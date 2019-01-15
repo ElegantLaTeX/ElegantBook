@@ -7,7 +7,7 @@
 \zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{3.01}
+\version{3.02}
 \myquote{Victory won\rq t come to us unless we go to it.}
 \logo{logo.png}
 \cover{cover.pdf}
@@ -75,7 +75,9 @@
 \section{选项设置}
 本文特殊选项设置共有 2 类，分为 {\color{main}主题颜色}设置 以及 {\color{main}章标题显示风格}设置。
 
-第 1 类为{\color{main}主题颜色}设置，内置 3 组颜色主题，分别为 \verb|green|（默认），\verb|cyan|，\verb|blue|，另外还有一个自定义的选项 \verb|nocolor|，用户\textbf{必须}在使用模板的时候选择某个颜色主题或选择 \verb|nocolor| 选项。调用颜色主题 \verb|green| 的方法为 \verb|\documentclass[green]{elegantbook}|或者使用 \verb|\documentclass[color=green]{elegantbook}|。需要改变颜色的话请选择 \verb|nocolor| 选项或者使用 \verb|color=none|，然后在导言区定义 main、second、third 颜色，具体的方法如下：
+第 1 类为{\color{main}主题颜色}设置，内置 3 组颜色主题，分别为 \verb|green|（默认）、\verb|cyan|、\verb|blue|，另外还有一个自定义的选项  \verb|nocolor|。调用颜色主题 \verb|green| 的方法为 \\
+\verb|\documentclass[green]{elegantbook}| 或者 \verb|\documentclass[color=green]{elegantbook}|。需要改变颜色的话请选择 \verb|nocolor| 选项或者使用 \verb|color=none|，然后在导言区定义 main、second、third 颜色，具体的方法如下：
+
 \begin{verbatim}
 \definecolor{main}{RGB}{70,70,70}    %定义 main 颜色值
 \definecolor{second}{RGB}{115,45,2}    %定义 second 颜色值
@@ -83,6 +85,7 @@
 \end{verbatim}
 
 \begin{table}[htp]
+\caption{ElegantBook 模板中的三套颜色主题\label{tab:color thm}}
 \centering
 \begin{tabular}{ccccc}
 \toprule
@@ -95,7 +98,6 @@ second &\makecell{ {\color{second1}\rule{1cm}{1cm}}}& \makecell{{\color{second2}
 third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\rule{1cm}{1cm}}}&\makecell{ {\color{third3}\rule{1cm}{1cm}}}&proposition\\
 \bottomrule
 \end{tabular}
-\caption{ElegantBook 模板中的三套颜色主题\label{tab:color thm}}
 \end{table}
 
 第 2 类为{\color{main} 章标题显示风格}，包含 \verb|hang|（默认）与 \verb|display| 两种风格，区别在于章标题单行显示（\verb|hang|）与双行显示（\verb|display|），本说明使用了 \verb|hang|。调用方式为 \verb|\documentclass[hang]{elegantbook}| 或者 \verb|\documentclass[titlestyle=hang]{elegantbook}|。
@@ -121,139 +123,99 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
 \section{可编辑的字段}
 在模板中，可以编辑的字段分别为作者 \verb|\author|、邮箱 \verb|\email|、中文标题 \verb|\zhtitle|、中文标题结尾 \verb|\zhend|、英文标题\verb| \entitle|、英文标题结尾 \verb|\enend|、名言 \verb|\myquote|、版本号 \verb|\version|。并且，可以根据自己的喜好把封面水印效果的 \verb|cover.pdf| 替换掉，以及封面中用到的 \verb|logo.png|。
 
+\section{参考文献}
+
+此模板使用了 Bib\TeX{} 来生成参考文献，默认使用的文献样式 aer 样式。参考文献示例：~\cite{Chen2018} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \verb|reference.bib| 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 Bib\TeX{} 编译。
+
 \chapter{ElegantBook 写作示例}
 
-\section{Economics and Differentiable Function}
+\section{Lebesgue 积分}
+在前面各章做了必要的准备后，本章开始介绍新的积分。在 Lebesgue 测度理论的基础上建立了 Lebesgue 积分，其被积函数和积分域更一般，可以对有界函数和无界函数统一处理。正是由于 Lebesgue 积分的这些特点，使得 Lebesgue 积分比 Riemann 积分具有在更一般条件下的极限定理和累次积分交换积分顺序的定理，这使得 Lebesgue 积分不仅在理论上更完善，而且在计算上更灵活有效。
 
-Economics focuses on the behaviour and interactions of economic agents and how economies work. Microeconomics analyzes basic elements in the economy, including individual agents and markets, their interactions, and the outcomes of interactions. Individual agents may include, for example, households, firms, buyers, and sellers. Macroeconomics analyzes the entire economy (meaning aggregated production, consumption, savings, and investment) and issues affecting it, including unemployment of resources (labour, capital, and land), inflation, economic growth, and the public policies that address these issues (monetary, fiscal, and other policies). See glossary of economics.
-\begin{align*}
-   &\max(\min)\quad \mathbb{E}\int_{t_0}^{t_1}f(t,x,u)\,dt\\
-   &\quad\mbox{s.t.} \quad dx=g(t,x,u)dt+\sigma(t,x,u)dz\\
-   &\quad \hspace{2.em} k(0)=k_0\;\text{given}
-\end{align*}
+Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非负简单函数，非负可测函数和一般可测函数积分的方式。
 
-where $z$ is stochastic process or white noise or wiener process.
+由于现代数学的许多分支如概率论、泛函分析、调和分析等常常用到一般空间上的测度与积分理论，在本章最后一节将介绍一般的测度空间上的积分。
 
-Other broad distinctions within economics include those between positive economics, describing "what is", and normative economics, advocating "what ought to be"; between economic theory and applied economics; between rational and behavioural economics; and between mainstream economics and heterodox economics.
+\subsection{积分的定义}
 
-Economic analysis can be applied throughout society, in business, finance, health care, and government. Economic analysis is sometimes also applied to such diverse subjects as crime, education, the family, law, politics, religion, social institutions, war, science, and the environment.
+我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
 
-\begin{definition}{Differenzierbarkeit}{diff}
-Eine Funktion $f:~I\to\mathbb{R}$ auf einem Intervall $I$ hei\ss{}t in $x_0\in I$ differenzierbar oder linear approximierbar, wenn der Grenzwert
-   \begin{equation*}
-      \lim\limits_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=
-      \lim\limits_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}
-   \end{equation*}
-existiert. Bei Existenz hei\ss{}t dieser Grenzwert Ableitung oder Differentialquotient von $f$ in $x_0$ und man schreibt f\"{u}r ihn
-   \begin{equation*}
-      f'(x_0)\quad\text{oder}\quad\frac{df}{dx}(x_0).
-   \end{equation*}
+\begin{definition}{可积性}{inter}
+设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为
+\begin{equation}
+   \label{inter}
+   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i).
+\end{equation}
+一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
 \end{definition}
 
-The discipline was renamed in the late 19th century, primarily due to Alfred Marshall, from "political economy" to "economics" as a shorter term for "economic science". At that time, it became more open to rigorous thinking and made increased use of mathematics, which helped support efforts to have it accepted as a science and as a separate discipline outside of political science and other social sciences.
+一个自然的问题是，Lebesgue 积分与我们所熟悉的 Riemann 积分有什么联系和区别？在 4.4 在我们将详细讨论 Riemann 积分与 Lebesgue 积分的关系。这里只看一个简单的例子。设 $D(x)$ 是区间 $[0,1]$ 上的 Dirichlet 函数。即 $D(x)=\chi_{Q_0}(x)$，其中 $Q_0$ 表示 $[0,1]$ 中的有理数的全体。根据非负简单函数积分的定义，$D(x)$ 在 $[0,1]$ 上的 Lebesgue 积分为
+\begin{equation}
+   \label{inter2}
+   \int_0^1 D(x)dx = \int_0^1 \chi_{Q_0} (x) dx = m(Q_0) = 0
+\end{equation}
+即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 
-\begin{example}
-$E$ and $F$ be two events such that $P(E)=
-P(F)=1/2$, and $P(E\cap F)=1/3$, let $\mathscr{F}=\sigma(Y)$,  $X$ and $Y$ be the indicate function of $E$ and $F$ respectively. How to compute $\mathbb{E}[ X\mid \mathscr{F} ]$?
-\end{example}
 
-Some subsequent comments criticized the definition as overly broad in failing to limit its subject matter to analysis of markets. From the 1960s, however, such comments abated as the economic theory of maximizing behaviour and rational-choice modelling expanded the domain of the subject to areas previously treated in other fields. There are other criticisms as well, such as in scarcity not accounting for the macroeconomics of high unemployment.
+有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。
 
 \begin{exercise}
-let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\leq M,x_n\in \mathbb{R}\big\}$, $\rho_{\infty}(x,y)=\sup\limits_{n\geq 1}|x_n-y_n|$, show that $\big(l^\infty,\rho_{\infty}\big)$ is complete.
+设 $f\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
+\begin{equation}
+   \label{ex:1}
+   I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
+\end{equation}
+是 $\mathcal{R}^1$ 上的连续函数。
 \end{exercise}
 
-\begin{theorem}{Mittelwertsatz f\"{u}r $n$ Variable}{31}
-Es sei $n\in\mathbb{N}$, $D\subseteq\mathbb{R}^n$ eine offene Menge und $f\in C^{1}(D,\mathbb{R})$. Dann gibt es auf jeder Strecke $[x_0,x]\subset D$ einen Punkt $\xi\in[x_0,x]$, so dass gilt
-\begin{equation*}
-   f(x)-f(x_0) = \operatorname{grad} f(\xi)^{\top}(x-x_0)
-\end{equation*}
+\begin{theorem}{Fubini 定理}{31}
+（1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
+\begin{equation}
+   \label{eq:461}
+   \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
+\end{equation}
+（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\ref{eq:461} 成立。
 \end{theorem}
 
 \begin{note}
 在本模板中，引理（lemma），推论（corollary ）的样式和定理的样式一致，包括颜色，仅仅只有计数器的设置不一样。
 \end{note}
 
-
-Gary Becker, a contributor to the expansion of economics into new areas, describes the approach he favours as "combin[ing the] assumptions of maximizing behaviour, stable preferences, and market equilibrium, used relentlessly and unflinchingly."One commentary characterizes the remark as making economics an approach rather than a subject matter but with great specificity as to the "choice process and the type of social interaction that [such] analysis involves." 
-
-
-Economic efficiency measures how well a system generates desired output with a given set of inputs and available technology. Efficiency is improved if more output is generated without changing inputs, or in other words, the amount of "waste" is reduced. A widely accepted general standard is Pareto efficiency, which is reached when no further change can make someone better off without making someone else worse off.
+我们说一个实变或者复变量的实值或者复值函数是在区间上平方可积的，如果其绝对值的平方在该区间上的积分是有限的。所有在勒贝格积分意义下平方可积的可测函数构成一个希尔伯特空间，也就是所谓的 $L^2$ 空间，几乎处处相等的函数归为同一等价类。形式上，$L^2$ 是平方可积函数的空间和几乎处处为 0 的函数空间的商空间。
 
 \begin{proposition}{最优性原理}{max}
-如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$在$[s,T]$ 任意子区间都是最优解，假设区间为 $[t_0,t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
+   如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s,T]$ 任意子区间都是最优解，假设区间为 $[t_0,t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
 \end{proposition}
 
-Microeconomics examines how entities, forming a market structure, interact within a market to create a market system. These entities include private and public players with various classifications, typically operating under scarcity of tradable units and light government regulation. The item traded may be a tangible product such as apples or a service such as repair services, legal counsel, or entertainment.
-
-\begin{corollary}{}{}
-假设 $V(\cdot,\cdot)$ 为值函数，则根据最大值原理~\ref{thm:31}，有如下推论
-\[
-V(k,z)=\max\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}
-\]
-\end{corollary}
-
-\begin{proof}
-因为 $y^*=\alpha\beta z k^\alpha$，$V(k,z)=\alpha/1-\alpha\beta\ln k_0+1/1-\alpha\beta \ln z_0+\Delta$。
-   \begin{align*}
-   \text{右边}&=\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}\\
-   &=\ln(zk^\alpha-\alpha\beta zk^\alpha)+\beta\mathbb{E}\Big[\frac{\alpha}{1-\alpha\beta}\ln y+\frac{1}{1-\alpha\beta}\ln z^\prime+\Delta\Big]\\
-   &=\ln(1-\alpha\beta)zk^\alpha+\beta\Big\{\mathbb{E}\big[\frac{\alpha}{1-\alpha\beta}\ln \alpha\beta z k^\alpha\big]+\frac{1}{1-\alpha\beta}\mathbb{E}[\ln z^\prime]+\Delta\Big\}
-   \end{align*}
-利用 $\mathbb{E}[\ln z^\prime]=0$，并将对数展开得
-   \begin{align*}
-   \text{右边}&=\ln (1-\alpha\beta)+\ln z+\alpha\ln k+\frac{\alpha\beta}{1-\alpha\beta}\big[\ln \alpha\beta+\ln z+\alpha\ln k\big]+\frac{\beta}{1-\alpha\beta}\mu+\beta \Delta\\
-   &=\frac{\alpha}{1-\alpha\beta}\ln k+\frac{1}{1-\alpha\beta}\ln z+\Delta
-   \end{align*}
-所以 $\text{左边}=\text{右边}$，证毕。
-\end{proof}
+我们知道最小二乘法可以用来处理一组数据，可以从一组测定的数据中寻求变量之间的依赖关系，这种函数关系称为经验公式。本课题将介绍最小二乘法的精确定义及如何寻求点与点之间近似成线性关系时的经验公式。假定实验测得变量之间的 $n$ 个数据，则在平面上，可以得到 $n$ 个点，这种图形称为 “散点图”，从图中可以粗略看出这些点大致散落在某直线近旁, 我们认为其近似为一线性函数，下面介绍求解步骤。
 
 
-
-\begin{property}
-Properties of Cauchy Sequence
-\begin{enumerate}[noitemsep]
-\item $\{x_k\}$ is cauchy sequence then $\{x_k^i\}$ is cauchy sequence.
-\item $x_k\in \mathbb{R}^n$, $\rho(x,y)$ is Euclidean, then cauchy is equivalent to convergent, $(\mathbb{R}^n,\rho)$ metric space is complete.
-\end{enumerate}
-\end{property}
-
-\begin{note}
-conclusion、assumption、property，remark、solution 的环境效果是一样的。
-\end{note}
-
-Various market structures exist. In perfectly competitive markets, no participants are large enough to have the market power to set the price of a homogeneous product. In other words, every participant is a "price taker" as no participant influences the price of a product. In the real world, markets often experience imperfect competition.
-
-Scarcity is represented in the figure by people being willing but unable in the aggregate to consume beyond the PPF (such as at $X$) and by the negative slope of the curve.[32] If production of one good increases along the curve, production of the other good decreases, an inverse relationship. This is because increasing output of one good requires transferring inputs to it from production of the other good, decreasing the latter.
+考虑函数 $y=a+bx$, 其中 $a$ 和 $b$ 是待定常数。如果离散点完全的在一直线上，可以认为变量之间的关系为一元函数。但一般说来，这些点不可能在同一直线上。但是它只能用直线来描述时，计算值与实际值会产生偏差。当然要求偏差越小越好，但由于偏差可正可负，因此不能认为总偏差时，拟合函数很好地反映了变量之间的关系，但是因为此时每个偏差的绝对值可能很大。为了改进这一缺陷，就考虑用平均值来代替。但是由于绝对值不易作解析运算，因此，进一步用残差平方和函数来度量总偏差。偏差的平方和最小可以保证每个偏差都不会很大。于是问题归结为确定拟合函数中的常数和使残差平方和函数最小。 
 
 \begin{figure}[!htbp]
 	\centering
 	\includegraphics[width=0.6\textwidth]{mpg.png}
-	\caption{The Relationship between MPG and Weight\label{fig:mpg}}
+	\caption{MPG 和 Weight 的关系图\label{fig:mpg}}
 \end{figure}
 
-\begin{definition}{Contraction mapping}{mapping}
-$(S,\rho)$ is the metric space, $T: S\to S$, If there exists $\alpha\in(0,1)$ such that for any $x$ and $y\in S$, the distance
-\begin{equation}
-\rho(Tx,Ty)\leq \alpha\rho(x,y)
-\end{equation}
-Then $T$ is a {\color{main} contraction mapping}.
-\end{definition}
 
-\begin{remark}
+
+以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
+
+
+\begin{property}
+柯西列的性质
 \begin{enumerate}[noitemsep]
-\item $T:S\to S$, where $S$ is a metric space, if  for any $x,y\in S$, $\rho(Tx,Ty)<\rho(x,y)$ is not contraction mapping.
-\item Contraction mapping is continuous map.
+\item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。
+\item $x_k\in \mathcal{R}^n$，$\rho(x,y)$ 是欧几里得空间，则柯西列是收敛的，$(\mathcal{R}^n,\rho)$ 空间是完备的。
 \end{enumerate}
-\end{remark}
+\end{property}
 
 
 \begin{conclusion}
-In theory, in a free market the aggregates (sum of) of quantity demanded by buyers and quantity supplied by sellers may reach economic equilibrium over time in reaction to price changes; in practice, various issues may prevent equilibrium, and any equilibrium reached may not necessarily be morally equitable. For example, if the supply of healthcare services is limited by external factors, the equilibrium price may be unaffordable for many who desire it but cannot pay for it.
+回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。如果在回归分析中，只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且自变量之间存在线性相关，则称为多重线性回归分析。
 \end{conclusion}
 
-\section{Bibliography}
-This template uses Bib\TeX{} to generate the bibliography, the default bibliography style is \verb|aer|. ~\cite{Chen2018} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. You can add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \verb|reference.bib| file, and cite the bibkey in the \verb|tex| file.
 
 
 \nocite{EINAV2010,Havrylchyk2018} 

@@ -5,11 +5,11 @@
 %% This work may be distributed and/or modified freely
 %% available at https://ddswhu.me/resource/
 % %
-%% Last Modification 2018-12-16
+%% Last Modification 2018-12-31
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2018/12/06 v3.00 ElegantBook document class]
+\ProvidesClass{elegantbook}[2018/12/31 v3.02 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -113,11 +113,11 @@
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
 \renewcommand{\partname}{部分}
-\renewcommand{\listfigurename}{\bfseries 插图目录}
-\renewcommand{\listtablename}{\bfseries 表格目录}
-\renewcommand{\bibname}{\bfseries 参考文献}
-\renewcommand{\appendixname}{\bfseries 附\hspace{2em}录}
-\renewcommand{\indexname}{\bfseries 索\hspace{2em}引}
+\renewcommand{\listfigurename}{插图目录}
+\renewcommand{\listtablename}{表格目录}
+\renewcommand{\bibname}{参考文献}
+\renewcommand{\appendixname}{附\hspace{2em}录}
+\renewcommand{\indexname}{索\hspace{2em}引}
 
 % more pretty font
 \linespread{1.3}
@@ -207,7 +207,7 @@
 {\hspace{-2.45em}\Large\bfseries{\color{main}\thesection}\enspace}{1pt}{\color{main}\Large\bfseries\filright}
 
 \titleformat{\subsection}[hang]{\bfseries}
-{\large\bfseries\color{main}\thesubsection\enspace}{1pt}{\color{main}\large\bfseries\filright}
+{\hspace{-2.45em}\large\bfseries\color{main}\thesubsection\enspace}{1pt}{\color{main}\large\bfseries\filright}
 
 \titlespacing{\chapter}{0pt}{0pt}{1.5\baselineskip}
 %\titlespacing{\subsection}{0pt}{0.5\baselineskip}{-\baselineskip}
@@ -247,6 +247,7 @@
         before skip=8pt,
         attach boxed title to top left={yshift=-0.11in,xshift=0.15in},
         boxed title style={boxrule=0pt,colframe=white,arc=0pt,outer arc=0pt},
+        % separator sign={:},
     },
     defstyle/.style={
         common,
@@ -268,34 +269,34 @@
     },
 }
 
-\newtcbtheorem[auto counter,number within=chapter]{definition}{Definition}{defstyle}{def}
-\newtcbtheorem[auto counter,number within=chapter]{theorem}{Theorem}{thmstyle}{thm}
-\newtcbtheorem[auto counter,number within=chapter]{proposition}{Proposition}{propstyle}{prop}
-\newtcbtheorem[auto counter,number within=chapter]{corollary}{Corollary}{thmstyle}{cor}
-\newtcbtheorem[auto counter,number within=chapter]{lemma}{Lemma}{thmstyle}{lemma}
+\newtcbtheorem[auto counter,number within=chapter]{definition}{定义}{defstyle}{def}
+\newtcbtheorem[auto counter,number within=chapter]{theorem}{定理}{thmstyle}{thm}
+\newtcbtheorem[auto counter,number within=chapter]{proposition}{命题}{propstyle}{prop}
+\newtcbtheorem[auto counter,number within=chapter]{corollary}{推论}{thmstyle}{cor}
+\newtcbtheorem[auto counter,number within=chapter]{lemma}{引理}{thmstyle}{lemma}
 
 
 
 %% Example with counter
 \newcounter{example}[chapter]
 \renewcommand{\theexample}{\thechapter.\arabic{example}}
-\newenvironment{example}{\par\noindent\textbf{Example\,\refstepcounter{example}\theexample: }\color{black!90}}{\par}
+\newenvironment{example}{\par\noindent\textbf{示例\,\refstepcounter{example}\theexample：}\color{black!90}}{\par}
 
 %% Exercise with counter
 \newcounter{exercise}[chapter]
 \renewcommand{\theexercise}{\thechapter.\arabic{exercise}}
-\newenvironment{exercise}{\par\noindent\textbf{Exercise\,\refstepcounter{exercise}\theexercise: }}{\par}
+\newenvironment{exercise}{\par\noindent\textbf{练习\,\refstepcounter{exercise}\theexercise：}}{\par}
 
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt}
-\newenvironment{note}{\par\itshape\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{Note:}}}{\par}
-\newenvironment{proof}{\par\noindent\textbf{Proof:}\color{black!90}\small}{\hfill$\Box$\quad\par}
+\newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{注意：}}\itshape}{\par}
+\newenvironment{proof}{\par\noindent\textbf{证明：}\color{black!90}\small}{\hfill$\Box$\quad\par}
 
-\newenvironment{remark}{\noindent\textbf{Remarks:}}{\par}
-\newenvironment{assumption}{\par\noindent\textbf{Assumptions:}}{\par}
-\newenvironment{conclusion}{\par\noindent\textbf{Conclusions:}}{\par}
-\newenvironment{solution}{\par\noindent\textbf{Solution:}}{\par}
-\newenvironment{property}{\par\noindent\textbf{Properties:}}{\par}
+\newenvironment{remark}{\noindent\textbf{备注：}}{\par}
+\newenvironment{assumption}{\par\noindent\textbf{假设：}}{\par}
+\newenvironment{conclusion}{\par\noindent\textbf{结论：}}{\par}
+\newenvironment{solution}{\par\noindent\textbf{答案：}}{\par}
+\newenvironment{property}{\par\noindent\textbf{性质：}}{\par}
 
 
 
@@ -373,7 +374,7 @@
 \end{flushright}
 \vfill
 \begin{center}
-\color{second} Version: \the\version
+\color{second} 版本: \the\version
 \end{center}
 \vfil\eject
 }
