@@ -40,8 +40,8 @@
 \LoadClass[12pt,a4paper,openany]{book}
 
 
-\usepackage[UTF8,space=auto,scheme=plain]{ctex}
-\usepackage{indentfirst}
+\RequirePackage[UTF8,space=auto,scheme=plain]{ctex}
+\RequirePackage{indentfirst}
 \setlength\parindent{2em}
 
 % font setting for text and math
@@ -51,30 +51,42 @@
 \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{type1cm}
 
+\DeclareSymbolFont{cmlargesymbols}{OMX}{cmex}{m}{n}
+\DeclareMathSymbol{\intop}{\mathop}{cmlargesymbols}{"5A}
+  \def\int{\intop\nolimits}
+\DeclareMathSymbol{\ointop}{\mathop}{cmlargesymbols}{"49}
+  \def\oint{\ointop\nolimits}
+\DeclareMathSymbol{\sumop}{\mathop}{cmlargesymbols}{"58}
+  \let\sum\sumop
+\DeclareMathSymbol{\prodop}{\mathop}{cmlargesymbols}{"59}
+  \let\prod\prodop
+
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
 
 \RequirePackage{xcolor}
 \ifdefstring{\ELEGANT@color}{green}{
-  \definecolor{main}{RGB}{0,120,2}%
-  \definecolor{second}{RGB}{230,90,7}%
-  \definecolor{third}{RGB}{0,160,152}%
+	\definecolor{main}{RGB}{0,120,2}%
+	\definecolor{second}{RGB}{230,90,7}%
+	\definecolor{third}{RGB}{0,160,152}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{cyan}{
-  \definecolor{main}{RGB}{0,175,152}%
-  \definecolor{second}{RGB}{239,126,30}%
-  \definecolor{third}{RGB}{120,8,13}%
+	\definecolor{main}{RGB}{0,175,152}%
+	\definecolor{second}{RGB}{239,126,30}%
+	\definecolor{third}{RGB}{120,8,13}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{blue}{
-  \definecolor{main}{RGB}{20,50,104}%
-  \definecolor{second}{RGB}{180,50,131}%
-  \definecolor{third}{RGB}{7,127,128}%
+	\definecolor{main}{RGB}{20,50,104}%
+	\definecolor{second}{RGB}{180,50,131}%
+	\definecolor{third}{RGB}{7,127,128}%
 }{\relax}
 
+% corlor definition
 \definecolor{winered}{rgb}{0.5,0,0}
+\definecolor{bule}{RGB}{18,29,57}
 
 \AtBeginDocument{
 \input{base.tex}
@@ -104,9 +116,6 @@
 \newtoks\enend
 \newtoks\zhend
 
-%%数学字体宏包
-
-
 
 %%中文结构名字
 \renewcommand{\contentsname}{目\hspace{2em}录}
@@ -119,82 +128,58 @@
 \renewcommand{\appendixname}{附录}
 \renewcommand{\indexname}{索\hspace{2em}引}
 
-% more pretty font
+%% 常用宏包
 \linespread{1.3}
 \RequirePackage{microtype}
-
-
-\RequirePackage{booktabs}
-\RequirePackage{multicol}
-\RequirePackage{xcolor}
-\RequirePackage{graphicx}
-\RequirePackage{fancyvrb}
-\graphicspath{{image/}{figure/}{fig/}{img/}}
-
-%% 常用宏包
 \RequirePackage{graphicx}
 \RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts}
 \RequirePackage{booktabs}
-\linespread{1.3}
+\RequirePackage{multicol}
+\RequirePackage{xcolor}
+\RequirePackage{fancyvrb}
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
-\newcommand*{\myquote}[1]{\def\@myquote{#1}}
 
-\newcommand*{\logo}[1]{
- \def\@logo{\includegraphics[width=0.3\textwidth]{#1}
- }
-}
-
-%% 水印壁纸
-\RequirePackage{wallpaper}
-\newcommand*{\cover}[1]{\def\@cover{
-  \ThisTileWallPaper{\paperwidth}{\paperheight}{#1}
- }
-}
-
+\RequirePackage{natbib}
+\setlength{\bibsep}{0.0pt}
+\def\bibfont{\footnotesize}
 
 
 %% 页面设置
-
-\RequirePackage{hyperref}
-
-\AtBeginDocument{
-  \hypersetup{
-    pdftitle = {\the\zhtitle\the\zhend},
-    pdfauthor = {\@author}
-  }
-}
-
-\hypersetup{
-			breaklinks,
-     		unicode,
-     		linktoc=all,
-			bookmarksnumbered=true,
-			bookmarksopen=true,
-			pdfsubject=\@author \@title Book,
-			pdfkeywords={ElegantBook},
-			pdfcreator={XeLaTeX with ElegantBook class},
-			colorlinks,
-      linkcolor=main,
-      citecolor=winered,
-			plainpages=false,
-			pdfstartview=FitH,
-			pdfborder={0 0 0},
-			linktocpage
-}
-
 \RequirePackage{geometry}
 \geometry{
-			a4paper,
-			left=27mm,  %% or inner=23mm
-			right=27mm, %% or outer=18mm
-			top=25.4mm, bottom=25.4mm,
-			headheight=2.17cm,
-			headsep=4mm,
-			footskip=12mm
+	a4paper,
+	left=27mm,  %% or inner=23mm
+	right=27mm, %% or outer=18mm
+	top=25.4mm, bottom=25.4mm,
+	headheight=2.17cm,
+	headsep=4mm,
+	footskip=12mm
 }
+
+\RequirePackage{hyperref}
+\hypersetup{
+	breaklinks,
+	unicode,
+	linktoc=all,
+	bookmarksnumbered=true,
+	bookmarksopen=true,
+	pdfsubject=\@author \@title Book,
+	pdftitle = {\the\zhtitle\the\zhend},
+    pdfauthor = {\@author}
+	pdfkeywords={ElegantBook},
+	pdfcreator={XeLaTeX with ElegantBook class},
+	colorlinks,
+	linkcolor=main,
+	citecolor=winered,
+	plainpages=false,
+	pdfstartview=FitH,
+	pdfborder={0 0 0},
+	linktocpage
+}
+
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
@@ -216,24 +201,19 @@
 %\titlespacing{\subsection}{0pt}{0.5\baselineskip}{-\baselineskip}
 
 
-
-
+% caption settings 
 \RequirePackage{caption}
 \captionsetup{labelfont = bf}
+\RequirePackage[font=small,labelfont={bf}]{caption} 
+\captionsetup[table]{skip=3pt}
+\captionsetup[figure]{skip=3pt}
+\newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
+\newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
+
 
 % list/itemize/enumerate setting
 \RequirePackage[shortlabels]{enumitem}
 \setlist{nolistsep}
-
-% caption settings 
-\RequirePackage[font=small,labelfont={bf}]{caption} 
-\captionsetup[table]{skip=3pt}
-\captionsetup[figure]{skip=3pt}
-
-
-\definecolor{bule}{RGB}{18,29,57}
-
-
 
 \RequirePackage[most]{tcolorbox}
 
@@ -299,8 +279,6 @@
  		\par\medskip\ignorespacesafterend %
  	}
 
-
-
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt}
 \newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{main}{注意：}}}\itshape}{\par}
@@ -312,10 +290,7 @@
 \newenvironment{solution}{\par\noindent\textbf{\color{main}{答案：}}}{\par}
 \newenvironment{property}{\par\noindent\textbf{\color{main}{性质：}}}{\par}
 
-
-
 %页眉页脚
-
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
 \fancyhf{}
@@ -330,26 +305,19 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{} }
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
-
-
-
-
-\DeclareSymbolFont{cmlargesymbols}{OMX}{cmex}{m}{n}
-\DeclareMathSymbol{\intop}{\mathop}{cmlargesymbols}{"5A}
-  \def\int{\intop\nolimits}
-\DeclareMathSymbol{\ointop}{\mathop}{cmlargesymbols}{"49}
-  \def\oint{\ointop\nolimits}
-\DeclareMathSymbol{\sumop}{\mathop}{cmlargesymbols}{"58}
-  \let\sum\sumop
-\DeclareMathSymbol{\prodop}{\mathop}{cmlargesymbols}{"59}
-  \let\prod\prodop
-
-\newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
-\newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
-
-
-
 %%封面
+\newcommand*{\myquote}[1]{\def\@myquote{#1}}
+\newcommand*{\logo}[1]{
+ \def\@logo{\includegraphics[width=0.3\textwidth]{#1}
+ }
+}
+
+%% 水印壁纸
+\RequirePackage{wallpaper}
+\newcommand*{\cover}[1]{\def\@cover{
+  \ThisTileWallPaper{\paperwidth}{\paperheight}{#1}
+ }
+}
 
 \def\maketitle{%
 \thispagestyle{empty}
@@ -389,7 +357,3 @@
 
 
 
-
-\RequirePackage{natbib}
-\setlength{\bibsep}{0.0pt}
-\def\bibfont{\footnotesize}
