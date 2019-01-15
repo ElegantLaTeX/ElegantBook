@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%
 %% start of file `elegantbook.cls'.
-%% Copyright 2013-2019 ElegantLaTeX (ElegantLaTeX2e@gmail.com)
+%% Copyright 2013-2019 ElegantLaTeX (ddswhu@126.com)
 %%
 %% This work may be distributed and/or modified freely
 %% available at https://ddswhu.me/resource/
 % %
-%% Last Modification 2018-9-11
+%% Last Modification 2018-12-02
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
@@ -44,22 +44,22 @@
 \RequirePackage{xcolor}
 \ifdefstring{\ELEGANT@color}{green}{
   \definecolor{main}{RGB}{0,120,2}%
-  \definecolor{seco}{RGB}{230,90,7}%
-  \definecolor{thid}{RGB}{0,160,152}%
+  \definecolor{second}{RGB}{230,90,7}%
+  \definecolor{third}{RGB}{0,160,152}%
 %  \base{greenbase.pdf}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{cyan}{
   \definecolor{main}{RGB}{0,175,152}%
-  \definecolor{seco}{RGB}{239,126,30}%
-  \definecolor{thid}{RGB}{120,8,13}%
+  \definecolor{second}{RGB}{239,126,30}%
+  \definecolor{third}{RGB}{120,8,13}%
  % \base{cyanbase.pdf}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{blue}{
   \definecolor{main}{RGB}{20,50,104}%
-  \definecolor{seco}{RGB}{180,50,131}%
-  \definecolor{thid}{RGB}{7,127,128}%
+  \definecolor{second}{RGB}{180,50,131}%
+  \definecolor{third}{RGB}{7,127,128}%
  % \base{bluebase.pdf}%
 }{\relax}
 
@@ -112,7 +112,7 @@
 \newcommand*{\myquote}[1]{\def\@myquote{#1}}
 
 \newcommand*{\logo}[1]{
- \def\@logo{\includegraphics[height=5.8cm]{#1}
+ \def\@logo{\includegraphics[width=0.5\textwidth]{#1}
  }
 }
 
@@ -202,20 +202,18 @@
 \defaultfontfeatures{Mapping=tex-text}
 \RequirePackage{xunicode}
 \RequirePackage{xltxtra}
-\setmainfont[Ligatures=TeX]{Minion Pro} %  (\textrm)
-\setsansfont{Myriad Pro} %  (\textsf)
-\setmonofont{Inconsolata}%Palatino Linotype
+\setmainfont[Ligatures=TeX]{Times New Roman} %  (\textrm)
+\setsansfont{Arial} %  (\textsf)
+\setmonofont{Courier New}%Palatino Linotype
 %-中文字体设置-%
 \RequirePackage{xeCJK}
 \setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{宋体}%方正书宋_GBK Adobe Song Std L华文中宋
-\setCJKsansfont[BoldFont={黑体}]{楷体}
+\setCJKsansfont[BoldFont={黑体},ItalicFont={楷体}]{楷体}
 \setCJKmonofont{楷体}
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
-\setCJKfamilyfont{new}{方正苏新诗柳楷简体}
-\setCJKfamilyfont{note}{方正启体简体}
-\newfontfamily\gara{Adobe Garamond Pro}
+
 
 %% 定理\引理\定义样式设置
 \RequirePackage{environ}
@@ -225,123 +223,123 @@
 \definecolor{bule}{RGB}{18,29,57}
 \definecolor{bablue}{RGB}{248,248,248}
 
-%define the style of tikz newthemsty
-\tikzstyle{newthemsty}
+%define the style of tikz etheoremsty
+\tikzstyle{etheoremsty}
           =[draw=main, fill=blue!10,very thick,rectangle,
            rounded corners, inner sep=10pt, inner ysep=20pt]
-\tikzstyle{newthemstytitle}
+\tikzstyle{etheoremstytitle}
           =[fill=main, text=blue!10]
 
-\tikzstyle{newdefinitionsty}
-          =[draw=seco, fill=yellow!20,very thick,rectangle,
+\tikzstyle{edefinitionsty}
+          =[draw=second, fill=yellow!20,very thick,rectangle,
            rounded corners, inner sep=10pt, inner ysep=20pt,
            text=black,fill opacity=0.9]
-\tikzstyle{newdefinitionstytitle}
-         =[fill=seco, text=white]
+\tikzstyle{edefinitionstytitle}
+         =[fill=second, text=white]
 
-\tikzstyle{newpropositionsty}
-          =[draw=thid, fill=bablue,very thick,rectangle,
+\tikzstyle{epropositionositionsty}
+          =[draw=third, fill=bablue,very thick,rectangle,
            rounded corners, inner sep=10pt, inner ysep=20pt,
            text=black,fill opacity=0.9]
-\tikzstyle{newpropositionstytitle}
-         =[fill=thid, text=white]
+\tikzstyle{epropositionositionstytitle}
+         =[fill=third, text=white]
 
-%%define the "newthem" environment
-\newcounter{Newthem}[chapter]
-\renewcommand{\theNewthem}{\thechapter.\arabic{Newthem}}
-\NewEnviron{newthem}[1][{}]{%
+%%define the "etheorem" environment
+\newcounter{etheorem}[chapter]
+\renewcommand{\theetheorem}{\thechapter.\arabic{etheorem}}
+\NewEnviron{etheorem}[1][{}]{%
 \begin{figure}[!htb]
 \noindent\centering
 \begin{tikzpicture}
-\node[newthemsty] (box){
+\node[etheoremsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\refstepcounter{Newthem}\BODY
+        \sffamily\refstepcounter{etheorem}\BODY
      \end{minipage}};
-\node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Theorem \theNewthem\; #1}};
-\node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
+\node[etheoremstytitle,right=10pt] at (box.north west){
+     \bf\textsf{Theorem \theetheorem\; #1}};
+\node[etheoremstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
 
-%%define the "newlemma" environment
-\newcounter{Newlemma}[chapter]
-\renewcommand{\theNewlemma}{\thechapter.\arabic{Newlemma}}
-\NewEnviron{newlemma}[1][{}]{%
+%%define the "elemma" environment
+\newcounter{elemma}[chapter]
+\renewcommand{\theelemma}{\thechapter.\arabic{elemma}}
+\NewEnviron{elemma}[1][{}]{%
 \begin{figure}[!htb]
 \noindent\centering
 \begin{tikzpicture}
-\node[newthemsty] (box){
+\node[etheoremsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\refstepcounter{Newlemma}\BODY
+        \sffamily\refstepcounter{elemma}\BODY
      \end{minipage}};
-\node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Lemma \theNewlemma\; #1}};
-\node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
+\node[etheoremstytitle,right=10pt] at (box.north west){
+     \bf\textsf{Lemma \theelemma\; #1}};
+\node[etheoremstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
 
-%%define the "newcorol" environment
-\newcounter{Newcorol}[chapter]
-\renewcommand{\theNewcorol}{\thechapter.\arabic{Newcorol}}
-\NewEnviron{newcorol}[1][{}]{%
+%%define the "ecorollary" environment
+\newcounter{ecorollary}[chapter]
+\renewcommand{\theecorollary}{\thechapter.\arabic{ecorollary}}
+\NewEnviron{ecorollary}[1][{}]{%
 \begin{figure}[!htb]
 \noindent\centering
 \begin{tikzpicture}
-\node[newthemsty] (box){
+\node[etheoremsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\refstepcounter{Newcorol}\BODY
+        \sffamily\refstepcounter{ecorollary}\BODY
      \end{minipage}};
-\node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Corollary \theNewcorol\; #1}};
-\node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
+\node[etheoremstytitle,right=10pt] at (box.north west){
+     \bf\textsf{Corollary \theecorollary\; #1}};
+\node[etheoremstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
 
 %% define the "proposition" environment
-\newcounter{Newprop}[chapter]
-\renewcommand{\theNewprop}{\thechapter.\arabic{Newprop}}
-\NewEnviron{newprop}[1][{}]{%
+\newcounter{eproposition}[chapter]
+\renewcommand{\theeproposition}{\thechapter.\arabic{eproposition}}
+\NewEnviron{eproposition}[1][{}]{%
 \begin{figure}[!htb]\noindent\centering
 \begin{tikzpicture}
-\node[newpropositionsty] (box){
+\node[epropositionositionsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\refstepcounter{Newprop}\BODY
+        \sffamily\refstepcounter{eproposition}\BODY
      \end{minipage}};
-\node[newpropositionstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Proposition \theNewprop\; #1}};
-\node[newpropositionstytitle, rounded corners] at (box.east) {$\spadesuit$};
+\node[epropositionositionstytitle,right=10pt] at (box.north west){
+     \bf\textsf{Proposition \theeproposition\; #1}};
+\node[epropositionositionstytitle, rounded corners] at (box.east) {$\spadesuit$};
 \end{tikzpicture}
 \end{figure}}
 
 
-%%define the "newdef" environment
-\newcounter{Newdefinition}[chapter]
-\renewcommand{\theNewdefinition}{\thechapter.\arabic{Newdefinition}}
-\NewEnviron{newdef}[1][{}]{%
+%%define the "edefinition" environment
+\newcounter{edefinition}[chapter]
+\renewcommand{\theedefinition}{\thechapter.\arabic{edefinition}}
+\NewEnviron{edefinition}[1][{}]{%
 \begin{figure}[!htb]\noindent\centering
 \begin{tikzpicture}
-\node [newdefinitionsty] (dbox){\begin{minipage}{0.93\textwidth}\itshape\refstepcounter{Newdefinition}\BODY\end{minipage}};
-\node[newdefinitionstytitle, right=10pt] at (dbox.north west) {\bf\textsf{Definition \theNewdefinition\; #1}};
-\node[newdefinitionstytitle, rounded corners] at (dbox.east) {$\heartsuit$};
+\node [edefinitionsty] (dbox){\begin{minipage}{0.93\textwidth}\itshape\refstepcounter{edefinition}\BODY\end{minipage}};
+\node[edefinitionstytitle, right=10pt] at (dbox.north west) {\bf\textsf{Definition \theedefinition\; #1}};
+\node[edefinitionstytitle, rounded corners] at (dbox.east) {$\heartsuit$};
 \end{tikzpicture}
 \end{figure}}
 
 
 %% Example with counter
-\newcounter{Newexam}[chapter]
-\renewcommand{\theNewexam}{\thechapter.\arabic{Newexam}}
-\newenvironment{example}{\par\noindent\textbf{Example\,\stepcounter{Newexam}\theNewexam: }\color{black!90}}{\par}
+\newcounter{example}[chapter]
+\renewcommand{\theexample}{\thechapter.\arabic{example}}
+\newenvironment{example}{\par\noindent\textbf{Example\,\stepcounter{example}\theexample: }\color{black!90}}{\par}
 
 %% Exercise with counter
-\newcounter{Newexer}[chapter]
-\renewcommand{\theNewexer}{\thechapter.\arabic{Newexer}}
-\newenvironment{exercise}{\par\noindent{\makebox[0pt][r]{\color{main}\ding{50}\;\;}}\textbf{Exercise\,\stepcounter{Newexer}\theNewexer: }}{\par}
+\newcounter{exercise}[chapter]
+\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}
+\newenvironment{exercise}{\par\noindent{\makebox[0pt][r]{\color{main}\ding{50}\;\;}}\textbf{Exercise\,\stepcounter{exercise}\theexercise: }}{\par}
 
-%%define the note and newproof environment
+%%define the note and eproof environment
 \RequirePackage{pifont,manfnt}
-\newenvironment{note}{\par\itshape\CJKfamily{note}\gara\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{Note:}}}{\par}
+\newenvironment{note}{\par\itshape\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{Note:}}}{\par}
 
-\newenvironment{remark}{\par\itshape\CJKfamily{note}\gara\noindent{\makebox[0pt][r]{\color{red!90}\ding{96}\quad}\textbf{Remarks:}}}{\par}
+\newenvironment{remark}{\par\itshape\noindent{\makebox[0pt][r]{\color{red!90}\ding{96}\quad}\textbf{Remarks:}}}{\par}
 
 
 \newenvironment{assumption}{\par\noindent\textbf{Assumptions: }\color{black!90}}{\par}
@@ -350,7 +348,7 @@
 
 \newenvironment{property}{\par\noindent\textbf{Properties: }}{\par}
 
-\newenvironment{newproof}{\par\noindent{\makebox[0pt][r]{\color{main}\ding{43}\;\;}\textbf{Proof:}}\color{black!90}\small}{\hfill$\Box$\quad\par}
+\newenvironment{eproof}{\par\noindent{\makebox[0pt][r]{\color{main}\ding{43}\;\;}\textbf{Proof:}}\color{black!90}\small}{\hfill$\Box$\quad\par}
 
 \newenvironment{solution}{\par\noindent{\makebox[0pt][r]{\color{main}\ding{46}\;\;}\textbf{Solution:}}\small}{\hfill$\Box$\quad\par}
 
@@ -391,10 +389,10 @@
 \vfill
 \vspace*{2cm}
 \begin{center}
-\color{seco}
+\color{second}
 \rule{0.8\textwidth}{2pt}\\
-\Huge {\color{main} \bfseries \the\entitle } {\color{seco} \bfseries \the\enend}\\
-{\Huge \CJKfamily{new}{\color{main} \the\zhtitle } \the\zhend}\\
+\Huge {\color{main} \bfseries \the\entitle } {\color{second} \bfseries \the\enend}\\
+{\Huge \bfseries{\color{main} \the\zhtitle } \the\zhend}\\
 \rule{0.8\textwidth}{2pt}
 \end{center}
 \vskip3ex
@@ -410,16 +408,16 @@
 \vfill
 \vspace{2cm}
 \begin{flushright}
-\color{seco}
+\color{second}
 \rule{0.45\textwidth}{1pt}\\
-整理：{\color{main}\@author}\\
-整理时间：{\color{main}\today}\\
-Email: \hyperlink{\the\email}{\the\email}\\
+作者：{\color{main}\@author}\\
+时间：{\color{main}\today}\\
+邮箱: \hyperlink{\the\email}{\the\email}\\
 \rule{0.45\textwidth}{1pt}
 \end{flushright}
 \vfill
 \begin{center}
-\color{seco} Version: \the\version
+\color{second} Version: \the\version
 \end{center}
 \vfil\eject
 }

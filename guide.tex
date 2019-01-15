@@ -8,23 +8,23 @@
 \zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{2.30}
+\version{2.40}
 \myquote{Victory won\rq t come to us unless we go to it.}
-\logo{logo.pdf}
+\logo{logo.png}
 \cover{cover.pdf}
 
 %green color
    \definecolor{main1}{RGB}{0,120,2}
-   \definecolor{seco1}{RGB}{230,90,7}
-   \definecolor{thid1}{RGB}{0,160,152}
+   \definecolor{second1}{RGB}{230,90,7}
+   \definecolor{third1}{RGB}{0,160,152}
 %cyan color
    \definecolor{main2}{RGB}{0,175,152}
-   \definecolor{seco2}{RGB}{239,126,30}
-   \definecolor{thid2}{RGB}{120,8,13}
+   \definecolor{second2}{RGB}{239,126,30}
+   \definecolor{third2}{RGB}{120,8,13}
 %blue color
    \definecolor{main3}{RGB}{20,50,104}
-   \definecolor{seco3}{RGB}{180,50,131}
-   \definecolor{thid3}{RGB}{7,127,128}
+   \definecolor{second3}{RGB}{180,50,131}
+   \definecolor{third3}{RGB}{7,127,128}
 
 \usepackage{makecell}
 \usepackage{lipsum}
@@ -64,7 +64,7 @@
 
 我以前从未写过类文件，所以，写这个模板的过程必然是折腾的过程，在写模板的过程中，最主要参考了《写给\LaTeXe{} 类与宏包的作者》\cite{packagewriter}、moderncv.cls 文件、\href{http://aff.whu.edu.cn/huangzh/}{武汉大学黄正华老师的论文模板}、《\LaTeXe{} 完全学习手册》\cite{complete}、{\itshape The Not So Short Introduction to \LaTeXe{}}\cite{oetiker2010not}以及各大\LaTeX{} 疑问解答网站，在此为无私奉献的组织和个人表示感谢！
 
-{\color{thid}忍不住插个图！}
+{\color{third}忍不住插个图！}
 
 \begin{figure}[!hbtp]
 \includegraphics[width=0.8\textwidth]{happy.jpg}
@@ -79,7 +79,7 @@
 
 如果您在使用此模板，方便的话，是否可以把您使用此模板制作的成品发一份给我们，谢谢！
 
-\section{关于字体}
+\section{关于字体（已删除）}
 
 基于本模板追求视觉上的美观的角度，强烈建议使用者安装./fonts/文件夹下的字体。出于版权的考虑，务必不能将此模板用于涉及盈利目的的商业行为，否则，后果自负，本模板带的字体仅供学习使用，如果您喜欢某种字体，请自行购买正版。本文主要使用的字体如下
 
@@ -104,11 +104,11 @@
 本文特殊选项设置共有3类，分为{\color{main}颜色} 、{\color{main} 数学字体 }以及{\color{main} 章标题显示风格}。
 
 \subsection{选项设置}
-第一类为{\color{main}颜色}主题设置，内置 3 组颜色主题，分别为 \verb|green|（默认），\verb|cyan|，\verb|blue|，另外还有一个自定义的选项 \verb|nocolor|，用户\textbf{必须}在使用模板的时候选择某个颜色主题或选择 \verb|nocolor|选项。调用颜色主题 \verb|green| 的方法为\verb|\documentclass[green]{elegantbook}|或者使用\verb|\documentclass[color=green]{elegantbook}|。需要改变颜色的话请选择 \verb|nocolor|选项或者使用 \verb|color=none|，然后在导言区定义main、seco、thid颜色，具体的方法如下：
+第一类为{\color{main}颜色}主题设置，内置 3 组颜色主题，分别为 \verb|green|（默认），\verb|cyan|，\verb|blue|，另外还有一个自定义的选项 \verb|nocolor|，用户\textbf{必须}在使用模板的时候选择某个颜色主题或选择 \verb|nocolor|选项。调用颜色主题 \verb|green| 的方法为\verb|\documentclass[green]{elegantbook}|或者使用\verb|\documentclass[color=green]{elegantbook}|。需要改变颜色的话请选择 \verb|nocolor|选项或者使用 \verb|color=none|，然后在导言区定义main、second、third颜色，具体的方法如下：
 \begin{verbatim}
 \definecolor{main}{RGB}{70,70,70}    %定义main颜色值
-\definecolor{seco}{RGB}{115,45,2}    %定义seco颜色值
-\definecolor{thid}{RGB}{0,80,80}     %定义thid颜色值
+\definecolor{second}{RGB}{115,45,2}    %定义second颜色值
+\definecolor{third}{RGB}{0,80,80}     %定义third颜色值
 \end{verbatim}
 
 第二类为{\color{main}数学字体}设置，有两个可选项，分别是 mathpazo（默认） 和 mtpro2 字体，调用mathpazo 字体使用 \verb|\documentclass[mathpazo]{elegantbook}|，调用 mtpro2 字体时需要把 \verb|mathpazo|换成 \verb|mtpro|，mathpazo 不需要用户自己安装字体，mtpro2 的字体需要自己安装。
@@ -119,11 +119,11 @@
 \toprule
 	  & green & cyan & blue & 主要使用的环境\\
 \midrule
-main & \makecell{{\color{main1}\rule{1cm}{1cm}}}& \makecell{{\color{main2}\rule{1cm}{1cm}}}&\makecell{ {\color{main3}\rule{1cm}{1cm}}}& newthem \ newlemma \ newcorol\\
+main & \makecell{{\color{main1}\rule{1cm}{1cm}}}& \makecell{{\color{main2}\rule{1cm}{1cm}}}&\makecell{ {\color{main3}\rule{1cm}{1cm}}}& etheorem \ elemma \ ecorollary\\
 
-seco &\makecell{ {\color{seco1}\rule{1cm}{1cm}}}& \makecell{{\color{seco2}\rule{1cm}{1cm}}}&\makecell{ {\color{seco3}\rule{1cm}{1cm}}}&newdef\\
+second &\makecell{ {\color{second1}\rule{1cm}{1cm}}}& \makecell{{\color{second2}\rule{1cm}{1cm}}}&\makecell{ {\color{second3}\rule{1cm}{1cm}}}&edefinition\\
 
-thid &\makecell{ {\color{thid1}\rule{1cm}{1cm}}}& \makecell{{\color{thid2}\rule{1cm}{1cm}}}&\makecell{ {\color{thid3}\rule{1cm}{1cm}}}&newprop\\
+third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\rule{1cm}{1cm}}}&\makecell{ {\color{third3}\rule{1cm}{1cm}}}&eproposition\\
 \bottomrule
 \end{tabular}
 \caption{ElegantBook 模板中的三套颜色主题\label{tab:color thm}}
@@ -138,11 +138,11 @@ thid &\makecell{ {\color{thid1}\rule{1cm}{1cm}}}& \makecell{{\color{thid2}\rule{
 \begin{enumerate}
 \item 定理类环境，包含标题和内容两部分。根据格式的不同分为3种
 \begin{itemize}
-\item {\color{main} newthem、newlemma、newcorol} 环境，颜色为主颜色main，三者编号均以章节为单位；
-\item {\color{main} newdef} 环境，含有一个可选项，编号以章节为单位，颜色为seco；
-\item {\color{main} newprop} 环境，含有一个可选项，编号以章节为单位，颜色为thid。
+\item {\color{main} etheorem、elemma、ecorollary} 环境，颜色为主颜色main，三者编号均以章节为单位；
+\item {\color{main} edefinition} 环境，含有一个可选项，编号以章节为单位，颜色为second；
+\item {\color{main} eproposition} 环境，含有一个可选项，编号以章节为单位，颜色为third。
 \end{itemize}
-\item 证明类环境，有  {\color{main} newproof、note、remark、solution} 环境，特点是，有引导符和引导词，并且 newproof、solution 环境有结束标志。
+\item 证明类环境，有  {\color{main} eproof、note、remark、solution} 环境，特点是，有引导符和引导词，并且 eproof、solution 环境有结束标志。
 \item 结论类环境，有 {\color{main}  conclusion、assumption、property} 环境，三者均以粗体的引导词为开头，和普通段落格式一致。
 \item 示例类环境--- {\color{main} example、exercise}环境，编号以章节为单位，其中exercise环境有引导符。
 \item 自定义环境--- {\color{main} custom}，带一个必选参数，格式与conclusion 环境很类似。
@@ -164,9 +164,9 @@ thid &\makecell{ {\color{thid1}\rule{1cm}{1cm}}}& \makecell{{\color{thid2}\rule{
 
 where $z$ is stochastic process or white noise or wiener process.
 
-\begin{newdef}[Wiener Process]
+\begin{edefinition}[Wiener Process]
 If $z$ is wiener process, then for any partition $t_0,t_1,t_2,\ldots$ of time interval, the random variables $z(t_1)-z(t_0),z(t_2)-z(t_1),\ldots$ are independently and normally distributed with zero means and variance $t_1-t_0,t_2-t_1,\ldots$
-\end{newdef}
+\end{edefinition}
 
 \lipsum[5]
 
@@ -178,11 +178,11 @@ $E$ and $F$ be two events such that $\mbf{P}(E)=\mbf{P}(F)=1/2$, and $\mbf{P}(E\
 let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\leq M,x_n\in \mathbb{R}\big\}$, $\rho_{\infty}(x,y)=\sup\limits_{n\geq 1}|x_n-y_n|$, show that $\big(l^\infty,\rho_{\infty}\big)$ is complete.
 \end{exercise}
 
-\begin{newthem}[勾股定理]\label{thm:31}
+\begin{etheorem}[勾股定理]\label{thm:31}
 勾股定理的数学表达（Expression）为
 \[a^2+b^2=c^2\]
 其中$a,b$为直角三角形的两条直角边长，$c$为直角三角形斜边长。
-\end{newthem}
+\end{etheorem}
 
 \begin{note}
 在本模板中，引理（lemma），推论（corollary ）的样式和定理的样式一致，包括颜色，仅仅只有计数器的设置不一样。在这个例稿中，我们将不给出引理推论的例子。
@@ -191,19 +191,19 @@ let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\
 
 \lipsum[4]
 
-\begin{newprop}[最优性原理]
+\begin{eproposition}[最优性原理]
 如果$u^*$在$[s,T]$上为最优解，则$u^*$在$[s,T]$任意子区间都是最优解，假设区间为$[t_0,t_1]$的最优解为$u^*$，则$u(t_0)=u^{*}(t_0)$，即初始条件必须还是在$u^*$上。
-\end{newprop}
+\end{eproposition}
 
 \lipsum[5-6]
-\begin{newcorol}
+\begin{ecorollary}
 假设$V(\cdot,\cdot)$为值函数，则跟据最大值原理~\ref{thm:31}，有如下推论
 \[
 V(k,z)=\max\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}
 \]
-\end{newcorol}
+\end{ecorollary}
 
-\begin{newproof}
+\begin{eproof}
 因为 $y^*=\alpha\beta z k^\alpha$，$V(k,z)=\alpha/1-\alpha\beta\ln k_0+1/1-\alpha\beta \ln z_0+\Delta$。
 \begin{align*}
 \text{右边}&=\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}\\
@@ -216,7 +216,7 @@ V(k,z)=\max\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}
 &=\frac{\alpha}{1-\alpha\beta}\ln k+\frac{1}{1-\alpha\beta}\ln z+\Delta
 \end{align*}
 所以$\text{左边}=\text{右边}$，证毕。
-\end{newproof}
+\end{eproof}
 
 
 
@@ -237,13 +237,13 @@ This is one example of the custom environment, the key word is given by the opti
 
 
 \lipsum[6]
-\begin{newdef}[Contraction mapping]
+\begin{edefinition}[Contraction mapping]
 $(S,\rho)$ is the metric space, $T: S\to S$, If there exists $\alpha\in(0,1)$ such that for any $x$ and $y\in S$, the distance
 \begin{equation}
 \rho(Tx,Ty)\leq \alpha\rho(x,y)
 \end{equation}
 Then $T$ is a {\color{main} contraction mapping}.
-\end{newdef}
+\end{edefinition}
 
 \begin{remark}
 \begin{enumerate}
