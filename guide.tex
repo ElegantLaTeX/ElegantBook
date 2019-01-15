@@ -1,14 +1,13 @@
 %!TEX program = xelatex
-
-\documentclass[color=green, mtpro,titlestyle=hang,mathpazo]{elegantbook}
+\documentclass[color=green,mathpazo,titlestyle=hang,11pt]{elegantbook}
 
 \author{ddswhu \& LiamHuang0205}
 \email{elegantlatex2e@gmail.com}
 \zhtitle{优美的\LaTeX{} 书籍}
-\zhend{模板}
+\zhend{}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{2.00}
+\version{2.10}
 \myquote{Victory won\rq t come to us unless we go to it.}
 \logo{logo.pdf}
 \cover{cover.pdf}
@@ -30,16 +29,10 @@
 \usepackage{lipsum}
 \usepackage{texnames}
 
-\usepackage{afterpage}
-
-
 
 \begin{document}
-
 \maketitle
-\tableofcontents 
-
-
+\tableofcontents
 \mainmatter
 \chapter{ElegantBook 模板的由来}
 
@@ -65,7 +58,7 @@
 
 在实际应用中，我们发现了一个比较重要的问题，因为在一般的笔记中，定义、定理经常一起出现，和课本区别比较大的是，通常是一堆定义之后，出现一堆性质或者定理。如果出现这种情况，使用 ElegantNote 模板会导致分块很严重，影响排版质量和美观。思前想后，我们决定将 ElegantNote 模板更新为 ElegantBook 模板，并在未来重新设计一个简洁版本的 ElegantNote。 至此ElegantBook 才横空出世，由于更名原因，ElegantBook 1.00 版本也即原来的 ElegantNote， 而ElegantBook 2.00 为目前的正式版本。
 
-\section{一张白纸折腾出一个模板}
+\section{一张白纸折腾出的一个模板}
 
 我以前从未写过类文件，所以，写这个模板的过程必然是折腾的过程，在写模板的过程中，最主要参考了《写给\LaTeXe{} 类与宏包的作者》\cite{packagewriter}、moderncv.cls 文件、\href{http://aff.whu.edu.cn/huangzh/}{武汉大学黄正华老师的论文模板}、《\LaTeXe{} 完全学习手册》\cite{complete}、{\itshape The Not So Short Introduction to \LaTeXe{}}\cite{oetiker2010not}以及各大\LaTeX{} 疑问解答网站，在此为无私奉献的组织和个人表示感谢！
 
@@ -73,14 +66,14 @@
 
 \begin{figure}[!hbtp]
 \includegraphics[width=0.8\textwidth]{happy.jpg}
-\caption{Happiness,We have it!\label{figur:happy}}
+\caption{Happiness,we have it!\label{figur:happy}}
 \end{figure}
 
 \chapter{ElegantBook 开服说明}
 \section{关于我们}
  我们目前都是学生，接触 \LaTeX{} 的时间也不是很长，因此，对于此模板的错误还请多多包涵！ 目前，模板的拓展性或者可移植性有待完善，所以，我们强烈建议用户不要大幅修改模板文件，我们的初衷是提供一套模板，让初学者能够使用一些比较美观，优雅的模板。如果在使用过程中，想修改一些简单的东西需要帮忙，请联系我们，我们的邮箱是：\href{elegantlatex2e@gmail.com}{elegantlatex2e@gmail.com}。我们将竭尽全力提供帮助！
 
-值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们的主页是 \url{http://elegantlatex.tk}，我们这个项目致力于打造一系列美观、优雅、简便的模板方便使用者记录学习历史。其中目前在实施或者在规划中的子项目有 书籍模板ElegantBook、笔记模板ElegantNote、幻灯片模板 ElegantSlide。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
+值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们的主页是 \href{http://elegantlatex.tk}{http://elegantlatex.tk}，我们这个项目致力于打造一系列美观、优雅、简便的模板方便使用者记录学习历史。其中目前在实施或者在规划中的子项目有 书籍模板ElegantBook、笔记模板ElegantNote、幻灯片模板 ElegantSlide。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
 
 \section{关于字体}
 
@@ -112,7 +105,6 @@
 \definecolor{main}{RGB}{70,70,70}    %定义main颜色值
 \definecolor{seco}{RGB}{115,45,2}    %定义seco颜色值
 \definecolor{thid}{RGB}{0,80,80}     %定义thid颜色值
-\base{blackbase.pdf}                 %可以改为自己想要的图案
 \end{verbatim}
 
 第二类为{\color{main}数学字体}设置，有两个可选项，分别是 mathpazo（默认） 和 mtpro2 字体，调用mathpazo 字体使用 \verb|\documentclass[mathpazo]{elegantbook}|，调用 mtpro2 字体时需要把 \verb|mathpazo|换成 \verb|mtpro|，mathpazo 不需要用户自己安装字体，mtpro2 的字体需要自己安装。
@@ -182,17 +174,16 @@ $E$ and $F$ be two events such that $\mbf{P}(E)=\mbf{P}(F)=1/2$, and $\mbf{P}(E\
 let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\leq M,x_n\in \mathbb{R}\big\}$, $\rho_{\infty}(x,y)=\sup\limits_{n\geq 1}|x_n-y_n|$, show that $\big(l^\infty,\rho_{\infty}\big)$ is complete.
 \end{exercise}
 
-\begin{newthem}[勾股定理]\label{thm:3.1}
+\begin{newthem}[勾股定理]
 勾股定理的数学表达（Expression）为
 \[a^2+b^2=c^2\]
 其中$a,b$为直角三角形的两条直角边长，$c$为直角三角形斜边长。
 \end{newthem}
 
-
-
 \begin{note}
 在本模板中，引理（lemma），推论（corollary ）的样式和定理的样式一致，包括颜色，仅仅只有计数器的设置不一样。在这个例稿中，我们将不给出引理推论的例子。
 \end{note}
+
 
 \lipsum[4]
 

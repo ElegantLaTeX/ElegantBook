@@ -6,6 +6,7 @@
 %% available at http://elegantlatex.tk/download/
 %% and  http://ddswhu.com/download/
 % %
+%% Last Modification 2014-2-3
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
@@ -40,32 +41,45 @@
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
-\newcommand*{\base}[1]{
- \def\@base{\includegraphics[scale=0.3]{#1}
- }
-}
+
 \RequirePackage{xcolor}
 \ifdefstring{\ELEGANT@color}{green}{
   \definecolor{main}{RGB}{0,120,2}%
   \definecolor{seco}{RGB}{230,90,7}%
   \definecolor{thid}{RGB}{0,160,152}%
-  \base{greenbase.pdf}%
+%  \base{greenbase.pdf}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{cyan}{
   \definecolor{main}{RGB}{0,175,152}%
   \definecolor{seco}{RGB}{239,126,30}%
   \definecolor{thid}{RGB}{120,8,13}%
-  \base{cyanbase.pdf}%
+ % \base{cyanbase.pdf}%
 }{\relax}
 
 \ifdefstring{\ELEGANT@color}{blue}{
   \definecolor{main}{RGB}{20,50,104}%
   \definecolor{seco}{RGB}{180,50,131}%
   \definecolor{thid}{RGB}{7,127,128}%
-  \base{bluebase.pdf}%
+ % \base{bluebase.pdf}%
 }{\relax}
 
+\AtBeginDocument{
+\input{base.tex}
+}
+
+\providecommand{\base}{
+\begin{tikzpicture}[scale=0.3]
+\triz{0}{0}
+\ellz{128}
+\intz{149}
+\ellz{170}
+\intz{191}
+\ellz{212}
+\triz{341}{180}
+\end{tikzpicture}}
+%\newcommand*{\base}{
+%}
 
 % ----- Handle Math option -----
 \ifELEGANT@mathpazo
@@ -84,8 +98,6 @@
 \newtoks\version
 \newtoks\enend
 \newtoks\zhend
-
-
 
 %%数学字体宏包
 
@@ -113,6 +125,7 @@
 }
 
 
+
 %% 页面设置
 
 \RequirePackage{hyperref}
@@ -125,33 +138,31 @@
 }
 
 \hypersetup{
- breaklinks,
- unicode,
- bookmarksnumbered  =true,
- bookmarksopen      =true,
- pdfsubject         =\@author \@title Book,
- pdfkeywords        ={ElegantBook},
- pdfcreator         ={XeLaTeX with ElegantBook class},
- colorlinks,
- linkcolor          =main,
- plainpages         =false,
- pdfstartview       =FitH,
- pdfborder={0 0 0},
- linktocpage
- }
+			breaklinks,
+                   unicode,
+			bookmarksnumbered=true,
+			bookmarksopen=true,
+			pdfsubject=\@author \@title Book,
+			pdfkeywords={ElegantBook},
+			pdfcreator={XeLaTeX with ElegantBook class},
+			colorlinks,
+			linkcolor=main,
+			plainpages=false,
+			pdfstartview=FitH,
+			pdfborder={0 0 0},
+			linktocpage
+}
 
 \RequirePackage{geometry}
 \geometry{
-    a4paper,
-   left=27mm,  %% or inner=23mm
-   right=27mm, %% or outer=18mm
-   top=25.4mm, bottom=25.4mm,
-   headheight=2.17cm,
-   headsep=4mm,
-   footskip=12mm
+			a4paper,
+			left=27mm,  %% or inner=23mm
+			right=27mm, %% or outer=18mm
+			top=25.4mm, bottom=25.4mm,
+			headheight=2.17cm,
+			headsep=4mm,
+			footskip=12mm
 }
-
-
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
@@ -159,7 +170,8 @@
 \renewcommand{\chaptername}{第 \thechapter 章}
 
 \titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{main}\chaptername}\enspace}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\@base]
+{\filcenter\LARGE\enspace\bfseries{\color{main}\chaptername}\enspace}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base]
+
 
 \titleformat{\section}[hang]{\sffamily}
 {\hspace{-2.45em}\Large\bfseries{\color{main}\thesection}\enspace}{1pt}{\color{main}\Large\bfseries\filright}
@@ -185,7 +197,6 @@
 \RequirePackage{caption}
 \captionsetup{labelfont = bf}
 
-
 %%字体设置
 \RequirePackage{fontenc}
 \RequirePackage[no-math,cm-default]{fontspec}
@@ -197,7 +208,7 @@
 \setmonofont{Inconsolata}%Palatino Linotype
 %-中文字体设置-%
 \RequirePackage{xeCJK}
-\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{华文中宋}%方正书宋_GBK Adobe Song Std L
+\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{HYShuSongYiJ}%方正书宋_GBK Adobe Song Std L华文中宋
 \setCJKsansfont[BoldFont={黑体}]{方正中等线简体}
 \setCJKmonofont{方正中等线简体}
 \XeTeXlinebreaklocale "zh"
@@ -245,10 +256,10 @@
 \begin{tikzpicture}
 \node[newthemsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\refstepcounter{Newthem}\BODY
+        \sffamily\BODY
      \end{minipage}};
 \node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Theorem \theNewthem\; #1}};
+     \bf\textsf{Theorem \stepcounter{Newthem}\theNewthem\; #1}};
 \node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -262,10 +273,10 @@
 \begin{tikzpicture}
 \node[newthemsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily \refstepcounter{Newlemma}\BODY
+        \sffamily\BODY
      \end{minipage}};
 \node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Lemma \theNewlemma\; #1}};
+     \bf\textsf{Lemma \stepcounter{Newlemma}\theNewlemma\; #1}};
 \node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -279,10 +290,10 @@
 \begin{tikzpicture}
 \node[newthemsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\refstepcounter{Newcorol}\BODY
+        \sffamily\BODY
      \end{minipage}};
 \node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Corollary \theNewcorol\; #1}};
+     \bf\textsf{Corollary \stepcounter{Newcorol}\theNewcorol\; #1}};
 \node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -295,10 +306,10 @@
 \begin{tikzpicture}
 \node[newpropositionsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\refstepcounter{Newprop}\BODY
+        \sffamily\BODY
      \end{minipage}};
 \node[newpropositionstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Proposition \theNewprop\; #1}};
+     \bf\textsf{Proposition \stepcounter{Newprop}\theNewprop\; #1}};
 \node[newpropositionstytitle, rounded corners] at (box.east) {$\spadesuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -310,8 +321,8 @@
 \NewEnviron{newdef}[1][{}]{%
 \begin{figure}[!htb]\noindent\centering
 \begin{tikzpicture}
-\node [newdefinitionsty] (dbox){\begin{minipage}{0.93\textwidth}\itshape\refstepcounter{Newdefinition}\BODY\end{minipage}};
-\node[newdefinitionstytitle, right=10pt] at (dbox.north west) {\bf\textsf{Definition \theNewdefinition\; #1}};
+\node [newdefinitionsty] (dbox){\begin{minipage}{0.93\textwidth}\itshape\BODY\end{minipage}};
+\node[newdefinitionstytitle, right=10pt] at (dbox.north west) {\bf\textsf{Definition \stepcounter{Newdefinition}\theNewdefinition\; #1}};
 \node[newdefinitionstytitle, rounded corners] at (dbox.east) {$\heartsuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -320,12 +331,12 @@
 %% Example with counter
 \newcounter{Newexam}[chapter]
 \renewcommand{\theNewexam}{\thechapter.\arabic{Newexam}}
-\newenvironment{example}{\par\noindent\textbf{Example\,\refstepcounter{Newexam}\theNewexam: }\color{black!90}}{\par}
+\newenvironment{example}{\par\noindent\textbf{Example\,\stepcounter{Newexam}\theNewexam: }\color{black!90}}{\par}
 
 %% Exercise with counter
 \newcounter{Newexer}[chapter]
 \renewcommand{\theNewexer}{\thechapter.\arabic{Newexer}}
-\newenvironment{exercise}{\par\noindent{\makebox[0pt][r]{\color{main}\ding{50}\;\;}}\textbf{Exercise\,\refstepcounter{Newexer}\theNewexer: }}{\par}
+\newenvironment{exercise}{\par\noindent{\makebox[0pt][r]{\color{main}\ding{50}\;\;}}\textbf{Exercise\,\stepcounter{Newexer}\theNewexer: }}{\par}
 
 %%define the note and newproof environment
 \RequirePackage{pifont,manfnt}
@@ -353,7 +364,7 @@
 \fancyhead[EL,OR]{\color{main}--\thepage/\pageref{LastPage}--}
 \fancyhead[ER]{\color{main}\em\nouppercase\leftmark{}}
 \fancyhead[OL]{\color{main}\em\nouppercase\rightmark}
-\fancyfoot[c]{\@base}
+\fancyfoot[c]{\base}
 \renewcommand{\headrule}{\color{main}\hrule width\textwidth}
 \pagestyle{fancy}
 
