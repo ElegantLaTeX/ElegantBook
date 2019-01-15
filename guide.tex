@@ -1,14 +1,13 @@
-%!TEX program = xelatex
-\documentclass[mathpazo,titlestyle=hang,11pt]{elegantbook}
+\documentclass[titlestyle=hang,11pt]{elegantbook}
 
-\author{ddswhu \& LiamHuang0205}
+\author{ddswhu \& Liam Huang}
 \email{ddswhu@outlook.com}
 
-\zhtitle{优美的\LaTeX{} 书籍}
+\zhtitle{优美的 \LaTeX{} 书籍}
 \zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{2.40}
+\version{3.00}
 \myquote{Victory won\rq t come to us unless we go to it.}
 \logo{logo.png}
 \cover{cover.pdf}
@@ -31,87 +30,56 @@
 \usepackage{texnames}
 
 
+
 \begin{document}
 \maketitle
 \tableofcontents
 \mainmatter
-\chapter{ElegantBook 模板的由来}
+\chapter{Elegant\LaTeX{} 系列模板介绍}
 
-只有当自己想去做一件事的时候才能把事情做好！
+值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们致力于打造一系列美观、优雅、简便的模板方便用户使用。Elegant\LaTeX{} 系列模板目前由 ElegantNote，ElegantBook，ElegantPaper，ElegantBeamer 组成，分别用于排版笔记，书籍，工作论文和幻灯片讲稿。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note 是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
+
+请用户在作者的主页下载最新版本，下载地址：\href{https://ddswhu.me/resource/}{https://ddswhu.me/resource/}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您在使用此模板，欢迎把您使用此模板制作的成品发一份给我们，谢谢！如果您有其他问题，建议或者意见，欢迎联系我：\mailto{ddswhu@outlook.com}。
 
 
-\section{ElegantNote 的前世今生}
+\section{ElegantBook 更新说明}
+在这几年间，我们收到了很多用户的反馈，主要的问题涉及到字体安装，编码支持，定理浮动，定理跨页，交叉引用等等。我们思前想后，原先让用户安装字体以追求视觉上的美观并不完美，用户陷入了巨大的麻烦，这违背了我们的模板初衷。因此我们在新版中删除了这部分，用户无需安装任何字体。让我们来看下此次 ElegantBook 模板 3.0 更新的主要内容有：
 
-写 ElegantNote 模板的初衷是为了简化我在写笔记中的工作，因为我不会写类文件和包文件，所以，最当初是想拜托小L做出一个华丽，清爽的 \LaTeX{} 模板，最好是类文件，而且因为这样可以简化导言区复杂的内容。后来，和小L一拍即合，遂开始一起做Elegant\LaTeX{}的设计。
-
-在学校的时候，搞定了定理环境样式的代码。因为不想重复 China\TeX{} 那个经典的页眉页脚，我找到了计量书上的一个图案，小L拿 Ti\emph{k}Z 一点一点把那个画出来了，不过我最后还是用的截取的方式得到的图案。慢慢地，我们把初步的样子做出来了。
-
-2013年的暑假开始后，我对那个初步的模板做了一点改动，然后用它写了Dynamic Programing 的笔记，并且，在写的过程中，对模板加了封面，也就是模板现在的封面（logo 在Version 2.00中已经改了）。至此，模板的大致样子终于出来了，不过当时也在写笔记的过程中知道了某些不足，比如
-\begin{enumerate}
-\item 定理类的环境在我们这个模板中不能浮动，也不能跨页，在Version 2.00 版本中已经添加。
-\item 某些环境不足，比如例子、假设、性质、结论等环境，在1.00版本中已经增加了这几个环境，在2.00版本中，环境设置更加全面。
-\item 一些我们不可预知的错误将会不期而遇。
-\item 一些我们目前没有需求，但是可以继续改进的地方，比如表格样式，比如抄录样式等。
+\begin{enumerate}[noitemsep]
+   \item 使用 \texttt{tcolorbox} 宏包改写了原先的定理类环境，目前定理环境等均可以跨页。
+   \item 重新命名了定理类环境的名称（theorem，definition，proposition 等）。
+   \item 重新命名了颜色的名字（first，second，third）。
+   \item 删除了自定义字体设置，改用 \texttt{ctex} 宏包用以支持中文。
 \end{enumerate}
 
-写完那个笔记之后越发让我对 Elegant\LaTeX{} 模板的制作更有激情，在和小L相互讨论的几天里，我们终于得到了1.00 版本的 ElegantNote 模板。
+\section{未来更新计划}
 
-\section{ElegantBook 的诞生}
+\begin{enumerate}[noitemsep]
+   \item 设计一个适合的 LOGO；
+   \item 重新设计 base 图标；
+   \item 重新设计一个好看的封面。
+   \item 将基础模板改为英文模板，添加选项使其支持中文。
+   \item 将最早的 ElegantNote 重新设计为简版发布。
+   \item 添加一个简化风格（plain）的颜色主题。
+\end{enumerate}
 
-在实际应用中，我们发现了一个比较重要的问题，因为在一般的笔记中，定义、定理经常一起出现，和课本区别比较大的是，通常是一堆定义之后，出现一堆性质或者定理。如果出现这种情况，使用 ElegantNote 模板会导致分块很严重，影响排版质量和美观。思前想后，我们决定将 ElegantNote 模板更新为 ElegantBook 模板，并在未来重新设计一个简洁版本的 ElegantNote。 至此ElegantBook 才横空出世，由于更名原因，ElegantBook 1.00 版本也即原来的 ElegantNote， 而ElegantBook 2.00 为目前的正式版本。
+\chapter{ElegantBook 设置说明}
 
-\section{一张白纸折腾出的一个模板}
 
-我以前从未写过类文件，所以，写这个模板的过程必然是折腾的过程，在写模板的过程中，最主要参考了《写给\LaTeXe{} 类与宏包的作者》\cite{packagewriter}、moderncv.cls 文件、\href{http://aff.whu.edu.cn/huangzh/}{武汉大学黄正华老师的论文模板}、《\LaTeXe{} 完全学习手册》\cite{complete}、{\itshape The Not So Short Introduction to \LaTeXe{}}\cite{oetiker2010not}以及各大\LaTeX{} 疑问解答网站，在此为无私奉献的组织和个人表示感谢！
+\section{编译方式}
 
-{\color{third}忍不住插个图！}
+本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。作者编写环境为 Win10(64bit) + \TeX{} Live 2018。由于使用的是 \texttt{ctex} 宏包，所以支持 \texttt{pdflatex} 以及 \texttt{xelatex} 编译。
 
-\begin{figure}[!hbtp]
-\includegraphics[width=0.8\textwidth]{happy.jpg}
-\caption{Happiness,we have it!\label{figur:happy}}
-\end{figure}
 
-\chapter{ElegantBook 开服说明}
-\section{关于我们}
- 我们目前都是学生，接触 \LaTeX{} 的时间也不是很长，因此，对于此模板的错误还请多多包涵！ 目前，模板的拓展性或者可移植性有待完善，所以，我们强烈建议用户不要大幅修改模板文件，我们的初衷是提供一套模板，让初学者能够使用一些比较美观，优雅的模板。如果在使用过程中，想修改一些简单的东西需要帮忙，请联系我们，我们的邮箱是：\href{elegantlatex2e@gmail.com}{elegantlatex2e@gmail.com}。我们将竭尽全力提供帮助！
+\section{选项设置}
+本文特殊选项设置共有 2 类，分为 {\color{main}主题颜色}设置 以及 {\color{main}章标题显示风格}设置。
 
-值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们的主页是 \href{http://elegantlatex.org}{http://elegantlatex.org}，我们这个项目致力于打造一系列美观、优雅、简便的模板方便使用者记录学习历史。其中目前在实施或者在规划中的子项目有 书籍模板ElegantBook、笔记模板ElegantNote、幻灯片模板 ElegantSlide。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
-
-如果您在使用此模板，方便的话，是否可以把您使用此模板制作的成品发一份给我们，谢谢！
-
-\section{关于字体（已删除）}
-
-基于本模板追求视觉上的美观的角度，强烈建议使用者安装./fonts/文件夹下的字体。出于版权的考虑，务必不能将此模板用于涉及盈利目的的商业行为，否则，后果自负，本模板带的字体仅供学习使用，如果您喜欢某种字体，请自行购买正版。本文主要使用的字体如下
-
-\begin{itemize}
-\itemsep=3pt
-\parskip=0pt
-\item Adobe Garamond Pro
-\item 方正苏新诗柳楷简体
-\item 方正启体简体
-\end{itemize}
-
-\begin{note}
-虽然我们模板更新到了 2.30 了（主要是字体删除，交叉引用的紧急修复），但是使用文档部分并没有更新（仍然是 2.00），在使用过程中，请尽量参考文档说明，如果有问题，可以联系我们。
-
-如果系统内安装了Adobe 字体，大家可以把模板中使用到的黑体，楷体，宋体等字替换成 Adobe 字体，这样可以达到最佳效果。
-\end{note}
-
-\section{文档说明}
-\subsection{编译方式}
-本模板基于book文类，所以book的选项对于本模板也是有效的。但是，只支持 \XeLaTeX{}，编码为 UTF-8，推荐使用 \TeX{}live编译。作者编写环境为Win8.1(64bit)+\TeX{}live 2013，由于使用了参考文献，所以，编译顺序为\XeLaTeX->\BibTeX->\XeLaTeX->\XeLaTeX。
-
-本文特殊选项设置共有3类，分为{\color{main}颜色} 、{\color{main} 数学字体 }以及{\color{main} 章标题显示风格}。
-
-\subsection{选项设置}
-第一类为{\color{main}颜色}主题设置，内置 3 组颜色主题，分别为 \verb|green|（默认），\verb|cyan|，\verb|blue|，另外还有一个自定义的选项 \verb|nocolor|，用户\textbf{必须}在使用模板的时候选择某个颜色主题或选择 \verb|nocolor|选项。调用颜色主题 \verb|green| 的方法为\verb|\documentclass[green]{elegantbook}|或者使用\verb|\documentclass[color=green]{elegantbook}|。需要改变颜色的话请选择 \verb|nocolor|选项或者使用 \verb|color=none|，然后在导言区定义main、second、third颜色，具体的方法如下：
+第 1 类为{\color{main}主题颜色}设置，内置 3 组颜色主题，分别为 \verb|green|（默认），\verb|cyan|，\verb|blue|，另外还有一个自定义的选项 \verb|nocolor|，用户\textbf{必须}在使用模板的时候选择某个颜色主题或选择 \verb|nocolor| 选项。调用颜色主题 \verb|green| 的方法为 \verb|\documentclass[green]{elegantbook}|或者使用 \verb|\documentclass[color=green]{elegantbook}|。需要改变颜色的话请选择 \verb|nocolor| 选项或者使用 \verb|color=none|，然后在导言区定义 main、second、third 颜色，具体的方法如下：
 \begin{verbatim}
-\definecolor{main}{RGB}{70,70,70}    %定义main颜色值
-\definecolor{second}{RGB}{115,45,2}    %定义second颜色值
-\definecolor{third}{RGB}{0,80,80}     %定义third颜色值
+\definecolor{main}{RGB}{70,70,70}    %定义 main 颜色值
+\definecolor{second}{RGB}{115,45,2}    %定义 second 颜色值
+\definecolor{third}{RGB}{0,80,80}     %定义 third 颜色值
 \end{verbatim}
-
-第二类为{\color{main}数学字体}设置，有两个可选项，分别是 mathpazo（默认） 和 mtpro2 字体，调用mathpazo 字体使用 \verb|\documentclass[mathpazo]{elegantbook}|，调用 mtpro2 字体时需要把 \verb|mathpazo|换成 \verb|mtpro|，mathpazo 不需要用户自己安装字体，mtpro2 的字体需要自己安装。
 
 \begin{table}[htp]
 \centering
@@ -119,135 +87,160 @@
 \toprule
 	  & green & cyan & blue & 主要使用的环境\\
 \midrule
-main & \makecell{{\color{main1}\rule{1cm}{1cm}}}& \makecell{{\color{main2}\rule{1cm}{1cm}}}&\makecell{ {\color{main3}\rule{1cm}{1cm}}}& etheorem \ elemma \ ecorollary\\
+main & \makecell{{\color{main1}\rule{1cm}{1cm}}}& \makecell{{\color{main2}\rule{1cm}{1cm}}}&\makecell{ {\color{main3}\rule{1cm}{1cm}}}& definition \\
 
-second &\makecell{ {\color{second1}\rule{1cm}{1cm}}}& \makecell{{\color{second2}\rule{1cm}{1cm}}}&\makecell{ {\color{second3}\rule{1cm}{1cm}}}&edefinition\\
+second &\makecell{ {\color{second1}\rule{1cm}{1cm}}}& \makecell{{\color{second2}\rule{1cm}{1cm}}}&\makecell{ {\color{second3}\rule{1cm}{1cm}}}&theorem \ lemma \ corollary\\
 
-third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\rule{1cm}{1cm}}}&\makecell{ {\color{third3}\rule{1cm}{1cm}}}&eproposition\\
+third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\rule{1cm}{1cm}}}&\makecell{ {\color{third3}\rule{1cm}{1cm}}}&proposition\\
 \bottomrule
 \end{tabular}
 \caption{ElegantBook 模板中的三套颜色主题\label{tab:color thm}}
 \end{table}
 
-第三类为{\color{main} 章标题显示风格}，包含 \verb|hang|（默认）与 \verb|display|两种风格，区别在于章标题单行显示（\verb|hang|）与双行显示（\verb|display|），本说明使用了 \verb|hang|。调用方式为 \verb|\documentclass[hang]{elegantbook}|或者 \verb|\documentclass[titlestyle=hang]{elegantbook}|。
+第 2 类为{\color{main} 章标题显示风格}，包含 \verb|hang|（默认）与 \verb|display| 两种风格，区别在于章标题单行显示（\verb|hang|）与双行显示（\verb|display|），本说明使用了 \verb|hang|。调用方式为 \verb|\documentclass[hang]{elegantbook}| 或者 \verb|\documentclass[titlestyle=hang]{elegantbook}|。
 
-综合起来，同时调用三个选项使用 \verb|\documentclass[color=X,Y,titlestyle=Z]{elegantbook}|。其中 \verb|X| 可以选择 \verb|green|,\verb|cyan|,\verb|blue|,\verb|none|；\verb|Y| 可以选择 \verb|mathpazo|或者 \verb|mtpro|；\verb|Z|可以选择 \verb|hang| 或者 \verb|display|。
+综合起来，同时调用三个选项使用 \verb|\documentclass[color=X,titlestyle=Y]{elegantbook}|。其中 \verb|X| 可以选择 \verb|green|,\verb|cyan|,\verb|blue|,\verb|none|；\verb|Z| 可以选择 \verb|hang| 或者 \verb|display|。
 
-\subsection{数学环境简介}
+\section{数学环境简介}
+
 在我们这个模板中，定义了三大类环境
-\begin{enumerate}
+
+\begin{enumerate}[noitemsep]
 \item 定理类环境，包含标题和内容两部分。根据格式的不同分为3种
-\begin{itemize}
-\item {\color{main} etheorem、elemma、ecorollary} 环境，颜色为主颜色main，三者编号均以章节为单位；
-\item {\color{main} edefinition} 环境，含有一个可选项，编号以章节为单位，颜色为second；
-\item {\color{main} eproposition} 环境，含有一个可选项，编号以章节为单位，颜色为third。
-\end{itemize}
-\item 证明类环境，有  {\color{main} eproof、note、remark、solution} 环境，特点是，有引导符和引导词，并且 eproof、solution 环境有结束标志。
-\item 结论类环境，有 {\color{main}  conclusion、assumption、property} 环境，三者均以粗体的引导词为开头，和普通段落格式一致。
-\item 示例类环境--- {\color{main} example、exercise}环境，编号以章节为单位，其中exercise环境有引导符。
-\item 自定义环境--- {\color{main} custom}，带一个必选参数，格式与conclusion 环境很类似。
+   \begin{itemize}[noitemsep]
+      \item {\color{main}\bfseries definition} 环境，含有一个可选项，编号以章节为单位，颜色为 {\color{main}main}；
+      \item {\color{second}\bfseries theorem、lemma、corollary} 环境，颜色为主颜色 {\color{second}second}，编号均以章节为单位；
+      \item {\color{third}\bfseries proposition} 环境，含有一个可选项，编号以章节为单位，颜色为 {\color{third}{third}}。
+   \end{itemize}
+\item 示例类环境，有 \textbf{example、exercise} 环境，自动编号，编号以章节为单位。
+\item 证明类环境，有 \textbf{proof、note} 环境，特点是，有引导符或者结尾符，\textbf{note} 环境有引导符号，\textbf{proof} 环境有证明完毕标志。
+\item 结论类环境，有\textbf{conclusion、assumption、property，remark、solution} 环境，三者均以粗体的引导词为开头，和普通段落格式一致。
 \end{enumerate}
 
-\subsection{可编辑的字段}
-在模板中，可以编辑的字段分别为作者\verb|\author|、\verb|\email|、\verb|\zhtitle|、\verb|\zhend|、\verb|\entitle|、\verb|\enend|、\verb|\version|。并且，可以根据自己的喜好把封面水印效果的\verb|cover.pdf|替换掉，以及封面中用到的\verb|logo.pdf|。
+\section{可编辑的字段}
+在模板中，可以编辑的字段分别为作者 \verb|\author|、邮箱 \verb|\email|、中文标题 \verb|\zhtitle|、中文标题结尾 \verb|\zhend|、英文标题\verb| \entitle|、英文标题结尾 \verb|\enend|、名言 \verb|\myquote|、版本号 \verb|\version|。并且，可以根据自己的喜好把封面水印效果的 \verb|cover.pdf| 替换掉，以及封面中用到的 \verb|logo.png|。
 
 \chapter{ElegantBook 写作示例}
 
-\section{灵魂不随便出卖，代码也不随便瞎写}
-\lipsum[3]
-考虑如下的随机动态规划问题
+\section{Economics and Differentiable Function}
+
+Economics focuses on the behaviour and interactions of economic agents and how economies work. Microeconomics analyzes basic elements in the economy, including individual agents and markets, their interactions, and the outcomes of interactions. Individual agents may include, for example, households, firms, buyers, and sellers. Macroeconomics analyzes the entire economy (meaning aggregated production, consumption, savings, and investment) and issues affecting it, including unemployment of resources (labour, capital, and land), inflation, economic growth, and the public policies that address these issues (monetary, fiscal, and other policies). See glossary of economics.
 \begin{align*}
-&\max(\min)\quad \mathbb{E}\int_{t_0}^{t_1}f(t,x,u)\,dt\\
-&\quad\mbox{s.t.} \quad dx=g(t,x,u)dt+\sigma(t,x,u)dz\\
-&\quad \hspace{2.em} k(0)=k_0\;\text{given}
+   &\max(\min)\quad \mathbb{E}\int_{t_0}^{t_1}f(t,x,u)\,dt\\
+   &\quad\mbox{s.t.} \quad dx=g(t,x,u)dt+\sigma(t,x,u)dz\\
+   &\quad \hspace{2.em} k(0)=k_0\;\text{given}
 \end{align*}
 
 where $z$ is stochastic process or white noise or wiener process.
 
-\begin{edefinition}[Wiener Process]
-If $z$ is wiener process, then for any partition $t_0,t_1,t_2,\ldots$ of time interval, the random variables $z(t_1)-z(t_0),z(t_2)-z(t_1),\ldots$ are independently and normally distributed with zero means and variance $t_1-t_0,t_2-t_1,\ldots$
-\end{edefinition}
+Other broad distinctions within economics include those between positive economics, describing "what is", and normative economics, advocating "what ought to be"; between economic theory and applied economics; between rational and behavioural economics; and between mainstream economics and heterodox economics.
 
-\lipsum[5]
+Economic analysis can be applied throughout society, in business, finance, health care, and government. Economic analysis is sometimes also applied to such diverse subjects as crime, education, the family, law, politics, religion, social institutions, war, science, and the environment.
+
+\begin{definition}{Differenzierbarkeit}{diff}
+Eine Funktion $f:~I\to\mathbb{R}$ auf einem Intervall $I$ hei\ss{}t in $x_0\in I$ differenzierbar oder linear approximierbar, wenn der Grenzwert
+   \begin{equation*}
+      \lim\limits_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=
+      \lim\limits_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}
+   \end{equation*}
+existiert. Bei Existenz hei\ss{}t dieser Grenzwert Ableitung oder Differentialquotient von $f$ in $x_0$ und man schreibt f\"{u}r ihn
+   \begin{equation*}
+      f'(x_0)\quad\text{oder}\quad\frac{df}{dx}(x_0).
+   \end{equation*}
+\end{definition}
+
+The discipline was renamed in the late 19th century, primarily due to Alfred Marshall, from "political economy" to "economics" as a shorter term for "economic science". At that time, it became more open to rigorous thinking and made increased use of mathematics, which helped support efforts to have it accepted as a science and as a separate discipline outside of political science and other social sciences.
 
 \begin{example}
-$E$ and $F$ be two events such that $\mbf{P}(E)=\mbf{P}(F)=1/2$, and $\mbf{P}(E\cap F)=1/3$, let $\mathscr{F}=\sigma(Y)$,  $X$ and $Y$ be the indicate function of $E$ and $F$ respectively. How to compute $\mathbb{E}[ X\mid \mathscr{F} ]$?
+$E$ and $F$ be two events such that $P(E)=
+P(F)=1/2$, and $P(E\cap F)=1/3$, let $\mathscr{F}=\sigma(Y)$,  $X$ and $Y$ be the indicate function of $E$ and $F$ respectively. How to compute $\mathbb{E}[ X\mid \mathscr{F} ]$?
 \end{example}
-\lipsum[4]
+
+Some subsequent comments criticized the definition as overly broad in failing to limit its subject matter to analysis of markets. From the 1960s, however, such comments abated as the economic theory of maximizing behaviour and rational-choice modelling expanded the domain of the subject to areas previously treated in other fields. There are other criticisms as well, such as in scarcity not accounting for the macroeconomics of high unemployment.
+
 \begin{exercise}
 let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\leq M,x_n\in \mathbb{R}\big\}$, $\rho_{\infty}(x,y)=\sup\limits_{n\geq 1}|x_n-y_n|$, show that $\big(l^\infty,\rho_{\infty}\big)$ is complete.
 \end{exercise}
 
-\begin{etheorem}[勾股定理]\label{thm:31}
-勾股定理的数学表达（Expression）为
-\[a^2+b^2=c^2\]
-其中$a,b$为直角三角形的两条直角边长，$c$为直角三角形斜边长。
-\end{etheorem}
+\begin{theorem}{Mittelwertsatz f\"{u}r $n$ Variable}{31}
+Es sei $n\in\mathbb{N}$, $D\subseteq\mathbb{R}^n$ eine offene Menge und $f\in C^{1}(D,\mathbb{R})$. Dann gibt es auf jeder Strecke $[x_0,x]\subset D$ einen Punkt $\xi\in[x_0,x]$, so dass gilt
+\begin{equation*}
+   f(x)-f(x_0) = \operatorname{grad} f(\xi)^{\top}(x-x_0)
+\end{equation*}
+\end{theorem}
 
 \begin{note}
-在本模板中，引理（lemma），推论（corollary ）的样式和定理的样式一致，包括颜色，仅仅只有计数器的设置不一样。在这个例稿中，我们将不给出引理推论的例子。
+在本模板中，引理（lemma），推论（corollary ）的样式和定理的样式一致，包括颜色，仅仅只有计数器的设置不一样。
 \end{note}
 
 
-\lipsum[4]
+Gary Becker, a contributor to the expansion of economics into new areas, describes the approach he favours as "combin[ing the] assumptions of maximizing behaviour, stable preferences, and market equilibrium, used relentlessly and unflinchingly."One commentary characterizes the remark as making economics an approach rather than a subject matter but with great specificity as to the "choice process and the type of social interaction that [such] analysis involves." 
 
-\begin{eproposition}[最优性原理]
-如果$u^*$在$[s,T]$上为最优解，则$u^*$在$[s,T]$任意子区间都是最优解，假设区间为$[t_0,t_1]$的最优解为$u^*$，则$u(t_0)=u^{*}(t_0)$，即初始条件必须还是在$u^*$上。
-\end{eproposition}
 
-\lipsum[5-6]
-\begin{ecorollary}
-假设$V(\cdot,\cdot)$为值函数，则跟据最大值原理~\ref{thm:31}，有如下推论
+Economic efficiency measures how well a system generates desired output with a given set of inputs and available technology. Efficiency is improved if more output is generated without changing inputs, or in other words, the amount of "waste" is reduced. A widely accepted general standard is Pareto efficiency, which is reached when no further change can make someone better off without making someone else worse off.
+
+\begin{proposition}{最优性原理}{max}
+如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$在$[s,T]$ 任意子区间都是最优解，假设区间为 $[t_0,t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
+\end{proposition}
+
+Microeconomics examines how entities, forming a market structure, interact within a market to create a market system. These entities include private and public players with various classifications, typically operating under scarcity of tradable units and light government regulation. The item traded may be a tangible product such as apples or a service such as repair services, legal counsel, or entertainment.
+
+\begin{corollary}{}{}
+假设 $V(\cdot,\cdot)$ 为值函数，则根据最大值原理~\ref{thm:31}，有如下推论
 \[
 V(k,z)=\max\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}
 \]
-\end{ecorollary}
+\end{corollary}
 
-\begin{eproof}
+\begin{proof}
 因为 $y^*=\alpha\beta z k^\alpha$，$V(k,z)=\alpha/1-\alpha\beta\ln k_0+1/1-\alpha\beta \ln z_0+\Delta$。
-\begin{align*}
-\text{右边}&=\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}\\
-&=\ln(zk^\alpha-\alpha\beta zk^\alpha)+\beta\mathbb{E}\Big[\frac{\alpha}{1-\alpha\beta}\ln y+\frac{1}{1-\alpha\beta}\ln z^\prime+\Delta\Big]\\
-&=\ln(1-\alpha\beta)zk^\alpha+\beta\Big\{\mathbb{E}\big[\frac{\alpha}{1-\alpha\beta}\ln \alpha\beta z k^\alpha\big]+\frac{1}{1-\alpha\beta}\mathbb{E}[\ln z^\prime]+\Delta\Big\}
-\end{align*}
-利用$\mathbb{E}[\ln z^\prime]=0$，并将对数展开得
-\begin{align*}
-\text{右边}&=\ln (1-\alpha\beta)+\ln z+\alpha\ln k+\frac{\alpha\beta}{1-\alpha\beta}\big[\ln \alpha\beta+\ln z+\alpha\ln k\big]+\frac{\beta}{1-\alpha\beta}\mu+\beta \Delta\\
-&=\frac{\alpha}{1-\alpha\beta}\ln k+\frac{1}{1-\alpha\beta}\ln z+\Delta
-\end{align*}
-所以$\text{左边}=\text{右边}$，证毕。
-\end{eproof}
+   \begin{align*}
+   \text{右边}&=\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}\\
+   &=\ln(zk^\alpha-\alpha\beta zk^\alpha)+\beta\mathbb{E}\Big[\frac{\alpha}{1-\alpha\beta}\ln y+\frac{1}{1-\alpha\beta}\ln z^\prime+\Delta\Big]\\
+   &=\ln(1-\alpha\beta)zk^\alpha+\beta\Big\{\mathbb{E}\big[\frac{\alpha}{1-\alpha\beta}\ln \alpha\beta z k^\alpha\big]+\frac{1}{1-\alpha\beta}\mathbb{E}[\ln z^\prime]+\Delta\Big\}
+   \end{align*}
+利用 $\mathbb{E}[\ln z^\prime]=0$，并将对数展开得
+   \begin{align*}
+   \text{右边}&=\ln (1-\alpha\beta)+\ln z+\alpha\ln k+\frac{\alpha\beta}{1-\alpha\beta}\big[\ln \alpha\beta+\ln z+\alpha\ln k\big]+\frac{\beta}{1-\alpha\beta}\mu+\beta \Delta\\
+   &=\frac{\alpha}{1-\alpha\beta}\ln k+\frac{1}{1-\alpha\beta}\ln z+\Delta
+   \end{align*}
+所以 $\text{左边}=\text{右边}$，证毕。
+\end{proof}
 
 
 
 \begin{property}
 Properties of Cauchy Sequence
-\begin{enumerate}\parskip=0pt \itemsep=0pt
+\begin{enumerate}[noitemsep]
 \item $\{x_k\}$ is cauchy sequence then $\{x_k^i\}$ is cauchy sequence.
 \item $x_k\in \mathbb{R}^n$, $\rho(x,y)$ is Euclidean, then cauchy is equivalent to convergent, $(\mathbb{R}^n,\rho)$ metric space is complete.
 \end{enumerate}
 \end{property}
 
+\begin{note}
+conclusion、assumption、property，remark、solution 的环境效果是一样的。
+\end{note}
 
-\lipsum[7]
+Various market structures exist. In perfectly competitive markets, no participants are large enough to have the market power to set the price of a homogeneous product. In other words, every participant is a "price taker" as no participant influences the price of a product. In the real world, markets often experience imperfect competition.
 
-\begin{custom}{Application}
-This is one example of the custom environment, the key word is given by the option of custom environment.
-\end{custom}
+Scarcity is represented in the figure by people being willing but unable in the aggregate to consume beyond the PPF (such as at $X$) and by the negative slope of the curve.[32] If production of one good increases along the curve, production of the other good decreases, an inverse relationship. This is because increasing output of one good requires transferring inputs to it from production of the other good, decreasing the latter.
 
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.6\textwidth]{mpg.png}
+	\caption{The Relationship between MPG and Weight\label{fig:mpg}}
+\end{figure}
 
-\lipsum[6]
-\begin{edefinition}[Contraction mapping]
+\begin{definition}{Contraction mapping}{mapping}
 $(S,\rho)$ is the metric space, $T: S\to S$, If there exists $\alpha\in(0,1)$ such that for any $x$ and $y\in S$, the distance
 \begin{equation}
 \rho(Tx,Ty)\leq \alpha\rho(x,y)
 \end{equation}
 Then $T$ is a {\color{main} contraction mapping}.
-\end{edefinition}
+\end{definition}
 
 \begin{remark}
-\begin{enumerate}
-\parskip=0pt \itemsep=0pt
+\begin{enumerate}[noitemsep]
 \item $T:S\to S$, where $S$ is a metric space, if  for any $x,y\in S$, $\rho(Tx,Ty)<\rho(x,y)$ is not contraction mapping.
 \item Contraction mapping is continuous map.
 \end{enumerate}
@@ -255,12 +248,18 @@ Then $T$ is a {\color{main} contraction mapping}.
 
 
 \begin{conclusion}
-看到一则小幽默，是这样说的：{\color{main} 别人都关心你飞的有多高，只有我关心你的翅膀好不好吃！}说多了都是泪啊！
+In theory, in a free market the aggregates (sum of) of quantity demanded by buyers and quantity supplied by sellers may reach economic equilibrium over time in reaction to price changes; in practice, various issues may prevent equilibrium, and any equilibrium reached may not necessarily be morally equitable. For example, if the supply of healthcare services is limited by external factors, the equilibrium price may be unaffordable for many who desire it but cannot pay for it.
 \end{conclusion}
 
+\section{Bibliography}
+This template uses Bib\TeX{} to generate the bibliography, the default bibliography style is \verb|aer|. ~\cite{Chen2018} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. You can add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \verb|reference.bib| file, and cite the bibkey in the \verb|tex| file.
 
-\bibliographystyle{ieeetr}
+
+\nocite{EINAV2010,Havrylchyk2018} 
+
+\bibliographystyle{aer}
 \bibliography{reference}
+
 \addcontentsline{toc}{chapter}{参考文献}
 
 \end{document}
