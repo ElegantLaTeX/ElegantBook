@@ -1,15 +1,15 @@
 %%%%%%%%%%%%%%%%%%%%%%
 %% start of file `elegantbook.cls'.
-%% Copyright 2013-2019 ElegantLaTeX (ddswhu@126.com)
+%% Copyright 2013-2019 ElegantLaTeX (elegantlatex2e@gmail.com)
 %%
 %% This work may be distributed and/or modified freely
-%% available at https://ddswhu.me/resource/
+%% available at https://github.com/ElegantLaTeX
 % %
-%% Last Modification 2018-01-08
+%% Last Modification 2019-01-15
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2018/01/08 v3.03 ElegantBook document class]
+\ProvidesClass{elegantbook}[2019/01/15 v3.04 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -274,35 +274,43 @@
 
 \newtcbtheorem[auto counter,number within=chapter]{definition}{定义}{defstyle}{def}
 \newtcbtheorem[auto counter,number within=chapter]{theorem}{定理}{thmstyle}{thm}
-\newtcbtheorem[auto counter,number within=chapter]{proposition}{命题}{propstyle}{prop}
+\newtcbtheorem[auto counter,number within=chapter]{proposition}{命题}{propstyle}{pro}
 \newtcbtheorem[auto counter,number within=chapter]{corollary}{推论}{thmstyle}{cor}
-\newtcbtheorem[auto counter,number within=chapter]{lemma}{引理}{thmstyle}{lemma}
-
+\newtcbtheorem[auto counter,number within=chapter]{lemma}{引理}{thmstyle}{lem}
 
 
 %% Example with counter
-\newcounter{example}[chapter]
-\renewcommand{\theexample}{\thechapter.\arabic{example}}
-\newenvironment{example}{\par\noindent\textbf{示例\,\refstepcounter{example}\theexample：}\color{black!90}}{\par}
+\newcounter{exam}[chapter]
+\setcounter{exam}{0}
+\renewcommand{\theexam}{\thechapter.\arabic{exam}}
+\newenvironment{example}[1][]{
+ 		\refstepcounter{exam}\par\medskip\noindent \textbf{\color{main}{示例}~\theexam #1:}\rmfamily %
+ 	}{
+ 		\par\medskip\ignorespacesafterend %
+ 	}
 
 %% Exercise with counter
-\newcounter{exercise}[chapter]
-\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}
-\newenvironment{exercise}{\par\noindent\textbf{练习\,\refstepcounter{exercise}\theexercise：}}{\par}
+\newcounter{exer}[chapter]
+\setcounter{exer}{0}
+\renewcommand{\theexer}{\thechapter.\arabic{exer}}
+\newenvironment{exercise}[1][]{
+ 		\refstepcounter{exer}\par\medskip\noindent \textbf{\color{main}{练习}~\theexer #1:}\rmfamily %
+ 	}{
+ 		\par\medskip\ignorespacesafterend %
+ 	}
+
+
 
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt}
-\newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{注意：}}\itshape}{\par}
-\newenvironment{proof}{\par\noindent\textbf{证明：}\color{black!90}\small}{\hfill$\Box$\quad\par}
+\newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{main}{注意：}}}\itshape}{\par}
+\newenvironment{proof}{\par\noindent\textbf{\color{main}{证明：}}\color{black!90}\small}{\hfill$\Box$\quad\par}
 
-\newenvironment{remark}{\noindent\textbf{备注：}}{\par}
-\newenvironment{assumption}{\par\noindent\textbf{假设：}}{\par}
-\newenvironment{conclusion}{\par\noindent\textbf{结论：}}{\par}
-\newenvironment{solution}{\par\noindent\textbf{答案：}}{\par}
-\newenvironment{property}{\par\noindent\textbf{性质：}}{\par}
-
-
-
+\newenvironment{remark}{\noindent\textbf{\color{main}{备注：}}}{\par}
+\newenvironment{assumption}{\par\noindent\textbf{\color{main}{假设：}}}{\par}
+\newenvironment{conclusion}{\par\noindent\textbf{\color{main}{结论：}}}{\par}
+\newenvironment{solution}{\par\noindent\textbf{\color{main}{答案：}}}{\par}
+\newenvironment{property}{\par\noindent\textbf{\color{main}{性质：}}}{\par}
 
 
 

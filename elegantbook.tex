@@ -1,13 +1,13 @@
 \documentclass{elegantbook}
 
 \author{ddswhu \& Liam Huang}
-\email{ddswhu@outlook.com}
-
+\email{elegantlatex2e@gmail.com}
+\usepackage{ntheorem}
 \zhtitle{优美的 \LaTeX{} 书籍}
 \zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{3.03}
+\version{3.04}
 \myquote{Victory won\rq t come to us unless we go to it.}
 \logo{ElegantLaTeX_green.pdf}
 \cover{cover.pdf}
@@ -35,30 +35,31 @@
 \mainmatter
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们致力于打造一系列美观、优雅、简便的模板方便用户使用。Elegant\LaTeX{} 系列模板目前由 ElegantNote，ElegantBook，ElegantPaper，ElegantBeamer 组成，分别用于排版笔记，书籍，工作论文和幻灯片讲稿。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note 是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
+值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们致力于打造一系列美观、优雅、简便的模板方便用户使用。Elegant\LaTeX{} 系列模板目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note 是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
 
-请用户在作者的主页下载最新版本，下载地址：\href{https://ddswhu.me/resource/}{https://ddswhu.me/resource/}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您在使用此模板，欢迎把您使用此模板制作的成品发一份给我们，谢谢！如果您有其他问题，建议或者意见，欢迎联系我：\mailto{ddswhu@outlook.com}。
+请用户在作者的主页下载最新版本，下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github/ElegantBook/Releases}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您在使用此模板，欢迎把您使用此模板制作的成品发一份给我们，谢谢！如果您有其他问题，建议或者意见，欢迎联系我们。
 
 
 \section{ElegantBook 更新说明}
-在这几年间，我们收到了很多用户的反馈，主要的问题涉及到字体安装，编码支持，定理浮动，定理跨页，交叉引用等等。我们思前想后，原先让用户安装字体以追求视觉上的美观并不完美，用户陷入了巨大的麻烦，这违背了我们的模板初衷。因此我们在新版中删除了这部分，用户无需安装任何字体。让我们来看下此次 ElegantBook 模板 3.0 更新的主要内容有：
+在这几年间，我们收到了很多用户的反馈，主要的问题涉及到字体安装，编码支持，定理浮动，定理跨页，交叉引用等等。我们思前想后，原先让用户安装字体以追求视觉上的美观并不完美，用户陷入了巨大的麻烦，这违背了我们的模板初衷。因此我们在新版中删除了这部分，用户无需安装任何字体。让我们来看下此次 ElegantBook 模板 3.x 更新的主要内容有：
 
 \begin{enumerate}[noitemsep]
-   \item 删除了自定义字体设置，改用 \texttt{ctex} 宏包用以支持中文。
-   \item 使用 \texttt{tcolorbox} 宏包改写了原先的定理类环境，目前定理环境等均可以跨页。
-   \item 重新命名了定理类环境的名称（theorem，definition，proposition 等）。
-   \item 重新命名了颜色的名字（first，second，third）。
+   \item 删除了自定义字体设置，改用 \texttt{ctex} 宏包用以支持中文；
+   \item 使用 \texttt{tcolorbox} 宏包改写了原先的定理类环境，目前定理环境等均可以跨页；
+   \item 重新命名了定理类环境的名称（theorem，definition，proposition 等）；
+   \item 重新命名了颜色的名字（first，second，third）；
+   \item 重新绘制 ElegantLaTeX 的 Logo；
+   \item 更新类定理环境，包括其交叉引用；
+   \item 特别修正附录相关内容。
 \end{enumerate}
 
 \section{未来更新计划}
 
 
 \begin{enumerate}[noitemsep]
-   \item 设计一个适合的 LOGO；
    \item 重新设计 base 图标；
    \item 重新设计一个好看的封面。
    \item 将基础模板改为英文模板，添加选项使其支持中文。
-   \item 将最早的 ElegantNote 重新设计为简版发布。
    \item 添加一个简化风格（plain）的颜色主题。
 \end{enumerate}
 
@@ -138,7 +139,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
 
-\begin{definition}{可积性}{inter}
+\begin{definition}{可积性}{int}
 设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为
 \begin{equation}
    \label{inter}
@@ -155,9 +156,9 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 
 
-有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。
+有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。练习题 \ref{exer:43} 是一个性质的证明。
 
-\begin{exercise}
+\begin{exercise}\label{exer:43}
 设 $f\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
 \begin{equation}
    \label{ex:1}
@@ -166,7 +167,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 是 $\mathcal{R}^1$ 上的连续函数。
 \end{exercise}
 
-\begin{theorem}{Fubini 定理}{31}
+\begin{theorem}{Fubini 定理}{fubi} 
 （1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
 \begin{equation}
    \label{eq:461}
@@ -176,7 +177,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \end{theorem}
 
 \begin{note}
-在本模板中，引理（lemma），推论（corollary ）的样式和定理的样式一致，包括颜色，仅仅只有计数器的设置不一样。
+在本模板中，引理（lemma），推论（corollary ）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
 \end{note}
 
 我们说一个实变或者复变量的实值或者复值函数是在区间上平方可积的，如果其绝对值的平方在该区间上的积分是有限的。所有在勒贝格积分意义下平方可积的可测函数构成一个希尔伯特空间，也就是所谓的 $L^2$ 空间，几乎处处相等的函数归为同一等价类。形式上，$L^2$ 是平方可积函数的空间和几乎处处为 0 的函数空间的商空间。
