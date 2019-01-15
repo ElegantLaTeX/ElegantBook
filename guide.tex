@@ -1,10 +1,11 @@
 %!TEX program = xelatex
-\documentclass[color=green,mathpazo,titlestyle=hang,11pt]{elegantbook}
+\documentclass[color=blue,mathpazo,titlestyle=hang,11pt]{elegantbook}
 
 \author{ddswhu \& LiamHuang0205}
 \email{elegantlatex2e@gmail.com}
+
 \zhtitle{优美的\LaTeX{} 书籍}
-\zhend{}
+\zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
 \version{2.10}
@@ -174,7 +175,7 @@ $E$ and $F$ be two events such that $\mbf{P}(E)=\mbf{P}(F)=1/2$, and $\mbf{P}(E\
 let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\leq M,x_n\in \mathbb{R}\big\}$, $\rho_{\infty}(x,y)=\sup\limits_{n\geq 1}|x_n-y_n|$, show that $\big(l^\infty,\rho_{\infty}\big)$ is complete.
 \end{exercise}
 
-\begin{newthem}[勾股定理]
+\begin{newthem}[勾股定理]\label{them}
 勾股定理的数学表达（Expression）为
 \[a^2+b^2=c^2\]
 其中$a,b$为直角三角形的两条直角边长，$c$为直角三角形斜边长。
@@ -187,7 +188,7 @@ let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\
 
 \lipsum[4]
 
-\begin{newprop}[最优性原理]
+\begin{newprop}[最优性原理]\label{thm}
 如果$u^*$在$[s,T]$上为最优解，则$u^*$在$[s,T]$任意子区间都是最优解，假设区间为$[t_0,t_1]$的最优解为$u^*$，则$u(t_0)=u^{*}(t_0)$，即初始条件必须还是在$u^*$上。
 \end{newprop}
 
@@ -233,7 +234,7 @@ This is one example of the custom environment, the key word is given by the opti
 
 
 \lipsum[6]
-\begin{newdef}[Contraction mapping]
+\begin{newdef}[Contraction mapping]\label{def:2.3}
 $(S,\rho)$ is the metric space, $T: S\to S$, If there exists $\alpha\in(0,1)$ such that for any $x$ and $y\in S$, the distance
 \begin{equation}
 \rho(Tx,Ty)\leq \alpha\rho(x,y)
@@ -241,6 +242,9 @@ $(S,\rho)$ is the metric space, $T: S\to S$, If there exists $\alpha\in(0,1)$ su
 Then $T$ is a {\color{main} contraction mapping}.
 \end{newdef}
 
+\ref{def:2.3}
+
+\ref{them}
 \begin{remark}
 \begin{enumerate}
 \parskip=0pt \itemsep=0pt

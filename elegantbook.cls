@@ -208,7 +208,7 @@
 \setmonofont{Inconsolata}%Palatino Linotype
 %-中文字体设置-%
 \RequirePackage{xeCJK}
-\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{HYShuSongYiJ}%方正书宋_GBK Adobe Song Std L华文中宋
+\setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{宋体}%方正书宋_GBK Adobe Song Std L华文中宋
 \setCJKsansfont[BoldFont={黑体}]{方正中等线简体}
 \setCJKmonofont{方正中等线简体}
 \XeTeXlinebreaklocale "zh"
@@ -328,6 +328,7 @@
 \end{figure}}
 
 
+
 %% Example with counter
 \newcounter{Newexam}[chapter]
 \renewcommand{\theNewexam}{\thechapter.\arabic{Newexam}}
@@ -388,7 +389,7 @@
 
 \def\maketitle{%
 \thispagestyle{empty}
-\@cover
+% \@cover
 \vfill
 \vspace*{2cm}
 \begin{center}
