@@ -1,4 +1,4 @@
-\documentclass[titlestyle=hang,11pt]{elegantbook}
+\documentclass{elegantbook}
 
 \author{ddswhu \& Liam Huang}
 \email{ddswhu@outlook.com}
@@ -7,7 +7,7 @@
 \zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{3.00}
+\version{3.01}
 \myquote{Victory won\rq t come to us unless we go to it.}
 \logo{logo.png}
 \cover{cover.pdf}
@@ -46,13 +46,14 @@
 在这几年间，我们收到了很多用户的反馈，主要的问题涉及到字体安装，编码支持，定理浮动，定理跨页，交叉引用等等。我们思前想后，原先让用户安装字体以追求视觉上的美观并不完美，用户陷入了巨大的麻烦，这违背了我们的模板初衷。因此我们在新版中删除了这部分，用户无需安装任何字体。让我们来看下此次 ElegantBook 模板 3.0 更新的主要内容有：
 
 \begin{enumerate}[noitemsep]
+   \item 删除了自定义字体设置，改用 \texttt{ctex} 宏包用以支持中文。
    \item 使用 \texttt{tcolorbox} 宏包改写了原先的定理类环境，目前定理环境等均可以跨页。
    \item 重新命名了定理类环境的名称（theorem，definition，proposition 等）。
    \item 重新命名了颜色的名字（first，second，third）。
-   \item 删除了自定义字体设置，改用 \texttt{ctex} 宏包用以支持中文。
 \end{enumerate}
 
 \section{未来更新计划}
+
 
 \begin{enumerate}[noitemsep]
    \item 设计一个适合的 LOGO；

@@ -5,7 +5,7 @@
 %% This work may be distributed and/or modified freely
 %% available at https://ddswhu.me/resource/
 % %
-%% Last Modification 2018-12-06
+%% Last Modification 2018-12-16
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
@@ -39,6 +39,11 @@
 % \ProcessOptions*\relax
 \LoadClass[12pt,a4paper,openany]{book}
 
+
+\usepackage[UTF8,space=auto,scheme=plain]{ctex}
+\usepackage{indentfirst}
+\setlength\parindent{2em}
+
 % font setting for text and math
 \RequirePackage[T1]{fontenc}
 \RequirePackage{newtxtext}
@@ -46,9 +51,6 @@
 \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{type1cm}
 
-\usepackage[UTF8,space=auto,scheme=plain]{ctex}
-\usepackage{indentfirst}
-\setlength\parindent{2em}
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
