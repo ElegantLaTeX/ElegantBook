@@ -5,11 +5,11 @@
 %% This work may be distributed and/or modified freely
 %% available at https://ddswhu.me/resource/
 % %
-%% Last Modification 2018-12-31
+%% Last Modification 2018-01-08
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2018/12/31 v3.02 ElegantBook document class]
+\ProvidesClass{elegantbook}[2018/01/08 v3.03 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -17,7 +17,7 @@
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
 
 % ----- Colors -----
-\DeclareStringOption[green]{color}[green]
+\DeclareStringOption[green]{color}
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color = green}}
 \DeclareVoidOption{cyan}{\ekv{color = cyan}}
@@ -116,7 +116,7 @@
 \renewcommand{\listfigurename}{插图目录}
 \renewcommand{\listtablename}{表格目录}
 \renewcommand{\bibname}{参考文献}
-\renewcommand{\appendixname}{附\hspace{2em}录}
+\renewcommand{\appendixname}{附录}
 \renewcommand{\indexname}{索\hspace{2em}引}
 
 % more pretty font
@@ -169,7 +169,8 @@
 
 \hypersetup{
 			breaklinks,
-      unicode,
+     		unicode,
+     		linktoc=all,
 			bookmarksnumbered=true,
 			bookmarksopen=true,
 			pdfsubject=\@author \@title Book,
@@ -197,10 +198,12 @@
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
-\renewcommand{\chaptername}{第 \thechapter\;章}
+\RequirePackage{apptools}
+\RequirePackage[toc,page]{appendix}
 
+\renewcommand{\chaptername}{第 \thechapter\;章}
 \titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{main}\chaptername}\enspace}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base]
+{\filcenter\LARGE\enspace\bfseries{\color{main}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base]
 
 
 \titleformat{\section}[hang]{\bfseries}
@@ -352,18 +355,15 @@
 {\Huge \bfseries{\color{main} \the\zhtitle } \the\zhend}\\
 \rule{0.8\textwidth}{2pt}
 \end{center}
-\vskip3ex
-\begin{figure}[htp]
-\centering
-\@logo
-\end{figure}
+\vfill
+\vskip5ex
+\centerline{\@logo}
 \begin{center}
 \begin{minipage}{0.65\textwidth}
 \indent\centering\color{bule}\@myquote
 \end{minipage}
 \end{center}
 \vfill
-\vspace{2cm}
 \begin{flushright}
 \color{second}
 \rule{0.45\textwidth}{1pt}\\

@@ -7,9 +7,9 @@
 \zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{3.02}
+\version{3.03}
 \myquote{Victory won\rq t come to us unless we go to it.}
-\logo{logo.png}
+\logo{ElegantLaTeX_green.pdf}
 \cover{cover.pdf}
 
 %green color
@@ -28,8 +28,6 @@
 \usepackage{makecell}
 \usepackage{lipsum}
 \usepackage{texnames}
-
-
 
 \begin{document}
 \maketitle
@@ -223,6 +221,19 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \bibliographystyle{aer}
 \bibliography{reference}
 
-\addcontentsline{toc}{chapter}{参考文献}
+\appendix
+\chapter{线性代数}
+
+\section{矩阵的分块}
+
+\begin{equation} 
+\begin{vmatrix}
+A_1 & 0\\
+C & A_2
+\end{vmatrix}
+=|A_1|\times |A_2|
+\end{equation}
+
+由矩阵 $A$ 的若干行、若干列的交叉位置元素按照原来顺序排成的矩阵称为 $A$ 的一个\textbf{子矩阵}。
 
 \end{document}
