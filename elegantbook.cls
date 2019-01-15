@@ -344,7 +344,7 @@
 \color{second}
 \rule{0.45\textwidth}{1pt}\\
 作者：{\color{main}\@author}\\
-时间：{\color{main}\today}\\
+时间：{\color{main}\@date}\\
 邮箱: \hyperlink{\the\email}{\the\email}\\
 \rule{0.45\textwidth}{1pt}
 \end{flushright}
