@@ -1,14 +1,14 @@
 %!TEX program = xelatex
-\documentclass[color=blue,mathpazo,titlestyle=hang,11pt]{elegantbook}
+\documentclass[mathpazo,titlestyle=hang,11pt]{elegantbook}
 
 \author{ddswhu \& LiamHuang0205}
-\email{elegantlatex2e@gmail.com}
+\email{ddswhu@outlook.com}
 
 \zhtitle{优美的\LaTeX{} 书籍}
 \zhend{模板}
 \entitle{Elegant\LaTeX{} Book}
 \enend{Template}
-\version{2.10}
+\version{2.30}
 \myquote{Victory won\rq t come to us unless we go to it.}
 \logo{logo.pdf}
 \cover{cover.pdf}
@@ -38,6 +38,7 @@
 \chapter{ElegantBook 模板的由来}
 
 只有当自己想去做一件事的时候才能把事情做好！
+
 
 \section{ElegantNote 的前世今生}
 
@@ -74,24 +75,26 @@
 \section{关于我们}
  我们目前都是学生，接触 \LaTeX{} 的时间也不是很长，因此，对于此模板的错误还请多多包涵！ 目前，模板的拓展性或者可移植性有待完善，所以，我们强烈建议用户不要大幅修改模板文件，我们的初衷是提供一套模板，让初学者能够使用一些比较美观，优雅的模板。如果在使用过程中，想修改一些简单的东西需要帮忙，请联系我们，我们的邮箱是：\href{elegantlatex2e@gmail.com}{elegantlatex2e@gmail.com}。我们将竭尽全力提供帮助！
 
-值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们的主页是 \href{http://elegantlatex.tk}{http://elegantlatex.tk}，我们这个项目致力于打造一系列美观、优雅、简便的模板方便使用者记录学习历史。其中目前在实施或者在规划中的子项目有 书籍模板ElegantBook、笔记模板ElegantNote、幻灯片模板 ElegantSlide。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
+值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们的主页是 \href{http://elegantlatex.org}{http://elegantlatex.org}，我们这个项目致力于打造一系列美观、优雅、简便的模板方便使用者记录学习历史。其中目前在实施或者在规划中的子项目有 书籍模板ElegantBook、笔记模板ElegantNote、幻灯片模板 ElegantSlide。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
+
+如果您在使用此模板，方便的话，是否可以把您使用此模板制作的成品发一份给我们，谢谢！
 
 \section{关于字体}
 
 基于本模板追求视觉上的美观的角度，强烈建议使用者安装./fonts/文件夹下的字体。出于版权的考虑，务必不能将此模板用于涉及盈利目的的商业行为，否则，后果自负，本模板带的字体仅供学习使用，如果您喜欢某种字体，请自行购买正版。本文主要使用的字体如下
+
 \begin{itemize}
 \itemsep=3pt
 \parskip=0pt
 \item Adobe Garamond Pro
-\item Minion Pro \& Myriad Pro  \& Inconsolata
-\item 方正字体
-\item 华文中宋
+\item 方正苏新诗柳楷简体
+\item 方正启体简体
 \end{itemize}
 
 \begin{note}
-中文正文使用了华文中宋，Minion Pro为英文衬线字体（\verb|\rmfamily|），Myriad Pro为英文非衬线字体（\verb|\sffamily|），Inconsolata 为英文打字机字体（\verb|\ttfamily|）。
+虽然我们模板更新到了 2.30 了（主要是字体删除，交叉引用的紧急修复），但是使用文档部分并没有更新（仍然是 2.00），在使用过程中，请尽量参考文档说明，如果有问题，可以联系我们。
 
-并且，如果系统内安装了Adobe 字体，大家可以把模板中使用到的黑体，楷体，宋体等字替换成 Adobe 字体，这样可以达到最佳效果。
+如果系统内安装了Adobe 字体，大家可以把模板中使用到的黑体，楷体，宋体等字替换成 Adobe 字体，这样可以达到最佳效果。
 \end{note}
 
 \section{文档说明}
@@ -175,7 +178,7 @@ $E$ and $F$ be two events such that $\mbf{P}(E)=\mbf{P}(F)=1/2$, and $\mbf{P}(E\
 let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\leq M,x_n\in \mathbb{R}\big\}$, $\rho_{\infty}(x,y)=\sup\limits_{n\geq 1}|x_n-y_n|$, show that $\big(l^\infty,\rho_{\infty}\big)$ is complete.
 \end{exercise}
 
-\begin{newthem}[勾股定理]\label{them}
+\begin{newthem}[勾股定理]\label{thm:31}
 勾股定理的数学表达（Expression）为
 \[a^2+b^2=c^2\]
 其中$a,b$为直角三角形的两条直角边长，$c$为直角三角形斜边长。
@@ -188,13 +191,13 @@ let $S=l^\infty=\big\{(x_n)\mid \exists\, M \text{ such that } \forall n, |x_n|\
 
 \lipsum[4]
 
-\begin{newprop}[最优性原理]\label{thm}
+\begin{newprop}[最优性原理]
 如果$u^*$在$[s,T]$上为最优解，则$u^*$在$[s,T]$任意子区间都是最优解，假设区间为$[t_0,t_1]$的最优解为$u^*$，则$u(t_0)=u^{*}(t_0)$，即初始条件必须还是在$u^*$上。
 \end{newprop}
 
 \lipsum[5-6]
 \begin{newcorol}
-假设$V(\cdot,\cdot)$为值函数，则跟据最大值原理，有如下推论
+假设$V(\cdot,\cdot)$为值函数，则跟据最大值原理~\ref{thm:31}，有如下推论
 \[
 V(k,z)=\max\Big\{u\big(zf(k)-y\big)+\beta \mathbb{E}V(y,z^\prime)\Big\}
 \]
@@ -234,7 +237,7 @@ This is one example of the custom environment, the key word is given by the opti
 
 
 \lipsum[6]
-\begin{newdef}[Contraction mapping]\label{def:2.3}
+\begin{newdef}[Contraction mapping]
 $(S,\rho)$ is the metric space, $T: S\to S$, If there exists $\alpha\in(0,1)$ such that for any $x$ and $y\in S$, the distance
 \begin{equation}
 \rho(Tx,Ty)\leq \alpha\rho(x,y)
@@ -242,9 +245,6 @@ $(S,\rho)$ is the metric space, $T: S\to S$, If there exists $\alpha\in(0,1)$ su
 Then $T$ is a {\color{main} contraction mapping}.
 \end{newdef}
 
-\ref{def:2.3}
-
-\ref{them}
 \begin{remark}
 \begin{enumerate}
 \parskip=0pt \itemsep=0pt

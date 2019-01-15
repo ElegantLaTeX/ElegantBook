@@ -3,14 +3,13 @@
 %% Copyright 2013-2019 ElegantLaTeX (ElegantLaTeX2e@gmail.com)
 %%
 %% This work may be distributed and/or modified freely
-%% available at http://elegantlatex.tk/download/
-%% and  http://ddswhu.com/download/
+%% available at https://ddswhu.me/resource/
 % %
-%% Last Modification 2014-2-3
+%% Last Modification 2018-9-11
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2014/01/20 v2.00 ElegantBook document class]
+\ProvidesClass{elegantbook}[2014/01/20 v2.30 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -209,8 +208,8 @@
 %-中文字体设置-%
 \RequirePackage{xeCJK}
 \setCJKmainfont[BoldFont={黑体},ItalicFont={楷体}]{宋体}%方正书宋_GBK Adobe Song Std L华文中宋
-\setCJKsansfont[BoldFont={黑体}]{方正中等线简体}
-\setCJKmonofont{方正中等线简体}
+\setCJKsansfont[BoldFont={黑体}]{楷体}
+\setCJKmonofont{楷体}
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
 
@@ -256,10 +255,10 @@
 \begin{tikzpicture}
 \node[newthemsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\BODY
+        \sffamily\refstepcounter{Newthem}\BODY
      \end{minipage}};
 \node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Theorem \stepcounter{Newthem}\theNewthem\; #1}};
+     \bf\textsf{Theorem \theNewthem\; #1}};
 \node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -273,10 +272,10 @@
 \begin{tikzpicture}
 \node[newthemsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\BODY
+        \sffamily\refstepcounter{Newlemma}\BODY
      \end{minipage}};
 \node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Lemma \stepcounter{Newlemma}\theNewlemma\; #1}};
+     \bf\textsf{Lemma \theNewlemma\; #1}};
 \node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -290,10 +289,10 @@
 \begin{tikzpicture}
 \node[newthemsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\BODY
+        \sffamily\refstepcounter{Newcorol}\BODY
      \end{minipage}};
 \node[newthemstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Corollary \stepcounter{Newcorol}\theNewcorol\; #1}};
+     \bf\textsf{Corollary \theNewcorol\; #1}};
 \node[newthemstytitle, rounded corners] at (box.east) {$\clubsuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -306,10 +305,10 @@
 \begin{tikzpicture}
 \node[newpropositionsty] (box){
      \begin{minipage}{0.93\columnwidth}
-        \sffamily\BODY
+        \sffamily\refstepcounter{Newprop}\BODY
      \end{minipage}};
 \node[newpropositionstytitle,right=10pt] at (box.north west){
-     \bf\textsf{Proposition \stepcounter{Newprop}\theNewprop\; #1}};
+     \bf\textsf{Proposition \theNewprop\; #1}};
 \node[newpropositionstytitle, rounded corners] at (box.east) {$\spadesuit$};
 \end{tikzpicture}
 \end{figure}}
@@ -321,12 +320,11 @@
 \NewEnviron{newdef}[1][{}]{%
 \begin{figure}[!htb]\noindent\centering
 \begin{tikzpicture}
-\node [newdefinitionsty] (dbox){\begin{minipage}{0.93\textwidth}\itshape\BODY\end{minipage}};
-\node[newdefinitionstytitle, right=10pt] at (dbox.north west) {\bf\textsf{Definition \stepcounter{Newdefinition}\theNewdefinition\; #1}};
+\node [newdefinitionsty] (dbox){\begin{minipage}{0.93\textwidth}\itshape\refstepcounter{Newdefinition}\BODY\end{minipage}};
+\node[newdefinitionstytitle, right=10pt] at (dbox.north west) {\bf\textsf{Definition \theNewdefinition\; #1}};
 \node[newdefinitionstytitle, rounded corners] at (dbox.east) {$\heartsuit$};
 \end{tikzpicture}
 \end{figure}}
-
 
 
 %% Example with counter
