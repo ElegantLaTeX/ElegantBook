@@ -5,11 +5,11 @@
 %% This work may be distributed and/or modified freely
 %% available at https://github.com/ElegantLaTeX
 % %
-%% Last Modification 2019-01-15
+%% Last Modification 2019-01-22
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2019/01/15 v3.04 ElegantBook document class]
+\ProvidesClass{elegantbook}[2019/01/22 v3.05 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -39,16 +39,40 @@
 % \ProcessOptions*\relax
 \LoadClass[12pt,a4paper,openany]{book}
 
-
-\RequirePackage[UTF8,space=auto,scheme=plain]{ctex}
 \RequirePackage{indentfirst}
 \setlength\parindent{2em}
 
+\RequirePackage{ifxetex}
+\ifxetex
+	\RequirePackage{fontenc}
+	\RequirePackage[no-math]{fontspec}
+	\setmainfont{Times New Roman}[NFSSFamily=ntxtlf]
+	\setsansfont{Arial}
+	%\setmonofont[Scale=0.9]{Courier New}
+	\RequirePackage{xeCJK}
+	\RequirePackage{xunicode}
+	\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
+	\setCJKsansfont[BoldFont={SimHei},ItalicFont={KaiTi}]{KaiTi}
+	\setCJKmonofont[BoldFont={SimHei},ItalicFont={KaiTi},Scale=0.9]{Microsoft YaHei}
+	\XeTeXlinebreaklocale "zh"
+	\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+	\RequirePackage{newtxmath}
+	%\DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}
+	%\SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}
+\else
+	\RequirePackage{fontenc}
+	\RequirePackage{newtxtext}
+	\RequirePackage{newtxmath}
+	\RequirePackage[UTF8, scheme=plain]{ctex}
+\fi
+\RequirePackage[scale=0.8]{FiraMono}
+%
+
 % font setting for text and math
-\RequirePackage[T1]{fontenc}
-\RequirePackage{newtxtext}
-\RequirePackage{newtxmath}
-\RequirePackage[scale=0.85]{newtxtt}  
+% \RequirePackage[T1]{fontenc}
+% \RequirePackage{newtxtext}
+% \RequirePackage{newtxmath}
+% \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{type1cm}
 
 \DeclareSymbolFont{cmlargesymbols}{OMX}{cmex}{m}{n}
@@ -93,7 +117,7 @@
 }
 
 \providecommand{\base}{
-\begin{tikzpicture}[scale=0.2]
+\begin{tikzpicture}[x=1pt,y=1pt,scale=0.2]
 \triz{0}{0}
 \ellz{128}
 \intz{149}
@@ -115,6 +139,11 @@
 \newtoks\version
 \newtoks\enend
 \newtoks\zhend
+
+\RequirePackage{enumerate}
+% list/itemize/enumerate setting
+\RequirePackage[shortlabels]{enumitem}
+\setlist{nolistsep}
 
 
 %%中文结构名字
@@ -166,11 +195,7 @@
 	linktoc=all,
 	bookmarksnumbered=true,
 	bookmarksopen=true,
-	pdfsubject=\@author \@title Book,
-	pdftitle = {\the\zhtitle\the\zhend},
-    pdfauthor = {\@author}
 	pdfkeywords={ElegantBook},
-	pdfcreator={XeLaTeX with ElegantBook class},
 	colorlinks,
 	linkcolor=main,
 	citecolor=winered,
@@ -219,7 +244,7 @@
 
 \tcbset{
     common/.style={
-        fontupper=\kaishu,
+        fontupper=\itshape,
         lower separated=false,
         coltitle=white,
         colback=gray!10,
