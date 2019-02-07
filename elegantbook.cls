@@ -108,6 +108,20 @@
 	\definecolor{third}{RGB}{7,127,128}%
 }{\relax}
 
+%green color
+\definecolor{main1}{RGB}{0,120,2}
+\definecolor{second1}{RGB}{230,90,7}
+\definecolor{third1}{RGB}{0,160,152}
+%cyan color
+\definecolor{main2}{RGB}{0,175,152}
+\definecolor{second2}{RGB}{239,126,30}
+\definecolor{third2}{RGB}{120,8,13}
+%blue color
+\definecolor{main3}{RGB}{20,50,104}
+\definecolor{second3}{RGB}{180,50,131}
+\definecolor{third3}{RGB}{7,127,128}
+
+
 % corlor definition
 \definecolor{winered}{rgb}{0.5,0,0}
 \definecolor{bule}{RGB}{18,29,57}
@@ -133,12 +147,12 @@
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
 \ifdefstring{\ELEGANT@titlestyle}{display}{\def\style{display}}{\relax}
 
-\newtoks\zhtitle
-\newtoks\entitle
+
 \newtoks\email
 \newtoks\version
-\newtoks\enend
-\newtoks\zhend
+\newtoks\institute
+\newtoks\subtitle
+
 
 \RequirePackage{enumerate}
 % list/itemize/enumerate setting
@@ -167,8 +181,13 @@
 \RequirePackage{multicol}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
+\RequirePackage{makecell,lipsum,texnames,setspace}
+\RequirePackage{tikz}
+
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
+
+\usetikzlibrary{backgrounds,calc}
 
 
 \RequirePackage{natbib}
@@ -331,54 +350,53 @@
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
 %%封面
-\newcommand*{\myquote}[1]{\def\@myquote{#1}}
+\newcommand*{\equote}[1]{\def\@equote{#1}}
+
 \newcommand*{\logo}[1]{
  \def\@logo{\includegraphics[width=0.3\textwidth]{#1}
  }
 }
-
-%% 水印壁纸
-\RequirePackage{wallpaper}
-\newcommand*{\cover}[1]{\def\@cover{
-  \ThisTileWallPaper{\paperwidth}{\paperheight}{#1}
+\newcommand*{\cover}[1]{
+ \def\@logo{\includegraphics[width=\linewidth]{cover.jpg}
  }
 }
 
-\def\maketitle{%
-\thispagestyle{empty}
-% \@cover
-\vfill
-\vspace*{2cm}
-\begin{center}
-\color{second}
-\rule{0.8\textwidth}{2pt}\\
-\Huge {\color{main} \bfseries \the\entitle } {\color{second} \bfseries \the\enend}\\
-{\Huge \bfseries{\color{main} \the\zhtitle } \the\zhend}\\
-\rule{0.8\textwidth}{2pt}
-\end{center}
-\vfill
-\vskip5ex
-\centerline{\@logo}
-\begin{center}
-\begin{minipage}{0.65\textwidth}
-\indent\centering\color{bule}\@myquote
-\end{minipage}
-\end{center}
-\vfill
-\begin{flushright}
-\color{second}
-\rule{0.45\textwidth}{1pt}\\
-作者：{\color{main}\@author}\\
-时间：{\color{main}\@date}\\
-邮箱: \hyperlink{\the\email}{\the\email}\\
-\rule{0.45\textwidth}{1pt}
-\end{flushright}
-\vfill
-\begin{center}
-\color{second} 版本: \the\version
-\end{center}
-\vfil\eject
-}
+\renewcommand*{\maketitle}{%
+\begin{titlepage}
+	\newpage
+	\newgeometry{margin = 0in}
+	\parindent=0pt
+	\renewcommand\baselinestretch{2.5}
+	\includegraphics[width=\linewidth]{cover.jpg}
+	\setlength{\fboxsep}{0pt}
+	\colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
+	\vfill
+	\hfill
+	\begin{minipage}[c]{0.618\linewidth}
+		{\bfseries\Huge \@title\\}
+		{\bfseries\huge \the\subtitle\\[1ex]}
+		\color{gray}\kaishu\normalsize
+		{\renewcommand{\arraystretch}{0.618}
+		\begin{tabular}{l} 
+			作者：\@author \\ 
+			版本：\the\version \\ 
+			组织：\the\institute\\
+			更新：\@date
+		\end{tabular}}
+	\end{minipage}
+	\hspace{2em}
+	\begin{minipage}[c]{0.26\linewidth}
+	\begin{tikzpicture}[remember picture,overlay]
+		\begin{pgfonlayer}{background}
+		  \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\includegraphics[width=0.7\textwidth]{logo.png}};
+		\end{pgfonlayer}
+	\end{tikzpicture}
+	\end{minipage}
+	\vfill
+	\centerline{\itshape \@equote}
+	\vfill
+	\restoregeometry
+\end{titlepage}}
 
 
 
