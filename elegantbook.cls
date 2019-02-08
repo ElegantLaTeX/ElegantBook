@@ -18,12 +18,15 @@
 
 % ----- Colors -----
 \DeclareStringOption[green]{color}
+\DeclareStringOption[en]{lang}
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color = green}}
 \DeclareVoidOption{cyan}{\ekv{color = cyan}}
 \DeclareVoidOption{blue}{\ekv{color = blue}}
-\DeclareVoidOption{nocolor}{\ekv{color = none}}
-
+\DeclareVoidOption{plain}{\ekv{color = plain}}
+% \DeclareVoidOption{nocolor}{\ekv{color = none}}
+\DeclareVoidOption{en}{\ekv{lang=en}}
+\DeclareVoidOption{cn}{\ekv{lang=cn}}
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
@@ -42,6 +45,7 @@
 \RequirePackage{indentfirst}
 \setlength\parindent{2em}
 
+% fontsetting
 \RequirePackage{ifxetex}
 \ifxetex
 	\RequirePackage{fontenc}
@@ -59,6 +63,14 @@
 	\RequirePackage{newtxmath}
 	%\DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}
 	%\SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}
+	\setCJKfamilyfont{zhsong}{SimSun}
+	\setCJKfamilyfont{zhhei}{SimHei}
+	\setCJKfamilyfont{zhkai}{KaiTi}
+	\setCJKfamilyfont{zhfs}{FangSong}
+	\newcommand*{\songti}{\CJKfamily{zhsong}} 
+	\newcommand*{\heiti}{\CJKfamily{zhhei}}   
+	\newcommand*{\kaishu}{\CJKfamily{zhkai}} 
+	\newcommand*{\fangsong}{\CJKfamily{zhfs}} 
 \else
 	\RequirePackage{fontenc}
 	\RequirePackage{newtxtext}
@@ -101,11 +113,15 @@
 	\definecolor{second}{RGB}{239,126,30}%
 	\definecolor{third}{RGB}{120,8,13}%
 }{\relax}
-
 \ifdefstring{\ELEGANT@color}{blue}{
 	\definecolor{main}{RGB}{20,50,104}%
 	\definecolor{second}{RGB}{180,50,131}%
 	\definecolor{third}{RGB}{7,127,128}%
+}{\relax}
+\ifdefstring{\ELEGANT@color}{plain}{
+	\definecolor{main}{RGB}{50,50,50}%
+	\definecolor{second}{RGB}{50,50,50}%
+	\definecolor{third}{RGB}{50,50,50}%
 }{\relax}
 
 %green color
@@ -126,22 +142,20 @@
 \definecolor{winered}{rgb}{0.5,0,0}
 \definecolor{bule}{RGB}{18,29,57}
 
-\AtBeginDocument{
-\input{base.tex}
-}
 
-\providecommand{\base}{
-\begin{tikzpicture}[x=1pt,y=1pt,scale=0.2]
-\triz{0}{0}
-\ellz{128}
-\intz{149}
-\ellz{170}
-\intz{191}
-\ellz{212}
-\triz{341}{180}
-\end{tikzpicture}}
-%\newcommand*{\base}{
-%}
+\newcommand{\base}[2]{%
+	\nointerlineskip \vspace{0.1\baselineskip}\hspace{\fill}
+	{\color{#1}
+		\resizebox{0.3\linewidth}{1.5ex}
+		{{%
+				{\begin{tikzpicture}
+					\node  (C) at (0,0) {};
+					\node (D) at (4,0) {};
+					\path (C) to [ornament=#2] (D);
+					\end{tikzpicture}}}}}%
+	\hspace{\fill}
+	\par\nointerlineskip \vspace{0.1\baselineskip}
+}
 
 % ----- Title Style -----
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
@@ -159,36 +173,65 @@
 \RequirePackage[shortlabels]{enumitem}
 \setlist{nolistsep}
 
-
-%%中文结构名字
-\renewcommand{\contentsname}{目\hspace{2em}录}
-\renewcommand{\figurename}{图}
-\renewcommand{\tablename}{表}
-\renewcommand{\partname}{部分}
-\renewcommand{\listfigurename}{插图目录}
-\renewcommand{\listtablename}{表格目录}
-\renewcommand{\bibname}{参考文献}
-\renewcommand{\appendixname}{附录}
-\renewcommand{\indexname}{索\hspace{2em}引}
+% caption settings 
+\RequirePackage{caption}
+\captionsetup{labelfont = bf}
+\RequirePackage[font=small,labelfont={bf,color=main}]{caption} 
+\captionsetup[table]{skip=3pt}
+\captionsetup[figure]{skip=3pt}
 
 %% 常用宏包
 \linespread{1.3}
 \RequirePackage{microtype}
 \RequirePackage{graphicx}
-\RequirePackage{enumerate}
+%\RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts}
 \RequirePackage{booktabs}
 \RequirePackage{multicol}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
 \RequirePackage{makecell,lipsum,texnames,setspace}
-\RequirePackage{tikz}
+
+
+%%中文结构名字
+\ifdefstring{\ELEGANT@lang}{en}{
+\newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
+\newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
+\renewcommand{\chaptername}{Chapter \thechapter}
+}{\relax}
+\ifdefstring{\ELEGANT@lang}{cn}{
+\renewcommand{\contentsname}{目录}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\partname}{第 \thepart\; 部分}
+\renewcommand{\listfigurename}{插图目录}
+\renewcommand{\listtablename}{表格目录}
+\renewcommand{\bibname}{参考文献}
+\renewcommand{\appendixname}{附录}
+\renewcommand{\indexname}{索引}
+\newcommand\figref[1]{\textbf{图}~\ref{#1}}
+\newcommand\tabref[1]{\textbf{表}~\ref{#1}}
+\renewcommand{\chaptername}{第 \thechapter\;章}
+}{\relax}
+
 
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
-\usetikzlibrary{backgrounds,calc}
+\RequirePackage{tikz}
+\usetikzlibrary{backgrounds,calc,shadows}
+\usepackage[object=vectorian]{pgfornament} %% 
 
+\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=main, draw=main] circle (2pt);}
+\newcommand*{\eitemii}{\tikz \draw [baseline, fill=main,draw=main,circular drop shadow] circle (2pt);}
+\newcommand*{\eitemiii}{\tikz \draw [baseline, fill=main,draw=main] circle (2pt);}
+\setlist[enumerate,1]{label=\color{main}\arabic*.}
+\setlist[enumerate,2]{label=\color{main}(\Roman*).}
+\setlist[enumerate,3]{label=\color{main}(\Alph*).}
+\setlist[enumerate,4]{label=\color{main}(\roman*).}
+\setlist[itemize,1]{label={\eitemi}}
+\setlist[itemize,2]{label={\eitemii}}
+\setlist[itemize,3]{label={\eitemiii}}
 
 \RequirePackage{natbib}
 \setlength{\bibsep}{0.0pt}
@@ -216,8 +259,9 @@
 	bookmarksopen=true,
 	pdfkeywords={ElegantBook},
 	colorlinks,
-	linkcolor=main,
+	linkcolor=winered,
 	citecolor=winered,
+	urlcolor  = winered,
 	plainpages=false,
 	pdfstartview=FitH,
 	pdfborder={0 0 0},
@@ -230,9 +274,9 @@
 \RequirePackage{apptools}
 \RequirePackage[toc,page]{appendix}
 
-\renewcommand{\chaptername}{第 \thechapter\;章}
+
 \titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{main}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base]
+{\filcenter\LARGE\enspace\bfseries{\color{main}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base{main}{88}]
 
 
 \titleformat{\section}[hang]{\bfseries}
@@ -245,14 +289,6 @@
 %\titlespacing{\subsection}{0pt}{0.5\baselineskip}{-\baselineskip}
 
 
-% caption settings 
-\RequirePackage{caption}
-\captionsetup{labelfont = bf}
-\RequirePackage[font=small,labelfont={bf}]{caption} 
-\captionsetup[table]{skip=3pt}
-\captionsetup[figure]{skip=3pt}
-\newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
-\newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
 
 
 % list/itemize/enumerate setting
@@ -296,11 +332,25 @@
     },
 }
 
-\newtcbtheorem[auto counter,number within=chapter]{definition}{定义}{defstyle}{def}
-\newtcbtheorem[auto counter,number within=chapter]{theorem}{定理}{thmstyle}{thm}
-\newtcbtheorem[auto counter,number within=chapter]{proposition}{命题}{propstyle}{pro}
-\newtcbtheorem[auto counter,number within=chapter]{corollary}{推论}{thmstyle}{cor}
-\newtcbtheorem[auto counter,number within=chapter]{lemma}{引理}{thmstyle}{lem}
+\newtcbtheorem[auto counter,number within=chapter]{definition}{
+	\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}
+}{defstyle}{def}
+
+\newtcbtheorem[auto counter,number within=chapter]{theorem}{
+	\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
+}{thmstyle}{thm}
+
+\newtcbtheorem[auto counter,number within=chapter]{proposition}{
+	\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
+}{propstyle}{pro}
+
+\newtcbtheorem[auto counter,number within=chapter]{corollary}{
+	\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}
+}{thmstyle}{cor}
+
+\newtcbtheorem[auto counter,number within=chapter]{lemma}{
+	\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
+}{thmstyle}{lem}
 
 
 %% Example with counter
@@ -308,7 +358,9 @@
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \newenvironment{example}[1][]{
- 		\refstepcounter{exam}\par\medskip\noindent \textbf{\color{main}{示例}~\theexam #1:}\rmfamily %
+ 		\refstepcounter{exam}\par\medskip\noindent \textbf{\color{main}{
+ 			\ifdefstring{\ELEGANT@lang}{en}{Example}{例}
+ 		}~\theexam #1:}\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -318,30 +370,61 @@
 \setcounter{exer}{0}
 \renewcommand{\theexer}{\thechapter.\arabic{exer}}
 \newenvironment{exercise}[1][]{
- 		\refstepcounter{exer}\par\medskip\noindent \textbf{\color{main}{练习}~\theexer #1:}\rmfamily %
+ 		\refstepcounter{exer}\par\medskip\noindent \textbf{\color{main}{
+ 			\ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
+ 		}~\theexer #1:}\rmfamily %
+ 	}{
+ 		\par\medskip\ignorespacesafterend %
+ 	}
+
+%% Exercise with counter
+\newcounter{prob}[chapter]
+\setcounter{prob}{0}
+\renewcommand{\theprob}{\thechapter.\arabic{prob}}
+\newenvironment{problem}[1][]{
+ 		\refstepcounter{prob}\par\medskip\noindent \textbf{\color{main}{
+ 			\ifdefstring{\ELEGANT@lang}{en}{Problem}{例题}
+ 		}~\theprob #1:}\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
 
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt}
-\newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{main}{注意：}}}\itshape}{\par}
-\newenvironment{proof}{\par\noindent\textbf{\color{main}{证明：}}\color{black!90}\small}{\hfill$\Box$\quad\par}
 
-\newenvironment{remark}{\noindent\textbf{\color{main}{备注：}}}{\par}
-\newenvironment{assumption}{\par\noindent\textbf{\color{main}{假设：}}}{\par}
-\newenvironment{conclusion}{\par\noindent\textbf{\color{main}{结论：}}}{\par}
-\newenvironment{solution}{\par\noindent\textbf{\color{main}{答案：}}}{\par}
-\newenvironment{property}{\par\noindent\textbf{\color{main}{性质：}}}{\par}
+\newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{main}
+	\ifdefstring{\ELEGANT@lang}{en}{Note:}{注意：}
+}}\itshape}{\par}
+
+\newenvironment{proof}{\par\noindent\textbf{\color{main}
+	\ifdefstring{\ELEGANT@lang}{en}{Proof:}{证明：}
+}\color{black!90}\small}{\hfill$\Box$\quad\par}
+\newenvironment{remark}{\noindent\textbf{\color{main}
+	\ifdefstring{\ELEGANT@lang}{en}{Remark:}{注：}
+}}{\par}
+\newenvironment{assumption}{\par\noindent\textbf{\color{main}
+	\ifdefstring{\ELEGANT@lang}{en}{Assumption:}{假设：}
+}}{\par}
+\newenvironment{conclusion}{\par\noindent\textbf{\color{main}
+	\ifdefstring{\ELEGANT@lang}{en}{Conclusion:}{结论：}
+}}{\par}
+\newenvironment{solution}{\par\noindent\textbf{\color{main}
+	\ifdefstring{\ELEGANT@lang}{en}{Solution:}{解：}
+}}{\par}
+\newenvironment{property}{\par\noindent\textbf{\color{main}
+	\ifdefstring{\ELEGANT@lang}{en}{Property:}{性质：}
+}}{\par}
+
+
 
 %页眉页脚
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
 \fancyhf{}
-\fancyhead[EL,OR]{\color{main}--\thepage/\pageref{LastPage}--}
+\fancyhead[EL,OR]{\color{main}--\thepage/\pageref*{LastPage}--}
 \fancyhead[ER]{\color{main}\em\nouppercase\leftmark{}}
 \fancyhead[OL]{\color{main}\em\nouppercase\rightmark}
-\fancyfoot[c]{\base}
+\fancyfoot[c]{\base{main}{88}}
 \renewcommand{\headrule}{\color{main}\hrule width\textwidth}
 \pagestyle{fancy}
 
@@ -374,14 +457,14 @@
 	\hfill
 	\begin{minipage}[c]{0.618\linewidth}
 		{\bfseries\Huge \@title\\}
-		{\bfseries\huge \the\subtitle\\[1ex]}
+		{\color{darkgray}\bfseries\Large \the\subtitle\\[2ex]}
 		\color{gray}\kaishu\normalsize
 		{\renewcommand{\arraystretch}{0.618}
 		\begin{tabular}{l} 
-			作者：\@author \\ 
-			版本：\the\version \\ 
-			组织：\the\institute\\
-			更新：\@date
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Author: }}{\textbf{作者：}}\@author \\
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute: }}{\textbf{组织：}}\the\institute\\
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Update: }}{\textbf{更新：}}\@date\\
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Version: }}{\textbf{版本：}}\the\version \\ 
 		\end{tabular}}
 	\end{minipage}
 	\hspace{2em}
@@ -398,5 +481,22 @@
 	\restoregeometry
 \end{titlepage}}
 
+\RequirePackage{listings} 
+\definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
+\definecolor{frenchplum}{RGB}{190,20,83}
+\lstset{language=[LaTeX]TeX,
+	texcsstyle=*\bf\color{winered}\ttfamily,
+	basicstyle=\footnotesize\ttfamily,
+	numbers=none,
+	breaklines=true,
+	keywordstyle=\bf\color{winered}\ttfamily,
+	commentstyle=\color{gray},
+	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm},
+	emphstyle={\color{frenchplum}},
+	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor},
+	frame=none,
+	tabsize=2,
+	rulecolor=\color{main},
+}
 
 
