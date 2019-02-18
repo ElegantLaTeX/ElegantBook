@@ -85,7 +85,7 @@
 % \RequirePackage{newtxtext}
 % \RequirePackage{newtxmath}
 % \RequirePackage[scale=0.85]{newtxtt}  
-\RequirePackage{type1cm}
+\RequirePackage{anyfontsize}
 
 \DeclareSymbolFont{cmlargesymbols}{OMX}{cmex}{m}{n}
 \DeclareMathSymbol{\intop}{\mathop}{cmlargesymbols}{"5A}
@@ -226,9 +226,9 @@
 \newcommand*{\eitemii}{\tikz \draw [baseline, fill=main,draw=main,circular drop shadow] circle (2pt);}
 \newcommand*{\eitemiii}{\tikz \draw [baseline, fill=main,draw=main] circle (2pt);}
 \setlist[enumerate,1]{label=\color{main}\arabic*.}
-\setlist[enumerate,2]{label=\color{main}(\Roman*).}
-\setlist[enumerate,3]{label=\color{main}(\Alph*).}
-\setlist[enumerate,4]{label=\color{main}(\roman*).}
+\setlist[enumerate,2]{label=\color{main}(\alph*).}
+\setlist[enumerate,3]{label=\color{main}\Roman*.}
+\setlist[enumerate,4]{label=\color{main}\Alph*.}
 \setlist[itemize,1]{label={\eitemi}}
 \setlist[itemize,2]{label={\eitemii}}
 \setlist[itemize,3]{label={\eitemiii}}
@@ -360,7 +360,7 @@
 \newenvironment{example}[1][]{
  		\refstepcounter{exam}\par\medskip\noindent \textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Example}{例}
- 		}~\theexam #1:}\rmfamily %
+ 		}~\theexam #1: }\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -372,7 +372,7 @@
 \newenvironment{exercise}[1][]{
  		\refstepcounter{exer}\par\medskip\noindent \textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
- 		}~\theexer #1:}\rmfamily %
+ 		}~\theexer #1: }\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -384,7 +384,7 @@
 \newenvironment{problem}[1][]{
  		\refstepcounter{prob}\par\medskip\noindent \textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Problem}{例题}
- 		}~\theprob #1:}\rmfamily %
+ 		}~\theprob #1: }\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -445,6 +445,7 @@
 }
 
 \renewcommand*{\maketitle}{%
+\hypersetup{pageanchor=false}
 \begin{titlepage}
 	\newpage
 	\newgeometry{margin = 0in}
@@ -455,7 +456,8 @@
 	\colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
 	\vfill
 	\hfill
-	\begin{minipage}[c]{0.618\linewidth}
+	\hspace{2em}
+	\begin{minipage}[c]{0.68\linewidth}
 		{\bfseries\Huge \@title\\}
 		{\color{darkgray}\bfseries\Large \the\subtitle\\[2ex]}
 		\color{gray}\kaishu\normalsize
@@ -467,8 +469,7 @@
 			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Version: }}{\textbf{版本：}}\the\version \\ 
 		\end{tabular}}
 	\end{minipage}
-	\hspace{2em}
-	\begin{minipage}[c]{0.26\linewidth}
+	\begin{minipage}[c]{0.27\linewidth}
 	\begin{tikzpicture}[remember picture,overlay]
 		\begin{pgfonlayer}{background}
 		  \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\includegraphics[width=0.7\textwidth]{logo.png}};
@@ -479,14 +480,16 @@
 	\centerline{\itshape \@equote}
 	\vfill
 	\restoregeometry
-\end{titlepage}}
+\end{titlepage}
+\thispagestyle{empty}
+}
 
 \RequirePackage{listings} 
 \definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
 \definecolor{frenchplum}{RGB}{190,20,83}
 \lstset{language=[LaTeX]TeX,
 	texcsstyle=*\bf\color{winered}\ttfamily,
-	basicstyle=\footnotesize\ttfamily,
+	basicstyle=\ttfamily,
 	numbers=none,
 	breaklines=true,
 	keywordstyle=\bf\color{winered}\ttfamily,
@@ -498,5 +501,7 @@
 	tabsize=2,
 	rulecolor=\color{main},
 }
+
+\bibliographystyle{aer}
 
 
