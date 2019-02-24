@@ -10,7 +10,7 @@
 ![Github Version](https://img.shields.io/github/release/ElegantLaTeX/ElegantBook.svg)
 ![Repo Size](https://img.shields.io/github/repo-size/ElegantLaTeX/ElegantBook.svg)
 
-ElegantBook is designed for Books. Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues, pull requests or email us at elegantlatex2e@gmail.com.
+ElegantBook is designed for Books. Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues, pull requests or contact us at elegantlatex2e@gmail.com.
 
 如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。
 

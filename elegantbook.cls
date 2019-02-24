@@ -3,13 +3,13 @@
 %% Copyright 2013-2019 ElegantLaTeX (elegantlatex2e@gmail.com)
 %%
 %% This work may be distributed and/or modified freely
-%% available at https://github.com/ElegantLaTeX
+%% available at https://github.com/ElegantLaTeX/ElegantBook
 % %
-%% Last Modification 2019-01-22
+%% Last Modification 2019-02-25
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2019/01/22 v3.05 ElegantBook document class]
+\ProvidesClass{elegantbook}[2019/02/24 v3.06 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -24,7 +24,7 @@
 \DeclareVoidOption{cyan}{\ekv{color = cyan}}
 \DeclareVoidOption{blue}{\ekv{color = blue}}
 \DeclareVoidOption{plain}{\ekv{color = plain}}
-% \DeclareVoidOption{nocolor}{\ekv{color = none}}
+\DeclareVoidOption{nocolor}{\ekv{color = none}}
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 % ----- Math option -----
@@ -40,7 +40,7 @@
 
 \ProcessKeyvalOptions*\relax
 % \ProcessOptions*\relax
-\LoadClass[12pt,a4paper,openany]{book}
+\LoadClass[12pt,a4paper,oneside,openany]{book}
 
 \RequirePackage{indentfirst}
 \setlength\parindent{2em}
@@ -57,7 +57,7 @@
 	\RequirePackage{xunicode}
 	\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
 	\setCJKsansfont[BoldFont={SimHei},ItalicFont={KaiTi}]{KaiTi}
-	\setCJKmonofont[BoldFont={SimHei},ItalicFont={KaiTi},Scale=0.9]{Microsoft YaHei}
+	\setCJKmonofont[BoldFont={SimHei},ItalicFont={KaiTi},Scale=0.7]{Microsoft YaHei}
 	\XeTeXlinebreaklocale "zh"
 	\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
 	\RequirePackage{newtxmath}
@@ -77,7 +77,7 @@
 	\RequirePackage{newtxmath}
 	\RequirePackage[UTF8, scheme=plain]{ctex}
 \fi
-\RequirePackage[scale=0.8]{FiraMono}
+\RequirePackage[scale=0.7]{FiraMono}
 %
 
 % font setting for text and math
@@ -242,8 +242,8 @@
 \RequirePackage{geometry}
 \geometry{
 	a4paper,
-	left=27mm,  %% or inner=23mm
-	right=27mm, %% or outer=18mm
+%	left=27mm,  %% or inner=23mm
+%	right=27mm, %% or outer=18mm
 	top=25.4mm, bottom=25.4mm,
 	headheight=2.17cm,
 	headsep=4mm,
@@ -278,12 +278,15 @@
 \titleformat{\chapter}[\style]{\bfseries}
 {\filcenter\LARGE\enspace\bfseries{\color{main}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base{main}{88}]
 
-
 \titleformat{\section}[hang]{\bfseries}
 {\hspace{-2.45em}\Large\bfseries{\color{main}\thesection}\enspace}{1pt}{\color{main}\Large\bfseries\filright}
 
 \titleformat{\subsection}[hang]{\bfseries}
 {\hspace{-2.45em}\large\bfseries\color{main}\thesubsection\enspace}{1pt}{\color{main}\large\bfseries\filright}
+
+\titleformat{\subsubsection}[hang]{\bfseries}
+{\hspace{-2.45em}\large\bfseries\color{main}\thesubsection\enspace}{1pt}{\color{main}\large\bfseries\filright}
+
 
 \titlespacing{\chapter}{0pt}{0pt}{1.5\baselineskip}
 %\titlespacing{\subsection}{0pt}{0.5\baselineskip}{-\baselineskip}
@@ -494,9 +497,9 @@
 	breaklines=true,
 	keywordstyle=\bf\color{winered}\ttfamily,
 	commentstyle=\color{gray},
-	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm},
+	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle},
 	emphstyle={\color{frenchplum}},
-	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor},
+	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,equote,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
 	frame=none,
 	tabsize=2,
 	rulecolor=\color{main},
