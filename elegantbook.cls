@@ -482,8 +482,8 @@
 	\vfill
 	\centerline{\itshape \@equote}
 	\vfill
-	\restoregeometry
 \end{titlepage}
+\restoregeometry
 \thispagestyle{empty}
 }
 
