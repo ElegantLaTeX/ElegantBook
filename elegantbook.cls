@@ -5,11 +5,11 @@
 %% This work may be distributed and/or modified freely
 %% available at https://github.com/ElegantLaTeX/ElegantBook
 % %
-%% Last Modification 2019-02-25
+%% Last Modification 2019-04-03
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2019/02/24 v3.06 ElegantBook document class]
+\ProvidesClass{elegantbook}[2019/04/03 v3.07 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -19,6 +19,7 @@
 % ----- Colors -----
 \DeclareStringOption[green]{color}
 \DeclareStringOption[en]{lang}
+\DeclareStringOption[answer]{result}
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color = green}}
 \DeclareVoidOption{cyan}{\ekv{color = cyan}}
@@ -27,6 +28,10 @@
 \DeclareVoidOption{nocolor}{\ekv{color = none}}
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
+
+\DeclareVoidOption{answer}{\ekv{result = answer}}
+\DeclareVoidOption{noanswer}{\ekv{result = noanswer}}
+
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
@@ -42,42 +47,24 @@
 % \ProcessOptions*\relax
 \LoadClass[12pt,a4paper,oneside,openany]{book}
 
-\RequirePackage{indentfirst}
+\RequirePackage{indentfirst,comment}
 \setlength\parindent{2em}
 
 % fontsetting
+
+\PassOptionsToPackage{no-math}{fontspec}
+\RequirePackage[UTF8, scheme=plain]{ctex}
+
 \RequirePackage{ifxetex}
+
 \ifxetex
 	\RequirePackage{fontenc}
-	\RequirePackage[no-math]{fontspec}
-	\setmainfont{Times New Roman}[NFSSFamily=ntxtlf]
-	\setsansfont{Arial}
-	%\setmonofont[Scale=0.9]{Courier New}
-	\RequirePackage{xeCJK}
-	\RequirePackage{xunicode}
-	\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
-	\setCJKsansfont[BoldFont={SimHei},ItalicFont={KaiTi}]{KaiTi}
-	\setCJKmonofont[BoldFont={SimHei},ItalicFont={KaiTi},Scale=0.7]{Microsoft YaHei}
-	\XeTeXlinebreaklocale "zh"
-	\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
-	\RequirePackage{newtxmath}
-	%\DeclareSymbolFont{operators}{OT1}{ntxtlf}{m}{n}
-	%\SetSymbolFont{operators}{bold}{OT1}{ntxtlf}{b}{n}
-	\setCJKfamilyfont{zhsong}{SimSun}
-	\setCJKfamilyfont{zhhei}{SimHei}
-	\setCJKfamilyfont{zhkai}{KaiTi}
-	\setCJKfamilyfont{zhfs}{FangSong}
-	\newcommand*{\songti}{\CJKfamily{zhsong}} 
-	\newcommand*{\heiti}{\CJKfamily{zhhei}}   
-	\newcommand*{\kaishu}{\CJKfamily{zhkai}} 
-	\newcommand*{\fangsong}{\CJKfamily{zhfs}} 
 \else
-	\RequirePackage{fontenc}
-	\RequirePackage{newtxtext}
-	\RequirePackage{newtxmath}
-	\RequirePackage[UTF8, scheme=plain]{ctex}
+	\RequirePackage[T1]{fontenc}
 \fi
-\RequirePackage[scale=0.7]{FiraMono}
+
+\RequirePackage{newtxtext}
+\RequirePackage{newtxmath}
 %
 
 % font setting for text and math
@@ -87,15 +74,27 @@
 % \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{anyfontsize}
 
-\DeclareSymbolFont{cmlargesymbols}{OMX}{cmex}{m}{n}
-\DeclareMathSymbol{\intop}{\mathop}{cmlargesymbols}{"5A}
-  \def\int{\intop\nolimits}
-\DeclareMathSymbol{\ointop}{\mathop}{cmlargesymbols}{"49}
-  \def\oint{\ointop\nolimits}
-\DeclareMathSymbol{\sumop}{\mathop}{cmlargesymbols}{"58}
-  \let\sum\sumop
-\DeclareMathSymbol{\prodop}{\mathop}{cmlargesymbols}{"59}
-  \let\prod\prodop
+\DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
+\DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
+
+% \let\sum\relax
+% \DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}%
+% \let\int\relax
+% \DeclareMathSymbol{\int}{\mathop}{CMlargesymbols}{"5A}%
+
+\let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
+\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+\DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
+\DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"49}
+\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"59}
+
+% \let\partial\relax
+% \DeclareMathSymbol{\partial}{\mathord}{CMletters}{"40}%
+% \let\in\relax
+%\DeclareMathSymbol{\in}{\mathrel}{CMsymbols}{"32}%
+% \let\pi\relax
+% \DeclareMathSymbol{\pi}{\mathord}{CMletters}{"19}
 
 
 % ----- Handle Colors -----
@@ -182,7 +181,6 @@
 
 %% 常用宏包
 \linespread{1.3}
-\RequirePackage{microtype}
 \RequirePackage{graphicx}
 %\RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts}
@@ -190,7 +188,7 @@
 \RequirePackage{multicol}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
-\RequirePackage{makecell,lipsum,texnames,setspace}
+\RequirePackage{makecell,lipsum,bxtexlogo,setspace}
 
 
 %%中文结构名字
@@ -293,12 +291,13 @@
 
 
 
-
+%%define the note and proof environment
+\RequirePackage{pifont,manfnt,bbding}
 % list/itemize/enumerate setting
 \RequirePackage[shortlabels]{enumitem}
 \setlist{nolistsep}
 
-\RequirePackage[most]{tcolorbox}
+\RequirePackage[many]{tcolorbox}
 
 \tcbset{
     common/.style={
@@ -318,18 +317,21 @@
     defstyle/.style={
         common,
         colframe=main,  
+        colback=main!10,
         colbacktitle=main, 
         overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
     },
     thmstyle/.style={
         common,
         colframe=second,  
+        colback=second!10,
         colbacktitle=second, 
         overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
     },
     propstyle/.style={
         common,
         colframe=third,  
+        colback=third!10,
         colbacktitle=third, 
         overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
     },
@@ -373,7 +375,7 @@
 \setcounter{exer}{0}
 \renewcommand{\theexer}{\thechapter.\arabic{exer}}
 \newenvironment{exercise}[1][]{
- 		\refstepcounter{exer}\par\medskip\noindent \textbf{\color{main}{
+ 		\refstepcounter{exer}\par\noindent\makebox[-3pt][r]{\scriptsize\color{red!90}\HandPencilLeft\quad}\textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
  		}~\theexer #1: }\rmfamily %
  	}{
@@ -392,8 +394,7 @@
  		\par\medskip\ignorespacesafterend %
  	}
 
-%%define the note and proof environment
-\RequirePackage{pifont,manfnt}
+
 
 \newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{main}
 	\ifdefstring{\ELEGANT@lang}{en}{Note:}{注意：}
@@ -401,7 +402,9 @@
 
 \newenvironment{proof}{\par\noindent\textbf{\color{main}
 	\ifdefstring{\ELEGANT@lang}{en}{Proof:}{证明：}
-}\color{black!90}\small}{\hfill$\Box$\quad\par}
+}\color{black!90}\small}{
+%\hfill$\Box$\quad
+\par}
 \newenvironment{remark}{\noindent\textbf{\color{main}
 	\ifdefstring{\ELEGANT@lang}{en}{Remark:}{注：}
 }}{\par}
@@ -418,15 +421,34 @@
 	\ifdefstring{\ELEGANT@lang}{en}{Property:}{性质：}
 }}{\par}
 
+% \ifdefstring{\ELEGANT@result}{answer}{
+% 	\AtBeginDocument{
+% 	\includecomment{solution}
+% 	\includecomment{proof}
+% 	}
+% }{\relax}
+\ifdefstring{\ELEGANT@result}{noanswer}{
+	\AtBeginDocument{
+	\excludecomment{solution}
+	\excludecomment{proof}
+	\excludecomment{inline}
+	}
+}{\relax}
 
 
 %页眉页脚
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
 \fancyhf{}
+\if@twoside
 \fancyhead[EL,OR]{\color{main}--\thepage/\pageref*{LastPage}--}
-\fancyhead[ER]{\color{main}\em\nouppercase\leftmark{}}
-\fancyhead[OL]{\color{main}\em\nouppercase\rightmark}
+\fancyhead[ER]{\color{main}\itshape\leftmark{}}
+\fancyhead[OL]{\color{main}\itshape\rightmark}
+\else
+\fancyhead[R]{\color{main}--\itshape\thepage/\pageref*{LastPage}--}
+\fancyhead[L]{\color{main}\itshape\rightmark}
+\fi
+
 \fancyfoot[c]{\base{main}{88}}
 \renewcommand{\headrule}{\color{main}\hrule width\textwidth}
 \pagestyle{fancy}
@@ -450,10 +472,9 @@
 \renewcommand*{\maketitle}{%
 \hypersetup{pageanchor=false}
 \begin{titlepage}
-	\newpage
 	\newgeometry{margin = 0in}
 	\parindent=0pt
-	\renewcommand\baselinestretch{2.5}
+	\setstretch{2.5}
 	\includegraphics[width=\linewidth]{cover.jpg}
 	\setlength{\fboxsep}{0pt}
 	\colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
@@ -482,20 +503,32 @@
 	\vfill
 	\centerline{\itshape \@equote}
 	\vfill
-	\restoregeometry
 \end{titlepage}
+\restoregeometry
 \thispagestyle{empty}
 }
 
+
+
 \RequirePackage{listings} 
+\renewcommand{\ttdefault}{cmtt}
+\lstdefinestyle{mystyle}{
+  basicstyle=%
+    \ttfamily
+    \lst@ifdisplaystyle\footnotesize\fi
+}
+
+\lstset{basicstyle=\scriptsize\ttfamily,style=mystyle}
+
+
 \definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
 \definecolor{frenchplum}{RGB}{190,20,83}
 \lstset{language=[LaTeX]TeX,
-	texcsstyle=*\bf\color{winered}\ttfamily,
+	texcsstyle=*\bfseries\color{winered}\ttfamily,
 	basicstyle=\ttfamily,
 	numbers=none,
 	breaklines=true,
-	keywordstyle=\bf\color{winered}\ttfamily,
+	keywordstyle=\bfseries\color{winered}\ttfamily,
 	commentstyle=\color{gray},
 	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle},
 	emphstyle={\color{frenchplum}},

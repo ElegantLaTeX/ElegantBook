@@ -1,4 +1,4 @@
-\documentclass{elegantbook}
+\documentclass[noanswer]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
@@ -12,6 +12,9 @@
 \logo{logo.png}
 \cover{cover.jpg}
 
+\setcitestyle{sectionbib}
+\usepackage{chapterbib} 
+%\excludecomment{solution}
 
 \begin{document}
 \maketitle
@@ -20,7 +23,7 @@
 \thispagestyle{empty}
 \mainmatter
 \hypersetup{pageanchor=true}
-
+\include{test}
 
 \chapter{Elegant\LaTeX{} Templates}
 
@@ -30,12 +33,12 @@ The latest version is available on \href{https://github.com/ElegantLaTeX/Elegant
 
 
 \section{ElegantBook Updates}
-Over these years, we've received a lot of feedback from users, with major issues related to font installation, coding support, theorem class environments floats, theorem cross-page, cross-references, and etc. We really think about these problems, it wasn't elegant to let the user install the font for visual beauty since users got into a lot of trouble, which went against the concept of our template. So we've removed that from the new version, users don't have to install any fonts. Let's take a look at the ElegantBook template 3.x updates:
+Over these years, we've received \cite{EINAV2010} a lot of feedback from users, with major issues related to font installation, coding support, theorem class environments floats, theorem cross-page, cross-references, and etc. We really think about these problems, it wasn't elegant to let the user install the font for visual beauty since users got into a lot of trouble, which went against the concept of our template. So we've removed that from the new version, users don't have to install any fonts. Let's take a look at the ElegantBook template 3.x updates:
 
 \begin{enumerate}
    \item Remove custom font settings and use the \lstinline{ctex} package or system font instead;
    \item Add English and Chinese modes（\lstinline{lang=cn/en});
-   \item \lstinline{PDFLaTeX} 与 \lstinline{XeLaTeX} Support;
+   \item \lstinline{PDFLaTeX} and \lstinline{XeLaTeX} Support;
    \item Use the \lstinline{tcolorbox} package to re-written the theorem class environments, which can span over pages;
    \item Theorem class environments name updated, and cross-references fixed;
    \item Color name updated, link color unified;
@@ -50,11 +53,19 @@ Over these years, we've received a lot of feedback from users, with major issues
 
 \chapter{ElegantBook Settings}
 
+\begin{solution}
+    This text will only be displayed, if \includecomment{mysection} was given
+\end{solution}
+
+\begin{proof}
+    This text will only be displayed, if \includecomment{mysection} was given
+\end{proof}
+
 \section{Compilation Methods}
-This template is based on the Standard LaTeX book class, so the options of book class also work. The default encoding is UTF-8, and \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2018. 
+This template is based on the Standard LaTeX book class,  so the options of book class also work. The default encoding is UTF-8, and \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2018. 
 \subsection[Compile with PDFLaTeX]{Compile with \lstinline{PDFLaTeX}}
 
-If you choose \lstinline{PDFLaTeX} to process your book, the default article font computer modern has changed to \lstinline{newtx} series, and the default font size is set to \lstinline{11pt}. The fonts are settings with:
+If you choose \lstinline{PDFLaTeX} to process your book, the default article font computer modern has changed to \lstinline{newtx} series, and the default font size is set to \lstinline{12pt}. The fonts are settings with:
 
 \begin{itemize}
 	\item \lstinline{newtxtext} package for text fonts, similar to times new roman font.
@@ -259,9 +270,9 @@ This template uses \lstinline{tikz} to customize \lstinline{itemize} and \lstinl
 
 \section{Bibliography}
 
-This template uses Bib\TeX{} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect, ~\cite{Chen2018} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
+This template uses \BibTeX{} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect, ~\cite{Chen2018} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
 
-If you want to use Bib\TeX{}, you must create a file named \lstinline{reference.bib}, and add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, and cite the bibkey in the \lstinline{tex} file. The Bib\TeX{} will automatically generate the bibliography for you for the reference you cited. If you want to add some noncited reference to the bibliography, you can use 
+If you want to use \BibTeX{}, you must create a file named \lstinline{reference.bib}, and add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, and cite the bibkey in the \lstinline{tex} file. The Bib\TeX{} will automatically generate the bibliography for you for the reference you cited. If you want to add some noncited reference to the bibliography, you can use 
 
 \begin{lstlisting}
 \nocite{EINAV2010, Havrylchyk2018} 
@@ -357,7 +368,7 @@ Let's continue using our application training example. In this case, we'd want t
 \end{itemize}
 
 
-\nocite{EINAV2010,Havrylchyk2018} 
+\nocite{Havrylchyk2018} 
 
 \bibliography{reference}
 

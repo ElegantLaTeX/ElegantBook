@@ -1,11 +1,16 @@
 \documentclass[cn]{elegantbook}
 
+
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
+
+%\definecolor{main}{RGB}{0,127,0}
+%\definecolor{second}{RGB}{204,102,0}
+%\definecolor{third}{RGB}{0,127,127}
 
 \version{3.06}
 \equote{Victory won\rq t come to us unless we go to it. --- M. Moore}
@@ -17,16 +22,19 @@
 \maketitle
 \tableofcontents
 \clearpage
-\thispagestyle{empty}
+% \thispagestyle{empty}
 
 \mainmatter
 \hypersetup{pageanchor=true}
 
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
+
+
 值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们致力于打造一系列美观、优雅、简便的模板方便用户使用。Elegant\LaTeX{} 系列模板目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note 是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
 
 最新版本下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github:ElegantBook/releases}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您在使用此模板，欢迎把您使用此模板制作的成品发一份给我们，谢谢！如果您有其他问题，建议或者意见，欢迎联系我们。
+
 
 
 \section{ElegantBook 更新说明}
@@ -49,8 +57,6 @@
 
 
 \chapter{ElegantBook 设置说明}
-
-
 
 \section{编译方式}
 
@@ -258,10 +264,13 @@ This is the content of example environment.
 
 \section{参考文献}
 
-此模板使用了 Bib\TeX{} 来生成参考文献，默认使用的文献样式（bib style）是 \lstinline{aer}。参考文献示例：~\cite{Chen2018} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+此模板使用了 \BibTeX{} 来生成参考文献，默认使用的文献样式（bib style）是 \lstinline{aer}。参考文献示例：~\cite{Chen2018} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
 
-你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 Bib\TeX{} 编译。如果你想在参考文献中添加未引用的文献，可以使用
+你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \BibTeX{} 编译。如果你想在参考文献中添加未引用的文献，可以使用
 
+\begin{lstlisting}[frame=single]
+\nocite{EINAV2010,Havrylchyk2018} 
+\end{lstlisting}
 
 \section{添加序章}
 
@@ -288,10 +297,10 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
 
 \begin{definition}{可积性}{int}
-设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为
+设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
 \begin{equation}
    \label{inter}
-   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) . 
+   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. 
 \end{equation}
 一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
 \end{definition}
@@ -307,7 +316,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。练习题 \ref{exer:43} 是一个性质的证明。
 
 \begin{exercise}\label{exer:43}
-设 $f\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
+设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
 \begin{equation}
    \label{ex:1}
    I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
