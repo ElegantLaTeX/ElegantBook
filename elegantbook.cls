@@ -220,9 +220,9 @@
 \usetikzlibrary{backgrounds,calc,shadows}
 \usepackage[object=vectorian]{pgfornament} %% 
 
-\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=main, draw=main] circle (2pt);}
-\newcommand*{\eitemii}{\tikz \draw [baseline, fill=main,draw=main,circular drop shadow] circle (2pt);}
-\newcommand*{\eitemiii}{\tikz \draw [baseline, fill=main,draw=main] circle (2pt);}
+\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=main, draw=none] circle (2pt);}
+\newcommand*{\eitemii}{\tikz \draw [baseline, fill=main,draw=none,circular drop shadow] circle (2pt);}
+\newcommand*{\eitemiii}{\tikz \draw [baseline, fill=main,draw=none] circle (2pt);}
 \setlist[enumerate,1]{label=\color{main}\arabic*.}
 \setlist[enumerate,2]{label=\color{main}(\alph*).}
 \setlist[enumerate,3]{label=\color{main}\Roman*.}
@@ -461,11 +461,11 @@
 \newcommand*{\equote}[1]{\def\@equote{#1}}
 
 \newcommand*{\logo}[1]{
- \def\@logo{\includegraphics[width=0.3\textwidth]{#1}
+ \def\@logo{\includegraphics[width=4.5cm]{#1}
  }
 }
 \newcommand*{\cover}[1]{
- \def\@logo{\includegraphics[width=\linewidth]{cover.jpg}
+ \def\@cover{\includegraphics[width=\linewidth]{#1}
  }
 }
 
@@ -475,7 +475,8 @@
 	\newgeometry{margin = 0in}
 	\parindent=0pt
 	\setstretch{2.5}
-	\includegraphics[width=\linewidth]{cover.jpg}
+	\@cover
+	% \includegraphics[width=\linewidth]{cover.jpg}
 	\setlength{\fboxsep}{0pt}
 	\colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
 	\vfill
@@ -496,7 +497,7 @@
 	\begin{minipage}[c]{0.27\linewidth}
 	\begin{tikzpicture}[remember picture,overlay]
 		\begin{pgfonlayer}{background}
-		  \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\includegraphics[width=0.7\textwidth]{logo.png}};
+		  \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\@logo};
 		\end{pgfonlayer}
 	\end{tikzpicture}
 	\end{minipage}
