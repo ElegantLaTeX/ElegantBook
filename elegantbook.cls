@@ -5,7 +5,7 @@
 %% This work may be distributed and/or modified freely
 %% available at https://github.com/ElegantLaTeX/ElegantBook
 % %
-%% Last Modification 2019-04-03
+%% Last Modification 2019-04-12
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
@@ -53,7 +53,7 @@
 % fontsetting
 
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage[UTF8, scheme=plain]{ctex}
+\RequirePackage[UTF8, scheme=plain,punct=kaiming]{ctex}
 
 \RequirePackage{ifxetex}
 
