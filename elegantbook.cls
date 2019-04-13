@@ -363,7 +363,7 @@
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \newenvironment{example}[1][]{
- 		\refstepcounter{exam}\par\medskip\noindent \textbf{\color{main}{
+ 		\refstepcounter{exam}\par\noindent \textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Example}{例}
  		}~\theexam #1: }\rmfamily %
  	}{
@@ -387,7 +387,7 @@
 \setcounter{prob}{0}
 \renewcommand{\theprob}{\thechapter.\arabic{prob}}
 \newenvironment{problem}[1][]{
- 		\refstepcounter{prob}\par\medskip\noindent \textbf{\color{main}{
+ 		\refstepcounter{prob}\par\noindent \textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Problem}{例题}
  		}~\theprob #1: }\rmfamily %
  	}{
