@@ -420,7 +420,7 @@
 \newenvironment{property}{\par\noindent\textbf{\color{main}
 	\ifdefstring{\ELEGANT@lang}{en}{Property:}{性质：}
 }}{\par}
-\newenvironment{property}[1]{\par\noindent\textbf{\color{main}
+\newenvironment{custom}[1]{\par\noindent\textbf{\color{main}
 	\ifdefstring{\ELEGANT@lang}{en}{#1:}{#1：}
 }}{\par}
 % \ifdefstring{\ELEGANT@result}{answer}{
