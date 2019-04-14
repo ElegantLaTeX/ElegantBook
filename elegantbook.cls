@@ -17,20 +17,31 @@
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
 
 % ----- Colors -----
-\DeclareStringOption[green]{color}
+\DeclareStringOption[blue]{color}
 \DeclareStringOption[en]{lang}
 \DeclareStringOption[answer]{result}
+\DeclareStringOption[fancy]{mode}
+\DeclareStringOption[show]{base}
+
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color = green}}
 \DeclareVoidOption{cyan}{\ekv{color = cyan}}
 \DeclareVoidOption{blue}{\ekv{color = blue}}
-\DeclareVoidOption{plain}{\ekv{color = plain}}
+\DeclareVoidOption{gray}{\ekv{color = gray}}
+\DeclareVoidOption{black}{\ekv{color = black}}
 \DeclareVoidOption{nocolor}{\ekv{color = none}}
+
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 
+\DeclareVoidOption{fancy}{\ekv{mode=fancy}}
+\DeclareVoidOption{simple}{\ekv{mode=simple}}
+
 \DeclareVoidOption{answer}{\ekv{result = answer}}
 \DeclareVoidOption{noanswer}{\ekv{result = noanswer}}
+
+\DeclareVoidOption{hide}{\ekv{base = hide}}
+\DeclareVoidOption{show}{\ekv{base = show}}
 
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
@@ -45,7 +56,7 @@
 
 \ProcessKeyvalOptions*\relax
 % \ProcessOptions*\relax
-\LoadClass[12pt,a4paper,oneside,openany]{book}
+\LoadClass[a4paper,oneside,openany]{book}
 
 \RequirePackage{indentfirst,comment}
 \setlength\parindent{2em}
@@ -117,10 +128,15 @@
 	\definecolor{second}{RGB}{180,50,131}%
 	\definecolor{third}{RGB}{7,127,128}%
 }{\relax}
-\ifdefstring{\ELEGANT@color}{plain}{
+\ifdefstring{\ELEGANT@color}{gray}{
 	\definecolor{main}{RGB}{50,50,50}%
 	\definecolor{second}{RGB}{50,50,50}%
 	\definecolor{third}{RGB}{50,50,50}%
+}{\relax}
+\ifdefstring{\ELEGANT@color}{black}{
+	\definecolor{main}{RGB}{0,0,0}%
+	\definecolor{second}{RGB}{0,0,0}%
+	\definecolor{third}{RGB}{0,0,0}%
 }{\relax}
 
 %green color
@@ -183,7 +199,7 @@
 \linespread{1.3}
 \RequirePackage{graphicx}
 %\RequirePackage{enumerate}
-\RequirePackage{amsmath,mathrsfs,amsfonts}
+\RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
 \RequirePackage{booktabs}
 \RequirePackage{multicol}
 \RequirePackage{xcolor}
@@ -274,7 +290,7 @@
 
 
 \titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{main}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\filcenter\base{main}{88}]
+{\filcenter\LARGE\enspace\bfseries{\color{main}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{main}\LARGE\filcenter}[\ifdefstring{\ELEGANT@base}{hide}{}{\filcenter\base{main}{88}}]
 
 \titleformat{\section}[hang]{\bfseries}
 {\hspace{-2.45em}\Large\bfseries{\color{main}\thesection}\enspace}{1pt}{\color{main}\Large\bfseries\filright}
@@ -297,11 +313,12 @@
 \RequirePackage[shortlabels]{enumitem}
 \setlist{nolistsep}
 
-\RequirePackage[many]{tcolorbox}
 
+\RequirePackage[many]{tcolorbox}
+\ifdefstring{\ELEGANT@mode}{fancy}{
 \tcbset{
     common/.style={
-        fontupper=\itshape,
+        fontupper=\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu},
         lower separated=false,
         coltitle=white,
         colback=gray!10,
@@ -357,6 +374,51 @@
 	\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
 }{thmstyle}{lem}
 
+}{\relax}
+
+\ifdefstring{\ELEGANT@mode}{simple}{
+\let\openbox\relax
+\RequirePackage{amsthm}
+\let\proof\relax
+\let\endproof\relax
+% declare a new theorem style
+\newtheoremstyle{ethmstyle}%
+{3pt}% Space above
+{3pt}% Space below 
+{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+{}% Indent amount
+{\bfseries\color{main}}% Theorem head font
+{.}% Punctuation after theorem head
+{.5em}% Space after theorem head 
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+\theoremstyle{ethmstyle}
+
+\newtheorem{etheorem}{\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}}[chapter]
+\newtheorem{edefinition}{\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}}[chapter]
+\newtheorem{elemma}{\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}}[chapter]
+\newtheorem{ecorollary}{\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}}[chapter]
+\newtheorem{eproposition}{\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}}[chapter]
+
+\newenvironment{theorem}[2]
+  {\ifstrempty{#1}{\etheorem}{\etheorem[#1]}\ifstrempty{#2}{}{\label{thm:#2}}}
+  {\endetheorem}
+
+\newenvironment{definition}[2]
+  {\ifstrempty{#1}{\edefinition}{\edefinition[#1]}\ifstrempty{#2}{}{\label{def:#2}}}
+  {\endedefinition}
+
+\newenvironment{lemma}[2]
+  {\ifstrempty{#1}{\elemma}{\elemma[#1]}\ifstrempty{#2}{}{\label{lem:#2}}}
+  {\endelemma}
+
+\newenvironment{corollary}[2]
+  {\ifstrempty{#1}{\ecorollary}{\ecorollary[#1]}\ifstrempty{#2}{}{\label{cor:#2}}}
+  {\endecorollary}
+
+\newenvironment{proposition}[2]
+  {\ifstrempty{#1}{\eproposition}{\eproposition[#1]}\ifstrempty{#2}{}{\label{pro:#2}}}
+  {\endeproposition}
+}{\relax}
 
 %% Example with counter
 \newcounter{exam}[chapter]
@@ -423,12 +485,7 @@
 \newenvironment{custom}[1]{\par\noindent\textbf{\color{main}
 	\ifdefstring{\ELEGANT@lang}{en}{#1:}{#1：}
 }}{\par}
-% \ifdefstring{\ELEGANT@result}{answer}{
-% 	\AtBeginDocument{
-% 	\includecomment{solution}
-% 	\includecomment{proof}
-% 	}
-% }{\relax}
+
 \ifdefstring{\ELEGANT@result}{noanswer}{
 	\AtBeginDocument{
 	\excludecomment{solution}
@@ -513,34 +570,32 @@
 
 
 
+
 \RequirePackage{listings} 
 \renewcommand{\ttdefault}{cmtt}
 \lstdefinestyle{mystyle}{
   basicstyle=%
     \ttfamily
-    \lst@ifdisplaystyle\footnotesize\fi
+    \lst@ifdisplaystyle\small\fi
 }
 
-\lstset{basicstyle=\scriptsize\ttfamily,style=mystyle}
-
+\lstset{basicstyle=\ttfamily,style=mystyle}
 
 \definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
 \definecolor{frenchplum}{RGB}{190,20,83}
 \lstset{language=[LaTeX]TeX,
-	texcsstyle=*\bfseries\color{winered}\ttfamily,
-	basicstyle=\ttfamily,
+	texcsstyle=*\color{winered},
 	numbers=none,
 	breaklines=true,
-	keywordstyle=\bfseries\color{winered}\ttfamily,
+	keywordstyle=\color{winered},
 	commentstyle=\color{gray},
 	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle},
 	emphstyle={\color{frenchplum}},
 	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,equote,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
 	frame=none,
 	tabsize=2,
-	rulecolor=\color{main},
+	% backgroundcolor=\color{lightgrey}
 }
 
-\bibliographystyle{aer}
 
 
