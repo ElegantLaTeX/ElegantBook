@@ -1,4 +1,4 @@
-\documentclass[cn]{elegantbook}
+\documentclass[cn,fancy,11pt]{elegantbook}
 
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
@@ -8,9 +8,6 @@
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
 
-%\definecolor{main}{RGB}{0,127,0}
-%\definecolor{second}{RGB}{204,102,0}
-%\definecolor{third}{RGB}{0,127,127}
 
 \version{3.07}
 \equote{Victory won\rq t come to us unless we go to it. --- M. Moore}
@@ -21,7 +18,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
-\clearpage
+
 % \thispagestyle{empty}
 
 \mainmatter
@@ -61,40 +58,10 @@
 \section{编译方式}
 
 本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2018，支持 \lstinline{PDFLaTeX} 以及 \lstinline{XeLaTeX} 编译。
-\subsection[选择 PDFLaTeX 编译]{选择 \lstinline{PDFLaTeX} 编译}
-如果你使用 \lstinline{PDFLaTeX} 编译，默认的 Computer Modern 字体被换成了 \lstinline{newtx} 系列字体，默认的字体字号是 12 pt。关于字体设置的宏包主要用到了：
-\begin{itemize}
-   \item \lstinline{newtxtext} 用于文档正文字体，类似于 Times New Roman 字体。
-   \item \lstinline{newtxmath} 用于数学字体，搭配 \lstinline{newtxtext} 非常合适。
-   \item \lstinline{FiraMono} 用于打字机字体，并使用了 \lstinline{scale=0.7} 选项。
-   \item \lstinline{ctex} 用于中文字体设置，并使用了 \lstinline{scheme=plain} 选项。
-\end{itemize}
-一次完整的编译：\lstinline[breaklines]{PDFLaTeX -> BibTeX -> PDFLaTeX*2}。
-
-\subsection[选择 XeLaTeX 编译]{选择 \lstinline{XeLaTeX} 编译}
-如果你选择 \lstinline{XeLaTeX} 编译的话，那么设置字体的宏包为 \lstinline{fontspec} 和 \lstinline{xeCJK}。由于模板中使用的字体是 Windows 中的字体，所以如果你使用其他操作系统，比如 Linux 或者 Mac OS，那么你需要把所用字体替换为你系统中的字体。设置字体的命令：
-
-\begin{lstlisting}[frame=single]
-\RequirePackage{fontenc}
-\RequirePackage[no-math]{fontspec}
-\setmainfont{Times New Roman}[NFSSFamily=ntxtlf]
-\setsansfont{Arial}
-%\setmonofont[Scale=0.7]{Courier New}
-\RequirePackage{xeCJK}
-\RequirePackage{xunicode}
-\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
-\setCJKsansfont[BoldFont={SimHei},ItalicFont={KaiTi}]{KaiTi}
-\setCJKmonofont[BoldFont={SimHei},ItalicFont={KaiTi},Scale=0.7]{Microsoft YaHei}
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
-\RequirePackage{newtxmath}
-\end{lstlisting}
-一次完整的编译：\lstinline[breaklines]{XeLaTeX -> BibTeX -> XeLaTeX*2}。
 
 
 \section{语言模式}
 本模板内含两套语言环境，改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
-
 \begin{lstlisting}[frame=single]  
 \documentclass[cn]{elegantbook} 
 \documentclass[lang=cn]{elegantbook}
@@ -109,14 +76,12 @@
 
 \section{颜色主题}
 本模板内置 4 组颜色主题，分别为 \textcolor{main1}{\lstinline{green}}（默认）、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}、\textcolor{gray}{\lstinline{plain}}，另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
-
 \begin{lstlisting}[frame=single]
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
 \end{lstlisting}
 
 其中 \textcolor{gray}{plain} 主题为全灰色。如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 main、second、third 颜色，具体方法如下：
-
 \begin{lstlisting}[frame=single]
 \definecolor{main}{RGB}{70,70,70}    
 \definecolor{second}{RGB}{115,45,2}    
@@ -142,7 +107,6 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
 \section{章标题显示风格}
 
 本模板内置 2 套\textit{章标题显示风格}，包含 \lstinline{hang}（默认）与 \lstinline{display} 两种风格，区别在于章标题单行显示（\lstinline{hang}）与双行显示（\lstinline{display}），本说明使用了 \lstinline{hang}。调用方式为
-
 \begin{lstlisting}[frame=single]
 \documentclass[hang]{elegantbook} %or
 \documentclass[titlestyle=hang]{elegantbook}
@@ -166,7 +130,6 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
 
 \subsection{定理类环境的使用}
 由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
-
 \begin{lstlisting}[frame=single]
 \begin{theorem}{<theorem name>}{<label>}
 The content of theorem.
@@ -201,7 +164,6 @@ The content of theorem.
 
 \subsection{其他数学环境的使用}
 其他三种数学环境因为没有选项，可以直接使用，比如 \lstinline{example} 环境的使用：
-
 \begin{lstlisting}[frame=single]
 \begin{example}
    This is the content of example environment.
@@ -267,7 +229,6 @@ This is the content of example environment.
 此模板使用了 \BibTeX{} 来生成参考文献，默认使用的文献样式（bib style）是 \lstinline{aer}。参考文献示例：~\cite{Chen2018} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
 
 你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \BibTeX{} 编译。如果你想在参考文献中添加未引用的文献，可以使用
-
 \begin{lstlisting}[frame=single]
 \nocite{EINAV2010,Havrylchyk2018} 
 \end{lstlisting}
@@ -275,12 +236,11 @@ This is the content of example environment.
 \section{添加序章}
 
 如果你想在第一章前面添加序章，不改变原本章节序号，你可以在第一章内容前面使用 
-
 \begin{lstlisting}[frame=single]
-\chapter*{序章}
-\addcontentsline{toc}{chapter}{序章} 
-\markboth{序章}{} 
-序章的内容。
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction} 
+\markboth{Introduction}{} 
+The content of introduction.
 \end{lstlisting}
 
 \chapter{ElegantBook 写作示例}
@@ -313,6 +273,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 
 
+
 有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。练习题 \ref{exer:43} 是一个性质的证明。
 
 \begin{exercise}\label{exer:43}
@@ -323,6 +284,14 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \end{equation}
 是 $\mathcal{R}^1$ 上的连续函数。
 \end{exercise}
+
+\begin{problem}
+即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+\end{problem}
+
+\begin{solution}
+即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+\end{solution}
 
 \begin{theorem}{Fubini 定理}{fubi} 
 （1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
@@ -340,7 +309,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 我们说一个实变或者复变量的实值或者复值函数是在区间上平方可积的，如果其绝对值的平方在该区间上的积分是有限的。所有在勒贝格积分意义下平方可积的可测函数构成一个希尔伯特空间，也就是所谓的 $L^2$ 空间，几乎处处相等的函数归为同一等价类。形式上，$L^2$ 是平方可积函数的空间和几乎处处为 0 的函数空间的商空间。
 
 \begin{proposition}{最优性原理}{max}
-如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s,T]$ 任意子区间都是最优解，假设区间为 $[t_0,t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
+如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
 \end{proposition}
 
 我们知道最小二乘法可以用来处理一组数据，可以从一组测定的数据中寻求变量之间的依赖关系，这种函数关系称为经验公式。本课题将介绍最小二乘法的精确定义及如何寻求点与点之间近似成线性关系时的经验公式。假定实验测得变量之间的 $n$ 个数据，则在平面上，可以得到 $n$ 个点，这种图形称为 “散点图”，从图中可以粗略看出这些点大致散落在某直线近旁, 我们认为其近似为一线性函数，下面介绍求解步骤。
