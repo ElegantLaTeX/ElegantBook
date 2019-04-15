@@ -1,4 +1,4 @@
-\documentclass[noanswer,fancy,hide]{elegantbook}
+\documentclass[noanswer,fancy,blue,11pt]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
@@ -6,25 +6,23 @@
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
-
 \version{3.07}
+
 \equote{Victory won\rq t come to us unless we go to it. --- M. Moore}
 
 \logo{logo.png}
 \cover{cover.jpg}
 
-\setcitestyle{sectionbib}
-\usepackage{chapterbib} 
-%\excludecomment{solution}
+
 
 \begin{document}
+
 \maketitle
 \tableofcontents
 \clearpage
 \thispagestyle{empty}
 \mainmatter
 \hypersetup{pageanchor=true}
-\include{test}
 
 \chapter{Elegant\LaTeX{} Templates}
 
@@ -54,56 +52,15 @@ Over these years, we've received \cite{EINAV2010} a lot of feedback from users, 
 
 \chapter{ElegantBook Settings}
 
-\begin{solution}
-    This text will only be displayed, if \includecomment{mysection} was given
-\end{solution}
-
-\begin{proof}
-    This text will only be displayed, if \includecomment{mysection} was given
-\end{proof}
 
 \section{Compilation Methods}
 This template is based on the Standard LaTeX book class,  so the options of book class also work. The default encoding is UTF-8, and \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2018. 
-\subsection[Compile with PDFLaTeX]{Compile with \lstinline{PDFLaTeX}}
-
-If you choose \lstinline{PDFLaTeX} to process your book, the default article font computer modern has changed to \lstinline{newtx} series, and the default font size is set to \lstinline{12pt}. The fonts are settings with:
-
-\begin{itemize}
-	\item \lstinline{newtxtext} package for text fonts, similar to times new roman font.
-	\item \lstinline{newtxmath} package for math fonts, close to \lstinline{times} package.
-	\item \lstinline{FiraMono} package for typewriter fonts, with option \lstinline{scale=0.7}.
-	\item \lstinline{ctex} package for Chinese fonts, with option \lstinline{scheme=plain}.
-\end{itemize}
-
-A full compilation chain：\lstinline[breaklines]{PDFLaTeX -> BibTeX -> PDFLaTeX*2}.
-
-
-\subsection[Compile with XeLaTeX]{Compile with \lstinline{XeLaTeX}}
-If you choose \lstinline{XeLaTeX} to process your book, we use \lstinline{fontspec} package and \lstinline{xeCJK} package. we used fonts available in Windows, if you are using Linux or Mac OS, please substitute these fonts with that of your system.
-
-\begin{lstlisting}[frame=single]
-\RequirePackage{fontenc}
-\RequirePackage[no-math]{fontspec}
-\setmainfont{Times New Roman}[NFSSFamily=ntxtlf]
-\setsansfont{Arial}
-%\setmonofont[Scale=0.7]{Courier New}
-\RequirePackage{xeCJK}
-\RequirePackage{xunicode}
-\setCJKmainfont[BoldFont={SimHei},ItalicFont={KaiTi}]{SimSun}
-\setCJKsansfont[BoldFont={SimHei},ItalicFont={KaiTi}]{KaiTi}
-\setCJKmonofont[BoldFont={SimHei},ItalicFont={KaiTi},Scale=0.7]{Microsoft YaHei}
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
-\RequirePackage{newtxmath}
-\end{lstlisting}
-
-A full compilation chain：\lstinline[breaklines]{XeLaTeX -> BibTeX -> XeLaTeX*2}.
 
 
 \section{Languages}
-We defined one option named \lstinline{lang}, this option has two alternative values, \lstinline{lang=en} (default) or \lstinline{lang=cn}. \lstinline{lang=cn} will make the caption of figure/table, abstract name, refname etc. Chinese, while \lstinline{lang=en} will keep all these stuff English, as the default article class sets. You can use this option as
 
-\begin{lstlisting}[frame=none]  
+We defined one option named \lstinline{lang}, this option has two alternative values, \lstinline{lang=en} (default) or \lstinline{lang=cn}. \lstinline{lang=cn} will make the caption of figure/table, abstract name, refname etc. Chinese, while \lstinline{lang=en} will keep all these stuff English, as the default article class sets. You can use this option as
+\begin{lstlisting}
 \documentclass[cn]{elegantbook} 
 \documentclass[lang=cn]{elegantbook}
 \documentclass[en]{elegantbook} 
@@ -117,8 +74,7 @@ You can input Chinese Character in either \lstinline{lang=en} or \lstinline{lang
 
 \section{Color Themes}
 This template contains 4 color themes,they are \textcolor{main1}{\lstinline{green}} (default), \textcolor{main2}{\lstinline{cyan}}, \textcolor{main3}{\lstinline{blue}}, \textcolor{gray}{\lstinline{plain}}, and there is a customization color option  \lstinline{nocolor}. You can choose \lstinline{green} with  
-
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
 \end{lstlisting}
@@ -151,8 +107,7 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
 This template contains 2 sets of \textit{title display styles},which including \lstinline{hang}(default) and \lstinline{display} style, 
 
 The difference is that the chapter heading is displayed on a single line (\lstinline{hang}) and on a double line (\lstinline{display}) , and this guide uses \lstinline{hang} . To change display style
-
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \documentclass[hang]{elegantbook} %or
 \documentclass[titlestyle=hang]{elegantbook}
 \end{lstlisting}
@@ -175,8 +130,7 @@ In this template, we defined four categories of theorem class environments
 
 \subsection{Theorem Class Environments}
 The template uses the \lstinline{tcolorbox} package to customize the theorem class environments, it is slightly different from the normal theorem environments. The usage is as follows:
-
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \begin{theorem}{<theorem name>}{<label>}
 The content of theorem.
 \end{theorem}
@@ -210,8 +164,7 @@ Other theorem class environments with the same usage are:
 
 \subsection{Other Customized Environments}
 The other three math environments can be used directly since there are no options for them, the \lstinline{example} environment usage:
-
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \begin{example}
 This is the content of example environment.
 \end{example}
@@ -274,7 +227,6 @@ This template uses \lstinline{tikz} to customize \lstinline{itemize} and \lstinl
 This template uses \BibTeX{} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect, ~\cite{Chen2018} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
 
 If you want to use \BibTeX{}, you must create a file named \lstinline{reference.bib}, and add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, and cite the bibkey in the \lstinline{tex} file. The Bib\TeX{} will automatically generate the bibliography for you for the reference you cited. If you want to add some noncited reference to the bibliography, you can use 
-
 \begin{lstlisting}
 \nocite{EINAV2010, Havrylchyk2018} 
 \end{lstlisting}
@@ -282,8 +234,7 @@ If you want to use \BibTeX{}, you must create a file named \lstinline{reference.
 \section{Preface}
 
 If you want to add a preface before the first chapter without changing the number of chapter, you can use it before the first chapter 
-
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \chapter*{Preface}
 \addcontentsline{toc}{chapter}{Preface} 
 \markboth{Preface}{} 
@@ -421,4 +372,5 @@ The content of chapter one.
 \end{document}
 \end{lstlisting}
 
+\bibliographystyle{aer}
 \end{document}

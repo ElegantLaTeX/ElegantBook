@@ -1,4 +1,4 @@
-\documentclass[cn,fancy,11pt]{elegantbook}
+\documentclass[cn,simple,blue,11pt]{elegantbook}
 
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
@@ -7,13 +7,14 @@
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
-
-
 \version{3.07}
+
 \equote{Victory won\rq t come to us unless we go to it. --- M. Moore}
+
 \logo{logo.png}
 \cover{cover.jpg}
 
+\usepackage{gbt7714}
 
 \begin{document}
 \maketitle
@@ -62,7 +63,7 @@
 
 \section{语言模式}
 本模板内含两套语言环境，改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
-\begin{lstlisting}[frame=single]  
+\begin{lstlisting}
 \documentclass[cn]{elegantbook} 
 \documentclass[lang=cn]{elegantbook}
 \documentclass[en]{elegantbook} 
@@ -76,13 +77,13 @@
 
 \section{颜色主题}
 本模板内置 4 组颜色主题，分别为 \textcolor{main1}{\lstinline{green}}（默认）、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}、\textcolor{gray}{\lstinline{plain}}，另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
 \end{lstlisting}
 
 其中 \textcolor{gray}{plain} 主题为全灰色。如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 main、second、third 颜色，具体方法如下：
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \definecolor{main}{RGB}{70,70,70}    
 \definecolor{second}{RGB}{115,45,2}    
 \definecolor{third}{RGB}{0,80,80}   
@@ -107,7 +108,7 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
 \section{章标题显示风格}
 
 本模板内置 2 套\textit{章标题显示风格}，包含 \lstinline{hang}（默认）与 \lstinline{display} 两种风格，区别在于章标题单行显示（\lstinline{hang}）与双行显示（\lstinline{display}），本说明使用了 \lstinline{hang}。调用方式为
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \documentclass[hang]{elegantbook} %or
 \documentclass[titlestyle=hang]{elegantbook}
 \end{lstlisting}
@@ -130,17 +131,13 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
 
 \subsection{定理类环境的使用}
 由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \begin{theorem}{<theorem name>}{<label>}
 The content of theorem.
 \end{theorem}
 \end{lstlisting}
 
-第一个必选项 \lstinline{<theorem name>} 是定理的名字，第二个必选项 \lstinline{<label>} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。效果如下：
-
-\begin{theorem}{<theorem name>}{<label>}
-The content of theorem.
-\end{theorem}
+第一个必选项 \lstinline{<theorem name>} 是定理的名字，第二个必选项 \lstinline{<label>} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
 
 其他相同用法的定理类环境有：
 
@@ -164,7 +161,7 @@ The content of theorem.
 
 \subsection{其他数学环境的使用}
 其他三种数学环境因为没有选项，可以直接使用，比如 \lstinline{example} 环境的使用：
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \begin{example}
    This is the content of example environment.
 \end{example}
@@ -236,7 +233,7 @@ This is the content of example environment.
 \section{添加序章}
 
 如果你想在第一章前面添加序章，不改变原本章节序号，你可以在第一章内容前面使用 
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction} 
 \markboth{Introduction}{} 
@@ -255,6 +252,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \subsection{积分的定义}
 
 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
+
 
 \begin{definition}{可积性}{int}
 设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
@@ -303,7 +301,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \end{theorem}
 
 \begin{note}
-在本模板中，引理（lemma），推论（corollary ）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
+在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
 \end{note}
 
 我们说一个实变或者复变量的实值或者复值函数是在区间上平方可积的，如果其绝对值的平方在该区间上的积分是有限的。所有在勒贝格积分意义下平方可积的可测函数构成一个希尔伯特空间，也就是所谓的 $L^2$ 空间，几乎处处相等的函数归为同一等价类。形式上，$L^2$ 是平方可积函数的空间和几乎处处为 0 的函数空间的商空间。
@@ -354,7 +352,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 \chapter{最小示例}
 
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 \documentclass{elegantbook}
 % title info
 \title{Title}
