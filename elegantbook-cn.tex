@@ -1,4 +1,4 @@
-\documentclass[cn,simple,blue,11pt]{elegantbook}
+\documentclass[cn,fancy,blue,11pt]{elegantbook}
 
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
@@ -14,7 +14,7 @@
 \logo{logo.png}
 \cover{cover.jpg}
 
-\usepackage{gbt7714}
+\usepackage[authoryear]{gbt7714}
 
 \begin{document}
 \maketitle
@@ -26,33 +26,33 @@
 \hypersetup{pageanchor=true}
 
 \chapter{Elegant\LaTeX{} 系列模板介绍}
-
-
-
-值此版本发行之际，我们 Elegant\LaTeX{} 项目组向大家重新介绍一下我们的工作，我们致力于打造一系列美观、优雅、简便的模板方便用户使用。Elegant\LaTeX{} 系列模板目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。这些子项目的名词是一体的，请在使用这些名词的时候不要将其断开（如 Elegant Note 是不正确的写法）。并且，Elegant\LaTeX{}  Book 指的即是 ElegantBook。
-
-最新版本下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github:ElegantBook/releases}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您在使用此模板，欢迎把您使用此模板制作的成品发一份给我们，谢谢！如果您有其他问题，建议或者意见，欢迎联系我们。
+Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。Elegant\LaTeX{} 系列模板目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。如果你在使用本模板，推荐最新版本！最新正式版下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 Github 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件\footnote{\email{elegantlatex2e@gmail.com}.}联系我们。
 
 
 
 \section{ElegantBook 更新说明}
-在这几年间，我们收到了很多用户的反馈，主要的问题涉及到字体安装，编码支持，定理浮动，定理跨页，交叉引用等等。我们思前想后，原先让用户安装字体以追求视觉上的美观并不完美，用户陷入了巨大的麻烦，这违背了我们的模板初衷。因此我们在新版中删除了这部分，用户无需安装任何字体。让我们来看下此次 ElegantBook 模板 3.x 更新的主要内容有：
+在这几年间，我们收到了很多用户的反馈，主要的问题涉及到字体安装，编码支持，定理浮动，定理跨页，交叉引用等等。我们思前想后，原先让用户安装字体以追求视觉上的美观并不完美，用户陷入了巨大的麻烦，这违背了我们的模板初衷。因此我们在新版中删除了这部分，用户无需安装任何字体。ElegantBook 3.x 版本更新的主要内容有：
 
 \begin{enumerate}
-   \item 删除了自定义字体设置，改用 \lstinline{ctex} 宏包或者系统默认字体；
+   \item 删除了自定义字体设置，改用 \lstinline{ctex} 宏包支持中文；
    \item 模板拆分为中英文模式（\lstinline{lang=cn/en}）；
-   \item \lstinline{PDFLaTeX} 与 \lstinline{XeLaTeX} 支持；
+   \item 支持 \lstinline{PDFLaTeX} 与 \lstinline{XeLaTeX}；
    \item 使用 \lstinline{tcolorbox} 宏包改写定理类环境，可跨页；
    \item 定理类环境名字更新，修复定理环境交叉引用；
+   \item 更新颜色主题，增加灰色和黑色主题；
    \item 颜色名字更新，统一链接颜色；
    \item 重新绘制 Elegant\LaTeX{} 的 Logo；
    \item 更新封面与装饰物，删除水印；
    \item 修正附录相关内容；
-   \item 增加灰色主题 \lstinline{color=plain}；
    \item 增加代码高亮；
-   \item 美化列表环境。
+   \item 美化列表环境；
+   \item 增加简化模式；
+   \item 增加 base 隐藏选项。
 \end{enumerate}
 
+\begin{note}
+由于新版本进行了重构，3.x 版本并不兼容 2.x 版本，如果你想把 2.x 版本的文件转为 3.x 版本，请查看\href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{跨版本转换}。今后不再回答关于 2.x 版本的问题。
+\end{note}
 
 \chapter{ElegantBook 设置说明}
 
@@ -66,44 +66,71 @@
 \begin{lstlisting}
 \documentclass[cn]{elegantbook} 
 \documentclass[lang=cn]{elegantbook}
-\documentclass[en]{elegantbook} 
-\documentclass[lang=en]{elegantbook}
 \end{lstlisting}
 
 \begin{remark}
-不管选用中文环境（\lstinline{lang=cn}）还是英文环境（\lstinline{lang=en}）均可输入中文。另外如果在笔记中使用了抄录环境（\lstinline{lstlisting}），并且其中包括了中文，请务必使用 \lstinline{XeLaTeX} 编译。
+不管选用中文环境（\lstinline{lang=cn}）还是英文环境（\lstinline{lang=en}）均可输入中文。另外如果在笔记中使用了抄录环境（\lstinline{lstlisting}），并抄录代码中有中文，请务必使用 \lstinline{XeLaTeX} 编译。
 \end{remark}
 
 
 \section{颜色主题}
-本模板内置 4 组颜色主题，分别为 \textcolor{main1}{\lstinline{green}}（默认）、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}、\textcolor{gray}{\lstinline{plain}}，另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
+本模板内置 5 组颜色主题，分别为 \textcolor{main1}{\lstinline{green}}\footnote{为原先默认主题}、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}（默认）、\textcolor{main4}{\lstinline{gray}}、\textcolor{main5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
 \end{lstlisting}
 
-其中 \textcolor{gray}{plain} 主题为全灰色。如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 main、second、third 颜色，具体方法如下：
+\begin{table}[htbp]
+\caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
+\centering
+\begin{tabular}{ccccccc}
+\toprule
+	        & \textcolor{main1}{green} 
+	        & \textcolor{main2}{cyan} 
+	        & \textcolor{main3}{blue}
+	        & \textcolor{main4}{gray} 
+	        & \textcolor{main5}{black} 
+	        & 主要使用的环境\\
+\midrule
+structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{structure2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
+				& \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
+				& \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
+				& chapter \ section \ subsection \\
+
+main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
+				& definition \ exercise \ problem \ solution \\
+
+second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second3}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second4}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second5}\rule{1cm}{1cm}}}
+				& theorem \ lemma \ corollary\\
+
+third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third3}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third4}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third5}\rule{1cm}{1cm}}}
+				& proposition\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structure、main、second、third 颜色，具体方法如下：
 \begin{lstlisting}
+\definecolor{structurecolor}{RGB}{0,0,0}
 \definecolor{main}{RGB}{70,70,70}    
 \definecolor{second}{RGB}{115,45,2}    
 \definecolor{third}{RGB}{0,80,80}   
 \end{lstlisting}
 
-\begin{table}[htp]
-\caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
-\centering
-\begin{tabular}{ccccc}
-\toprule
-	  & \textcolor{main1}{green} & \textcolor{main2}{cyan} & \textcolor{main3}{blue} & 主要使用的环境\\
-\midrule
-main & \makecell{{\color{main1}\rule{1cm}{1cm}}}& \makecell{{\color{main2}\rule{1cm}{1cm}}}&\makecell{ {\color{main3}\rule{1cm}{1cm}}}& definition \\
-
-second &\makecell{ {\color{second1}\rule{1cm}{1cm}}}& \makecell{{\color{second2}\rule{1cm}{1cm}}}&\makecell{ {\color{second3}\rule{1cm}{1cm}}}&theorem \ lemma \ corollary\\
-
-third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\rule{1cm}{1cm}}}&\makecell{ {\color{third3}\rule{1cm}{1cm}}}&proposition\\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \section{章标题显示风格}
 
@@ -115,7 +142,13 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
 
 \section{数学环境简介}
 
-在我们这个模板中，定义了四大类环境
+在我们这个模板中，我们定义了两种不同的定理模式 \lstinline{mode}，包括简单模式（\lstinline{simple}）和炫彩模式（\lstinline{fancy}），默认为 \lstinline{fancy} 模式，不同模式的选择为
+\begin{lstlisting}
+\documentclass[simple]{elegantbook} %or
+\documentclass[mode=simple]{elegantbook}
+\end{lstlisting}
+
+本模板定义了四大类环境
 
 \begin{itemize}
 \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
@@ -126,7 +159,7 @@ third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\ru
    \end{itemize}
 \item \textit{示例类环境}，有 \textbf{example、exercise、problem} 环境（对应于例，练习，例题），自动编号，编号以章节为单位。
 \item \textit{证明类环境}，有 \textbf{proof、note} 环境，特点是，有引导符或者结尾符，\textbf{note} 环境有引导符号，\textbf{proof} 环境有证明完毕符号。
-\item \textit{结论类环境}，有 \textbf{conclusion、assumption、property，remark、solution} 环境，三者均以粗体的引导词为开头，和普通段落格式一致。
+\item \textit{结论类环境}，有 \textbf{conclusion、assumption、property，remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
 \end{itemize}
 
 \subsection{定理类环境的使用}
@@ -159,21 +192,17 @@ The content of theorem.
  \end{table}%
  
 
-\subsection{其他数学环境的使用}
-其他三种数学环境因为没有选项，可以直接使用，比如 \lstinline{example} 环境的使用：
+\subsection{其他环境的使用}
+其他三种环境没有选项，可以直接使用，比如 \lstinline{example} 环境的使用方法与效果：
 \begin{lstlisting}
 \begin{example}
    This is the content of example environment.
 \end{example}
 \end{lstlisting}
 
-效果如下：
-
 \begin{example}
 This is the content of example environment.
 \end{example}
-
-
 
 这几个都是同一类环境，区别在于
 
@@ -183,6 +212,13 @@ This is the content of example environment.
    \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
 \end{itemize}
 
+\section{装饰物}
+
+本模板为章节后的装饰物（base）添加了隐藏选项，有 \lstinline{show}和 \lstinline{hide} 两个选项。
+\begin{lstlisting}
+\documentclass[hide]{elegantbook} %or
+\documentclass[base=hide]{elegantbook}
+\end{lstlisting}
 
 \section{封面和徽标}
 
@@ -223,16 +259,17 @@ This is the content of example environment.
 
 \section{参考文献}
 
-此模板使用了 \BibTeX{} 来生成参考文献，默认使用的文献样式（bib style）是 \lstinline{aer}。参考文献示例：~\cite{Chen2018} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+此模板使用了 \BibTeX{} 来生成参考文献，在中文示例中，使用了 \lstinline{gbt7714} 宏包。参考文献示例：~\cite{en1} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
 
 你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \BibTeX{} 编译。如果你想在参考文献中添加未引用的文献，可以使用
 \begin{lstlisting}[frame=single]
-\nocite{EINAV2010,Havrylchyk2018} 
+\nocite{EINAV2010,Havrylchyk2018} %or include some bibitems
+\nocite{*} %include all the bibitems
 \end{lstlisting}
 
 \section{添加序章}
 
-如果你想在第一章前面添加序章，不改变原本章节序号，你可以在第一章内容前面使用 
+如果你想在第一章前面添序章，不改变原本章节序号，你可以在第一章内容前面使用 
 \begin{lstlisting}
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction} 
@@ -332,7 +369,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
 \end{conclusion}
 
-\nocite{EINAV2010,Havrylchyk2018} 
+\nocite{*} 
 
 \bibliography{reference}
 
@@ -353,7 +390,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \chapter{最小示例}
 
 \begin{lstlisting}
-\documentclass{elegantbook}
+\documentclass[lang=cn,11pt]{elegantbook}
 % title info
 \title{Title}
 \subtitle{Subtitle is here}
