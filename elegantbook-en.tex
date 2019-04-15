@@ -28,25 +28,27 @@
 
 On the occasion of this release, we, Elegant\LaTeX{} Program, want to reintroduce our work to you. We are committed to creating a series of beautiful, elegant, easy to use \LaTeX{} templates for users. The Elegant\LaTeX{} is currently composed of \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}, \href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}, \href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} for typesetting notes, books, and working papers respectively. 
 
-The latest version is available on \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github:ElegantBook/releases}. This guide describes some settings of this template and how to use it. If you have any other questions, suggestions or comments, please feel free to contact us.
+The latest version is available on \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github}. This guide describes some settings of this template and how to use it. If you have any other questions, suggestions or comments, please feel free to contact us, our email is \email{elegantlatex2e@gmail.com}.
 
 
 \section{ElegantBook Updates}
-Over these years, we've received \cite{EINAV2010} a lot of feedback from users, with major issues related to font installation, coding support, theorem class environments floats, theorem cross-page, cross-references, and etc. We really think about these problems, it wasn't elegant to let the user install the font for visual beauty since users got into a lot of trouble, which went against the concept of our template. So we've removed that from the new version, users don't have to install any fonts. Let's take a look at the ElegantBook template 3.x updates:
+Over these years, we've received a lot of feedbacks from users, with major issues related to font installation, coding support, theorem class environments floats, theorem cross-page, cross-references, and etc. We really think about these problems, it wasn't elegant to let the user install the font for visual beauty since users got into a lot of trouble, which went against the concept of our template. So we've removed that from the new version, users don't have to install any fonts. Let's take a look at the ElegantBook template 3.x updates:
 
 \begin{enumerate}
-   \item Remove custom font settings and use the \lstinline{ctex} package or system font instead;
-   \item Add English and Chinese modes（\lstinline{lang=cn/en});
-   \item \lstinline{PDFLaTeX} and \lstinline{XeLaTeX} Support;
-   \item Use the \lstinline{tcolorbox} package to re-written the theorem class environments, which can span over pages;
+   \item Remove custom font settings;
+   \item Add English and Chinese modes;
+   \item \lstinline{PDFLaTeX} and \lstinline{XeLaTeX} support;
+   \item Use the \lstinline{tcolorbox} package to re-written the theorem class environments;
    \item Theorem class environments name updated, and cross-references fixed;
+   \item renew color themes and add gray and black theme;
    \item Color name updated, link color unified;
    \item New Elegant\LaTeX{} Logo;
    \item New cover and decorations, remove the watermark;
    \item Fix appendix;
-   \item Add gray theme: \lstinline{color=plain};
    \item Add code highlighting;
-   \item Beautify the list environment.
+   \item Beautify the list environments;
+   \item Add simple theorem mode;
+   \item Add base hide option.
 \end{enumerate}
 
 
@@ -59,48 +61,76 @@ This template is based on the Standard LaTeX book class,  so the options of book
 
 \section{Languages}
 
-We defined one option named \lstinline{lang}, this option has two alternative values, \lstinline{lang=en} (default) or \lstinline{lang=cn}. \lstinline{lang=cn} will make the caption of figure/table, abstract name, refname etc. Chinese, while \lstinline{lang=en} will keep all these stuff English, as the default article class sets. You can use this option as
+We defined one option named \lstinline{lang}, this option has two alternative values, \lstinline{lang=en} (default) or \lstinline{lang=cn}. \lstinline{lang=cn} will make the captions of figure/table, abstract name, refname etc. Chinese. You can use this option as
 \begin{lstlisting}
-\documentclass[cn]{elegantbook} 
-\documentclass[lang=cn]{elegantbook}
 \documentclass[en]{elegantbook} 
 \documentclass[lang=en]{elegantbook}
 \end{lstlisting}
 
 \begin{remark}
-You can input Chinese Character in either \lstinline{lang=en} or \lstinline{lang=cn}. If you are using (\lstinline{lstlisting}) environment, and it contains Chinese characters, please use \lstinline{XeLaTeX}.
+You can input Chinese Characters in either \lstinline{lang=en} or \lstinline{lang=cn}. If you are using (\lstinline{lstlisting}) environment, and it contains Chinese characters, please use \lstinline{XeLaTeX}.
 \end{remark}
 
 
 \section{Color Themes}
-This template contains 4 color themes,they are \textcolor{main1}{\lstinline{green}} (default), \textcolor{main2}{\lstinline{cyan}}, \textcolor{main3}{\lstinline{blue}}, \textcolor{gray}{\lstinline{plain}}, and there is a customization color option  \lstinline{nocolor}. You can choose \lstinline{green} with  
+This template contains 5 color themes,they are  \textcolor{main1}{\lstinline{green}}\footnote{original default theme.}、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}（default）、\textcolor{main4}{\lstinline{gray}}、\textcolor{main5}{\lstinline{black}}. You can choose \lstinline{green} with  
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
 \end{lstlisting}
 
-where \textcolor{gray}{plain} theme is gray for all theorem class environments and paper structures. If you want to customize the colors, please select \lstinline{nocolor} or use \lstinline{color=none} , then define the main, second, and third colors in the preamble section as follows:
-\begin{lstlisting}[frame=single]
-\definecolor{main}{RGB}{70,70,70}    
-\definecolor{second}{RGB}{115,45,2}    
-\definecolor{third}{RGB}{0,80,80}   
-\end{lstlisting}
 
-\begin{table}[htp]
-\caption{ElegantBook Themes\label{tab:color thm}}
+\begin{table}[htbp]
+\caption{ElegantBook Themes\label{tab:color thm}\label{tab:color thm}}
 \centering
-\begin{tabular}{ccccc}
+\begin{tabular}{ccccccc}
 \toprule
-	  & \textcolor{main1}{green} & \textcolor{main2}{cyan} & \textcolor{main3}{blue} & Main Environments\\
+	        & \textcolor{main1}{green} 
+	        & \textcolor{main2}{cyan} 
+	        & \textcolor{main3}{blue}
+	        & \textcolor{main4}{gray} 
+	        & \textcolor{main5}{black} 
+	        & Main Environments\\
 \midrule
-main & \makecell{{\color{main1}\rule{1cm}{1cm}}}& \makecell{{\color{main2}\rule{1cm}{1cm}}}&\makecell{ {\color{main3}\rule{1cm}{1cm}}}& definition \\
+structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{structure2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
+				& \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
+				& \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
+				& chapter \ section \ subsection \\
 
-second &\makecell{ {\color{second1}\rule{1cm}{1cm}}}& \makecell{{\color{second2}\rule{1cm}{1cm}}}&\makecell{ {\color{second3}\rule{1cm}{1cm}}}&theorem \ lemma \ corollary\\
+main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
+				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
+				& definition \ exercise \ problem \ solution \\
 
-third &\makecell{ {\color{third1}\rule{1cm}{1cm}}}& \makecell{{\color{third2}\rule{1cm}{1cm}}}&\makecell{ {\color{third3}\rule{1cm}{1cm}}}&proposition\\
+second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second3}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second4}\rule{1cm}{1cm}}}
+				& \makecell{{\color{second5}\rule{1cm}{1cm}}}
+				& theorem \ lemma \ corollary\\
+
+third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third2}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third3}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third4}\rule{1cm}{1cm}}}
+				& \makecell{{\color{third5}\rule{1cm}{1cm}}}
+				& proposition\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+If you want to customize the colors, please select \lstinline{nocolor} or use \lstinline{color=none} , then define the main, second, and third colors in the preamble section as follows:
+\begin{lstlisting}[frame=single]
+\definecolor{structurecolor}{RGB}{60,113,183}
+\definecolor{main}{RGB}{0,166,82}%
+\definecolor{second}{RGB}{255,134,24}%
+\definecolor{third}{RGB}{0,174,247}% 
+\end{lstlisting}
+
 
 \section{Chapter Title Display Styles}
 
@@ -113,6 +143,11 @@ The difference is that the chapter heading is displayed on a single line (\lstin
 \end{lstlisting}
 
 \section{Theorem Class Environments}
+We defined two sets of theorem modes, \lstinline{simple} style and \lstinline{fancy} style (default), you can change to \lstinline{simple} mode by 
+\begin{lstlisting}
+\documentclass[simple]{elegantbook} %or
+\documentclass[mode=simple]{elegantbook}
+\end{lstlisting}
 
 In this template, we defined four categories of theorem class environments
 
@@ -125,7 +160,7 @@ In this template, we defined four categories of theorem class environments
    \end{itemize}
 \item \textit{Example Environments}, including \textbf{example, exercise, problem} environment, auto numering within chapter.
 \item \textit{Proof Environment}, including \textbf{proof, note} environment, they contain introductory symbol (\textbf{note} environment) or ending symbol (\textbf{proof} environment).
-\item \textit{Conclusion Environments}, including \textbf{conclusion, assumption, property, remark, solution} environment, all of these begin with boldfaced words, and the contents are the same as a normal paragraph.
+\item \textit{Conclusion Environments}, including \textbf{conclusion, assumption, property, remark, solution}\footnote{We also define and key \lstinline{result}, which can hide the \lstinline{solution} and \lstinline{proof} environments. You can switch by \lstinline{result=answer} or \lstinline{result=noanswer}} environment, all of these begin with boldfaced words, and the contents are the same as a normal paragraph.
 \end{itemize}
 
 \subsection{Theorem Class Environments}
@@ -136,11 +171,7 @@ The content of theorem.
 \end{theorem}
 \end{lstlisting}
 
-The first parameter \lstinline{<theorem name>} is the name of the theorem, and the second parameter \lstinline{label} is the label used in cross-reference with \verb|ref{thm:label}|. Note that cross-references must be prefixed with \lstinline{thm:}. The effect is as follows:
-
-\begin{theorem}{<theorem name>}{<label>}
-The content of theorem.
-\end{theorem}
+The first parameter \lstinline{<theorem name>} is the name of the theorem, and the second parameter \lstinline{label} is the label used in cross-reference with \verb|ref{thm:label}|. Note that cross-references must be prefixed with \lstinline{thm:}. 
 
 Other theorem class environments with the same usage are:
 
@@ -184,6 +215,13 @@ These are all the same environments, except that
    \item conclusion environment with boldfaced keywords and normal paragraph content.
 \end{itemize}
 
+\section{Base Hide Option}
+We defined an option to hide the base below the chapter, you can use it by
+\begin{lstlisting}
+\documentclass[hide]{elegantbook} %or
+\documentclass[base=hide]{elegantbook}
+\end{lstlisting}
+
 
 \section{Cover and Logo}
 
@@ -224,7 +262,7 @@ This template uses \lstinline{tikz} to customize \lstinline{itemize} and \lstinl
 
 \section{Bibliography}
 
-This template uses \BibTeX{} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect, ~\cite{Chen2018} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
+This template uses \BibTeX{} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect, ~\cite{en1} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
 
 If you want to use \BibTeX{}, you must create a file named \lstinline{reference.bib}, and add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, and cite the bibkey in the \lstinline{tex} file. The Bib\TeX{} will automatically generate the bibliography for you for the reference you cited. If you want to add some noncited reference to the bibliography, you can use 
 \begin{lstlisting}
@@ -261,10 +299,6 @@ Note that a subgroup~$H$ of a group $G$ is itself a left coset of $H$ in $G$.
 
 \begin{theorem}{Lagrange's Theorem}{}
 Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of $H$ divides the order of $G$.
-\begin{enumerate}
-\item fwfew
-\item fwefw
-\end{enumerate}
 \end{theorem}
 
 \lipsum[3]
@@ -324,7 +358,7 @@ Let's continue using our application training example. In this case, we'd want t
 \end{itemize}
 
 
-\nocite{Havrylchyk2018} 
+\nocite{en1,en2,en3} 
 
 \bibliography{reference}
 

@@ -145,18 +145,30 @@
 }{\relax}
 
 %green color
-\definecolor{main1}{RGB}{0,120,2}
-\definecolor{second1}{RGB}{230,90,7}
-\definecolor{third1}{RGB}{0,160,152}
+	\definecolor{structure1}{RGB}{0,120,2}%
+	\definecolor{main1}{RGB}{0,120,2}%
+	\definecolor{second1}{RGB}{230,90,7}%
+	\definecolor{third1}{RGB}{0,160,152}%
 %cyan color
-\definecolor{main2}{RGB}{0,175,152}
-\definecolor{second2}{RGB}{239,126,30}
-\definecolor{third2}{RGB}{120,8,13}
+	\definecolor{structure2}{RGB}{31,186,190}%
+	\definecolor{main2}{RGB}{59,180,5}%
+	\definecolor{second2}{RGB}{175,153,8}%
+	\definecolor{third2}{RGB}{244,105,102}%
 %blue color
-\definecolor{main3}{RGB}{20,50,104}
-\definecolor{second3}{RGB}{180,50,131}
-\definecolor{third3}{RGB}{7,127,128}
-
+	\definecolor{structure3}{RGB}{60,113,183}
+	\definecolor{main3}{RGB}{0,166,82}%
+	\definecolor{second3}{RGB}{255,134,24}%
+	\definecolor{third3}{RGB}{0,174,247}%
+% gray color
+	\definecolor{structure4}{RGB}{0,0,0}
+	\definecolor{main4}{RGB}{150,150,150}%
+	\definecolor{second4}{RGB}{150,150,150}%
+	\definecolor{third4}{RGB}{150,150,150}%
+% black color
+	\definecolor{structure5}{RGB}{0,0,0}
+	\definecolor{main5}{RGB}{0,0,0}%
+	\definecolor{second5}{RGB}{0,0,0}%
+	\definecolor{third5}{RGB}{0,0,0}%
 
 % corlor definition
 \definecolor{winered}{rgb}{0.5,0,0}
@@ -288,7 +300,8 @@
 	pdfborder={0 0 0},
 	linktocpage
 }
-
+\let\email\relax
+\newcommand\email[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
@@ -391,7 +404,7 @@
 \let\proof\relax
 \let\endproof\relax
 % declare a new theorem style
-\newtheoremstyle{ethmstyle}%
+\newtheoremstyle{edefstyle}%
 {3pt}% Space above
 {3pt}% Space below 
 {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
@@ -400,12 +413,36 @@
 {.}% Punctuation after theorem head
 {.5em}% Space after theorem head 
 {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
-\theoremstyle{ethmstyle}
+% -------------------------------------------------%
+\newtheoremstyle{ethmstyle}%
+{3pt}% Space above
+{3pt}% Space below 
+{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+{}% Indent amount
+{\bfseries\color{second}}% Theorem head font
+{.}% Punctuation after theorem head
+{.5em}% Space after theorem head 
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+% -------------------------------------------------%
+\newtheoremstyle{eprostyle}%
+{3pt}% Space above
+{3pt}% Space below 
+{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+{}% Indent amount
+{\bfseries\color{third}}% Theorem head font
+{.}% Punctuation after theorem head
+{.5em}% Space after theorem head 
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 
-\newtheorem{etheorem}{\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}}[chapter]
+\theoremstyle{edefstyle}
 \newtheorem{edefinition}{\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}}[chapter]
+
+\theoremstyle{ethmstyle}
+\newtheorem{etheorem}{\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}}[chapter]
 \newtheorem{elemma}{\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}}[chapter]
 \newtheorem{ecorollary}{\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}}[chapter]
+
+\theoremstyle{eprostyle}
 \newtheorem{eproposition}{\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}}[chapter]
 
 \newenvironment{theorem}[2]
