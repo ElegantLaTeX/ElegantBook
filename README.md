@@ -14,7 +14,7 @@ ElegantBook is designed for books. Just enjoy it! If you have any questions, sug
 
 如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。最近我们新建了一个 QQ 用户交流群（Q 群：692108391），欢迎加入。
 
-**注意：** 由于新版本进行了重构，3.x 版本并不兼容 2.x 版本，如果你想把 2.x 版本的文件转为 3.x 版本，请查看[跨版本转换](https://github.com/ElegantLaTeX/ElegantBook/wiki/%E8%BD%AC%E6%8D%A2)。
+**注意：** 由于新版本进行了重构，3.x 版本并不兼容 2.x 版本，如果你想把 2.x 版本的文件转为 3.x 版本，请查看[跨版本转换](https://github.com/ElegantLaTeX/ElegantBook/wiki/convert)。
 
 # License
 
