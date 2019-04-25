@@ -73,7 +73,7 @@ You can input Chinese Characters in either \lstinline{lang=en} or \lstinline{lan
 
 
 \section{Color Themes}
-This template contains 5 color themes,they are  \textcolor{main1}{\lstinline{green}}\footnote{original default theme.}、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}（default）、\textcolor{main4}{\lstinline{gray}}、\textcolor{main5}{\lstinline{black}}. You can choose \lstinline{green} with  
+This template contains 5 color themes,they are  \textcolor{main1}{\lstinline{green}}\footnote{original default theme.}, \textcolor{main2}{\lstinline{cyan}}, \textcolor{main3}{\lstinline{blue}}(default), \textcolor{main4}{\lstinline{gray}}, \textcolor{main5}{\lstinline{black}}. You can choose \lstinline{green} with  
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
@@ -81,7 +81,7 @@ This template contains 5 color themes,they are  \textcolor{main1}{\lstinline{gre
 
 
 \begin{table}[htbp]
-\caption{ElegantBook Themes\label{tab:color thm}\label{tab:color thm}}
+\caption{ElegantBook Themes\label{tab:color thm}}
 \centering
 \begin{tabular}{ccccccc}
 \toprule
@@ -97,22 +97,19 @@ structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
 				& \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
 				& \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
 				& \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
-				& chapter \ section \ subsection \\
-
+				& chapter  section  subsection \\
 main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
 				& \makecell{{\color{main2}\rule{1cm}{1cm}}}
 				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
 				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
 				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
-				& definition \ exercise \ problem \ solution \\
-
+				& definition  exercise  problem  \\
 second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
 				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
 				& \makecell{{\color{second3}\rule{1cm}{1cm}}}
 				& \makecell{{\color{second4}\rule{1cm}{1cm}}}
 				& \makecell{{\color{second5}\rule{1cm}{1cm}}}
-				& theorem \ lemma \ corollary\\
-
+				& theorem  lemma  corollary\\
 third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
 				& \makecell{{\color{third2}\rule{1cm}{1cm}}}
 				& \makecell{{\color{third3}\rule{1cm}{1cm}}}
@@ -262,9 +259,9 @@ This template uses \lstinline{tikz} to customize \lstinline{itemize} and \lstinl
 
 \section{Bibliography}
 
-This template uses \BibTeX{} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect, ~\cite{en1} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
+This template uses \hologo{BibTeX} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect, ~\cite{en1} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
 
-If you want to use \BibTeX{}, you must create a file named \lstinline{reference.bib}, and add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, and cite the bibkey in the \lstinline{tex} file. The Bib\TeX{} will automatically generate the bibliography for you for the reference you cited. If you want to add some noncited reference to the bibliography, you can use 
+If you want to use \hologo{BibTeX}, you must create a file named \lstinline{reference.bib}, and add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, and cite the bibkey in the \lstinline{tex} file. The Bib\TeX{} will automatically generate the bibliography for you for the reference you cited. If you want to add some noncited reference to the bibliography, you can use 
 \begin{lstlisting}
 \nocite{EINAV2010, Havrylchyk2018} 
 \end{lstlisting}
@@ -359,7 +356,6 @@ Let's continue using our application training example. In this case, we'd want t
 
 
 \nocite{en1,en2,en3} 
-
 \bibliography{reference}
 
 \appendix
@@ -369,7 +365,7 @@ This appendix covers some of the basic mathematics used in econometrics. We brie
 
 \section{Summation Operator and Description Statistics}
 
-\textbf{Summation Operator} is an abbreviation used to express the summation of numbers, it plays an important role in statistics and econometrics analysis. If $\{x_i: i=1, 2, \ldots, n\}$ is a sequence of $n$ numbers, the summation of the $n$ numbers is：
+\textbf{Summation Operator} is an abbreviation used to express the summation of numbers, it plays an important role in statistics and econometrics analysis. If $\{x_i: i=1, 2, \ldots, n\}$ is a sequence of $n$ numbers, the summation of the $n$ numbers is:
 
 \begin{equation}
 \sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
@@ -406,5 +402,5 @@ The content of chapter one.
 \end{document}
 \end{lstlisting}
 
-\bibliographystyle{aer}
+
 \end{document}
