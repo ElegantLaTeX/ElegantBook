@@ -1,4 +1,4 @@
-\documentclass[cn,fancy,blue,11pt]{elegantbook}
+\documentclass[cn,11pt,fancy]{elegantbook}
 
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
@@ -14,7 +14,7 @@
 \logo{logo.png}
 \cover{cover.jpg}
 
-\usepackage[authoryear]{gbt7714}
+
 
 \begin{document}
 \maketitle
@@ -26,9 +26,7 @@
 \hypersetup{pageanchor=true}
 
 \chapter{Elegant\LaTeX{} 系列模板介绍}
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。Elegant\LaTeX{} 系列模板目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。如果你在使用本模板，推荐最新版本！最新正式版下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 Github 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件\footnote{\email{elegantlatex2e@gmail.com}.}联系我们。
-
-
+Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。如果你在使用本模板，推荐最新版本！最新正式版下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Github}。本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 Github 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件\footnote{\email{elegantlatex2e@gmail.com}.}联系我们。最近我们新建了一个 QQ 用户交流群（Q 群：692108391），欢迎加入。
 
 \section{ElegantBook 更新说明}
 在这几年间，我们收到了很多用户的反馈，主要的问题涉及到字体安装，编码支持，定理浮动，定理跨页，交叉引用等等。我们思前想后，原先让用户安装字体以追求视觉上的美观并不完美，用户陷入了巨大的麻烦，这违背了我们的模板初衷。因此我们在新版中删除了这部分，用户无需安装任何字体。ElegantBook 3.x 版本更新的主要内容有：
@@ -73,6 +71,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \end{remark}
 
 
+
 \section{颜色主题}
 本模板内置 5 组颜色主题，分别为 \textcolor{main1}{\lstinline{green}}\footnote{为原先默认主题}、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}（默认）、\textcolor{main4}{\lstinline{gray}}、\textcolor{main5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
 \begin{lstlisting}
@@ -85,11 +84,11 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \centering
 \begin{tabular}{ccccccc}
 \toprule
-	        & \textcolor{main1}{green} 
-	        & \textcolor{main2}{cyan} 
-	        & \textcolor{main3}{blue}
-	        & \textcolor{main4}{gray} 
-	        & \textcolor{main5}{black} 
+	        & \textcolor{structure1}{green} 
+	        & \textcolor{structure2}{cyan} 
+	        & \textcolor{structure3}{blue}
+	        & \textcolor{structure4}{gray} 
+	        & \textcolor{structure5}{black} 
 	        & 主要使用的环境\\
 \midrule
 structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
@@ -104,7 +103,7 @@ main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
 				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
 				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
 				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
-				& definition \ exercise \ problem \ solution \\
+				& definition \ exercise \ problem \\
 
 second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
 				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
@@ -204,6 +203,7 @@ The content of theorem.
 This is the content of example environment.
 \end{example}
 
+
 这几个都是同一类环境，区别在于
 
 \begin{itemize}
@@ -259,9 +259,9 @@ This is the content of example environment.
 
 \section{参考文献}
 
-此模板使用了 \BibTeX{} 来生成参考文献，在中文示例中，使用了 \lstinline{gbt7714} 宏包。参考文献示例：~\cite{en1} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+此模板使用了 \hologo{BibTeX} 来生成参考文献，在中文示例中，使用了 \lstinline{gbt7714} 宏包。参考文献示例：~\cite{en1} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
 
-你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \BibTeX{} 编译。如果你想在参考文献中添加未引用的文献，可以使用
+你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \hologo{BibTeX} 编译。如果你想添加未引用的文献，可以使用
 \begin{lstlisting}[frame=single]
 \nocite{EINAV2010,Havrylchyk2018} %or include some bibitems
 \nocite{*} %include all the bibitems
@@ -269,7 +269,7 @@ This is the content of example environment.
 
 \section{添加序章}
 
-如果你想在第一章前面添序章，不改变原本章节序号，你可以在第一章内容前面使用 
+如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用 
 \begin{lstlisting}
 \chapter*{Introduction}
 \addcontentsline{toc}{chapter}{Introduction} 
@@ -369,6 +369,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
 \end{conclusion}
 
+
 \nocite{*} 
 
 \bibliography{reference}
@@ -418,5 +419,6 @@ The content of chapter one.
 
 \end{document}
 \end{lstlisting}
+
 
 \end{document}
