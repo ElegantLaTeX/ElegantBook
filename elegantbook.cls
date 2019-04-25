@@ -252,6 +252,7 @@
   % \bibliographystyle{aer}
   
   % meta info prefix
+  \newcommand*\@format@metaInfo{\kaishu}
   \newcommand*\@pre@author    {作者：}
   \newcommand*\@pre@institute {机构：}
   \newcommand*\@pre@date      {日期：}
@@ -265,10 +266,11 @@
   \bibliographystyle{aer}
   
   % meta info prefix
-  \newcommand*\@pre@author    {Author:}
-  \newcommand*\@pre@institute {Institute:}
-  \newcommand*\@pre@date      {Date:}
-  \newcommand*\@pre@version   {Version:}
+  \newcommand*\@format@metaInfo{\bfseries}
+  \newcommand*\@pre@author    {Author: }
+  \newcommand*\@pre@institute {Institute: }
+  \newcommand*\@pre@date      {Date: }
+  \newcommand*\@pre@version   {Version: }
 }{\relax}
 
 
@@ -609,9 +611,8 @@
   \ifcsvoid{@#1}
     {}
     {
-      \bfseries\kaishu
+      \@format@metaInfo
       \csname @pre@#1\endcsname
-      {\space}  % force sep space
       \csname @#1\endcsname \\
     }
 }
