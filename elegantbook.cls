@@ -4,12 +4,11 @@
 %%
 %% This work may be distributed and/or modified freely
 %% available at https://github.com/ElegantLaTeX/ElegantBook
-% %
-%% Last Modification 2019-04-12
+% 
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2019/04/03 v3.07 ElegantBook document class]
+\ProvidesClass{elegantbook}[2019/04/25 v3.07 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -65,7 +64,9 @@
 % fontsetting
 
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage[UTF8, scheme=plain,punct=kaiming]{ctex}
+\ifdefstring{\ELEGANT@lang}{cn}{
+\RequirePackage[UTF8, scheme=plain]{ctex}
+}
 
 \RequirePackage{ifxetex}
 
@@ -201,6 +202,11 @@
 \newtoks\email
 \newtoks\subtitle
 
+\RequirePackage{natbib}
+\setlength{\bibsep}{0.0pt}
+\def\bibfont{\footnotesize}
+
+
 
 \RequirePackage{enumerate}
 % list/itemize/enumerate setting
@@ -223,28 +229,16 @@
 \RequirePackage{multicol}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
-\RequirePackage{makecell,lipsum,bxtexlogo,setspace}
+\RequirePackage{makecell,lipsum,hologo,setspace}
 
 
 %%中文结构名字
-\ifdefstring{\ELEGANT@lang}{en}{
-  \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
-  \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
-  \renewcommand{\chaptername}{Chapter \thechapter}
-  
-  % meta info prefix
-  \newcommand*\@pre@author    {Author:}
-  \newcommand*\@pre@institute {Institute:}
-  \newcommand*\@pre@date      {Date:}
-  \newcommand*\@pre@version   {Version:}
-}{\relax}
-
 \ifdefstring{\ELEGANT@lang}{cn}{
   \renewcommand{\contentsname}{目\hspace{2em}录}
   \renewcommand{\figurename}{图}
   \renewcommand{\tablename}{表}
-  \renewcommand{\partname}{第 \thepart{} 部分}
-  \renewcommand{\chaptername}{第 \thechapter{} 章}
+  \renewcommand{\partname}{第 \thepart\; 部分}
+  \renewcommand{\chaptername}{第 \thechapter\;章}
   \renewcommand{\listfigurename}{插图目录}
   \renewcommand{\listtablename}{表格目录}
   \renewcommand{\bibname}{参考文献}
@@ -253,6 +247,9 @@
   
   \newcommand\figref[1]{\textbf{\figurename}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{\tablename}~\ref{#1}}
+
+  \RequirePackage[authoryear]{gbt7714}
+  % \bibliographystyle{aer}
   
   % meta info prefix
   \newcommand*\@pre@author    {作者：}
@@ -260,7 +257,19 @@
   \newcommand*\@pre@date      {日期：}
   \newcommand*\@pre@version   {版本：}
 }{\relax}
-
+\ifdefstring{\ELEGANT@lang}{en}{
+  \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
+  \renewcommand{\chaptername}{Chapter \thechapter}
+  
+  \bibliographystyle{aer}
+  
+  % meta info prefix
+  \newcommand*\@pre@author    {Author:}
+  \newcommand*\@pre@institute {Institute:}
+  \newcommand*\@pre@date      {Date:}
+  \newcommand*\@pre@version   {Version:}
+}{\relax}
 
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
@@ -279,10 +288,6 @@
 \setlist[itemize,1]{label={\eitemi}}
 \setlist[itemize,2]{label={\eitemii}}
 \setlist[itemize,3]{label={\eitemiii}}
-
-\RequirePackage{natbib}
-\setlength{\bibsep}{0.0pt}
-\def\bibfont{\footnotesize}
 
 
 %% device settings
@@ -426,9 +431,9 @@
 {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
 {}% Indent amount
 {\bfseries\color{main}}% Theorem head font
-{.}% Punctuation after theorem head
-{.5em}% Space after theorem head 
-{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+{}% Punctuation after theorem head
+{0.5em}% Space after theorem head 
+{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 % -------------------------------------------------%
 \newtheoremstyle{ethmstyle}%
 {3pt}% Space above
@@ -436,9 +441,9 @@
 {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
 {}% Indent amount
 {\bfseries\color{second}}% Theorem head font
-{.}% Punctuation after theorem head
+{}% Punctuation after theorem head
 {.5em}% Space after theorem head 
-{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 % -------------------------------------------------%
 \newtheoremstyle{eprostyle}%
 {3pt}% Space above
@@ -446,9 +451,9 @@
 {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
 {}% Indent amount
 {\bfseries\color{third}}% Theorem head font
-{.}% Punctuation after theorem head
+{}% Punctuation after theorem head
 {.5em}% Space after theorem head 
-{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 
 \theoremstyle{edefstyle}
 \newtheorem{edefinition}{\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}}[chapter]
@@ -493,7 +498,7 @@
 \newenvironment{example}[1][]{
  		\refstepcounter{exam}\par\noindent\textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Example}{例}
- 		}~\theexam #1: }\rmfamily %
+ 		}\theexam #1 }\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -505,7 +510,7 @@
 \newenvironment{exercise}[1][]{
  		\refstepcounter{exer}\par\noindent\makebox[-3pt][r]{\scriptsize\color{red!90}\HandPencilLeft\quad}\textbf{\color{main}{
  			\ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
- 		}~\theexer #1: }\rmfamily %
+ 		}\theexer #1 }\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -517,7 +522,7 @@
 \newenvironment{problem}[1][]{
  		\refstepcounter{prob}\par\noindent\textbf{\color{main}{%
  			\ifdefstring{\ELEGANT@lang}{en}{Problem}{例题}
- 		}~\theprob #1: }\rmfamily %
+ 		}\theprob #1 }\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -525,31 +530,31 @@
 
 
 \newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Note:}{注意：}
+	\ifdefstring{\ELEGANT@lang}{en}{Note}{注意}
 }}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{\par}
 
 \newenvironment{proof}{\par\noindent\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Proof:}{证明：}
+	\ifdefstring{\ELEGANT@lang}{en}{Proof}{证明}
 }\color{black!90}\small}{
 %\hfill$\Box$\quad
 \par}
 \newenvironment{remark}{\noindent\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Remark:}{注：}
+	\ifdefstring{\ELEGANT@lang}{en}{Remark}{注}
 }}{\par}
 \newenvironment{assumption}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Assumption:}{假设：}
+	\ifdefstring{\ELEGANT@lang}{en}{Assumption}{假设}
 }}{\par}
 \newenvironment{conclusion}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Conclusion:}{结论：}
+	\ifdefstring{\ELEGANT@lang}{en}{Conclusion}{结论}
 }}{\par}
 \newenvironment{solution}{\par\noindent\textbf{\color{main}
-	\ifdefstring{\ELEGANT@lang}{en}{Solution:}{解：}
+	\ifdefstring{\ELEGANT@lang}{en}{Solution}{解}
 }}{\par}
 \newenvironment{property}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Property:}{性质：}
+	\ifdefstring{\ELEGANT@lang}{en}{Property}{性质}
 }}{\par}
 \newenvironment{custom}[1]{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{#1:}{#1：}
+	\ifdefstring{\ELEGANT@lang}{en}{#1}{#1}
 }}{\par}
 
 \ifdefstring{\ELEGANT@result}{noanswer}{
@@ -603,7 +608,12 @@
 \newcommand\@printMetaInfoItem[1]{%
   \ifcsvoid{@#1}
     {}
-    {\csname @pre@#1\endcsname{\space}\csname @#1\endcsname \\}% force sep space
+    {
+      \bfseries\kaishu
+      \csname @pre@#1\endcsname
+      {\space}  % force sep space
+      \csname @#1\endcsname \\
+    }
 }
 
 \renewcommand*{\maketitle}{%
@@ -632,9 +642,9 @@
     \par
     % meta info
     \vspace{.8cm}\hspace{3.5em}%
-   	\begin{minipage}{0.68\linewidth}
+   	\begin{minipage}{0.67\linewidth}
       \linespread{1.5}\selectfont
-   		\color{gray}\kaishu\normalsize
+   		\color{gray}\normalsize
    		\renewcommand{\arraystretch}{0.618}
       \@printMetaInfoItem{author}
       \@printMetaInfoItem{institute}
@@ -687,6 +697,3 @@
 	columns=flexible,
 	% backgroundcolor=\color{lightgrey}
 }
-
-
-
