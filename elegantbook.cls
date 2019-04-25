@@ -193,10 +193,12 @@
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
 \ifdefstring{\ELEGANT@titlestyle}{display}{\def\style{display}}{\relax}
 
+% unify using \@<cmd> to install content, instead of using \newtoks\<cmd>
+\newcommand*{\institute}[1]{\gdef\@institute{#1}}
+\newcommand*{\version}[1]{\gdef\@version{#1}}
+\newcommand*{\equote}[1]{\def\@equote{#1}}
 
 \newtoks\email
-\newtoks\version
-\newtoks\institute
 \newtoks\subtitle
 
 
@@ -226,23 +228,37 @@
 
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{en}{
-\newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
-\newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
-\renewcommand{\chaptername}{Chapter \thechapter}
+  \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
+  \renewcommand{\chaptername}{Chapter \thechapter}
+  
+  % meta info prefix
+  \newcommand*\@pre@author    {Author:}
+  \newcommand*\@pre@institute {Institute:}
+  \newcommand*\@pre@date      {Date:}
+  \newcommand*\@pre@version   {Version:}
 }{\relax}
+
 \ifdefstring{\ELEGANT@lang}{cn}{
-\renewcommand{\contentsname}{目\hspace{2em}录}
-\renewcommand{\figurename}{图}
-\renewcommand{\tablename}{表}
-\renewcommand{\partname}{第 \thepart\; 部分}
-\renewcommand{\listfigurename}{插图目录}
-\renewcommand{\listtablename}{表格目录}
-\renewcommand{\bibname}{参考文献}
-\renewcommand{\appendixname}{附录}
-\renewcommand{\indexname}{索\hspace{2em}引}
-\newcommand\figref[1]{\textbf{图}~\ref{#1}}
-\newcommand\tabref[1]{\textbf{表}~\ref{#1}}
-\renewcommand{\chaptername}{第 \thechapter\;章}
+  \renewcommand{\contentsname}{目\hspace{2em}录}
+  \renewcommand{\figurename}{图}
+  \renewcommand{\tablename}{表}
+  \renewcommand{\partname}{第 \thepart{} 部分}
+  \renewcommand{\chaptername}{第 \thechapter{} 章}
+  \renewcommand{\listfigurename}{插图目录}
+  \renewcommand{\listtablename}{表格目录}
+  \renewcommand{\bibname}{参考文献}
+  \renewcommand{\appendixname}{附录}
+  \renewcommand{\indexname}{索\hspace{2em}引}
+  
+  \newcommand\figref[1]{\textbf{\figurename}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{\tablename}~\ref{#1}}
+  
+  % meta info prefix
+  \newcommand*\@pre@author    {作者：}
+  \newcommand*\@pre@institute {机构：}
+  \newcommand*\@pre@date      {日期：}
+  \newcommand*\@pre@version   {版本：}
 }{\relax}
 
 
@@ -568,69 +584,76 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{} }
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
-%%封面
-\newcommand*{\equote}[1]{\def\@equote{#1}}
-
 \def\IfEmpty#1{%
   \edef\1{\the#1}
   \ifx\1\empty
 }
 \def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
 
-\newcommand*{\logo}[1]{
- \def\@logo{\includegraphics[width=4.2cm]{#1}
- }
-}
-\newcommand*{\cover}[1]{
- \def\@cover{\includegraphics[width=\linewidth]{#1}
- }
+\newcommand*{\logo}[1]{%
+ \def\@logo{\includegraphics[width=4.2cm]{#1}}%
 }
 
+\newcommand*{\cover}[1]{%
+ \def\@cover{\includegraphics[width=\linewidth]{#1}}%
+}
 
-\renewcommand{\baselinestretch}{1.35} 
+\linespread{1.35}\selectfont
+
+\newcommand\@printMetaInfoItem[1]{%
+  \ifcsvoid{@#1}
+    {}
+    {\csname @pre@#1\endcsname{\space}\csname @#1\endcsname \\}% force sep space
+}
 
 \renewcommand*{\maketitle}{%
-\hypersetup{pageanchor=false}
-\begin{titlepage}
-	\newgeometry{margin = 0in}
-	\parindent=0pt
-	\@cover
-	\setlength{\fboxsep}{0pt}
-	\colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
-	\vfill
-	\vskip-2ex
-	\hspace{2em}
-	\parbox{0.8\textwidth}{
-		\bfseries\Huge \@title\par
-	}
-	\vfill
-	\vspace{-1.0cm}
-	\setstretch{2.5}
-	\hspace{2.5em}
-	\begin{minipage}[c]{0.68\linewidth}
-		{\color{darkgray}\bfseries\Large \the\subtitle\\[2ex]}
-		\color{gray}\kaishu\normalsize
-		{\renewcommand{\arraystretch}{0.618}
-		\begin{tabular}{l} 
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Author: }}{\textbf{作者：}} \@author \\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute: }}{\textbf{组织：}} \the\institute\\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Date: }}{\textbf{时间：}} \@date\\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Version: }}{\textbf{版本：}} \the\version\\
-		\end{tabular}}
-	\end{minipage}
-	\begin{minipage}[c]{0.27\linewidth}
-	\begin{tikzpicture}[remember picture,overlay]
-		\begin{pgfonlayer}{background}
-		  \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\@logo};
-		\end{pgfonlayer}
-	\end{tikzpicture}
-	\end{minipage}
-	\vfill
-	\centerline{\itshape \@equote}
-	\vfill
-\end{titlepage}
-\restoregeometry
-\thispagestyle{empty}
+  \hypersetup{pageanchor=false}%
+  \begin{titlepage}
+  	\newgeometry{margin = 0in}%
+  	\setlength\parindent{0pt}%
+    % cover image
+  	\@cover
+    \par
+    % rule in color "second"
+  	\begingroup
+      \setlength{\fboxsep}{0pt}%
+      \color{second}%
+      \rule{\linewidth}{0.5in}%
+    \endgroup
+    \par
+    % main title
+    \vspace{1.5cm}\hspace*{2em}%
+  	\parbox{0.8\textwidth}{\bfseries\Huge \@title}
+    \par
+    % subtitle
+    \vspace{.8cm}\hspace{2.5em}%
+    \linespread{2.0}\selectfont
+    {\color{darkgray}\bfseries\Large \the\subtitle}%
+    \par
+    % meta info
+    \vspace{.8cm}\hspace{3.5em}%
+   	\begin{minipage}{0.68\linewidth}
+      \linespread{1.5}\selectfont
+   		\color{gray}\kaishu\normalsize
+   		\renewcommand{\arraystretch}{0.618}
+      \@printMetaInfoItem{author}
+      \@printMetaInfoItem{institute}
+      \@printMetaInfoItem{date}
+      \@printMetaInfoItem{version}
+   	\end{minipage}
+    \par
+    % logo, put on absolute coordinates
+   	\begin{tikzpicture}[remember picture,overlay]
+		  \node[opacity=0.8,anchor=south east, inner sep=0pt] 
+        at ($(current page.south east) + (-0.8in, 1.5in)$) {\@logo};
+   	\end{tikzpicture}
+    % equote
+  	\vfill
+  	\centerline{\itshape \@equote}
+  	\vspace{1.5cm}
+  \end{titlepage}
+  \restoregeometry
+  \thispagestyle{empty}
 }
 
 
