@@ -43,17 +43,18 @@
 \DeclareVoidOption{hide}{\ekv{base = hide}}
 \DeclareVoidOption{show}{\ekv{base = show}}
 
-% ----- Math option -----
-\newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
-
-% ----- backward compatibility
 \DeclareVoidOption{hang}{\ekv{titlestyle = hang}}
 \DeclareVoidOption{display}{\ekv{titlestyle = display}}
+
+
 % ----- Default Options -----
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{book}}
 
 \ProcessKeyvalOptions*\relax
 \LoadClass[a4paper,oneside,openany]{book}
+
+\RequirePackage{comment}
+
 
 
 % fontsetting
@@ -65,6 +66,7 @@
 
 \RequirePackage{ifxetex}
 
+% font setting for text and math
 \ifxetex
 	\RequirePackage{fontenc}
 \else
@@ -144,11 +146,14 @@
 	\par\nointerlineskip \vspace{0.1\baselineskip}
 }
 
+% ----- Math option -----
+\newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
 % ----- Title Style -----
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
 \ifdefstring{\ELEGANT@titlestyle}{display}{\def\style{display}}{\relax}
 
-% unify using \@<cmd> to install content, instead of using \newtoks\<cmd>
+% unify using \@<cmd> to store content, instead of using \newtoks\<cmd>
 \newcommand*{\institute}[1]{\gdef\@institute{#1}}
 \newcommand*{\version}[1]{\gdef\@version{#1}}
 \newcommand*{\equote}[1]{\def\@equote{#1}}
@@ -569,16 +574,18 @@
 }
 \fi
 
-\fancyfoot[c]{\base{structurecolor}{88}}
-\renewcommand{\headrule}{\color{structurecolor}\hrule width\textwidth}
+\fancyfoot[c]{\base{structure}{88}}
+\renewcommand{\headrule}{\color{structure}\hrule width\textwidth}
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
-% \renewcommand{\headrule}{}
-\fancypagestyle{plain}{\renewcommand{\headrulewidth}{0pt}\fancyhf{}\renewcommand{\headrule}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{} }
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhf{}
+  \renewcommand{\headrule}{}
 }
+\renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
 \newcommand*{\logo}[1]{%
  \def\@logo{\includegraphics[width=4.2cm]{#1}}%
