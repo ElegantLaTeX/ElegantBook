@@ -73,7 +73,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 
 \section{颜色主题}
-本模板内置 5 组颜色主题，分别为 \textcolor{main1}{\lstinline{green}}\footnote{为原先默认主题}、\textcolor{main2}{\lstinline{cyan}}、\textcolor{main3}{\lstinline{blue}}（默认）、\textcolor{main4}{\lstinline{gray}}、\textcolor{main5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
+本模板内置 5 组颜色主题，分别为 \colorsetDemo{green}\footnote{为原先默认主题}、\colorsetDemo{cyan}、\colorsetDemo{blue}（默认）、\colorsetDemo{gray}、\colorsetDemo{black}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
@@ -82,52 +82,56 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \begin{table}[htbp]
 \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
 \centering
-\begin{tabular}{ccccccc}
+\begin{tabular}{c >{\colorset{green}}c 
+                  >{\colorset{cyan}}c 
+                  >{\colorset{blue}}c  
+                  >{\colorset{gray}}c  
+                  >{\colorset{black}}cc}
 \toprule
-	        & \textcolor{structure1}{green} 
-	        & \textcolor{structure2}{cyan} 
-	        & \textcolor{structure3}{blue}
-	        & \textcolor{structure4}{gray} 
-	        & \textcolor{structure5}{black} 
-	        & 主要使用的环境\\
+	        & \textcolor{structure}{green} 
+	        & \textcolor{structure}{cyan} 
+	        & \textcolor{structure}{blue} 
+	        & \textcolor{structure}{gray} 
+	        & \textcolor{structure}{black}
+	        & 主要使用的环境 \\
 \midrule
-structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
-				& chapter \ section \ subsection \\
+structure & \colorDemo{structure}
+  				& \colorDemo{structure}
+  				& \colorDemo{structure} 
+  				& \colorDemo{structure} 
+  				& \colorDemo{structure} 
+  				& chapter \ section \ subsection \\
 
-main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
-				& definition \ exercise \ problem \\
+main      & \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& definition \ exercise \ problem \\
 
-second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second5}\rule{1cm}{1cm}}}
-				& theorem \ lemma \ corollary\\
+second    & \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& theorem \ lemma \ corollary\\
 
-third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third5}\rule{1cm}{1cm}}}
-				& proposition\\
+third     & \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& proposition \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structure、main、second、third 颜色，具体方法如下：
+如需自定义颜色集，请使用文档类选项 \lstinline{nocolor} 或 \lstinline{color=none}，然后在导言区定义 structure、main、second、third 四个颜色，例如：
 \begin{lstlisting}
-\definecolor{structurecolor}{RGB}{0,0,0}
-\definecolor{main}{RGB}{70,70,70}    
-\definecolor{second}{RGB}{115,45,2}    
-\definecolor{third}{RGB}{0,80,80}   
+\definecolor{structure}{RGB}{0,0,0}
+\definecolor{main}{RGB}{70,70,70}
+\definecolor{second}{RGB}{115,45,2}
+\definecolor{third}{RGB}{0,80,80}
 \end{lstlisting}
 
 
