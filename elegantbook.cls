@@ -53,11 +53,8 @@
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{book}}
 
 \ProcessKeyvalOptions*\relax
-% \ProcessOptions*\relax
 \LoadClass[a4paper,oneside,openany]{book}
 
-\RequirePackage{indentfirst,comment}
-\setlength\parindent{2em}
 
 % fontsetting
 
@@ -76,37 +73,17 @@
 
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
-%
-
-% font setting for text and math
-% \RequirePackage[T1]{fontenc}
-% \RequirePackage{newtxtext}
-% \RequirePackage{newtxmath}
-% \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{anyfontsize}
 
-\DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
-\DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
+%\DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
+%\DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
 \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
-
-% \let\sum\relax
-% \DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}%
-% \let\int\relax
-% \DeclareMathSymbol{\int}{\mathop}{CMlargesymbols}{"5A}%
 
 \let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
 \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
 \DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
 \DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"49}
 \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"59}
-
-% \let\partial\relax
-% \DeclareMathSymbol{\partial}{\mathord}{CMletters}{"40}%
-% \let\in\relax
-%\DeclareMathSymbol{\in}{\mathrel}{CMsymbols}{"32}%
-% \let\pi\relax
-% \DeclareMathSymbol{\pi}{\mathord}{CMletters}{"19}
-
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
