@@ -60,7 +60,7 @@
 
 \PassOptionsToPackage{no-math}{fontspec}
 \ifdefstring{\ELEGANT@lang}{cn}{
-\RequirePackage[UTF8, scheme=plain]{ctex}
+  \RequirePackage[UTF8, scheme=plain]{ctex}
 }
 
 \RequirePackage{ifxetex}
@@ -77,7 +77,10 @@
 
 \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
 
-\let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
+\let\intop\relax
+\let\sumop\relax
+\let\ointop\relax
+\let\prodop\relax
 \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
 \DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
 \DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"49}
@@ -281,17 +284,33 @@
 
 \setcounter{secnumdepth}{5}
 
-\titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{structure}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{structure}\LARGE\filcenter}[\ifdefstring{\ELEGANT@base}{hide}{}{\filcenter\base{structure}{88}}]
+\titleformat{\chapter}[\style]
+  {\bfseries}
+  {%
+    \filcenter\LARGE\enspace\bfseries
+    {\color{structure}\IfAppendix{\appendixname}{\chaptername}\enspace}%
+  }
+  {1pt}
+  {\bfseries\color{structure}\LARGE\filcenter}
+  [\ifdefstring{\ELEGANT@base}{hide}{}{\filcenter\base{structure}{88}}]
 
-\titleformat{\section}[hang]{\bfseries}
-{\hspace{-2.45em}\Large\bfseries{\color{structure}\thesection}\enspace}{1pt}{\color{structure}\Large\bfseries\filright}
+\titleformat{\section}[hang]
+  {\bfseries}
+  {\hspace{-2.45em}\Large\bfseries{\color{structure}\thesection}\enspace}
+  {1pt}
+  {\color{structure}\Large\bfseries\filright}
 
-\titleformat{\subsection}[hang]{\bfseries}
-{\hspace{-2.45em}\large\bfseries\color{structure}\thesubsection\enspace}{1pt}{\color{structure}\large\bfseries\filright}
+\titleformat{\subsection}[hang]
+  {\bfseries}
+  {\hspace{-2.45em}\large\bfseries\color{structure}\thesubsection\enspace}
+  {1pt}
+  {\color{structure}\large\bfseries\filright}
 
-\titleformat{\subsubsection}[hang]{\bfseries}
-{\hspace{-2.45em}\large\bfseries\color{structure}\thesubsubsection\enspace}{1pt}{\color{structure}\large\bfseries\filright}
+\titleformat{\subsubsection}[hang]
+  {\bfseries}
+  {\hspace{-2.45em}\large\bfseries\color{structure}\thesubsubsection\enspace}
+  {1pt}
+  {\color{structure}\large\bfseries\filright}
 
 
 \titlespacing{\chapter}{0pt}{-20pt}{1.3\baselineskip}
@@ -308,64 +327,64 @@
 
 \RequirePackage[many]{tcolorbox}
 \ifdefstring{\ELEGANT@mode}{fancy}{
-\tcbset{
+  \tcbset{
     common/.style={
-        fontupper=\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu},
-        lower separated=false,
-        coltitle=white,
-        colback=gray!5,
-        boxrule=0.5pt,
-        fonttitle=\bfseries,
-        enhanced,
-        breakable,
-        top=8pt,
-        before skip=8pt,
-        attach boxed title to top left={yshift=-0.11in,xshift=0.15in},
-        boxed title style={boxrule=0pt,colframe=white,arc=0pt,outer arc=0pt},
-        separator sign={.},
+      fontupper=\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu},
+      lower separated=false,
+      coltitle=white,
+      colback=gray!5,
+      boxrule=0.5pt,
+      fonttitle=\bfseries,
+      enhanced,
+      breakable,
+      top=8pt,
+      before skip=8pt,
+      attach boxed title to top left={yshift=-0.11in,xshift=0.15in},
+      boxed title style={boxrule=0pt,colframe=white,arc=0pt,outer arc=0pt},
+      separator sign={.},
     },
     defstyle/.style={
-        common,
-        colframe=main,  
-        colback=main!5,
-        colbacktitle=main, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
+      common,
+      colframe=main,  
+      colback=main!5,
+      colbacktitle=main, 
+      overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
     },
     thmstyle/.style={
-        common,
-        colframe=second,  
-        colback=second!5,
-        colbacktitle=second, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
+      common,
+      colframe=second,  
+      colback=second!5,
+      colbacktitle=second, 
+      overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
     },
     propstyle/.style={
-        common,
-        colframe=third,  
-        colback=third!5,
-        colbacktitle=third, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
+      common,
+      colframe=third,  
+      colback=third!5,
+      colbacktitle=third, 
+      overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
     },
-}
-
-\newtcbtheorem[auto counter,number within=chapter]{definition}{
-	\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}
-}{defstyle}{def}
-
-\newtcbtheorem[auto counter,number within=chapter]{theorem}{
-	\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
-}{thmstyle}{thm}
-
-\newtcbtheorem[auto counter,number within=chapter]{proposition}{
-	\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
-}{propstyle}{pro}
-
-\newtcbtheorem[auto counter,number within=chapter]{corollary}{
-	\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}
-}{thmstyle}{cor}
-
-\newtcbtheorem[auto counter,number within=chapter]{lemma}{
-	\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
-}{thmstyle}{lem}
+  }
+  
+  \newtcbtheorem[auto counter,number within=chapter]{definition}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}
+  }{defstyle}{def}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{theorem}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
+  }{thmstyle}{thm}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{proposition}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
+  }{propstyle}{pro}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{corollary}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}
+  }{thmstyle}{cor}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{lemma}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
+  }{thmstyle}{lem}
 
 }{\relax}
 
@@ -376,34 +395,34 @@
 \let\endproof\relax
 % declare a new theorem style
 \newtheoremstyle{edefstyle}%
-{3pt}% Space above
-{3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
-{}% Indent amount
-{\bfseries\color{main}}% Theorem head font
-{}% Punctuation after theorem head
-{0.5em}% Space after theorem head 
-{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+  {3pt}% Space above
+  {3pt}% Space below 
+  {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+  {}% Indent amount
+  {\bfseries\color{main}}% Theorem head font
+  {}% Punctuation after theorem head
+  {0.5em}% Space after theorem head 
+  {\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 % -------------------------------------------------%
 \newtheoremstyle{ethmstyle}%
-{3pt}% Space above
-{3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
-{}% Indent amount
-{\bfseries\color{second}}% Theorem head font
-{}% Punctuation after theorem head
-{.5em}% Space after theorem head 
-{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+  {3pt}% Space above
+  {3pt}% Space below 
+  {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+  {}% Indent amount
+  {\bfseries\color{second}}% Theorem head font
+  {}% Punctuation after theorem head
+  {.5em}% Space after theorem head 
+  {\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 % -------------------------------------------------%
 \newtheoremstyle{eprostyle}%
-{3pt}% Space above
-{3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
-{}% Indent amount
-{\bfseries\color{third}}% Theorem head font
-{}% Punctuation after theorem head
-{.5em}% Space after theorem head 
-{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+  {3pt}% Space above
+  {3pt}% Space below 
+  {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+  {}% Indent amount
+  {\bfseries\color{third}}% Theorem head font
+  {}% Punctuation after theorem head
+  {.5em}% Space after theorem head 
+  {\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 
 \theoremstyle{edefstyle}
 \newtheorem{edefinition}{\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}}[chapter]
@@ -522,12 +541,32 @@
 \fancyhf{}
 
 \if@twoside
-\fancyhead[EL,OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\thepage/\pageref*{LastPage}--}
-\fancyhead[ER]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark{}}
-\fancyhead[OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+\fancyhead[EL,OR]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  --\thepage/\pageref*{LastPage}--%
+}
+\fancyhead[ER]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  \leftmark
+}
+\fancyhead[OL]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  \rightmark
+}
 \else
-\fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\thepage/\pageref*{LastPage}--}
-\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+\fancyhead[R]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  --\thepage/\pageref*{LastPage}--%
+}
+\fancyhead[L]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  \rightmark
+}
 \fi
 
 \fancyfoot[c]{\base{structurecolor}{88}}
