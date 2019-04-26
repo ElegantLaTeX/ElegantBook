@@ -73,7 +73,7 @@ You can input Chinese Characters in either \lstinline{lang=en} or \lstinline{lan
 
 
 \section{Color Themes}
-This template contains 5 color themes,they are  \textcolor{main1}{\lstinline{green}}\footnote{original default theme.}, \textcolor{main2}{\lstinline{cyan}}, \textcolor{main3}{\lstinline{blue}}(default), \textcolor{main4}{\lstinline{gray}}, \textcolor{main5}{\lstinline{black}}. You can choose \lstinline{green} with  
+This template contains 5 color themes,they are  \colorsetDemo{green}\footnote{original default theme.}, \colorsetDemo{cyan}{\lstinline{cyan}}, \colorsetDemo{blue} (default), \colorsetDemo{gray}, \colorsetDemo{black}. You can choose \lstinline{green} with  
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
@@ -83,44 +83,48 @@ This template contains 5 color themes,they are  \textcolor{main1}{\lstinline{gre
 \begin{table}[htbp]
 \caption{ElegantBook Themes\label{tab:color thm}}
 \centering
-\begin{tabular}{ccccccc}
+\begin{tabular}{c >{\colorset{green}}c 
+                  >{\colorset{cyan}}c 
+                  >{\colorset{blue}}c  
+                  >{\colorset{gray}}c  
+                  >{\colorset{black}}cc}
 \toprule
-	        & \textcolor{main1}{green} 
-	        & \textcolor{main2}{cyan} 
-	        & \textcolor{main3}{blue}
-	        & \textcolor{main4}{gray} 
-	        & \textcolor{main5}{black} 
+	        & \textcolor{structure}{green} 
+	        & \textcolor{structure}{cyan} 
+	        & \textcolor{structure}{blue} 
+	        & \textcolor{structure}{gray} 
+	        & \textcolor{structure}{black}
 	        & Main Environments\\
 \midrule
-structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
+structure & \colorDemo{structure}
+  				& \colorDemo{structure}
+  				& \colorDemo{structure} 
+  				& \colorDemo{structure} 
+  				& \colorDemo{structure} 
 				& chapter  section  subsection \\
-main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
+main      & \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
 				& definition  exercise  problem  \\
-second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second5}\rule{1cm}{1cm}}}
+second    & \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
 				& theorem  lemma  corollary\\
-third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third5}\rule{1cm}{1cm}}}
+third     & \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
 				& proposition\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-If you want to customize the colors, please select \lstinline{nocolor} or use \lstinline{color=none} , then define the main, second, and third colors in the preamble section as follows:
+If you want to customize the colors, please use class option \lstinline{nocolor} or \lstinline{color=none} , then define the main, second, and third color names in the preamble, as follows:
 \begin{lstlisting}[frame=single]
 \definecolor{structurecolor}{RGB}{60,113,183}
 \definecolor{main}{RGB}{0,166,82}%

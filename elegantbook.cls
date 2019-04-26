@@ -698,11 +698,11 @@
 }
 \let\colorset\@color@updateColorset
 
-% typeset text #1 in color "main" and colorset #1, local
+% typeset text #1 in color "structure" and colorset #1, local
 \newcommand*\colorsetDemo[1]{%
   \begingroup
   \@color@updateColorset{#1}%
-  \textcolor{main}{\lstinline{#1}}%
+  \textcolor{structure}{\lstinline{#1}}%
   \endgroup
 }
 
