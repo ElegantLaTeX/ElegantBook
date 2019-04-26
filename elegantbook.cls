@@ -15,13 +15,13 @@
 \SetupKeyvalOptions{family=ELEGANT, prefix=ELEGANT@, setkeys=\kvsetkeys}
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
 
-% ----- Colors -----
+% ----- Class options -----
 \DeclareStringOption[blue]{color}
 \DeclareStringOption[en]{lang}
 \DeclareStringOption[answer]{result}
 \DeclareStringOption[fancy]{mode}
 \DeclareStringOption[show]{base}
-
+\DeclareStringOption[hang]{titlestyle}[hang]
 
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color = green}}
@@ -34,11 +34,11 @@
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 
-\DeclareVoidOption{fancy}{\ekv{mode=fancy}}
-\DeclareVoidOption{simple}{\ekv{mode=simple}}
-
 \DeclareVoidOption{answer}{\ekv{result = answer}}
 \DeclareVoidOption{noanswer}{\ekv{result = noanswer}}
+
+\DeclareVoidOption{fancy}{\ekv{mode=fancy}}
+\DeclareVoidOption{simple}{\ekv{mode=simple}}
 
 \DeclareVoidOption{hide}{\ekv{base = hide}}
 \DeclareVoidOption{show}{\ekv{base = show}}
@@ -46,8 +46,6 @@
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
-% ----- Title Style -----
-\DeclareStringOption[hang]{titlestyle}[hang]
 % ----- backward compatibility
 \DeclareVoidOption{hang}{\ekv{titlestyle = hang}}
 \DeclareVoidOption{display}{\ekv{titlestyle = display}}
