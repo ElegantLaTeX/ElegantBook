@@ -75,8 +75,6 @@
 \RequirePackage{newtxmath}
 \RequirePackage{anyfontsize}
 
-%\DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
-%\DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
 \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
 
 \let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
@@ -152,7 +150,6 @@
 \newcommand*{\version}[1]{\gdef\@version{#1}}
 \newcommand*{\equote}[1]{\def\@equote{#1}}
 
-\newtoks\email
 \newtoks\subtitle
 
 \RequirePackage{natbib}
@@ -250,8 +247,6 @@
 \RequirePackage{geometry}
 \geometry{
 	a4paper,
-%	left=27mm,  %% or inner=23mm
-%	right=27mm, %% or outer=18mm
 	top=25.4mm, bottom=25.4mm,
 	headheight=2.17cm,
 	headsep=4mm,
@@ -544,11 +539,7 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{} }
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
-\def\IfEmpty#1{%
-  \edef\1{\the#1}
-  \ifx\1\empty
 }
-\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
 
 \newcommand*{\logo}[1]{%
  \def\@logo{\includegraphics[width=4.2cm]{#1}}%
