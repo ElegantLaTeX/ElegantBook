@@ -221,7 +221,7 @@
 \captionsetup[figure]{skip=3pt}
 
 %% 常用宏包
-\linespread{1.3}
+% \linespread{1.3}
 \RequirePackage{graphicx}
 %\RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
@@ -574,7 +574,7 @@
   		toprule=0.5pt,
   		bottomrule=0.5pt,
   		top=8pt,
-        before skip=8pt,
+  		before skip=8pt,
   		sharp corners
     },
 }
@@ -635,7 +635,7 @@
  \def\@cover{\includegraphics[width=\linewidth]{#1}}%
 }
 
-\linespread{1.35}\selectfont
+\linespread{1.3}\selectfont
 
 \newcommand\@printMetaInfoItem[1]{%
   \ifcsvoid{@#1}
