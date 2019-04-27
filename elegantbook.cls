@@ -114,10 +114,10 @@
   	\definecolor{third}     {RGB}{0,174,247}%
   }{\relax}%
   \ifdefstring{\ELEGANT@color}{gray}{%
-  	\definecolor{structure} {RGB}{0,0,0}%
-  	\definecolor{main}      {RGB}{150,150,150}%
-  	\definecolor{second}    {RGB}{150,150,150}%
-  	\definecolor{third}     {RGB}{150,150,150}%
+  	\definecolor{structure} {RGB}{100,100,100}%
+  	\definecolor{main}      {RGB}{100,100,100}%
+  	\definecolor{second}    {RGB}{100,100,100}%
+  	\definecolor{third}     {RGB}{100,100,100}%
   }{\relax}%
   \ifdefstring{\ELEGANT@color}{black}{%
   	\definecolor{structure} {RGB}{0,0,0}%
@@ -536,10 +536,10 @@
     introduction/.style={
         enhanced,
 		breakable,
-		colback=structurecolor!10,
-		colframe=structurecolor,
+		colback=structure!10,
+		colframe=structure,
   		fonttitle=\bfseries,
-  		colbacktitle=structurecolor,
+  		colbacktitle=structure,
   		fontupper=\ifdefstring{\ELEGANT@lang}{en}{\sffamily}{\kaishu},
   		attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
   		boxrule=0pt,
@@ -552,13 +552,14 @@
 }
 
 \newenvironment{introduction}[1][\ifdefstring{\ELEGANT@lang}{en}{Introduction}{内容提要}]{
-\begin{tcolorbox}[introduction,title={#1}]
-\begin{multicols}{2}
-\begin{itemize}[label=\textcolor{structurecolor}{\scriptsize\SquareShadowBottomRight}]
-}{%
-\end{itemize}
-\end{multicols}
-\end{tcolorbox}}
+	\begin{tcolorbox}[introduction,title={#1}]
+	\begin{multicols}{2}
+	\begin{itemize}[label=\textcolor{structure}{\scriptsize\SquareShadowBottomRight}]
+	}{%
+	\end{itemize}
+	\end{multicols}
+	\end{tcolorbox}
+}
 
 
 \ifdefstring{\ELEGANT@result}{noanswer}{

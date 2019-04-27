@@ -54,6 +54,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 \chapter{ElegantBook 设置说明}
 
+
 \section{编译方式}
 
 本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2018，支持 \lstinline{PDFLaTeX} 以及 \lstinline{XeLaTeX} 编译。
@@ -282,14 +283,14 @@ The content of introduction.
 \end{lstlisting}
 
 \chapter{ElegantBook 写作示例}
+
+
 \begin{introduction}
-\item 测试中文 Fubini 定理~\ref{thm:fubi}
-\item 这个很长很长很长\\
-另外有额外文本信息
-\item 标题长度不一致
-\item Test English
-\item So what\\
-$a^2+b^2=c^2$
+\item 积分定义~\ref{def:int}
+\item Fubini 定理~\ref{thm:fubi}
+\item 最优性原理~\ref{pro:max}
+\item 柯西列性质~\ref{property:cauchy}
+\item 韦达定理
 \end{introduction}
 
 \section{Lebesgue 积分}
@@ -370,7 +371,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
 
-\begin{property}
+\begin{property}\label{property:cauchy}
 柯西列的性质
 \begin{enumerate}
 \item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。

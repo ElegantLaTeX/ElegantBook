@@ -11,6 +11,8 @@
 *.cb
 *.cb2
 .*.lb
+elegant*-cn.pdf
+elegant*-en.pdf
 
 ## Intermediate documents:
 *.dvi
