@@ -15,13 +15,13 @@
 \SetupKeyvalOptions{family=ELEGANT, prefix=ELEGANT@, setkeys=\kvsetkeys}
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
 
-% ----- Colors -----
+% ----- Class options -----
 \DeclareStringOption[blue]{color}
 \DeclareStringOption[en]{lang}
 \DeclareStringOption[answer]{result}
 \DeclareStringOption[fancy]{mode}
 \DeclareStringOption[show]{base}
-
+\DeclareStringOption[hang]{titlestyle}[hang]
 
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color = green}}
@@ -34,42 +34,39 @@
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 
-\DeclareVoidOption{fancy}{\ekv{mode=fancy}}
-\DeclareVoidOption{simple}{\ekv{mode=simple}}
-
 \DeclareVoidOption{answer}{\ekv{result = answer}}
 \DeclareVoidOption{noanswer}{\ekv{result = noanswer}}
+
+\DeclareVoidOption{fancy}{\ekv{mode=fancy}}
+\DeclareVoidOption{simple}{\ekv{mode=simple}}
 
 \DeclareVoidOption{hide}{\ekv{base = hide}}
 \DeclareVoidOption{show}{\ekv{base = show}}
 
-% ----- Math option -----
-\newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
-
-% ----- Title Style -----
-\DeclareStringOption[hang]{titlestyle}[hang]
-% ----- backward compatibility
 \DeclareVoidOption{hang}{\ekv{titlestyle = hang}}
 \DeclareVoidOption{display}{\ekv{titlestyle = display}}
+
+
 % ----- Default Options -----
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{book}}
 
 \ProcessKeyvalOptions*\relax
-% \ProcessOptions*\relax
 \LoadClass[a4paper,oneside,openany]{book}
 
-\RequirePackage{indentfirst,comment}
-\setlength\parindent{2em}
+\RequirePackage{comment}
+
+
 
 % fontsetting
 
 \PassOptionsToPackage{no-math}{fontspec}
 \ifdefstring{\ELEGANT@lang}{cn}{
-\RequirePackage[UTF8, scheme=plain]{ctex}
+  \RequirePackage[UTF8, scheme=plain]{ctex}
 }
 
 \RequirePackage{ifxetex}
 
+% font setting for text and math
 \ifxetex
 	\RequirePackage{fontenc}
 \else
@@ -78,104 +75,63 @@
 
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
-%
-
-% font setting for text and math
-% \RequirePackage[T1]{fontenc}
-% \RequirePackage{newtxtext}
-% \RequirePackage{newtxmath}
-% \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{anyfontsize}
 
-\DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
-\DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
 \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
 
-% \let\sum\relax
-% \DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}%
-% \let\int\relax
-% \DeclareMathSymbol{\int}{\mathop}{CMlargesymbols}{"5A}%
-
-\let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
+\let\intop\relax
+\let\sumop\relax
+\let\ointop\relax
+\let\prodop\relax
 \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
 \DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
 \DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"49}
 \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"59}
 
-% \let\partial\relax
-% \DeclareMathSymbol{\partial}{\mathord}{CMletters}{"40}%
-% \let\in\relax
-%\DeclareMathSymbol{\in}{\mathrel}{CMsymbols}{"32}%
-% \let\pi\relax
-% \DeclareMathSymbol{\pi}{\mathord}{CMletters}{"19}
-
-
 % ----- Handle Colors -----
-%% 章节以及页脚图形
 
-\RequirePackage{xcolor}
-\ifdefstring{\ELEGANT@color}{green}{
-	\definecolor{structurecolor}{RGB}{0,120,2}%
-	\definecolor{main}{RGB}{0,120,2}%
-	\definecolor{second}{RGB}{230,90,7}%
-	\definecolor{third}{RGB}{0,160,152}%
-}{\relax}
-\ifdefstring{\ELEGANT@color}{cyan}{
-	\definecolor{structurecolor}{RGB}{31,186,190}%
-	\definecolor{main}{RGB}{59,180,5}%
-	\definecolor{second}{RGB}{175,153,8}%
-	\definecolor{third}{RGB}{244,105,102}%
-}{\relax}
-\ifdefstring{\ELEGANT@color}{blue}{
-	\definecolor{structurecolor}{RGB}{60,113,183}
-	\definecolor{main}{RGB}{0,166,82}%
-	\definecolor{second}{RGB}{255,134,24}%
-	\definecolor{third}{RGB}{0,174,247}%
-}{\relax}
-\ifdefstring{\ELEGANT@color}{gray}{
-	\definecolor{structurecolor}{RGB}{0,0,0}
-	\definecolor{main}{RGB}{150,150,150}%
-	\definecolor{second}{RGB}{150,150,150}%
-	\definecolor{third}{RGB}{150,150,150}%
-}{\relax}
-\ifdefstring{\ELEGANT@color}{black}{
-	\definecolor{structurecolor}{RGB}{0,0,0}
-	\definecolor{main}{RGB}{0,0,0}%
-	\definecolor{second}{RGB}{0,0,0}%
-	\definecolor{third}{RGB}{0,0,0}%
-}{\relax}
-
-%green color
-	\definecolor{structure1}{RGB}{0,120,2}%
-	\definecolor{main1}{RGB}{0,120,2}%
-	\definecolor{second1}{RGB}{230,90,7}%
-	\definecolor{third1}{RGB}{0,160,152}%
-%cyan color
-	\definecolor{structure2}{RGB}{31,186,190}%
-	\definecolor{main2}{RGB}{59,180,5}%
-	\definecolor{second2}{RGB}{175,153,8}%
-	\definecolor{third2}{RGB}{244,105,102}%
-%blue color
-	\definecolor{structure3}{RGB}{60,113,183}
-	\definecolor{main3}{RGB}{0,166,82}%
-	\definecolor{second3}{RGB}{255,134,24}%
-	\definecolor{third3}{RGB}{0,174,247}%
-% gray color
-	\definecolor{structure4}{RGB}{0,0,0}
-	\definecolor{main4}{RGB}{150,150,150}%
-	\definecolor{second4}{RGB}{150,150,150}%
-	\definecolor{third4}{RGB}{150,150,150}%
-% black color
-	\definecolor{structure5}{RGB}{0,0,0}
-	\definecolor{main5}{RGB}{0,0,0}%
-	\definecolor{second5}{RGB}{0,0,0}%
-	\definecolor{third5}{RGB}{0,0,0}%
 
 % corlor definition
-\definecolor{winered}{rgb}{0.5,0,0}
-\definecolor{bule}{RGB}{18,29,57}
+\RequirePackage{xcolor}
 
+\newcommand\@color@define{%
+  \ifdefstring{\ELEGANT@color}{green}{%
+  	\definecolor{structure} {RGB}{0,120,2}%
+  	\definecolor{main}      {RGB}{0,120,2}%
+  	\definecolor{second}    {RGB}{230,90,7}%
+  	\definecolor{third}     {RGB}{0,160,152}%
+  }{\relax}%
+  \ifdefstring{\ELEGANT@color}{cyan}{%
+  	\definecolor{structure} {RGB}{31,186,190}%
+  	\definecolor{main}      {RGB}{59,180,5}%
+  	\definecolor{second}    {RGB}{175,153,8}%
+  	\definecolor{third}     {RGB}{244,105,102}%
+  }{\relax}%
+  \ifdefstring{\ELEGANT@color}{blue}{%
+  	\definecolor{structure} {RGB}{60,113,183}%
+  	\definecolor{main}      {RGB}{0,166,82}%
+  	\definecolor{second}    {RGB}{255,134,24}%
+  	\definecolor{third}     {RGB}{0,174,247}%
+  }{\relax}%
+  \ifdefstring{\ELEGANT@color}{gray}{%
+  	\definecolor{structure} {RGB}{0,0,0}%
+  	\definecolor{main}      {RGB}{150,150,150}%
+  	\definecolor{second}    {RGB}{150,150,150}%
+  	\definecolor{third}     {RGB}{150,150,150}%
+  }{\relax}%
+  \ifdefstring{\ELEGANT@color}{black}{%
+  	\definecolor{structure} {RGB}{0,0,0}%
+  	\definecolor{main}      {RGB}{0,0,0}%
+  	\definecolor{second}    {RGB}{0,0,0}%
+  	\definecolor{third}     {RGB}{0,0,0}%
+  }{\relax}%
+}
+\@color@define
 
+\definecolor{winered}       {rgb}{0.5,0,0}
+\definecolor{bule}          {RGB}{18,29,57}
+
+%% 章节以及页脚图形
 \newcommand{\base}[2]{%
 	\nointerlineskip \vspace{0.1\baselineskip}\hspace{\fill}
 	{\color{#1}
@@ -190,16 +146,18 @@
 	\par\nointerlineskip \vspace{0.1\baselineskip}
 }
 
+% ----- Math option -----
+\newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
 % ----- Title Style -----
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
 \ifdefstring{\ELEGANT@titlestyle}{display}{\def\style{display}}{\relax}
 
-% unify using \@<cmd> to install content, instead of using \newtoks\<cmd>
+% unify using \@<cmd> to store content, instead of using \newtoks\<cmd>
 \newcommand*{\institute}[1]{\gdef\@institute{#1}}
 \newcommand*{\version}[1]{\gdef\@version{#1}}
 \newcommand*{\equote}[1]{\def\@equote{#1}}
 
-\newtoks\email
 \newtoks\subtitle
 
 \RequirePackage{natbib}
@@ -216,7 +174,7 @@
 % caption settings 
 \RequirePackage{caption}
 \captionsetup{labelfont = bf}
-\RequirePackage[font=small,labelfont={bf,color=structurecolor}]{caption} 
+\RequirePackage[font=small,labelfont={bf,color=structure}]{caption} 
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
 
@@ -278,15 +236,15 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{backgrounds,calc,shadows}
-\usepackage[object=vectorian]{pgfornament} %% 
+\usepackage[object=vectorian]{pgfornament}
 
-\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=structurecolor, draw=none] circle (2pt);}
-\newcommand*{\eitemii}{\tikz \draw [baseline, fill=structurecolor,draw=none,circular drop shadow] circle (2pt);}
-\newcommand*{\eitemiii}{\tikz \draw [baseline, fill=structurecolor,draw=none] circle (2pt);}
-\setlist[enumerate,1]{label=\color{structurecolor}\arabic*.}
-\setlist[enumerate,2]{label=\color{structurecolor}(\alph*).}
-\setlist[enumerate,3]{label=\color{structurecolor}\Roman*.}
-\setlist[enumerate,4]{label=\color{structurecolor}\Alph*.}
+\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=structure, draw=none] circle (2pt);}
+\newcommand*{\eitemii}{\tikz \draw [baseline, fill=structure,draw=none,circular drop shadow] circle (2pt);}
+\newcommand*{\eitemiii}{\tikz \draw [baseline, fill=structure,draw=none] circle (2pt);}
+\setlist[enumerate,1]{label=\color{structure}\arabic*.}
+\setlist[enumerate,2]{label=\color{structure}(\alph*).}
+\setlist[enumerate,3]{label=\color{structure}\Roman*.}
+\setlist[enumerate,4]{label=\color{structure}\Alph*.}
 \setlist[itemize,1]{label={\eitemi}}
 \setlist[itemize,2]{label={\eitemii}}
 \setlist[itemize,3]{label={\eitemiii}}
@@ -297,8 +255,6 @@
 \RequirePackage{geometry}
 \geometry{
 	a4paper,
-%	left=27mm,  %% or inner=23mm
-%	right=27mm, %% or outer=18mm
 	top=25.4mm, bottom=25.4mm,
 	headheight=2.17cm,
 	headsep=4mm,
@@ -333,17 +289,33 @@
 
 \setcounter{secnumdepth}{5}
 
-\titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{structurecolor}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{structurecolor}\LARGE\filcenter}[\ifdefstring{\ELEGANT@base}{hide}{}{\filcenter\base{structurecolor}{88}}]
+\titleformat{\chapter}[\style]
+  {\bfseries}
+  {%
+    \filcenter\LARGE\enspace\bfseries
+    {\color{structure}\IfAppendix{\appendixname}{\chaptername}\enspace}%
+  }
+  {1pt}
+  {\bfseries\color{structure}\LARGE\filcenter}
+  [\ifdefstring{\ELEGANT@base}{hide}{}{\filcenter\base{structure}{88}}]
 
-\titleformat{\section}[hang]{\bfseries}
-{\hspace{-2.45em}\Large\bfseries{\color{structurecolor}\thesection}\enspace}{1pt}{\color{structurecolor}\Large\bfseries\filright}
+\titleformat{\section}[hang]
+  {\bfseries}
+  {\hspace{-2.45em}\Large\bfseries{\color{structure}\thesection}\enspace}
+  {1pt}
+  {\color{structure}\Large\bfseries\filright}
 
-\titleformat{\subsection}[hang]{\bfseries}
-{\hspace{-2.45em}\large\bfseries\color{structurecolor}\thesubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
+\titleformat{\subsection}[hang]
+  {\bfseries}
+  {\hspace{-2.45em}\large\bfseries\color{structure}\thesubsection\enspace}
+  {1pt}
+  {\color{structure}\large\bfseries\filright}
 
-\titleformat{\subsubsection}[hang]{\bfseries}
-{\hspace{-2.45em}\large\bfseries\color{structurecolor}\thesubsubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
+\titleformat{\subsubsection}[hang]
+  {\bfseries}
+  {\hspace{-2.45em}\large\bfseries\color{structure}\thesubsubsection\enspace}
+  {1pt}
+  {\color{structure}\large\bfseries\filright}
 
 
 \titlespacing{\chapter}{0pt}{-20pt}{1.3\baselineskip}
@@ -360,64 +332,64 @@
 
 \RequirePackage[many]{tcolorbox}
 \ifdefstring{\ELEGANT@mode}{fancy}{
-\tcbset{
+  \tcbset{
     common/.style={
-        fontupper=\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu},
-        lower separated=false,
-        coltitle=white,
-        colback=gray!5,
-        boxrule=0.5pt,
-        fonttitle=\bfseries,
-        enhanced,
-        breakable,
-        top=8pt,
-        before skip=8pt,
-        attach boxed title to top left={yshift=-0.11in,xshift=0.15in},
-        boxed title style={boxrule=0pt,colframe=white,arc=0pt,outer arc=0pt},
-        separator sign={.},
+      fontupper=\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu},
+      lower separated=false,
+      coltitle=white,
+      colback=gray!5,
+      boxrule=0.5pt,
+      fonttitle=\bfseries,
+      enhanced,
+      breakable,
+      top=8pt,
+      before skip=8pt,
+      attach boxed title to top left={yshift=-0.11in,xshift=0.15in},
+      boxed title style={boxrule=0pt,colframe=white,arc=0pt,outer arc=0pt},
+      separator sign={.},
     },
     defstyle/.style={
-        common,
-        colframe=main,  
-        colback=main!5,
-        colbacktitle=main, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
+      common,
+      colframe=main,  
+      colback=main!5,
+      colbacktitle=main, 
+      overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
     },
     thmstyle/.style={
-        common,
-        colframe=second,  
-        colback=second!5,
-        colbacktitle=second, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
+      common,
+      colframe=second,  
+      colback=second!5,
+      colbacktitle=second, 
+      overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
     },
     propstyle/.style={
-        common,
-        colframe=third,  
-        colback=third!5,
-        colbacktitle=third, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
+      common,
+      colframe=third,  
+      colback=third!5,
+      colbacktitle=third, 
+      overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
     },
-}
-
-\newtcbtheorem[auto counter,number within=chapter]{definition}{
-	\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}
-}{defstyle}{def}
-
-\newtcbtheorem[auto counter,number within=chapter]{theorem}{
-	\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
-}{thmstyle}{thm}
-
-\newtcbtheorem[auto counter,number within=chapter]{proposition}{
-	\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
-}{propstyle}{pro}
-
-\newtcbtheorem[auto counter,number within=chapter]{corollary}{
-	\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}
-}{thmstyle}{cor}
-
-\newtcbtheorem[auto counter,number within=chapter]{lemma}{
-	\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
-}{thmstyle}{lem}
+  }
+  
+  \newtcbtheorem[auto counter,number within=chapter]{definition}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}
+  }{defstyle}{def}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{theorem}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
+  }{thmstyle}{thm}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{proposition}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
+  }{propstyle}{pro}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{corollary}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}
+  }{thmstyle}{cor}
+  
+  \newtcbtheorem[auto counter,number within=chapter]{lemma}{
+  	\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
+  }{thmstyle}{lem}
 
 }{\relax}
 
@@ -428,34 +400,34 @@
 \let\endproof\relax
 % declare a new theorem style
 \newtheoremstyle{edefstyle}%
-{3pt}% Space above
-{3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
-{}% Indent amount
-{\bfseries\color{main}}% Theorem head font
-{}% Punctuation after theorem head
-{0.5em}% Space after theorem head 
-{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+  {3pt}% Space above
+  {3pt}% Space below 
+  {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+  {}% Indent amount
+  {\bfseries\color{main}}% Theorem head font
+  {}% Punctuation after theorem head
+  {0.5em}% Space after theorem head 
+  {\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 % -------------------------------------------------%
 \newtheoremstyle{ethmstyle}%
-{3pt}% Space above
-{3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
-{}% Indent amount
-{\bfseries\color{second}}% Theorem head font
-{}% Punctuation after theorem head
-{.5em}% Space after theorem head 
-{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+  {3pt}% Space above
+  {3pt}% Space below 
+  {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+  {}% Indent amount
+  {\bfseries\color{second}}% Theorem head font
+  {}% Punctuation after theorem head
+  {.5em}% Space after theorem head 
+  {\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 % -------------------------------------------------%
 \newtheoremstyle{eprostyle}%
-{3pt}% Space above
-{3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
-{}% Indent amount
-{\bfseries\color{third}}% Theorem head font
-{}% Punctuation after theorem head
-{.5em}% Space after theorem head 
-{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
+  {3pt}% Space above
+  {3pt}% Space below 
+  {\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+  {}% Indent amount
+  {\bfseries\color{third}}% Theorem head font
+  {}% Punctuation after theorem head
+  {.5em}% Space after theorem head 
+  {\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}% Theorem head spec (can be left empty, meaning ‘normal’)
 
 \theoremstyle{edefstyle}
 \newtheorem{edefinition}{\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}}[chapter]
@@ -604,28 +576,46 @@
 \fancyhf{}
 
 \if@twoside
-\fancyhead[EL,OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\thepage/\pageref*{LastPage}--}
-\fancyhead[ER]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark{}}
-\fancyhead[OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+\fancyhead[EL,OR]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  --\thepage/\pageref*{LastPage}--%
+}
+\fancyhead[ER]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  \leftmark
+}
+\fancyhead[OL]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  \rightmark
+}
 \else
-\fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\thepage/\pageref*{LastPage}--}
-\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+\fancyhead[R]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  --\thepage/\pageref*{LastPage}--%
+}
+\fancyhead[L]{%
+  \color{structure}%
+  \ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}%
+  \rightmark
+}
 \fi
 
-\fancyfoot[c]{\base{structurecolor}{88}}
-\renewcommand{\headrule}{\color{structurecolor}\hrule width\textwidth}
+\fancyfoot[c]{\base{structure}{88}}
+\renewcommand{\headrule}{\color{structure}\hrule width\textwidth}
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
-% \renewcommand{\headrule}{}
-\fancypagestyle{plain}{\renewcommand{\headrulewidth}{0pt}\fancyhf{}\renewcommand{\headrule}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{} }
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
-\def\IfEmpty#1{%
-  \edef\1{\the#1}
-  \ifx\1\empty
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhf{}
+  \renewcommand{\headrule}{}
 }
-\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
+\renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
 \newcommand*{\logo}[1]{%
  \def\@logo{\includegraphics[width=4.2cm]{#1}}%
@@ -723,8 +713,33 @@
 	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,equote,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
 	frame=single,
 	tabsize=2,
-	rulecolor=\color{structurecolor},
+	rulecolor=\color{structure},
 	framerule=0.2pt,
 	columns=flexible,
 	% backgroundcolor=\color{lightgrey}
+}
+
+%% helper commands used in manual
+
+% change to colorset #1, global
+\newcommand*\@color@updateColorset[1]{%
+  \ekv{color=#1}%
+  \@color@define
+}
+\let\colorset\@color@updateColorset
+
+% typeset text #1 in color "structure" and colorset #1, local
+\newcommand*\colorsetDemo[1]{%
+  \begingroup
+  \@color@updateColorset{#1}%
+  \textcolor{structure}{\lstinline{#1}}%
+  \endgroup
+}
+
+% draw a 1cm square (with .05cm margin) in color #1
+\newcommand*\colorDemo[1]{%
+  \begin{tikzpicture}[baseline=0.3cm]
+    \clip (-.05, -.05) rectangle +(1.1, 1.1);
+    \fill[#1] (0, 0) rectangle (1, 1);
+  \end{tikzpicture}
 }
