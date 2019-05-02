@@ -88,48 +88,60 @@
 \DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"49}
 \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"59}
 
-% ----- Handle Colors -----
 
+%% open latex3 catcode scheme, where 
+%%  - space ( ) is ignored, and
+%%  - colon (:) and underscore (_) are allowed in command names
+\ExplSyntaxOn
+
+% ----- Handle Colors -----
 
 % color definition
 \RequirePackage{xcolor}
 
-\newcommand\@color@define{%
-  \ifdefstring{\ELEGANT@color}{green}{%
-    \definecolor{structure} {RGB}{0,120,2}%
-    \definecolor{main}      {RGB}{0,120,2}%
-    \definecolor{second}    {RGB}{230,90,7}%
-    \definecolor{third}     {RGB}{0,160,152}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{cyan}{%
-    \definecolor{structure} {RGB}{31,186,190}%
-    \definecolor{main}      {RGB}{59,180,5}%
-    \definecolor{second}    {RGB}{175,153,8}%
-    \definecolor{third}     {RGB}{244,105,102}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{blue}{%
-    \definecolor{structure} {RGB}{60,113,183}%
-    \definecolor{main}      {RGB}{0,166,82}%
-    \definecolor{second}    {RGB}{255,134,24}%
-    \definecolor{third}     {RGB}{0,174,247}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{gray}{%
-    \definecolor{structure} {RGB}{100,100,100}%
-    \definecolor{main}      {RGB}{100,100,100}%
-    \definecolor{second}    {RGB}{100,100,100}%
-    \definecolor{third}     {RGB}{100,100,100}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{black}{%
-    \definecolor{structure} {RGB}{0,0,0}%
-    \definecolor{main}      {RGB}{0,0,0}%
-    \definecolor{second}    {RGB}{0,0,0}%
-    \definecolor{third}     {RGB}{0,0,0}%
-  }{\relax}%
+\newcommand\@color@define{
+  \ifdefstring{\ELEGANT@color}{green}{
+    \definecolor{structure} {RGB}{0,120,2}
+    \definecolor{main}      {RGB}{0,120,2}
+    \definecolor{second}    {RGB}{230,90,7}
+    \definecolor{third}     {RGB}{0,160,152}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{cyan}{
+    \definecolor{structure} {RGB}{31,186,190}
+    \definecolor{main}      {RGB}{59,180,5}
+    \definecolor{second}    {RGB}{175,153,8}
+    \definecolor{third}     {RGB}{244,105,102}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{blue}{
+    \definecolor{structure} {RGB}{60,113,183}
+    \definecolor{main}      {RGB}{0,166,82}
+    \definecolor{second}    {RGB}{255,134,24}
+    \definecolor{third}     {RGB}{0,174,247}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{gray}{
+    \definecolor{structure} {RGB}{100,100,100}
+    \definecolor{main}      {RGB}{100,100,100}
+    \definecolor{second}    {RGB}{100,100,100}
+    \definecolor{third}     {RGB}{100,100,100}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{black}{
+    \definecolor{structure} {RGB}{0,0,0}
+    \definecolor{main}      {RGB}{0,0,0}
+    \definecolor{second}    {RGB}{0,0,0}
+    \definecolor{third}     {RGB}{0,0,0}
+  }{\relax}
+  
+  \colorlet{demo}{structure}
 }
 \@color@define
 
 \definecolor{winered}       {rgb}{0.5,0,0}
 \definecolor{bule}          {RGB}{18,29,57}
+
+
+%% close latex3 catcode scheme
+\ExplSyntaxOff
+
 
 %% 章节以及页脚图形
 \newcommand{\base}[2]{%
@@ -733,7 +745,7 @@
 \newcommand*\colorsetDemo[1]{%
   \begingroup
   \@color@updateColorset{#1}%
-  \textcolor{structure}{\lstinline{#1}}%
+  \textcolor{demo}{\lstinline{#1}}%
   \endgroup
 }
 
