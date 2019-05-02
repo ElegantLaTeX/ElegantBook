@@ -53,9 +53,6 @@
 \ProcessKeyvalOptions*\relax
 \LoadClass[a4paper,oneside,openany]{book}
 
-\RequirePackage{comment}
-
-
 
 % fontsetting
 
@@ -77,7 +74,7 @@
 \RequirePackage{newtxmath}
 \RequirePackage{anyfontsize}
 
-\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
 
 \let\intop\relax
 \let\sumop\relax
@@ -136,7 +133,6 @@
 \@color@define
 
 \definecolor{winered}       {rgb}{0.5,0,0}
-\definecolor{bule}          {RGB}{18,29,57}
 
 
 %% close latex3 catcode scheme
