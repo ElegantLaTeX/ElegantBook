@@ -91,7 +91,7 @@
 % ----- Handle Colors -----
 
 
-% corlor definition
+% color definition
 \RequirePackage{xcolor}
 
 \newcommand\@color@define{%
