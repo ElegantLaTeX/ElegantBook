@@ -162,11 +162,10 @@
 \ifdefstring{\ELEGANT@titlestyle}{display}{\def\style{display}}{\relax}
 
 % unify using \@<cmd> to store content, instead of using \newtoks\<cmd>
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
 \newcommand*{\institute}[1]{\gdef\@institute{#1}}
 \newcommand*{\version}[1]{\gdef\@version{#1}}
 \newcommand*{\equote}[1]{\def\@equote{#1}}
-
-\newtoks\subtitle
 
 \RequirePackage{natbib}
 \setlength{\bibsep}{0.0pt}
@@ -666,10 +665,14 @@
     \parbox{0.8\textwidth}{\bfseries\Huge \@title}
     \par
     % subtitle
-    \vspace{.8cm}\hspace{2.5em}%
-    \linespread{2.0}\selectfont
-    {\color{darkgray}\bfseries\Large \the\subtitle}%
-    \par
+    \ifdefvoid\@subtitle
+      {\vspace{.4cm}}
+      {%
+        \vspace{.8cm}\hspace{2.5em}%
+        \linespread{2.0}\selectfont
+        {\color{darkgray}\bfseries\Large \@subtitle}%
+        \par
+      }%
     % meta info
     \vspace{.8cm}\hspace{3.5em}%
     \begin{minipage}{0.67\linewidth}
