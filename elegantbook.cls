@@ -24,27 +24,27 @@
 \DeclareStringOption[hang]{titlestyle}[hang]
 
 % ----- backward compatibility
-\DeclareVoidOption{green}{\ekv{color = green}}
-\DeclareVoidOption{cyan}{\ekv{color = cyan}}
-\DeclareVoidOption{blue}{\ekv{color = blue}}
-\DeclareVoidOption{gray}{\ekv{color = gray}}
-\DeclareVoidOption{black}{\ekv{color = black}}
-\DeclareVoidOption{nocolor}{\ekv{color = none}}
+\DeclareVoidOption{green}{\ekv{color=green}}
+\DeclareVoidOption{cyan}{\ekv{color=cyan}}
+\DeclareVoidOption{blue}{\ekv{color=blue}}
+\DeclareVoidOption{gray}{\ekv{color=gray}}
+\DeclareVoidOption{black}{\ekv{color=black}}
+\DeclareVoidOption{nocolor}{\ekv{color=none}}
 
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 
-\DeclareVoidOption{answer}{\ekv{result = answer}}
-\DeclareVoidOption{noanswer}{\ekv{result = noanswer}}
+\DeclareVoidOption{answer}{\ekv{result=answer}}
+\DeclareVoidOption{noanswer}{\ekv{result=noanswer}}
 
 \DeclareVoidOption{fancy}{\ekv{mode=fancy}}
 \DeclareVoidOption{simple}{\ekv{mode=simple}}
 
-\DeclareVoidOption{hide}{\ekv{base = hide}}
-\DeclareVoidOption{show}{\ekv{base = show}}
+\DeclareVoidOption{hide}{\ekv{base=hide}}
+\DeclareVoidOption{show}{\ekv{base=show}}
 
-\DeclareVoidOption{hang}{\ekv{titlestyle = hang}}
-\DeclareVoidOption{display}{\ekv{titlestyle = display}}
+\DeclareVoidOption{hang}{\ekv{titlestyle=hang}}
+\DeclareVoidOption{display}{\ekv{titlestyle=display}}
 
 
 % ----- Default Options -----
@@ -52,9 +52,6 @@
 
 \ProcessKeyvalOptions*\relax
 \LoadClass[a4paper,oneside,openany]{book}
-
-\RequirePackage{comment}
-
 
 
 % fontsetting
@@ -68,16 +65,16 @@
 
 % font setting for text and math
 \ifxetex
-	\RequirePackage{fontenc}
+  \RequirePackage{fontenc}
 \else
-	\RequirePackage[T1]{fontenc}
+  \RequirePackage[T1]{fontenc}
 \fi
 
 \RequirePackage{newtxtext}
 \RequirePackage{newtxmath}
 \RequirePackage{anyfontsize}
 
-\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
 
 \let\intop\relax
 \let\sumop\relax
@@ -88,62 +85,73 @@
 \DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"49}
 \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"59}
 
+
+%% open latex3 catcode scheme, where 
+%%  - space ( ) is ignored, and
+%%  - colon (:) and underscore (_) are allowed in command names
+\ExplSyntaxOn
+
 % ----- Handle Colors -----
 
-
-% corlor definition
+% color definition
 \RequirePackage{xcolor}
 
-\newcommand\@color@define{%
-  \ifdefstring{\ELEGANT@color}{green}{%
-  	\definecolor{structure} {RGB}{0,120,2}%
-  	\definecolor{main}      {RGB}{0,120,2}%
-  	\definecolor{second}    {RGB}{230,90,7}%
-  	\definecolor{third}     {RGB}{0,160,152}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{cyan}{%
-  	\definecolor{structure} {RGB}{31,186,190}%
-  	\definecolor{main}      {RGB}{59,180,5}%
-  	\definecolor{second}    {RGB}{175,153,8}%
-  	\definecolor{third}     {RGB}{244,105,102}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{blue}{%
-  	\definecolor{structure} {RGB}{60,113,183}%
-  	\definecolor{main}      {RGB}{0,166,82}%
-  	\definecolor{second}    {RGB}{255,134,24}%
-  	\definecolor{third}     {RGB}{0,174,247}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{gray}{%
-  	\definecolor{structure} {RGB}{100,100,100}%
-  	\definecolor{main}      {RGB}{100,100,100}%
-  	\definecolor{second}    {RGB}{100,100,100}%
-  	\definecolor{third}     {RGB}{100,100,100}%
-  }{\relax}%
-  \ifdefstring{\ELEGANT@color}{black}{%
-  	\definecolor{structure} {RGB}{0,0,0}%
-  	\definecolor{main}      {RGB}{0,0,0}%
-  	\definecolor{second}    {RGB}{0,0,0}%
-  	\definecolor{third}     {RGB}{0,0,0}%
-  }{\relax}%
+\newcommand\@color@define{
+  \ifdefstring{\ELEGANT@color}{green}{
+    \definecolor{structure} {RGB}{0,120,2}
+    \definecolor{main}      {RGB}{0,120,2}
+    \definecolor{second}    {RGB}{230,90,7}
+    \definecolor{third}     {RGB}{0,160,152}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{cyan}{
+    \definecolor{structure} {RGB}{31,186,190}
+    \definecolor{main}      {RGB}{59,180,5}
+    \definecolor{second}    {RGB}{175,153,8}
+    \definecolor{third}     {RGB}{244,105,102}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{blue}{
+    \definecolor{structure} {RGB}{60,113,183}
+    \definecolor{main}      {RGB}{0,166,82}
+    \definecolor{second}    {RGB}{255,134,24}
+    \definecolor{third}     {RGB}{0,174,247}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{gray}{
+    \definecolor{structure} {RGB}{100,100,100}
+    \definecolor{main}      {RGB}{100,100,100}
+    \definecolor{second}    {RGB}{100,100,100}
+    \definecolor{third}     {RGB}{100,100,100}
+  }{\relax}
+  \ifdefstring{\ELEGANT@color}{black}{
+    \definecolor{structure} {RGB}{0,0,0}
+    \definecolor{main}      {RGB}{0,0,0}
+    \definecolor{second}    {RGB}{0,0,0}
+    \definecolor{third}     {RGB}{0,0,0}
+  }{\relax}
+  
+  \colorlet{demo}{structure}
 }
 \@color@define
 
 \definecolor{winered}       {rgb}{0.5,0,0}
-\definecolor{bule}          {RGB}{18,29,57}
+
+
+%% close latex3 catcode scheme
+\ExplSyntaxOff
+
 
 %% 章节以及页脚图形
 \newcommand{\base}[2]{%
-	\nointerlineskip \vspace{0.1\baselineskip}\hspace{\fill}
-	{\color{#1}
-		\resizebox{0.3\linewidth}{1.5ex}
-		{{%
-				{\begin{tikzpicture}
-					\node  (C) at (0,0) {};
-					\node (D) at (4,0) {};
-					\path (C) to [ornament=#2] (D);
-					\end{tikzpicture}}}}}%
-	\hspace{\fill}
-	\par\nointerlineskip \vspace{0.1\baselineskip}
+  \nointerlineskip \vspace{0.1\baselineskip}\hspace{\fill}
+  {\color{#1}
+    \resizebox{0.3\linewidth}{1.5ex}
+    {{%
+        {\begin{tikzpicture}
+          \node  (C) at (0,0) {};
+          \node (D) at (4,0) {};
+          \path (C) to [ornament=#2] (D);
+          \end{tikzpicture}}}}}%
+  \hspace{\fill}
+  \par\nointerlineskip \vspace{0.1\baselineskip}
 }
 
 % ----- Math option -----
@@ -173,7 +181,7 @@
 
 % caption settings 
 \RequirePackage{caption}
-\captionsetup{labelfont = bf}
+\captionsetup{labelfont=bf}
 \RequirePackage[font=small,labelfont={bf,color=structure}]{caption} 
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
@@ -254,30 +262,30 @@
 
 \RequirePackage{geometry}
 \geometry{
-	a4paper,
-	top=25.4mm, bottom=25.4mm,
-	headheight=2.17cm,
-	headsep=4mm,
-	footskip=12mm
+  a4paper,
+  top=25.4mm, bottom=25.4mm,
+  headheight=2.17cm,
+  headsep=4mm,
+  footskip=12mm
 }
 
 
 \RequirePackage{hyperref}
 \hypersetup{
-	breaklinks,
-	unicode,
-	linktoc=all,
-	bookmarksnumbered=true,
-	bookmarksopen=true,
-	pdfkeywords={ElegantBook},
-	colorlinks,
-	linkcolor=winered,
-	citecolor=winered,
-	urlcolor  = winered,
-	plainpages=false,
-	pdfstartview=FitH,
-	pdfborder={0 0 0},
-	linktocpage
+  breaklinks,
+  unicode,
+  linktoc=all,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfkeywords={ElegantBook},
+  colorlinks,
+  linkcolor=winered,
+  citecolor=winered,
+  urlcolor =winered,
+  plainpages=false,
+  pdfstartview=FitH,
+  pdfborder={0 0 0},
+  linktocpage
 }
 \let\email\relax
 \newcommand\email[1]{\href{mailto:#1}{\nolinkurl{#1}}}
@@ -372,23 +380,23 @@
   }
   
   \newtcbtheorem[auto counter,number within=chapter]{definition}{
-  	\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}
+    \ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}
   }{defstyle}{def}
   
   \newtcbtheorem[auto counter,number within=chapter]{theorem}{
-  	\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
+    \ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
   }{thmstyle}{thm}
   
   \newtcbtheorem[auto counter,number within=chapter]{proposition}{
-  	\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
+    \ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
   }{propstyle}{pro}
   
   \newtcbtheorem[auto counter,number within=chapter]{corollary}{
-  	\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}
+    \ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}
   }{thmstyle}{cor}
   
   \newtcbtheorem[auto counter,number within=chapter]{lemma}{
-  	\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
+    \ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}
   }{thmstyle}{lem}
 
 }{\relax}
@@ -470,104 +478,104 @@
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \newenvironment{example}[1][]{
- 		\refstepcounter{exam}\par\noindent\textbf{\color{main}{
- 			\ifdefstring{\ELEGANT@lang}{en}{Example}{例}
- 		}\theexam #1 }\rmfamily %
- 	}{
- 		\par\medskip\ignorespacesafterend %
- 	}
+  \refstepcounter{exam}\par\noindent\textbf{\color{main}{
+    \ifdefstring{\ELEGANT@lang}{en}{Example}{例}
+  }\theexam #1 }\rmfamily %
+}{
+  \par\medskip\ignorespacesafterend %
+}
 
 %% Exercise with counter
 \newcounter{exer}[chapter]
 \setcounter{exer}{0}
 \renewcommand{\theexer}{\thechapter.\arabic{exer}}
 \newenvironment{exercise}[1][]{
- 		\refstepcounter{exer}\par\noindent\makebox[-3pt][r]{\scriptsize\color{red!90}\HandPencilLeft\quad}\textbf{\color{main}{
- 			\ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
- 		}\theexer #1 }\rmfamily %
- 	}{
- 		\par\medskip\ignorespacesafterend %
- 	}
+  \refstepcounter{exer}\par\noindent\makebox[-3pt][r]{\scriptsize\color{red!90}\HandPencilLeft\quad}\textbf{\color{main}{
+    \ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
+  }\theexer #1 }\rmfamily %
+}{
+  \par\medskip\ignorespacesafterend %
+}
 
 %% Exercise with counter
 \newcounter{prob}[chapter]
 \setcounter{prob}{0}
 \renewcommand{\theprob}{\thechapter.\arabic{prob}}
 \newenvironment{problem}[1][]{
- 		\refstepcounter{prob}\par\noindent\textbf{\color{main}{%
- 			\ifdefstring{\ELEGANT@lang}{en}{Problem}{例题}
- 		}\theprob #1 }\rmfamily %
- 	}{
- 		\par\medskip\ignorespacesafterend %
- 	}
+  \refstepcounter{prob}\par\noindent\textbf{\color{main}{%
+    \ifdefstring{\ELEGANT@lang}{en}{Problem}{例题}
+  }\theprob #1 }\rmfamily %
+}{
+  \par\medskip\ignorespacesafterend %
+}
 
 
 
 \newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Note}{注意}
+  \ifdefstring{\ELEGANT@lang}{en}{Note}{注意}
 }}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{\par}
 
 \newenvironment{proof}{\par\noindent\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Proof}{证明}
+  \ifdefstring{\ELEGANT@lang}{en}{Proof}{证明}
 }\color{black!90}\small}{
 %\hfill$\Box$\quad
 \par}
 \newenvironment{remark}{\noindent\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Remark}{注}
+  \ifdefstring{\ELEGANT@lang}{en}{Remark}{注}
 }}{\par}
 \newenvironment{assumption}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Assumption}{假设}
+  \ifdefstring{\ELEGANT@lang}{en}{Assumption}{假设}
 }}{\par}
 \newenvironment{conclusion}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Conclusion}{结论}
+  \ifdefstring{\ELEGANT@lang}{en}{Conclusion}{结论}
 }}{\par}
 \newenvironment{solution}{\par\noindent\textbf{\color{main}
-	\ifdefstring{\ELEGANT@lang}{en}{Solution}{解}
+  \ifdefstring{\ELEGANT@lang}{en}{Solution}{解}
 }}{\par}
 \newenvironment{property}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Property}{性质}
+  \ifdefstring{\ELEGANT@lang}{en}{Property}{性质}
 }}{\par}
 \newenvironment{custom}[1]{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{#1}{#1}
+  \ifdefstring{\ELEGANT@lang}{en}{#1}{#1}
 }}{\par}
 
 \RequirePackage{multicol}
 \tcbset{
-    introduction/.style={
-        enhanced,
-		breakable,
-		colback=structure!10,
-		colframe=structure,
-  		fonttitle=\bfseries,
-  		colbacktitle=structure,
-  		fontupper=\ifdefstring{\ELEGANT@lang}{en}{\sffamily}{\kaishu},
-  		attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
-  		boxrule=0pt,
-  		toprule=0.5pt,
-  		bottomrule=0.5pt,
-  		top=8pt,
-  		before skip=8pt,
-  		sharp corners
-    },
+  introduction/.style={
+    enhanced,
+    breakable,
+    colback=structure!10,
+    colframe=structure,
+    fonttitle=\bfseries,
+    colbacktitle=structure,
+    fontupper=\ifdefstring{\ELEGANT@lang}{en}{\sffamily}{\kaishu},
+    attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
+    boxrule=0pt,
+    toprule=0.5pt,
+    bottomrule=0.5pt,
+    top=8pt,
+    before skip=8pt,
+    sharp corners
+  },
 }
 
 \newenvironment{introduction}[1][\ifdefstring{\ELEGANT@lang}{en}{Introduction}{内容提要}]{
-	\begin{tcolorbox}[introduction,title={#1}]
-	\begin{multicols}{2}
-	\begin{itemize}[label=\textcolor{structure}{\scriptsize\SquareShadowBottomRight}]
-	}{%
-	\end{itemize}
-	\end{multicols}
-	\end{tcolorbox}
+  \begin{tcolorbox}[introduction,title={#1}]
+  \begin{multicols}{2}
+  \begin{itemize}[label=\textcolor{structure}{\scriptsize\SquareShadowBottomRight}]
+}{%
+  \end{itemize}
+  \end{multicols}
+  \end{tcolorbox}
 }
 
 
 \ifdefstring{\ELEGANT@result}{noanswer}{
-	\AtBeginDocument{
-	\excludecomment{solution}
-	\excludecomment{proof}
-	\excludecomment{inline}
-	}
+  \AtBeginDocument{
+    \excludecomment{solution}
+    \excludecomment{proof}
+    \excludecomment{inline}
+  }
 }{\relax}
 
 
@@ -641,13 +649,13 @@
 \renewcommand*{\maketitle}{%
   \hypersetup{pageanchor=false}%
   \begin{titlepage}
-  	\newgeometry{margin = 0in}%
-  	\setlength\parindent{0pt}%
+    \newgeometry{margin=0in}%
+    \setlength\parindent{0pt}%
     % cover image
-  	\@cover
+    \@cover
     \par
     % rule in color "second"
-  	\begingroup
+    \begingroup
       \setlength{\fboxsep}{0pt}%
       \color{second}%
       \rule{\linewidth}{0.5in}%
@@ -655,7 +663,7 @@
     \par
     % main title
     \vspace{1.5cm}\hspace*{2em}%
-  	\parbox{0.8\textwidth}{\bfseries\Huge \@title}
+    \parbox{0.8\textwidth}{\bfseries\Huge \@title}
     \par
     % subtitle
     \vspace{.8cm}\hspace{2.5em}%
@@ -664,25 +672,25 @@
     \par
     % meta info
     \vspace{.8cm}\hspace{3.5em}%
-   	\begin{minipage}{0.67\linewidth}
+    \begin{minipage}{0.67\linewidth}
       \linespread{1.5}\selectfont
-   		\color{gray}\normalsize
-   		\renewcommand{\arraystretch}{0.618}
+      \color{gray}\normalsize
+      \renewcommand{\arraystretch}{0.618}
       \@printMetaInfoItem{author}
       \@printMetaInfoItem{institute}
       \@printMetaInfoItem{date}
       \@printMetaInfoItem{version}
-   	\end{minipage}
+    \end{minipage}
     \par
     % logo, put on absolute coordinates
-   	\begin{tikzpicture}[remember picture,overlay]
-		  \node[opacity=0.8,anchor=south east, inner sep=0pt] 
+    \begin{tikzpicture}[remember picture,overlay]
+      \node[opacity=0.8,anchor=south east, inner sep=0pt] 
         at ($(current page.south east) + (-0.8in, 1.5in)$) {\@logo};
-   	\end{tikzpicture}
+    \end{tikzpicture}
     % equote
-  	\vfill
-  	\centerline{\itshape \@equote}
-  	\vspace{1.5cm}
+    \vfill
+    \centerline{\itshape \@equote}
+    \vspace{1.5cm}
   \end{titlepage}
   \restoregeometry
   \thispagestyle{empty}
@@ -704,20 +712,20 @@
 \definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
 \definecolor{frenchplum}{RGB}{190,20,83}
 \lstset{language=[LaTeX]TeX,
-	texcsstyle=*\color{winered},
-	numbers=none,
-	breaklines=true,
-	keywordstyle=\color{winered},
-	commentstyle=\color{gray},
-	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle},
-	emphstyle={\color{frenchplum}},
-	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,equote,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
-	frame=single,
-	tabsize=2,
-	rulecolor=\color{structure},
-	framerule=0.2pt,
-	columns=flexible,
-	% backgroundcolor=\color{lightgrey}
+  texcsstyle=*\color{winered},
+  numbers=none,
+  breaklines=true,
+  keywordstyle=\color{winered},
+  commentstyle=\color{gray},
+  emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle},
+  emphstyle={\color{frenchplum}},
+  morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,equote,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
+  frame=single,
+  tabsize=2,
+  rulecolor=\color{structure},
+  framerule=0.2pt,
+  columns=flexible,
+  % backgroundcolor=\color{lightgrey}
 }
 
 %% helper commands used in manual
@@ -733,7 +741,7 @@
 \newcommand*\colorsetDemo[1]{%
   \begingroup
   \@color@updateColorset{#1}%
-  \textcolor{structure}{\lstinline{#1}}%
+  \textcolor{demo}{\lstinline{#1}}%
   \endgroup
 }
 
