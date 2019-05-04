@@ -89,40 +89,40 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
                   >{\colorset{gray}}c  
                   >{\colorset{black}}cc}
 \toprule
-          & \textcolor{structure}{green} 
-          & \textcolor{structure}{cyan} 
-          & \textcolor{structure}{blue} 
-          & \textcolor{structure}{gray} 
-          & \textcolor{structure}{black}
-          & 主要使用的环境 \\
+	        & \textcolor{structure}{green} 
+	        & \textcolor{structure}{cyan} 
+	        & \textcolor{structure}{blue} 
+	        & \textcolor{structure}{gray} 
+	        & \textcolor{structure}{black}
+	        & 主要使用的环境 \\
 \midrule
 structure & \colorDemo{structure}
-          & \colorDemo{structure}
-          & \colorDemo{structure} 
-          & \colorDemo{structure} 
-          & \colorDemo{structure} 
-          & chapter \ section \ subsection \\
+  				& \colorDemo{structure}
+  				& \colorDemo{structure} 
+  				& \colorDemo{structure} 
+  				& \colorDemo{structure} 
+  				& chapter \ section \ subsection \\
 
 main      & \colorDemo{main}
-          & \colorDemo{main}
-          & \colorDemo{main}
-          & \colorDemo{main}
-          & \colorDemo{main}
-          & definition \ exercise \ problem \\
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& \colorDemo{main}
+  				& definition \ exercise \ problem \\
 
 second    & \colorDemo{second}
-          & \colorDemo{second}
-          & \colorDemo{second}
-          & \colorDemo{second}
-          & \colorDemo{second}
-          & theorem \ lemma \ corollary\\
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& \colorDemo{second}
+  				& theorem \ lemma \ corollary\\
 
 third     & \colorDemo{third}
-          & \colorDemo{third}
-          & \colorDemo{third}
-          & \colorDemo{third}
-          & \colorDemo{third}
-          & proposition \\
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& \colorDemo{third}
+  				& proposition \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -364,9 +364,9 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 我们知道最小二乘法可以用来处理一组数据，可以从一组测定的数据中寻求变量之间的依赖关系，这种函数关系称为经验公式。本课题将介绍最小二乘法的精确定义及如何寻求点与点之间近似成线性关系时的经验公式。假定实验测得变量之间的 $n$ 个数据，则在平面上，可以得到 $n$ 个点，这种图形称为 “散点图”，从图中可以粗略看出这些点大致散落在某直线近旁, 我们认为其近似为一线性函数，下面介绍求解步骤。
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.6\textwidth]{scatter.pdf}
-  \caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
+	\centering
+	\includegraphics[width=0.6\textwidth]{scatter.pdf}
+	\caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
 \end{figure}
 
 以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
