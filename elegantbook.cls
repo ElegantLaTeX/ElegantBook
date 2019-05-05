@@ -540,6 +540,36 @@
 	\ifdefstring{\ELEGANT@lang}{en}{#1}{#1}
 }}{\par}
 
+\RequirePackage{multicol}
+\tcbset{
+    introduction/.style={
+        enhanced,
+		breakable,
+		colback=structurecolor!10,
+		colframe=structurecolor,
+  		fonttitle=\bfseries,
+  		colbacktitle=structurecolor,
+  		fontupper=\ifdefstring{\ELEGANT@lang}{en}{\sffamily}{\kaishu},
+  		attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
+  		boxrule=0pt,
+  		toprule=0.5pt,
+  		bottomrule=0.5pt,
+  		top=8pt,
+        before skip=8pt,
+  		sharp corners
+    },
+}
+
+\newenvironment{introduction}[1][\ifdefstring{\ELEGANT@lang}{en}{Introduction}{内容提要}]{
+\begin{tcolorbox}[introduction,title={#1}]
+\begin{multicols}{2}
+\begin{itemize}[label=\textcolor{structurecolor}{\scriptsize\SquareShadowBottomRight}]
+}{%
+\end{itemize}
+\end{multicols}
+\end{tcolorbox}}
+
+
 \ifdefstring{\ELEGANT@result}{noanswer}{
 	\AtBeginDocument{
 	\excludecomment{solution}
