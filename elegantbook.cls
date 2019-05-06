@@ -21,15 +21,15 @@
 \DeclareStringOption[answer]{result}
 \DeclareStringOption[fancy]{mode}
 \DeclareStringOption[show]{base}
-
+\DeclareStringOption[normal]{device}
 
 % ----- backward compatibility
-\DeclareVoidOption{green}{\ekv{color = green}}
-\DeclareVoidOption{cyan}{\ekv{color = cyan}}
-\DeclareVoidOption{blue}{\ekv{color = blue}}
-\DeclareVoidOption{gray}{\ekv{color = gray}}
-\DeclareVoidOption{black}{\ekv{color = black}}
-\DeclareVoidOption{nocolor}{\ekv{color = none}}
+\DeclareVoidOption{green}{\ekv{color=green}}
+\DeclareVoidOption{cyan}{\ekv{color=cyan}}
+\DeclareVoidOption{blue}{\ekv{color=blue}}
+\DeclareVoidOption{gray}{\ekv{color=gray}}
+\DeclareVoidOption{black}{\ekv{color=black}}
+\DeclareVoidOption{nocolor}{\ekv{color=none}}
 
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
@@ -37,20 +37,22 @@
 \DeclareVoidOption{fancy}{\ekv{mode=fancy}}
 \DeclareVoidOption{simple}{\ekv{mode=simple}}
 
-\DeclareVoidOption{answer}{\ekv{result = answer}}
-\DeclareVoidOption{noanswer}{\ekv{result = noanswer}}
+\DeclareVoidOption{answer}{\ekv{result=answer}}
+\DeclareVoidOption{noanswer}{\ekv{result=noanswer}}
 
-\DeclareVoidOption{hide}{\ekv{base = hide}}
-\DeclareVoidOption{show}{\ekv{base = show}}
+\DeclareVoidOption{hide}{\ekv{base=hide}}
+\DeclareVoidOption{show}{\ekv{base=show}}
 
+\DeclareVoidOption{normal}{\ekv{device=normal}}
+\DeclareVoidOption{pad}{\ekv{device=pad}}
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
 % ----- Title Style -----
 \DeclareStringOption[hang]{titlestyle}[hang]
 % ----- backward compatibility
-\DeclareVoidOption{hang}{\ekv{titlestyle = hang}}
-\DeclareVoidOption{display}{\ekv{titlestyle = display}}
+\DeclareVoidOption{hang}{\ekv{titlestyle=hang}}
+\DeclareVoidOption{display}{\ekv{titlestyle=display}}
 % ----- Default Options -----
 \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{book}}
 
@@ -261,7 +263,7 @@
 \usetikzlibrary{backgrounds,calc,shadows}
 \usepackage[object=vectorian]{pgfornament} %% 
 
-\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=structurecolor, draw=none] circle (2pt);}
+\newcommand*{\eitemi}{\tikz \draw [baseline, ball color=structurecolor,draw=none] circle (2pt);}
 \newcommand*{\eitemii}{\tikz \draw [baseline, fill=structurecolor,draw=none,circular drop shadow] circle (2pt);}
 \newcommand*{\eitemiii}{\tikz \draw [baseline, fill=structurecolor,draw=none] circle (2pt);}
 \setlist[enumerate,1]{label=\color{structurecolor}\arabic*.}
@@ -276,16 +278,24 @@
 %% device settings
 
 \RequirePackage{geometry}
+
+\ifdefstring{\ELEGANT@device}{normal}{
 \geometry{
 	a4paper,
-%	left=27mm,  %% or inner=23mm
-%	right=27mm, %% or outer=18mm
 	top=25.4mm, bottom=25.4mm,
 	headheight=2.17cm,
 	headsep=4mm,
 	footskip=12mm
-}
+}}{\relax}
 
+\ifdefstring{\ELEGANT@device}{pad}{
+\geometry{
+	paperwidth=7.5in, 
+	paperheight=10in,
+	margin=16mm,
+	headheight=2.17cm,
+	footskip=4mm
+}}{\relax}
 
 \RequirePackage{hyperref}
 \hypersetup{
@@ -615,11 +625,17 @@
  \def\@logo{\includegraphics[width=4.2cm]{#1}
  }
 }
+\ifdefstring{\ELEGANT@device}{normal}{
 \newcommand*{\cover}[1]{
  \def\@cover{\includegraphics[width=\linewidth]{#1}
  }
-}
+}}{\relax}
 
+\ifdefstring{\ELEGANT@device}{pad}{
+\newcommand*{\cover}[1]{
+ \def\@cover{\includegraphics[trim=0 26px 0 26px,clip=true, width=\linewidth]{#1}
+ }
+}}{\relax}
 
 \renewcommand{\baselinestretch}{1.35} 
 
