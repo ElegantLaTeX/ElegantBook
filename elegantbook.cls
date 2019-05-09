@@ -633,7 +633,7 @@
 
 \ifdefstring{\ELEGANT@device}{pad}{
 \newcommand*{\cover}[1]{
- \def\@cover{\includegraphics[trim=0 26px 0 26px,clip=true, width=\linewidth]{#1}
+ \def\@cover{\includegraphics[trim=0 26bp 0 26bp,clip=true, width=\linewidth]{#1}
  }
 }}{\relax}
 
