@@ -237,7 +237,8 @@
 \renewcommand{\contentsname}{目\hspace{2em}录}
 \renewcommand{\figurename}{图}
 \renewcommand{\tablename}{表}
-\renewcommand{\partname}{第 \thepart\; 部分}
+\renewcommand{\partname}{\color{structurecolor}}
+\renewcommand{\thepart}{第\zhnumber{\arabic{part}}部分}
 \renewcommand{\listfigurename}{插图目录}
 \renewcommand{\listtablename}{表格目录}
 \renewcommand{\bibname}{参考文献}
@@ -256,7 +257,11 @@
 \bibliographystyle{aer}
 }{\relax}
 
-
+\RequirePackage{xpatch}
+\xpatchcmd{\part}{\thispagestyle{plain}}
+      {\pagecolor{white}\thispagestyle{plain}}{}{}
+\xpatchcmd{\@endpart}{\vfil\newpage}{\vfil\newpage
+              \pagecolor{white}}{}{}
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
 \RequirePackage{tikz}
