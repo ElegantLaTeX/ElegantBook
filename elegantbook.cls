@@ -351,9 +351,6 @@
 
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt,bbding}
-% list/itemize/enumerate setting
-\RequirePackage[shortlabels]{enumitem}
-\setlist{nolistsep}
 
 
 \RequirePackage[many]{tcolorbox}
