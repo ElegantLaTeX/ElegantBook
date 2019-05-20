@@ -79,8 +79,9 @@
 \fi
 
 \RequirePackage{newtxtext}
-\RequirePackage{newtxmath}
-% \RequirePackage{mtpro2}
+% \RequirePackage{newtxmath}
+\let\Bbbk\relax
+\usepackage[lite]{mtpro2}
 %
 
 % font setting for text and math
@@ -261,9 +262,9 @@
 
 \RequirePackage{xpatch}
 \xpatchcmd{\part}{\thispagestyle{plain}}
-      {\pagecolor{white}\thispagestyle{plain}}{}{}
+      {\thispagestyle{plain}}{}{}
 \xpatchcmd{\@endpart}{\vfil\newpage}{\vfil\newpage
-              \pagecolor{white}}{}{}
+             }{}{}
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
 \RequirePackage{tikz}
