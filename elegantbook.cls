@@ -217,8 +217,6 @@
 \setlist{nolistsep}
 
 % caption settings 
-\RequirePackage{caption}
-\captionsetup{labelfont = bf}
 \RequirePackage[font=small,labelfont={bf,color=structurecolor}]{caption} 
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
@@ -352,9 +350,6 @@
 
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt,bbding}
-% list/itemize/enumerate setting
-\RequirePackage[shortlabels]{enumitem}
-\setlist{nolistsep}
 
 
 \RequirePackage[many]{tcolorbox}
