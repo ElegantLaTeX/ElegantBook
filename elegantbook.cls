@@ -79,9 +79,9 @@
 \fi
 
 \RequirePackage{newtxtext}
-% \RequirePackage{newtxmath}
-\let\Bbbk\relax
-\usepackage[lite]{mtpro2}
+\RequirePackage{newtxmath}
+% \let\Bbbk\relax
+% \usepackage[lite]{mtpro2}
 %
 
 % font setting for text and math
