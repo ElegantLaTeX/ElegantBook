@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2019/04/25 v3.07 ElegantBook document class]
+\ProvidesClass{elegantbook}[2019/05/26 v3.08 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -22,7 +22,9 @@
 \DeclareStringOption[fancy]{mode}
 \DeclareStringOption[show]{base}
 \DeclareStringOption[normal]{device}
-
+\DeclareStringOption[numbers]{cite}
+\DeclareStringOption[newtxmath]{math}
+\DeclareStringOption[marginfalse]{marginpar}
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color=green}}
 \DeclareVoidOption{cyan}{\ekv{color=cyan}}
@@ -45,6 +47,15 @@
 
 \DeclareVoidOption{normal}{\ekv{device=normal}}
 \DeclareVoidOption{pad}{\ekv{device=pad}}
+
+\DeclareVoidOption{numbers}{\ekv{cite=numbers}}
+\DeclareVoidOption{authoryear}{\ekv{cite=authoryear}}
+
+\DeclareVoidOption{newtxmath}{\ekv{math=newtx}}
+\DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
+
+\DeclareVoidOption{margintrue}{\ekv{marginpar=margintrue}}
+\DeclareVoidOption{marginfalse}{\ekv{marginpar=marginfalse}}
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
@@ -64,6 +75,11 @@
 \setlength\parindent{2em}
 
 % fontsetting
+\ifdefstring{\ELEGANT@math}{mtpro2}{
+\let\Bbbk\relax
+\RequirePackage[lite]{mtpro2}
+}{\relax}
+
 
 \PassOptionsToPackage{no-math}{fontspec}
 \ifdefstring{\ELEGANT@lang}{cn}{
@@ -78,11 +94,13 @@
 	\RequirePackage[T1]{fontenc}
 \fi
 
+
 \RequirePackage{newtxtext}
+\ifdefstring{\ELEGANT@math}{newtxmath}{
 \RequirePackage{newtxmath}
-% \let\Bbbk\relax
-% \usepackage[lite]{mtpro2}
-%
+}{\relax}
+
+
 
 % font setting for text and math
 % \RequirePackage[T1]{fontenc}
@@ -90,30 +108,26 @@
 % \RequirePackage{newtxmath}
 % \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{anyfontsize}
-
+\ifdefstring{\ELEGANT@math}{newtxmath}{
 \DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
 \DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
 \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
-
 % \let\sum\relax
 % \DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}%
 % \let\int\relax
 % \DeclareMathSymbol{\int}{\mathop}{CMlargesymbols}{"5A}%
-
 \let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
-
 \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
 \DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
 \DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"48}
 \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
-
 % \let\partial\relax
 % \DeclareMathSymbol{\partial}{\mathord}{CMletters}{"40}%
 % \let\in\relax
 %\DeclareMathSymbol{\in}{\mathrel}{CMsymbols}{"32}%
 % \let\pi\relax
 % \DeclareMathSymbol{\pi}{\mathord}{CMletters}{"19}
-
+}{\relax}
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
@@ -138,7 +152,7 @@
 	\definecolor{third}{RGB}{0,174,247}%
 }{\relax}
 \ifdefstring{\ELEGANT@color}{gray}{
-	\definecolor{structurecolor}{RGB}{0,0,0}
+	\definecolor{structurecolor}{RGB}{150,150,150}
 	\definecolor{main}{RGB}{150,150,150}%
 	\definecolor{second}{RGB}{150,150,150}%
 	\definecolor{third}{RGB}{150,150,150}%
@@ -166,7 +180,7 @@
 	\definecolor{second3}{RGB}{255,134,24}%
 	\definecolor{third3}{RGB}{0,174,247}%
 % gray color
-	\definecolor{structure4}{RGB}{0,0,0}
+	\definecolor{structure4}{RGB}{150,150,150}
 	\definecolor{main4}{RGB}{150,150,150}%
 	\definecolor{second4}{RGB}{150,150,150}%
 	\definecolor{third4}{RGB}{150,150,150}%
@@ -205,7 +219,7 @@
 \newtoks\institute
 \newtoks\subtitle
 
-\RequirePackage{natbib}
+\RequirePackage[sort&compress]{natbib}
 \setlength{\bibsep}{0.0pt}
 \def\bibfont{\footnotesize}
 
@@ -223,8 +237,13 @@
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
 
+\AtBeginDocument{
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+}
 %% 常用宏包
 \linespread{1.3}
+
 \RequirePackage{graphicx}
 %\RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
@@ -232,8 +251,8 @@
 \RequirePackage{multicol}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
-\RequirePackage{makecell,lipsum,hologo,setspace}
-
+\RequirePackage{makecell,lipsum,hologo}
+\usepackage{setspace}
 
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
@@ -250,7 +269,10 @@
 \newcommand\figref[1]{\textbf{图}~\ref{#1}}
 \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
 \renewcommand{\chaptername}{第 \thechapter\;章}
-\RequirePackage[authoryear]{gbt7714}
+\ifdefstring{\ELEGANT@cite}{authoryear}{
+\RequirePackage[authoryear]{gbt7714}}{\relax}
+\ifdefstring{\ELEGANT@cite}{numbers}{
+\RequirePackage[numbers]{gbt7714}}{\relax}
 % \bibliographystyle{aer}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
@@ -286,7 +308,7 @@
 %% device settings
 
 \RequirePackage{geometry}
-
+\RequirePackage{marginnote}
 \ifdefstring{\ELEGANT@device}{normal}{
 \geometry{
 	a4paper,
@@ -294,7 +316,14 @@
 	headheight=2.17cm,
 	headsep=4mm,
 	footskip=12mm
-}}{\relax}
+}
+\ifdefstring{\ELEGANT@marginpar}{margintrue}{
+\geometry{
+	marginparwidth=6cm, marginparsep=5mm,
+	left=1.5cm,right=7.5cm,
+}
+}{\relax}
+}{\relax}
 
 \ifdefstring{\ELEGANT@device}{pad}{
 \geometry{
@@ -550,7 +579,7 @@
 }}{\par}
 \newenvironment{solution}{\par\noindent\textbf{\color{main}
 	\ifdefstring{\ELEGANT@lang}{en}{Solution}{解}
-}}{\par}
+}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{\vskip2ex\par}
 \newenvironment{property}{\par\noindent\textbf{\color{third}
 	\ifdefstring{\ELEGANT@lang}{en}{Property}{性质}
 }}{\par}
@@ -587,6 +616,13 @@
 \end{multicols}
 \end{tcolorbox}}
 
+\RequirePackage{adforn}
+\newenvironment{problemset}[1][\ifdefstring{\ELEGANT@lang}{en}{\textbf{\chaptername\; Exercise}}{\textbf{\chaptername\; 习题}}]{
+\begin{center}
+\textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
+\end{center}
+\begin{enumerate}[label=\textcolor{structurecolor}{\arabic*.}]}{%
+\end{enumerate}}
 
 \ifdefstring{\ELEGANT@result}{noanswer}{
 	\AtBeginDocument{
@@ -621,7 +657,7 @@
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
 
 %%封面
-\newcommand*{\equote}[1]{\def\@equote{#1}}
+\newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 
 \def\IfEmpty#1{%
   \edef\1{\the#1}
@@ -684,7 +720,10 @@
 	\end{tikzpicture}
 	\end{minipage}
 	\vfill
-	\centerline{\itshape \@equote}
+	\begin{center}
+	\setstretch{1.3}
+	\parbox[t]{0.7\textwidth}{\centering \itshape \@extrainfo}
+	\end{center}
 	\vfill
 \end{titlepage}
 \restoregeometry
@@ -714,11 +753,37 @@
 	commentstyle=\color{gray},
 	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle},
 	emphstyle={\color{frenchplum}},
-	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,equote,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
+	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
 	frame=single,
 	tabsize=2,
 	rulecolor=\color{structurecolor},
 	framerule=0.2pt,
 	columns=flexible,
 	% backgroundcolor=\color{lightgrey}
+}
+
+\definecolor{tcolor}{RGB}{255,127,  0} % default: 0,124,53
+\definecolor{lcolor}{RGB}{255,178,102} % default: 153,255,153
+\definecolor{pcolor}{RGB}{251,204,231} % default: 216,255,216
+
+\RequirePackage{bm}
+\newif\ifstartedinmathmode
+\newcommand{\elegantpar}[2]{%
+ \relax\ifmmode\startedinmathmodetrue\else\startedinmathmodefalse\fi
+  {\color{second}\ifstartedinmathmode \ensuremath{\bm\langle #1 \bm\rangle}\else $\bm\langle$#1$\bm\rangle$\fi}%
+  \begin{tikzpicture}[remember picture, baseline=-0.75ex]%
+    \node[coordinate] (inText) {};%
+  \end{tikzpicture}%
+  \marginnote{%
+    \renewcommand{\baselinestretch}{1.0}%
+    \begin{tikzpicture}[remember picture]%
+      \draw node[fill= third!20, rounded corners,text width=\marginparwidth] (inNote){\footnotesize #2};%
+    \end{tikzpicture}%
+    }%
+  \begin{tikzpicture}[remember picture, overlay]%
+    \draw[draw = second]
+      ([yshift=-0.55em] inText)
+        -| ([xshift=-0.55em] inNote.west)
+        -| (inNote.west);%
+  \end{tikzpicture}%
 }
