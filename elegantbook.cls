@@ -240,6 +240,7 @@
 \AtBeginDocument{
 \setlength{\abovedisplayskip}{3pt}
 \setlength{\belowdisplayskip}{3pt}
+\setcounter{tocdepth}{1}
 }
 %% 常用宏包
 \linespread{1.3}
@@ -251,8 +252,7 @@
 \RequirePackage{multicol}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
-\RequirePackage{makecell,lipsum,hologo}
-\usepackage{setspace}
+\RequirePackage{makecell,lipsum,hologo,setspace}
 
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
@@ -706,10 +706,10 @@
 		\color{gray}\normalsize
 		{\renewcommand{\arraystretch}{0.618}
 		\begin{tabular}{l} 
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Author: }}{\kaishu 作者：} \@author \\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute: }}{\kaishu 组织：} \the\institute\\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Date: }}{\kaishu 时间：} \@date\\
-			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Version: }}{\kaishu 版本：} \the\version\\
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Author:}}{\kaishu 作者：} \@author \\
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute:}}{\kaishu 组织：} \the\institute\\
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Date:}}{\kaishu 时间：} \@date\\
+			\ifdefstring{\ELEGANT@lang}{en}{\textbf{Version:}}{\kaishu 版本：} \the\version\\
 		\end{tabular}}
 	\end{minipage}
 	\begin{minipage}[c]{0.27\linewidth}
@@ -741,7 +741,7 @@
     \lst@ifdisplaystyle\small\fi
 }
 
-\lstset{basicstyle=\ttfamily,style=mystyle}
+\lstset{basicstyle=\ttfamily,style=mystyle,breaklines=true}
 
 \definecolor{lightgrey}{rgb}{0.9,0.9,0.9}
 \definecolor{frenchplum}{RGB}{190,20,83}
@@ -751,9 +751,9 @@
 	breaklines=true,
 	keywordstyle=\color{winered},
 	commentstyle=\color{gray},
-	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle},
+	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,marginnote,ctex,listings},
 	emphstyle={\color{frenchplum}},
-	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents},
+	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents,elegantpar,numbers,authoryear,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote},
 	frame=single,
 	tabsize=2,
 	rulecolor=\color{structurecolor},
@@ -761,10 +761,6 @@
 	columns=flexible,
 	% backgroundcolor=\color{lightgrey}
 }
-
-\definecolor{tcolor}{RGB}{255,127,  0} % default: 0,124,53
-\definecolor{lcolor}{RGB}{255,178,102} % default: 153,255,153
-\definecolor{pcolor}{RGB}{251,204,231} % default: 216,255,216
 
 \RequirePackage{bm}
 \newif\ifstartedinmathmode
