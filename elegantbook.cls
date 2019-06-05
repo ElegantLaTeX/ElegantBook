@@ -268,12 +268,14 @@
 \renewcommand{\indexname}{索\hspace{2em}引}
 \newcommand\figref[1]{\textbf{图}~\ref{#1}}
 \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
-\renewcommand{\chaptername}{第 \thechapter\;章}
+\renewcommand{\chaptername}{第 \thechapter\,章}
 \ifdefstring{\ELEGANT@cite}{authoryear}{
-\RequirePackage[authoryear]{gbt7714}}{\relax}
+	\RequirePackage[authoryear]{gbt7714}
+}{\relax}
 \ifdefstring{\ELEGANT@cite}{numbers}{
-\RequirePackage[numbers]{gbt7714}}{\relax}
-% \bibliographystyle{aer}
+	\RequirePackage[numbers]{gbt7714}
+}{\relax}
+\bibliographystyle{abbrv}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
 \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
@@ -526,9 +528,9 @@
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \newenvironment{example}[1][]{
- 		\refstepcounter{exam}\par\noindent\textbf{\color{main}{
+ 		\refstepcounter{exam}\par\noindent\textbf{\color{main}{%
  			\ifdefstring{\ELEGANT@lang}{en}{Example}{例}
- 		}\theexam #1 }\rmfamily %
+ 		}\theexam #1 \,}\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -538,9 +540,9 @@
 \setcounter{exer}{0}
 \renewcommand{\theexer}{\thechapter.\arabic{exer}}
 \newenvironment{exercise}[1][]{
- 		\refstepcounter{exer}\par\noindent\makebox[-3pt][r]{\scriptsize\color{red!90}\HandPencilLeft\quad}\textbf{\color{main}{
+ 		\refstepcounter{exer}\par\noindent\makebox[-3pt][r]{\scriptsize\color{red!90}\HandPencilLeft\quad}\textbf{\color{main}{%
  			\ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
- 		}\theexer #1 }\rmfamily %
+ 		}\theexer #1 \,}\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
@@ -552,39 +554,39 @@
 \newenvironment{problem}[1][]{
  		\refstepcounter{prob}\par\noindent\textbf{\color{main}{%
  			\ifdefstring{\ELEGANT@lang}{en}{Problem}{例题}
- 		}\theprob #1 }\rmfamily %
+ 		}\theprob #1 \,}\rmfamily %
  	}{
  		\par\medskip\ignorespacesafterend %
  	}
 
 
 
-\newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Note}{注意}
+\newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{second}%
+	\ifdefstring{\ELEGANT@lang}{en}{Note}{注意}\,
 }}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{\par}
 
-\newenvironment{proof}{\par\noindent\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Proof}{证明}
+\newenvironment{proof}{\par\noindent\textbf{\color{second}%
+	\ifdefstring{\ELEGANT@lang}{en}{Proof}{证明}\;
 }\color{black!90}\small}{
 %\hfill$\Box$\quad
 \par}
-\newenvironment{remark}{\noindent\textbf{\color{second}
-	\ifdefstring{\ELEGANT@lang}{en}{Remark}{注}
+\newenvironment{remark}{\noindent\textbf{\color{second}%
+	\ifdefstring{\ELEGANT@lang}{en}{Remark}{注}\,
 }}{\par}
-\newenvironment{assumption}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Assumption}{假设}
+\newenvironment{assumption}{\par\noindent\textbf{\color{third}%
+	\ifdefstring{\ELEGANT@lang}{en}{Assumption}{假设}\,
 }}{\par}
-\newenvironment{conclusion}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Conclusion}{结论}
+\newenvironment{conclusion}{\par\noindent\textbf{\color{third}%
+	\ifdefstring{\ELEGANT@lang}{en}{Conclusion}{结论}\,
 }}{\par}
-\newenvironment{solution}{\par\noindent\textbf{\color{main}
-	\ifdefstring{\ELEGANT@lang}{en}{Solution}{解}
+\newenvironment{solution}{\par\noindent\textbf{\color{main}%
+	\ifdefstring{\ELEGANT@lang}{en}{Solution}{解}\;
 }\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{\vskip2ex\par}
-\newenvironment{property}{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{Property}{性质}
+\newenvironment{property}{\par\noindent\textbf{\color{third}%
+	\ifdefstring{\ELEGANT@lang}{en}{Property}{性质}\;
 }}{\par}
 \newenvironment{custom}[1]{\par\noindent\textbf{\color{third}
-	\ifdefstring{\ELEGANT@lang}{en}{#1}{#1}
+	\ifdefstring{\ELEGANT@lang}{en}{#1}{#1}\,
 }}{\par}
 
 \RequirePackage{multicol}
@@ -617,7 +619,7 @@
 \end{tcolorbox}}
 
 \RequirePackage{adforn}
-\newenvironment{problemset}[1][\ifdefstring{\ELEGANT@lang}{en}{\textbf{\chaptername\; Exercise}}{\textbf{\chaptername\; 习题}}]{
+\newenvironment{problemset}[1][\ifdefstring{\ELEGANT@lang}{en}{\textbf{\chaptername\, Exercise}}{\textbf{\chaptername\, 习题}}]{
 \begin{center}
 \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
 \end{center}
@@ -653,8 +655,8 @@
 \renewcommand{\headrulewidth}{1pt}
 % \renewcommand{\headrule}{}
 \fancypagestyle{plain}{\renewcommand{\headrulewidth}{0pt}\fancyhf{}\renewcommand{\headrule}{}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection\; #1}{} }
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername \; #1\;}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\, #1}{} }
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername \, #1\,}{}}
 
 %%封面
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
