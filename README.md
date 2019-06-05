@@ -12,13 +12,13 @@
 
 ElegantBook is designed for books. Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues or contact us at elegantlatex2e@gmail.com.
 
-如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。最近我们新建了一个 QQ 用户交流群（Q 群：692108391），欢迎加入。
+ElegantBook 是为 LaTeX 书籍写作而设计的模板，如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。QQ 用户交流群：692108391，欢迎加入。
 
 **注意：** 由于新版本进行了重构，并且 3.6 版本对于封面进行了改版，3.6 以后的版本并不兼容之前版本，如果你想把之前版本的文件转为 3.6 以后的版本，请查看[跨版本转换](https://github.com/ElegantLaTeX/ElegantBook/wiki/convert)。
 
 **重要提示：出于某些因素的考虑，ElegantLaTeX 项目自 2019 年 5 月 20 日开始，不再接受任何非作者预约性质的提交（pull request)！如果你想改进模板，你可以给我们提交 issue，或者可以在遵循协议的情况下，克隆到自己仓库下进行修改**。
 
-# 致谢
+# Acknowledgement 致谢
 
 2019 年 5 月 20 日，ElegantBook 模板在 Github 上的 Star 数达到了 100，这对于 ElegantLaTeX 系列模板是一个非常重要的里程碑！
 
@@ -47,14 +47,14 @@ ElegantBook is designed for books. Just enjoy it! If you have any questions, sug
 
 再次感谢大家对于模板的喜爱！
 
-# License
+# License 协议
 
 This work is released under the LaTeX Project Public License, v1.3c or later. 
 
 本模板发布遵循 LaTeX 项目公共许可证 1.3 c 或更高版本。如果是衍生作品，请务必加入协议声明和模板信息（github、CTAN 地址）。
 
-# 衍生与拓展开发
+## Derived Works 衍生与拓展开发
 
 + [ElegantBookdown](https://github.com/XiangyunHuang/ElegantBookdown)：[XiangyunHuang](https://github.com/XiangyunHuang) 开发并维护的基于 ElegantBook 的 Bookdown 模板。
-+ [bookdownplus](https://github.com/pzhaonet/bookdownplus)：应网友要求，[https://github.com/pzhaonet](https://github.com/pzhaonet) 在 bookdownplus 收录了 ElegantPaper 模板，并为 Mac 做了字体适配。
-+ [PanBook](https://github.com/annProg/PanBook)：[annProg](https://github.com/annProg) 开发并维护的基于 Markdown 写作的工作流，收录了 ElegantBook 和 ElegantPaper 模板（有改动）。
++ [bookdownplus](https://github.com/pzhaonet/bookdownplus)：应网友要求，[pzhaonet](https://github.com/pzhaonet) 在 bookdownplus 收录了 ElegantPaper 模板，并为 Mac 做了字体适配。
++ [PanBook](https://github.com/annProg/PanBook)：[annProg](https://github.com/annProg) 开发并维护的基于 Markdown 写作的工作流，收录了 ElegantBook 和 ElegantPaper 模板。
