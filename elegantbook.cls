@@ -411,21 +411,21 @@
         colframe=main,  
         colback=main!5,
         colbacktitle=main, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
+        overlay unbroken and last={\node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {\textcolor{main}{$\clubsuit$}}; }
     },
     thmstyle/.style={
         common,
         colframe=second,  
         colback=second!5,
         colbacktitle=second, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
+        overlay unbroken and last={\node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {\textcolor{second}{$\heartsuit$}}; }
     },
     propstyle/.style={
         common,
         colframe=third,  
         colback=third!5,
         colbacktitle=third, 
-        overlay unbroken and last={\node[anchor=south east, outer sep=6pt] at (\textwidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
+        overlay unbroken and last={\node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {\textcolor{third}{$\spadesuit$}}; }
     },
 }
 
