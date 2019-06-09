@@ -25,6 +25,7 @@
 \DeclareStringOption[numbers]{cite}
 \DeclareStringOption[newtxmath]{math}
 \DeclareStringOption[marginfalse]{marginpar}
+\DeclareStringOption[onecol]{toc}
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color=green}}
 \DeclareVoidOption{cyan}{\ekv{color=cyan}}
@@ -56,6 +57,10 @@
 
 \DeclareVoidOption{margintrue}{\ekv{marginpar=margintrue}}
 \DeclareVoidOption{marginfalse}{\ekv{marginpar=marginfalse}}
+
+\DeclareVoidOption{onecol}{\ekv{toc=onecol}}
+\DeclareVoidOption{twocol}{\ekv{toc=twocol}}
+
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
@@ -242,6 +247,17 @@
 \setlength{\belowdisplayskip}{3pt}
 \setcounter{tocdepth}{1}
 }
+
+\ifdefstring{\ELEGANT@toc}{twocol}{
+\renewcommand{\tableofcontents}{%
+\setlength{\columnsep}{2em}
+%\setlength{\columnseprule}{.8pt}
+\begin{multicols}{2}[\chapter*{\contentsname}]%
+  \@starttoc{toc}%
+\end{multicols}}
+}{\relax}
+
+
 %% 常用宏包
 \linespread{1.3}
 
