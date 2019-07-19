@@ -288,7 +288,6 @@
 \ifdefstring{\ELEGANT@cite}{numbers}{
 	\RequirePackage[numbers]{gbt7714}
 }{\relax}
-\bibliographystyle{abbrv}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
 \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
@@ -323,7 +322,6 @@
 %% device settings
 
 \RequirePackage{geometry}
-\RequirePackage{marginnote}
 \ifdefstring{\ELEGANT@device}{normal}{
 \geometry{
 	a4paper,
@@ -332,12 +330,6 @@
 	headsep=4mm,
 	footskip=12mm
 }
-\ifdefstring{\ELEGANT@marginpar}{margintrue}{
-\geometry{
-	marginparwidth=6cm, marginparsep=5mm,
-	left=1.5cm,right=7.5cm,
-}
-}{\relax}
 }{\relax}
 
 \ifdefstring{\ELEGANT@device}{pad}{
@@ -631,10 +623,14 @@
 \RequirePackage{adforn}
 \newenvironment{problemset}[1][\ifdefstring{\ELEGANT@lang}{en}{\textbf{\chaptername\, Exercise}}{\textbf{\chaptername\, 习题}}]{
 \begin{center}
+\ifdefstring{\ELEGANT@lang}{en}{\addcontentsline{toc}{section}{\chaptername\, Exercise} }{\addcontentsline{toc}{section}{\chaptername\, 习题}}
 \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
 \end{center}
 \begin{enumerate}[label=\textcolor{structurecolor}{\arabic*.}]}{%
 \end{enumerate}}
+
+\def\relsec{\endgroup start}
+\def\endrelsec{end\begingroup\def \@currenvir {relsec}}
 
 \ifdefstring{\ELEGANT@result}{noanswer}{
 	\AtBeginDocument{
