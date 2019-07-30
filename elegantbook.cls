@@ -113,18 +113,15 @@
 % \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{anyfontsize}
 \ifdefstring{\ELEGANT@math}{newtxmath}{
-\DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
-\DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
-\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
 % \let\sum\relax
 % \DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}%
 % \let\int\relax
 % \DeclareMathSymbol{\int}{\mathop}{CMlargesymbols}{"5A}%
 \let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
-\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
-\DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
-\DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"48}
-\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+\DeclareMathSymbol{\sumop}{\mathop}{largesymbols}{"50}
+\DeclareMathSymbol{\intop}{\mathop}{largesymbols}{"52}
+\DeclareMathSymbol{\ointop}{\mathop}{largesymbols}{"48}
+\DeclareMathSymbol{\prodop}{\mathop}{largesymbols}{"51}
 % \let\partial\relax
 % \DeclareMathSymbol{\partial}{\mathord}{CMletters}{"40}%
 % \let\in\relax
