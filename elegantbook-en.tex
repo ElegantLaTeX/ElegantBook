@@ -6,7 +6,7 @@
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
-\version{3.08}
+\version{3.09}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
 
@@ -42,16 +42,8 @@ Contact Infos:
 \section{ElegantBook Updates}
 What\rq s new in this version:
 \begin{enumerate}
-   \item Fix \lstinline|\part|.
-   \item Introduce pad mode.
-   \item Support mtpro2 package.
-   \item Revise default format of references to numbers.
-   \item Include environment for chapter introduction.
-   \item Include environment for problem set.
-   \item Include margin note using \lstinline{\elegantpar} (beta).
-   \item Reduce line spacing for equations.
-   \item Turn \lstinline{\equote} into \lstinline{\extrainfo}, with multi-line display.
-   \item Polish documentation by including acknowledgement, etc.
+   \item Remove \lstinline|\elegantpar|;
+   \item Fix symbol font settings (by \href{muzimuzhi}{https://github.com/muzimuzhi});
 \end{enumerate}
 
 \begin{note}
@@ -92,7 +84,7 @@ Recruit Support Members for Elegant\LaTeX{} to translate template OGs(Chinese ->
 Thank our best support members for their selfless work!
 \begin{itemize}
 	\item OG Translator: \href{https://github.com/peggy2006xzyz}{YPY};
-	\item Wiki Maintainer: \href{https://github.com/izinngo}{Ingo Zinngo};
+	\item Wiki Maintainer: \href{https://github.com/izinngo}{Ingo Zinngo}, \href{Xiaohao890809}{https://github.com/xiaohao890809};
 	\item QQ Group Manager: \href{https://github.com/sikouhjw}{Sikouhjw}.
 \end{itemize}
 
@@ -123,9 +115,13 @@ The explanation right of the tip usage belongs to Elegant\LaTeX{} with no superv
 		\toprule
 		Tipper   & Amount & Date & Channel \\
 		\midrule
-		Lerh  & 10 RMB  & 2019/5/15 & Wechat \\
-		Yueguodipingxian & 10 RMB   & 2019/5/15 & Wechat \\
-		Dapeng & 20 RMB & 2019/5/27 & Wechat\\
+		Lerh  & 10 RMB  & 2019/05/15 & Wechat \\
+		Yueguodipingxian & 10 RMB   & 2019/05/15 & Wechat \\
+		Dapeng & 20 RMB & 2019/05/27 & Wechat\\
+		Anonymous & 10 RMB & 2019/05/30 & Wechat \\
+		\href{http://www.latexstudio.net/}{latexstudio.net} & 666 RMB & 2019/06/05 & Alipay \\
+		Cassis & 11 RMB & 2019/06/30 & Wechat \\
+		Anonymous & 10 RMB & 2019/07/23 & Wechat \\
 		\bottomrule
 	\end{tabular}%
 \end{table}%
@@ -505,24 +501,6 @@ Let's continue using our application training example. In this case, we'd want t
 	\item Find the slope of the line $5x - 5y = 7$.
 \end{problemset}
 
-\chapter{Margin Notes}
-For version 3.08, we introduce margin note option and \lstinline{\elegantpar} (Beta). In this template, margin note option \lstinline{marginpar} is included. If \lstinline{marginpar=margintrue}, the width of both sides will reduce at least 1.5cm. If \lstinline{marginpar=marginfalse}, the width of sides will remain unchanged. Margin note option works under \lstinline{device=normal} only.
-
-Margin note option can be activated using \lstinline{\marginpar} built in \LaTeX{} or \lstinline{\marginnote} command in \lstinline{marginnote}. For more information, refer to \href{https://en.wikibooks.org/wiki/LaTeX/Footnotes_and_Margin_Notes#Margin_Notes}{Margin Notes} or \LaTeX{} books.
-
-\lstinline{\elegantpar} is introduced in this version. Note that TikZ overlay is used in this command, hence you have to compile three times to get the right display effect.
-
-%\setlength{\marginparwidth}{2.5cm}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et \elegantpar{dolore magna aliqua}{This is Beautiful the elegantpar Style for English Text}. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-\begin{equation}
-E = m\elegantpar{c^{2}}{$E=mc^2$}
-\end{equation}
 
 \chapter{FAQ}
 

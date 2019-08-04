@@ -93,44 +93,23 @@
 
 \RequirePackage{ifxetex}
 
-% \ifxetex
-% 	\RequirePackage{fontenc}
-% \else
-% 	\RequirePackage[T1]{fontenc}
-% \fi
+
 
 \RequirePackage{newtxtext}
-\ifdefstring{\ELEGANT@math}{newtxmath}{
-\RequirePackage{newtxmath}
-}{\relax}
-
-
-
-% font setting for text and math
-% \RequirePackage[T1]{fontenc}
-% \RequirePackage{newtxtext}
-% \RequirePackage{newtxmath}
-% \RequirePackage[scale=0.85]{newtxtt}  
 \RequirePackage{anyfontsize}
 \ifdefstring{\ELEGANT@math}{newtxmath}{
+\RequirePackage{newtxmath}
 \DeclareSymbolFont{CMletters}     {OML}{cmm} {m}{it}%
 \DeclareSymbolFont{CMsymbols}     {OMS}{cmsy}{m}{n}%
 \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}%
-% \let\sum\relax
-% \DeclareMathSymbol{\sum}{\mathop}{CMlargesymbols}{"50}%
-% \let\int\relax
-% \DeclareMathSymbol{\int}{\mathop}{CMlargesymbols}{"5A}%
-\let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
+\let\intop\relax
+\let\sumop\relax
+\let\ointop\relax
+\let\prodop\relax
 \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
 \DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
 \DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"48}
 \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
-% \let\partial\relax
-% \DeclareMathSymbol{\partial}{\mathord}{CMletters}{"40}%
-% \let\in\relax
-%\DeclareMathSymbol{\in}{\mathrel}{CMsymbols}{"32}%
-% \let\pi\relax
-% \DeclareMathSymbol{\pi}{\mathord}{CMletters}{"19}
 }{\relax}
 
 % ----- Handle Colors -----
@@ -740,7 +719,6 @@
 
 
 
-
 \RequirePackage{listings} 
 \renewcommand{\ttdefault}{cmtt}
 \lstdefinestyle{mystyle}{
@@ -771,23 +749,4 @@
 }
 
 \RequirePackage{bm}
-\newif\ifstartedinmathmode
-\newcommand{\elegantpar}[2]{%
- \relax\ifmmode\startedinmathmodetrue\else\startedinmathmodefalse\fi
-  {\color{second}\ifstartedinmathmode \ensuremath{\bm\langle #1 \bm\rangle}\else $\bm\langle$#1$\bm\rangle$\fi}%
-  \begin{tikzpicture}[remember picture, baseline=-0.75ex]%
-    \node[coordinate] (inText) {};%
-  \end{tikzpicture}%
-  \marginnote{%
-    \renewcommand{\baselinestretch}{1.0}%
-    \begin{tikzpicture}[remember picture]%
-      \draw node[fill= third!20, rounded corners,text width=\marginparwidth] (inNote){\footnotesize #2};%
-    \end{tikzpicture}%
-    }%
-  \begin{tikzpicture}[remember picture, overlay]%
-    \draw[draw = second]
-      ([yshift=-0.55em] inText)
-        -| ([xshift=-0.55em] inNote.west)
-        -| (inNote.west);%
-  \end{tikzpicture}%
-}
+
