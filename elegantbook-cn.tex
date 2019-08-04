@@ -6,7 +6,7 @@
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
-\version{3.08}
+\version{3.09}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. --- M. Moore}
 
@@ -44,18 +44,10 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 \section{ElegantBook 更新说明}
 
-此次更新主要涉及
+此次更新主要有
 \begin{enumerate}
-\item 修复 \lstinline|\part| 命令；
-\item 增加 pad 模式；
-\item 增加 mtpro2 宏包选项支持；
-\item 修改参考文献默认为 numbers 格式；
-\item 增加章节介绍 introduction 环境；
-\item 增加章节习题 problemset 环境；
-\item 增加旁注，\lstinline{\elegantpar} 命令（测试）；
-\item 减少公式前后距离；
-\item \lstinline{\equote} 改为 \lstinline{\extrainfo}，并且多行显示；
-\item 完善文档，增加致谢等部分。
+\item 删除 \lstinline{\elegantpar} 命令；
+\item 修复符号字体设置（by \href{muzimuzhi}{https://github.com/muzimuzhi}）；
 \end{enumerate}
 
 \begin{note}
@@ -97,6 +89,15 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 \section{协作人员招募}
 招募 Elegant\LaTeX{} 的协作人员，没有工资。工作内容：翻译 Elegant\LaTeX{} 系列模板相关的文稿（中文->英文），维护模板的 wiki（主要涉及 Markdown 语法），如果有公众号文稿写作经历的话，也可以帮忙写微信稿。本公告长期有效。
 
+目前 ElegantLaTeX 共有 3 名协作人员，分别是
+\begin{itemize}
+	\item 官方文档翻译: \href{https://github.com/peggy2006xzyz}{YPY};
+	\item Github 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
+	\item QQ 群管理员: \href{https://github.com/sikouhjw}{Sikouhjw}.
+\end{itemize}
+
+在此感谢他们无私的奉献！
+
 \section{致谢}
 2019 年 5 月 20 日，ElegantBook 模板在 Github 上的 star 数达到了 100，并且 21 日上了 Github 网站 \TeX{} 语言的\href{https://github.com/trending/tex?since=daily}{日趋势榜单}。这对于 Elegant\LaTeX{} 系列模板都是一个里程碑！
 
@@ -132,6 +133,8 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 	大熊 &  20 元 & 2019/05/27 & 微信 \\
 	佚名 & 10 元 & 2019/05/30 & 微信\\
 	\href{http://www.latexstudio.net/}{latexstudio.net} & 666 元 & 2019/06/05 & 支付宝\\
+	Cassis & 11 元 & 2019/06/30 & 微信\\
+	* 君 & 10 元 & 2019/07/23 & 微信\\
     \bottomrule
     \end{tabular}%
 \end{table}%
@@ -159,6 +162,10 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 \documentclass[pad]{elegantbook} %or
 \documentclass[device=pad]{elegantbook}
 \end{lstlisting}
+
+\begin{equation}
+\int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
+\end{equation}
 
 \section{颜色主题}
 本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
@@ -244,8 +251,8 @@ third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
       \item \textcolor{second}{\textbf{theorem、lemma、corollary}} 环境，颜色为 \textcolor{second} {second}；
       \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
    \end{itemize}
-\item \textit{示例类环境}，有 \textbf{example、exercise、problem} 环境（对应于例，练习，例题），自动编号，编号以章节为单位。
-\item \textit{证明类环境}，有 \textbf{proof、note} 环境，特点是，有引导符或者结尾符，\textbf{note} 环境有引导符号，\textbf{proof} 环境有证明完毕符号。
+\item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
+\item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
 \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property，remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
 \end{itemize}
 
@@ -296,7 +303,7 @@ This is the content of example environment.
 
 \begin{itemize}
    \item 示例环境（example）、练习（exercise）与例题（problem）章节自动编号；
-   \item 注意（note）环境有提醒引导符，证明（proof）环境有证明结束符；
+   \item 注意（note），练习（exercise）环境有提醒引导符；
    \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
 \end{itemize}
 
@@ -422,6 +429,10 @@ The content of introduction.
 如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。
 \end{remark}
 
+
+\section{旁注}
+在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！
+
 \chapter{ElegantBook 写作示例}
 
 \begin{introduction}
@@ -486,6 +497,10 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 \end{example}
 
+\begin{proof}
+测试证明环境
+\end{proof}
+
 \begin{solution}
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 \end{solution}
@@ -536,30 +551,6 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \item 证明：不为零矩阵的幂零矩阵不能对角化。
 \item 设 $A = (a_{ij})$ 是数域 $K$ 上的一个 $n$ 级上三角矩阵，证明：如果 $a_{11} = a_{22} = \cdots = a_{nn}$，并且至少有一个 $a_{kl} \not = 0 (k < l)$，则 $A$ 一定不能对角化。
 \end{problemset}
-
-\chapter{旁注}
-在 3.08 版本，我们加入了旁注（边注）等设置以及 \lstinline{\elegantpar} 命令，不过目前处于测试阶段。如果你想整个文档都加入旁注，一般的方法是，重新设置旁注的大小。本模板加入了一个旁注选项 \lstinline{marginpar}，如果加入旁注 \lstinline{marginpar=margintrue}，则会减少版芯两边的宽度（减少至 1.5cm），如果不加入旁注 \lstinline{marginpar=marginfalse}（默认），则维持两边距离不变。旁注选项仅对 \lstinline{device=normal} 试用，pad 模式并不支持。
-
-旁注命令可以使用 \LaTeX{} 自带的 \lstinline{\marginpar} 命令或者 \lstinline{marginnote}  宏包的  \lstinline{\marginnote}  命令，旁注的使用，请参考维基百科：\href{https://en.wikibooks.org/wiki/LaTeX/Footnotes_and_Margin_Notes#Margin_Notes}{旁注}或者 \LaTeX {}书籍。
-
-本模板还添加了一个 \lstinline{\elegantpar} 命令，需要注意的是，由于这个命令使用了 TikZ 中的层叠效果（overlay），所以为了得到正确的旁注显示，你需要多次编译（3 次）。\lstinline{\elegantpar} 命令的效果如下。
-
-%\setlength{\marginparwidth}{2.5cm}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et \elegantpar{dolore magna aliqua}{This is Beautiful the elegantpar Style for English Text}. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-\begin{equation}
-a^{2}+b^{2} = \elegantpar{c^{2}}{勾股定理
-\begin{equation*}a^2+b^2=c^2\end{equation*}}
-\end{equation}
- 
- 若夫日出而林霏开，云归而岩穴暝，晦明变化者，山间之朝暮也。野芳发而幽香，佳木秀而繁阴，风霜高洁，水落而石出者，山间之四时也。朝而往，暮而归，四时之景不同，而乐亦无穷也。 
- 
- 至于负者歌于途，行者休于树，前者呼，后者应，\elegantpar{伛偻提携}{指搀扶着走的小孩子}，往来而不绝者，滁人游也。临溪而渔，溪深而鱼肥。酿泉为酒，泉香而酒洌；山肴野蔌，杂然而前陈者，太守宴也。宴酣之乐，非丝非竹，射者中，弈者胜，觥筹交错，起坐而喧哗者，众宾欢也。苍颜白发，颓然乎其间者，太守醉也。$2\elegantpar{x}{方程的解与数学符号的选择无关}=3$。
 
 \chapter{常见问题集}
 
@@ -697,7 +688,10 @@ a^{2}+b^{2} = \elegantpar{c^{2}}{勾股定理
 \sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
 \end{equation}
 
-
+\begin{lstlisting}[language=Python]
+if x==0:
+    print(x)
+\end{lstlisting}
 
 \chapter{最小示例}
 
