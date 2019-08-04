@@ -99,11 +99,17 @@
 \RequirePackage{anyfontsize}
 \ifdefstring{\ELEGANT@math}{newtxmath}{
 \RequirePackage{newtxmath}
+\let\oldwidering\widering
+\let\widering\undefined
+\RequirePackage{yhmath}
+\let\widering\oldwidering
+\RequirePackage{esvect}
+\DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
 \let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
-\DeclareMathSymbol{\sumop}{\mathop}{largesymbols}{"50}
-\DeclareMathSymbol{\intop}{\mathop}{largesymbols}{"52}
-\DeclareMathSymbol{\ointop}{\mathop}{largesymbols}{"48}
-\DeclareMathSymbol{\prodop}{\mathop}{largesymbols}{"51}
+\DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+\DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
+\DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"48}
+\DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
 }{\relax}
 
 % ----- Handle Colors -----
@@ -235,7 +241,7 @@
 %\RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
 \RequirePackage{booktabs}
-\RequirePackage{multicol}
+\RequirePackage{multicol,multirow}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
 \RequirePackage{makecell,lipsum,hologo,setspace}
@@ -628,7 +634,7 @@
 \fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
 \fi
 
-\fancyfoot[c]{\base{structurecolor}{88}}
+\fancyfoot[c]{\catcode`\$=3\relax\base{structurecolor}{88}}
 \renewcommand{\headrule}{\color{structurecolor}\hrule width\textwidth}
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
