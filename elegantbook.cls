@@ -99,16 +99,18 @@
 \RequirePackage{anyfontsize}
 \ifdefstring{\ELEGANT@math}{newtxmath}{
 \RequirePackage{newtxmath}
-\let\oldwidering\widering
-\let\widering\undefined
-\RequirePackage{yhmath}
-\let\widering\oldwidering
-\RequirePackage{esvect}
+\RequirePackage{esint}
+%%% use yhmath pkg, uncomment following code
+% \let\oldwidering\widering
+% \let\widering\undefined
+% \RequirePackage{yhmath}
+% \let\widering\oldwidering
+
+%%% use esvect pkg, uncomment following code
+% \RequirePackage{esvect}
 \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
-\let\intop\relax\let\sumop\relax\let\ointop\relax\let\prodop\relax
+\let\sumop\relax\let\prodop\relax
 \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
-\DeclareMathSymbol{\intop}{\mathop}{CMlargesymbols}{"52}
-\DeclareMathSymbol{\ointop}{\mathop}{CMlargesymbols}{"48}
 \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
 }{\relax}
 
@@ -607,7 +609,7 @@
 \RequirePackage{adforn}
 \newenvironment{problemset}[1][\ifdefstring{\ELEGANT@lang}{en}{\textbf{\chaptername\, Exercise}}{\textbf{\chaptername\, 习题}}]{
 \begin{center}
-\ifdefstring{\ELEGANT@lang}{en}{\addcontentsline{toc}{section}{\chaptername\, Exercise} }{\addcontentsline{toc}{section}{\chaptername\, 习题}}
+% \ifdefstring{\ELEGANT@lang}{en}{\addcontentsline{toc}{section}{\chaptername\, Exercise} }{\addcontentsline{toc}{section}{\chaptername\, 习题}}
 \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
 \end{center}
 \begin{enumerate}[label=\textcolor{structurecolor}{\arabic*.}]}{%
@@ -752,6 +754,6 @@
 	columns=flexible,
 	% backgroundcolor=\color{lightgrey}
 }
-
+\newcommand\bmmax{0}
 \RequirePackage{bm}
 
