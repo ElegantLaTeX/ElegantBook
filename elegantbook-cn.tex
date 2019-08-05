@@ -47,7 +47,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 此次更新主要有
 \begin{enumerate}
 \item 删除 \lstinline{\elegantpar} 命令；
-\item 修复符号字体设置（by \href{muzimuzhi}{https://github.com/muzimuzhi}）；
+\item 修复符号字体设置；
 \end{enumerate}
 
 \begin{note}
@@ -74,7 +74,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 更多关于 \TeX{} Live 2019 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install_latex/releases}{一份简短的安装 \LaTeX{} 的介绍}。
 
 \section{在线使用模板}
-考虑到用户的在线合作需求，我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络通畅的用户可以直接通过 Overleaf 在线使用我们的模板。这样的好处是无需安装 \TeX{} Live 2019，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
+我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络便利的用户可以直接通过 Overleaf 在线使用我们的模板。使用 Overleaf 的好处是无需安装 \TeX{} Live 2019，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
 
 \begin{remark}
 Overleaf 上，中文需要使用 \lstinline{XeLaTeX} 进行编译，英文可以使用 \lstinline{PDFLaTeX} 与 \lstinline{XeLaTeX} 进行编译。
@@ -119,9 +119,9 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 \includegraphics[width=0.5\textwidth]{donate.jpg}
 \end{figure}
 
-赞赏费用的使用解释权归 Elegant\LaTeX{} 所有，并且不接受监督，请自愿理性打赏，10 元以上的赞赏，我们将列入捐赠榜，谢谢各位金主！
+\textbf{赞赏费用的使用解释权归 Elegant\LaTeX{} 所有，并且不接受监督，请自愿理性打赏}。10 元以上的赞赏，我们将列入捐赠榜，谢谢各位金主！
 
-\begin{table}[htbp]
+\begin{table}[!htbp]
   \centering
   \caption{捐赠榜}
     \begin{tabular}{crcc}
@@ -134,7 +134,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 	佚名 & 10 元 & 2019/05/30 & 微信\\
 	\href{http://www.latexstudio.net/}{latexstudio.net} & 666 元 & 2019/06/05 & 支付宝\\
 	Cassis & 11 元 & 2019/06/30 & 微信\\
-	* 君 & 10 元 & 2019/07/23 & 微信\\
+	佚名 & 10 元 & 2019/07/23 & 微信\\
     \bottomrule
     \end{tabular}%
 \end{table}%
@@ -405,7 +405,6 @@ The content of introduction.
 \end{introduction}
 \end{lstlisting}
 
-
 \section{章后习题}
 前面我们介绍了例题和练习两个环境，这里我们再加一个，章后习题（\lstinline{problemset}）环境，用于在每一章结尾，显示本章的练习。使用方法如下
 
@@ -433,6 +432,28 @@ The content of introduction.
 \section{旁注}
 在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！
 
+\section{其他}
+在 3.08 版本中，用户反馈模板在和 \lstinline{yhmath} 以及 \lstinline{esvect} 等宏包搭配使用的时候会出现报错：
+\begin{lstlisting}
+LaTeX Error:
+   Too many symbol fonts declared.
+\end{lstlisting}
+
+根据 \href{https://github.com/muzimuzhi}{muzimuzhi} 的解释是，模板重新定义了数学字体，达到了 {\heiti 最多 16 个数学字体} 的上限，在调用其他宏包的时候，无法新增数学字体。为了减少调用非常用宏包，在此给出如何调用 \lstinline{yhmath} 以及 \lstinline{esvect} 宏包的方法。
+
+请在 \lstinline{elegantbook.cls} 内搜索 \lstinline{yhmath} 或者 \lstinline{esvect}，将你所需要的宏包加载语句取消注释即可。
+\begin{lstlisting}
+%%% use yhmath pkg, uncomment following code
+% \let\oldwidering\widering
+% \let\widering\undefined
+% \RequirePackage{yhmath}
+% \let\widering\oldwidering
+
+%%% use esvect pkg, uncomment following code
+% \RequirePackage{esvect}
+\end{lstlisting}
+
+
 \chapter{ElegantBook 写作示例}
 
 \begin{introduction}
@@ -457,8 +478,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \begin{itemize}
 \item 名词解释
 \begin{definition}{可积性}{int}
-$\vv{AB}$
-设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)\oint_{a}^b\ointop_{a}^b\prod_{i=1}^n$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
+设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
 \begin{equation}
    \label{inter}
    \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
@@ -627,7 +647,9 @@ $\vv{AB}$
 \end{custom}
 
 \begin{solution}
-首先，我们{\heiti 强烈建议你不要去修改字体}！如果你一定坚持修改字体，请在 \lstinline{newtxtext} 宏包加载前加入中文字体设置（\lstinline{xeCJK} 宏包）。如果你选择自定义字体，请设置好 \lstinline{\kaishu}，\lstinline{\heiti} 等命令，否则会报错。如果你看不懂我现在说的，请停止你的字体自定义行为。
+首先，我们{\heiti 强烈建议你不要去修改字体}！如果你一定坚持修改字体，请在 \lstinline{newtxtext} 宏包加载前加入中文字体设置（\lstinline{xeCJK} 宏包）。
+
+如果你选择自定义字体，请设置好 \lstinline{\kaishu}，\lstinline{\heiti} 等命令，否则会报错。如果你看不懂我现在说的，请停止你的字体自定义行为。
 \end{solution}
 
 \begin{custom}{问题}
