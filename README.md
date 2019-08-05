@@ -34,7 +34,7 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，如果你有其他问�
 
 ![](https://github.com/ElegantLaTeX/ElegantBook/wiki/donate.jpg)
 
-赞赏费用的使用解释权归 ElegantLaTeX 所有，并且不接受监督，请自愿理性打赏，10 元以上的赞赏，我们将列入捐赠榜，谢谢各位金主！
+**赞赏费用的使用解释权归 ElegantLaTeX 所有，并且不接受监督，请自愿理性打赏**。10 元以上的赞赏，我们将列入捐赠榜，谢谢各位金主！
 
 
 | 捐赠者   | 金额 |  时间  | 渠道 |
@@ -45,7 +45,7 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，如果你有其他问�
 | 佚名      | 10 RMB |   2019/05/30   | 微信 |
 | [latexstudio.net](http://www.latexstudio.net/)      | 666 RMB |   2019/06/05   | 支付宝 |
 | Cassis | 11 RMB | 2019/06/30 | 微信 |
-| \*君 | 10 RMB | 2019/07/23 | 微信 |
+| 佚名 | 10 RMB | 2019/07/23 | 微信 |
 
 再次感谢大家对于模板的喜爱！
 
