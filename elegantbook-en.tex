@@ -1,4 +1,4 @@
-\documentclass[fancy,blue,11pt]{elegantbook}
+\documentclass[fancy,11pt,twocol]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
@@ -43,11 +43,14 @@ Contact Infos:
 What\rq s new in this version:
 \begin{enumerate}
    \item Remove \lstinline|\elegantpar|;
-   \item Fix symbol font settings (by \href{muzimuzhi}{https://github.com/muzimuzhi});
+   \item Fix math symbol font settings;
+   \item Introduce option \lstinline|twocol| for toc;
+   \item Revise footnote layout;
+   \item Other modifications.
 \end{enumerate}
 
 \begin{note}
-	Since the latest version has witnessed huge reconstruction (with cover change in version 3.06), 3.x is backward incompatible with 2.x. For those who would like to convert documents compiled with earlier version (3.06 or 2.x) to be compatible with latest version, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{conversion}. Questions about version 2.x will not be answered henceforth.
+	Users for 2.x, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{conversion}.
 \end{note}
 
 \section{Installation and Update}
@@ -67,7 +70,7 @@ If you are a \TeX{} Live 2018 user and would like to update to \TeX{} Live 2019,
 
 Excuse me? You are a  C\TeX{}  user? Sorry, this template is incompatible with C\TeX{}.
 
-For more details about the installation and usage of \TeX{} Live 2019, the compatibility of C\TeX{} and \TeX{} Live, installation directory, etc., please refer to OG (Official Guide).
+For more details about the installation and usage of \TeX{} Live 2019, the compatibility of C\TeX{} and \TeX{} Live, please refer to OG (Official Guide) and/or \href{https://github.com/OsbertWang/install_latex/releases}{Install LaTeX v5.1} by OsbertWang.
 
 \section{Online Usage of Templates}
 Considering the online usage of the templates, all the templates are available on Overleaf. Those who enjoy smooth network may feel free to use the templates without \TeX{} Live and to visit your documents anywhere anytime. Search \lstinline{elegantlatex} on Overleaf or visit \href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{search result}, choose the one you prefer and save it to your account, then you can edit yourself or corporate with others if you like. For more infomation about Overleaf, please refer to Overleaf OG.
@@ -75,40 +78,49 @@ Considering the online usage of the templates, all the templates are available o
 \section{User\rq s Selected Works Plan}
 Eight years have passed since the found of Elegant\LaTeX{} Program. It\rq s an honor that our templates are preferred by a lot of users. Hence, in order to promote more interactions among our users and know more about what you need, we are planning to provide a platform to display selected works of our users on Github or our homepage. If you want to show us your work(s), contact us via Email or other ways. Or if you have upload your work(s) on Github or Gitee etc., share the URL(s) with us.
 
+\centerline{\textcolor{red}{\bfseries Wanted!}}
+
 \section{About Pull Request}
 For some reasons, pull request is unacceptable since May 20, 2019. For those who want to help revise the templates, submit issues or clone to your own repository to modify under the constriction of  LPPL-1.3c.
 
 \section{Recruit Support Members}
-Recruit Support Members for Elegant\LaTeX{} to translate template OGs(Chinese -> English), maintain wiki entries using MarkDown, update Wechat articles. No deadline for this recruitment.
+Recruit Support Members for Elegant\LaTeX{} to translate template OGs(Chinese -> English), maintain wiki entries using Markdown, update Wechat articles. No deadline for this recruitment.
 
-Thank our best support members for their selfless work!
+So far, Elegant\LaTeX{} has four Support Members:
 \begin{itemize}
 	\item OG Translator: \href{https://github.com/peggy2006xzyz}{YPY};
-	\item Wiki Maintainer: \href{https://github.com/izinngo}{Ingo Zinngo}, \href{Xiaohao890809}{https://github.com/xiaohao890809};
+	\item Wiki Maintainer: \href{https://github.com/izinngo}{Ingo Zinngo}, \href{https://github.com/xiaohao890809}{Xiaohao890809};
 	\item QQ Group Manager: \href{https://github.com/sikouhjw}{Sikouhjw}.
 \end{itemize}
 
 \section{Acknowledgement}
-The number of stars on Github for ElegantBook reached 100 on May 20, 2019 and was included in the \href{https://github.com/trending/tex?since=daily}{Trending} under the \TeX{} catagory. It is a remarkable moment for Elegant\LaTeX{} !!!
+The number of stars on Github for ElegantBook reached 100 on May 20, 2019\footnote{189 stars by August 18, 2019!}.
 
-Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. \LaTeX{} studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on \LaTeX{} in China.
-
-Thank muzimuzhi for the revision of the template.
+Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. \LaTeX{} studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on \LaTeX{} in China. Thank \href{https://github.com/muzimuzhi}{muzimuzhi} for the revision of the template.
 
 If you like our template, star on Github.
-\begin{figure}[htbp]
+\begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\textwidth]{star.png}
 	\caption{Twinkle, Twinkle, Little Star}
 \end{figure}
-Recently some users have expressed their love for our templates and want to tip us. QR code for donation is now available.
-\begin{figure}[htbp]
+
+\begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{donate.jpg}
+	\includegraphics[width=0.618\textwidth]{star-history.png}
+	\caption{Github Star Trends for Elegant\LaTeX{} (by week)}
+\end{figure}
+
+\section{Donation}
+To express your love for our templates and/or our developers, please do not hesitate to tip us. Since last release of 3.08, we have received about a thousand RMB! (The emergence of a millionaire is on the way. Loading... )
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[width=0.45\textwidth]{donate.jpg}
 \end{figure}
 
 The explanation right of the tip usage belongs to Elegant\LaTeX{} with no supervision. Feel free to tip us. Those who donate more than 10 RMB will be recorded in the Donation List. Thank all the tippers!
-\begin{table}[htbp]
+
+\begin{table}[!h]
 	\centering
 	\caption{Donation List}
 	\begin{tabular}{cccc}
@@ -128,8 +140,7 @@ The explanation right of the tip usage belongs to Elegant\LaTeX{} with no superv
 
 \chapter{ElegantBook Settings}
 
-This template is based on the Standard \LaTeX{} book class, so the options of book class work as well. The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2019. 
-
+This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2019, either \lstinline{PDFLaTeX} or \lstinline{XeLaTeX} works fine.
 
 \section{Languages}
 We defined one option named \lstinline{lang} which has two alternative values, \lstinline{lang=en} (default) and \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
@@ -289,7 +300,7 @@ These are all similar environments with slight differences lies in:
 \end{itemize}
 
 \section{Base Hide Option}
-Hiding the end-of-chapter base is optional, simply type in:
+Hiding the end-of-chapter and end-of-page base is optional, simply type in:
 \begin{lstlisting}
 \documentclass[hide]{elegantbook} %or
 \documentclass[base=hide]{elegantbook}
@@ -298,7 +309,7 @@ Hiding the end-of-chapter base is optional, simply type in:
 
 \section{Cover and Logo}
 
-The cover image used in this template is from \href{https://pixabay.com/en/tea-time-poetry-coffee-reading-3240766/}{pixabay.com}\footnote{Thank China\TeX{} for providing free image source, \href{https://www.pexels.com/}{pexels.com} is strongly recommended.}. The image is completely free and can be used under any circumstance. The cover image size is $1280 \times 1024$. If you would like to change the cover, please crop it according to the size of the cover picture strictly.One free online image clipping site: \href{https://www.befunky.com/create/crop-photo/}{befunky.com}.
+The cover image used in this template is from \href{https://pixabay.com/en/tea-time-poetry-coffee-reading-3240766/}{pixabay.com}\footnote{Thank China\TeX{} for providing free image source, \href{https://www.pexels.com/}{pexels.com} is strongly recommended.}. The image is completely free and can be used under any circumstance. The cover image size is $1280 \times 1024$. If you would like to change the cover, please crop it according to the size of the cover picture strictly. One free online image clipping site: \href{https://www.fotor.com/cn}{fotor.com}. Feel free to join our QQ Group to get more elegant covers.
 
 Aspect ratio of the logo is 1:1 in this guide, i.e. a square picture. To replace the logo, do remember to choose the appropriate picture.
 
@@ -343,9 +354,11 @@ If you want to use \hologo{BibTeX}, you must create a file named \lstinline{refe
 \nocite{*} %include all the bibitems
 \end{lstlisting}
 
-Two more options \lstinline{cite=numbers} and \lstinline{cite=authoryear} are available in this new version, with the default setting as \lstinline{numbers} since those major in science and technology use \lstinline{numbers} more often. For those who major in liberal arts want to use \lstinline{authoryear}, please type in:
+Three more options \lstinline{cite=numbers}, \lstinline{cite=super} and \lstinline{cite=authoryear} are available in this new version, with the default setting as \lstinline{numbers} since those major in science and technology use \lstinline{numbers} and/or \lstinline{cite=super} more often. For those who want to use \lstinline{cite=super} or \lstinline{authoryear}, please type in:
 \begin{lstlisting}
-\documentclass[cite=authoryear]{elegantbook} %or
+\documentclass[cite=super]{elegantbook} % set cite for super style 
+\documentclass[super]{elegantbook}
+\documentclass[cite=authoryear]{elegantbook} % set cite for author-year style
 \documentclass[authoryear]{elegantbook}
 \end{lstlisting}
 
@@ -379,7 +392,7 @@ you will get:
 	\item Angle of Corner
 \end{introduction}
 
-You can change the title of this environment by modifying the optional argument of this environment
+You can change the title of this environment by modifying the optional argument of this environment:
 \begin{lstlisting}
 \begin{introduction}[Brief Introduction]
 ...
@@ -402,8 +415,80 @@ And you will get:
 	\item exercise 3
 \end{problemset}
 \begin{remark}
-If you want to customize the title of  \lstinline{problemset}, please change the optional argument like introduction environment.
+If you want to customize the title of \lstinline{problemset}, please change the optional argument like in introduction environment. In this version the \lstinline{problemset} environment automatically appears in the table of contents but not in the header or footer.
 \end{remark}
+
+\section{Margin Notes}
+In 3.08, we introduced \lstinline{marginpar=margintrue} and \lstinline{\elegantpar} (Beta) with piles of bugs. Hence we decide to remove them in 3.09 and will suspend the options till revolutionary optimization. Sorry for all the bugs! However, we retain the option \lstinline{marginpar} for users to get margin motes by activating \lstinline{marginpar=margintrue} and using \lstinline{\marginpar} or \lstinline{marginnote} packages.
+
+\begin{remark}
+
+Note that text and equation are both available in the margin notes.
+\begin{lstlisting}
+% text
+\marginpar{margin paragraph text}
+
+% equation
+\marginpar{
+\begin{equation}
+	a^2 + b^2 = c^2
+\end{equation}
+}
+\end{lstlisting}
+
+For tables and figures, note that floating environment is not allowed. You have to use \lstinline{includegraphics} or \lstinline{table} and use \lstinline{\captionof} to name it. To get centralized figures or tables, use \lstinline{\centerline} or \lstinline{center}. To learn more, please refer to \href{https://tex.stackexchange.com/questions/5583/caption-of-figure-in-marginpar-and-caption-of-wrapfigure-in-margin}{Caption of Figure in Marginpar}.
+
+\begin{lstlisting}
+% graph with centerline command
+\marginpar{
+	\centerline{
+		\includegraphics[width=0.2\textwidth]{logo.png}
+	}
+	\captionof{figure}{your figure caption}
+}
+
+% graph with center environment
+\marginpar{
+	\begin{center}
+		\includegraphics[width=0.2\textwidth]{logo.png}
+		\captionof{figure}{your figure caption}
+	\end{center}
+}
+\end{lstlisting}
+
+\end{remark}
+
+\section{Hyphens}
+Since the template uses \lstinline{newtx}, please pay attention to the hyphens. For instance,
+\begin{equation}
+\int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
+\end{equation}
+
+The corresponding code is: 
+\begin{lstlisting}
+\begin{equation}
+\int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
+\end{equation}
+\end{lstlisting}
+
+\section{Symbol Fonts}
+Feedback from some 3.08 users claims that error occurs when using our templates with  \lstinline{yhmath}, \lstinline{esvect} and other packages.
+\begin{lstlisting}
+LaTeX Error:
+Too many symbol fonts declared.
+\end{lstlisting}
+
+The reason is that the template redefines font for math so that no new math font is allowed to be added. To use \lstinline{yhmath} and/or \lstinline{esvect}, please locate \lstinline{yhmath} or \lstinline{esvect} in \lstinline{elegantbook.cls}, uncomment corresponding related code.
+\begin{lstlisting}
+%%% use yhmath pkg, uncomment following code
+% \let\oldwidering\widering
+% \let\widering\undefined
+% \RequirePackage{yhmath}
+% \let\widering\oldwidering
+
+%%% use esvect pkg, uncomment following code
+% \RequirePackage{esvect}
+\end{lstlisting}
 
 
 \chapter{ElegantBook Writing Sample}
@@ -513,6 +598,13 @@ Let's continue using our application training example. In this case, we'd want t
 \end{solution}
 
 
+\begin{custom}{Question}
+	\lstinline[breaklines]{Package ctex Error: CTeX fontset `Mac' is unavailable.}
+\end{custom}
+
+\begin{solution}
+	Under Mac, please use \lstinline{XeLaTeX} for Chinese documents.
+\end{solution}
 
 \begin{custom}{Question}
 	Which version should I choose?
@@ -564,7 +656,7 @@ Let's continue using our application training example. In this case, we'd want t
 \end{custom}
 
 \begin{solution}
-	Yes, \lstinline{listings} package is used in ElegantBook, hence language is optional. For global setting, use \lstinline{\lstset}. For more information, please refer to package documentations.
+	Yes, \lstinline{listings} package is used in ElegantBook, hence language is optional(e.g. \lstinline{language=Python}). For global setting, use \lstinline{\lstset}. For more information, please refer to package documentations.
 \end{solution}
 
 

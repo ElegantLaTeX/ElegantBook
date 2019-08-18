@@ -212,7 +212,7 @@
 
 \RequirePackage{enumerate}
 % list/itemize/enumerate setting
-\RequirePackage[shortlabels]{enumitem}
+\RequirePackage[shortlabels,inline]{enumitem}
 \setlist{nolistsep}
 
 % caption settings 
@@ -226,6 +226,8 @@
 \setlength{\abovedisplayskip}{3pt}
 \setlength{\belowdisplayskip}{3pt}
 \setcounter{tocdepth}{1}
+\RequirePackage[flushmargin]{footmisc}
+\setlength{\footnotesep}{12pt}
 }
 
 \ifdefstring{\ELEGANT@toc}{twocol}{
@@ -252,25 +254,28 @@
 
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
-\renewcommand{\contentsname}{目\hspace{2em}录}
-\renewcommand{\figurename}{图}
-\renewcommand{\tablename}{表}
-\renewcommand{\partname}{\color{structurecolor}}
-\renewcommand{\thepart}{第\zhnumber{\arabic{part}}部分}
-\renewcommand{\listfigurename}{插图目录}
-\renewcommand{\listtablename}{表格目录}
-\renewcommand{\bibname}{参考文献}
-\renewcommand{\appendixname}{附录}
-\renewcommand{\indexname}{索\hspace{2em}引}
-\newcommand\figref[1]{\textbf{图}~\ref{#1}}
-\newcommand\tabref[1]{\textbf{表}~\ref{#1}}
-\renewcommand{\chaptername}{第 \thechapter\,章}
-\ifdefstring{\ELEGANT@cite}{authoryear}{
-	\RequirePackage[authoryear]{gbt7714}
-}{\relax}
-\ifdefstring{\ELEGANT@cite}{numbers}{
-	\RequirePackage[numbers]{gbt7714}
-}{\relax}
+	\renewcommand{\contentsname}{目\hspace{2em}录}
+	\renewcommand{\figurename}{图}
+	\renewcommand{\tablename}{表}
+	\renewcommand{\partname}{\color{structurecolor}}
+	\renewcommand{\thepart}{第\zhnumber{\arabic{part}}部分}
+	\renewcommand{\listfigurename}{插图目录}
+	\renewcommand{\listtablename}{表格目录}
+	\renewcommand{\bibname}{参考文献}
+	\renewcommand{\appendixname}{附录}
+	\renewcommand{\indexname}{索\hspace{2em}引}
+	\newcommand\figref[1]{\textbf{图}~\ref{#1}}
+	\newcommand\tabref[1]{\textbf{表}~\ref{#1}}
+	\renewcommand{\chaptername}{第 \thechapter\,章}
+	\ifdefstring{\ELEGANT@cite}{authoryear}{
+		\RequirePackage[authoryear]{gbt7714}
+	}{\relax}
+	\ifdefstring{\ELEGANT@cite}{numbers}{
+		\RequirePackage[numbers]{gbt7714}
+	}{\relax}
+	\ifdefstring{\ELEGANT@cite}{super}{
+		\RequirePackage[super]{gbt7714}
+	}{\relax}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
 \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
@@ -313,6 +318,12 @@
 	headsep=4mm,
 	footskip=12mm
 }
+\ifdefstring{\ELEGANT@marginpar}{margintrue}{
+\geometry{
+	marginparwidth=5cm, marginparsep=5mm,
+	left=2cm,right=7cm,
+}
+}{\relax}
 }{\relax}
 
 \ifdefstring{\ELEGANT@device}{pad}{
@@ -609,7 +620,7 @@
 \RequirePackage{adforn}
 \newenvironment{problemset}[1][\ifdefstring{\ELEGANT@lang}{en}{\textbf{\chaptername\, Exercise}}{\textbf{\chaptername\, 习题}}]{
 \begin{center}
-% \ifdefstring{\ELEGANT@lang}{en}{\addcontentsline{toc}{section}{\chaptername\, Exercise} }{\addcontentsline{toc}{section}{\chaptername\, 习题}}
+\ifdefstring{\ELEGANT@lang}{en}{\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\,}{Chapter} Exercise} }{\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\,}{章节}习题}}
 \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
 \end{center}
 \begin{enumerate}[label=\textcolor{structurecolor}{\arabic*.}]}{%
@@ -632,16 +643,32 @@
 \RequirePackage{lastpage}
 \fancyhf{}
 
-\if@twoside
-\fancyhead[EL,OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\thepage/\pageref*{LastPage}--}
-\fancyhead[ER]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark{}}
-\fancyhead[OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
-\else
-\fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\thepage/\pageref*{LastPage}--}
-\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
-\fi
 
-\fancyfoot[c]{\catcode`\$=3\relax\base{structurecolor}{88}}
+\ifdefstring{\ELEGANT@base}{hide}{
+	\if@twoside
+	\fancyhead[ER,OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+	\fancyhead[El,OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\else
+	\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+	\fancyfoot[c]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
+	\fi
+}{\relax}
+
+
+\ifdefstring{\ELEGANT@base}{show}{
+	\fancyfoot[c]{\catcode`\$=3\relax\base{structurecolor}{88}}
+	\if@twoside
+	\fancyhead[ER,OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
+	\fancyhead[EL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\fancyhead[OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+	\else
+	\fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
+	\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\fi
+}{\relax}
+
+
 \renewcommand{\headrule}{\color{structurecolor}\hrule width\textwidth}
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{1pt}
@@ -744,9 +771,9 @@
 	breaklines=true,
 	keywordstyle=\color{winered},
 	commentstyle=\color{gray},
-	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,marginnote,ctex,listings},
+	emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,marginnote,ctex,listings,base},
 	emphstyle={\color{frenchplum}},
-	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents,elegantpar,numbers,authoryear,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote},
+	morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote},
 	frame=single,
 	tabsize=2,
 	rulecolor=\color{structurecolor},
