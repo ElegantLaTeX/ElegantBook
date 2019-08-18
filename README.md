@@ -40,7 +40,7 @@ If you like our template, star on Github.
 
 如果你喜欢我们的模板，你可以在 Github 上收藏我们的模板。
 
-![](https://github.com/ElegantLaTeX/ElegantBook/blob/master/image/star-history.png)
+![](https://raw.githubusercontent.com/wiki/ElegantLaTeX/ElegantBook/star-history.png)
 
 
 
