@@ -40,9 +40,6 @@ If you like our template, star on Github.
 
 如果你喜欢我们的模板，你可以在 Github 上收藏我们的模板。
 
-![](https://raw.githubusercontent.com/wiki/ElegantLaTeX/ElegantBook/star-history.png)
-
-
 
 ## 捐赠
 
