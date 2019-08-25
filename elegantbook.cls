@@ -74,7 +74,7 @@
 
 \ProcessKeyvalOptions*\relax
 % \ProcessOptions*\relax
-\LoadClass[a4paper,oneside,openany]{book}
+\LoadClass[a4paper,oneside]{book}
 
 \RequirePackage{indentfirst,comment}
 \setlength\parindent{2em}
@@ -316,6 +316,7 @@
 	headsep=4mm,
 	footskip=12mm
 }
+
 \ifdefstring{\ELEGANT@marginpar}{margintrue}{
 \geometry{
 	marginparwidth=5cm, marginparsep=5mm,
@@ -640,13 +641,12 @@
 
 
 \ifdefstring{\ELEGANT@base}{hide}{
+	\fancyfoot[c]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\scriptsize--\;\thepage\;--}
 	\if@twoside
-	\fancyhead[ER,OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
-	\fancyhead[El,OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\fancyhead[ER]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\fancyhead[OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
 	\else
-	\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
 	\fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
-	\fancyfoot[c]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
 	\fi
 }{\relax}
 
@@ -654,12 +654,12 @@
 \ifdefstring{\ELEGANT@base}{show}{
 	\fancyfoot[c]{\catcode`\$=3\relax\base{structurecolor}{88}}
 	\if@twoside
-	\fancyhead[ER,OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
-	\fancyhead[EL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
-	\fancyhead[OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+	\fancyhead[EL,OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
+	\fancyhead[ER]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\fancyhead[OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
 	\else
 	\fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
-	\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
+	\fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
 	\fi
 }{\relax}
 
