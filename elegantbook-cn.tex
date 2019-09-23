@@ -1,4 +1,4 @@
-\documentclass[cn,11pt,twocol]{elegantbook}
+\documentclass[cn,11pt]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -18,7 +18,7 @@
 \maketitle
 
 \tableofcontents
-
+% \thispagestyle{empty}
 
 \mainmatter
 \hypersetup{pageanchor=true}
@@ -431,6 +431,15 @@ The content of introduction.
 	\item exercise 1
 	\item exercise 2
 	\item exercise 3
+	\item 测试数学公式
+\begin{equation}
+a^2+b^2=c^2
+\end{equation}
+\item 测试插图
+\begin{figure}[htp]
+\centering
+\includegraphics[width=0.2\textwidth]{logo.png}
+\end{figure}
 \end{problemset}
 
 \begin{remark}
@@ -513,6 +522,7 @@ LaTeX Error:
 
 
 
+
 \chapter{ElegantBook 写作示例}
 
 \begin{introduction}
@@ -586,6 +596,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
    \label{eq:461}
    \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
 \end{equation}
+
 （2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\ref{eq:461} 成立。
 \end{theorem}
 

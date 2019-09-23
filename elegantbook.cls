@@ -77,8 +77,6 @@
 \LoadClass[a4paper,oneside]{book}
 
 \RequirePackage{indentfirst,comment}
-\setlength\parindent{2em}
-
 % fontsetting
 \ifdefstring{\ELEGANT@math}{mtpro2}{
 \let\Bbbk\relax
@@ -93,7 +91,10 @@
 
 \RequirePackage{ifxetex}
 
-
+% \AtBeginDocument{%
+%   \addtocontents{toc}{\protect\pagestyle{empty}}%
+%   \addtocontents{lof}{\protect\thispagestyle{empty}}%
+% }
 
 \RequirePackage{newtxtext}
 \RequirePackage{anyfontsize}
@@ -254,6 +255,7 @@
 
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
+	\setlength\parindent{2\ccwd}
 	\renewcommand{\contentsname}{目\hspace{2em}录}
 	\renewcommand{\figurename}{图}
 	\renewcommand{\tablename}{表}
@@ -278,10 +280,11 @@
 	}{\relax}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
-\newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
-\newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
-\renewcommand{\chaptername}{Chapter \thechapter}
-\bibliographystyle{aer}
+	\setlength\parindent{2em}
+	\newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
+	\newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
+	\renewcommand{\chaptername}{Chapter \thechapter}
+	\bibliographystyle{aer}
 }{\relax}
 
 \RequirePackage{xpatch}
@@ -357,7 +360,7 @@
 \newcommand\email[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
 %%   章节设置
-\RequirePackage[center,pagestyles]{titlesec}
+\RequirePackage[center]{titlesec}
 \RequirePackage{apptools}
 \RequirePackage[toc,page]{appendix}
 
@@ -369,8 +372,8 @@
 \titleformat{\section}[hang]{\bfseries}
 {\Large\bfseries{\color{structurecolor}\thesection}\enspace}{1pt}{\color{structurecolor}\Large\bfseries\filright}
 
-\titleformat{\subsection}[hang]{\bfseries}
-{\large\bfseries\color{structurecolor}\thesubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
+\titleformat{\subsection}[hang]{\bfseries}{
+  \large\bfseries\color{structurecolor}\thesubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
 
 \titleformat{\subsubsection}[hang]{\bfseries}
 {\large\bfseries\color{structurecolor}\thesubsubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
@@ -389,11 +392,16 @@
 
 
 \RequirePackage[many]{tcolorbox}
+
+% \newlength{\normalparindent}
+% \setlength{\normalparindent}{\parindent}
+
 \ifdefstring{\ELEGANT@mode}{fancy}{
 \tcbset{
     common/.style={
         fontupper=\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu},
         lower separated=false,
+        % before upper={\setlength{\parindent}{\normalparindent}},
         coltitle=white,
         colback=gray!5,
         boxrule=0.5pt,
