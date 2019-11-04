@@ -1,4 +1,5 @@
-\documentclass[cn,11pt]{elegantbook}
+\documentclass[cn,11pt, twocol]{elegantbook}
+\usepackage{tocloft}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -36,8 +37,8 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
 \item 文档 Wiki：\href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
 \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
-\item 微博：ElegantLaTeX
-\item 微信公众号：ElegantLaTeX
+\item 微博：Elegant\LaTeX{}
+\item 微信公众号：Elegant\LaTeX{}
 \item 用户 QQ 群：692108391 
 \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
@@ -81,7 +82,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络便利的用户可以直接通过 Overleaf 在线使用我们的模板。使用 Overleaf 的好处是无需安装 \TeX{} Live 2019，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
 
 \begin{remark}
-Overleaf 上，中文需要使用 \lstinline{XeLaTeX} 进行编译，英文可以使用 \lstinline{PDFLaTeX} 与 \lstinline{XeLaTeX} 进行编译。
+Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文可以使用 \hologo{pdfLaTeX} 与 \hologo{XeLaTeX} 进行编译。
 \end{remark}
 
 \section{用户作品计划}
@@ -153,7 +154,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 
 
 \chapter{ElegantBook 设置说明}
-本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2019，支持 \lstinline{PDFLaTeX} 以及 \lstinline{XeLaTeX} 编译。
+本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2019，支持 \hologo{pdfLaTeX} 以及 \hologo{XeLaTeX} 编译。
 
 
 \section{语言模式}
@@ -164,7 +165,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 \end{lstlisting}
 
 \begin{remark}
-只有中文环境（\lstinline{lang=cn}）才可以输入中文。另外如果抄录环境（\lstinline{lstlisting}）中有中文字符，请务必使用 \lstinline{XeLaTeX} 编译。
+只有中文环境（\lstinline{lang=cn}）才可以输入中文。另外如果抄录环境（\lstinline{lstlisting}）中有中文字符，请务必使用 \hologo{XeLaTeX} 编译。
 \end{remark}
 
 \section{设备选项}
@@ -433,7 +434,7 @@ The content of introduction.
 	\item exercise 3
 	\item 测试数学公式
 \begin{equation}
-a^2+b^2=c^2
+a^2+b^2=c_{2_{i}} (1,2) [1,23]
 \end{equation}
 \item 测试插图
 \begin{figure}[htp]
@@ -763,8 +764,12 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 \bibliography{reference}
 
+
+
 \appendix
+
 \chapter{基本数学工具}
+
 
 本附录包括了计量经济学中用到的一些基本数学，我们扼要论述了求和算子的各种性质，研究了线性和某些非线性方程的性质，并复习了比例和百分数。我们还介绍了一些在应用计量经济学中常见的特殊函数，包括二次函数和自然对数，前 4 节只要求基本的代数技巧，第 5 节则对微分学进行了简要回顾；虽然要理解本书的大部分内容，微积分并非必需，但在一些章末附录和第 3 篇某些高深专题中，我们还是用到了微积分。
 
