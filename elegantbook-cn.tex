@@ -1,5 +1,4 @@
-\documentclass[cn,11pt, twocol]{elegantbook}
-\usepackage{tocloft}
+\documentclass[cn,11pt]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -26,21 +25,19 @@
 
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-
 Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 Github 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
-
 
 我们的联系方式：
 \begin{itemize}
-\item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
-\item Github 网址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
-\item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
-\item 文档 Wiki：\href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
-\item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
-\item 微博：Elegant\LaTeX{}
-\item 微信公众号：Elegant\LaTeX{}
-\item 用户 QQ 群：692108391 
-\item 邮件：\email{elegantlatex2e@gmail.com}
+  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
+  \item Github 网址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
+  \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
+  \item 文档 Wiki：\href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
+  \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
+  \item 微博：Elegant\LaTeX{}
+  \item 微信公众号：Elegant\LaTeX{}
+  \item 用户 QQ 群：692108391 
+  \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
 
 
@@ -48,11 +45,11 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 此次更新主要有
 \begin{enumerate}
-\item 删除 \lstinline{\elegantpar} 命令；
-\item 修复符号字体设置；
-\item 增加双栏目录选项；
-\item 修改脚注格式；
-\item 其他。
+  \item 删除 \lstinline{\elegantpar} 命令；
+  \item 修复符号字体设置；
+  \item 增加双栏目录选项；
+  \item 修改脚注格式；
+  \item 其他。
 \end{enumerate}
 
 \begin{note}
@@ -60,6 +57,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \end{note}
 
 \section{模板安装与更新}
+
 你可以通过免安装的方式使用本模板，也可以通过安装模板的方式使用。
 
 免安装使用方法如下，从 Github 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板进行更新之后，你需要手动替换 \lstinline{cls} 文件。
@@ -67,9 +65,9 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 如果你是 \TeX{} Live 2019 用户，我们非常推荐你直接进行安装和更新。你可以通过 \TeX{} Live 2019 自带的 \lstinline{tlshell}\footnote{也叫 \TeX{} Live Manager} 进行安装。安装非常简单，步骤如下，搜索并打开 \lstinline{tlshell}，然后通过 \lstinline{File -> Load Default Repository} 加载远程仓库，如果你不想使用默认的仓库，你可以通过 \lstinline{Options} 下的菜单设置远程仓库。设置好仓库之后，等待仓库加载完毕，你可以在下面的搜索栏搜索 \lstinline{elegantbook}，然后选择进行安装与更新。
 
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=0.7\textwidth]{tlshell.png}
-\caption{使用 \TeX{} Live Shell 安装 ElegantBook 模板}
+  \centering
+  \includegraphics[width=0.7\textwidth]{tlshell.png}
+  \caption{使用 \TeX{} Live Shell 安装 ElegantBook 模板}
 \end{figure}
 
 如果你是 \TeX{} Live 2018 的用户，由于 2018 无法直接更新到 2019，所以你想更新的话，需要卸载 2018 重装 2019。如果你实在不想折腾，那么你仍然可以使用本模板。你可以手动安装模板，将 \lstinline{elegantbook.cls} 复制到你的 \TeX{} Live 目录下，默认安装目录为 \lstinline|C:\texlive\2019\texmf-dist\tex\latex\elegantbook|，然后通过命令行（管理员权限），运行 \lstinline{texhash} 即可。
@@ -79,6 +77,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 更多关于 \TeX{} Live 2019 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install_latex/releases}{一份简短的安装 \LaTeX{} 的介绍}。
 
 \section{在线使用模板}
+
 我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络便利的用户可以直接通过 Overleaf 在线使用我们的模板。使用 Overleaf 的好处是无需安装 \TeX{} Live 2019，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
 
 \begin{remark}
@@ -86,22 +85,24 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文可以�
 \end{remark}
 
 \section{用户作品计划}
-Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板也受到了很多用户的喜爱，在此，为了促进模板用户之间的交流，了解用户需求，完善本模板，我们将建立一个区域专门展示用户的文档，包括但不限于 Github 和官网等。如果你愿意将自己的作品展示出来，请邮件或者其他方式联系我们。如果自己代码已经传到 Github 或者 Gitee 等网站，可以提供对应网址。
 
+Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板也受到了很多用户的喜爱，在此，为了促进模板用户之间的交流，了解用户需求，完善本模板，我们将建立一个区域专门展示用户的文档，包括但不限于 Github 和官网等。如果你愿意将自己的作品展示出来，请邮件或者其他方式联系我们。如果自己代码已经传到 Github 或者 Gitee 等网站，可以提供对应网址。
 
 \centerline{\textcolor{red}{\bfseries 广告位招租！}}
 
 \section{关于提交}
+
 出于某些因素的考虑，Elegant\LaTeX{} 项目自 2019 年 5 月 20 日开始，\textbf{不再接受任何非作者预约性质的提交}（pull request)！如果你想改进模板，你可以给我们提交 issues，或者可以在遵循协议（LPPL-1.3c）的情况下，克隆到自己仓库下进行修改。
 
 \section{协作人员招募}
+
 招募 Elegant\LaTeX{} 的协作人员，没有工资。工作内容：翻译 Elegant\LaTeX{} 系列模板相关的文稿（中文->英文），维护模板的 wiki（主要涉及 Markdown 语法），如果有公众号文稿写作经历的话，也可以帮忙写微信稿。本公告长期有效。
 
 目前 ElegantLaTeX 共有 4 名协作人员，分别是
 \begin{itemize}
-	\item 官方文档翻译: \href{https://github.com/peggy2006xzyz}{YPY};
-	\item Github 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
-	\item QQ 群管理员: \href{https://github.com/sikouhjw}{Sikouhjw}.
+  \item 官方文档翻译: \href{https://github.com/peggy2006xzyz}{YPY};
+  \item Github 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
+  \item QQ 群管理员: \href{https://github.com/sikouhjw}{Sikouhjw}.
 \end{itemize}
 
 在此感谢他们无私的奉献！
@@ -113,18 +114,19 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 
 如果你喜欢我们的模板，你可以在 Github 上收藏我们的模板。
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=\textwidth]{star.png}
-\caption{一键三连求赞}
+  \centering
+  \includegraphics[width=\textwidth]{star.png}
+  \caption{一键三连求赞}
 \end{figure}
 
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=0.618\textwidth]{star-history.png}
-\caption{Elegant\LaTeX{} 系列模板上线 Github 之后上每周 Star 数变化}
+  \centering
+  \includegraphics[width=0.618\textwidth]{star-history.png}
+  \caption{Elegant\LaTeX{} 系列模板上线 Github 之后上每周 Star 数变化}
 \end{figure}
 
 \section{捐赠}
+
 如果您非常喜爱我们的模板或者我，你还可以选择捐赠以表达您对我们模板和我的支持。本模板自 3.08 版本发布了捐赠信息之后，收到了近千元的捐赠（四舍五入就是一个亿），非常感谢！
 
 \begin{figure}[htbp]
@@ -152,10 +154,9 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
     \end{tabular}%
 \end{table}%
 
-
 \chapter{ElegantBook 设置说明}
-本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2019，支持 \hologo{pdfLaTeX} 以及 \hologo{XeLaTeX} 编译。
 
+本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2019，支持 \hologo{pdfLaTeX} 以及 \hologo{XeLaTeX} 编译。
 
 \section{语言模式}
 本模板内含两套语言环境，改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
@@ -176,6 +177,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 \end{lstlisting}
 
 \section{颜色主题}
+
 本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
@@ -233,7 +235,6 @@ third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
 \definecolor{third}{RGB}{0,80,80}   
 \end{lstlisting}
 
-
 \section{章标题显示风格}
 
 本模板内置 2 套\textit{章标题显示风格}，包含 \lstinline{hang}（默认）与 \lstinline{display} 两种风格，区别在于章标题单行显示（\lstinline{hang}）与双行显示（\lstinline{display}），本说明使用了 \lstinline{hang}。调用方式为
@@ -253,18 +254,19 @@ third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
 本模板定义了四大类环境
 
 \begin{itemize}
-\item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
-   \begin{itemize}
+  \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
+    \begin{itemize}
       \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
       \item \textcolor{second}{\textbf{theorem、lemma、corollary}} 环境，颜色为 \textcolor{second} {second}；
       \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
-   \end{itemize}
-\item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
-\item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
-\item \textit{结论类环境}，有 \textbf{conclusion、assumption、property，remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
+    \end{itemize}
+  \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
+  \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
+  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property，remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
 \end{itemize}
 
 \subsection{定理类环境的使用}
+
 由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
 \begin{lstlisting}
 \begin{theorem}{theorem name}{label}
@@ -306,13 +308,12 @@ The content of theorem.
 This is the content of example environment.
 \end{example}
 
-
 这几个都是同一类环境，区别在于
 
 \begin{itemize}
-   \item 示例环境（example）、练习（exercise）与例题（problem）章节自动编号；
-   \item 注意（note），练习（exercise）环境有提醒引导符；
-   \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
+  \item 示例环境（example）、练习（exercise）与例题（problem）章节自动编号；
+  \item 注意（note），练习（exercise）环境有提醒引导符；
+  \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
 \end{itemize}
 
 \section{装饰物}
@@ -332,32 +333,32 @@ This is the content of example environment.
 \section{列表环境}
 本模板借助于 \lstinline{tikz} 定制了 \lstinline{itemize} 和 \lstinline{enumerate} 环境，其中 \lstinline{itemize} 环境修改了 3 层嵌套，而 \lstinline{enumerate} 环境修改了 4 层嵌套（仅改变颜色）。示例如下\\[2ex]
 \begin{minipage}[b]{0.49\textwidth}
-\begin{itemize}
-   \item first item of nesti;
-   \item second item of nesti;
-   \begin{itemize}
-      \item first item of nestii;
-      \item second item of nestii;
+  \begin{itemize}
+    \item first item of nesti;
+    \item second item of nesti;
       \begin{itemize}
-         \item first item of nestiii;
-         \item second item of nestiii.
-      \end{itemize}   
-   \end{itemize}
-\end{itemize}
+        \item first item of nestii;
+        \item second item of nestii;
+        \begin{itemize}
+          \item first item of nestiii;
+          \item second item of nestiii.
+        \end{itemize}   
+      \end{itemize}
+  \end{itemize}
 \end{minipage}
 \begin{minipage}[b]{0.49\textwidth}
-\begin{enumerate}
-   \item first item of nesti;
-   \item second item of nesti;
-   \begin{enumerate}
-      \item first item of nestii;
-      \item second item of nestii;
+  \begin{enumerate}
+    \item first item of nesti;
+    \item second item of nesti;
       \begin{enumerate}
-         \item first item of nestiii;
-         \item second item of nestiii.
-      \end{enumerate}   
-   \end{enumerate}
-\end{enumerate}
+        \item first item of nestii;
+        \item second item of nestii;
+        \begin{enumerate}
+          \item first item of nestiii;
+          \item second item of nestiii.
+        \end{enumerate}   
+      \end{enumerate}
+  \end{enumerate}
 \end{minipage}
 
 \section{参考文献}
@@ -392,20 +393,20 @@ The content of introduction.
 模板新增了一个章节摘要环境（introduction），使用示例
 \begin{lstlisting}
 \begin{introduction}
-	\item Definition of Theorem
-	\item Ask for help
-	\item Optimization Problem
-	\item Property of Cauchy Series
-	\item Angle of Corner
+  \item Definition of Theorem
+  \item Ask for help
+  \item Optimization Problem
+  \item Property of Cauchy Series
+  \item Angle of Corner
 \end{introduction}
 \end{lstlisting}
 效果如下：
 \begin{introduction}
-	\item Definition of Theorem
-	\item Ask for help
-	\item Optimization Problem
-	\item Property of Cauchy Series
-	\item Angle of Corner
+  \item Definition of Theorem
+  \item Ask for help
+  \item Optimization Problem
+  \item Property of Cauchy Series
+  \item Angle of Corner
 \end{introduction}
 
 环境的标题文字可以通过这个环境的可选参数进行修改，修改方法为：
@@ -420,19 +421,19 @@ The content of introduction.
 
 \begin{lstlisting}
 \begin{problemset}
-	\item exercise 1
-	\item exercise 2
-	\item exercise 3
+  \item exercise 1
+  \item exercise 2
+  \item exercise 3
 \end{problemset}
 \end{lstlisting}
 
 
 效果如下：
 \begin{problemset}
-	\item exercise 1
-	\item exercise 2
-	\item exercise 3
-	\item 测试数学公式
+  \item exercise 1
+  \item exercise 2
+  \item exercise 3
+  \item 测试数学公式
 \begin{equation}
 a^2+b^2=c_{2_{i}} (1,2) [1,23]
 \end{equation}
@@ -446,7 +447,6 @@ a^2+b^2=c_{2_{i}} (1,2) [1,23]
 \begin{remark}
 如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
 \end{remark}
-
 
 \section{旁注}
 在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
@@ -527,11 +527,11 @@ LaTeX Error:
 \chapter{ElegantBook 写作示例}
 
 \begin{introduction}
-\item 积分定义~\ref{def:int}
-\item Fubini 定理~\ref{thm:fubi}
-\item 最优性原理~\ref{pro:max}
-\item 柯西列性质~\ref{property:cauchy}
-\item 韦达定理
+  \item 积分定义~\ref{def:int}
+  \item Fubini 定理~\ref{thm:fubi}
+  \item 最优性原理~\ref{pro:max}
+  \item 柯西列性质~\ref{property:cauchy}
+  \item 韦达定理
 \end{introduction}
 
 \section{Lebesgue 积分}

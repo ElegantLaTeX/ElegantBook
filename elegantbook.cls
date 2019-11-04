@@ -255,10 +255,6 @@
 \RequirePackage{fancyvrb}
 \RequirePackage{makecell,lipsum,hologo,setspace}
 
-% \usepackage{tocloft}
-% \renewcommand{\cfttoctitlefont}{\hfill\Large\bfseries}
-% \renewcommand{\cftaftertoctitle}{\hfill}
-
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
   \setlength\parindent{2\ccwd}
