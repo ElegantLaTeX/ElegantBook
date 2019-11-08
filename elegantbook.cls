@@ -203,11 +203,41 @@
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
 \ifdefstring{\ELEGANT@titlestyle}{display}{\def\style{display}}{\relax}
 
+% ------ Extra Bio -------
+\RequirePackage{tikz}  % this loads `pgfkeys` package
+\usetikzlibrary{backgrounds,calc,shadows}
+\usepackage[object=vectorian]{pgfornament}
 
 \newtoks\email
-\newtoks\version
-\newtoks\institute
-\newtoks\subtitle
+\def\subtitle#1{\long\def\@subtitle{#1}}
+\def\@subtitle{}
+
+\def\@extrabio{}
+\newcommand\extrabio@append[2]{%
+    \expandafter\g@addto@macro\expandafter\@extrabio\expandafter{#1 &}%
+    \expandafter\g@addto@macro\expandafter\@extrabio\expandafter{#2 \\}%
+}
+
+\def\author#1{%
+    \extrabio@append{\elegant@str@author}{#1}%
+}
+\def\institute#1{%
+    \extrabio@append{\elegant@str@institute}{#1}%
+}
+\def\date#1{%
+    \extrabio@append{\elegant@str@date}{#1}%
+}
+\def\version#1{
+    \extrabio@append{\elegant@str@version}{#1}%
+}
+
+% key handler used by \extrabio
+\pgfkeys{/elegant/bio/.unknown/.code={%
+  \extrabio@append\pgfkeyscurrentkeyRAW\pgfkeyscurrentvalue
+}}
+\newcommand{\extrabio}[1]{%
+  \pgfkeys{/elegant/bio/.cd,#1}%
+}
 
 \RequirePackage[sort&compress]{natbib}
 \setlength{\bibsep}{0.0pt}
@@ -272,7 +302,20 @@
   \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
   \renewcommand{\chaptername}{第 \thechapter\,章}
   \RequirePackage[\ELEGANT@cite]{gbt7714}
-}{\relax}
+
+  % 标题 bio 部分的名称，如「作者」、「组织」等
+  \def\elegant@str@author{作者}
+  \def\elegant@str@institute{组织}
+  \def\elegant@str@date{时间}
+  \def\elegant@str@version{版本}
+  \def\elegant@str@biosep{：}
+}{
+  \def\elegant@str@author{Author}
+  \def\elegant@str@institute{Institute}
+  \def\elegant@str@date{Date}
+  \def\elegant@str@version{Version}
+  \def\elegant@str@biosep{:\space}
+}
 \ifdefstring{\ELEGANT@lang}{en}{
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
@@ -288,10 +331,6 @@
 \xpatchcmd{\@endpart}{\vfil\newpage}{\vfil\newpage
              }{}{}
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
-
-\RequirePackage{tikz}
-\usetikzlibrary{backgrounds,calc,shadows}
-\usepackage[object=vectorian]{pgfornament} %% 
 
 \newcommand*{\eitemi}{\tikz \draw [baseline, ball color=structurecolor,draw=none] circle (2pt);}
 \newcommand*{\eitemii}{\tikz \draw [baseline, fill=structurecolor,draw=none,circular drop shadow] circle (2pt);}
@@ -705,50 +744,54 @@
 \renewcommand{\baselinestretch}{1.35} 
 
 \renewcommand*{\maketitle}{%
-\hypersetup{pageanchor=false}
-\begin{titlepage}
-  \newgeometry{margin = 0in}
-  \parindent=0pt
-  \@cover
-  \setlength{\fboxsep}{0pt}
-  \colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
-  \vfill
-  \vskip-2ex
-  \hspace{2em}
-  \parbox{0.8\textwidth}{
-    \bfseries\Huge \@title\par
-  }
-  \vfill
-  \vspace{-1.0cm}
-  \setstretch{2.5}
-  \hspace{2.5em}
-  \begin{minipage}[c]{0.67\linewidth}
-    {\color{darkgray}\bfseries\Large \the\subtitle\\[2ex]}
-    \color{gray}\normalsize
-    {\renewcommand{\arraystretch}{0.618}
-    \begin{tabular}{l} 
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Author:}}{\kaishu 作者：} \@author \\
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute:}}{\kaishu 组织：} \the\institute\\
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Date:}}{\kaishu 时间：} \@date\\
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Version:}}{\kaishu 版本：} \the\version\\
-    \end{tabular}}
-  \end{minipage}
-  \begin{minipage}[c]{0.27\linewidth}
-  \begin{tikzpicture}[remember picture,overlay]
-    \begin{pgfonlayer}{background}
-      \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\@logo};
-    \end{pgfonlayer}
-  \end{tikzpicture}
-  \end{minipage}
-  \vfill
-  \begin{center}
-  \setstretch{1.3}
-  \parbox[t]{0.7\textwidth}{\centering \itshape \@extrainfo}
-  \end{center}
-  \vfill
-\end{titlepage}
-\restoregeometry
-\thispagestyle{empty}
+  \hypersetup{pageanchor=false}
+  \begin{titlepage}
+    \newgeometry{margin = 0in}%
+    \parindent=0pt
+    \@cover
+    \setlength{\fboxsep}{0pt}%
+    \colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
+    \vfill
+    \vskip-2ex
+    \hspace{2em}%
+    \parbox{0.8\textwidth}{
+      \bfseries\Huge \@title\par
+    }
+    \vfill
+    \vspace{-1.0cm}
+    \setstretch{2.5}
+    \hspace{2.5em}
+    \begin{minipage}[c]{0.67\linewidth}
+      \ifx\@subtitle\@empty
+      \else
+        \bfseries\Large
+        \textcolor{darkgray}{\@subtitle} \\[2ex]
+      \fi
+      \color{gray}\normalsize
+      \renewcommand{\arraystretch}{0.618}%
+      \ifx\@extrabio\@empty
+      \else
+        \begin{tabular}{@{}r@{\elegant@str@biosep}l@{}} 
+          \@extrabio
+        \end{tabular}
+      \fi
+    \end{minipage}
+    \begin{minipage}[c]{0.27\linewidth}
+      \begin{tikzpicture}[remember picture,overlay]
+        \begin{pgfonlayer}{background}
+          \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\@logo};
+        \end{pgfonlayer}
+      \end{tikzpicture}
+    \end{minipage}
+    \vfill
+    \begin{center}
+    \setstretch{1.3}
+    \parbox[t]{0.7\textwidth}{\centering \itshape \@extrainfo}
+    \end{center}
+    \vfill
+  \end{titlepage}
+  \restoregeometry
+  \thispagestyle{empty}
 }
 
 
