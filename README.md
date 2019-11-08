@@ -10,9 +10,9 @@
 ![Github Version](https://img.shields.io/github/release/ElegantLaTeX/ElegantBook.svg)
 ![Repo Size](https://img.shields.io/github/repo-size/ElegantLaTeX/ElegantBook.svg)
 
-ElegantBook is designed for books. Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues or contact us at elegantlatex2e@gmail.com.
+ElegantBook is designed for writing books, created by [Dongsheng Deng](https://ddswhu.me/) and [Liam Huang](https://liam.page/). Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues or contact us at elegantlatex2e@gmail.com.
 
-ElegantBook 是为 LaTeX 书籍写作而设计的模板，如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。QQ 用户交流群：692108391，欢迎加入。
+ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [ddswhu](https://ddswhu.me/) 和 [Liam Huang](https://liam.page/) 创立。如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。QQ 用户交流群：692108391，欢迎加入。
 
 ## 重要提示
 
@@ -22,8 +22,7 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，如果你有其他问�
 
 **Important Info** For some reasons, pull request is unacceptable since May 20, 2019. For those who want to help revise the templates, submit issues or clone to your own repository to modify under the constriction of  LPPL-1.3c.
 
-**重要提示：出于某些因素的考虑，ElegantLaTeX 项目自 2019 年 5 月 20 日开始，不再接受任何非作者预约性质的提交（pull request)！如果你想改进模板，你可以给我们提交 issue，或者可以在遵循协议的情况下，克隆到自己仓库下进行修改**。
-
+**重要提示**：出于某些因素的考虑，ElegantLaTeX 项目 **不接受任何非本人预约性质的提交（pull requests）！**
 
 
 ## Acknowledgement 致谢
@@ -34,7 +33,7 @@ The number of stars on Github for ElegantBook reached 100 on May 20, 2019.
 
 Thank ChinaTeX and [LaTeX Studio](http://www.latexstudio.net/) for their promotion. LaTeX studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on LaTeX in China. Thank [muzimuzhi](https://github.com/muzimuzhi) for the revision of the template.
 
-在此特别感谢 ChinaTeX 以及 [LaTeX 工作室](http://www.latexstudio.net/)对于本系列模板的大力宣传与推广。LaTeX 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏。这也是我所见到的国内最全面的 LaTeX 相关的网站。特别感谢 [muzimuzhi](https://github.com/muzimuzhi) 对于模板的完善。
+在此特别感谢 ChinaTeX 以及 [LaTeX 工作室](http://www.latexstudio.net/)对于本系列模板的大力宣传与推广。LaTeX 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏。这也是我所见到的国内最全面的 LaTeX 相关的网站。
 
 If you like our template, star on Github.
 
@@ -69,7 +68,7 @@ Thank you all.
 
 ## License 协议
 
-This work is released under the LaTeX Project Public License, v1.3c or later. 
+This work is released under the LaTeX Project Public License, v1.3c or later.
 
 本模板发布遵循 LaTeX 项目公共许可证 1.3 c 或更高版本。如果是衍生作品，请务必加入协议声明和模板信息（github、CTAN 地址）。
 
