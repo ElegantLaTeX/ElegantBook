@@ -12,7 +12,7 @@
 
 ElegantBook is designed for writing books, created by [Dongsheng Deng](https://ddswhu.me/) and [Liam Huang](https://liam.page/). Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues or contact us at elegantlatex2e@gmail.com.
 
-ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [ddswhu](https://ddswhu.me/) 和 [Liam Huang](https://liam.page/) 创立。如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。QQ 用户交流群：692108391，欢迎加入。
+ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Dongsheng Deng](https://ddswhu.me/) 和 [Liam Huang](https://liam.page/) 创立。如果你有其他问题、建议或者报告 bug，可以提交 issues 或者给我们发邮件：elegantlatex2e@gmail.com。QQ 用户交流群：692108391，欢迎加入。
 
 ## 重要提示
 
