@@ -25,21 +25,36 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Dongsheng Deng](h
 
 ## 捐赠
 
-如果您非常喜爱我们的模板或者我，你还可以选择捐赠以表达您对我们模板和我的支持。本模板自 3.08 版本发布了捐赠信息之后，收到了近千元的捐赠（四舍五入就是一个亿），非常感谢！
+如果您非常喜爱我们的模板或者我，你还可以选择捐赠以表达您对我们模板和我的支持。本模板自 3.08 版本发布了捐赠信息之后，收到了超过千元的捐赠（四舍五入就是一个亿），非常感谢！
 
 ![](https://github.com/ElegantLaTeX/ElegantBook/wiki/donate.jpg)
 
-**赞赏费用的使用解释权归 ElegantLaTeX 所有，并且不接受监督，请自愿理性打赏**。10 元以上的赞赏，我们将列入捐赠榜，谢谢各位金主！
+**赞赏费用的使用解释权归 ElegantLaTeX 所有，并且不接受监督，请自愿理性打赏**。10 元以上的赞赏，我们将列入捐赠榜，谢谢各位金主！（如果有遗漏，请务必联系我们，这对我们很重要）
 
-| 捐赠者| 金额|  时间| 渠道|
+
+| 捐赠者   | 金额 |  时间  | 渠道 |
 | :------:   | :----:   | :----: | :------:   |
-| Lerh   | 10 RMB |   2019/05/15   | 微信|
-| 越过地平线 | 10 RMB |   2019/05/15   | 微信  |
-| 大鹏      | 20 RMB |   2019/05/27   | 微信  |
-| 佚名      | 10 RMB |   2019/05/30   | 微信  |
-| [latexstudio.net](http://www.latexstudio.net/)      | 666 RMB |   2019/06/05   | 支付宝  |
+| Lerh   | 10 RMB |   2019/05/15   | 微信 |
+| 越过地平线  | 10 RMB | 2019/05/15   | 微信 |
+| 银桑 | 20 RMB | 2019/05/27  | 微信 |
+| *空 | 10 RMB | 2019/05/30 | 微信 |
+| [latexstudio.net](http://www.latexstudio.net) | 666 RMB | 2019/06/05 | 支付宝 |
 | Cassis | 11 RMB | 2019/06/30 | 微信 |
-| 佚名 | 10 RMB | 2019/07/23 | 微信  |
+| *君 | 10 RMB | 2019/07/23 | 微信 |
+| P*u | 50 RMB | 2019/07/30 | 微信 |
+| *萌 | 19 RMB | 2019/08/28 | 微信 |
+| 曲豆豆 | 10 RMB | 2019/08/28 | 微信 |
+| 李博 | 100 RMB | 2019/10/06 | 微信 |
+| Njustsll | 10 RMB | 2019/10/11 | 微信 |
+| 刘志阔 | 99.99 RMB | 2019/10/15 | 支付宝 |
+| *涛 | 16 RMB | 2019/10/17 | 微信 |
+| 赤霓 | 12 RMB | 2019/10/17 | 支付宝 |
+| 追寻原风景 | 10 RMB | 2019/10/28 | 微信 |
+| 郭德良 | 88 RMB | 2019/11/03 | 微信 |
+| 自强不息 | 20 RB | 2019/11/04 | 支付宝 |
+| 读书之虫 | 20 RMB | 2019/11/18 | 微信 |
+| *等 |  10 RMB | 2019/11/18 | 微信 |
+| *哲 |  20 RMB | 2019/11/18 | 微信 |
 
 再次感谢大家对于模板的喜爱！
 
@@ -79,15 +94,30 @@ To express your love for our templates and/or our developers, please do not hesi
 
 The explanation right of the tip usage belongs to ElegantLaTeX with no supervision. Feel free to tip us. Those who donate more than 10 RMB will be recorded in the Donation List. Thank all the tippers! Thank you all.
 
-| Tipper | Amount |  Date  | Channel |
-| :------:   | :----:   | :----: | :------:   |
-| Lerh   | 10 RMB |   2019/05/15   | Wechat |
-| Yueguodipingxian | 10 RMB |   2019/05/15   | Wechat |
-| Dapeng      | 20 RMB |   2019/05/27   | Wechat |
-| Anonymous      | 10 RMB |   2019/05/30   | Wechat |
-| [latexstudio.net](http://www.latexstudio.net/)      | 666 RMB |   2019/06/05   | Alipay |
-| Cassis | 11 RMB | 2019/06/30 | Wechat |
-| Anonymous | 10 RMB | 2019/07/23 | Wechat |
+
+|      Tipper      | Amount     |   Date     | Channel |
+| :--------------: | :----:     | :-------:  | :-----: |
+| Lerh             | 10 RMB     | 2019/5/15  | Wechat  |
+| YueGuoDiPingXian | 10 RMB     | 2019/5/15  | Wechat  |
+| YinSang          | 20 RMB     | 2019/5/27  | Wechat  |
+| * Kong		       | 10 RMB     | 2019/05/30 | Wechat  |
+| [latexstudio.net](http://www.latexstudio.net) | 666 RMB | 2019/06/05 | Alipay |
+| Cassis    	     | 11 RMB     | 2019/06/30 | Wechat  |
+| * Jun		 	       | 10 RMB     | 2019/07/23 | Wechat  |
+| P*u              | 50 RMB     | 2019/07/30 | Wechat  |
+| * Meng 		       | 19 RMB     | 2019/08/28 | Wechat  |
+| QuDouDou 	       | 10 RMB     | 2019/08/28 | Wechat  |
+| LI Bo 			     | 100 RMB    | 2019/10/06 | Wechat  |
+| Njustsll 	       | 10 RMB     | 2019/10/11 | Wechat  |
+| LIU ZhiKuo 	     | 99.99 RMB  | 2019/10/15 | Alipay  |
+| * Tao            | 16 RMB     | 2019/10/17 | Wechat  |
+| ChiHong          | 12 RMB     | 2019/10/17 | Alipay  |
+| YuanFengJing     | 10 RMB     | 2019/10/28 | Wechat  |
+| GUO DeLiang      | 88 RMB     | 2019/11/03 | Wechat  |
+| ZiQiangBuXi      | 20 RMB     | 2019/11/03 | Alipay  |
+| DuShuZhiChong    | 20 RMB     | 2019/11/18 | Wechat  |
+| * Deng           | 10 RMB     | 2019/11/18 | Wechat  |
+| * Zhe            | 20 RMB     | 2019/11/18 | Wechat  |
 
 
 ## License
