@@ -280,7 +280,6 @@
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
   \renewcommand{\chaptername}{Chapter \thechapter}
-  \renewcommand{\chaptername}{Appendix \thechapter}
   \bibliographystyle{aer}
 }{\relax}
 
