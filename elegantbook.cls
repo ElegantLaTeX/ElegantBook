@@ -231,7 +231,7 @@
 \setlength{\abovedisplayskip}{3pt}
 \setlength{\belowdisplayskip}{3pt}
 \setcounter{tocdepth}{1}
-\RequirePackage[flushmargin]{footmisc}
+\RequirePackage[flushmargin,stable]{footmisc}
 \setlength{\footnotesep}{12pt}
 }
 

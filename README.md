@@ -13,7 +13,7 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Dongsheng Deng](h
 
 ## 重要提示
 
-**版本提醒：** 由于新版本进行了重构，并且 3.6 版本对于封面进行了改版，3.6 以后的版本并不兼容之前版本，如果你想把之前版本的文件转为 3.6 以后的版本，请查看[跨版本转换](https://github.com/ElegantLaTeX/ElegantBook/wiki/convert)。我们强烈建议你使用最新版。
+**版本提醒：** 由于新版本进行了重构，并且 3.06 版本对于封面进行了改版，3.06 以后的版本并不兼容之前版本，如果你想把之前版本的文件转为 3.06 以后的版本，请查看[跨版本转换](https://github.com/ElegantLaTeX/ElegantBook/wiki/convert)。我们强烈建议你使用最新版。
 
 **重要提示**：ElegantLaTeX 项目 **不接受** 任何非作者预约提交（pull requests）！
 
