@@ -76,6 +76,33 @@
 % \ProcessOptions*\relax
 \LoadClass[a4paper,oneside]{book}
 
+%% device settings
+\RequirePackage{geometry}
+\ifdefstring{\ELEGANT@device}{normal}{
+\geometry{
+  a4paper,
+  top=25.4mm, bottom=25.4mm,
+  headheight=2.17cm,
+  headsep=4mm,
+  footskip=12mm
+}
+
+\ifdefstring{\ELEGANT@marginpar}{margintrue}{
+\geometry{
+  marginparwidth=5cm, marginparsep=5mm,
+  left=2cm,right=7cm,
+}
+}{\relax}
+}{\relax}
+
+\ifdefstring{\ELEGANT@device}{pad}{
+\geometry{
+  paperwidth=7.5in, 
+  paperheight=10in,
+  margin=16mm,
+  headheight=2.17cm,
+  footskip=4mm
+}}{\relax}
 
 \RequirePackage{indentfirst,comment}
 % fontsetting
@@ -155,30 +182,30 @@
 }{\relax}
 
 %green color
-  \definecolor{structure1}{RGB}{0,120,2}%
-  \definecolor{main1}{RGB}{0,120,2}%
-  \definecolor{second1}{RGB}{230,90,7}%
-  \definecolor{third1}{RGB}{0,160,152}%
+\definecolor{structure1}{RGB}{0,120,2}%
+\definecolor{main1}{RGB}{0,120,2}%
+\definecolor{second1}{RGB}{230,90,7}%
+\definecolor{third1}{RGB}{0,160,152}%
 %cyan color
-  \definecolor{structure2}{RGB}{31,186,190}%
-  \definecolor{main2}{RGB}{59,180,5}%
-  \definecolor{second2}{RGB}{175,153,8}%
-  \definecolor{third2}{RGB}{244,105,102}%
+\definecolor{structure2}{RGB}{31,186,190}%
+\definecolor{main2}{RGB}{59,180,5}%
+\definecolor{second2}{RGB}{175,153,8}%
+\definecolor{third2}{RGB}{244,105,102}%
 %blue color
-  \definecolor{structure3}{RGB}{60,113,183}
-  \definecolor{main3}{RGB}{0,166,82}%
-  \definecolor{second3}{RGB}{255,134,24}%
-  \definecolor{third3}{RGB}{0,174,247}%
+\definecolor{structure3}{RGB}{60,113,183}
+\definecolor{main3}{RGB}{0,166,82}%
+\definecolor{second3}{RGB}{255,134,24}%
+\definecolor{third3}{RGB}{0,174,247}%
 % gray color
-  \definecolor{structure4}{RGB}{150,150,150}
-  \definecolor{main4}{RGB}{150,150,150}%
-  \definecolor{second4}{RGB}{150,150,150}%
-  \definecolor{third4}{RGB}{150,150,150}%
+\definecolor{structure4}{RGB}{150,150,150}
+\definecolor{main4}{RGB}{150,150,150}%
+\definecolor{second4}{RGB}{150,150,150}%
+\definecolor{third4}{RGB}{150,150,150}%
 % black color
-  \definecolor{structure5}{RGB}{0,0,0}
-  \definecolor{main5}{RGB}{0,0,0}%
-  \definecolor{second5}{RGB}{0,0,0}%
-  \definecolor{third5}{RGB}{0,0,0}%
+\definecolor{structure5}{RGB}{0,0,0}
+\definecolor{main5}{RGB}{0,0,0}%
+\definecolor{second5}{RGB}{0,0,0}%
+\definecolor{third5}{RGB}{0,0,0}%
 
 % corlor definition
 \definecolor{winered}{rgb}{0.5,0,0}
@@ -306,35 +333,6 @@
 \setlist[itemize,3]{label={\eitemiii}}
 
 
-%% device settings
-
-\RequirePackage{geometry}
-\ifdefstring{\ELEGANT@device}{normal}{
-\geometry{
-  a4paper,
-  top=25.4mm, bottom=25.4mm,
-  headheight=2.17cm,
-  headsep=4mm,
-  footskip=12mm
-}
-
-\ifdefstring{\ELEGANT@marginpar}{margintrue}{
-\geometry{
-  marginparwidth=5cm, marginparsep=5mm,
-  left=2cm,right=7cm,
-}
-}{\relax}
-}{\relax}
-
-\ifdefstring{\ELEGANT@device}{pad}{
-\geometry{
-  paperwidth=7.5in, 
-  paperheight=10in,
-  margin=16mm,
-  headheight=2.17cm,
-  footskip=4mm
-}}{\relax}
-
 \RequirePackage{hyperref}
 \hypersetup{
   breaklinks,
@@ -440,6 +438,10 @@
 \newtcbtheorem[auto counter,number within=chapter]{theorem}{
   \ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
 }{thmstyle}{thm}
+
+% \newtcbtheorem[auto counter,use counter from=theorem]{axiom}{
+%   \ifdefstring{\ELEGANT@lang}{en}{Axiom}{公理}
+% }{thmstyle}{axi}
 
 \newtcbtheorem[auto counter,number within=chapter]{proposition}{
   \ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
