@@ -439,9 +439,13 @@
   \ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}
 }{thmstyle}{thm}
 
-% \newtcbtheorem[auto counter,use counter from=theorem]{axiom}{
-%   \ifdefstring{\ELEGANT@lang}{en}{Axiom}{公理}
-% }{thmstyle}{axi}
+\newtcbtheorem[auto counter,number within=chapter]{postulate}{
+  \ifdefstring{\ELEGANT@lang}{en}{Postulate}{公设}
+}{thmstyle}{pos}
+
+\newtcbtheorem[auto counter,number within=chapter]{axiom}{
+  \ifdefstring{\ELEGANT@lang}{en}{Axiom}{公理}
+}{thmstyle}{axi}
 
 \newtcbtheorem[auto counter,number within=chapter]{proposition}{
   \ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}
@@ -500,6 +504,8 @@
 \newtheorem{etheorem}{\ifdefstring{\ELEGANT@lang}{en}{Theorem}{定理}}[chapter]
 \newtheorem{elemma}{\ifdefstring{\ELEGANT@lang}{en}{Lemma}{引理}}[chapter]
 \newtheorem{ecorollary}{\ifdefstring{\ELEGANT@lang}{en}{Corollary}{推论}}[chapter]
+\newtheorem{epostulate}{\ifdefstring{\ELEGANT@lang}{en}{Postulate}{公设}}[chapter]
+\newtheorem{eaxiom}{\ifdefstring{\ELEGANT@lang}{en}{Axiom}{公理}}[chapter]
 
 \theoremstyle{eprostyle}
 \newtheorem{eproposition}{\ifdefstring{\ELEGANT@lang}{en}{Proposition}{命题}}[chapter]
@@ -519,6 +525,14 @@
 \newenvironment{corollary}[2]
   {\ifstrempty{#1}{\ecorollary}{\ecorollary[#1]}\ifstrempty{#2}{}{\label{cor:#2}}}
   {\endecorollary}
+
+\newenvironment{postulate}[2]
+  {\ifstrempty{#1}{\epostulate}{\epostulate[#1]}\ifstrempty{#2}{}{\label{pos:#2}}}
+  {\endepostulate}
+
+\newenvironment{axiom}[2]
+  {\ifstrempty{#1}{\eaxiom}{\eaxiom[#1]}\ifstrempty{#2}{}{\label{axi:#2}}}
+  {\endaxiom}
 
 \newenvironment{proposition}[2]
   {\ifstrempty{#1}{\eproposition}{\eproposition[#1]}\ifstrempty{#2}{}{\label{pro:#2}}}
