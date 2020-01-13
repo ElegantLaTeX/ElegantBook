@@ -22,7 +22,6 @@
 \DeclareStringOption[fancy]{mode}
 \DeclareStringOption[show]{base}
 \DeclareStringOption[normal]{device}
-\DeclareStringOption[numbers]{cite}
 \DeclareStringOption[newtxmath]{math}
 \DeclareStringOption[marginfalse]{marginpar}
 \DeclareStringOption[onecol]{toc}
@@ -49,8 +48,12 @@
 \DeclareVoidOption{normal}{\ekv{device=normal}}
 \DeclareVoidOption{pad}{\ekv{device=pad}}
 
+\DeclareStringOption[numbers]{cite}
 \DeclareVoidOption{numbers}{\ekv{cite=numbers}}
 \DeclareVoidOption{authoryear}{\ekv{cite=authoryear}}
+\DeclareVoidOption{super}{\ekv{cite=super}}
+
+\DeclareStringOption[apalike]{bibstyle}
 
 \DeclareVoidOption{newtxmath}{\ekv{math=newtx}}
 \DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
@@ -111,12 +114,16 @@
 \RequirePackage[lite]{mtpro2}
 }{\relax}
 
+\setcounter{tocdepth}{1}
 
 \PassOptionsToPackage{no-math}{fontspec}
 \RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
+
 \ifdefstring{\ELEGANT@lang}{cn}{
-\RequirePackage[UTF8, scheme=plain]{ctex}
-}
+  \RequirePackage[UTF8, scheme=plain]{ctex}
+  \AfterEndPreamble{
+    \renewcommand{\itshape}{\kaishu}
+    \setlength\parindent{2\ccwd}}}
 
 \RequirePackage{ifxetex}
 
@@ -236,7 +243,7 @@
 \newtoks\institute
 \newtoks\subtitle
 
-\RequirePackage[sort&compress]{natbib}
+\RequirePackage[\ELEGANT@cite,sort&compress]{natbib}
 \setlength{\bibsep}{0.0pt}
 \def\bibfont{\footnotesize}
 
@@ -255,11 +262,10 @@
 \captionsetup[figure]{skip=3pt}
 
 \AtBeginDocument{
-\setlength{\abovedisplayskip}{3pt}
-\setlength{\belowdisplayskip}{3pt}
-\setcounter{tocdepth}{1}
-\RequirePackage[flushmargin,stable]{footmisc}
-\setlength{\footnotesep}{12pt}
+  \setlength{\abovedisplayskip}{3pt}
+  \setlength{\belowdisplayskip}{3pt}
+  \RequirePackage[flushmargin,stable]{footmisc}
+  \setlength{\footnotesep}{12pt}
 }
 
 \ifdefstring{\ELEGANT@toc}{twocol}{
@@ -286,7 +292,6 @@
 
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
-  \setlength\parindent{2\ccwd}
   \renewcommand{\contentsname}{目\hspace{2em}录}
   \renewcommand{\figurename}{图}
   \renewcommand{\tablename}{表}
@@ -300,6 +305,10 @@
   \newcommand\figref[1]{\textbf{图}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
   \renewcommand{\chaptername}{第 \thechapter\,章}
+  \newcommand{\authorname}{\textit{作者：}}
+  \newcommand{\institutename}{\textit{组织：}}
+  \newcommand{\datename}{\textit{时间：}}
+  \newcommand{\versionname}{\textit{版本：}}
   \RequirePackage[\ELEGANT@cite]{gbt7714}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
@@ -307,7 +316,11 @@
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
   \renewcommand{\chaptername}{Chapter \thechapter}
-  \bibliographystyle{aer}
+  \newcommand{\authorname}{\textbf{Author: }}
+  \newcommand{\institutename}{\textbf{Institute: }}
+  \newcommand{\datename}{\textbf{Date: }}
+  \newcommand{\versionname}{\textbf{Version: }}
+  \bibliographystyle{\ELEGANT@bibstyle}
 }{\relax}
 
 \RequirePackage{xpatch}
@@ -393,7 +406,7 @@
 \ifdefstring{\ELEGANT@mode}{fancy}{
 \tcbset{
     common/.style={
-        fontupper=\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu},
+        fontupper=\itshape,
         lower separated=false,
         % before upper={\setlength{\parindent}{\normalparindent}},
         coltitle=white,
@@ -470,7 +483,7 @@
 \newtheoremstyle{edefstyle}%
 {3pt}% Space above
 {3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+{\itshape}% Body font
 {}% Indent amount
 {\bfseries\color{main}}% Theorem head font
 {}% Punctuation after theorem head
@@ -480,7 +493,7 @@
 \newtheoremstyle{ethmstyle}%
 {3pt}% Space above
 {3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+{\itshape}% Body font
 {}% Indent amount
 {\bfseries\color{second}}% Theorem head font
 {}% Punctuation after theorem head
@@ -490,7 +503,7 @@
 \newtheoremstyle{eprostyle}%
 {3pt}% Space above
 {3pt}% Space below 
-{\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\upshape\kaishu}}% Body font
+{\itshape}% Body font
 {}% Indent amount
 {\bfseries\color{third}}% Theorem head font
 {}% Punctuation after theorem head
@@ -583,7 +596,7 @@
 
 \newenvironment{note}{\par\noindent{\makebox[0pt][r]{\scriptsize\color{red!90}\textdbend\quad}\textbf{\color{second}%
   \ifdefstring{\ELEGANT@lang}{en}{Note}{注意}\,
-}}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{\par}
+}}\itshape}{\par}
 
 \newenvironment{proof}{\par\noindent\textbf{\color{second}%
   \ifdefstring{\ELEGANT@lang}{en}{Proof}{证明}\;
@@ -601,7 +614,7 @@
 }}{\par}
 \newenvironment{solution}{\par\noindent\textbf{\color{main}%
   \ifdefstring{\ELEGANT@lang}{en}{Solution}{解}\;
-}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}}{\vskip2ex\par}
+}\itshape}{\vskip2ex\par}
 \newenvironment{property}{\par\noindent\textbf{\color{third}%
   \ifdefstring{\ELEGANT@lang}{en}{Property}{性质}\;
 }}{\par}
@@ -618,7 +631,7 @@
     colframe=structurecolor,
       fonttitle=\bfseries,
       colbacktitle=structurecolor,
-      fontupper=\ifdefstring{\ELEGANT@lang}{en}{\sffamily}{\kaishu},
+      fontupper=\sffamily,
       attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
       boxrule=0pt,
       toprule=0.5pt,
@@ -661,17 +674,15 @@
 
 %页眉页脚
 \RequirePackage{fancyhdr}
-\RequirePackage{lastpage}
 \fancyhf{}
 
-
 \ifdefstring{\ELEGANT@base}{hide}{
-  \fancyfoot[c]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\scriptsize--\;\thepage\;--}
+  \fancyfoot[c]{\color{structurecolor}\itshape\scriptsize--\;\thepage\;--}
   \if@twoside
-  \fancyhead[ER]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
-  \fancyhead[OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+  \fancyhead[ER]{\color{structurecolor}\itshape\leftmark}
+  \fancyhead[OL]{\color{structurecolor}\itshape\rightmark}
   \else
-  \fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+  \fancyhead[R]{\color{structurecolor}\itshape\rightmark}
   \fi
 }{\relax}
 
@@ -679,12 +690,12 @@
 \ifdefstring{\ELEGANT@base}{show}{
   \fancyfoot[c]{\catcode`\$=3\relax\base{structurecolor}{88}}
   \if@twoside
-  \fancyhead[EL,OR]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
-  \fancyhead[ER]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\leftmark}
-  \fancyhead[OL]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+  \fancyhead[EL,OR]{\color{structurecolor}\itshape--\;\thepage\;--}
+  \fancyhead[ER]{\color{structurecolor}\itshape\leftmark}
+  \fancyhead[OL]{\color{structurecolor}\itshape\rightmark}
   \else
-  \fancyhead[R]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}--\;\thepage/\pageref*{LastPage}\;--}
-  \fancyhead[L]{\color{structurecolor}\ifdefstring{\ELEGANT@lang}{en}{\itshape}{\kaishu}\rightmark}
+  \fancyhead[R]{\color{structurecolor}\itshape--\;\thepage\;--}
+  \fancyhead[L]{\color{structurecolor}\itshape\rightmark}
   \fi
 }{\relax}
 
@@ -747,10 +758,10 @@
     \color{gray}\normalsize
     {\renewcommand{\arraystretch}{0.618}
     \begin{tabular}{l} 
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Author:}}{\kaishu 作者：} \@author \\
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Institute:}}{\kaishu 组织：} \the\institute\\
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Date:}}{\kaishu 时间：} \@date\\
-      \ifdefstring{\ELEGANT@lang}{en}{\textbf{Version:}}{\kaishu 版本：} \the\version\\
+      \authorname \@author \\
+      \institutename \the\institute\\
+      \datename \@date\\
+      \versionname \the\version\\
     \end{tabular}}
   \end{minipage}
   \begin{minipage}[c]{0.27\linewidth}
