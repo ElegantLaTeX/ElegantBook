@@ -6,7 +6,7 @@
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
-\version{3.09}
+\version{3.10*}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. --- M. Moore}
 
@@ -18,9 +18,6 @@
 \maketitle
 
 \frontmatter
-\chapter*{引言}
-
-这是引言部分
 
 \tableofcontents
 
@@ -281,6 +278,16 @@ The content of theorem.
 \end{theorem}
 \end{lstlisting}
 
+\begin{lstlisting}{Python}
+>> 'www0'>='W123'
+
+ans =
+
+  1×4 logical 数组
+
+   1   1   1   0
+\end{lstlisting}
+
 第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
 
 其他相同用法的定理类环境有：
@@ -416,13 +423,13 @@ The content of introduction.
 \end{introduction}
 \end{lstlisting}
 效果如下：
-\begin{introduction}
-  \item Definition of Theorem
-  \item Ask for help
-  \item Optimization Problem
-  \item Property of Cauchy Series
-  \item Angle of Corner
-\end{introduction}
+% \begin{introduction}
+%   \item Definition of Theorem
+%   \item Ask for help
+%   \item Optimization Problem
+%   \item Property of Cauchy Series
+%   \item Angle of Corner
+% \end{introduction}
 
 环境的标题文字可以通过这个环境的可选参数进行修改，修改方法为：
 \begin{lstlisting}
@@ -463,8 +470,8 @@ a^2+b^2=c_{2_{i}} (1,2) [1,23]
 如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
 \end{remark}
 
-\section{旁注}
-在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
+% \section{旁注}
+% 在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
 
 \begin{remark}
 在使用旁注的时候，需要注意的是，文本和公式可以直接在旁注中使用。
@@ -576,7 +583,6 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 
 
-
 有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。练习题 \ref{exer:43} 是一个性质的证明。
 
 \begin{exercise}\label{exer:43}
@@ -588,13 +594,13 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 是 $\mathcal{R}^1$ 上的连续函数。
 \end{exercise}
 
-%\begin{problem}
-%即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-%\end{problem}
-
-\begin{example}
+\begin{problem}
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-\end{example}
+\end{problem}
+
+% \begin{example}
+% 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+% \end{example}
 
 \begin{proof}
 测试证明环境

@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/01/14 v3.10 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/01/17 v3.10 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -122,8 +122,6 @@
   \AfterEndPreamble{
     \renewcommand{\itshape}{\kaishu}
     \setlength\parindent{2\ccwd}}}
-
-\RequirePackage{ifxetex}
 
 % \AtBeginDocument{%
 %   \addtocontents{toc}{\protect\pagestyle{empty}}%
@@ -325,6 +323,8 @@
   \newcommand{\conclusionname}{结论}
   \newcommand{\solutionname}{解}
   \newcommand{\propertyname}{性质}
+  \newcommand{\introductionname}{内容提要}
+  \newcommand{\problemsetname}{习题}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
   \setlength\parindent{2em}
@@ -353,6 +353,8 @@
   \newcommand{\conclusionname}{Conclusion}
   \newcommand{\solutionname}{Solution}
   \newcommand{\propertyname}{Property}
+  \newcommand{\introductionname}{Introduction}
+  \newcommand{\problemsetname}{Exercise}
 }{\relax}
 
 \RequirePackage{xpatch}
@@ -521,8 +523,7 @@
       \thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
 \theoremstyle{edefstyle}
-\newtheorem{edefinition}{\ifdefstring{\ELEGANT@lang}{en}{Definition}{定义}}[chapter]
-
+\newtheorem{edefinition}{\definitionname }[chapter]
 \theoremstyle{ethmstyle}
 \newtheorem{etheorem}{\theoremname }[chapter]
 \newtheorem{elemma}{\lemmaname }[chapter]
@@ -571,34 +572,29 @@
 \setcounter{exam}{0}
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \newenvironment{example}[1][]{
-     \refstepcounter{exam}\par\noindent\textbf{\color{main}{%
-       \ifdefstring{\ELEGANT@lang}{en}{Example}{例}
-     }\theexam #1 \,}\rmfamily %
-   }{
-     \par\medskip\ignorespacesafterend %
-   }
+  \refstepcounter{exam}
+  \par\noindent\textbf{\color{main}{\examplename}\theexam~#1 \,}\rmfamily}{
+  \par\medskip\ignorespacesafterend}
 
 %% Exercise with counter
 \newcounter{exer}[chapter]
 \setcounter{exer}{0}
 \renewcommand{\theexer}{\thechapter.\arabic{exer}}
 \newenvironment{exercise}[1][]{
-     \refstepcounter{exer}\par\noindent\makebox[-3pt][r]{\scriptsize\color{red!90}\HandPencilLeft\quad}\textbf{\color{main}{%
-       \ifdefstring{\ELEGANT@lang}{en}{Exercise}{练习}
-     }\theexer #1 \,}\rmfamily %
-   }{
-     \par\medskip\ignorespacesafterend %
-   }
+  \refstepcounter{exer}
+  \par\noindent\makebox[-3pt][r]{
+    \scriptsize\color{red!90}\HandPencilLeft\quad}
+    \textbf{\color{main}{\exercisename}\theexer #1 \,}\rmfamily}{
+  \par\medskip\ignorespacesafterend}
 
 %% Exercise with counter
 \newcounter{prob}[chapter]
 \setcounter{prob}{0}
 \renewcommand{\theprob}{\thechapter.\arabic{prob}}
-\newenvironment{problem}[1]{
-  \refstepcounter{prob}\par\noindent\textbf{\color{main}{%
-    \problemname }
-    \theprob #1 \,}\rmfamily}{
-      \par\medskip\ignorespacesafterend}
+\newenvironment{problem}[1][]{
+  \refstepcounter{prob}
+  \par\noindent\textbf{\color{main}{\problemname} \theprob #1 \,}\rmfamily}{
+  \par\medskip\ignorespacesafterend}
 
 
 
@@ -614,16 +610,16 @@
   % \hfill$\Box$\quad
   \par}
 
-\newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname}\itshape}{\vskip2ex\par}
-\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname}}{\par}
-\newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname}}{\par}
-\newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname}}{\par}
-\newenvironment{property}{\par\noindent\textbf{\color{third}\propertyname}}{\par}
+\newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname} \medskip\itshape}{\vskip2ex\par}
+\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname} \medskip}{\par}
+\newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname} \medskip}{\par}
+\newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname} \medskip}{\par}
+\newenvironment{property}{\par\noindent\textbf{\color{third}\propertyname}\medskip}{\par}
 \newenvironment{custom}[1]{\par\noindent\textbf{\color{third} #1 }}{\par}
 
 \RequirePackage{multicol}
 \tcbset{
-  introduction/.style={
+  introductionsty/.style={
     enhanced,
     breakable,
     colback=structurecolor!10,
@@ -641,23 +637,22 @@
   },
 }
 
-\newenvironment{introduction}[1][\ifdefstring{\ELEGANT@lang}{en}{Introduction}{内容提要}]{
-\begin{tcolorbox}[introduction,title={#1}]
-\begin{multicols}{2}
-\begin{itemize}[label=\textcolor{structurecolor}{\scriptsize\SquareShadowBottomRight}]
-}{%
-\end{itemize}
-\end{multicols}
-\end{tcolorbox}}
+\newenvironment{introduction}[1][\introductionname]{
+  \begin{tcolorbox}[introductionsty,title={#1}]
+    \begin{multicols}{2}
+      \begin{itemize}[label=\textcolor{structurecolor}{\upshape\scriptsize\SquareShadowBottomRight}]}{
+      \end{itemize}
+    \end{multicols}
+  \end{tcolorbox}}
 
 \RequirePackage{adforn}
-\newenvironment{problemset}[1][\ifdefstring{\ELEGANT@lang}{en}{\textbf{\chaptername\, Exercise}}{\textbf{\chaptername\, 习题}}]{
-\begin{center}
-\ifdefstring{\ELEGANT@lang}{en}{\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\,}{Chapter} Exercise} }{\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\,}{章节}习题}}
-\textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
-\end{center}
-\begin{enumerate}[label=\textcolor{structurecolor}{\arabic*.}]}{%
-\end{enumerate}}
+\newenvironment{problemset}[1][\chaptername~\medskip~\problemsetname]{
+  \begin{center}
+    \addcontentsline{toc}{section}{\texorpdfstring{\chaptername\medskip\problemsetname}{\problemsetname}}
+    \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
+  \end{center}
+  \begin{enumerate}}{
+  \end{enumerate}}
 
 \def\relsec{\endgroup start}
 \def\endrelsec{end\begingroup\def \@currenvir {relsec}}
@@ -676,7 +671,7 @@
 \fancyhf{}
 
 \ifdefstring{\ELEGANT@base}{hide}{
-  \fancyfoot[c]{\color{structurecolor}\itshape\scriptsize--\;\thepage\;--}
+  \fancyfoot[c]{\color{structurecolor}\scriptsize--\;\thepage\;--}
   \if@twoside
   \fancyhead[ER]{\color{structurecolor}\itshape\leftmark}
   \fancyhead[OL]{\color{structurecolor}\itshape\rightmark}
@@ -689,11 +684,11 @@
 \ifdefstring{\ELEGANT@base}{show}{
   \fancyfoot[c]{\catcode`\$=3\relax\base{structurecolor}{88}}
   \if@twoside
-  \fancyhead[EL,OR]{\color{structurecolor}\itshape--\;\thepage\;--}
+  \fancyhead[EL,OR]{\color{structurecolor}--\;\thepage\;--}
   \fancyhead[ER]{\color{structurecolor}\itshape\leftmark}
   \fancyhead[OL]{\color{structurecolor}\itshape\rightmark}
   \else
-  \fancyhead[R]{\color{structurecolor}\itshape--\;\thepage\;--}
+  \fancyhead[R]{\color{structurecolor}--\;\thepage\;--}
   \fancyhead[L]{\color{structurecolor}\itshape\rightmark}
   \fi
 }{\relax}
@@ -798,6 +793,7 @@
 \lstset{language=[LaTeX]TeX,
   texcsstyle=*\color{winered},
   numbers=none,
+  mathescape,
   breaklines=true,
   keywordstyle=\color{winered},
   commentstyle=\color{gray},
