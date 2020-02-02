@@ -55,7 +55,7 @@
 
 \DeclareStringOption[apalike]{bibstyle}
 
-\DeclareVoidOption{newtxmath}{\ekv{math=newtx}}
+\DeclareVoidOption{newtx}{\ekv{math=newtx}}
 \DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
 \DeclareVoidOption{cm}{\ekv{math=cm}}
 
@@ -115,7 +115,7 @@
 \setcounter{tocdepth}{1}
 
 \PassOptionsToPackage{no-math}{fontspec}
-\RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
+
 
 \ifdefstring{\ELEGANT@lang}{cn}{
   \RequirePackage[UTF8, scheme=plain]{ctex}
@@ -233,26 +233,33 @@
 \ifdefstring{\ELEGANT@titlestyle}{hang}{\def\style{hang}}{\relax}
 \ifdefstring{\ELEGANT@titlestyle}{display}{\def\style{display}}{\relax}
 
+% reference: 
+% https://tex.stackexchange.com/questions/58506/how-to-make-a-new-command-similar-to-author
+% https://pastebin.com/C8W4axzV
+\newcommand{\email}[1]{\gdef\@email{\href{mailto:#1}{\nolinkurl{#1}}}}
+\def\@email{\@latex@warning@no@line{No \noexpand\email given}}
 
-\newtoks\email
-\newtoks\version
-\newtoks\institute
-\newtoks\subtitle
+\global\let\@title\@empty
+\global\let\@author\@empty
+\global\let\@date\@empty
+\newcommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\newcommand{\institute}[1]{\gdef\@institute{#1}}
+\newcommand{\version}[1]{\gdef\@version{#1}}
+\newcommand{\extrainfo}[1]{\gdef\@extrainfo{#1}}
+
+\RequirePackage{mwe}
+\newcommand{\logo}[1]{\gdef\@logo{#1}}
+\newcommand{\cover}[1]{\gdef\@cover{#1}}
 
 \RequirePackage[\ELEGANT@cite,sort&compress]{natbib}
 \setlength{\bibsep}{0.0pt}
 \def\bibfont{\footnotesize}
-
-
 
 \RequirePackage{enumerate}
 % list/itemize/enumerate setting
 \RequirePackage[shortlabels,inline]{enumitem}
 \setlist{nolistsep}
 
-% caption settings 
-\RequirePackage{caption}
-\captionsetup{labelfont = bf}
 \RequirePackage[font=small,labelfont={bf,color=structurecolor}]{caption} 
 \captionsetup[table]{skip=3pt}
 \captionsetup[figure]{skip=3pt}
@@ -279,6 +286,7 @@
 
 \RequirePackage{graphicx}
 %\RequirePackage{enumerate}
+\RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
 
 \RequirePackage{booktabs}
 \RequirePackage{multicol,multirow}
@@ -325,6 +333,7 @@
   \newcommand{\propertyname}{性质}
   \newcommand{\introductionname}{内容提要}
   \newcommand{\problemsetname}{习题}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textit{#1}：#2}}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
   \setlength\parindent{2em}
@@ -355,6 +364,7 @@
   \newcommand{\propertyname}{Property}
   \newcommand{\introductionname}{Introduction}
   \newcommand{\problemsetname}{Exercise}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
 }{\relax}
 
 \RequirePackage{xpatch}
@@ -399,8 +409,7 @@
   pdfborder={0 0 0},
   linktocpage
 }
-\let\email\relax
-\newcommand\email[1]{\href{mailto:#1}{\nolinkurl{#1}}}
+
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
@@ -412,27 +421,22 @@
 \titleformat{\chapter}[\style]{\bfseries}
 {\filcenter\LARGE\enspace\bfseries{\color{structurecolor}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{structurecolor}\LARGE\filcenter}[\ifdefstring{\ELEGANT@base}{hide}{}{\filcenter\base{structurecolor}{88}}]
 
-\titleformat{\section}[hang]{\bfseries}
-{\Large\bfseries{\color{structurecolor}\thesection}\enspace}{1pt}{\color{structurecolor}\Large\bfseries\filright}
-
+\titleformat{\section}[hang]{\bfseries}{
+  \Large\bfseries{\color{structurecolor}\thesection}\enspace}{1pt}{%
+  \color{structurecolor}\Large\bfseries\filright}
 \titleformat{\subsection}[hang]{\bfseries}{
-  \large\bfseries\color{structurecolor}\thesubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
-
-\titleformat{\subsubsection}[hang]{\bfseries}
-{\large\bfseries\color{structurecolor}\thesubsubsection\enspace}{1pt}{\color{structurecolor}\large\bfseries\filright}
+  \large\bfseries\color{structurecolor}\thesubsection\enspace}{1pt}{%
+  \color{structurecolor}\large\bfseries\filright}
+\titleformat{\subsubsection}[hang]{\bfseries}{
+  \large\bfseries\color{structurecolor}\thesubsubsection\enspace}{1pt}{%
+  \color{structurecolor}\large\bfseries\filright}
 
 
 \titlespacing{\chapter}{0pt}{-20pt}{1.3\baselineskip}
 %\titlespacing{\subsection}{0pt}{0.5\baselineskip}{-\baselineskip}
 
-
-
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt,bbding}
-% list/itemize/enumerate setting
-\RequirePackage[shortlabels]{enumitem}
-\setlist{nolistsep}
-
 
 \RequirePackage[many]{tcolorbox}
 
@@ -486,20 +490,13 @@
         \node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {
           \textcolor{third}{$\spadesuit$}};}},}
 
-\newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
-
-\newtcbtheorem[auto counter,number within=chapter]{theorem}{\theoremname}{thmstyle}{thm}
-
-\newtcbtheorem[auto counter,number within=chapter]{postulate}{\postulatename}{thmstyle}{pos}
-
-\newtcbtheorem[auto counter,number within=chapter]{axiom}{\axiomname}{thmstyle}{axi}
-
-\newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
-
-\newtcbtheorem[auto counter,number within=chapter]{corollary}{\corollaryname}{thmstyle}{cor}
-
-\newtcbtheorem[auto counter,number within=chapter]{lemma}{\lemmaname}{thmstyle}{lem}
-
+  \newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
+  \newtcbtheorem[auto counter,number within=chapter]{theorem}{\theoremname}{thmstyle}{thm}
+  \newtcbtheorem[auto counter,number within=chapter]{postulate}{\postulatename}{thmstyle}{pos}
+  \newtcbtheorem[auto counter,number within=chapter]{axiom}{\axiomname}{thmstyle}{axi}
+  \newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
+  \newtcbtheorem[auto counter,number within=chapter]{corollary}{\corollaryname}{thmstyle}{cor}
+  \newtcbtheorem[auto counter,number within=chapter]{lemma}{\lemmaname}{thmstyle}{lem}
 }{\relax}
 
 \ifdefstring{\ELEGANT@mode}{simple}{
@@ -511,56 +508,53 @@
   
   % declare a new theorem style
   \newtheoremstyle{edefstyle}{3pt}{3pt}{\itshape}{}{
-    \bfseries\color{main}}{}{0.5em}{
-      \thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  % -------------------------------------------------%
+    \bfseries\color{main}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
   \newtheoremstyle{ethmstyle}{3pt}{3pt}{\itshape}{}{
-    \bfseries\color{second}}{}{.5em}{
-      \thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  % -------------------------------------------------%
+    \bfseries\color{second}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
   \newtheoremstyle{eprostyle}{3pt}{3pt}{\itshape}{}{
-    \bfseries\color{third}}{}{.5em}{
-      \thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
+    \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
-\theoremstyle{edefstyle}
-\newtheorem{edefinition}{\definitionname }[chapter]
-\theoremstyle{ethmstyle}
-\newtheorem{etheorem}{\theoremname }[chapter]
-\newtheorem{elemma}{\lemmaname }[chapter]
-\newtheorem{ecorollary}{\corollaryname }[chapter]
-\newtheorem{epostulate}{\postulatename }[chapter]
-\newtheorem{eaxiom}{\axiomname }[chapter]
 
-\theoremstyle{eprostyle}
-\newtheorem{eproposition}{\propositionname }[chapter]
+  \theoremstyle{edefstyle} % definition style
 
-\newenvironment{theorem}[2]
-  {\ifstrempty{#1}{\etheorem}{\etheorem[#1]}\ifstrempty{#2}{}{\label{thm:#2}}}
-  {\endetheorem}
+  \newtheorem{edefinition}{\definitionname}[chapter]
+  \newenvironment{definition}[2]{
+    \ifstrempty{#1}{\edefinition}{\edefinition[#1]}\ifstrempty{#2}{}{\label{def:#2}}}{
+    \endedefinition}
 
-\newenvironment{definition}[2]
-  {\ifstrempty{#1}{\edefinition}{\edefinition[#1]}\ifstrempty{#2}{}{\label{def:#2}}}
-  {\endedefinition}
 
-\newenvironment{lemma}[2]
-  {\ifstrempty{#1}{\elemma}{\elemma[#1]}\ifstrempty{#2}{}{\label{lem:#2}}}
-  {\endelemma}
+  \theoremstyle{ethmstyle} %theorem style
+  
+  \newtheorem{etheorem}{\theoremname}[chapter]
+  \newenvironment{theorem}[2]{
+    \ignorespaces\ifstrempty{#1}{\etheorem}{\etheorem[#1]}\ifstrempty{#2}{}{\label{thm:#2}}}{
+    \endetheorem}
 
-\newenvironment{corollary}[2]
-  {\ifstrempty{#1}{\ecorollary}{\ecorollary[#1]}\ifstrempty{#2}{}{\label{cor:#2}}}
-  {\endecorollary}
+  \newtheorem{elemma}{\lemmaname}[chapter]
+  \newenvironment{lemma}[2]{
+    \ignorespaces\ifstrempty{#1}{\elemma}{\elemma[#1]}\ifstrempty{#2}{}{\label{lem:#2}}}{
+    \endelemma}
+  
+  \newtheorem{ecorollary}{\corollaryname}[chapter]
+  \newenvironment{corollary}[2]{
+    \ignorespaces\ifstrempty{#1}{\ecorollary}{\ecorollary[#1]}\ifstrempty{#2}{}{\label{cor:#2}}}{
+    \endecorollary}
+  
+  \newtheorem{epostulate}{\postulatename}[chapter]
+  \newenvironment{postulate}[2]{
+    \ifstrempty{#1}{\epostulate}{\epostulate[#1]}\ifstrempty{#2}{}{\label{pos:#2}}}{
+    \endepostulate}
+  
+  \newtheorem{eaxiom}{\axiomname}[chapter]
+  \newenvironment{axiom}[2]{
+    \ifstrempty{#1}{\eaxiom}{\eaxiom[#1]}\ifstrempty{#2}{}{\label{axi:#2}}}{
+    \endaxiom}
 
-\newenvironment{postulate}[2]
-  {\ifstrempty{#1}{\epostulate}{\epostulate[#1]}\ifstrempty{#2}{}{\label{pos:#2}}}
-  {\endepostulate}
-
-\newenvironment{axiom}[2]
-  {\ifstrempty{#1}{\eaxiom}{\eaxiom[#1]}\ifstrempty{#2}{}{\label{axi:#2}}}
-  {\endaxiom}
-
-\newenvironment{proposition}[2]
-  {\ifstrempty{#1}{\eproposition}{\eproposition[#1]}\ifstrempty{#2}{}{\label{pro:#2}}}
-  {\endeproposition}
+  \theoremstyle{eprostyle}
+  \newtheorem{eproposition}{\propositionname}[chapter]
+  \newenvironment{proposition}[2]{
+    \ifstrempty{#1}{\eproposition}{\eproposition[#1]}\ifstrempty{#2}{}{\label{pro:#2}}}{
+    \endeproposition}
 }{\relax}
 
 % main（green-def): example exercise problem solution
@@ -648,7 +642,7 @@
 \RequirePackage{adforn}
 \newenvironment{problemset}[1][\chaptername~\medskip~\problemsetname]{
   \begin{center}
-    \addcontentsline{toc}{section}{\texorpdfstring{\chaptername\medskip\problemsetname}{\problemsetname}}
+    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\medskip\problemsetname}{\problemsetname}}
     \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
   \end{center}
   \begin{enumerate}}{
@@ -702,31 +696,6 @@
 \renewcommand{\sectionmark}[1]{\markright{\thesection\, #1}{} }
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername \, #1\,}{}}
 
-%%封面
-\newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
-
-\def\IfEmpty#1{%
-  \edef\1{\the#1}
-  \ifx\1\empty
-}
-\def \ifempty#1{\def\temp{#1} \ifx\temp\empty }
-
-\newcommand*{\logo}[1]{
- \def\@logo{\includegraphics[width=4.2cm]{#1}
- }
-}
-\ifdefstring{\ELEGANT@device}{normal}{
-\newcommand*{\cover}[1]{
- \def\@cover{\includegraphics[width=\linewidth]{#1}
- }
-}}{\relax}
-
-\ifdefstring{\ELEGANT@device}{pad}{
-\newcommand*{\cover}[1]{
- \def\@cover{\includegraphics[trim=0 26bp 0 26bp,clip=true, width=\linewidth]{#1}
- }
-}}{\relax}
-
 \renewcommand{\baselinestretch}{1.35} 
 
 \renewcommand*{\maketitle}{%
@@ -734,51 +703,73 @@
 \begin{titlepage}
   \newgeometry{margin = 0in}
   \parindent=0pt
-  \@cover
+  \ifdefstring{\ELEGANT@device}{normal}{
+    \ifcsname @cover\endcsname
+      \includegraphics[width=\linewidth]{\@cover}
+    \else
+      \includegraphics[width=\linewidth]{example-image}
+    \fi
+  }{\relax}
+  \ifdefstring{\ELEGANT@device}{pad}{
+    \ifcsname @cover\endcsname
+      \includegraphics[trim=0 26bp 0 26bp,clip=true, width=\linewidth]{\@cover}
+    \else
+      \includegraphics[trim=0 26bp 0 26bp,clip=true, width=\linewidth]{example-image}
+    \fi
+  }{\relax}
   \setlength{\fboxsep}{0pt}
   \colorbox{second}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
   \vfill
   \vskip-2ex
   \hspace{2em}
   \parbox{0.8\textwidth}{
-    \bfseries\Huge \@title\par
-  }
+    \bfseries\Huge 
+      \ifcsname @title\endcsname \@title \fi
+    \par}
   \vfill
   \vspace{-1.0cm}
   \setstretch{2.5}
   \hspace{2.5em}
   \begin{minipage}[c]{0.67\linewidth}
-    {\color{darkgray}\bfseries\Large \the\subtitle\\[2ex]}
+    {\color{darkgray}\bfseries\Large
+      \ifcsname @subtitle\endcsname\@subtitle\\[2ex]\fi}
     \color{gray}\normalsize
     {\renewcommand{\arraystretch}{0.618}
-    \begin{tabular}{l} 
-      \authorname \@author \\
-      \institutename \the\institute\\
-      \datename \@date\\
-      \versionname \the\version\\
+    \begin{tabular}{l}
+      % \ifcsname @author\endcsname \authorname \@author\\\fi
+      \ifx\@author\empty\else\authorname\@author\\ \fi
+      \ifcsname @institute\endcsname \institutename \@institute\\ \fi
+      % \ifcsname @date\endcsname  \@date\\\fi
+      \ifx\@date\empty\else\datename\@date \\ \fi
+      \ifcsname @version\endcsname \versionname \@version\\ \fi
+      \ifcsname @bioinfo\endcsname \@bioinfo\\ \fi
     \end{tabular}}
   \end{minipage}
   \begin{minipage}[c]{0.27\linewidth}
   \begin{tikzpicture}[remember picture,overlay]
     \begin{pgfonlayer}{background}
-      \node[opacity=0.8,anchor=south east,outer sep=0pt,inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {\@logo};
+      \node[opacity=0.8,
+            anchor=south east,
+            outer sep=0pt,
+            inner sep=0pt] at ($(current page.south east) +(-0.8in,1.5in)$) {
+              \ifcsname @logo\endcsname\includegraphics[width=4.2cm]{\@logo}\fi};
     \end{pgfonlayer}
   \end{tikzpicture}
   \end{minipage}
   \vfill
   \begin{center}
-  \setstretch{1.3}
-  \parbox[t]{0.7\textwidth}{\centering \itshape \@extrainfo}
+    \setstretch{1.3}
+    \parbox[t]{0.7\textwidth}{\centering \itshape 
+      \ifcsname @extrainfo\endcsname\@extrainfo\fi}
   \end{center}
   \vfill
 \end{titlepage}
 \restoregeometry
-\thispagestyle{empty}
-}
+\thispagestyle{empty}}
 
 
 
-\RequirePackage{listings} 
+\RequirePackage{listings}
 \renewcommand{\ttdefault}{cmtt}
 \lstdefinestyle{mystyle}{
   basicstyle=%

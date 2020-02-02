@@ -7,6 +7,7 @@
 \institute{Elegant\LaTeX{} Program}
 \date{\today}
 \version{3.10*}
+\bioinfo{自定义}{信息}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. --- M. Moore}
 
@@ -189,46 +190,43 @@ Hellow
 \end{lstlisting}
 
 \begin{table}[htbp]
-\caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
-\centering
-\begin{tabular}{ccccccc}
-\toprule
-	        & \textcolor{structure1}{green} 
-	        & \textcolor{structure2}{cyan} 
-	        & \textcolor{structure3}{blue}
-	        & \textcolor{structure4}{gray} 
-	        & \textcolor{structure5}{black} 
-	        & 主要使用的环境\\
-\midrule
-structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
-				& chapter \ section \ subsection \\
-
-main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
-				& definition \ exercise \ problem \\
-
-second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second5}\rule{1cm}{1cm}}}
-				& theorem \ lemma \ corollary\\
-
-third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third5}\rule{1cm}{1cm}}}
-				& proposition\\
-\bottomrule
-\end{tabular}
+  \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
+  \centering
+  \begin{tabular}{ccccccc}
+  \toprule
+              & \textcolor{structure1}{green} 
+              & \textcolor{structure2}{cyan} 
+              & \textcolor{structure3}{blue}
+              & \textcolor{structure4}{gray} 
+              & \textcolor{structure5}{black} 
+              & 主要使用的环境\\
+  \midrule
+    structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
+              & \makecell{{\color{structure2}\rule{1cm}{1cm}}}
+              & \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
+              & \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
+              & \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
+              & chapter \ section \ subsection \\
+    main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
+              & \makecell{{\color{main2}\rule{1cm}{1cm}}}
+              & \makecell{{\color{main3}\rule{1cm}{1cm}}}
+              & \makecell{{\color{main4}\rule{1cm}{1cm}}}
+              & \makecell{{\color{main5}\rule{1cm}{1cm}}}
+              & definition \ exercise \ problem \\
+    second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
+              & \makecell{{\color{second2}\rule{1cm}{1cm}}}
+              & \makecell{{\color{second3}\rule{1cm}{1cm}}}
+              & \makecell{{\color{second4}\rule{1cm}{1cm}}}
+              & \makecell{{\color{second5}\rule{1cm}{1cm}}}
+              & theorem \ lemma \ corollary\\
+    third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
+            & \makecell{{\color{third2}\rule{1cm}{1cm}}}
+            & \makecell{{\color{third3}\rule{1cm}{1cm}}}
+            & \makecell{{\color{third4}\rule{1cm}{1cm}}}
+            & \makecell{{\color{third5}\rule{1cm}{1cm}}}
+            & proposition\\
+  \bottomrule
+  \end{tabular}
 \end{table}
 
 如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
@@ -278,15 +276,6 @@ The content of theorem.
 \end{theorem}
 \end{lstlisting}
 
-\begin{lstlisting}{Python}
->> 'www0'>='W123'
-
-ans =
-
-  1×4 logical 数组
-
-   1   1   1   0
-\end{lstlisting}
 
 第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
 
