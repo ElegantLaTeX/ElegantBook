@@ -25,6 +25,7 @@
 \DeclareStringOption[cm]{math}
 \DeclareStringOption[marginfalse]{marginpar}
 \DeclareStringOption[onecol]{toc}
+\DeclareStringOption{scheme}
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color=green}}
 \DeclareVoidOption{cyan}{\ekv{color=cyan}}
@@ -32,6 +33,8 @@
 \DeclareVoidOption{gray}{\ekv{color=gray}}
 \DeclareVoidOption{black}{\ekv{color=black}}
 \DeclareVoidOption{nocolor}{\ekv{color=none}}
+
+\DeclareVoidOption{chinese}{\ekv{scheme=chinese}}
 
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
@@ -54,6 +57,7 @@
 \DeclareVoidOption{super}{\ekv{cite=super}}
 
 \DeclareStringOption[apalike]{bibstyle}
+
 
 \DeclareVoidOption{newtx}{\ekv{math=newtx}}
 \DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
@@ -308,7 +312,9 @@
   \renewcommand{\indexname}{索\hspace{2em}引}
   \newcommand\figref[1]{\textbf{图}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
-  \renewcommand{\chaptername}{第 \thechapter\,章}
+  \ifdefstring{\ELEGANT@scheme}{chinese}{
+    \renewcommand{\chaptername}{第 \zhnumber{\thechapter}\ 章}}{
+    \renewcommand{\chaptername}{第 \thechapter 章}}
   \newcommand{\authorname}{\textit{作者：}}
   \newcommand{\institutename}{\textit{组织：}}
   \newcommand{\datename}{\textit{时间：}}
@@ -568,7 +574,7 @@
 \newenvironment{example}[1][]{
   \refstepcounter{exam}
   \par\noindent\textbf{\color{main}{\examplename}\theexam~#1 \,}\rmfamily}{
-  \par\medskip\ignorespacesafterend}
+  \par\ignorespacesafterend}
 
 %% Exercise with counter
 \newcounter{exer}[chapter]
@@ -579,7 +585,7 @@
   \par\noindent\makebox[-3pt][r]{
     \scriptsize\color{red!90}\HandPencilLeft\quad}
     \textbf{\color{main}{\exercisename}\theexer #1 \,}\rmfamily}{
-  \par\medskip\ignorespacesafterend}
+  \par\ignorespacesafterend}
 
 %% Exercise with counter
 \newcounter{prob}[chapter]
@@ -588,7 +594,7 @@
 \newenvironment{problem}[1][]{
   \refstepcounter{prob}
   \par\noindent\textbf{\color{main}{\problemname} \theprob #1 \,}\rmfamily}{
-  \par\medskip\ignorespacesafterend}
+  \par\ignorespacesafterend}
 
 
 
@@ -604,11 +610,11 @@
   % \hfill$\Box$\quad
   \par}
 
-\newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname} \medskip\itshape}{\vskip2ex\par}
-\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname} \medskip}{\par}
-\newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname} \medskip}{\par}
-\newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname} \medskip}{\par}
-\newenvironment{property}{\par\noindent\textbf{\color{third}\propertyname}\medskip}{\par}
+\newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname} \itshape}{\par}
+\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname}}{\par}
+\newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname}}{\par}
+\newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname}}{\par}
+\newenvironment{property}{\par\noindent\textbf{\color{third}\propertyname}}{\par}
 \newenvironment{custom}[1]{\par\noindent\textbf{\color{third} #1 }}{\par}
 
 \RequirePackage{multicol}
@@ -640,9 +646,9 @@
   \end{tcolorbox}}
 
 \RequirePackage{adforn}
-\newenvironment{problemset}[1][\chaptername~\medskip~\problemsetname]{
+\newenvironment{problemset}[1][\chaptername~\problemsetname]{
   \begin{center}
-    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\medskip\problemsetname}{\problemsetname}}
+    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername~\problemsetname}{\problemsetname}}
     \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
   \end{center}
   \begin{enumerate}}{

@@ -1,4 +1,4 @@
-\documentclass[cn,11pt,simple]{elegantbook}
+\documentclass[cn,11pt,simple,chinese]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -25,12 +25,12 @@
 \mainmatter
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 Github 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
+Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
 
 我们的联系方式：
 \begin{itemize}
   \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
-  \item Github 网址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
+  \item GitHub 网址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
   \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
   \item 文档 Wiki：\href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
@@ -60,7 +60,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 你可以通过免安装的方式使用本模板，也可以通过安装模板的方式使用。
 
-免安装使用方法如下，从 Github 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板进行更新之后，你需要手动替换 \lstinline{cls} 文件。
+免安装使用方法如下，从 GitHub 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板进行更新之后，你需要手动替换 \lstinline{cls} 文件。
 
 如果你是 \TeX{} Live 2019 用户，我们非常推荐你直接进行安装和更新。你可以通过 \TeX{} Live 2019 自带的 \lstinline{tlshell}\footnote{也叫 \TeX{} Live Manager} 进行安装。安装非常简单，步骤如下，搜索并打开 \lstinline{tlshell}，然后通过 \lstinline{File -> Load Default Repository} 加载远程仓库，如果你不想使用默认的仓库，你可以通过 \lstinline{Options} 下的菜单设置远程仓库。设置好仓库之后，等待仓库加载完毕，你可以在下面的搜索栏搜索 \lstinline{elegantbook}，然后选择进行安装与更新。
 
@@ -101,18 +101,18 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 目前 ElegantLaTeX 共有 4 名协作人员，分别是
 \begin{itemize}
   \item 官方文档翻译: \href{https://github.com/peggy2006xzyz}{YPY};
-  \item Github 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
+  \item GitHub 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
   \item QQ 群管理员: \href{https://github.com/sikouhjw}{Sikouhjw}.
 \end{itemize}
 
 在此感谢他们无私的奉献！
 
 \section{致谢}
-2019 年 5 月 20 日，ElegantBook 模板在 Github 上的收藏数（star）达到了 100\footnote{截止 2019 年 8 月 18 日 3.09 版本正式发布，star 数为 189。}。
+2019 年 5 月 20 日，ElegantBook 模板在 GitHub 上的收藏数（star）达到了 100\footnote{截止 2019 年 8 月 18 日 3.09 版本正式发布，star 数为 189。}。
 
 在此特别感谢 China\TeX{} 以及 \href{http://www.latexstudio.net/}{\LaTeX{} 工作室}对于本系列模板的大力宣传与推广。\LaTeX{} 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏，这也是国内最全面的 \LaTeX{} 相关的网站。
 
-如果你喜欢我们的模板，你可以在 Github 上收藏我们的模板。
+如果你喜欢我们的模板，你可以在 GitHub 上收藏我们的模板。
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{star.png}
@@ -122,7 +122,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 8 年了，我们的模板�
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.618\textwidth]{star-history.png}
-  \caption{Elegant\LaTeX{} 系列模板上线 Github 之后上每周 Star 数变化}
+  \caption{Elegant\LaTeX{} 系列模板上线 GitHub 之后上每周 Star 数变化}
 \end{figure}
 
 \section{捐赠}
@@ -275,6 +275,15 @@ Hellow
 The content of theorem.
 \end{theorem}
 \end{lstlisting}
+
+\begin{remark}
+  中文（Chinese）是中国语言文字或中国语言文学的省称。特指汉族的语言文字（汉语和汉字）或汉语言文学。在汉字文化圈和海外华人社区中，中文也被称为汉文、华文。中文（汉语）有标准语和方言之分，其标准语即汉语普通话。
+\end{remark}
+
+\begin{problem}
+  中文（Chinese）是中国语言文字或中国语言文学的省称。特指汉族的语言文字（汉语和汉字）或汉语言文学。在汉字文化圈和海外华人社区中，中文也被称为汉文、华文。中文（汉语）有标准语和方言之分，其标准语即汉语普通话。
+\end{problem}
+
 
 
 第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
@@ -695,7 +704,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \end{custom}
 
 \begin{solution}
-请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 Github 或者 \TeX{} Live 2019 内获取。
+请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2019 内获取。
 \end{solution}
 
 
