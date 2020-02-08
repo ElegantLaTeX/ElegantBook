@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/01/17 v3.10 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/02/08 v3.10 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -33,8 +33,13 @@
 \DeclareVoidOption{gray}{\ekv{color=gray}}
 \DeclareVoidOption{black}{\ekv{color=black}}
 \DeclareVoidOption{nocolor}{\ekv{color=none}}
+\DeclareStringOption[ctexfont]{chinesefont}
 
 \DeclareVoidOption{chinese}{\ekv{scheme=chinese}}
+
+\DeclareVoidOption{ctexfont}{\ekv{chinesefont=ctexfont}}
+\DeclareVoidOption{founder}{\ekv{chinesefont=founder}}
+\DeclareVoidOption{nofont}{\ekv{chinesefont=nofont}}
 
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
@@ -57,7 +62,6 @@
 \DeclareVoidOption{super}{\ekv{cite=super}}
 
 \DeclareStringOption[apalike]{bibstyle}
-
 
 \DeclareVoidOption{newtx}{\ekv{math=newtx}}
 \DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
@@ -97,8 +101,8 @@
   \ifdefstring{\ELEGANT@marginpar}{margintrue}{
     \geometry{
       marginparwidth=5cm, marginparsep=5mm,
-      left=2cm,right=7cm,
-    }}}
+      left=2cm,right=7cm}}{\relax}}{
+    \relax}
 
 \ifdefstring{\ELEGANT@device}{pad}{
 \geometry{
@@ -119,24 +123,53 @@
 \setcounter{tocdepth}{1}
 
 \PassOptionsToPackage{no-math}{fontspec}
-
-
+\RequirePackage{iftex}
 \ifdefstring{\ELEGANT@lang}{cn}{
-  \RequirePackage[UTF8, scheme=plain]{ctex}
+  \ifXeTeX
+    \ifdefstring{\ELEGANT@chinesefont}{founder}{
+      \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+      \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+      \setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZHei-B01}
+      \setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZFangSong-Z02}
+      \setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+      \setCJKfamilyfont{zhhei}{FZHei-B01}
+      \setCJKfamilyfont{zhkai}{FZKai-Z03}
+      \setCJKfamilyfont{zhfs}{FZFangSong-Z02}
+      \newcommand*{\songti}{\CJKfamily{zhsong}}
+      \newcommand*{\heiti}{\CJKfamily{zhhei}}
+      \newcommand*{\kaishu}{\CJKfamily{zhkai}}
+      \newcommand*{\fangsong}{\CJKfamily{zhfs}}}{\relax}
+    
+    \ifdefstring{\ELEGANT@chinesefont}{nofont}{
+      \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}}{\relax}
+
+    \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
+      \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
+  \else
+    \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
+      \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
+  \fi
   \AfterEndPreamble{
-    \renewcommand{\itshape}{\kaishu}
-    \setlength\parindent{2\ccwd}}}
+    % \renewcommand{\itshape}{\kaishu}
+    \setlength\parindent{2\ccwd}}}{\relax}
 
-% \AtBeginDocument{%
-%   \addtocontents{toc}{\protect\pagestyle{empty}}%
-%   \addtocontents{lof}{\protect\thispagestyle{empty}}%
-% }
+\ifcsname kaishu\endcsname
+  \newcommand{\citshape}{\kaishu}
+\else
+  \newcommand{\citshape}{\itshape}
+\fi
 
+\ifcsname fangsong\endcsname
+  \newcommand{\cfs}{\fangsong}
+\else
+  \newcommand{\cfs}{\sffamily}
+\fi
 
 \RequirePackage{newtxtext}
 \RequirePackage{anyfontsize}
-\ifdefstring{\ELEGANT@math}{newtxmath}{
+\ifdefstring{\ELEGANT@math}{newtx}{
   \RequirePackage{newtxmath}
+  \let\Bbbk\relax
   \RequirePackage{esint}
   %%% use yhmath pkg, uncomment following code
   % \let\oldwidering\widering
@@ -240,8 +273,7 @@
 % reference: 
 % https://tex.stackexchange.com/questions/58506/how-to-make-a-new-command-similar-to-author
 % https://pastebin.com/C8W4axzV
-\newcommand{\email}[1]{\gdef\@email{\href{mailto:#1}{\nolinkurl{#1}}}}
-\def\@email{\@latex@warning@no@line{No \noexpand\email given}}
+\newcommand\email[1]{\href{mailto:#1}{\nolinkurl{#1}}}
 
 \global\let\@title\@empty
 \global\let\@author\@empty
@@ -254,6 +286,9 @@
 \RequirePackage{mwe}
 \newcommand{\logo}[1]{\gdef\@logo{#1}}
 \newcommand{\cover}[1]{\gdef\@cover{#1}}
+
+\newcommand{\question}[1]{\uline{#1}}
+\newcommand{\answer}[1]{{\par\citshape #1}}
 
 \RequirePackage[\ELEGANT@cite,sort&compress]{natbib}
 \setlength{\bibsep}{0.0pt}
@@ -300,7 +335,7 @@
 
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
-  \renewcommand{\contentsname}{目\hspace{2em}录}
+  \renewcommand{\contentsname}{目录}
   \renewcommand{\figurename}{图}
   \renewcommand{\tablename}{表}
   \renewcommand{\partname}{\color{structurecolor}}
@@ -313,8 +348,8 @@
   \newcommand\figref[1]{\textbf{图}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
   \ifdefstring{\ELEGANT@scheme}{chinese}{
-    \renewcommand{\chaptername}{第 \zhnumber{\thechapter}\ 章}}{
-    \renewcommand{\chaptername}{第 \thechapter 章}}
+    \renewcommand{\chaptername}{第~\zhnumber{\arabic{chapter}}~章}}{
+    \renewcommand{\chaptername}{第~\thechapter{}~章}}
   \newcommand{\authorname}{\textit{作者：}}
   \newcommand{\institutename}{\textit{组织：}}
   \newcommand{\datename}{\textit{时间：}}
@@ -339,7 +374,9 @@
   \newcommand{\propertyname}{性质}
   \newcommand{\introductionname}{内容提要}
   \newcommand{\problemsetname}{习题}
-  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textit{#1}：#2}}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textit{#1}：\textit{#2}}}
+  \newcommand{\updatename}{更新：}
+  \newcommand{\historyname}{版本更新历史}
 }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
   \setlength\parindent{2em}
@@ -371,6 +408,8 @@
   \newcommand{\introductionname}{Introduction}
   \newcommand{\problemsetname}{Exercise}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{Updates:}
+  \newcommand{\historyname}{Version History}
 }{\relax}
 
 \RequirePackage{xpatch}
@@ -383,8 +422,11 @@
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
-\usepackage{pgfornament} %% load tizk without tikz
+\usepackage{pgfornament} %% load tikz without tikz
 \usetikzlibrary{backgrounds,calc,shadows}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+%  https://tex.stackexchange.com/questions/7032/good-way-to-make-textcircled-numbers
 
 \newcommand*{\eitemi}{\tikz \draw [baseline, ball color=structurecolor,draw=none] circle (2pt);}
 \newcommand*{\eitemii}{\tikz \draw [baseline, fill=structurecolor,draw=none,circular drop shadow] circle (2pt);}
@@ -409,13 +451,12 @@
   colorlinks,
   linkcolor=winered,
   citecolor=winered,
-  urlcolor  = winered,
+  urlcolor=winered,
   plainpages=false,
   pdfstartview=FitH,
   pdfborder={0 0 0},
   linktocpage
 }
-
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
@@ -451,7 +492,7 @@
 \ifdefstring{\ELEGANT@mode}{fancy}{
   \tcbset{
     common/.style={
-      fontupper=\itshape,
+      fontupper=\citshape,
       lower separated=false,
       % before upper={\setlength{\parindent}{\normalparindent}},
       coltitle=white,
@@ -513,11 +554,11 @@
   \let\endproof\relax
   
   % declare a new theorem style
-  \newtheoremstyle{edefstyle}{3pt}{3pt}{\itshape}{}{
+  \newtheoremstyle{edefstyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{main}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  \newtheoremstyle{ethmstyle}{3pt}{3pt}{\itshape}{}{
+  \newtheoremstyle{ethmstyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{second}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  \newtheoremstyle{eprostyle}{3pt}{3pt}{\itshape}{}{
+  \newtheoremstyle{eprostyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
 
@@ -573,7 +614,7 @@
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \newenvironment{example}[1][]{
   \refstepcounter{exam}
-  \par\noindent\textbf{\color{main}{\examplename}\theexam~#1 \,}\rmfamily}{
+  \par\noindent\textbf{\color{main}{\examplename}\theexam #1 }\rmfamily}{
   \par\ignorespacesafterend}
 
 %% Exercise with counter
@@ -584,38 +625,35 @@
   \refstepcounter{exer}
   \par\noindent\makebox[-3pt][r]{
     \scriptsize\color{red!90}\HandPencilLeft\quad}
-    \textbf{\color{main}{\exercisename}\theexer #1 \,}\rmfamily}{
-  \par\ignorespacesafterend}
+    \textbf{\color{main}{\exercisename}\theexer #1 }\rmfamily}{
+    \par\ignorespacesafterend}
 
-%% Exercise with counter
+%% Problem with counter
 \newcounter{prob}[chapter]
 \setcounter{prob}{0}
 \renewcommand{\theprob}{\thechapter.\arabic{prob}}
 \newenvironment{problem}[1][]{
   \refstepcounter{prob}
-  \par\noindent\textbf{\color{main}{\problemname} \theprob #1 \,}\rmfamily}{
+  \par\noindent\textbf{\color{main}{\problemname}\theprob #1 }\rmfamily}{
   \par\ignorespacesafterend}
-
-
 
 \newenvironment{note}{
   \par\noindent\makebox[-3pt][r]{
     \scriptsize\color{red!90}\textdbend\quad}
-    \textbf{\color{second}\notename\,}
-    \itshape}{\par}
+    \textbf{\color{second}\notename} \citshape}{\par}
 
 \newenvironment{proof}{
   \par\noindent\textbf{\color{second}\proofname\;}
-  \color{black!90}\small}{
+  \color{black!90}\cfs}{
   % \hfill$\Box$\quad
   \par}
 
-\newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname} \itshape}{\par}
-\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname}}{\par}
-\newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname}}{\par}
-\newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname}}{\par}
-\newenvironment{property}{\par\noindent\textbf{\color{third}\propertyname}}{\par}
-\newenvironment{custom}[1]{\par\noindent\textbf{\color{third} #1 }}{\par}
+\newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname} \citshape}{\par}
+\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname\citshape} \citshape}{\par}
+\newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname} \citshape}{\par}
+\newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname} \citshape}{\par}
+\newenvironment{property}{\par\noindent\textbf{\color{third}\propertyname} \citshape}{\par}
+\newenvironment{custom}[1]{\par\noindent\textbf{\color{third} #1} \citshape}{\par}
 
 \RequirePackage{multicol}
 \tcbset{
@@ -626,7 +664,7 @@
     colframe=structurecolor,
     fonttitle=\bfseries,
     colbacktitle=structurecolor,
-    fontupper=\itshape,
+    fontupper=\citshape,
     attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
     boxrule=0pt,
     toprule=0.5pt,
@@ -648,7 +686,7 @@
 \RequirePackage{adforn}
 \newenvironment{problemset}[1][\chaptername~\problemsetname]{
   \begin{center}
-    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername~\problemsetname}{\problemsetname}}
+    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\;\problemsetname}{\problemsetname}}
     \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
   \end{center}
   \begin{enumerate}}{
@@ -673,10 +711,10 @@
 \ifdefstring{\ELEGANT@base}{hide}{
   \fancyfoot[c]{\color{structurecolor}\scriptsize--\;\thepage\;--}
   \if@twoside
-  \fancyhead[ER]{\color{structurecolor}\itshape\leftmark}
-  \fancyhead[OL]{\color{structurecolor}\itshape\rightmark}
+  \fancyhead[ER]{\color{structurecolor}\citshape\leftmark}
+  \fancyhead[OL]{\color{structurecolor}\citshape\rightmark}
   \else
-  \fancyhead[R]{\color{structurecolor}\itshape\rightmark}
+  \fancyhead[R]{\color{structurecolor}\citshape\rightmark}
   \fi
 }{\relax}
 
@@ -685,11 +723,11 @@
   \fancyfoot[c]{\catcode`\$=3\relax\base{structurecolor}{88}}
   \if@twoside
   \fancyhead[EL,OR]{\color{structurecolor}--\;\thepage\;--}
-  \fancyhead[ER]{\color{structurecolor}\itshape\leftmark}
-  \fancyhead[OL]{\color{structurecolor}\itshape\rightmark}
+  \fancyhead[ER]{\color{structurecolor}\citshape\leftmark}
+  \fancyhead[OL]{\color{structurecolor}\citshape\rightmark}
   \else
   \fancyhead[R]{\color{structurecolor}--\;\thepage\;--}
-  \fancyhead[L]{\color{structurecolor}\itshape\rightmark}
+  \fancyhead[L]{\color{structurecolor}\citshape\rightmark}
   \fi
 }{\relax}
 
@@ -706,6 +744,7 @@
 
 \renewcommand*{\maketitle}{%
 \hypersetup{pageanchor=false}
+\pagenumbering{Alph}
 \begin{titlepage}
   \newgeometry{margin = 0in}
   \parindent=0pt
@@ -794,9 +833,9 @@
   breaklines=true,
   keywordstyle=\color{winered},
   commentstyle=\color{gray},
-  emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,newtx,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,marginnote,ctex,listings,base},
+  emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,ctex,listings,base,math,scheme,toc,esint,chinesefont,amsmath,bibstyle,gbt7714,natbib},
   emphstyle={\color{frenchplum}},
-  morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote},
+  morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote,bioinfo,datechange,listofchange,lvert,lastpage,songti,heiti,fangsong,setCJKfamilyfont,textbf},
   frame=single,
   tabsize=2,
   rulecolor=\color{structurecolor},
@@ -804,6 +843,32 @@
   columns=flexible,
   % backgroundcolor=\color{lightgrey}
 }
+
 \newcommand\bmmax{0}
 \RequirePackage{bm}
 
+% add the list of change history
+\newcommand{\dateinfoline}[2]{
+  \noindent\makebox[0pt][r]{%
+  \makebox[-5em][r]{%
+    \textbf{\textcolor{structurecolor}{#1}}}\quad}%
+  {\citshape\updatename\ignorespaces#2}}
+
+\newcommand{\datechange}[2]{%
+  \noindent{\makebox[\textwidth][r]{\color{structurecolor}\rule{1.15\textwidth}{.4pt}}}
+  \dateinfoline{#1}{#2}
+  \addcontentsline{dates}{section}{#1 -- #2}}
+
+\newcommand{\listofchanges}{%
+  \begingroup
+    \renewcommand{\contentsname}{\historyname}
+    \let\old@starttoc\@starttoc
+    \def\@starttoc##1{
+      \old@starttoc{dates}}
+    \tableofcontents%
+  \endgroup}
+% https://tex.stackexchange.com/questions/472931/list-of-all-dates-in-a-document
+
+\newenvironment{change}{
+  \begin{enumerate}[label=\small\protect\circled{\arabic*}]}{
+  \end{enumerate}}
