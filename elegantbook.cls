@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/02/08 v3.10 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/02/10 v3.10 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -287,8 +287,7 @@
 \newcommand{\logo}[1]{\gdef\@logo{#1}}
 \newcommand{\cover}[1]{\gdef\@cover{#1}}
 
-\newcommand{\question}[1]{\uline{#1}}
-\newcommand{\answer}[1]{{\par\citshape #1}}
+\newcommand{\question}[1]{{\par\citshape #1}\\[0.2ex]}
 
 \RequirePackage[\ELEGANT@cite,sort&compress]{natbib}
 \setlength{\bibsep}{0.0pt}
@@ -709,7 +708,7 @@
 \fancyhf{}
 
 \ifdefstring{\ELEGANT@base}{hide}{
-  \fancyfoot[c]{\color{structurecolor}\scriptsize--\;\thepage\;--}
+  \fancyfoot[c]{\color{structurecolor}\scriptsize\thepage}
   \if@twoside
   \fancyhead[ER]{\color{structurecolor}\citshape\leftmark}
   \fancyhead[OL]{\color{structurecolor}\citshape\rightmark}

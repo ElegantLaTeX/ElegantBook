@@ -1,4 +1,4 @@
-\documentclass[cn,11pt,chinese]{elegantbook}
+\documentclass[cn,11pt,chinese,founder,hide]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -26,24 +26,22 @@
 \maketitle
 \frontmatter
 
-\chapter*{前言}
+\chapter*{特别声明}
 \markboth{Introduction}{前言}
 
 在过去的 2019 年，\href{https://elegantlatex.org/}{Elegant\LaTeX{}} 系列模板均逐步上线 \href{https://github.com/ElegantLaTeX}{GitHub}、\href{https://ctan.org/pkg/elegantbook}{CTAN}、\href{https://www.overleaf.com/latex/templates/elegantbook-template/zpsrbmdsxrgy}{Overleaf} 以及 \href{https://gitee.com/ElegantLaTeX/ElegantBook}{Gitee} 上。截止到 2019 年底，ElegantNote、ElegantBook、ElegantPaper 三个模板在 GitHub 上的收藏数达到了 194、333 和 220，从 2019 年 5 月开启捐赠之后收到了用户 33 笔合计超过 1500 元的捐赠，用户群人数也超过了 400 人。这些数字的背后，反映出 Elegant\LaTeX{} 越来越受用户的喜爱，在此非常感谢大家。
 
-但与此同时，也发生了一些不愉快的事情。因为和某位 \LaTeX{} “专家”意见不合，我在 GitHub 上屏蔽了他，之后此人在 \LaTeX{} 大群（\LaTeX{} Studio 一群）内阴阳怪气本人和本模板，我目前已经退出此 \LaTeX{} 群。
+但是，我想声明的是：
 
-\section*{Elegant\LaTeX{} 和我}
+\begin{center}
+  由于某些原因，Elegant\LaTeX{} 项目 \underline{不再接受}\textbf{任何}非我本人预约的提交。
+\end{center}
 
-Elegant\LaTeX{} 是我和小 L（Liam Huang）在 2013 年共同发起创立的。Elegant\LaTeX{} 名义上是两个人的项目，但在经历长时间断层之后的改版，新 Elegant\LaTeX{} 项目的维护都是我一个人在做。另外，我和小 L 是好朋友，没有任何不和，只是重心不一样了而已，请不要脑补剧情。
+我是一个理想主义者，关于这个模板，我有自己的想法。我所关心的是，我周围的人能方便使用 \LaTeX{} 以及此模板，我自己会为自己的东西感到开心。如果维护模板让我不开心，那我就不会再维护了。诚然这个模板并不是完美的，但是相比 2.x 好很多了，这些改进离不开大家的反馈、China\TeX{} 和逐鹿人的鼓励以及支援人员的帮助！
 
-自 2019 年 5 月 20 日，Elegant\LaTeX{} 项目\uline{不再接受}\textbf{任何}非我本人预约的提交（pr）。
+\underline{如果你无法认同我的想法，建议直接删除本模板。}
 
-我是一个理想主义者，关于这个模板，我有自己的想法。我所关心的是，我周围的人能方便使用 \LaTeX{} 以及此模板，我自己会为自己的东西感到开心。如果维护模板让我不开心，那我就不会再维护了。这个模板并不是完美的，但是相比 2.x 好很多了，这些改进离不开大家的反馈、China\TeX{} 和逐鹿人的鼓励以及支援人员的帮助！
-
-\uline{如果你无法认同我的想法，请直接删除本模板。}
-
-\vskip 2cm
+\vskip 1.5cm
 
 \begin{flushright}
 Ethan Deng\\
@@ -81,10 +79,10 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \item 新增中文字体选项 \lstinline{chinesefont}，可选项为 \lstinline{ctexfont}、\lstinline{founder} 和 \lstinline{nofont}。
   \item 将封面作者信息设置为可选，并且增加自定义信息命令 \lstinline{\bioinfo}；
 	\item 在说明文档中增加版本历史，新增 \lstinline{\datechange} 命令和 \lstinline{change} 环境；
-	\item 增加汉化章节选项 \lstinline{scheme}，可选项为 \lstinline{chinese}；
+	\item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
 	\item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
 	\item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
-	\item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}（默认）、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
+	\item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
 	\item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
 \end{enumerate}
 
@@ -94,7 +92,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 \section{模板安装与更新}
 
-你可以通过免安装的方式使用本模板，包括在线使用和本地使用不同支持方式，也可以通过发行版安装方式使用。
+你可以通过免安装的方式使用本模板，包括在线使用和本地（文件夹内）使用两种方式，也可以通过 \TeX{} 发行版安装使用。
 
 \subsection{在线使用模板}
 
@@ -109,7 +107,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
 
-\subsection{本地安装使用}
+\subsection{发行版安装使用}
 
 如果你是 \TeX{} Live 2019 用户，我们推荐你直接进行安装和更新。你可以通过 \TeX{} Live 2019 自带的 \lstinline{tlshell}\footnote{也叫 \TeX{} Live Manager} 进行安装。安装非常简单，步骤如下，搜索并打开 \lstinline{tlshell}，然后通过 \lstinline{File -> Load Default Repository} 加载远程仓库，如果你不想使用默认的仓库，你可以通过 \lstinline{Options} 下的菜单设置远程仓库。设置好仓库之后，等待仓库加载完毕，你可以在下面的搜索栏搜索 \lstinline{elegantbook}，然后选择进行安装与更新。
 
@@ -340,9 +338,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 
 \subsection{自定义封面}
 
-另外，如果需要使用自定义的封面，比如 Adobe illustrator 或者其他软件制作的 A4 PDF 文档，请把 \lstinline{\maketitle} 注释掉，然后借助 \lstinline{pdfpages} 宏包将自制封面插入即可
-
-。如果使用 \lstinline{titlepage} 环境，也是类似。如果需要 2.x 版本的封面，请参考 \href{https://github.com/EthanDeng/etitlepage}{etitlepage}。
+另外，如果需要使用自定义的封面，比如 Adobe illustrator 或者其他软件制作的 A4 PDF 文档，请把 \lstinline{\maketitle} 注释掉，然后借助 \lstinline{pdfpages} 宏包将自制封面插入即可。如果使用 \lstinline{titlepage} 环境，也是类似。如果需要 2.x 版本的封面，请参考 \href{https://github.com/EthanDeng/etitlepage}{etitlepage}。
 
 \section{章标标题}
 
@@ -525,13 +521,13 @@ The content of introduction.
 \end{introduction}
 \end{lstlisting}
 效果如下：
-% \begin{introduction}
-%   \item Definition of Theorem
-%   \item Ask for help
-%   \item Optimization Problem
-%   \item Property of Cauchy Series
-%   \item Angle of Corner
-% \end{introduction}
+\begin{introduction}
+  \item Definition of Theorem
+  \item Ask for help
+  \item Optimization Problem
+  \item Property of Cauchy Series
+  \item Angle of Corner
+\end{introduction}
 
 环境的标题文字可以通过这个环境的可选参数进行修改，修改方法为：
 \begin{lstlisting}
@@ -814,31 +810,31 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 我们根据用户社区反馈整理了下面一些常见的问题，用户在遇到问题时，应当首先查阅本手册和本部分的常见的问题。
 
-\begin{enumerate}
+\begin{enumerate}[itemsep=1.5ex]
   \item \question{有没有办法章节用“第一章，第一节，（一）”这种？}
-    \answer{见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。}
+    见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
   \item \question{3.07 版本的 cls 的 natbib 加了numbers 编译完了没变化，群主设置了不可更改了？}
-    \answer{之前在 3.07 版本中在引入 \lstinline{gbt7714} 宏包时，加入了 \lstinline{authoryear} 选项，这个使得 \lstinline{natbib} 设置了 \lstinline{numbers} 也无法生效。3.08 和 3.09 版本中，模板新增加了 \lstinline{numbers} 、\lstinline{super} 和 \lstinline{authoryear} 文献选项，你可以参考前文设置说明。}
+    之前在 3.07 版本中在引入 \lstinline{gbt7714} 宏包时，加入了 \lstinline{authoryear} 选项，这个使得 \lstinline{natbib} 设置了 \lstinline{numbers} 也无法生效。3.08 和 3.09 版本中，模板新增加了 \lstinline{numbers} 、\lstinline{super} 和 \lstinline{authoryear} 文献选项，你可以参考前文设置说明。
   \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
-    \answer{页面颜色可以使用 \lstinline{pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。}
-  \item \lstinline[breaklines]{Package ctex Error: CTeX fontset `Mac' is unavailable.}
-    \answer{在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。}
-  \item \lstinline{! LaTeX Error: Unknown option `scheme=plain' for package `ctex'.}
-    \answer{你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2019。}
+    页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
+  \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset `Mac' is unavailable.}}
+    在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。
+  \item \question{\lstinline{! LaTeX Error: Unknown option `scheme=plain' for package `ctex'.}}
+    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2019。
   \item \question{我该使用什么版本？}
-    \answer{请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2019 内获取。}
+    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2019 内获取。
   \item \question{我该使用什么编辑器？}
-    \answer{你可以使用 \TeX{} Live 2019 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2019 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。}
-  \item \uline{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
-    \answer{模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。}
+    你可以使用 \TeX{} Live 2019 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2019 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
+  \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
+    模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
   \item \question{请问交叉引用是什么？}
-    \answer{本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。}
+    本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
   \item \question{定义等环境中无法使用加粗命令么？}
-    \answer{是这样的，默认中文并没加粗命令，如果你想在定义等环境中使用加粗命令，请使用 \lstinline|heiti| 等字体命令，而不要使用 \lstinline|textbf|。或者，你可以将 \lstinline|textbf| 重新定义为 \lstinline|heiti|。英文模式不存在这个问题。}
+    是这样的，默认中文并没加粗命令，如果你想在定义等环境中使用加粗命令，请使用 \lstinline{\heiti} 等字体命令，而不要使用 \lstinline{\textbf}。或者，你可以将 \lstinline|\textbf| 重新定义为 \lstinline|\heiti|。英文模式不存在这个问题。
   \item \question{代码高亮环境能用其他语言吗？}
-    \answer{可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lsset} 命令，更多信息请参考宏包文档。}
+    可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lsset} 命令，更多信息请参考宏包文档。
   \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
-    \answer{由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。在找到非常好的创意之前不会发布正式的 Beamer 主题，如果你非常希望得到 Elegant\LaTeX{} “官方”的主题，请在用户 QQ 群内下载测试主题 PreElegantSlide。正式版制作计划在今年或者明年。}
+    由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。在找到非常好的创意之前不会发布正式的 Beamer 主题，如果你非常希望得到 Elegant\LaTeX{} “官方”的主题，请在用户 QQ 群内下载测试主题 PreElegantSlide。正式版制作计划在今年或者明年。
 \end{enumerate}
 
 \chapter{版本更新历史}
@@ -853,10 +849,10 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item 新增中文字体选项 \lstinline{chinesefont}，可选项为 \lstinline{ctexfont}、\lstinline{founder} 和 \lstinline{nofont}。
   \item 将封面作者信息设置为可选，并且增加自定义信息命令 \lstinline{\bioinfo}；
 	\item 在说明文档中增加版本历史，新增 \lstinline{\datechange} 命令和 \lstinline{change} 环境；
-	\item 增加汉化章节选项 \lstinline{scheme}，可选项为 \lstinline{chinese}；
+	\item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
 	\item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
 	\item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
-	\item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}（默认）、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
+	\item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
 	\item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
 \end{change}
 
