@@ -1,11 +1,11 @@
-\documentclass[cn,11pt,chinese,founder,hide]{elegantbook}
+\documentclass[cn,11pt,chinese]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{\today}
+\date{February 10, 2020}
 \version{3.10}
 \bioinfo{自定义}{信息}
 
@@ -14,13 +14,12 @@
 \logo{logo-blue.png}
 \cover{cover.jpg}
 
-
+% 本文档命令
 \usepackage{array}
-
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
-
+% 修改目录深度
 \setcounter{tocdepth}{2}
-\newcommand{\cd}{\lstinline}
+
 \begin{document}
 
 \maketitle
@@ -45,7 +44,7 @@
 
 \begin{flushright}
 Ethan Deng\\
-February 8, 2020
+February 10, 2020
 \end{flushright}
 
 \tableofcontents
@@ -78,16 +77,16 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \textbf{重要提示}：原先通过 \lstinline{newtxmath} 宏包设置的数学字体改为 \LaTeX{} 默认数学字体，如果需要保持原来的字体，需要显式声明数学字体（\lstinline{math=newtx}）；
   \item 新增中文字体选项 \lstinline{chinesefont}，可选项为 \lstinline{ctexfont}、\lstinline{founder} 和 \lstinline{nofont}。
   \item 将封面作者信息设置为可选，并且增加自定义信息命令 \lstinline{\bioinfo}；
-	\item 在说明文档中增加版本历史，新增 \lstinline{\datechange} 命令和 \lstinline{change} 环境；
-	\item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
-	\item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
-	\item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
-	\item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
-	\item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
+  \item 在说明文档中增加版本历史，新增 \lstinline{\datechange} 命令和 \lstinline{change} 环境；
+  \item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
+  \item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
+  \item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
+  \item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
+  \item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
 \end{enumerate}
 
 \begin{note}
-2.x 版本的用户请仔细查看\href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{跨版本转换}。
+如果你之前使用了本模板，在使用新版本时，需要删除文档中的 \lstinline|\hypersetup{pageanchor=true}|，并且在 \lstinline{\maketitle} 和 \lstinline{\tableofcontents} 之间添加 \lstinline{\frontmatter}。2.x 版本的用户请仔细查看\href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{跨版本转换}。
 \end{note}
 
 \section{模板安装与更新}
@@ -165,7 +164,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 另外，也感谢 \href{https://github.com/stone-zeng}{Xiangdong Zeng}、\href{https://github.com/latexers}{逐鹿人}等人帮忙群管理。
 
 \section{致谢}
-2019 年 5 月 20 日，ElegantBook 模板在 GitHub 上的收藏数（star）达到了 100\footnote{截止 2020 年 2 月 8 日 3.10 版本正式发布，star 数为 372。}。在此特别感谢 China\TeX{} 以及 \href{http://www.latexstudio.net/}{\LaTeX{} 工作室}对于本系列模板的大力宣传与推广。\LaTeX{} 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏，这也是国内最全面的 \LaTeX{} 相关的网站。
+2019 年 5 月 20 日，ElegantBook 模板在 GitHub 上的收藏数（star）达到了 100\footnote{截止 3.10 版本正式发布，star 数为 374。}。在此特别感谢 China\TeX{} 以及 \href{http://www.latexstudio.net/}{\LaTeX{} 工作室}对于本系列模板的大力宣传与推广。\LaTeX{} 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏，这也是国内最全面的 \LaTeX{} 相关的网站。
 
 如果你喜欢我们的模板，你可以在 GitHub 上收藏我们的模板。
 %\begin{figure}[htbp]
@@ -215,7 +214,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
     F*5   & 10 RMB & 2020/01/03 & 微信    & S*m   & 20.20 RMB & 2020/01/03 & 微信 \\
     二代青雉  & 13 RMB & 2020/01/14 & 支付宝   & *?    & 66 RMB & 2020/01/15 & 微信 \\
     Mr. Xiong & 20 RMB & 2020/01/17 & 微信    & *博    & 15 RMB & 2020/01/18 & 微信 \\
-    *者    & 10 RMB & 2020/02/02 & 微信    &       &       &       &  \\
+    *者    & 10 RMB & 2020/02/02 & 微信    & Jackie  &  88.80 RMB  &  2020/02/09 & 微信 \\
     \hline
     \end{tabular}%
   \label{tab:donation}%
@@ -580,9 +579,9 @@ The content of introduction.
 
 % equation
 \marginpar{
-	\begin{equation}
-		a^2 + b^2 = c^2
-	\end{equation}
+  \begin{equation}
+    a^2 + b^2 = c^2
+  \end{equation}
 }
 \end{lstlisting}
 
@@ -591,18 +590,18 @@ The content of introduction.
 \begin{lstlisting}
 % graph with centerline command
 \marginpar{
-	\centerline{
-		\includegraphics[width=0.2\textwidth]{logo.png}
-	}
-	\captionof{figure}{your figure caption}
+  \centerline{
+    \includegraphics[width=0.2\textwidth]{logo.png}
+  }
+  \captionof{figure}{your figure caption}
 }
 
 % graph with center environment
 \marginpar{
-	\begin{center}
-		\includegraphics[width=0.2\textwidth]{logo.png}
-		\captionof{figure}{your figure caption}
-	\end{center}
+  \begin{center}
+    \includegraphics[width=0.2\textwidth]{logo.png}
+    \captionof{figure}{your figure caption}
+  \end{center}
 }
 \end{lstlisting}
 
@@ -612,7 +611,7 @@ The content of introduction.
 \chapter{字体选项}
 字体选项独立成章的原因是，我们希望本模板的用户关心模板使用的字体，知晓自己使用的字体以及遇到字体相关的问题能更加便捷地找到答案。
 
-\textcolor{red}{\bfseries 重要提示}：从 2020 年 2 月 8 日 3.10 版本更新之后，沿用至今的 newtx 系列字体被重新更改为 cm 字体。并且新增中文字体（\lstinline{chinesefont}）选项。
+\textcolor{red}{\bfseries 重要提示}：从 3.10 版本更新之后，沿用至今的 newtx 系列字体被重新更改为 cm 字体。并且新增中文字体（\lstinline{chinesefont}）选项。
 
 \section{数学字体选项}
 
@@ -635,12 +634,12 @@ The content of introduction.
 
 如果使用 \lstinline{newtx} 系列字体宏包，需要注意下连字符的问题。
 \begin{equation}
-	\int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
+  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
 \end{equation}
 的代码为
 \begin{lstlisting}
 \begin{equation}
-	\int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
+  \int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
 \end{equation}
 \end{lstlisting}
 
@@ -673,6 +672,10 @@ LaTeX Error:
 \item \lstinline{founder}：方正字体选项，调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文。
 \item \lstinline{nofont}：调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
 \end{enumerate}
+
+\begin{remark}
+  使用 \lstinline{founder} 选项或者 \lstinline{nofont} 时，必须使用 \hologo{XeLaTeX} 进行编译。
+\end{remark}
 
 \subsection{方正字体选项}
 由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。
@@ -781,9 +784,9 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 我们知道最小二乘法可以用来处理一组数据，可以从一组测定的数据中寻求变量之间的依赖关系，这种函数关系称为经验公式。本课题将介绍最小二乘法的精确定义及如何寻求点与点之间近似成线性关系时的经验公式。假定实验测得变量之间的 $n$ 个数据，则在平面上，可以得到 $n$ 个点，这种图形称为 “散点图”，从图中可以粗略看出这些点大致散落在某直线近旁, 我们认为其近似为一线性函数，下面介绍求解步骤。
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.6\textwidth]{scatter.pdf}
-	\caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
+  \centering
+  \includegraphics[width=0.6\textwidth]{scatter.pdf}
+  \caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
 \end{figure}
 
 以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
@@ -841,29 +844,29 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 根据用户的反馈，我们不断修正和完善模板。截止到此次更新，ElegantBook 模板在 GitHub 上有将近 100 次提交，正式发行版本（release）有 16 次。
 
-\datechange{2020/02/08}{版本 3.10 正式发布}
+\datechange{2020/02/10}{版本 3.10 正式发布}
 
 \begin{change}
   \item 增加数学字体选项 \lstinline{math}，可选项为 \lstinline{newtx} 和 \lstinline{cm}。\\
   \textbf{重要提示}：原先通过 \lstinline{newtxmath} 宏包设置的数学字体改为 \LaTeX{} 默认数学字体，如果需要保持原来的字体，需要显式声明数学字体（\lstinline{math=newtx}）；
   \item 新增中文字体选项 \lstinline{chinesefont}，可选项为 \lstinline{ctexfont}、\lstinline{founder} 和 \lstinline{nofont}。
   \item 将封面作者信息设置为可选，并且增加自定义信息命令 \lstinline{\bioinfo}；
-	\item 在说明文档中增加版本历史，新增 \lstinline{\datechange} 命令和 \lstinline{change} 环境；
-	\item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
-	\item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
-	\item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
-	\item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
-	\item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
+  \item 在说明文档中增加版本历史，新增 \lstinline{\datechange} 命令和 \lstinline{change} 环境；
+  \item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
+  \item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
+  \item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
+  \item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
+  \item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
 \end{change}
 
 \datechange{2019/08/18}{版本 3.09 正式发布}
 
 \begin{change}
-	\item 由于 \lstinline{\elegantpar} 存在一些问题，暂时性删除 \lstinline{\elegantpar} 命令，并提示用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar} 旁注/边注命令。
-	\item 积分操作符统一更改为 \lstinline{esint} 宏包设置；
-	\item 新增目录选项 \lstinline{toc}，可选项为单栏 \lstinline{onecol} 和双栏 \lstinline{twocol}；
-	\item 手动增加参考文献选项 \lstinline{cite}，可选项为上标形式 \lstinline{super}；
-	\item 修正章节习题（\lstinline{problemset}）环境。
+  \item 由于 \lstinline{\elegantpar} 存在一些问题，暂时性删除 \lstinline{\elegantpar} 命令，并提示用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar} 旁注/边注命令。
+  \item 积分操作符统一更改为 \lstinline{esint} 宏包设置；
+  \item 新增目录选项 \lstinline{toc}，可选项为单栏 \lstinline{onecol} 和双栏 \lstinline{twocol}；
+  \item 手动增加参考文献选项 \lstinline{cite}，可选项为上标形式 \lstinline{super}；
+  \item 修正章节习题（\lstinline{problemset}）环境。
 \end{change}
 
 \nocite{*} 

@@ -1,12 +1,12 @@
-\documentclass[11pt,simple]{elegantbook}
+\documentclass[lang=en,11pt]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{\today}
-\version{3.10*}
+\date{February 10, 2020}
+\version{3.10}
 \bioinfo{Bio}{Information}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
@@ -15,6 +15,7 @@
 \cover{cover.jpg}
 
 \begin{document}
+
 \maketitle
 
 \frontmatter
@@ -26,34 +27,36 @@ Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegan
 
 Contact Infos:
 \begin{itemize}
-	\item Homepage: \href{https://elegantlatex.org/}{https://elegantlatex.org/}
-	\item Github: \href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
-	\item CTAN: \href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
-	\item Wiki: \href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
-	\item Download: \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{release}, \href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{latest version}
-	\item Weibo: Elegant\LaTeX{}
-	\item Wechat: Elegant\LaTeX{}
-	\item QQ: 692108391
-	\item Email: \email{elegantlatex2e@gmail.com}
+  \item Homepage: \href{https://elegantlatex.org/}{https://elegantlatex.org/}
+  \item Github: \href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
+  \item CTAN: \href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
+  \item Wiki: \href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
+  \item Download: \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{release}, \href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{latest version}
+  \item Weibo: Elegant\LaTeX{}
+  \item Wechat: Elegant\LaTeX{}
+  \item QQ: 692108391
+  \item Email: \email{elegantlatex2e@gmail.com}
 \end{itemize}
 
 
 \section{ElegantBook Updates}
 What\rq s new in this version:
 \begin{enumerate}
-	\item Introduce \lstinline{math} for math font, optional styles are Times-ish \lstinline{newtx}, Computer Modern-ish \lstinline{cm}. \textbf{Notice}: The math font \lstinline{newtxmath} in previous versions is reset to default \LaTeX{} math font, to keep previous math font, please declare \lstinline{math=newtx}.
-	\item Introduce \lstinline{chinesefont} for Chinese font, optional fonts are \lstinline{founder}, \lstinline{ctexfont} and \lstinline{nofont}.
-	\item Turn author information on the cover optional and add customized command \lstinline{\bioinfo}.
-	\item Add version time line in this documentation with command \lstinline{\datechange} and environment \lstinline{change}.
-	\item Add Chinese chapter style \lstinline{scheme} with option \lstinline{chinese}.
-	\item Since the bug raised by \lstinline{\lvert} is fixed, exchange package positions of \lstinline{ctex} and \lstinline{amsmath}.
-	\item Revise header settings by dropping \lstinline{\lastpage} to avoid page anchor bug and adding \lstinline{\frontmatter}.
-	\item Revise bibliography option \lstinline{cite} with optional styles \lstinline{number},\lstinline{authoryear} and \lstinline{super}.
-	\item Introduce bibliography style option \lstinline{bibstyle}, with default style \lstinline{apalike} for English and \lstinline{gbt7714} for Chinese.
+  \item Introduce \lstinline{math} for math font, optional styles are \lstinline{newtx} and \lstinline{cm}.\\
+  \textbf{Notice}: The math font \lstinline{newtxmath} in previous versions is reset to default \LaTeX{} math font, to keep previous math font, please declare \lstinline{math=newtx}.
+  \item Introduce \lstinline{chinesefont} option, with \lstinline{founder}, \lstinline{ctexfont} and \lstinline{nofont} available.
+  \item Turn author information on the cover optional and add customized command \lstinline{\bioinfo}.
+  \item Add version history with command \lstinline{\datechange} and environment \lstinline{change}.
+  \item Add Chinese chapter style \lstinline{scheme} with option \lstinline{chinese}.
+  \item Since the bug raised by \lstinline{\lvert} is fixed, exchange package positions of \lstinline{ctex} and \lstinline{amsmath}.
+  \item Drop \lstinline{\lastpage} from header to avoid page anchor bug and adding \lstinline{\frontmatter}.
+  \item Revise bibliography option \lstinline{cite} with optional styles \lstinline{numbers},\lstinline{authoryear} and \lstinline{super}.
+  \item Introduce bibliography style option \lstinline{bibstyle}, with default bib style \lstinline{apalike} for English mode and \lstinline{gbt7714} package for Chinese mode.
 \end{enumerate}
 
+
 \begin{note}
-	Users for 2.x, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{conversion}.
+  If you are using previous version, please delete \lstinline|\hypersetup{pageanchor=true}| and add \lstinline{\frontmatter} after \lstinline{\maketitle} and before \lstinline{\tableofcontents}. Users for 2.x, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{conversion}.
 \end{note}
 
 \section{Installation and Update}
@@ -63,7 +66,7 @@ Both portable version and installation package are available for this template, 
 Visit \href{https://www.overleaf.com/}{Overleaf} to use our template online anywhere and anytime without local installation. To find our template, search \lstinline{elegantlatex} in the \lstinline{templates} or simply visit \href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{search result}, choose the template you prefer and \lstinline{Open as Template} to own a copy yourself to edit freely. To learn more about Overleaf, please refer to \href{https://www.overleaf.com/learn}{Documentation}.
 
 \begin{remark}
-	On Overleaf, please use \hologo{XeLaTeX} to compile articles in Chinese and \hologo{pdfLaTeX} to compile articles in English.
+  On Overleaf, please use \hologo{XeLaTeX} to compile articles in Chinese and \hologo{pdfLaTeX} to compile articles in English.
 \end{remark}
 
 \subsection{To Use Portable Version}
@@ -73,9 +76,9 @@ For portable version, simply download lastest ElegantBook-master from Github or 
 If you are a \TeX{} Live 2019 user, using the \lstinline{tlshell}\footnote{namely, \TeX{} Live Manager} of \TeX{} Live 2019 direct installation package is strongly recommended. Simply search and open \lstinline{tlshell}, click on \lstinline{File -> Load Default Repository} or customize repository by \lstinline{Options}. Wait till the repository loads successfully, search \lstinline{elegantbook} by name, installation and update is just a click away.
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{tlshell.png}
-	\caption{Use \TeX{} Live Shell to Install ElegantBook Template}
+  \centering
+  \includegraphics[width=0.7\textwidth]{tlshell.png}
+  \caption{Use \TeX{} Live Shell to Install ElegantBook Template}
 \end{figure}
 
 \subsection{Update Templates}
@@ -87,7 +90,7 @@ tlmgr update --self
 tlmgr update --all
 \end{lstlisting}
 
-To learn more, please refer to {https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
+To learn more, please refer to \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
 
 \subsection{Other Release Versions}
 If you are a \TeX{} Live 2018 user and would like to update to \TeX{} Live 2019, the official solution is to uninstall 2018. If you want to save the bother of uninstallation and installation, please copy \lstinline{elegantbook.cls} to the installation directory of \TeX{} Live 2018 (default: \lstinline|C:\texlive\2018\texmf-dist\tex\latex\elegantbook| ), run \lstinline{texhash} in cmd.
@@ -97,83 +100,83 @@ Excuse me? You are a  C\TeX{}  user? Sorry, this template is incompatible with C
 For more details about the installation and usage of \TeX{} Live 2019, the compatibility of C\TeX{} and \TeX{} Live, please refer to OG (Official Guide) and/or \href{https://github.com/OsbertWang/install_latex/releases}{Install LaTeX v5.1} by OsbertWang.
 
 \section{User\rq s Selected Works Plan}
-Eight years have passed since the found of Elegant\LaTeX{} Program. It\rq s an honor that our templates are preferred by a lot of users. Hence, in order to promote more interactions among our users and know more about what you need, we are planning to provide a platform to display selected works of our users on Github or our homepage. If you want to show us your work(s), contact us via Email or other ways. Or if you have upload your work(s) on Github or Gitee etc., share the URL(s) with us. Current available works are  (\href{https://github.com/ElegantLaTeX/Archive/tree/master/Collections}).
+Eight years have passed since the found of Elegant\LaTeX{} Program. It\rq s an honor that our templates are preferred by a lot of users. Hence, in order to promote more interactions among our users and know more about what you need, we are planning to provide a platform to display selected works of our users on Github or our homepage. If you want to show us your work(s), contact us via Email or other ways. Or if you have upload your work(s) on Github or Gitee etc., share the URL(s) with us. You can visit current available works \href{https://github.com/ElegantLaTeX/Archive/tree/master/Collections}{here}.
 
 \section{About Pull Request}
-For some reasons, pull request is unacceptable since May 20, 2019. For those who want to help revise the templates, submit issues or clone to your own repository to modify under the constriction of  LPPL-1.3c.
+For some reasons, pull requests will NOT by accepted since May 20, 2019. For those who want to help improve the templates, submit issues or clone to your own repository to modify under LPPL-1.3c.
 
 \section{Recruit Support Members}
-Recruit Support Members for Elegant\LaTeX{} to translate template OGs(Chinese -> English), maintain wiki entries using Markdown, update Wechat articles. No deadline for this recruitment.
+Recruit support members for Elegant\LaTeX{} to translate template OGs, maintain wiki entries using Markdown, update Wechat articles. No deadline for this recruitment.
 
 So far, Elegant\LaTeX{} has four Support Members:
 \begin{itemize}
-	\item OG Translator: \href{https://github.com/peggy2006xzyz}{YPY};
-	\item Wiki Maintainer: \href{https://github.com/izinngo}{Ingo Zinngo}, \href{https://github.com/xiaohao890809}{Xiaohao890809};
-	\item QQ Group Manager \& FAQ Maintainer: \href{https://github.com/sikouhjw}{Sikouhjw}.
+  \item OG Translator: \href{https://github.com/peggy2006xzyz}{YPY};
+  \item Wiki Maintainer: \href{https://github.com/izinngo}{Ingo Zinngo}, \href{https://github.com/xiaohao890809}{Xiaohao890809};
+  \item QQ Group Manager \& FAQ Maintainer: \href{https://github.com/sikouhjw}{Sikouhjw}.
 \end{itemize}
 
-BTW, thank \href{https://github.com/stone-zeng}{Xiangdong Zeng}, \href{https://github.com/latexers}{Zhuluren},etc. for help.
+BTW, thank \href{https://github.com/stone-zeng}{Xiangdong Zeng}, \href{https://github.com/latexers}{Zhuluren}, etc. for their help.
 
 \section{Acknowledgement}
-The number of stars on Github for ElegantBook reached 100 on May 20, 2019\footnote{189 stars by August 18, 2019!}.Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. \LaTeX{} studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on \LaTeX{} in China. 
+The number of stars on Github for ElegantBook reached 100 on May 20, 2019\footnote{372 stars by February 8, 2020!}.Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. \LaTeX{} studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on \LaTeX{} in China. 
 
 If you like our template, star on Github.
 
 \section{Donation}
 To express your love for our templates and/or our developers, please do not hesitate to tip us. Since last release of 3.08, we have received about 1,500 RMB! (The emergence of a millionaire is on the way. Loading... )
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.45\textwidth]{donate.jpg}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.45\textwidth]{donate.jpg}
 \end{figure}
 
 The explanation right of the tip usage belongs to Elegant\LaTeX{} with no supervision. Feel free to tip us. Those who donate more than 10 RMB will be recorded in the Donation List. Thank all the tippers!
 
 \begin{table}[!htb]
-	\centering
-	\caption{Donation List}
-	\begin{tabular}{*{4}{>{\scriptsize}c}|*{4}{>{\scriptsize}c}}
-		\toprule
-		\textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} & \textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} \\
-		\midrule
-		Lerh  & 10 RMB & 2019/05/15 & Wechat    & yueguodipingxian & 10 RMB & 2019/05/15 & Wechat \\
-		yinsang    & 20 RMB & 2019/05/27 & Wechat    & *kong    & 10 RMB & 2019/05/30 & Wechat \\
-		latexstudio.net & 666 RMB & 2019/06/05 & Alipay   & A*n   & 40 RMB & 2019/06/15 & Wechat \\
-		* xia   & 22 RMB & 2019/06/15 & Wechat    & * qian  & 21 RMB  & 2019/06/15 & Wechat \\
-		Cassis & 11 RMB & 2019/06/30 & Wechat    & * jun    & 10 RMB & 2019/07/23 & Wechat \\
-		P*u   & 50 RMB & 2019/07/30 & Wechat    & * meng    & 19 RMB & 2019/08/28 & Wechat \\
-		Qu Doudou   & 10 RMB & 2019/08/28 & Wechat    & Li Bo    & 100 RMB & 2019/10/06 & Wechat \\
-		Njustsll & 10 RMB & 2019/10/11 & Wechat    & Liu Zhikuo   & 99.99 RMB & 2019/10/15 & Alipay \\
-		* tao   & 16 RMB & 2019/10/17 & Wechat    & Chini    & 12 RMB & 2019/10/17 & Alipay \\
-		zhuixunyuanfengjing & 10 RMB & 2019/10/28 & Wechat    & Guo Deliang   & 88 RMB & 2019/11/03 & Wechat \\
-		ziqiangbuxi  & 20 RMB & 2019/11/04 & Alipay   & dushuzhichong  & 20 RMB & 2019/11/18 & Wechat \\
-		* deng    & 10 RMB & 2019/11/18 & Wechat    & * zhe   & 20 RMB & 2019/11/18 & Wechat \\
-		anonymous    & 10 RMB & 2019/11/24 & Wechat    & Jiye Qian & 66 RMB & 2019/12/04 & Wechat \\
-		* yang   & 20 RMB & 2019/12/05 & Wechat    & Catcher & 11 RMB & 2019/12/08 & Alipay \\
-		xierbotementu & 10 RMB & 2019/12/09 & Alipay   & * wei   & 10 RMB & 2019/12/09 & Wechat \\
-		Simon & 20 RMB & 2019/12/11 & Alipay   & liushangqianyi & 66.60 RMB & 2019/12/18 & Alipay \\
-		yu     & 10 RMB & 2019/12/20 & Alipay   & *chen   & 15 RMB & 2019/12/20 & Wechat \\
-		suifeng   & 20 RMB & 2019/12/27 & Alipay   & Ws    & 23.30 RMB & 2019/12/28 & Wechat \\
-		chuba    & 100 RMB  & 2020/01/02 & Alipay   & p*e   & 20 RMB & 2020/01/03 & Wechat \\
-		Shunmx & 100 RMB & 2020/01/03 & Wechat    & hj    & 10 RMB & 2020/01/03 & Wechat \\
-		F*5   & 10 RMB & 2020/01/03 & Wechat    & S*m   & 20.20 RMB & 2020/01/03 & Wechat \\
-		erdaiqingzhi  & 13 RMB & 2020/01/14 & Alipay   & *?    & 66 RMB & 2020/01/15 & Wechat \\
-		Mr. Xiong & 20 RMB & 2020/01/17 & Wechat    & *bo    & 15 RMB & 2020/01/18 & Wechat \\
-		*zhe    & 10 RMB & 2020/02/02 & Wechat    &       &       &       &  \\
-		\bottomrule
-	\end{tabular}%
-	\label{tab:donation}%
+  \centering
+  \caption{Donation List}
+  \begin{tabular}{*{4}{>{\scriptsize}c}|*{4}{>{\scriptsize}c}}
+    \toprule
+    \textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} & \textbf{Tipper} & \textbf{Amount} & \textbf{Date} & \textbf{Channel} \\
+    \midrule
+    Lerh  & 10 RMB & 2019/05/15 & Wechat    & yueguodipingxian & 10 RMB & 2019/05/15 & Wechat \\
+    yinsang    & 20 RMB & 2019/05/27 & Wechat    & *kong    & 10 RMB & 2019/05/30 & Wechat \\
+    latexstudio.net & 666 RMB & 2019/06/05 & Alipay   & A*n   & 40 RMB & 2019/06/15 & Wechat \\
+    * xia   & 22 RMB & 2019/06/15 & Wechat    & * qian  & 21 RMB  & 2019/06/15 & Wechat \\
+    Cassis & 11 RMB & 2019/06/30 & Wechat    & * jun    & 10 RMB & 2019/07/23 & Wechat \\
+    P*u   & 50 RMB & 2019/07/30 & Wechat    & * meng    & 19 RMB & 2019/08/28 & Wechat \\
+    Qu Doudou   & 10 RMB & 2019/08/28 & Wechat    & Li Bo    & 100 RMB & 2019/10/06 & Wechat \\
+    Njustsll & 10 RMB & 2019/10/11 & Wechat    & Liu Zhikuo   & 99.99 RMB & 2019/10/15 & Alipay \\
+    * tao   & 16 RMB & 2019/10/17 & Wechat    & Chini    & 12 RMB & 2019/10/17 & Alipay \\
+    yuanfengjing & 10 RMB & 2019/10/28 & Wechat    & Guo Deliang   & 88 RMB & 2019/11/03 & Wechat \\
+    ziqiangbuxi  & 20 RMB & 2019/11/04 & Alipay   & dushuzhichong  & 20 RMB & 2019/11/18 & Wechat \\
+    * deng    & 10 RMB & 2019/11/18 & Wechat    & * zhe   & 20 RMB & 2019/11/18 & Wechat \\
+    anonymous    & 10 RMB & 2019/11/24 & Wechat    & Jiye Qian & 66 RMB & 2019/12/04 & Wechat \\
+    * yang   & 20 RMB & 2019/12/05 & Wechat    & Catcher & 11 RMB & 2019/12/08 & Alipay \\
+    xierbotementu & 10 RMB & 2019/12/09 & Alipay   & * wei   & 10 RMB & 2019/12/09 & Wechat \\
+    Simon & 20 RMB & 2019/12/11 & Alipay   & liushangqianyi & 66.60 RMB & 2019/12/18 & Alipay \\
+    yu     & 10 RMB & 2019/12/20 & Alipay   & *chen   & 15 RMB & 2019/12/20 & Wechat \\
+    suifeng   & 20 RMB & 2019/12/27 & Alipay   & Ws    & 23.30 RMB & 2019/12/28 & Wechat \\
+    chuba    & 100 RMB  & 2020/01/02 & Alipay   & p*e   & 20 RMB & 2020/01/03 & Wechat \\
+    Shunmx & 100 RMB & 2020/01/03 & Wechat    & hj    & 10 RMB & 2020/01/03 & Wechat \\
+    F*5   & 10 RMB & 2020/01/03 & Wechat    & S*m   & 20.20 RMB & 2020/01/03 & Wechat \\
+    erdaiqingzhi  & 13 RMB & 2020/01/14 & Alipay   & *?    & 66 RMB & 2020/01/15 & Wechat \\
+    Mr. Xiong & 20 RMB & 2020/01/17 & Wechat    & *bo    & 15 RMB & 2020/01/18 & Wechat \\
+    *zhe    & 10 RMB & 2020/02/02 & Wechat    &  Jackie &  88.80 RMB  &  2020/02/09 & Wechat \\
+    \bottomrule
+  \end{tabular}%
+  \label{tab:donation}%
 \end{table}%
 
 BTW, we provide Certificate of Donation for those who donated, tippers please leave your name(nickname) and email address for us to send the certificates.
 
-\begin{figure}[!htbp]
-	\centering
-	\includegraphics[width=0.7\textwidth]{cert.jpg}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.7\textwidth]{cert.pdf}
 \end{figure}
 
 \chapter{ElegantBook Settings}
 
-This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2019, either \lstinline{PDFLaTeX} or \lstinline{XeLaTeX} works fine.
+This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2019, either \hologo{pdfLaTeX} or \lstinline{XeLaTeX} works fine. \lstinline{XeLaTeX} is preferred for Chinese articles.
 
 \section{Languages}
 We defined one option named \lstinline{lang} which has two alternative values, \lstinline{lang=en} (default) and \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
@@ -183,11 +186,11 @@ We defined one option named \lstinline{lang} which has two alternative values, \
 \end{lstlisting}
 
 \begin{remark}
-Chinese Characters  are acceptable whenever \lstinline{lang=en} or \lstinline{lang=cn}. If you would like to include Chinese characters under (\lstinline{lstlisting}) environment, please use \lstinline{XeLaTeX} to compile.
+Chinese Characters  are acceptable whenever \lstinline{lang=en} or \lstinline{lang=cn}. If you would like to include Chinese characters under (\lstinline{lstlisting}) environment, please use \hologo{XeLaTeX} to compile.
 \end{remark}
 
 \section{Device Mode Option}
-The option for device (\lstinline{device}) was originally used in ElegantNote, now we include this option in ElegantBook\footnote{Pictures have to be modified accordingly} as well. Activate iPad mode in the following way\footnote{Default size: normal, A4 paper}:
+The option for device (\lstinline{device}) was originally used in ElegantNote, now we include this option in ElegantBook\footnote{Pictures have to be modified accordingly.} as well. Activate iPad mode in the following way\footnote{Default size: normal, A4 paper.}:
 \begin{lstlisting}
 \documentclass[pad]{elegantbook} %or
 \documentclass[device=pad]{elegantbook}
@@ -206,37 +209,37 @@ This template contains 5 color themes, i.e. \textcolor{structure1}{\lstinline{gr
 \centering
 \begin{tabular}{ccccccc}
 \toprule
-	        & \textcolor{structure1}{green} 
-	        & \textcolor{structure2}{cyan} 
-	        & \textcolor{structure3}{blue}
-	        & \textcolor{structure4}{gray} 
-	        & \textcolor{structure5}{black} 
-	        & Main Environments\\
+          & \textcolor{structure1}{green} 
+          & \textcolor{structure2}{cyan} 
+          & \textcolor{structure3}{blue}
+          & \textcolor{structure4}{gray} 
+          & \textcolor{structure5}{black} 
+          & Main Environments\\
 \midrule
 structure & \makecell{{\color{structure1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
-				& \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
-				& chapter  section  subsection \\
+        & \makecell{{\color{structure2}\rule{1cm}{1cm}}}
+        & \makecell{{\color{structure3}\rule{1cm}{1cm}}} 
+        & \makecell{{\color{structure4}\rule{1cm}{1cm}}} 
+        & \makecell{{\color{structure5}\rule{1cm}{1cm}}} 
+        & chapter  section  subsection \\
 main      & \makecell{{\color{main1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{main5}\rule{1cm}{1cm}}}
-				& definition  exercise  problem  \\
+        & \makecell{{\color{main2}\rule{1cm}{1cm}}}
+        & \makecell{{\color{main3}\rule{1cm}{1cm}}}
+        & \makecell{{\color{main4}\rule{1cm}{1cm}}}
+        & \makecell{{\color{main5}\rule{1cm}{1cm}}}
+        & definition  exercise  problem  \\
 second    & \makecell{{\color{second1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{second5}\rule{1cm}{1cm}}}
-				& theorem  lemma  corollary\\
+        & \makecell{{\color{second2}\rule{1cm}{1cm}}}
+        & \makecell{{\color{second3}\rule{1cm}{1cm}}}
+        & \makecell{{\color{second4}\rule{1cm}{1cm}}}
+        & \makecell{{\color{second5}\rule{1cm}{1cm}}}
+        & theorem  lemma  corollary\\
 third     & \makecell{{\color{third1}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third2}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third3}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third4}\rule{1cm}{1cm}}}
-				& \makecell{{\color{third5}\rule{1cm}{1cm}}}
-				& proposition\\
+        & \makecell{{\color{third2}\rule{1cm}{1cm}}}
+        & \makecell{{\color{third3}\rule{1cm}{1cm}}}
+        & \makecell{{\color{third4}\rule{1cm}{1cm}}}
+        & \makecell{{\color{third5}\rule{1cm}{1cm}}}
+        & proposition\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -253,15 +256,15 @@ If you want to customize the colors, please select \lstinline{nocolor} or use \l
 \subsection{Customized Cover}
 From v3.10, customized cover is allowed, you can choose or hide any element as you prefer. Current optional elements are:
 \begin{itemize}
-	\item title: \lstinline{\title}
-	\item subtitle: \lstinline{\subtitle}
-	\item author: \lstinline{\author}
-	\item institute: \lstinline{\institute}
-	\item date: \lstinline{\date}
-	\item version: \lstinline{\version}
-	\item extra information: \lstinline{\extrainfo}
-	\item cover image: \lstinline{\cover}
-	\item logo: \lstinline{\logo}
+  \item title: \lstinline{\title}
+  \item subtitle: \lstinline{\subtitle}
+  \item author: \lstinline{\author}
+  \item institute: \lstinline{\institute}
+  \item date: \lstinline{\date}
+  \item version: \lstinline{\version}
+  \item extra information: \lstinline{\extrainfo}
+  \item cover image: \lstinline{\cover}
+  \item logo: \lstinline{\logo}
 \end{itemize}
 
 Besides, an extra command \lstinline{\bioinfo} is provided with two options--caption and content. For instance, if you want to display \lstinline{Username: 111520}, just type in
@@ -277,11 +280,11 @@ The cover image used in this template is from \href{https://pixabay.com/en/tea-t
 Aspect ratio of the logo is 1:1 in this guide, i.e. a square picture. To replace the logo, do remember to choose the appropriate picture.
 
 \subsection{Stylized Cover}
-Want to use stylized cover? -- For instance, A4-sized PDF designed by Adobe Illustrator, please comment out \lstinline{\maketitle} and use \lstinline{pdfpages} to insert the cover. Similar for using \lstinline{titlepage}. If you would like to use the cover in version 2.x, please refer to \href{https://github.com/EthanDeng/etitlepage}{etitlepage}.
+Want to use stylized cover?(For instance, A4-sized PDF designed by Adobe Illustrator) Please comment out \lstinline{\maketitle} and use \lstinline{pdfpages} to insert the cover. Similar for using \lstinline{titlepage}. If you would like to use the cover in version 2.x, please refer to \href{https://github.com/EthanDeng/etitlepage}{etitlepage}.
 
 \section{Chapter Title Display Styles}
 
-This template contains 2 sets of \textit{title display styles},\lstinline{hang}(default) and \lstinline{display} style. For the former, chapter title is displayed on a single line (\lstinline{hang}). For the latter, chapter title is displayed on a double line (\lstinline{display}).In this guide, we use \lstinline{hang} . To change display style
+This template contains 2 sets of \textit{title display styles},\lstinline{hang}(default) and \lstinline{display} style. For the former, chapter title is displayed on a single line (\lstinline{hang}). For the latter, chapter title is displayed on a double line (\lstinline{display}).In this guide, we use \lstinline{hang} . To change display style, use:
 \begin{lstlisting}
 \documentclass[hang]{elegantbook} %or
 \documentclass[titlestyle=hang]{elegantbook}
@@ -307,7 +310,7 @@ In this template, we defined four different theorem class environments
    \end{itemize}
 \item \textit{Example Environments}, including \textbf{example, exercise, problem} environment, auto numbering corresponding to chapter.
 \item \textit{Proof Environment}, including \textbf{proof, note} environment containing introductory symbol (\textbf{note} environment) or ending symbol (\textbf{proof} environment).
-\item \textit{Conclusion Environments}, including \textbf{conclusion, assumption, property, remark, solution}\footnote{We also define an option \lstinline{result}, which can hide the \lstinline{solution} and \lstinline{proof} environments. You can switch between \lstinline{result=answer} and \lstinline{result=noanswer}} environment, all of which begin with boldfaced words, with format consistent with normal paragraphs.
+\item \textit{Conclusion Environments}, including \textbf{conclusion, assumption, property, remark and solution}\footnote{We also define an option \lstinline{result}, which can hide the \lstinline{solution} and \lstinline{proof} environments. You can switch between \lstinline{result=answer} and \lstinline{result=noanswer}.} environments, all of which begin with boldfaced words, with format consistent with normal paragraphs.
 \end{itemize}
 
 \subsection{Theorem Class Environments}
@@ -428,10 +431,9 @@ To change the bibliography style, this version introduces \lstinline{bibstyle} w
 
 If you want to add a preface before the first chapter with the number of chapter unchanged, please add the preface in the following way:
 \begin{lstlisting}
-\chapter*{Preface}
-\addcontentsline{toc}{chapter}{Preface} 
-\markboth{Preface}{} 
-The content of Preface.
+\chapter*{Introduction}
+\markboth{Introduction}{Introduction}
+The content of introduction.
 \end{lstlisting}
 
 \section{Content Option and Depth}
@@ -449,23 +451,23 @@ to make it 2.
 
 
 \section{Introduction Environment}
-We create a introduction environment to display the structure of chapter. The basic useage is as follows
+We create a introduction environment to display the structure of chapter. The basic useage is as follows:
 \begin{lstlisting}
 \begin{introduction}
-	\item Definition of Theorem
-	\item Ask for help
-	\item Optimization Problem
-	\item Property of Cauchy Series
-	\item Angle of Corner
+  \item Definition of Theorem
+  \item Ask for help
+  \item Optimization Problem
+  \item Property of Cauchy Series
+  \item Angle of Corner
 \end{introduction}
 \end{lstlisting}
-you will get:
+And you will get:
 \begin{introduction}
-	\item Definition of Theorem
-	\item Ask for help
-	\item Optimization Problem
-	\item Property of Cauchy Series
-	\item Angle of Corner
+  \item Definition of Theorem
+  \item Ask for help
+  \item Optimization Problem
+  \item Property of Cauchy Series
+  \item Angle of Corner
 \end{introduction}
 
 You can change the title of this environment by modifying the optional argument of this environment:
@@ -479,27 +481,27 @@ You can change the title of this environment by modifying the optional argument 
 The environment \lstinline{problemset} is used at the end of each chapter to display corresponding exercises. Just type in the following sentences:
 \begin{lstlisting}
 \begin{problemset}
-	\item exercise 1
-	\item exercise 2
-	\item exercise 3
+  \item exercise 1
+  \item exercise 2
+  \item exercise 3
 \end{problemset}
 \end{lstlisting}
 And you will get:
 \begin{problemset}
-	\item exercise 1
-	\item exercise 2
-	\item exercise 3
-	\item math equation test:
-	\begin{equation}
-	a^2+b^2=c_{2_{i}} (1,2) [1,23]
-	\end{equation}
+  \item exercise 1
+  \item exercise 2
+  \item exercise 3
+  \item math equation test:
+  \begin{equation}
+  a^2+b^2=c_{2_{i}} (1,2) [1,23]
+  \end{equation}
 \end{problemset}
 \begin{remark}
 If you want to customize the title of \lstinline{problemset}, please change the optional argument like in introduction environment. In this version the \lstinline{problemset} environment automatically appears in the table of contents but not in the header or footer(to be fixed).
 \end{remark}
 
 \begin{solution}
-	If you want to customize the title of \lstinline{problemset}, please change the optional argument like in introduction environment. In this version the \lstinline{problemset} environment automatically appears in the table of contents but not in the header or footer(to be fixed).
+  If you want to customize the title of \lstinline{problemset}, please change the optional argument like in introduction environment. In this version the \lstinline{problemset} environment automatically appears in the table of contents but not in the header or footer(to be fixed).
 \end{solution}
 
 \section{Margin Notes}
@@ -514,7 +516,7 @@ Note that text and equation are both available in the margin notes.
 % equation
 \marginpar{
 \begin{equation}
-	a^2 + b^2 = c^2
+  a^2 + b^2 = c^2
 \end{equation}
 }
 \end{lstlisting}
@@ -524,18 +526,18 @@ For tables and figures, note that floating environment is not allowed. You have 
 \begin{lstlisting}
 % graph with centerline command
 \marginpar{
-	\centerline{
-		\includegraphics[width=0.2\textwidth]{logo.png}
-	}
-	\captionof{figure}{your figure caption}
+  \centerline{
+    \includegraphics[width=0.2\textwidth]{logo.png}
+  }
+  \captionof{figure}{your figure caption}
 }
 
 % graph with center environment
 \marginpar{
-	\begin{center}
-		\includegraphics[width=0.2\textwidth]{logo.png}
-		\captionof{figure}{your figure caption}
-	\end{center}
+  \begin{center}
+    \includegraphics[width=0.2\textwidth]{logo.png}
+    \captionof{figure}{your figure caption}
+  \end{center}
 }
 \end{lstlisting}
 
@@ -549,9 +551,9 @@ Leave one chapter to introduce fonts to help users to solve font problems conven
 \section{Math Fonts}
 This template defines a new command(\lstinline{math}), with three options:
 \begin{enumerate}
-	\item \lstinline{math=cm}(default), use \LaTeX{} default math font (recommended).
-	\item \lstinline{math=newtx}, use \lstinline{newtxmath} math font (may bring about bugs).
-	\item \lstinline{math=mtpro2}, use \lstinline{mtpro2} package to set math font.
+  \item \lstinline{math=cm}(default), use \LaTeX{} default math font (recommended).
+  \item \lstinline{math=newtx}, use \lstinline{newtxmath} math font (may bring about bugs).
+  \item \lstinline{math=mtpro2}, use \lstinline{mtpro2} package to set math font.
 \end{enumerate}
 
 \section{Use newtx fonts}
@@ -641,9 +643,9 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 \end{proof}
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.6\textwidth]{scatter.pdf}
-	\caption{Matplotlib: Scatter Plot Example\label{fig:scatter}}
+  \centering
+  \includegraphics[width=0.6\textwidth]{scatter.pdf}
+  \caption{Matplotlib: Scatter Plot Example\label{fig:scatter}}
 \end{figure}
 
 Regression analysis is a powerful statistical method that allows you to examine the relationship between two or more variables of interest. While there are many types of regression analysis, at their core they all examine the influence of one or more independent variables on a dependent variable. The process of performing a regression allows you to confidently determine which factors matter most, which factors can be ignored, and how these factors influence each other.
@@ -676,13 +678,13 @@ Let's continue using our application training example. In this case, we'd want t
 \lipsum[1-2]
 
 \begin{itemize}
-	\item Routing and resource discovery;
-	     \begin{itemize} 
-      	   	\item Language Models
-       	 	\item Vector Space Models
-    		 \end{itemize}
-	\item Resilient and scalable computer networks;
-	\item Distributed storage and search.
+  \item Routing and resource discovery;
+       \begin{itemize} 
+             \item Language Models
+            \item Vector Space Models
+         \end{itemize}
+  \item Resilient and scalable computer networks;
+  \item Distributed storage and search.
 \end{itemize}
 
 \begin{problemset}
@@ -695,53 +697,50 @@ Let's continue using our application training example. In this case, we'd want t
 \chapter{FAQ}
 We list some FAQs for users to refer to:
 \begin{enumerate}
-	\item \question{Why option numbers for natbib fail to take effect in v3.07?}
-	\answer{In v3.07, when \lstinline{gbt7714} is introduced, option \lstinline{authoryear} is incompatible with \lstinline{natbib}. In v3.08 and 3.09, \lstinline{numbers}, \lstinline{numbers}, \lstinline{super} and \lstinline{authoryear} are introduced.}
-	\item \question{I want to customize font and background color.}
-	\answer{Please use \lstinline{pagecolor} to change background color, refer to \href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{this} to customize font.}
-	\item \lstinline[breaklines]{Package ctex Error: CTeX fontset `Mac' is unavailable.}
-	\answer{Under Mac, please use \lstinline{XeLaTeX} for Chinese documents.}
-	\item \lstinline{! LaTeX Error: Unknown option `scheme=plain' for package `ctex'.}
-	\answer{Use \TeX{} Live 2019.}
-	\item \question{Which version should I choose?}
-	\answer{Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX{} Live 2019.}
-	\item \question{Which editor should I choose?}
-	\answer{You can use \TeX{} Live 2019 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX{}works autocomplete}. \TeX{} Live 2019 + \TeX{}studio is strongly recommended. I myself use VS Code and Sublime Text. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.}
-	\item \question{Hello, we want to use ElegantBook to write a book about machine learning and would like your authorization.}
-	\answer{Feel free to use our templates by pointing out our copyright. For other issues, please refer to LPPL-1.3c. If you want to show us your work, share the URL with us afterwards.}
-	\item \question{What is cross reference?}
-	\answer{This template is aimed at who are not a complete beginner for \LaTeX{}. Please learn more about \LaTeX{} before using this template.}
-	\item \question{Is the language for code highlighting optional?}
-	\answer{Yes, \lstinline{listings} package is used in ElegantBook, hence language is optional(e.g. \lstinline{language=Python}). For global setting, use \lstinline{lstset}. For more information, please refer to package documentations.}
-	\item \question{When will Beamer template (ElegantSlide or ElegantBeamer) forthcoming?}
-	\answer{Since there is an excellent theme \href{https://github.com/matze/mtheme}{Metropolis}, a Beta theme PreElegantSlide is available in QQ group. Feel free to download. A formal version is forthcoming in this year or next year.}
+  \item \question{Why option numbers for natbib fail to take effect in v3.07?}
+  In v3.07, when \lstinline{gbt7714} is introduced, option \lstinline{authoryear} is incompatible with \lstinline{natbib}. In v3.08 and 3.09, \lstinline{numbers}, \lstinline{numbers}, \lstinline{super} and \lstinline{authoryear} are introduced.
+  \item \question{I want to customize font and background color.}
+  Please use \lstinline{pagecolor} to change background color, refer to \href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{this} to customize font.
+  \item \question{Which version should I choose?}
+  Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX{} Live 2019.
+  \item \question{Which editor should I choose?}
+  You can use \TeX{} Live 2019 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX{}works autocomplete}. \TeX{} Live 2019 + \TeX{}studio is strongly recommended. I myself use VS Code and Sublime Text. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.
+  \item \question{Hello, we want to use ElegantBook to write a book about machine learning and would like your authorization.}
+  Feel free to use our templates by pointing out our copyright. For other issues, please refer to LPPL-1.3c. If you want to show us your work, share the URL with us afterwards.
+  \item \question{What is cross reference?}
+  This template is aimed at who are not a complete beginner for \LaTeX{}. Please learn more about \LaTeX{} before using this template.
+  \item \question{Is the language for code highlighting optional?}
+  Yes, \lstinline{listings} package is used in ElegantBook, hence language is optional(e.g. \lstinline{language=Python}). For global setting, use \lstinline{lstset}. For more information, please refer to package documentations.
+  \item \question{When will Beamer template (ElegantSlide or ElegantBeamer) forthcoming?}
+  Since there is an excellent theme \href{https://github.com/matze/mtheme}{Metropolis}, a Beta theme PreElegantSlide is available in QQ group. Feel free to download. A formal version is forthcoming in this year or next year.
 \end{enumerate}
 
-\chapter{Update History}
-We revised our templates now and then. Nearly 100 submits and 16 releases for ElegantBook on GitHub. 
+\chapter{Version History}
+We revised our templates now and then. This section shows the version story of ElegantBook. We have nearly 100 submits and 16 releases on GitHub since uploaded.
 
-\datechange{2020/02/08}{release of v3.10}
+\datechange{2020/02/10}{release of v3.10}
 
 \begin{change}
-\item Introduce \lstinline{math} for math font, optional styles are Times-ish \lstinline{newtx}, Computer Modern-ish \lstinline{cm}. \textbf{Notice}: The math font \lstinline{newtxmath} in previous versions is reset to default \LaTeX{} math font, to keep previous math font, please declare \lstinline{math=newtx}.
-\item Introduce \lstinline{chinesefont} for Chinese font, optional fonts are \lstinline{founder}, \lstinline{ctexfont} and \lstinline{nofont}.
-\item Turn author information on the cover optional and add customized command \lstinline{\bioinfo}.
-\item Add version time line in this documentation with command \lstinline{\datechange} and environment \lstinline{change}.
-\item Add Chinese chapter style \lstinline{scheme} with option \lstinline{chinese}.
-\item Since the bug raised by \lstinline{\lvert} is fixed, exchange package positions of \lstinline{ctex} and \lstinline{amsmath}.
-\item Revise header settings by dropping \lstinline{\lastpage} to avoid page anchor bug and adding \lstinline{\frontmatter}.
-\item Revise bibliography option \lstinline{cite} with optional styles \lstinline{number},\lstinline{authoryear} and \lstinline{super}.
-\item Introduce bibliography style option \lstinline{bibstyle}, with default style \lstinline{apalike} for English and \lstinline{gbt7714} for Chinese.
+  \item Introduce \lstinline{math} for math font, optional styles are \lstinline{newtx} and \lstinline{cm}.\\
+  \textbf{Notice}: The math font \lstinline{newtxmath} in previous versions is reset to default \LaTeX{} math font, to keep previous math font, please declare \lstinline{math=newtx}.
+  \item Introduce \lstinline{chinesefont} option, with \lstinline{founder}, \lstinline{ctexfont} and \lstinline{nofont} available.
+  \item Turn author information on the cover optional and add customized command \lstinline{\bioinfo}.
+  \item Add version history with command \lstinline{\datechange} and environment \lstinline{change}.
+  \item Add Chinese chapter style \lstinline{scheme} with option \lstinline{chinese}.
+  \item Since the bug raised by \lstinline{\lvert} is fixed, exchange package positions of \lstinline{ctex} and \lstinline{amsmath}.
+  \item Drop \lstinline{\lastpage} from header to avoid page anchor bug and adding \lstinline{\frontmatter}.
+  \item Revise bibliography option \lstinline{cite} with optional styles \lstinline{numbers},\lstinline{authoryear} and \lstinline{super}.
+  \item Introduce bibliography style option \lstinline{bibstyle}, with default bib style \lstinline{apalike} for English mode and \lstinline{gbt7714} package for Chinese mode.
 \end{change}
 
 \datechange{2019/08/18}{release of v3.09}
 
 \begin{change}
-	\item Remove \lstinline{\elegantpar} temporary and remind users to use \lstinline{\marginnote} and \lstinline{\marginpar} instead.
-	\item Use \lstinline{esint} to display integral operator.
-	\item Add new command \lstinline{toc}, with options  \lstinline{onecol} and \lstinline{twocol}.
-	\item Add new option \lstinline{cite} \lstinline{super} for superscript-displayed citation.
-	\item Revise \lstinline{problemset}.
+  \item Remove \lstinline{\elegantpar} temporary and remind users to use \lstinline{\marginnote} and \lstinline{\marginpar} instead.
+  \item Use \lstinline{esint} to display integral operator.
+  \item Add new command \lstinline{toc}, with options  \lstinline{onecol} and \lstinline{twocol}.
+  \item Add new option \lstinline{cite} \lstinline{super} for superscript-displayed citation.
+  \item Revise \lstinline{problemset}.
 \end{change}
 
 

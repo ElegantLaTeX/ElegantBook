@@ -162,7 +162,7 @@
 \ifcsname fangsong\endcsname
   \newcommand{\cfs}{\fangsong}
 \else
-  \newcommand{\cfs}{\sffamily}
+  \newcommand{\cfs}{\normalfont}
 \fi
 
 \RequirePackage{newtxtext}
@@ -648,7 +648,7 @@
   \par}
 
 \newenvironment{solution}{\par\noindent\textbf{\color{main}\solutionname} \citshape}{\par}
-\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname\citshape} \citshape}{\par}
+\newenvironment{remark}{\noindent\textbf{\color{second}\remarkname}}{\par}
 \newenvironment{assumption}{\par\noindent\textbf{\color{third}\assumptionname} \citshape}{\par}
 \newenvironment{conclusion}{\par\noindent\textbf{\color{third}\conclusionname} \citshape}{\par}
 \newenvironment{property}{\par\noindent\textbf{\color{third}\propertyname} \citshape}{\par}
