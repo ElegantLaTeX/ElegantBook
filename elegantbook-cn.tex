@@ -20,6 +20,9 @@
 % 修改目录深度
 \setcounter{tocdepth}{2}
 
+\usepackage{cleveref}
+\crefformat{chapter}{#2第\zhnumber{#1}章#3}
+
 \begin{document}
 
 \maketitle
@@ -81,7 +84,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
   \item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
   \item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
-  \item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
+  \item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{numbers}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
   \item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
 \end{enumerate}
 
@@ -227,9 +230,9 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 \includegraphics[width=0.7\textwidth]{cert.pdf}
 \end{figure}
 
-\chapter{ElegantBook 设置说明}
+\chapter{ElegantBook 设置说明}\label{chap:foo}
 
-本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2019，支持 \hologo{pdfLaTeX} 以及 \hologo{XeLaTeX} 编译。中文请尽量使用 \hologo{XeLaTeX} 编译。
+\cref{chap:foo}本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2019，支持 \hologo{pdfLaTeX} 以及 \hologo{XeLaTeX} 编译。中文请尽量使用 \hologo{XeLaTeX} 编译。
 
 \section{语言模式}
 本模板内含两套语言环境，改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
@@ -372,7 +375,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
     \end{itemize}
   \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
   \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
-  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property，remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
+  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
 \end{itemize}
 
 \subsection{定理类环境的使用}
@@ -842,7 +845,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 \chapter{版本更新历史}
 
-根据用户的反馈，我们不断修正和完善模板。截止到此次更新，ElegantBook 模板在 GitHub 上有将近 100 次提交，正式发行版本（release）有 16 次。
+根据用户的反馈，我们不断修正和完善模板。截止到此次更新，ElegantBook 模板在 GitHub 上有将近 100 次提交，正式发行版本（release）有 16 次。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
 
 \datechange{2020/02/10}{版本 3.10 正式发布}
 
@@ -855,7 +858,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
   \item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
   \item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
-  \item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{number}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
+  \item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{numbers}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
   \item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
 \end{change}
 
@@ -868,6 +871,97 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item 手动增加参考文献选项 \lstinline{cite}，可选项为上标形式 \lstinline{super}；
   \item 修正章节习题（\lstinline{problemset}）环境。
 \end{change}
+
+\datechange{2019/05/28}{版本 3.08 正式发布}
+
+\begin{change}
+  \item 修复 \lstinline{\part} 命令。
+  \item 引入 Note 模板中的 \lstinline{pad} 选项 \lstinline{device=pad}。
+  \item 数学字体加入 \lstinline{mtpro2} 可选项 \lstinline{math=mtpro2}，使用免费的 \lstinline{lite} 子集。
+  \item 将参考文献默认显示方式 \lstinline{authoyear} 改为 \lstinline{numbers}。
+  \item 引入旁注命令 \lstinline{\marginpar}（测试）。
+  \item 新增章节摘要环境 \lstinline{introduction}。
+  \item 新增章节习题环境 \lstinline{problemset}。
+  \item 将 \lstinline{\equote} 重命名为 \lstinline{\extrainfo}。
+  \item 完善说明文档，增加致谢部分。
+\end{change}
+
+\datechange{2019/04/15}{版本 3.07 正式发布}
+
+\begin{change}
+  \item 删除中英文自定义字体总设置。
+  \item 新增颜色主题，并将原绿色默认主题设置为蓝色 \lstinline{color=blue}。
+  \item 引入隐藏装饰图案选项 \lstinline{base}，可选项有显示 \lstinline{show} 和隐藏 \lstinline{hide}。
+  \item 新增定理模式 \lstinline{mode}，可选项有简单模式 \lstinline{simple} 和炫彩模式 \lstinline{fancy}。
+  \item 新增隐藏证明、答案等环境的选项 \lstinline{result=noanswer}。
+\end{change}
+
+\datechange{2019/02/25}{版本 3.06 正式发布}
+
+\begin{change}
+  \item 删除水印。
+  \item 新封面，新装饰图案。
+  \item 添加引言使用说明。
+  \item 修复双面 \lstinline{twoside}。
+  \item 美化列表环境。
+  \item 增加 \lstinline{\subsubsection} 的设置。
+  \item 将模板拆分成中英文语言模式。
+  \item 使用 \lstinline{lstlisting} 添加代码高亮。
+  \item 增加定理类环境使用说明。
+\end{change}
+
+\datechange{2019/01/22}{版本 3.05 正式发布}
+
+\begin{change}
+  \item 添加 \lstinline{xeCJK} 宏包中文支持方案。
+  \item 修复模板之前对 Ti\textit{k}Z 单位的改动。
+  \item 更新 logo 图。
+\end{change}
+
+\datechange{2019/01/15}{版本 3.04 正式发布}
+
+\begin{change}
+  \item 格式化模板代码。
+  \item 增加 \lstinline{\equote} 命令。
+  \item 修改 \lstinline{\date}。
+\end{change}
+
+\datechange{2019/01/08}{版本 3.03 正式发布}
+
+\begin{change}
+  \item 修复附录章节显示问题。
+  \item 小幅优化封面代码。
+\end{change}
+
+\datechange{2018/12/31}{版本 3.02 正式发布}
+
+\begin{change}
+  \item 修复名字系列命令自定义格式时出现的空格问题，比如 \lstinline{\listfigurename}。
+  \item 英文定理类名字改为中文名。
+  \item 英文结构名改为中文。
+\end{change}
+
+\datechange{2018/12/16}{版本 3.01 正式发布}
+
+\begin{change}
+  \item 调整 \lstinline{ctex} 宏包。
+  \item 说明文档增加更新内容。
+\end{change}
+
+\datechange{2018/12/06}{版本 3.00 正式发布}
+
+\begin{change}
+  \item 删除 \lstinline{mathpazo} 数学字体选项。
+  \item 添加邮箱命令 \lstinline{\mailto}。
+  \item 修改英文字体为 \lstinline{newtx} 系列，另外大型操作符号维持 cm 字体。
+  \item 中文字体改用 \lstinline{ctex} 宏包自动设置。
+  \item 删除 \lstinline{xeCJK} 字体设置，原因是不同系统字体不方便统一。
+  \item 定理换用 \lstinline{tcolobox} 宏包定义，并基本维持原有的定理样式，优化显示效果，支持跨页；定理类名字重命名，如 etheorem 改为 theorem 等等。
+  \item 删去自定义的缩进命令 \lstinline{\Eindent}。
+  \item 添加参考文献宏包 \lstinline{natbib}。
+  \item 颜色名字重命名。
+\end{change}
+
 
 \nocite{*} 
 \bibliography{reference}

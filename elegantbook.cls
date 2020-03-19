@@ -325,7 +325,8 @@
 \RequirePackage{graphicx}
 %\RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
-
+% \providecommand\qed{}
+% \renewcommand{\qed}{\hfill\ensuremath{\square}}
 \RequirePackage{booktabs}
 \RequirePackage{multicol,multirow}
 \RequirePackage{xcolor}
@@ -373,7 +374,7 @@
   \newcommand{\propertyname}{性质}
   \newcommand{\introductionname}{内容提要}
   \newcommand{\problemsetname}{习题}
-  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textit{#1}：\textit{#2}}}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textit{#1}：#2}}
   \newcommand{\updatename}{更新：}
   \newcommand{\historyname}{版本更新历史}
 }{\relax}
@@ -410,6 +411,42 @@
   \newcommand{\updatename}{Updates:}
   \newcommand{\historyname}{Version History}
 }{\relax}
+
+\ifdefstring{\ELEGANT@lang}{it}{
+  \RequirePackage[italian]{babel}
+  \setlength\parindent{2em}
+  \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{Tabella}~\ref{#1}}
+  \renewcommand{\chaptername}{Capitolo \thechapter}
+  \newcommand{\authorname}{\textbf{Autore: }}
+  \newcommand{\institutename}{\textbf{Istituto: }}
+  \newcommand{\datename}{\textbf{Data: }}
+  \newcommand{\versionname}{\textbf{Versione: }}
+  \bibliographystyle{\ELEGANT@bibstyle}
+  \newcommand{\notename}{Nota}
+  \newcommand{\proofname}{Dimostrazione}
+  \newcommand{\problemname}{Problema}
+  \newcommand{\definitionname}{Definizione}
+  \newcommand{\theoremname}{Teorema}
+  \newcommand{\axiomname}{Assioma}
+  \newcommand{\postulatename}{Postulato}
+  \newcommand{\lemmaname}{Lemma}
+  \newcommand{\propositionname}{Proposizione}
+  \newcommand{\corollaryname}{Corollario}
+  \newcommand{\examplename}{Esempio}
+  \newcommand{\exercisename}{Esercizio}
+  \newcommand{\remarkname}{Commento}
+  \newcommand{\assumptionname}{Assunto}
+  \newcommand{\conclusionname}{Conclusione}
+  \newcommand{\solutionname}{Soluzione}
+  \newcommand{\propertyname}{Proprietà}
+  \newcommand{\introductionname}{Introduzione}
+  \newcommand{\problemsetname}{Esercizio}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{Aggiornamenti:}
+  \newcommand{\historyname}{Cronologia delle versioni}
+}{\relax}
+
 
 \RequirePackage{xpatch}
 \xpatchcmd{\part}{
