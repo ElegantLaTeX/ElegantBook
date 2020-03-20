@@ -650,7 +650,7 @@
 \renewcommand{\theexam}{\thechapter.\arabic{exam}}
 \newenvironment{example}[1][]{
   \refstepcounter{exam}
-  \par\noindent\textbf{\color{main}{\examplename}\theexam #1 }\rmfamily}{
+  \par\noindent\textbf{\color{main}{\examplename} \theexam #1 }\rmfamily}{
   \par\ignorespacesafterend}
 
 %% Exercise with counter
@@ -661,7 +661,7 @@
   \refstepcounter{exer}
   \par\noindent\makebox[-3pt][r]{
     \scriptsize\color{red!90}\HandPencilLeft\quad}
-    \textbf{\color{main}{\exercisename}\theexer #1 }\rmfamily}{
+    \textbf{\color{main}{\exercisename} \theexer #1 }\rmfamily}{
     \par\ignorespacesafterend}
 
 %% Problem with counter
@@ -670,7 +670,7 @@
 \renewcommand{\theprob}{\thechapter.\arabic{prob}}
 \newenvironment{problem}[1][]{
   \refstepcounter{prob}
-  \par\noindent\textbf{\color{main}{\problemname}\theprob #1 }\rmfamily}{
+  \par\noindent\textbf{\color{main}{\problemname} \theprob #1 }\rmfamily}{
   \par\ignorespacesafterend}
 
 \newenvironment{note}{
