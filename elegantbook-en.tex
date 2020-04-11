@@ -14,8 +14,6 @@
 \logo{logo-blue.png}
 \cover{cover.jpg}
 
-\providecommand\qed{}
-\renewcommand{\qed}{\hfill\ensuremath{\square}}
 
 \begin{document}
 
@@ -642,7 +640,7 @@ Let $H$ be a finite subgroup of a group $G$.  Then each left coset of $H$ in $G$
 \end{proposition}
 
 \begin{proof}
-Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and $z = yb$ for some $b \in H$. If $h$ is any element of $H$ then $ah \in H$ and $a^{-1}h \in H$, since $H$ is a subgroup of $G$. But $zh = x(ah)$ and $xh = z(a^{-1}h)$ for all $h \in H$. Therefore $zH \subset xH$ and $xH \subset zH$, and thus $xH = zH$.  Similarly $yH = zH$, and thus $xH = yH$, as required. \qed
+Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and $z = yb$ for some $b \in H$. If $h$ is any element of $H$ then $ah \in H$ and $a^{-1}h \in H$, since $H$ is a subgroup of $G$. But $zh = x(ah)$ and $xh = z(a^{-1}h)$ for all $h \in H$. Therefore $zH \subset xH$ and $xH \subset zH$, and thus $xH = zH$.  Similarly $yH = zH$, and thus $xH = yH$, as required. 
 \end{proof}
 
 \begin{figure}[htbp]
