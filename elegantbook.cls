@@ -85,6 +85,25 @@
 % \ProcessOptions*\relax
 \LoadClass[a4paper,oneside]{book}
 
+\RequirePackage{setspace}
+\RequirePackage{hyperref}
+\hypersetup{
+  breaklinks,
+  unicode,
+  linktoc=all,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  pdfkeywords={ElegantBook},
+  colorlinks,
+  linkcolor=winered,
+  citecolor=winered,
+  urlcolor=winered,
+  plainpages=false,
+  pdfstartview=FitH,
+  pdfborder={0 0 0},
+  linktocpage
+}
+
 %% device settings
 \RequirePackage{geometry}
 \ifdefstring{\ELEGANT@device}{normal}{
@@ -317,7 +336,7 @@
 \RequirePackage{multicol,multirow}
 \RequirePackage{xcolor}
 \RequirePackage{fancyvrb}
-\RequirePackage{makecell,lipsum,hologo,setspace}
+\RequirePackage{makecell,lipsum,hologo}
 %%中文结构名字
 \ifdefstring{\ELEGANT@lang}{cn}{
   \renewcommand{\contentsname}{目录}
@@ -466,24 +485,6 @@
 \setlist[itemize,2]{label={\eitemii}}
 \setlist[itemize,3]{label={\eitemiii}}
 
-
-\RequirePackage{hyperref}
-\hypersetup{
-  breaklinks,
-  unicode,
-  linktoc=all,
-  bookmarksnumbered=true,
-  bookmarksopen=true,
-  pdfkeywords={ElegantBook},
-  colorlinks,
-  linkcolor=winered,
-  citecolor=winered,
-  urlcolor=winered,
-  plainpages=false,
-  pdfstartview=FitH,
-  pdfborder={0 0 0},
-  linktocpage
-}
 
 %%   章节设置
 \RequirePackage[center,pagestyles]{titlesec}
@@ -845,7 +846,7 @@
   breaklines=true,
   keywordstyle=\color{winered},
   commentstyle=\color{gray},
-  emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,ctex,listings,base,math,scheme,toc,esint,chinesefont,amsmath,bibstyle,natbib},
+  emph={elegantpaper,fontenc,fontspec,xeCJK,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,ctex,listings,base,math,scheme,toc,esint,chinesefont,amsmath,bibstyle,natbib,pgfornament},
   emphstyle={\color{frenchplum}},
   morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote,bioinfo,datechange,listofchange,lvert,lastpage,songti,heiti,fangsong,setCJKfamilyfont,textbf},
   frame=single,
