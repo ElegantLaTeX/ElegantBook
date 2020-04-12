@@ -1,12 +1,12 @@
-\documentclass[lang=en,11pt,fancy]{elegantbook}
+\documentclass[lang=en,11pt,fancy,authoryear]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{February 10, 2020}
-\version{3.10}
+\date{April 12, 2020}
+\version{3.11}
 \bioinfo{Bio}{Information}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
@@ -29,7 +29,7 @@ Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegan
 Contact Infos:
 \begin{itemize}
   \item Homepage: \href{https://elegantlatex.org/}{https://elegantlatex.org/}
-  \item Github: \href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
+  \item GitHub: \href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
   \item CTAN: \href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
   \item Wiki: \href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
   \item Download: \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{release}, \href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{latest version}
@@ -41,18 +41,14 @@ Contact Infos:
 
 
 \section{ElegantBook Updates}
-What\rq s new in this version:
+
+Version 3.11 is the last version of 3.x, it's base upon 3.10, mainly to resolve \TeX{} Live 2020 compilation errors caused by \lstinline{gbt7714} compatibility issues. What\rq s new in this version:
+
 \begin{enumerate}
-  \item Introduce \lstinline{math} for math font, optional styles are \lstinline{newtx} and \lstinline{cm}.\\
-  \textbf{Notice}: The math font \lstinline{newtxmath} in previous versions is reset to default \LaTeX{} math font, to keep previous math font, please declare \lstinline{math=newtx}.
-  \item Introduce \lstinline{chinesefont} option, with \lstinline{founder}, \lstinline{ctexfont} and \lstinline{nofont} available.
-  \item Turn author information on the cover optional and add customized command \lstinline{\bioinfo}.
-  \item Add version history with command \lstinline{\datechange} and environment \lstinline{change}.
-  \item Add Chinese chapter style \lstinline{scheme} with option \lstinline{chinese}.
-  \item Since the bug raised by \lstinline{\lvert} is fixed, exchange package positions of \lstinline{ctex} and \lstinline{amsmath}.
-  \item Drop \lstinline{\lastpage} from header to avoid page anchor bug and adding \lstinline{\frontmatter}.
-  \item Revise bibliography option \lstinline{cite} with optional styles \lstinline{numbers},\lstinline{authoryear} and \lstinline{super}.
-  \item Introduce bibliography style option \lstinline{bibstyle}, with default bib style \lstinline{apalike} for English mode and \lstinline{gbt7714} package for Chinese mode.
+  \item \textbf{Fix}: Fix \lstinline{natbib option clash} problems caused by \lstinline{gbt7714} updates;
+  \item Remove \lstinline{base} decorations and its options since \lstinline{pgfornament} package is not included in \TeX{} Live 2020;
+  \item Fix spacing problem in some environments;
+  \item Add Italian language option, \lstinline{lang=it}.
 \end{enumerate}
 
 
@@ -71,7 +67,7 @@ Visit \href{https://www.overleaf.com/}{Overleaf} to use our template online anyw
 \end{remark}
 
 \subsection{To Use Portable Version}
-For portable version, simply download lastest ElegantBook-master from Github or CTAN (to be more accurate, download \lstinline{elegantbook.cls}) and save the file(s) under your working directory. This way of installation is simple and convenient, but you have to manually update \lstinline{cls} now and then.
+For portable version, simply download lastest ElegantBook-master from GitHub or CTAN (to be more accurate, download \lstinline{elegantbook.cls}) and save the file(s) under your working directory. This way of installation is simple and convenient, but you have to manually update \lstinline{cls} now and then.
 
 \subsection{To Use Local Installation Version}
 If you are a \TeX{} Live 2019 user, using the \lstinline{tlshell}\footnote{namely, \TeX{} Live Manager} of \TeX{} Live 2019 direct installation package is strongly recommended. Simply search and open \lstinline{tlshell}, click on \lstinline{File -> Load Default Repository} or customize repository by \lstinline{Options}. Wait till the repository loads successfully, search \lstinline{elegantbook} by name, installation and update is just a click away.
@@ -101,7 +97,7 @@ Excuse me? You are a  C\TeX{}  user? Sorry, this template is incompatible with C
 For more details about the installation and usage of \TeX{} Live 2019, the compatibility of C\TeX{} and \TeX{} Live, please refer to OG (Official Guide) and/or \href{https://github.com/OsbertWang/install_latex/releases}{Install LaTeX v5.1} by OsbertWang.
 
 \section{User\rq s Selected Works Plan}
-Eight years have passed since the found of Elegant\LaTeX{} Program. It\rq s an honor that our templates are preferred by a lot of users. Hence, in order to promote more interactions among our users and know more about what you need, we are planning to provide a platform to display selected works of our users on Github or our homepage. If you want to show us your work(s), contact us via Email or other ways. Or if you have upload your work(s) on Github or Gitee etc., share the URL(s) with us. You can visit current available works \href{https://github.com/ElegantLaTeX/Archive/tree/master/Collections}{here}.
+Eight years have passed since the found of Elegant\LaTeX{} Program. It\rq s an honor that our templates are preferred by a lot of users. Hence, in order to promote more interactions among our users and know more about what you need, we are planning to provide a platform to display selected works of our users on GitHub or our homepage. If you want to show us your work(s), contact us via Email or other ways. Or if you have upload your work(s) on GitHub or Gitee etc., share the URL(s) with us. You can visit current available works \href{https://github.com/ElegantLaTeX/Archive/tree/master/Collections}{here}.
 
 \section{About Pull Request}
 For some reasons, pull requests will NOT by accepted since May 20, 2019. For those who want to help improve the templates, submit issues or clone to your own repository to modify under LPPL-1.3c.
@@ -119,9 +115,9 @@ So far, Elegant\LaTeX{} has four Support Members:
 BTW, thank \href{https://github.com/stone-zeng}{Xiangdong Zeng}, \href{https://github.com/latexers}{Zhuluren}, etc. for their help.
 
 \section{Acknowledgement}
-The number of stars on Github for ElegantBook reached 100 on May 20, 2019\footnote{372 stars by February 8, 2020!}.Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. \LaTeX{} studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on \LaTeX{} in China. 
+The number of stars on GitHub for ElegantBook reached 100 on May 20, 2019\footnote{372 stars by February 8, 2020!}.Thank China\TeX{} and \href{http://www.latexstudio.net/}{\LaTeX{} studio} for their promotion. \LaTeX{} studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on \LaTeX{} in China. 
 
-If you like our template, star on Github.
+If you like our template, star on GitHub.
 
 \section{Donation}
 To express your love for our templates and/or our developers, please do not hesitate to tip us. Since last release of 3.08, we have received about 1,500 RMB! (The emergence of a millionaire is on the way. Loading... )
@@ -162,7 +158,11 @@ The explanation right of the tip usage belongs to Elegant\LaTeX{} with no superv
     F*5   & 10 RMB & 2020/01/03 & Wechat    & S*m   & 20.20 RMB & 2020/01/03 & Wechat \\
     erdaiqingzhi  & 13 RMB & 2020/01/14 & Alipay   & *?    & 66 RMB & 2020/01/15 & Wechat \\
     Mr. Xiong & 20 RMB & 2020/01/17 & Wechat    & *bo    & 15 RMB & 2020/01/18 & Wechat \\
-    *zhe    & 10 RMB & 2020/02/02 & Wechat    &  Jackie &  88.80 RMB  &  2020/02/09 & Wechat \\
+    *Zhe    & 10 RMB & 2020/02/02 & Wechat    &  Jackie &  88.80 RMB  &  2020/02/09 & Wechat \\
+    Henry\_Sun & 50 RMB & 2020/02/14 & Alipay & * Qiao  & 50 RMB & 2020/02/21 & Wechat \\
+    YunLian & 10 RMB & 2020/03/02 & Alipay & S*y  &  10 RMB  &  2020/03/15 & Wechat \\
+    * Ge  & 66.66 RMB & 2020/03/17 & Wechat    &   K*e & 30 RMB & 2020/03/30 & Wechat\\
+    * Yang  &  20 RMB  &  2020/04/02 & Wechat & Shi*n  & 30 RMB & 2020/04/11 & Wechat \\
     \bottomrule
   \end{tabular}%
   \label{tab:donation}%
@@ -180,14 +180,14 @@ BTW, we provide Certificate of Donation for those who donated, tippers please le
 This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2019, either \hologo{pdfLaTeX} or \lstinline{XeLaTeX} works fine. \lstinline{XeLaTeX} is preferred for Chinese articles.
 
 \section{Languages}
-We defined one option named \lstinline{lang} which has two alternative values, \lstinline{lang=en} (default) and \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
+We defined one option named \lstinline{lang} which has three alternative values, \lstinline{lang=en} (default) , \lstinline{lang=cn} and \lstinline{lang=it}\footnote{Provided by \href{https://github.com/VincentMVV}{VincentMVV}, detail in \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{GitHub: Italian translation}.}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
 \begin{lstlisting}
 \documentclass[en]{elegantbook} 
 \documentclass[lang=en]{elegantbook}
 \end{lstlisting}
 
 \begin{remark}
-Chinese Characters  are acceptable whenever \lstinline{lang=en} or \lstinline{lang=cn}. If you would like to include Chinese characters under (\lstinline{lstlisting}) environment, please use \hologo{XeLaTeX} to compile.
+Chinese Characters  are acceptable \textbf{ONLY} in \lstinline{lang=cn}. If you would like to include Chinese characters under (\lstinline{lstlisting}) environment, please use \hologo{XeLaTeX} to compile.
 \end{remark}
 
 \section{Device Mode Option}
@@ -365,13 +365,6 @@ These are all similar environments with slight differences lies in:
    \item Note begins with introductory symbol and proof ends with ending symbol;
    \item Conclusion and other environments are normal paragraph environments with boldfaced introductory words.
 \end{itemize}
-
-\section{Base Hide Option}
-Hiding the end-of-chapter and end-of-page base is optional, simply type in:
-\begin{lstlisting}
-\documentclass[hide]{elegantbook} %or
-\documentclass[base=hide]{elegantbook}
-\end{lstlisting}
 
 
 \section{List Environments}
@@ -719,6 +712,17 @@ We list some FAQs for users to refer to:
 \chapter{Version History}
 We revised our templates now and then. This section shows the version story of ElegantBook. We have nearly 100 submits and 16 releases on GitHub since uploaded.
 
+\datechange{2020/04/12}{release of v3.11, \textcolor{red}{\textbf{LAST} version of 3.x}.}
+
+\begin{enumerate}
+  \item \textbf{Fix}: Fix \lstinline{natbib option clash} problems caused by \lstinline{gbt7714} updates;
+  \item Remove \lstinline{base} decorations and its options since \lstinline{pgfornament} package is not included in \TeX{} Live 2020;
+  \item Fix spacing problem in some environments;
+  \item Add Italian language option, \lstinline{lang=it}.
+\end{enumerate}
+
+
+
 \datechange{2020/02/10}{release of v3.10}
 
 \begin{change}
@@ -744,8 +748,7 @@ We revised our templates now and then. This section shows the version story of E
   \item Revise \lstinline{problemset}.
 \end{change}
 
-
-\nocite{en1,en2,en3}
+\nocite{en2,en3}
 \bibliography{reference}
 \appendix
 
