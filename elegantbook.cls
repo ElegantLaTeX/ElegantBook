@@ -425,7 +425,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Tabella}~\ref{#1}}
-  \renewcommand{\chaptername}{Capitolo \thechapter}
+  \renewcommand{\chaptername}{Capitolo \arabic{chapter}}
   \newcommand{\authorname}{\textbf{Autore: }}
   \newcommand{\institutename}{\textbf{Istituto: }}
   \newcommand{\datename}{\textbf{Data: }}
