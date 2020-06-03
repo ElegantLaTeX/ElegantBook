@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/04/12 v4.0.1 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/06/03 v4.0.1 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
