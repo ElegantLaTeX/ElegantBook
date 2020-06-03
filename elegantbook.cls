@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/04/12 v3.11 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/04/12 v4.0.1 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -390,6 +390,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
+  \renewcommand{\partname}{\color{structurecolor} Part}
   \renewcommand{\chaptername}{Chapter \thechapter}
   \newcommand{\authorname}{\textbf{Author: }}
   \newcommand{\institutename}{\textbf{Institute: }}
@@ -565,14 +566,43 @@
         \node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {
           \textcolor{third}{$\spadesuit$}};}},}
 
-  \newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
-  \newtcbtheorem[auto counter,number within=chapter]{theorem}{\theoremname}{thmstyle}{thm}
-  \newtcbtheorem[auto counter,number within=chapter]{postulate}{\postulatename}{thmstyle}{pos}
-  \newtcbtheorem[auto counter,number within=chapter]{axiom}{\axiomname}{thmstyle}{axi}
-  \newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
-  \newtcbtheorem[auto counter,number within=chapter]{corollary}{\corollaryname}{thmstyle}{cor}
-  \newtcbtheorem[auto counter,number within=chapter]{lemma}{\lemmaname}{thmstyle}{lem}
+  % \newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
+  \DeclareTColorBox[auto counter,number within=chapter]{definition}{ o t\label g }{
+    common,defstyle,
+    IfValueTF={#1}{title={\definitionname~\thetcbcounter\ (#1)}}{title=\definitionname~\thetcbcounter},
+    IfBooleanTF={#2}{label=#3}{}}
+  % \newtcbtheorem[auto counter,number within=chapter]{theorem}{\theoremname}{thmstyle}{thm}
+  \DeclareTColorBox[auto counter,number within=chapter]{theorem}{ o t\label g }{
+    common,thmstyle,
+    IfValueTF={#1}{title={\theoremname~\thetcbcounter\ (#1)}}{title=\theoremname~\thetcbcounter},
+    IfBooleanTF={#2}{label=#3}{}}
+  % \newtcbtheorem[auto counter,number within=chapter]{postulate}{\postulatename}{thmstyle}{pos}
+  \DeclareTColorBox[auto counter,number within=chapter]{postulate}{ o t\label g }{
+    common,thmstyle,
+    IfValueTF={#1}{title={\postulatename~\thetcbcounter\ (#1)}}{title=\postulatename~\thetcbcounter},
+    IfBooleanTF={#2}{label=#3}{}}
+  % \newtcbtheorem[auto counter,number within=chapter]{axiom}{\axiomname}{thmstyle}{axi}
+  \DeclareTColorBox[auto counter,number within=chapter]{axiom}{ o t\label g }{
+    common,thmstyle,
+    IfValueTF={#1}{title={\axiomname~\thetcbcounter\ (#1)}}{title=\axiomname~\thetcbcounter},
+    IfBooleanTF={#2}{label=#3}{}}
+  % \newtcbtheorem[auto counter,number within=chapter]{corollary}{\corollaryname}{thmstyle}{cor}
+  \DeclareTColorBox[auto counter,number within=chapter]{corollary}{ o t\label g }{
+    common,thmstyle,
+    IfValueTF={#1}{title={\corollaryname~\thetcbcounter\ (#1)}}{title=\corollaryname~\thetcbcounter},
+    IfBooleanTF={#2}{label=#3}{}}
+  % \newtcbtheorem[auto counter,number within=chapter]{lemma}{\lemmaname}{thmstyle}{lem}
+  \DeclareTColorBox[auto counter,number within=chapter]{lemma}{ o t\label g }{
+    common,thmstyle,
+    IfValueTF={#1}{title={\lemmaname~\thetcbcounter\ (#1)}}{title=\lemmaname~\thetcbcounter},
+    IfBooleanTF={#2}{label=#3}{}}
+  % \newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
+  \DeclareTColorBox[auto counter,number within=chapter]{proposition}{ o t\label g }{
+    common,propstyle,
+    IfValueTF={#1}{title={\propositionname~\thetcbcounter\ (#1)}}{title=\propositionname~\thetcbcounter},
+    IfBooleanTF={#2}{label=#3}{}}
 }{\relax}
+
 
 \ifdefstring{\ELEGANT@mode}{simple}{
   \let\openbox\relax
@@ -580,56 +610,28 @@
   \let\proof\relax
   % \let\proofname\relax
   \let\endproof\relax
-  
+
   % declare a new theorem style
-  \newtheoremstyle{edefstyle}{3pt}{3pt}{\citshape}{-3pt}{
+  \newtheoremstyle{defstyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{main}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  \newtheoremstyle{ethmstyle}{3pt}{3pt}{\citshape}{-3pt}{
+  \newtheoremstyle{thmstyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{second}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
-  \newtheoremstyle{eprostyle}{3pt}{3pt}{\citshape}{-3pt}{
+  \newtheoremstyle{prostyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
 
-  \theoremstyle{edefstyle} % definition style
+  \theoremstyle{defstyle} % definition style
+  \newtheorem{definition}{\definitionname}[chapter]
 
-  \newtheorem{edefinition}{\definitionname}[chapter]
-  \newenvironment{definition}[2]{
-    \ifstrempty{#1}{\edefinition}{\edefinition[#1]}\ifstrempty{#2}{}{\label{def:#2}}}{
-    \endedefinition}
+  \theoremstyle{thmstyle} %theorem style
+  \newtheorem{theorem}{\theoremname}[chapter]
+  \newtheorem{lemma}{\lemmaname}[chapter]
+  \newtheorem{corollary}{\corollaryname}[chapter]
+  \newtheorem{postulate}{\postulatename}[chapter]
+  \newtheorem{axiom}{\axiomname}[chapter]
 
-
-  \theoremstyle{ethmstyle} %theorem style
-  
-  \newtheorem{etheorem}{\theoremname}[chapter]
-  \newenvironment{theorem}[2]{
-    \ignorespaces\ifstrempty{#1}{\etheorem}{\etheorem[#1]}\ifstrempty{#2}{}{\label{thm:#2}}}{
-    \endetheorem}
-
-  \newtheorem{elemma}{\lemmaname}[chapter]
-  \newenvironment{lemma}[2]{
-    \ignorespaces\ifstrempty{#1}{\elemma}{\elemma[#1]}\ifstrempty{#2}{}{\label{lem:#2}}}{
-    \endelemma}
-  
-  \newtheorem{ecorollary}{\corollaryname}[chapter]
-  \newenvironment{corollary}[2]{
-    \ignorespaces\ifstrempty{#1}{\ecorollary}{\ecorollary[#1]}\ifstrempty{#2}{}{\label{cor:#2}}}{
-    \endecorollary}
-  
-  \newtheorem{epostulate}{\postulatename}[chapter]
-  \newenvironment{postulate}[2]{
-    \ifstrempty{#1}{\epostulate}{\epostulate[#1]}\ifstrempty{#2}{}{\label{pos:#2}}}{
-    \endepostulate}
-  
-  \newtheorem{eaxiom}{\axiomname}[chapter]
-  \newenvironment{axiom}[2]{
-    \ifstrempty{#1}{\eaxiom}{\eaxiom[#1]}\ifstrempty{#2}{}{\label{axi:#2}}}{
-    \endaxiom}
-
-  \theoremstyle{eprostyle}
-  \newtheorem{eproposition}{\propositionname}[chapter]
-  \newenvironment{proposition}[2]{
-    \ifstrempty{#1}{\eproposition}{\eproposition[#1]}\ifstrempty{#2}{}{\label{pro:#2}}}{
-    \endeproposition}
+  \theoremstyle{prostyle} % proposition style
+  \newtheorem{proposition}{\propositionname}[chapter]
 }{\relax}
 
 % main（green-def): example exercise problem solution

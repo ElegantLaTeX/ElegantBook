@@ -10,7 +10,10 @@
 \bioinfo{自定义}{信息}
 
 \extrainfo{温柔正确的人总是难以生存，因为这世界既不温柔，也不正确。—— 比企谷八幡}
-
+\setcounter{tocdepth}{3}
+\newcommand{\dollar}{\mbox{\textdollar}}
+\lstset{
+  mathescape = false}
 \logo{logo-blue.png}
 \cover{cover.jpg}
 
@@ -295,11 +298,11 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 \end{table}
 
 如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
-\begin{lstlisting}
+\begin{lstlisting}[tabsize=4]]
 \definecolor{structurecolor}{RGB}{0,0,0}
 \definecolor{main}{RGB}{70,70,70}    
 \definecolor{second}{RGB}{115,45,2}    
-\definecolor{third}{RGB}{0,80,80}   
+\definecolor{third}{RGB}{0,80,80} 
 \end{lstlisting}
 
 \section{封面}
@@ -596,6 +599,7 @@ The content of introduction.
 
 \end{remark}
 
+\part{中文}
 
 \chapter{字体选项}
 字体选项独立成章的原因是，我们希望本模板的用户关心模板使用的字体，知晓自己使用的字体以及遇到字体相关的问题能更加便捷地找到答案。
@@ -711,7 +715,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
 
-\begin{definition}{可积性}{int} 
+\begin{definition}[可积性] \label{def:int} 
 设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
 \begin{equation}
    \label{inter}
@@ -747,7 +751,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 \end{proof}
 
-\begin{theorem}{Fubini 定理}{fubi} 
+\begin{theorem}[Fubini 定理] \label{thm:fubi} 
 （1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
 \begin{equation}
    \label{eq:461}
@@ -763,7 +767,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 我们说一个实变或者复变量的实值或者复值函数是在区间上平方可积的，如果其绝对值的平方在该区间上的积分是有限的。所有在勒贝格积分意义下平方可积的可测函数构成一个希尔伯特空间，也就是所谓的 $L^2$ 空间，几乎处处相等的函数归为同一等价类。形式上，$L^2$ 是平方可积函数的空间和几乎处处为 0 的函数空间的商空间。
 
-\begin{proposition}{最优性原理}{max}
+\begin{proposition}[最优性原理] \label{pro:max}
 如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
 \end{proposition}
 
