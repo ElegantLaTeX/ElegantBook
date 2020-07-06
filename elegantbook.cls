@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/06/03 v4.0.1 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/07/06 v4.0.2 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -53,13 +53,6 @@
 \DeclareVoidOption{normal}{\ekv{device=normal}}
 \DeclareVoidOption{pad}{\ekv{device=pad}}
 
-\DeclareStringOption[numbers]{cite}
-\DeclareVoidOption{numbers}{\ekv{cite=numbers}}
-\DeclareVoidOption{authoryear}{\ekv{cite=authoryear}}
-\DeclareVoidOption{super}{\ekv{cite=super}}
-
-\DeclareStringOption[apalike]{bibstyle}
-
 \DeclareVoidOption{newtx}{\ekv{math=newtx}}
 \DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
 \DeclareVoidOption{cm}{\ekv{math=cm}}
@@ -86,6 +79,10 @@
 \LoadClass[a4paper,oneside]{book}
 
 \RequirePackage{setspace}
+
+\RequirePackage{csquotes}
+
+
 \RequirePackage{hyperref}
 \hypersetup{
   breaklinks,
@@ -167,7 +164,9 @@
   \fi
   \AfterEndPreamble{
     % \renewcommand{\itshape}{\kaishu}
-    \setlength\parindent{2\ccwd}}}{\relax}
+    \setlength\parindent{2\ccwd}}
+}{\relax}
+
 
 \ifcsname kaishu\endcsname
   \newcommand{\citshape}{\kaishu}
@@ -295,9 +294,6 @@
 
 \newcommand{\question}[1]{{\par\citshape #1}\\[0.2ex]}
 
-\ifdefstring{\ELEGANT@lang}{cn}{\relax}{
-  \RequirePackage[\ELEGANT@cite,sort&compress]{natbib}}
-
 \RequirePackage{enumerate}
 % list/itemize/enumerate setting
 \RequirePackage[shortlabels,inline]{enumitem}
@@ -338,6 +334,18 @@
 \RequirePackage{fancyvrb}
 \RequirePackage{makecell,lipsum,hologo}
 %%中文结构名字
+
+\ifdefstring{\ELEGANT@lang}{cn}{
+  \RequirePackage[
+    backend=biber,
+    style=gb7714-2015,
+    sorting=gb7714-2015]{biblatex}}{
+  \RequirePackage[
+    backend=biber,
+    style=numeric-comp,
+    sorting=none]{biblatex}
+}
+
 \ifdefstring{\ELEGANT@lang}{cn}{
   \renewcommand{\contentsname}{目录}
   \renewcommand{\figurename}{图}
@@ -358,12 +366,6 @@
   \newcommand{\institutename}{\citshape 组织：}
   \newcommand{\datename}{\citshape 时间：}
   \newcommand{\versionname}{\citshape 版本：}
-  \RequirePackage{gbt7714}
-  \ifdefstring{\ELEGANT@cite}{authoryear}{
-    \bibliographystyle{gbt7714-author-year}}{
-    \bibliographystyle{gbt7714-numerical}}
-  \ifdefstring{\ELEGANT@cite}{numbers}{
-    \citestyle{numbers}}{\relax}
   \newcommand{\notename}{笔记}
   \renewcommand*{\proofname}{证明}
   \newcommand{\problemname}{例题}
@@ -385,7 +387,8 @@
   \newcommand{\problemsetname}{习题}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{{\citshape #1}：#2}}
   \newcommand{\updatename}{更新：}
-  \newcommand{\historyname}{版本更新历史}}{\relax}
+  \newcommand{\historyname}{版本更新历史}
+  }{\relax}
 \ifdefstring{\ELEGANT@lang}{en}{
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
@@ -396,7 +399,6 @@
   \newcommand{\institutename}{\textbf{Institute: }}
   \newcommand{\datename}{\textbf{Date: }}
   \newcommand{\versionname}{\textbf{Version: }}
-  \bibliographystyle{\ELEGANT@bibstyle}
   \newcommand{\notename}{Note}
   \newcommand{\proofname}{Proof}
   \newcommand{\problemname}{Problem}
@@ -431,7 +433,6 @@
   \newcommand{\institutename}{\textbf{Istituto: }}
   \newcommand{\datename}{\textbf{Data: }}
   \newcommand{\versionname}{\textbf{Versione: }}
-  \bibliographystyle{\ELEGANT@bibstyle}
   \newcommand{\notename}{Nota}
   \newcommand{\proofname}{Dimostrazione}
   \newcommand{\problemname}{Problema}
@@ -456,8 +457,6 @@
   \newcommand{\historyname}{Cronologia delle versioni}
 }{\relax}
 
-\setlength{\bibsep}{0.0pt}
-\def\bibfont{\footnotesize}
 
 \RequirePackage{xpatch}
 \xpatchcmd{\part}{
@@ -513,9 +512,7 @@
 
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt,bbding}
-
 \RequirePackage[many]{tcolorbox}
-
 % \newlength{\normalparindent}
 % \setlength{\normalparindent}{\parindent}
 \ifdefstring{\ELEGANT@mode}{fancy}{
@@ -565,7 +562,6 @@
       overlay unbroken and last={
         \node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {
           \textcolor{third}{$\spadesuit$}};}},}
-
   % \newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
   \DeclareTColorBox[auto counter,number within=chapter]{definition}{ o t\label g }{
     common,defstyle,
@@ -600,8 +596,7 @@
   \DeclareTColorBox[auto counter,number within=chapter]{proposition}{ o t\label g }{
     common,propstyle,
     IfValueTF={#1}{title={\propositionname~\thetcbcounter\ (#1)}}{title=\propositionname~\thetcbcounter},
-    IfBooleanTF={#2}{label=#3}{}}
-}{\relax}
+    IfBooleanTF={#2}{label=#3}{}}}{\relax}
 
 
 \ifdefstring{\ELEGANT@mode}{simple}{
@@ -887,3 +882,5 @@
 \newenvironment{change}{
   \begin{enumerate}[label=\small\protect\circled{\arabic*}]}{
   \end{enumerate}}
+
+\addbibresource[location=local]{reference.bib}

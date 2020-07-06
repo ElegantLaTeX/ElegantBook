@@ -1,12 +1,12 @@
-\documentclass[11pt,fancy,authoryear]{elegantbook}
+\documentclass[11pt,fancy,twoside]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{June 6, 2020}
-\version{4.0.1}
+\date{July 6, 2020}
+\version{4.0.2}
 \bioinfo{Bio}{Information}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
@@ -401,7 +401,7 @@ This template uses \lstinline{tikz} to customize the list environments, with \ls
 
 \section{Bibliography}
 
-This template uses \hologo{BibTeX} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect. ~\cite{en1} use data from a major peer-to-peer lending marketplace in China to study whether female and male investors evaluate loan performance differently. 
+This template uses \hologo{BibTeX} to generate the bibliography, the default bibliography style is \lstinline{aer}. Let's take a glance at the citation effect. ~\cite{en1} use data from a major peer-to-peer lending \cite{en3} marketplace in China to study whether female and male investors evaluate loan performance differently \parencite{en2}. 
 
 If you want to use \hologo{BibTeX}, you must create a file named \lstinline{reference.bib}, add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, then cite the bibkey in the \lstinline{tex} file. The Bib\TeX{} will automatically generate the bibliography for the reference you cited. If you want to add some noncited reference to the bibliography, you can use 
 \begin{lstlisting}[frame=single]
@@ -750,7 +750,8 @@ We revised our templates now and then. This section shows the version story of E
 \end{change}
 
 \nocite{en2,en3}
-\bibliography{reference}
+\printbibliography
+
 \appendix
 
 \chapter{Mathematical Tools}
