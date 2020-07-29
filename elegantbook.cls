@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/07/06 v4.0.2 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/07/29 v4.0.3 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -60,8 +60,10 @@
 \DeclareVoidOption{margintrue}{\ekv{marginpar=margintrue}}
 \DeclareVoidOption{marginfalse}{\ekv{marginpar=marginfalse}}
 
+
 \DeclareVoidOption{onecol}{\ekv{toc=onecol}}
 \DeclareVoidOption{twocol}{\ekv{toc=twocol}}
+
 
 % ----- Math option -----
 \newcommand\mailto[1]{\href{mailto:#1}{\nolinkurl{#1}}}
@@ -310,14 +312,7 @@
   \setlength{\footnotesep}{12pt}
 }
 
-\ifdefstring{\ELEGANT@toc}{twocol}{
-\renewcommand{\tableofcontents}{%
-\setlength{\columnsep}{2em}
-%\setlength{\columnseprule}{.8pt}
-\begin{multicols}{2}[\chapter*{\contentsname}]%
-  \@starttoc{toc}%
-\end{multicols}}
-}{\relax}
+
 
 
 %% 常用宏包
@@ -884,3 +879,21 @@
   \end{enumerate}}
 
 \addbibresource[location=local]{reference.bib}
+
+\renewcommand\tableofcontents{%
+  \hypersetup{linktoc=all, linkcolor=black}
+    \if@twocolumn
+      \@restonecoltrue\onecolumn
+    \else
+      \@restonecolfalse
+    \fi
+    \chapter*{\contentsname
+        \@mkboth{%
+           \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \ifdefstring{\ELEGANT@toc}{twocol}{
+      \setlength{\columnsep}{2em}
+      \begin{multicols}{2}%
+        \@starttoc{toc}
+      \end{multicols}}{
+      \@starttoc{toc}}
+    \if@restonecol\twocolumn\fi}
