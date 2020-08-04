@@ -13,13 +13,9 @@ ElegantBook is designed for writing books, created by [Dongsheng Deng](https://d
 
 ## Important Notes
 
-**Version Note**: Users for 2.x, please refer to [Version Convert](https://github.com/ElegantLaTeX/ElegantBook/wiki/convert). We strongly recommend that you use the latest version.
-
-**Important Info**: For some reasons, __unauthorial__ pull requests are **UNACCEPTABLE** since May 20, 2019. For those who want to help revise the templates, submit issues or clone to your own repository to modify under the LPPL-1.3c.
+For some reasons, __unauthorized__ pull requests are **UNACCEPTABLE** since May 20, 2019. For those who want to help revise the templates, submit issues or clone to your own repository to modify under the LPPL-1.3c.
 
 ## Acknowledgement
-
-_News_: _The number of stars on Github for ElegantBook reached 100 on May 20, 2019_.
 
 Thank ChinaTeX and [LaTeX Studio](http://www.latexstudio.net/) for their promotion. LaTeX studio offers tons of valuable posts and templates for discovery. It is the most comprehensive website on LaTeX in China. If you like our template, star on Github for supporting us.
 

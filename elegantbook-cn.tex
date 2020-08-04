@@ -5,8 +5,8 @@
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{July 29, 2020}
-\version{4.0.3}
+\date{Aug. 4, 2020}
+\version{4.0.5}
 \bioinfo{自定义}{信息}
 
 \extrainfo{温柔正确的人总是难以生存，因为这世界既不温柔，也不正确。—— 比企谷八幡}
@@ -16,10 +16,19 @@
   mathescape = false}
 \logo{logo-blue.png}
 \cover{cover.jpg}
+\DeclareCaptionLabelFormat{nospace}{#1#2}
+\captionsetup[table]{labelfont=bf, labelsep=period}
+\renewcommand{\thetable}{L~\arabic{table}}
 
 % 本文档命令
 \usepackage{array}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+\usepackage[lined,dotocloa,algochapter]{algorithm2e}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
 
 \begin{document}
 
@@ -28,6 +37,7 @@
 
 \chapter*{特别声明}
 \markboth{Introduction}{前言}
+
 
 在过去的 2019 年，\href{https://elegantlatex.org/}{Elegant\LaTeX{}} 系列模板均逐步上线 \href{https://github.com/ElegantLaTeX}{GitHub}、\href{https://ctan.org/pkg/elegantbook}{CTAN}、\href{https://www.overleaf.com/latex/templates/elegantbook-template/zpsrbmdsxrgy}{Overleaf} 以及 \href{https://gitee.com/ElegantLaTeX/ElegantBook}{Gitee} 上。截止到 2019 年底，ElegantNote、ElegantBook、ElegantPaper 三个模板在 GitHub 上的收藏数达到了 194、333 和 220，从 2019 年 5 月开启捐赠之后收到了用户 33 笔合计超过 1500 元的捐赠，用户群人数也超过了 400 人。这些数字的背后，反映出 Elegant\LaTeX{} 越来越受用户的喜爱，在此非常感谢大家。
 
@@ -54,7 +64,35 @@ February 10, 2020
 \mainmatter
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
+\begin{algorithm}\label{alg:test}
+  \Input{A bitmap $I$ of size $w \times l$}
+  \Output{A partition of the bitmap}
+  \BlankLine
+  \emph{special treatment of the first line}\;
+  \For{$i \leftarrow 2$ \KwTo $l$}{
+    \emph{special treatment of the first element of line $i$}\;
+    \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
+      $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
+      $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
+      $\This \leftarrow \FindCompress{$I[i,j]$}$\;
+      \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
+        \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
+        \lElse{$\Union{\This,\Left}$}
+      }
+      \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
+        \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
+        \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
+        \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
+      }
+    }
+    \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
+  }
+  \caption{disjoint decomposition}\label{algo_disjdecomp}
+\end{algorithm}
+
+\ref{alg:test}
+
+Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。 \ref{sec:update}
 
 我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
@@ -70,7 +108,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \end{itemize}
 
 
-\section{ElegantBook 更新说明}
+\section{ElegantBook 更新说明}\label{sec:update}
 
 此次为 3.x 最后一个版本，在 3.10 基础上，主要为了解决 \TeX{} Live 2020 中编译错误，具体内容有：
 
@@ -220,7 +258,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
   \label{tab:donation}%
 \end{table}%
 
-另外，为了表示感谢，我们制作了捐赠纪念证，欢迎大家来信告知邮箱以及姓名（艺名），我们将通过邮件发送电子版纪念证。
+另外，为了表示感谢，我们制作了捐赠纪念证，欢迎大家来信告知邮箱以及姓名（艺名），我们将通过邮件发送电子版纪念证。\ref{tab:donation} 是捐赠名单。
 
 \begin{figure}[!htbp]
 \centering
@@ -599,12 +637,14 @@ The content of introduction.
 
 \end{remark}
 
-\part{中文}
+\part{模板设置}
 
 \chapter{字体选项}
 字体选项独立成章的原因是，我们希望本模板的用户关心模板使用的字体，知晓自己使用的字体以及遇到字体相关的问题能更加便捷地找到答案。
 
 \textcolor{red}{\bfseries 重要提示}：从 3.10 版本更新之后，沿用至今的 newtx 系列字体被重新更改为 cm 字体。并且新增中文字体（\lstinline{chinesefont}）选项。
+
+OpenType 字体设置参考 Stone-Zeng \href{https://stone-zeng.github.io/2018-08-08-use-opentype-fonts/}{在 \LaTeX{} 中使用 OpenType 字体}。
 
 \section{数学字体选项}
 
@@ -740,7 +780,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
    \label{ex:1}
    I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
 \end{equation}
-是 $\mathcal{R}^1$ 上的连续函数。
+是 $\mathcal{R}^1$ 上的连续函数。 
 \end{exercise}
 
 \begin{solution}
@@ -760,6 +800,8 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 （2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\ref{eq:461} 成立。
 \end{theorem}
+
+\ref{thm:fubi}
 
 \begin{note}
 在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。

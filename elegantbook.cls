@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/07/29 v4.0.3 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/08/04 v4.0.5 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -187,7 +187,31 @@
   \newcommand{\cfs}{\normalfont}
 \fi
 
-\RequirePackage{newtxtext}
+
+\usepackage{fontspec}
+\setmainfont{TeX Gyre TermesX}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Latin Modern Mono}
+
+% Libertinus Serif/Libertinus Sans
+
+% TeX Gyre TermesX/TeX Gyre Heros
+
+\defaultfontfeatures[TeX Gyre TermesX,TeX Gyre Heros]{
+  Extension      = .otf,
+  UprightFont    = *-regular,
+  BoldFont       = *-bold,
+  ItalicFont     = *-italic,
+  BoldItalicFont = *-bolditalic
+}
+\defaultfontfeatures[Latin Modern Mono]{
+  Extension      = .otf,
+  UprightFont    = *-regular,
+  BoldFont       = *-bold,
+  ItalicFont     = *-oblique,
+  BoldItalicFont = *-boldoblique
+}
+
 \RequirePackage{anyfontsize}
 \ifdefstring{\ELEGANT@math}{newtx}{
   \RequirePackage{newtxmath}
@@ -211,7 +235,7 @@
 % ----- Handle Colors -----
 %% 章节以及页脚图形
 
-\RequirePackage{xcolor}
+\RequirePackage[table]{xcolor}
 \ifdefstring{\ELEGANT@color}{green}{
   \definecolor{structurecolor}{RGB}{0,120,2}%
   \definecolor{main}{RGB}{0,120,2}%
@@ -325,7 +349,7 @@
 % \renewcommand{\qed}{\hfill\ensuremath{\square}}
 \RequirePackage{booktabs}
 \RequirePackage{multicol,multirow}
-\RequirePackage{xcolor}
+
 \RequirePackage{fancyvrb}
 \RequirePackage{makecell,lipsum,hologo}
 %%中文结构名字
@@ -350,13 +374,13 @@
   \renewcommand{\listfigurename}{插图目录}
   \renewcommand{\listtablename}{表格目录}
   \renewcommand{\bibname}{参考文献}
-  \renewcommand{\appendixname}{附录~\thechapter}
+  \renewcommand{\appendixname}{附录~\thechapter\;}
   \renewcommand{\indexname}{索\hspace{2em}引}
   \newcommand\figref[1]{\textbf{图}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
   \ifdefstring{\ELEGANT@scheme}{chinese}{
-    \renewcommand{\chaptername}{第~\zhnumber{\arabic{chapter}}~章}}{
-    \renewcommand{\chaptername}{第~\thechapter{}~章}}
+    \renewcommand{\chaptername}{第\zhnumber{\arabic{chapter}}章}}{
+    \renewcommand{\chaptername}{第 \thechapter{} 章}}
   \newcommand{\authorname}{\citshape 作者：}
   \newcommand{\institutename}{\citshape 组织：}
   \newcommand{\datename}{\citshape 时间：}
@@ -388,8 +412,6 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
-  \renewcommand{\partname}{\color{structurecolor} Part}
-  \renewcommand{\chaptername}{Chapter \thechapter}
   \newcommand{\authorname}{\textbf{Author: }}
   \newcommand{\institutename}{\textbf{Institute: }}
   \newcommand{\datename}{\textbf{Date: }}
@@ -419,11 +441,13 @@
 }{\relax}
 
 \ifdefstring{\ELEGANT@lang}{it}{
+  % \RequirePackage[utf8]{inputenc}
   \RequirePackage[italian]{babel}
+  % \RequirePackage[T1]{fontenc}
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Tabella}~\ref{#1}}
-  \renewcommand{\chaptername}{Capitolo \arabic{chapter}}
+  % \renewcommand{\chaptername}{Capitolo \thechapter}
   \newcommand{\authorname}{\textbf{Autore: }}
   \newcommand{\institutename}{\textbf{Istituto: }}
   \newcommand{\datename}{\textbf{Data: }}
@@ -453,18 +477,10 @@
 }{\relax}
 
 
-\RequirePackage{xpatch}
-\xpatchcmd{\part}{
-  \thispagestyle{plain}}{
-  \thispagestyle{plain}}{}{}
-\xpatchcmd{\@endpart}{
-  \vfil\newpage}{
-  \vfil\newpage}{}{}
-
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
-\usepackage{tikz} %% load tikz without tikz
-\usetikzlibrary{backgrounds,calc,shadows}
+\RequirePackage{tikz} %% load tikz without tikz
+\usetikzlibrary{backgrounds,calc,shadows,positioning,fit}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
 %  https://tex.stackexchange.com/questions/7032/good-way-to-make-textcircled-numbers
@@ -487,10 +503,10 @@
 \RequirePackage[toc,page,title,titletoc]{appendix}
 
 \setcounter{secnumdepth}{5}
-
-\titleformat{\chapter}[\style]{\bfseries}
-{\filcenter\LARGE\enspace\bfseries{\color{structurecolor}\IfAppendix{\appendixname}{\chaptername}\enspace}}{1pt}{\bfseries\color{structurecolor}\LARGE\filcenter}[]
-
+\newcommand{\chapterextra}{\ifdefstring{\ELEGANT@lang}{cn}{}{\thechapter\enspace}}
+\titleformat{\chapter}[\style]{\bfseries}{
+  \filcenter\LARGE\enspace\bfseries{\color{structurecolor} \chaptertitlename\ \chapterextra}}{1pt}{
+  \LARGE\bfseries\color{structurecolor}\filcenter}[]
 \titleformat{\section}[hang]{\bfseries}{
   \Large\bfseries{\color{structurecolor}\thesection}\enspace}{1pt}{%
   \color{structurecolor}\Large\bfseries\filright}
@@ -704,7 +720,7 @@
   \end{tcolorbox}}
 
 \RequirePackage{adforn}
-\newenvironment{problemset}[1][\chaptername~\problemsetname]{
+\newenvironment{problemset}[1][\chaptername~\chapterextra\problemsetname]{
   \begin{center}
     \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\;\problemsetname}{\problemsetname}}
     \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
@@ -820,7 +836,7 @@
 
 
 \RequirePackage{listings}
-\renewcommand{\ttdefault}{cmtt}
+% \renewcommand{\ttdefault}{cmtt}
 \lstdefinestyle{mystyle}{
   basicstyle=%
     \ttfamily
@@ -897,3 +913,41 @@
       \end{multicols}}{
       \@starttoc{toc}}
     \if@restonecol\twocolumn\fi}
+
+
+\labelformat{section}{Section~#1}
+\labelformat{theorem}{定理~#1}
+\labelformat{algorithm}{算法~#1}
+\labelformat{exercise}{习题~#1}
+
+\RequirePackage{pagecolor}
+\def\@part[#1]#2{%
+    \newcommand*{\mylmargin}{\dimexpr\oddsidemargin+1in\relax}
+    \ifnum \c@secnumdepth >-2\relax
+      \refstepcounter{part}%
+      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
+    \else
+      \addcontentsline{toc}{part}{#1}%
+    \fi
+    \markboth{}{}%
+    {
+    \centering
+    \newpagecolor{structurecolor!10}
+    \interlinepenalty \@M
+    \normalfont
+    \vskip 30\p@
+    \hspace{-\the\mylmargin}
+    \fboxsep0pt
+    \colorbox{white}{
+      \begin{minipage}[c]{1.0\paperwidth}
+        \centering
+        \parbox{0.7\textwidth}{
+          \centering
+          \vspace*{1.5\baselineskip}
+          \Huge\scshape\bfseries \textcolor{structurecolor}{\thepart.\; #2}
+          \vspace*{0.7\baselineskip}}
+      \end{minipage}}}
+  \@endpart
+  \restorepagecolor}
+
+

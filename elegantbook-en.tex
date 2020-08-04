@@ -5,8 +5,8 @@
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{July 29, 2020}
-\version{4.0.3}
+\date{Aug. 4, 2020}
+\version{4.0.5}
 \bioinfo{Bio}{Information}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
@@ -14,6 +14,13 @@
 \logo{logo-blue.png}
 \cover{cover.jpg}
 
+\usepackage[symbols,nogroupskip,sort=none]{glossaries-extra}
+
+\glsxtrnewsymbol[description={position}]{x}{\ensuremath{x}}
+\glsxtrnewsymbol[description={velocity force it name position Subtraction Operator force it name position Subtraction Operator force it name position Subtraction Operator force it name position Subtraction Operator}]{v}{\ensuremath{v}}
+\glsxtrnewsymbol[description={acceleration}]{a}{\ensuremath{a}}
+\glsxtrnewsymbol[description={time}]{t}{\ensuremath{t}}
+\glsxtrnewsymbol[description={force it name position Subtraction Operator}]{F}{\ensuremath{F}}
 
   
 \begin{document}
@@ -24,8 +31,11 @@
 \tableofcontents
 
 \mainmatter
+\printunsrtglossary[type=symbols,style=long]
+
+
 \chapter{Elegant\LaTeX{} Templates}
-Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegant, user-friendly templates. Currently, the Elegant\LaTeX{} is composed of \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}, \href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}, \href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper}, designed for typesetting notes, books, and working papers respectively. Latest releases are strongly recommended! This guide is aimed at briefly introducing the 101 of this template. For any other question, suggestion or comment, feel free to contact us on GitHub \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} or email us at \email{elegantlatex2e@gmail.com}.
+Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegant, user-friendly templates. Currently, the Elegant\LaTeX{} is composed of \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}, \href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}, \href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper}, designed for typesetting notes, books, and working papers respectively. Latest releases are strongly recommended! This guide is aimed at briefly introducing the 101 of this template. For any other question, suggestion or comment, feel free to contact us on GitHub \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} or email us at \email{elegantlatex2e@gmail.com}. $\gls{F}$
 
 Contact Infos:
 \begin{itemize}
@@ -176,13 +186,12 @@ BTW, we provide Certificate of Donation for those who donated, tippers please le
   \includegraphics[width=0.7\textwidth]{cert.pdf}
 \end{figure}
 
-\part{Hello world}
-\chapter{ElegantBook Settings}
+\part{HELLO WORLD}
 
 This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2019, either \hologo{pdfLaTeX} or \lstinline{XeLaTeX} works fine. \lstinline{XeLaTeX} is preferred for Chinese articles.
 
 \section{Languages}
-We defined one option named \lstinline{lang} which has three alternative values, \lstinline{lang=en} (default) , \lstinline{lang=cn} and \lstinline{lang=it}\footnote{Provided by \href{https://github.com/VincentMVV}{VincentMVV}, detail in \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{GitHub: Italian translation}.}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
+We defined one option named \lstinline{lang} which has three alternative values, \lstinline{lang=en} (default) , \lstinline{lang=cn} and \lstinline{lang=it}\footnote{Provided by \href{https://github.com/VincentMVV}{VincentMVV}, detail in \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{GitHub: Italian translation}.}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as {\sffamily This is sffamily}
 \begin{lstlisting}
 \documentclass[en]{elegantbook} 
 \documentclass[lang=en]{elegantbook}

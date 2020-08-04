@@ -13,13 +13,11 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Dongsheng Deng](h
 
 ## 重要提示
 
-**版本提醒：** 由于新版本进行了重构，并且 3.06 版本对于封面进行了改版，3.06 以后的版本并不兼容之前版本，如果你想把之前版本的文件转为 3.06 以后的版本，请查看[跨版本转换](https://github.com/ElegantLaTeX/ElegantBook/wiki/convert)。我们强烈建议你使用最新版。
-
-**重要提示**：ElegantLaTeX 项目 **不接受** 任何非作者预约提交（pull requests）！
+**重要提示**：ElegantLaTeX 项目 **不接受** 任何非预授权的提交（pull requests）！
 
 ## 致谢
 
-2019 年 5 月 20 日，ElegantBook 模板在 Github 上的 Star 数达到了 100，这对于 ElegantLaTeX 系列模板是一个非常重要的里程碑！在此特别感谢 ChinaTeX 以及 [LaTeX 工作室](http://www.latexstudio.net/)对于本系列模板的大力宣传与推广。LaTeX 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏。这也是我所见到的国内最全面的 LaTeX 相关的网站。
+特别感谢 ChinaTeX 以及 [LaTeX 工作室](http://www.latexstudio.net/)对于本系列模板的大力宣传与推广。LaTeX 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏。这也是我所见到的国内最全面的 LaTeX 相关的网站。
 
 如果你喜欢我们的模板，你可以在 Github 上收藏我们的模板。
 
