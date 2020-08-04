@@ -1,4 +1,4 @@
-\documentclass[11pt,fancy,twocol]{elegantbook}
+\documentclass[11pt,fancy,twocol,twoside]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
@@ -13,6 +13,8 @@
 
 \logo{logo-blue.png}
 \cover{cover.jpg}
+\usepackage{imakeidx}
+\makeindex
 
 \usepackage[symbols,nogroupskip,sort=none]{glossaries-extra}
 
@@ -33,7 +35,7 @@
 \mainmatter
 \printunsrtglossary[type=symbols,style=long]
 
-
+\part{HELLO WORLD}
 \chapter{Elegant\LaTeX{} Templates}
 Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegant, user-friendly templates. Currently, the Elegant\LaTeX{} is composed of \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}, \href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}, \href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper}, designed for typesetting notes, books, and working papers respectively. Latest releases are strongly recommended! This guide is aimed at briefly introducing the 101 of this template. For any other question, suggestion or comment, feel free to contact us on GitHub \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} or email us at \email{elegantlatex2e@gmail.com}. $\gls{F}$
 
@@ -186,7 +188,7 @@ BTW, we provide Certificate of Donation for those who donated, tippers please le
   \includegraphics[width=0.7\textwidth]{cert.pdf}
 \end{figure}
 
-\part{HELLO WORLD}
+
 
 This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2019, either \hologo{pdfLaTeX} or \lstinline{XeLaTeX} works fine. \lstinline{XeLaTeX} is preferred for Chinese articles.
 
@@ -482,7 +484,7 @@ You can change the title of this environment by modifying the optional argument 
 \end{introduction}
 \end{lstlisting}
 
-\section{Problem Set}
+%\section{Problem Set}
 The environment \lstinline{problemset} is used at the end of each chapter to display corresponding exercises. Just type in the following sentences:
 \begin{lstlisting}
 \begin{problemset}
@@ -578,7 +580,7 @@ Since the template uses \lstinline{newtx}, please pay attention to the hyphens. 
 The corresponding code is: 
 \begin{lstlisting}
 \begin{equation}
-\int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
+  \int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
 \end{equation}
 \end{lstlisting}
 
@@ -658,6 +660,10 @@ Regression analysis is a powerful statistical method that allows you to examine 
 
 Let's continue using our application training example. In this case, we'd want to measure the historical levels of satisfaction with the events from the past three years or so, as well as any information possible in regards to the independent variables. 
 
+\section{Second section}
+This second section\index{S!section} may include some special word, 
+and expand the ones already used\index{keywords!used}.
+
 
 \begin{table}[htbp]
   \small
@@ -693,6 +699,7 @@ Let's continue using our application training example. In this case, we'd want t
   \item Distributed storage and search.
 \end{itemize}
 
+%\problemset
 \begin{problemset}
   \item Solve the equation $5(- 3x - 2) - (x - 3) = -4(4x + 5) + 13$.
   \item Find the distance between the points $(-4 , -5)$ and $(-1 , -1)$.
@@ -775,5 +782,7 @@ This appendix covers some of the basic mathematics used in econometrics. We brie
 \begin{equation}
 \sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
 \end{equation}
+
+\printindex
 
 \end{document}

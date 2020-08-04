@@ -109,6 +109,7 @@
   \geometry{
     a4paper,
     top=25.4mm, bottom=25.4mm,
+    left=20mm, right=20mm,
     headheight=2.17cm,
     headsep=4mm,
     footskip=12mm
@@ -136,6 +137,7 @@
 }{\relax}
 
 \setcounter{tocdepth}{1}
+\renewcommand{\baselinestretch}{1.2}
 
 \PassOptionsToPackage{no-math}{fontspec}
 \RequirePackage{iftex}
@@ -338,10 +340,6 @@
 
 
 
-
-%% 常用宏包
-\linespread{1.3}
-
 \RequirePackage{graphicx}
 %\RequirePackage{enumerate}
 \RequirePackage{amsmath,mathrsfs,amsfonts,amssymb}
@@ -366,6 +364,7 @@
 }
 
 \ifdefstring{\ELEGANT@lang}{cn}{
+  \renewcommand{\baselinestretch}{1.3}
   \renewcommand{\contentsname}{目录}
   \renewcommand{\figurename}{图}
   \renewcommand{\tablename}{表}
@@ -387,7 +386,6 @@
   \newcommand{\versionname}{\citshape 版本：}
   \newcommand{\notename}{笔记}
   \renewcommand*{\proofname}{证明}
-  \newcommand{\problemname}{例题}
   \newcommand{\definitionname}{定义}
   \newcommand{\theoremname}{定理}
   \newcommand{\axiomname}{公理}
@@ -395,15 +393,16 @@
   \newcommand{\lemmaname}{引理}
   \newcommand{\propositionname}{命题}
   \newcommand{\corollaryname}{推论}
-  \newcommand{\examplename}{例}
-  \newcommand{\exercisename}{练习}
+  \newcommand{\examplename}{例题} %
+  \newcommand{\instancename}{示例} %
+  \newcommand{\problemname}{问题} % 问题
+  \newcommand{\exercisename}{练习} % 练习=习题
   \newcommand{\remarkname}{注}
   \newcommand{\assumptionname}{假设}
   \newcommand{\conclusionname}{结论}
   \newcommand{\solutionname}{解}
   \newcommand{\propertyname}{性质}
   \newcommand{\introductionname}{内容提要}
-  \newcommand{\problemsetname}{习题}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{{\citshape #1}：#2}}
   \newcommand{\updatename}{更新：}
   \newcommand{\historyname}{版本更新历史}
@@ -434,7 +433,7 @@
   \newcommand{\solutionname}{Solution}
   \newcommand{\propertyname}{Property}
   \newcommand{\introductionname}{Introduction}
-  \newcommand{\problemsetname}{Exercise}
+  % \newcommand{\problemsetname}{Exercise}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Updates:}
   \newcommand{\historyname}{Version History}
@@ -447,7 +446,6 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Tabella}~\ref{#1}}
-  % \renewcommand{\chaptername}{Capitolo \thechapter}
   \newcommand{\authorname}{\textbf{Autore: }}
   \newcommand{\institutename}{\textbf{Istituto: }}
   \newcommand{\datename}{\textbf{Data: }}
@@ -470,7 +468,6 @@
   \newcommand{\solutionname}{Soluzione}
   \newcommand{\propertyname}{Proprietà}
   \newcommand{\introductionname}{Introduzione}
-  \newcommand{\problemsetname}{Esercizio}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Aggiornamenti:}
   \newcommand{\historyname}{Cronologia delle versioni}
@@ -720,9 +717,12 @@
   \end{tcolorbox}}
 
 \RequirePackage{adforn}
-\newenvironment{problemset}[1][\chaptername~\chapterextra\problemsetname]{
+
+\newenvironment{problemset}[1][\chaptername~\chapterextra\exercisename]{
   \begin{center}
-    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\;\problemsetname}{\problemsetname}}
+    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\;\exercisename}{\exercisename}}
+    % \markboth{#1}{\rightmark}
+    \markright{#1}
     \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
   \end{center}
   \begin{enumerate}}{
@@ -759,9 +759,9 @@
 % \renewcommand{\headrule}{}
 \fancypagestyle{plain}{\renewcommand{\headrulewidth}{0pt}\fancyhf{}\renewcommand{\headrule}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\, #1}{} }
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername \, #1\,}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername~\chapterextra{}#1}{}}
 
-\renewcommand{\baselinestretch}{1.35} 
+
 
 \renewcommand*{\maketitle}{%
 \hypersetup{pageanchor=false}
@@ -871,8 +871,9 @@
 % add the list of change history
 \newcommand{\dateinfoline}[2]{
   \noindent\makebox[0pt][r]{%
-  \makebox[-5em][r]{%
-    \textbf{\textcolor{structurecolor}{#1}}}\quad}%
+  \makebox[-3em][r]{%
+    \small
+    \textbf{\textcolor{structurecolor}{#1}}}\;\;}%
   {\citshape\updatename\ignorespaces#2}}
 
 \newcommand{\datechange}[2]{%
@@ -920,7 +921,7 @@
 \labelformat{algorithm}{算法~#1}
 \labelformat{exercise}{习题~#1}
 
-\RequirePackage{pagecolor}
+\RequirePackage{pagecolor,afterpage}
 \def\@part[#1]#2{%
     \newcommand*{\mylmargin}{\dimexpr\oddsidemargin+1in\relax}
     \ifnum \c@secnumdepth >-2\relax
@@ -928,11 +929,10 @@
       \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
     \else
       \addcontentsline{toc}{part}{#1}%
-    \fi
-    \markboth{}{}%
+    \fi%
     {
     \centering
-    \newpagecolor{structurecolor!10}
+    \newpagecolor{structurecolor!10}\afterpage{\restorepagecolor}
     \interlinepenalty \@M
     \normalfont
     \vskip 30\p@
@@ -947,7 +947,11 @@
           \Huge\scshape\bfseries \textcolor{structurecolor}{\thepart.\; #2}
           \vspace*{0.7\baselineskip}}
       \end{minipage}}}
-  \@endpart
-  \restorepagecolor}
+  \@endpart}
 
 
+\renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}%
+\thispagestyle{empty}%
+\newpage%
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
