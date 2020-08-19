@@ -23,7 +23,7 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Dongsheng Deng](h
 
 ## 捐赠
 
-感谢大家对于 ElegantLaTeX 项目的捐赠，由于捐赠名单过长，此处不单列，完整的捐赠名单见[此处](https://github.com/ElegantLaTeX/ElegantBook/donation-CN.md)，我们为每个捐赠人提供了捐赠纪念，欢迎来信获取。
+感谢大家对于 ElegantLaTeX 项目的捐赠，由于捐赠名单过长，此处不单列，完整的捐赠名单见[此处](donation-CN.md)，我们为每个捐赠人提供了捐赠纪念，欢迎来信获取。
 
 ## 协议
 
