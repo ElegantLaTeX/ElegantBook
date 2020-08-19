@@ -21,7 +21,7 @@ Thank ChinaTeX and [LaTeX Studio](http://www.latexstudio.net/) for their promoti
 
 ## Donation
 
-Thank all the donators for your generous donation to the ElegantLaTeX Program, the full list of donators can be found at [here](https://github.com/ElegantLaTeX/ElegantBook/donation.md).
+Thank all the donators for your generous donation to the ElegantLaTeX Program, the full list of donators can be found at [here](donation.md).
 
 
 ## License
