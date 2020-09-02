@@ -473,6 +473,114 @@
   \newcommand{\historyname}{Cronologia delle versioni}
 }{\relax}
 
+\ifdefstring{\ELEGANT@lang}{hu}{
+  \RequirePackage[magyar]{babel}
+  \setlength\parindent{2em}
+  \newcommand\figref[1]{\ref{#1}~\textbf{Ábra}}
+  \newcommand\tabref[1]{\ref{#1}~\textbf{Táblázat}}
+  \renewcommand{\chaptername}{\thechapter ~ fejezet}
+  \newcommand{\authorname}{\textbf{Szerző: }}
+  \newcommand{\institutename}{\textbf{Intézmény: }}
+  \newcommand{\datename}{\textbf{Dátum: }}
+  \newcommand{\versionname}{\textbf{Verziószám: }}
+  \bibliographystyle{\ELEGANT@bibstyle}
+  \newcommand{\notename}{Jegyzet}
+  \newcommand{\proofname}{Bizonyítás}
+  \newcommand{\problemname}{Probléma}
+  \newcommand{\definitionname}{Definíció}
+  \newcommand{\theoremname}{Tétel}
+  \newcommand{\axiomname}{Axióma}
+  \newcommand{\postulatename}{Követelmény}
+  \newcommand{\lemmaname}{Lemma}
+  \newcommand{\propositionname}{Előzmény}
+  \newcommand{\corollaryname}{Következmény}
+  \newcommand{\examplename}{Példa}
+  \newcommand{\exercisename}{Feladat}
+  \newcommand{\remarkname}{Megjegyzés}
+  \newcommand{\assumptionname}{Sejtés}
+  \newcommand{\conclusionname}{Összefoglalás}
+  \newcommand{\solutionname}{Megoldás}
+  \newcommand{\propertyname}{Tulajdonság}
+  \newcommand{\introductionname}{Bevezetés}
+  \newcommand{\problemsetname}{Feladatok}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{Frissítve:}
+  \newcommand{\historyname}{Korábbi verziók}
+}{\relax}
+
+\ifdefstring{\ELEGANT@lang}{nl}{
+  \RequirePackage[dutch]{babel}
+  \setlength\parindent{2em}
+  \newcommand\figref[1]{\textbf{Figuur}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{Tabel}~\ref{#1}}
+  \renewcommand{\chaptername}{Hoofdstuk \arabic{chapter}}
+  \newcommand{\authorname}{\textbf{Auteur: }}
+  \newcommand{\institutename}{\textbf{Instituut: }}
+  \newcommand{\datename}{\textbf{Datum: }}
+  \newcommand{\versionname}{\textbf{Versie: }}
+  \newcommand{\notename}{Opmerking}
+  \newcommand{\proofname}{Bewijs}
+  \newcommand{\problemname}{Probleem}
+  \newcommand{\definitionname}{Definitie}
+  \newcommand{\theoremname}{Stelling}
+  \newcommand{\axiomname}{Uitgangspunt}
+  \newcommand{\postulatename}{Hypothese}
+  \newcommand{\lemmaname}{Lemma}
+  \newcommand{\propositionname}{Voorstel}
+  \newcommand{\corollaryname}{Gevolgtrekking}
+  \newcommand{\examplename}{Voorbeeld}
+  \newcommand{\exercisename}{Oefening}
+  \newcommand{\remarkname}{Commentaar}
+  \newcommand{\assumptionname}{Veronderstelling}
+  \newcommand{\conclusionname}{Besluit}
+  \newcommand{\solutionname}{Oplossing}
+  \newcommand{\propertyname}{Eigenschap}
+  \newcommand{\introductionname}{Introductie}
+  \newcommand{\problemsetname}{Probleemcomplex}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{Update:}
+  \newcommand{\historyname}{Versie Geschiedenis}
+}{\relax}
+
+\ifdefstring{\ELEGANT@lang}{de}{
+  \setlength\parindent{2em}
+  \renewcommand{\contentsname}{Inhaltsverzeichnis}
+  \newcommand\figref[1]{\textbf{Figur}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{Tabelle}~\ref{#1}}
+  \renewcommand{\partname}{\color{structurecolor} Teil}
+  \renewcommand{\listfigurename}{Abbildungsverzeichnis}
+  \renewcommand{\listtablename}{Tabellenverzeichnis}
+  \renewcommand{\bibname}{Bibliographie}
+  \renewcommand{\appendixname}{Anhang~\thechapter}
+  \renewcommand{\chaptername}{Kapitel \thechapter}
+  \newcommand{\authorname}{\textbf{Autor: }}
+  \newcommand{\institutename}{\textbf{Institut: }}
+  \newcommand{\datename}{\textbf{Datum: }}
+  \newcommand{\versionname}{\textbf{Version: }}
+  \newcommand{\notename}{Notiz}
+  \newcommand{\proofname}{Beweis}
+  \newcommand{\problemname}{Problem}
+  \newcommand{\definitionname}{Definition}
+  \newcommand{\theoremname}{Theorem}
+  \newcommand{\axiomname}{Axiom}
+  \newcommand{\postulatename}{Postulat}
+  \newcommand{\lemmaname}{Lemma}
+  \newcommand{\propositionname}{Behauptung}
+  \newcommand{\corollaryname}{Corollary}
+  \newcommand{\examplename}{Beispiel}
+  \newcommand{\instancename}{Beispiel} %
+  \newcommand{\exercisename}{\"{U}bung}
+  \newcommand{\remarkname}{Anmerkung}
+  \newcommand{\assumptionname}{Annahme}
+  \newcommand{\conclusionname}{Abschluss}
+  \newcommand{\solutionname}{Aufl\"{o}sung}
+  \newcommand{\propertyname}{Property}
+  \newcommand{\introductionname}{Einleitung}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{Updates:}
+  \newcommand{\historyname}{Version der Geschichte}
+}{\relax}
+
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
