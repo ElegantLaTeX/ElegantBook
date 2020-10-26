@@ -64,34 +64,6 @@ February 10, 2020
 \mainmatter
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-\begin{algorithm}\label{alg:test}
-  \Input{A bitmap $I$ of size $w \times l$}
-  \Output{A partition of the bitmap}
-  \BlankLine
-  \emph{special treatment of the first line}\;
-  \For{$i \leftarrow 2$ \KwTo $l$}{
-    \emph{special treatment of the first element of line $i$}\;
-    \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
-      $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
-      $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
-      $\This \leftarrow \FindCompress{$I[i,j]$}$\;
-      \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
-        \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
-        \lElse{$\Union{\This,\Left}$}
-      }
-      \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
-        \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
-        \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
-        \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
-      }
-    }
-    \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
-  }
-  \caption{disjoint decomposition}\label{algo_disjdecomp}
-\end{algorithm}
-
-\ref{alg:test}
-
 Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。 \ref{sec:update}
 
 我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
@@ -137,18 +109,12 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \subsection{本地免安装使用}
 
-
 \textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
 
 \subsection{发行版安装使用}
 
-如果你是 \TeX{} Live 2019 用户，我们推荐你直接进行安装和更新。你可以通过 \TeX{} Live 2019 自带的 \lstinline{tlshell}\footnote{也叫 \TeX{} Live Manager} 进行安装。安装非常简单，步骤如下，搜索并打开 \lstinline{tlshell}，然后通过 \lstinline{File -> Load Default Repository} 加载远程仓库，如果你不想使用默认的仓库，你可以通过 \lstinline{Options} 下的菜单设置远程仓库。设置好仓库之后，等待仓库加载完毕，你可以在下面的搜索栏搜索 \lstinline{elegantbook}，然后选择进行安装与更新。
+如果你刚安装 \TeX{} Live 2020 用户，由于 texlive 已经自带，请务必直接升级全部宏包，使用 cmd 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新。
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.7\textwidth]{tlshell.png}
-  \caption{使用 \TeX{} Live Shell 安装 ElegantBook 模板}
-\end{figure}
 
 \subsection{更新问题}
 
@@ -443,6 +409,34 @@ The content of theorem.
    \label{tab:theorem-class}%
  \end{table}%
  
+\subsection{算法环境}
+
+ 
+\begin{algorithm}\label{alg:test}
+  \Input{A bitmap $I$ of size $w \times l$}
+  \Output{A partition of the bitmap}
+  \BlankLine
+  \emph{special treatment of the first line}\;
+  \For{$i \leftarrow 2$ \KwTo $l$}{
+    \emph{special treatment of the first element of line $i$}\;
+    \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
+      $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
+      $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
+      $\This \leftarrow \FindCompress{$I[i,j]$}$\;
+      \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
+        \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
+        \lElse{$\Union{\This,\Left}$}
+      }
+      \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
+        \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
+        \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
+        \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
+      }
+    }
+    \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
+  }
+  \caption{disjoint decomposition}\label{algo_disjdecomp}
+\end{algorithm}
 
 \subsection{其他环境的使用}
 
@@ -817,7 +811,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{scatter.pdf}
+  \includegraphics[width=0.6\textwidth]{scatter.jpg}
   \caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
 \end{figure}
 
