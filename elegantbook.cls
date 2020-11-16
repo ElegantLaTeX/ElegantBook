@@ -581,6 +581,40 @@
   \newcommand{\historyname}{Version der Geschichte}
 }{\relax}
 
+\ifdefstring{\ELEGANT@lang}{es}{
+  \RequirePackage[spanish]{babel}
+  \setlength\parindent{2em}
+  \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{Tabla}~\ref{#1}}
+  \renewcommand{\spanishchaptername}{Capítulo \thechapter}
+  \newcommand{\authorname}{\textbf{Autor: }}
+  \newcommand{\institutename}{\textbf{Instituto: }}
+  \newcommand{\datename}{\textbf{Fecha: }}
+  \newcommand{\versionname}{\textbf{Versión: }}
+  \bibliographystyle{\ELEGANT@bibstyle}
+  \newcommand{\notename}{Nota}
+  \newcommand{\proofname}{Demostración}
+  \newcommand{\problemname}{Problema}
+  \newcommand{\definitionname}{Definición}
+  \newcommand{\theoremname}{Teorema}
+  \newcommand{\axiomname}{Axioma}
+  \newcommand{\postulatename}{Postulado}
+  \newcommand{\lemmaname}{Lema}
+  \newcommand{\propositionname}{Proposición}
+  \newcommand{\corollaryname}{Corolario}
+  \newcommand{\examplename}{Ejemplo}
+  \newcommand{\exercisename}{Ejercicio}
+  \newcommand{\remarkname}{Comentario}
+  \newcommand{\assumptionname}{Asunto}
+  \newcommand{\conclusionname}{Conclusión}
+  \newcommand{\solutionname}{Solución}
+  \newcommand{\propertyname}{Propiedad}
+  \newcommand{\introductionname}{Introducción}
+  \newcommand{\problemsetname}{Ejercicio}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{Actualización:}
+  \newcommand{\historyname}{Historial de versiones}
+}{\relax}
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
