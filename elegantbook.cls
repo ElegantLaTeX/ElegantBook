@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/08/04 v4.0.5 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/01/02 v4.0.6 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -191,15 +191,15 @@
 
 
 \usepackage{fontspec}
-\setmainfont{TeX Gyre TermesX}
+\setmainfont{TeX Gyre Termes}
 \setsansfont{TeX Gyre Heros}
-\setmonofont{Latin Modern Mono}
+% \setmonofont[Ligatures=TeX]{Latin Modern Mono}
 
 % Libertinus Serif/Libertinus Sans
 
 % TeX Gyre TermesX/TeX Gyre Heros
 
-\defaultfontfeatures[TeX Gyre TermesX,TeX Gyre Heros]{
+\defaultfontfeatures[TeX Gyre Termes,TeX Gyre Heros]{
   Extension      = .otf,
   UprightFont    = *-regular,
   BoldFont       = *-bold,
@@ -1047,12 +1047,12 @@
     \hspace{-\the\mylmargin}
     \fboxsep0pt
     \colorbox{white}{
-      \begin{minipage}[c]{1.0\paperwidth}
+      \begin{minipage}[c]{\paperwidth}
         \centering
-        \parbox{0.7\textwidth}{
+        \parbox{0.65\textwidth}{
           \centering
           \vspace*{1.5\baselineskip}
-          \Huge\scshape\bfseries \textcolor{structurecolor}{\thepart.\; #2}
+          \Huge\bfseries \textcolor{structurecolor}{\thepart.\; #2}
           \vspace*{0.7\baselineskip}}
       \end{minipage}}}
   \@endpart}

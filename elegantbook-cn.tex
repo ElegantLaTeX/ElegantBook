@@ -1,12 +1,12 @@
-\documentclass[cn,10pt]{elegantbook}
+\documentclass[cn,10pt,founder]{elegantbook}
 
-\title{ElegantBook：优美的 \LaTeX{} 书籍模板}
+\title{ElegantBook：优美的 \LaTeX{} 书籍模板（开发版）}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{Aug. 4, 2020}
-\version{4.0.5}
+\date{Jan. 2, 2020}
+\version{4.0.6}
 \bioinfo{自定义}{信息}
 
 \extrainfo{温柔正确的人总是难以生存，因为这世界既不温柔，也不正确。—— 比企谷八幡}
@@ -23,12 +23,6 @@
 % 本文档命令
 \usepackage{array}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
-
-\usepackage[lined,dotocloa,algochapter]{algorithm2e}
-\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
-\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
-\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
-
 
 \begin{document}
 
@@ -63,34 +57,6 @@ February 10, 2020
 
 \mainmatter
 \chapter{Elegant\LaTeX{} 系列模板介绍}
-
-\begin{algorithm}\label{alg:test}
-  \Input{A bitmap $I$ of size $w \times l$}
-  \Output{A partition of the bitmap}
-  \BlankLine
-  \emph{special treatment of the first line}\;
-  \For{$i \leftarrow 2$ \KwTo $l$}{
-    \emph{special treatment of the first element of line $i$}\;
-    \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
-      $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
-      $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
-      $\This \leftarrow \FindCompress{$I[i,j]$}$\;
-      \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
-        \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
-        \lElse{$\Union{\This,\Left}$}
-      }
-      \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
-        \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
-        \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
-        \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
-      }
-    }
-    \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
-  }
-  \caption{disjoint decomposition}\label{algo_disjdecomp}
-\end{algorithm}
-
-\ref{alg:test}
 
 Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。 \ref{sec:update}
 
@@ -137,8 +103,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \subsection{本地免安装使用}
 
-
-\textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
+\textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新版，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
 
 \subsection{发行版安装使用}
 
@@ -375,7 +340,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 
 \subsection{自定义封面}
 
-另外，如果需要使用自定义的封面，比如 Adobe illustrator 或者其他软件制作的 A4 PDF 文档，请把 \lstinline{\maketitle} 注释掉，然后借助 \lstinline{pdfpages} 宏包将自制封面插入即可。如果使用 \lstinline{titlepage} 环境，也是类似。如果需要 2.x 版本的封面，请参考 \href{https://github.com/EthanDeng/etitlepage}{etitlepage}。
+另外，如果使用自定义的封面，比如 Adobe illustrator 或者其他软件制作的 A4 PDF 文档，请把 \lstinline{\maketitle} 注释掉，然后借助 \lstinline{pdfpages} 宏包将自制封面插入即可。如果使用 \lstinline{titlepage} 环境，也是类似。如果需要 2.x 版本的封面，请参考 \href{https://github.com/EthanDeng/etitlepage}{etitlepage}。
 
 \section{章标标题}
 
@@ -904,7 +869,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \datechange{2019/08/18}{版本 3.09 正式发布}
 
 \begin{change}
-  \item 由于 \lstinline{\elegantpar} 存在一些问题，暂时性删除 \lstinline{\elegantpar} 命令，并提示用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar} 旁注/边注命令。
+  \item 由于 \lstinline{\elegantpar} 存在 bug，暂时性删除 \lstinline{\elegantpar} 命令，并提示用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar}。
   \item 积分操作符统一更改为 \lstinline{esint} 宏包设置；
   \item 新增目录选项 \lstinline{toc}，可选项为单栏 \lstinline{onecol} 和双栏 \lstinline{twocol}；
   \item 手动增加参考文献选项 \lstinline{cite}，可选项为上标形式 \lstinline{super}；
