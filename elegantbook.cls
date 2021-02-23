@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2020/08/04 v4.0.5 ElegantBook document class]
+\ProvidesClass{elegantbook}[2020/01/02 v4.0.6 ElegantBook document class]
 
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -193,7 +193,7 @@
 \usepackage{fontspec}
 \setmainfont{TeX Gyre Termes}
 \setsansfont{TeX Gyre Heros}
-\setmonofont{Latin Modern Mono}
+% \setmonofont[Ligatures=TeX]{Latin Modern Mono}
 
 % Libertinus Serif/Libertinus Sans
 

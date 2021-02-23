@@ -1,12 +1,12 @@
-\documentclass[cn,10pt,twoside]{elegantbook}
+\documentclass[cn,10pt]{elegantbook}
 
-\title{ElegantBook：优美的 \LaTeX{} 书籍模板}
+\title{ElegantBook：优美的 \LaTeX{} 书籍模板（开发版）}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{Aug. 4, 2020}
-\version{4.0.5}
+\date{Jan. 2, 2020}
+\version{4.0.6}
 \bioinfo{自定义}{信息}
 
 \extrainfo{温柔正确的人总是难以生存，因为这世界既不温柔，也不正确。—— 比企谷八幡}
@@ -107,7 +107,11 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \subsection{本地免安装使用}
 
+<<<<<<< HEAD
+\textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新版，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
+=======
 \textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
+>>>>>>> 30a916c26cfb8bcd8ea019376c8bfc4080f205bf
 
 \subsection{发行版安装使用}
 
@@ -339,7 +343,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 
 \subsection{自定义封面}
 
-另外，如果需要使用自定义的封面，比如 Adobe illustrator 或者其他软件制作的 A4 PDF 文档，请把 \lstinline{\maketitle} 注释掉，然后借助 \lstinline{pdfpages} 宏包将自制封面插入即可。如果使用 \lstinline{titlepage} 环境，也是类似。如果需要 2.x 版本的封面，请参考 \href{https://github.com/EthanDeng/etitlepage}{etitlepage}。
+另外，如果使用自定义的封面，比如 Adobe illustrator 或者其他软件制作的 A4 PDF 文档，请把 \lstinline{\maketitle} 注释掉，然后借助 \lstinline{pdfpages} 宏包将自制封面插入即可。如果使用 \lstinline{titlepage} 环境，也是类似。如果需要 2.x 版本的封面，请参考 \href{https://github.com/EthanDeng/etitlepage}{etitlepage}。
 
 \section{章标标题}
 
@@ -896,7 +900,11 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \datechange{2019/08/18}{版本 3.09 正式发布}
 
 \begin{change}
+<<<<<<< HEAD
   \item \lstinline{\elegantpar} 存在 bug，删除 \lstinline{\elegantpar} 命令，建议用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar} 旁注命令。
+=======
+  \item 由于 \lstinline{\elegantpar} 存在 bug，暂时性删除 \lstinline{\elegantpar} 命令，并提示用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar}。
+>>>>>>> 6c64e5900bc7db464b57cf0379413c5212f3650a
   \item 积分操作符统一更改为 \lstinline{esint} 宏包设置；
   \item 新增目录选项 \lstinline{toc}，可选项为单栏 \lstinline{onecol} 和双栏 \lstinline{twocol}；
   \item 手动增加参考文献选项 \lstinline{cite}，可选项为上标形式 \lstinline{super}；
