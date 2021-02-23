@@ -191,7 +191,7 @@
 
 
 \usepackage{fontspec}
-\setmainfont{TeX Gyre TermesX}
+\setmainfont{TeX Gyre Termes}
 \setsansfont{TeX Gyre Heros}
 \setmonofont{Latin Modern Mono}
 
@@ -199,7 +199,7 @@
 
 % TeX Gyre TermesX/TeX Gyre Heros
 
-\defaultfontfeatures[TeX Gyre TermesX,TeX Gyre Heros]{
+\defaultfontfeatures[TeX Gyre Termes,TeX Gyre Heros]{
   Extension      = .otf,
   UprightFont    = *-regular,
   BoldFont       = *-bold,
@@ -889,8 +889,8 @@
 
 \fancyfoot[c]{\color{structurecolor}\scriptsize\thepage}
 \if@twoside
-  \fancyhead[ER]{\color{structurecolor}\cnormal\leftmark}
-  \fancyhead[OL]{\color{structurecolor}\cnormal\rightmark}
+  \fancyhead[EL]{\color{structurecolor}\cnormal\leftmark}
+  \fancyhead[OR]{\color{structurecolor}\cnormal\rightmark}
 \else
   \fancyhead[R]{\color{structurecolor}\cnormal\rightmark}
 \fi
@@ -1063,37 +1063,19 @@
 \labelformat{algorithm}{算法~#1}
 \labelformat{exercise}{习题~#1}
 
-\RequirePackage{pagecolor,afterpage}
-\def\@part[#1]#2{%
-    \newcommand*{\mylmargin}{\dimexpr\oddsidemargin+1in\relax}
-    \ifnum \c@secnumdepth >-2\relax
-      \refstepcounter{part}%
-      \addcontentsline{toc}{part}{\thepart\hspace{1em}#1}%
-    \else
-      \addcontentsline{toc}{part}{#1}%
-    \fi%
-    {
-    \centering
-    \newpagecolor{structurecolor!10}\afterpage{\restorepagecolor}
-    \interlinepenalty \@M
-    \normalfont
-    \vskip 30\p@
-    \hspace{-\the\mylmargin}
-    \fboxsep0pt
-    \colorbox{white}{
-      \begin{minipage}[c]{1.0\paperwidth}
-        \centering
-        \parbox{0.7\textwidth}{
-          \centering
-          \vspace*{1.5\baselineskip}
-          \Huge\scshape\bfseries \textcolor{structurecolor}{\thepart.\; #2}
-          \vspace*{0.7\baselineskip}}
-      \end{minipage}}}
-  \@endpart}
-
 
 \renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
 \hbox{}%
 \thispagestyle{empty}%
 \newpage%
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+\usepackage{titletoc}%
+\titlecontents{chapter}% <section-type>
+  [0pt]% <left>
+  {\vspace{1em}\bfseries}% <above-code>
+  {第~\zhnumber{\thecontentslabel}~章\hspace{0.5em}}% <numbered-entry-format>
+  {}% <numberless-entry-format>
+  {\hspace{0.6em}\hfill\contentspage}% <filler-page-format>
+
+

@@ -1,4 +1,4 @@
-\documentclass[11pt,fancy,twocol,twoside]{elegantbook}
+\documentclass[11pt,fancy,twocol,twoside,bibstyle=abbrv]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
@@ -26,6 +26,15 @@
 
 %\captionsetup{labelsep=space}
 
+\usepackage{titletoc}% http://ctan.org/pkg/titletoc
+\titlecontents{chapter}% <section-type>
+  [] % shape
+  {\bfseries}% format
+  {\chaptertitlename\ \thecontentslabel\hspace{1em}}% label
+  {}% sep
+  {\hfill\contentspage} % before code
+  [\addvspace{0.5\baselineskip}] % after code
+
 \begin{document}
 
 \maketitle
@@ -37,6 +46,7 @@
 \printunsrtglossary[type=symbols,style=long]
 
 \part{HELLO WORLD}
+
 \chapter{Elegant\LaTeX{} Templates}
 Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegant, user-friendly templates. Currently, the Elegant\LaTeX{} is composed of \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}, \href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}, \href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper}, designed for typesetting notes, books, and working papers respectively. Latest releases are strongly recommended! This guide is aimed at briefly introducing the 101 of this template. For any other question, suggestion or comment, feel free to contact us on GitHub \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} or email us at \email{elegantlatex2e@gmail.com}. $\gls{F}$
 
@@ -84,14 +94,6 @@ Visit \href{https://www.overleaf.com/}{Overleaf} to use our template online anyw
 \subsection{To Use Portable Version}
 For portable version, simply download lastest ElegantBook-master from GitHub or CTAN (to be more accurate, download \lstinline{elegantbook.cls}) and save the file(s) under your working directory. This way of installation is simple and convenient, but you have to manually update \lstinline{cls} now and then.
 
-\subsection{To Use Local Installation Version}
-If you are a \TeX{} Live 2019 user, using the \lstinline{tlshell}\footnote{namely, \TeX{} Live Manager} of \TeX{} Live 2019 direct installation package is strongly recommended. Simply search and open \lstinline{tlshell}, click on \lstinline{File -> Load Default Repository} or customize repository by \lstinline{Options}. Wait till the repository loads successfully, search \lstinline{elegantbook} by name, installation and update is just a click away.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.7\textwidth]{tlshell.png}
-  \caption{Use \TeX{} Live Shell to Install ElegantBook Template}
-\end{figure}
 
 \subsection{Update Templates}
 If you fail to update templates using \lstinline{tlshell}, please use cmd to update all the packages or switch to portable version instead.
@@ -654,7 +656,7 @@ Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{scatter.pdf}
+  \includegraphics[width=0.6\textwidth]{scatter.jpg}
   \caption{Matplotlib: Scatter Plot Example\label{fig:scatter}}
 \end{figure}
 
