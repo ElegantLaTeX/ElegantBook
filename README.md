@@ -19,10 +19,6 @@ For some reasons, __unauthorized__ pull requests are **UNACCEPTABLE** since May 
 
 Thank ChinaTeX and [LaTeX Studio](http://www.latexstudio.net/) for their promotion. 
 
-## Donation
-
-Thank all the donators for your generous donation to the ElegantLaTeX Program, the full list of donators can be found at [here](donation.md).
-
 
 ## License
 

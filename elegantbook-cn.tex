@@ -1,28 +1,27 @@
-\documentclass[cn,10pt]{elegantbook}
+\documentclass[cn,10pt,math=newtx,citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook}
 
-\title{ElegantBook：优美的 \LaTeX{} 书籍模板（开发版）}
+\title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{Jan. 2, 2020}
-\version{4.0.6}
+\date{May 2, 2021}
+\version{4.1}
 \bioinfo{自定义}{信息}
 
-\extrainfo{温柔正确的人总是难以生存，因为这世界既不温柔，也不正确。—— 比企谷八幡}
+\extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
+
 \setcounter{tocdepth}{3}
-\newcommand{\dollar}{\mbox{\textdollar}}
-\lstset{
-  mathescape = false}
+
 \logo{logo-blue.png}
 \cover{cover.jpg}
-\DeclareCaptionLabelFormat{nospace}{#1#2}
-\captionsetup[table]{labelfont=bf, labelsep=period}
-\renewcommand{\thetable}{L~\arabic{table}}
 
 % 本文档命令
 \usepackage{array}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
 
 \begin{document}
 
@@ -33,16 +32,15 @@
 
 \markboth{Introduction}{前言}
 
+自 2019 年 Elegant\LaTeX{} 系列模板上线 GitHub、CTAN 以来，受到很多用户的喜爱。
 
-在过去的 2019 年，\href{https://elegantlatex.org/}{Elegant\LaTeX{}} 系列模板均逐步上线 \href{https://github.com/ElegantLaTeX}{GitHub}、\href{https://ctan.org/pkg/elegantbook}{CTAN}、\href{https://www.overleaf.com/latex/templates/elegantbook-template/zpsrbmdsxrgy}{Overleaf} 以及 \href{https://gitee.com/ElegantLaTeX/ElegantBook}{Gitee} 上。截止到 2019 年底，ElegantNote、ElegantBook、ElegantPaper 三个模板在 GitHub 上的收藏数达到了 194、333 和 220，从 2019 年 5 月开启捐赠之后收到了用户 33 笔合计超过 1500 元的捐赠，用户群人数也超过了 400 人。这些数字的背后，反映出 Elegant\LaTeX{} 越来越受用户的喜爱，在此非常感谢大家。
+2020 年，我打算做 Elegant\LaTeX{} 的最后一个版本，也就是原定计划 ElegantBook 4.x 版本为 Elegant\LaTeX{} 系列模板的终止符。基于我想把 4.x 做成一个最终版本，我计划了很多事情，包括将代码转为 dtx，将三个模板的文档打包进 dtx 里面，然后重新设计封面，补充各种页面，增加元素等等。我想的很多，但是做起来并不是很顺利，中间也发生了很多事情，不想解释。直至今年 4 月，我决定，不论如何，先把 4.1 发布出来。
 
-但是，我想声明的是：
+\vskip 0.5cm
 
-\begin{center}
-  由于某些原因，Elegant\LaTeX{} 项目 \underline{不再接受}\textbf{任何}非我本人预约的提交。
-\end{center}
+另外，在临近 Elegant\LaTeX{} 模板告别之际，我想和各位用户说句话：别太自私。
 
-我是一个理想主义者，关于这个模板，我有自己的想法。我所关心的是，我周围的人能方便使用 \LaTeX{} 以及此模板，我自己会为自己的东西感到开心。如果维护模板让我不开心，那我就不会再维护了。诚然这个模板并不是完美的，但是相比 2.x 好很多了，这些改进离不开大家的反馈、China\TeX{} 和逐鹿人的鼓励以及支援人员的帮助！
+\vskip 0.5cm
 
 \underline{如果你无法认同我的想法，建议直接删除本模板。}
 
@@ -50,26 +48,22 @@
 
 \begin{flushright}
 Ethan Deng\\
-February 10, 2020
+May 2, 2021
 \end{flushright}
 
 \tableofcontents
 
-
 \mainmatter
-
-\part{模板介绍}
 
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。 \ref{sec:update}
+Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
 
 我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
   \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
   \item GitHub 网址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
   \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
-  \item 文档 Wiki：\href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
   \item 微博：Elegant\LaTeX{}
   \item 微信公众号：Elegant\LaTeX{}
@@ -78,15 +72,17 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \end{itemize}
 
 
-\section{ElegantBook 更新说明}\label{sec:update}
+\section{ElegantBook 更新说明}
 
-此次为 3.x 最后一个版本，在 3.10 基础上，主要为了解决 \TeX{} Live 2020 中编译错误，具体内容有：
+此次为 4.x 第一个版本，在 3.x 基础上，主要更新了定理以及参考文献的支持方式，具体内容有：
 
 \begin{enumerate}
-  \item \textbf{重要修正}：修复因为 \lstinline{gbt7714} 宏包更新导致的 \lstinline{natbib option clash} 错误；
-  \item 由于 \lstinline{pgfornament} 宏包未被 \TeX Live 2020 收录，因此删除 base 相关的内容；
-  \item 修复部分环境的空格问题；
-  \item 增加了意大利语言选项 \lstinline{lang=it}。
+  \item \textbf{重要改动}：由原先的 \hologo{BibTeX} 改为 biblatex 编译方式（后端为 \lstinline{biber}），请注意两者之间的差异；
+  \item \textbf{重要改进}：修改对于定理写法兼容方式，提高数学公式代码的兼容性；
+  \item 页面设置改动，默认页面更宽；方便书写和阅读；
+  \item 支持目录文字以及页码跳转；
+  \item 不再维护 \hologo{pdfLaTeX} 中文支持方式，请务必使用 \hologo{XeLaTeX} 编译中文文稿。
+  \item 增加多语言选项，法语 \lstinline{lang=fr}、德语 \lstinline{lang=de}、荷兰语 \lstinline{lang=nl}、匈牙利语 \lstinline{lang=hu}、西班牙语 \lstinline{lang=es}、蒙古语 \lstinline{lang=mn} 等。
 \end{enumerate}
 
 \begin{note}
@@ -107,16 +103,11 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \subsection{本地免安装使用}
 
-<<<<<<< HEAD
 \textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新版，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
-=======
-\textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新（正式）版文件，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
->>>>>>> 30a916c26cfb8bcd8ea019376c8bfc4080f205bf
 
 \subsection{发行版安装使用}
 
-如果你刚安装 \TeX{} Live 2020 用户，由于 texlive 已经自带，请务必直接升级全部宏包，使用 cmd 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新。
-
+本模板测试环境为 Win10 和 TeX Live 2021，如果你刚安装 \TeX{} Live 2021 用户，安装后建议升级全部宏包，升级方法：使用 cmd 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新。
 
 \subsection{更新问题}
 
@@ -133,119 +124,41 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \subsection{其他发行版本}
 
-如果你是 \TeX{} Live 2018 的用户，由于 2018 难以更新到 2019，建议卸载 2018 重装 2019。如果嫌麻烦，你可以手动安装模板，将 \lstinline{elegantbook.cls} 复制到你的 \TeX{} Live 目录下，默认安装目录为 \lstinline|C:\texlive\2019\texmf-dist\tex\latex\elegantbook|，然后通过命令行（管理员权限），运行 \lstinline{texhash} 即可。
+由于宏包版本问题，本模板不支持 C\TeX{} 套装，请务必安装 TeX Live。更多关于 \TeX{} Live 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install_latex/releases}{一份简短的安装 \LaTeX{} 的介绍}。
 
-由于宏包版本问题，本模板不支持 C\TeX{} 套装。更多关于 \TeX{} Live 2019 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install_latex/releases}{一份简短的安装 \LaTeX{} 的介绍}。
-
-
-\section{用户作品计划}
-
-Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板也受到了很多用户的喜爱，在此，为了促进模板用户之间的交流，了解用户需求，完善本模板，我们将建立一个区域专门展示用户的文档，包括但不限于 GitHub 和官网等。如果你愿意将自己的作品展示出来，请邮件或者其他方式联系我们。如果自己代码已经传到 GitHub 或者 Gitee 等网站，可以提供对应网址。\href{https://github.com/ElegantLaTeX/Archive/tree/master/Collections}{用户文档中心}目前有下面一些作品：
-\begin{enumerate}
-\item 唐绍东：微积分笔记
-\item 曲豆豆：超甜微积分习题集
-\item 王世强：《化工数值计算与 MATLAB》复习指南
-\item 李晨迪：Fluid Mechanics Notes
-\item 肖明顺：地球物理勘查常用规范汇编
-\item 白衣卿相：期末复习笔记-拓扑学摘要
-\end{enumerate}
 
 \section{关于提交}
 
 出于某些因素的考虑，Elegant\LaTeX{} 项目自 2019 年 5 月 20 日开始，\textbf{不再接受任何非作者预约性质的提交}（pull request)！如果你想改进模板，你可以给我们提交 issues，或者可以在遵循协议（LPPL-1.3c）的情况下，克隆到自己仓库下进行修改。
 
-\section{协作人员招募}
-
-招募 Elegant\LaTeX{} 的协作人员（志愿者），没有报酬。工作内容：翻译 Elegant\LaTeX{} 系列模板文档，维护模板的维基，如果有公众号文稿写作经历的话，也可以帮忙写微信稿。本公告长期有效。目前 Elegant\LaTeX{} 共有 4 名协作人员，在此感谢他们无私的奉献！
-\begin{itemize}
-  \item 官方文档翻译: \href{https://github.com/peggy2006xzyz}{YPY};
-  \item GitHub 维基维护: \href{https://github.com/izinngo}{Ingo Zinngo}、\href{https://github.com/xiaohao890809}{追寻原风景};
-  \item QQ 群管理、FAQ 整理: \href{https://github.com/sikouhjw}{Sikouhjw}.
-\end{itemize}
-
-另外，也感谢 \href{https://github.com/stone-zeng}{Xiangdong Zeng}、\href{https://github.com/latexers}{逐鹿人}等人帮忙群管理。
-
-\section{致谢}
-2019 年 5 月 20 日，ElegantBook 模板在 GitHub 上的收藏数（star）达到了 100\footnote{截止 3.10 版本正式发布，star 数为 374。}。在此特别感谢 China\TeX{} 以及 \href{http://www.latexstudio.net/}{\LaTeX{} 工作室}对于本系列模板的大力宣传与推广。\LaTeX{} 工作室网站上有很多精彩的帖子和精致的模板，欢迎大家去挖掘里面的宝藏，这也是国内最全面的 \LaTeX{} 相关的网站。
-
-如果你喜欢我们的模板，你可以在 GitHub 上收藏我们的模板。
-%\begin{figure}[htbp]
-%  \centering
-%  \includegraphics[width=\textwidth]{star.png}
-%  \caption{一键三连求赞}
-%\end{figure}
-
-\section{捐赠}
-
-如果您非常喜爱我们的模板或者我，你还可以选择捐赠\footnote{最好在捐赠时备注信息。}以表达您对我们模板和我的支持。本模板自 3.08 版本发布了捐赠信息之后，收到了超过 1500 元的捐赠（四舍五入就是一个亿），非常感谢！
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{donate.jpg}
-\end{figure}
-
-\textbf{赞赏费用的使用解释权归 Elegant\LaTeX{} 所有，并且不接受监督，请自愿理性打赏}。10 元以上的赞赏，我们将列入捐赠榜，谢谢各位金主！
-
-\begin{table}[!htb]
-  \centering
-  \caption{Elegant\LaTeX{} 系列模板捐赠榜}
-    \begin{tabular}{*{4}{>{\scriptsize}c}|*{4}{>{\scriptsize}c}}
-    \hline
-    \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} & \textbf{捐赠者} & \textbf{金额} & \textbf{时间} & \textbf{渠道} \\
-    \hline
-    Lerh  & 10 RMB & 2019/05/15 & 微信    & 越过地平线 & 10 RMB & 2019/05/15 & 微信 \\
-    银桑    & 20 RMB & 2019/05/27 & 微信    & *空    & 10 RMB & 2019/05/30 & 微信 \\
-    latexstudio.net & 666 RMB & 2019/06/05 & 支付宝   & A*n   & 40 RMB & 2019/06/15 & 微信 \\
-    * 夏   & 22 RMB & 2019/06/15 & 微信    & * 倩   & 21 RMB  & 2019/06/15 & 微信 \\
-    Cassis & 11 RMB & 2019/06/30 & 微信    & *君    & 10 RMB & 2019/07/23 & 微信 \\
-    P*u   & 50 RMB & 2019/07/30 & 微信    & *萌    & 19 RMB & 2019/08/28 & 微信 \\
-    曲豆豆   & 10 RMB & 2019/08/28 & 微信    & 李博    & 100 RMB & 2019/10/06 & 微信 \\
-    Njustsll & 10 RMB & 2019/10/11 & 微信    & 刘志阔   & 99.99 RMB & 2019/10/15 & 支付宝 \\
-    * 韬   & 16 RMB & 2019/10/17 & 微信    & 赤霓    & 12 RMB & 2019/10/17 & 支付宝 \\
-    追寻原风景 & 10 RMB & 2019/10/28 & 微信    & 郭德良   & 88 RMB & 2019/11/03 & 微信 \\
-    自强不息  & 20 RMB & 2019/11/04 & 支付宝   & 读书之虫  & 20 RMB & 2019/11/18 & 微信 \\
-    *等    & 10 RMB & 2019/11/18 & 微信    & *哲    & 20 RMB & 2019/11/18 & 微信 \\
-    佚名    & 10 RMB & 2019/11/24 & 微信    & Jiye Qian & 66 RMB & 2019/12/04 & 微信 \\
-    * 阳   & 20 RMB & 2019/12/05 & 微信    & Catcher & 11 RMB & 2019/12/08 & 支付宝 \\
-    希尔波特门徒 & 10 RMB & 2019/12/09 & 支付宝   & * 伟   & 10 RMB & 2019/12/09 & 微信 \\
-    Simon & 20 RMB & 2019/12/11 & 支付宝   & 流殇丶浅忆 & 66.60 RMB & 2019/12/18 & 支付宝 \\
-    羽     & 10 RMB & 2019/12/20 & 支付宝   & * 琛   & 15 RMB & 2019/12/20 & 微信 \\
-    随风    & 20 RMB & 2019/12/27 & 支付宝   & Ws    & 23.30 RMB & 2019/12/28 & 微信 \\
-    初八    & 100 RMB  & 2020/01/02 & 支付宝   & p*e   & 20 RMB & 2020/01/03 & 微信 \\
-    Shunmx & 100 RMB & 2020/01/03 & 微信    & hj    & 10 RMB & 2020/01/03 & 微信 \\
-    F*5   & 10 RMB & 2020/01/03 & 微信    & S*m   & 20.20 RMB & 2020/01/03 & 微信 \\
-    二代青雉  & 13 RMB & 2020/01/14 & 支付宝   & *?    & 66 RMB & 2020/01/15 & 微信 \\
-    Mr. Xiong & 20 RMB & 2020/01/17 & 微信    & *博    & 15 RMB & 2020/01/18 & 微信 \\
-    * 者  & 10 RMB & 2020/02/02 & 微信    & Jackie  &  88.80 RMB  &  2020/02/09 & 微信 \\
-    Henry\_Sun、 & 50 RMB & 2020/02/14 & 支付宝 & * 桥  & 50 RMB & 2020/02/21 & 微信 \\
-    昀琏 & 10 RMB & 2020/03/02 & 支付宝 & S*y  &  10 RMB  &  2020/03/15 & 微信 \\
-    * 哥  & 66.66 RMB & 2020/03/17 & 微信    &   K*e & 30 RMB & 2020/03/30 & 微信\\
-    * 阳  &  20 RMB  &  2020/04/02 & 微信 & 士*n  & 30 RMB & 2020/04/11 & 微信 \\
-    \hline
-    \end{tabular}%
-  \label{tab:donation}%
-\end{table}%
-
-另外，为了表示感谢，我们制作了捐赠纪念证，欢迎大家来信告知邮箱以及姓名（艺名），我们将通过邮件发送电子版纪念证。\ref{tab:donation} 是捐赠名单。
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.6\textwidth]{cert.pdf}
-\end{figure}
 
 \chapter{ElegantBook 设置说明}
 
-本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2020，支持 \hologo{pdfLaTeX} 以及 \hologo{XeLaTeX} 编译。中文请尽量使用 \hologo{XeLaTeX} 编译。
+本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2021，英文支持 \hologo{pdfLaTeX}，中文仅支持 \hologo{XeLaTeX} 编译。
 
 \section{语言模式}
-本模板内含三套语言环境 \lstinline{lang=cn}、\lstinline{lang=en} 以及 \lstinline{lang=it} \footnote{由 \href{https://github.com/VincentMVV}{VincentMVV} 提供意大利语翻译，具体的内容见\href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}。}，改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
+本模板内含两套基础语言环境 \lstinline{lang=cn}、\lstinline{lang=en}。改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
 \begin{lstlisting}
 \documentclass[cn]{elegantbook} 
 \documentclass[lang=cn]{elegantbook}
 \end{lstlisting}
 
+除模板自带的两套语言设定之外，由网友提供的其他语言环境设置如下：
+\begin{itemize}
+  \item 由 \href{https://github.com/VincentMVV}{VincentMVV} 提供的意大利语翻译 \lstinline{lang=it}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
+  \item 由 \href{https://github.com/abfek66}{abfek66} 提供的法语翻译 \lstinline{lang=fr}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
+  % \item 由 \href{https://github.com/stultus}{stultus} 提供的马拉雅拉姆语翻译 \lstinline{lang=}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/90}{Malayalam translation}；
+  \item 由 \href{https://github.com/inktvis75}{inktvis75} 提供的荷兰语翻译 \lstinline{lang=nl}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/108}{Dutch Translation}；
+  \item 由 \href{https://github.com/palkotamas}{palkotamas} 提供的匈牙利语翻译 \lstinline{lang=hu}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation}；
+  \item 由 Lisa 提供的德语翻译 \lstinline{lang=de}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation}；
+  \item 由 Gustavo A. Corradi 提供的西班牙语的翻译 \lstinline{lang=es}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation}；
+  \item 由 \href{https://github.com/Altantsooj}{Altantsooj} 提供的蒙古语的翻译 \lstinline{lang=mn}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}。
+\end{itemize}
+
+
+
 \begin{remark}
-只有中文环境（\lstinline{lang=cn}）才可以输入中文。另外如果抄录环境（\lstinline{lstlisting}）中有中文字符，请务必使用 \hologo{XeLaTeX} 编译。
+以上各个语言的设定均为网友设定，我们未对上述翻译进行过校对，如果有问题，请在对应的 issue 下评论。并且，只有中文环境（\lstinline{lang=cn}）才可以输入中文。
 \end{remark}
 
 \section{设备选项}
@@ -268,37 +181,37 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
   \centering
   \begin{tabular}{ccccccc}
   \toprule
-              & \textcolor{structure1}{green} 
-              & \textcolor{structure2}{cyan} 
-              & \textcolor{structure3}{blue}
-              & \textcolor{structure4}{gray} 
-              & \textcolor{structure5}{black} 
-              & 主要使用的环境\\
+    & \textcolor{structure1}{green} 
+    & \textcolor{structure2}{cyan} 
+    & \textcolor{structure3}{blue}
+    & \textcolor{structure4}{gray} 
+    & \textcolor{structure5}{black} 
+    & 主要使用的环境\\
   \midrule
     structure & \ccr{structure1}
-              & \ccr{structure2}
-              & \ccr{structure3} 
-              & \ccr{structure4} 
-              & \ccr{structure5} 
-              & chapter \ section \ subsection \\
+    & \ccr{structure2}
+    & \ccr{structure3} 
+    & \ccr{structure4} 
+    & \ccr{structure5} 
+    & chapter \ section \ subsection \\
     main      & \ccr{main1}
-              & \ccr{main2}
-              & \ccr{main3}
-              & \ccr{main4}
-              & \ccr{main5}
-              & definition \ exercise \ problem \\
+    & \ccr{main2}
+    & \ccr{main3}
+    & \ccr{main4}
+    & \ccr{main5}
+    & definition \ exercise \ problem \\
     second    & \ccr{second1}
-              & \ccr{second2}
-              & \ccr{second3}
-              & \ccr{second4}
-              & \ccr{second5}
-              & theorem \ lemma \ corollary\\
+    & \ccr{second2}
+    & \ccr{second3}
+    & \ccr{second4}
+    & \ccr{second5}
+    & theorem \ lemma \ corollary\\
     third     & \ccr{third1}
-            & \ccr{third2}
-            & \ccr{third3}
-            & \ccr{third4}
-            & \ccr{third5}
-            & proposition\\
+    & \ccr{third2}
+    & \ccr{third3}
+    & \ccr{third4}
+    & \ccr{third5}
+    & proposition\\
   \bottomrule
   \end{tabular}
 \end{table}
@@ -308,7 +221,7 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 \definecolor{structurecolor}{RGB}{0,0,0}
 \definecolor{main}{RGB}{70,70,70}    
 \definecolor{second}{RGB}{115,45,2}    
-\definecolor{third}{RGB}{0,80,80} 
+\definecolor{third}{RGB}{0,80,80}
 \end{lstlisting}
 
 \section{封面}
@@ -316,21 +229,30 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 \subsection{封面个性化}
 
 从 3.10 版本开始，封面更加弹性化，用户可以自行选择输出的内容，包括 \lstinline{\title} 在内的所有封面元素都可为空。目前封面的元素有
-\begin{itemize}
-  \item 标题：\lstinline{\title}
-  \item 副标题：\lstinline{\subtitle}
-  \item 作者：\lstinline{\author}
-  \item 机构：\lstinline{\institute}
-  \item 日期：\lstinline{\date}
-  \item 版本：\lstinline{\version}
-  \item 箴言：\lstinline{\extrainfo}
-  \item 封面图：\lstinline{\cover}
-  \item 徽标：\lstinline{\logo}
-\end{itemize}
+
+\begin{table}[htbp]
+  \centering
+  \caption{封面元素信息}
+  \begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}}
+    \toprule
+    信息 & 命令 & 信息 & 命令 & 信息 & 命令 \\
+    \midrule
+    标题 & \lstinline|\title| & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author| \\
+    机构 & \lstinline|\institute| & 日期 &  \lstinline|\date| & 版本 & \lstinline|\version| \\
+    箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover| & 徽标 & \lstinline|\logo| \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用 
 \begin{lstlisting}
 \bioinfo{User Name}{115520}
+\end{lstlisting}
+
+封面中间位置的色块的颜色可以使用下面命令进行修改：
+\begin{lstlisting}
+  \definecolor{customcolor}{RGB}{32,178,170}
+  \colorlet{coverlinecolor}{customcolor}
 \end{lstlisting}
 
 \subsection{封面图}
@@ -386,11 +308,23 @@ Elegant\LaTeX{} 系列模板从创立至今已经有 9 年了，我们的模板�
 由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
 \begin{lstlisting}
 \begin{theorem}{theorem name}{label}
-The content of theorem.
+  The content of theorem.
 \end{theorem}
 \end{lstlisting}
 
 第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
+
+在用户多次反馈下，4.x 之后，引入了原生定理的支持方式，也就是使用可选项方式：
+
+\begin{lstlisting}
+\begin{theorem}[theorem name] \label{thm:theorem-label}
+  The content of theorem.
+\end{theorem}
+% or 
+\begin{theorem} \label{thm:theorem-withou-name}
+  The content of theorem without name.
+\end{theorem}
+\end{lstlisting}
 
 其他相同用法的定理类环境有：
 
@@ -490,26 +424,21 @@ The content of theorem.
 
 \section{参考文献}
 
-此模板使用了 \hologo{BibTeX} 来生成参考文献，在中文示例中，使用了 \lstinline{gbt7714} 宏包。参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+此模板使用了 \hologo{biber} 来生成参考文献，也即使用 \lstinline{biblatex} 宏包，在中文示例中，使用了 \lstinline{gbt7714} 宏包。参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
 
-你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \hologo{BibTeX} 编译。如果你想添加未引用的文献，可以使用
-\begin{lstlisting}[frame=single]
-\nocite{EINAV2010,Havrylchyk2018} %or include some bibitems
-\nocite{*} %include all the bibitems
-\end{lstlisting}
+你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \hologo{biber} 编译。
 
-本模板还添加了 \lstinline{cite=numbers} 、\lstinline{cite=super} 和 \lstinline{cite=authoryear}  三个参考文献选项，用于设置参考文献格式的设置，默认为 \lstinline{numbers}。据我们所知，理工科类一般使用数字形式 \lstinline{numbers} 或者上标形式 \lstinline{super}，而文科类使用作者-年份 \lstinline{authoryear} 比较多，所以我们将 \lstinline{numbers} 作为默认格式。如果需要改为 \lstinline{cite=super}  或者  \lstinline{authoryear} ，可以使用
+为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），如果需要设置为国标 GB7714-2015，需要使用：
 \begin{lstlisting}
-\documentclass[cite=super]{elegantbook} % set super style ref style
-\documentclass[super]{elegantbook}
-\documentclass[cite=authoryear]{elegantbook} % set author year ref style
-\documentclass[authoryear]{elegantbook}
+  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
 \end{lstlisting}
 
-为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 选项，默认为 apalike，更多的选择可以参考 \href{https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles}{\hologo{BibTeX} Bibliography Styles}。用法为
+如果需要添加排序方式，可以在导言区加入
 \begin{lstlisting}
-  \documentclass[bibstyle=apalike]{elegantbook} 
+  \ExecuteBibliographyOptions{sorting=ynt}
 \end{lstlisting}
+
+启用国标之后，可以加入 \lstinline{sorting=gb7714-2015}。
 
 \section{添加序章}
 
@@ -633,14 +562,10 @@ The content of introduction.
 
 \end{remark}
 
-\part{模板设置}
-
 \chapter{字体选项}
 字体选项独立成章的原因是，我们希望本模板的用户关心模板使用的字体，知晓自己使用的字体以及遇到字体相关的问题能更加便捷地找到答案。
 
 \textcolor{red}{\bfseries 重要提示}：从 3.10 版本更新之后，沿用至今的 newtx 系列字体被重新更改为 cm 字体。并且新增中文字体（\lstinline{chinesefont}）选项。
-
-OpenType 字体设置参考 Stone-Zeng \href{https://stone-zeng.github.io/2018-08-08-use-opentype-fonts/}{在 \LaTeX{} 中使用 OpenType 字体}。
 
 \section{数学字体选项}
 
@@ -844,18 +769,16 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \begin{enumerate}[itemsep=1.5ex]
   \item \question{有没有办法章节用“第一章，第一节，（一）”这种？}
     见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
-  \item \question{3.07 版本的 cls 的 natbib 加了numbers 编译完了没变化，群主设置了不可更改了？}
-    之前在 3.07 版本中在引入 \lstinline{gbt7714} 宏包时，加入了 \lstinline{authoryear} 选项，这个使得 \lstinline{natbib} 设置了 \lstinline{numbers} 也无法生效。3.08 和 3.09 版本中，模板新增加了 \lstinline{numbers} 、\lstinline{super} 和 \lstinline{authoryear} 文献选项，你可以参考前文设置说明。
   \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
     页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
   \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset `Mac' is unavailable.}}
     在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。
   \item \question{\lstinline{! LaTeX Error: Unknown option `scheme=plain' for package `ctex'.}}
-    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2019。
+    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2021。
   \item \question{我该使用什么版本？}
-    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2019 内获取。
+    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
   \item \question{我该使用什么编辑器？}
-    你可以使用 \TeX{} Live 2019 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2019 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
+    你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
   \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
     模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
   \item \question{请问交叉引用是什么？}
@@ -865,12 +788,25 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item \question{代码高亮环境能用其他语言吗？}
     可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lsset} 命令，更多信息请参考宏包文档。
   \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
-    由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。在找到非常好的创意之前不会发布正式的 Beamer 主题，如果你非常希望得到 Elegant\LaTeX{} “官方”的主题，请在用户 QQ 群内下载测试主题 PreElegantSlide。正式版制作计划在今年或者明年。
+    由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。后续确定不会再出任何主题/模板，请大家根据需要修改已有主题。
 \end{enumerate}
 
 \chapter{版本更新历史}
 
-根据用户的反馈，我们不断修正和完善模板。截止到此次更新，ElegantBook 模板在 GitHub 上有将近 100 次提交，正式发行版本（release）有 16 次。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+根据用户的反馈，我们不断修正和完善模板。截止到此次更新，ElegantBook 模板在 GitHub 上有将近 100 次提交，正式发行版本（release）有 17 次。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+
+
+\datechange{2021/05/02}{版本 4.1 正式发布。}
+
+\begin{change}
+  \item \textbf{重要改动}：由原先的 \hologo{BibTeX} 改为 biblatex 编译方式（后端为 \lstinline{biber}），请注意两者之间的差异；
+  \item \textbf{重要改进}：修改对于定理写法兼容方式，提高数学公式代码的兼容性；
+  \item 页面设置改动，默认页面更宽；方便书写和阅读；
+  \item 支持目录文字以及页码跳转；
+  \item 不再维护 \hologo{pdfLaTeX} 中文支持方式，请务必使用 \hologo{XeLaTeX} 编译中文文稿。
+  \item 增加多个语言选项，法语 \lstinline{lang=fr}、荷兰语 \lstinline{lang=nl}、匈牙利语 \lstinline{lang=hu}、西班牙语 \lstinline{lang=es}、蒙古语 \lstinline{lang=mn} 等。
+\end{change}
+
 
 \datechange{2020/04/12}{版本 3.11 正式发布，\textcolor{red}{此版本为 3.x 最后版本。}}
 
@@ -900,11 +836,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \datechange{2019/08/18}{版本 3.09 正式发布}
 
 \begin{change}
-<<<<<<< HEAD
   \item \lstinline{\elegantpar} 存在 bug，删除 \lstinline{\elegantpar} 命令，建议用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar} 旁注命令。
-=======
-  \item 由于 \lstinline{\elegantpar} 存在 bug，暂时性删除 \lstinline{\elegantpar} 命令，并提示用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar}。
->>>>>>> 6c64e5900bc7db464b57cf0379413c5212f3650a
   \item 积分操作符统一更改为 \lstinline{esint} 宏包设置；
   \item 新增目录选项 \lstinline{toc}，可选项为单栏 \lstinline{onecol} 和双栏 \lstinline{twocol}；
   \item 手动增加参考文献选项 \lstinline{cite}，可选项为上标形式 \lstinline{super}；
