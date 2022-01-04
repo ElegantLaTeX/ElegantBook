@@ -17,6 +17,8 @@ For some reasons, __unauthorized__ pull requests are **UNACCEPTABLE** since May 
 
 ## Acknowledgement
 
+Thank [sikouhjw](https://github.com/sikouhjw) for his quick response to Github issues and continuously support work for ElegantLaTeX.
+
 Thank ChinaTeX and [LaTeX Studio](http://www.latexstudio.net/) for their promotion. 
 
 
