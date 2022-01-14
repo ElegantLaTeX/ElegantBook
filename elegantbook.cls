@@ -10,6 +10,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{elegantbook}[2021/05/02 v4.1 ElegantBook document class]
 
+%%% patch for newtx v1.7 or later
+\IfFileExists{newtx.sty}{\PassOptionsToPackage{nofontspec}{newtxtext}}{}
+%%%
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
 \SetupKeyvalOptions{family=ELEGANT, prefix=ELEGANT@, setkeys=\kvsetkeys}
