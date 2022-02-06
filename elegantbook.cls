@@ -46,6 +46,7 @@
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 \DeclareVoidOption{it}{\ekv{lang=it}}
+\DeclareVoidOption{pt}{\ekv{lang=pt}}
 
 \DeclareVoidOption{fancy}{\ekv{mode=fancy}}
 \DeclareVoidOption{simple}{\ekv{mode=simple}}
@@ -680,6 +681,40 @@
   \newcommand\bioinfo[2]{\gdef@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Шинэчлэлтүүд:}
   \newcommand{\historyname}{Хувилбарын түүх}
+}{\relax}
+
+\ifdefstring{\ELEGANT@lang}{pt}{
+  \RequirePackage[portuguese]{babel}
+  \setlength\parindent{2em}
+  \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{Tabela}~\ref{#1}}
+  \renewcommand{\spanishchaptername}{Capítulo \thechapter}
+  \newcommand{\authorname}{\textbf{Autor: }}
+  \newcommand{\institutename}{\textbf{Instituição: }}
+  \newcommand{\datename}{\textbf{Data: }}
+  \newcommand{\versionname}{\textbf{Versão: }}
+  \newcommand{\notename}{Observação}
+  \newcommand{\proofname}{Demostração}
+  \newcommand{\problemname}{Problema}
+  \newcommand{\definitionname}{Definição}
+  \newcommand{\theoremname}{Teorema}
+  \newcommand{\axiomname}{Axioma}
+  \newcommand{\postulatename}{Postulado}
+  \newcommand{\lemmaname}{Lema}
+  \newcommand{\propositionname}{Proposição}
+  \newcommand{\corollaryname}{Corolário}
+  \newcommand{\examplename}{Exemplo}
+  \newcommand{\exercisename}{Exercício}
+  \newcommand{\remarkname}{Comentário}
+  \newcommand{\assumptionname}{Assunto}
+  \newcommand{\conclusionname}{Conclusão}
+  \newcommand{\solutionname}{Soluções}
+  \newcommand{\propertyname}{Propiedade}
+  \newcommand{\introductionname}{Introdução}
+  \newcommand{\problemsetname}{Questão}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{Atualização: }
+  \newcommand{\historyname}{Histórico de versões}
 }{\relax}
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
