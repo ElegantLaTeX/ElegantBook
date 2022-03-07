@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%
 %% start of file `elegantbook.cls'.
-%% Copyright 2013-2021 ElegantLaTeX (elegantlatex2e@gmail.com)
+%% Copyright 2013-2022 ElegantLaTeX (elegantlatex2e@gmail.com)
 %%
 %% This work may be distributed and/or modified freely
 %% available at https://github.com/ElegantLaTeX/ElegantBook
@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2021/05/02 v4.1 ElegantBook document class]
+\ProvidesClass{elegantbook}[2021/03/08 v4.2 ElegantBook document class]
 
 %%% patch for newtx v1.7 or later
 \IfFileExists{newtx.sty}{\PassOptionsToPackage{nofontspec}{newtxtext}}{}
