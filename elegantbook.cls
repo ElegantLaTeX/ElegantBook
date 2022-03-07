@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2021/03/08 v4.2 ElegantBook document class]
+\ProvidesClass{elegantbook}[2022/03/08 v4.2 ElegantBook document class]
 
 %%% patch for newtx v1.7 or later
 \IfFileExists{newtx.sty}{\PassOptionsToPackage{nofontspec}{newtxtext}}{}
