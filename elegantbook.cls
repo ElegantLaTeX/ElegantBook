@@ -344,16 +344,17 @@
 \RequirePackage{makecell,lipsum,hologo}
 %%中文结构名字
 
+
+%%   章节设置
+\RequirePackage[center,pagestyles]{titlesec}
+\RequirePackage[title,titletoc,header]{appendix}
+
+
 \RequirePackage[
   backend=biber,
   citestyle=\ELEGANT@citestyle,
   bibstyle=\ELEGANT@bibstyle]{biblatex}
-
-
-
-%%   章节设置
-
-\RequirePackage{appendix}
+\defbibheading{elegantbook}[\ebibname]{#1}
 
 \ifdefstring{\ELEGANT@lang}{cn}{
   \renewcommand{\baselinestretch}{1.3}
@@ -365,13 +366,12 @@
   \renewcommand{\listfigurename}{插图目录}
   \renewcommand{\listtablename}{表格目录}
   \renewcommand{\bibname}{参考文献}
+  \newcommand{\ebibname}{参考文献}
   \renewcommand{\appendixname}{附录}
+  \renewcommand{\appendixtocname}{附录}
   \renewcommand{\indexname}{索\hspace{2em}引}
   \newcommand\figref[1]{\textbf{图}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
-  \ifdefstring{\ELEGANT@scheme}{chinese}{
-    \renewcommand{\chaptername}{第\zhnumber{\arabic{chapter}}章}}{
-    \renewcommand{\chaptername}{第 \thechapter{} 章}}
   \newcommand{\authorname}{\citshape 作者：}
   \newcommand{\institutename}{\citshape 组织：}
   \newcommand{\datename}{\citshape 时间：}
@@ -398,12 +398,16 @@
   \newcommand\bioinfo[2]{\gdef\@bioinfo{{\citshape #1}：#2}}
   \newcommand{\updatename}{更新：}
   \newcommand{\historyname}{版本更新历史}
-  }{\relax}
+  \newcommand{\beforechap}{第}
+  \newcommand{\afterchap}{章}
+}{\relax}
+
+
 \ifdefstring{\ELEGANT@lang}{en}{
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figure}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Table}~\ref{#1}}
-  \renewcommand{\chaptername}{Chapter \thechapter}
+  \renewcommand{\chaptername}{Chapter}
   \renewcommand{\partname}{\color{structurecolor} Part}
   \newcommand{\authorname}{\textbf{Author: }}
   \newcommand{\institutename}{\textbf{Institute: }}
@@ -428,6 +432,7 @@
   \newcommand{\propertyname}{Property}
   \newcommand{\introductionname}{Introduction}
   \renewcommand{\appendixname}{Appendix}
+  \newcommand{\ebibname}{Bibliography}
   % \newcommand{\problemsetname}{Exercise}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Updates:}
@@ -441,7 +446,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Tabella}~\ref{#1}}
-  \renewcommand{\chaptername}{Chapter \thechapter}
+  \renewcommand{\chaptername}{Chapter}
   \newcommand{\authorname}{\textbf{Autore: }}
   \newcommand{\institutename}{\textbf{Istituto: }}
   \newcommand{\datename}{\textbf{Data: }}
@@ -466,6 +471,7 @@
   \newcommand{\introductionname}{Introduzione}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Aggiornamenti:}
+  \newcommand{\ebibname}{Bibliografia}
   \newcommand{\historyname}{Cronologia delle versioni}
 }{\relax}
 
@@ -476,7 +482,7 @@
   \setlength\parindent{2em}
   \renewcommand\figref[1]{\textbf{Figure}\ref{#1}}
   \renewcommand\tabref[1]{\textbf{Tableau}\ref{#1}}
-  \renewcommand{\chaptername}{Chapitre \thechapter}
+  \renewcommand{\chaptername}{Chapitre}
   \renewcommand{\authorname}{\textbf{Auteur: }}
   \renewcommand{\institutename}{\textbf{Institut: }}
   \renewcommand{\datename}{\textbf{Date: }}
@@ -501,6 +507,7 @@
   \renewcommand{\introductionname}{Introduction}
   \renewcommand{\problemsetname}{Exercice}
   \renewcommand{\updatename}{Mises à jour:}
+  \newcommand{\ebibname}{Bibliographie}
   \renewcommand{\historyname}{Historique des versions}
 }{\relax}
 
@@ -510,7 +517,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figuur}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Tabel}~\ref{#1}}
-  \renewcommand{\chaptername}{Hoofdstuk \arabic{chapter}}
+  \renewcommand{\chaptername}{Hoofdstuk}
   \newcommand{\authorname}{\textbf{Auteur: }}
   \newcommand{\institutename}{\textbf{Instituut: }}
   \newcommand{\datename}{\textbf{Datum: }}
@@ -536,6 +543,7 @@
   \newcommand{\problemsetname}{Probleemcomplex}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Update:}
+  \newcommand{\ebibname}{Bibliographie}
   \newcommand{\historyname}{Versie Geschiedenis}
 }{\relax}
 
@@ -545,7 +553,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\ref{#1}~\textbf{Ábra}}
   \newcommand\tabref[1]{\ref{#1}~\textbf{Táblázat}}
-  \renewcommand{\chaptername}{\thechapter ~ fejezet}
+  \renewcommand{\chaptername}{Fejezet}
   \newcommand{\authorname}{\textbf{Szerző: }}
   \newcommand{\institutename}{\textbf{Intézmény: }}
   \newcommand{\datename}{\textbf{Dátum: }}
@@ -571,6 +579,7 @@
   \newcommand{\problemsetname}{Feladatok}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Frissítve:}
+  \newcommand{\ebibname}{Bibliográfia}
   \newcommand{\historyname}{Korábbi verziók}
 }{\relax}
 
@@ -584,7 +593,7 @@
   \renewcommand{\listtablename}{Tabellenverzeichnis}
   \renewcommand{\bibname}{Bibliographie}
   \renewcommand{\appendixname}{Anhang}
-  \renewcommand{\chaptername}{Kapitel \thechapter}
+  \renewcommand{\chaptername}{Kapitel}
   \newcommand{\authorname}{\textbf{Autor: }}
   \newcommand{\institutename}{\textbf{Institut: }}
   \newcommand{\datename}{\textbf{Datum: }}
@@ -610,6 +619,7 @@
   \newcommand{\introductionname}{Einleitung}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Updates:}
+  \renewcommand{\ebibname}{Bibliographie}
   \newcommand{\historyname}{Version der Geschichte}
 }{\relax}
 
@@ -618,7 +628,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Tabla}~\ref{#1}}
-  \renewcommand{\spanishchaptername}{Capítulo \thechapter}
+  \renewcommand{\spanishchaptername}{Capítulo}
   \newcommand{\authorname}{\textbf{Autor: }}
   \newcommand{\institutename}{\textbf{Instituto: }}
   \newcommand{\datename}{\textbf{Fecha: }}
@@ -644,6 +654,7 @@
   \newcommand{\problemsetname}{Ejercicio}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Actualización:}
+  \newcommand{\ebibname}{Bibliografía}
   \newcommand{\historyname}{Historial de versiones}
 }{\relax}
 
@@ -654,7 +665,7 @@
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Зураг}\ref{#1}}
   \newcommand\tabref[1]{\textbf{Хүснэгт}\ref{#1}}
-  \renewcommand{\chaptername}{Бүлэг \thechapter}
+  \renewcommand{\chaptername}{Бүлэг}
   \newcommand{\authorname}{\textbf{Зохиогч: }}
   \newcommand{\institutename}{\textbf{Сургууль: }}
   \newcommand{\datename}{\textbf{Огноо: }}
@@ -680,15 +691,17 @@
   \newcommand{\problemsetname}{Бодлогууд}
   \newcommand\bioinfo[2]{\gdef@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Шинэчлэлтүүд:}
+  \newcommand{\ebibname}{Ном зүй}
   \newcommand{\historyname}{Хувилбарын түүх}
 }{\relax}
+
 
 \ifdefstring{\ELEGANT@lang}{pt}{
   \RequirePackage[portuguese]{babel}
   \setlength\parindent{2em}
   \newcommand\figref[1]{\textbf{Figura}~\ref{#1}}
   \newcommand\tabref[1]{\textbf{Tabela}~\ref{#1}}
-  \renewcommand{\spanishchaptername}{Capítulo \thechapter}
+  \renewcommand{\chaptername}{Capítulo}
   \newcommand{\authorname}{\textbf{Autor: }}
   \newcommand{\institutename}{\textbf{Instituição: }}
   \newcommand{\datename}{\textbf{Data: }}
@@ -714,8 +727,52 @@
   \newcommand{\problemsetname}{Questão}
   \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
   \newcommand{\updatename}{Atualização: }
+  \newcommand{\ebibname}{Bibliografia}
   \newcommand{\historyname}{Histórico de versões}
 }{\relax}
+
+
+\ifdefstring{\ELEGANT@lang}{jp}{
+ \RequirePackage{luatexja}
+  \setlength\parindent{2em}
+  \renewcommand{\contentsname}{目次}
+  \newcommand\figref[1]{\textbf{図}~\ref{#1}}
+  \newcommand\tabref[1]{\textbf{表}~\ref{#1}}
+  \renewcommand{\partname}{\color{structurecolor}}
+  \renewcommand{\listfigurename}{イラストカタログ}
+  \renewcommand{\listtablename}{表カタログ}
+  \renewcommand{\bibname}{参考文献}
+  \renewcommand{\appendixname}{付録}
+  \renewcommand{\chaptername}{第 \thechapter 章}
+  \newcommand{\authorname}{\textbf{著者：}}
+  \newcommand{\institutename}{\textbf{組織団体：}}
+  \newcommand{\datename}{\textbf{日付：}}
+  \newcommand{\versionname}{\textbf{\citshape バージョン：}}
+  \newcommand{\notename}{ノート}
+  \newcommand{\proofname}{証明}
+  \newcommand{\problemname}{問題}
+  \newcommand{\definitionname}{定義}
+  \newcommand{\theoremname}{定理}
+  \newcommand{\axiomname}{公理}
+  \newcommand{\postulatename}{公準}
+  \newcommand{\lemmaname}{補題}
+  \newcommand{\propositionname}{命題}
+  \newcommand{\corollaryname}{系}
+  \newcommand{\examplename}{例題}
+  \newcommand{\instancename}{例}
+  \newcommand{\exercisename}{練習}
+  \newcommand{\remarkname}{注}
+  \newcommand{\assumptionname}{仮設}
+  \newcommand{\conclusionname}{結論}
+  \newcommand{\solutionname}{解答}
+  \newcommand{\propertyname}{性質}
+  \newcommand{\introductionname}{内容概要}
+  \newcommand\bioinfo[2]{\gdef\@bioinfo{\textbf{#1}: #2}}
+  \newcommand{\updatename}{更新：}
+  \newcommand{\ebibname}{参考文献}
+  \newcommand{\historyname}{バージョン更新履歴}
+}{\relax}
+
 
 \graphicspath{{./figure/}{./figures/}{./image/}{./images/}{./graphics/}{./graphic/}{./pictures/}{./picture/}}
 
@@ -736,12 +793,19 @@
 \setlist[itemize,2]{label={\eitemii}}
 \setlist[itemize,3]{label={\eitemiii}}
 
-
-\RequirePackage[center,pagestyles]{titlesec}
 \RequirePackage{apptools}
+
+% appendix chapter:
+
+\ifdefstring{\ELEGANT@lang}{cn}{
+  \ifdefstring{\ELEGANT@scheme}{chinese}{
+    \newcommand{\xchaptertitle}{第\zhnumber{\arabic{chapter}}章} }{
+    \newcommand{\xchaptertitle}{第 \thechapter{} 章}} }{
+  \newcommand{\xchaptertitle}{\chaptername~\thechapter~}}
+
 \setcounter{secnumdepth}{5}
 \titleformat{\chapter}[\style]{\bfseries}{
-  \filcenter\LARGE\enspace\bfseries{\color{structurecolor} \IfAppendix{\appendixname\;\thechapter}{\chaptername}\;}}{1pt}{
+  \filcenter\LARGE\enspace\bfseries{\color{structurecolor} \IfAppendix{\appendixname\;\thechapter\;}{\xchaptertitle\;}}}{1pt}{
   \LARGE\bfseries\color{structurecolor}\filcenter}[]
 \titleformat{\section}[hang]{\bfseries}{
   \Large\bfseries{\color{structurecolor}\thesection}\enspace}{1pt}{%
@@ -959,9 +1023,9 @@
 
 \RequirePackage{adforn}
 
-\newenvironment{problemset}[1][\chaptername~\;\exercisename]{
+\newenvironment{problemset}[1][\xchaptertitle~\exercisename]{
   \begin{center}
-    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\chaptername\;\exercisename}{\exercisename}}
+    \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\xchaptertitle~\exercisename}{\exercisename}}
     % \markboth{#1}{\rightmark}
     \markright{#1}
     \textcolor{structurecolor}{\Large\bfseries\adftripleflourishleft~#1~\adftripleflourishright}
@@ -986,7 +1050,7 @@
 \fancyhf{}
 
 
-\fancyfoot[c]{\color{structurecolor}\scriptsize\thepage}
+\fancyfoot[c]{\color{structurecolor}\small\thepage}
 \if@twoside
   \fancyhead[EL]{\color{structurecolor}\cnormal\leftmark}
   \fancyhead[OR]{\color{structurecolor}\cnormal\rightmark}
@@ -1000,8 +1064,7 @@
 % \renewcommand{\headrule}{}
 \fancypagestyle{plain}{\renewcommand{\headrulewidth}{0pt}\fancyhf{}\renewcommand{\headrule}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\, #1}{}}
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername\, #1}{}}
-
+\renewcommand{\chaptermark}[1]{\markboth{\xchaptertitle\, #1}{}}
 
 
 \renewcommand*{\maketitle}{%
@@ -1163,3 +1226,30 @@
 \thispagestyle{empty}%
 \newpage%
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+
+% https://tex.stackexchange.com/questions/56839/chaptername-is-used-even-for-appendix-chapters-in-toc
+\usepackage{calc}
+\usepackage[titles]{tocloft}
+\ifdefstring{\ELEGANT@lang}{cn}{
+  \renewcommand{\cftchappresnum}{\beforechap\space}
+  \renewcommand{\cftchapaftersnum}{\space\afterchap}
+  \setlength{\cftchapnumwidth}{\widthof{\textbf{附录~999}}}
+  \g@addto@macro\appendix{%
+    \addtocontents{toc}{%
+      \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
+      \protect\renewcommand{\protect\cftchapaftersnum}{}%
+    }%
+  }
+}{
+  \renewcommand{\cftchappresnum}{\chaptername\space}
+  \renewcommand{\cftchapaftersnum}{\space}
+  \setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~9}}}
+  \g@addto@macro\appendix{%
+    \addtocontents{toc}{%
+      \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
+      \protect\renewcommand{\protect\cftchapaftersnum}{}%
+      \setlength{\cftchapnumwidth}{\widthof{\textbf{Appendix~999}}}
+    }%
+  }
+}

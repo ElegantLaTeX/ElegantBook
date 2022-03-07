@@ -1,15 +1,15 @@
-\documentclass[cn,10pt]{elegantbook}
+\documentclass[lang=cn,10pt]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{May 2, 2021}
-\version{4.1}
+\date{March 8, 2022}
+\version{4.2}
 \bioinfo{自定义}{信息}
 
-\extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
+\extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
 
 \setcounter{tocdepth}{3}
 
@@ -20,36 +20,13 @@
 \usepackage{array}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 
-\definecolor{customcolor}{RGB}{32,178,170}
-\colorlet{coverlinecolor}{customcolor}
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
 
 \begin{document}
 
 \maketitle
 \frontmatter
-
-\chapter*{特别声明}
-
-\markboth{Introduction}{前言}
-
-自 2019 年 Elegant\LaTeX{} 系列模板上线 GitHub、CTAN 以来，受到很多用户的喜爱。
-
-2020 年，我打算做 Elegant\LaTeX{} 的最后一个版本，也就是原定计划 ElegantBook 4.x 版本为 Elegant\LaTeX{} 系列模板的终止符。基于我想把 4.x 做成一个最终版本，我计划了很多事情，包括将代码转为 dtx，将三个模板的文档打包进 dtx 里面，然后重新设计封面，补充各种页面，增加元素等等。我想的很多，但是做起来并不是很顺利，中间也发生了很多事情，不想解释。直至今年 4 月，我决定，不论如何，先把 4.1 发布出来。
-
-\vskip 0.5cm
-
-另外，在临近 Elegant\LaTeX{} 模板告别之际，我想和各位用户说：多分享，多奉献。
-
-\vskip 0.5cm
-
-\underline{如果你无法认同我的想法，建议直接删除本模板。}
-
-\vskip 1.5cm
-
-\begin{flushright}
-Ethan Deng\\
-May 2, 2021
-\end{flushright}
 
 \tableofcontents
 
@@ -71,23 +48,6 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
 
-
-\section{ElegantBook 更新说明}
-
-此次为 4.x 第一个版本，在 3.x 基础上，主要更新了定理以及参考文献的支持方式，具体内容有：
-
-\begin{enumerate}
-  \item \textbf{重要改动}：由原先的 \hologo{BibTeX} 改为 biblatex 编译方式（后端为 \lstinline{biber}），请注意两者之间的差异；
-  \item \textbf{重要改进}：修改对于定理写法兼容方式，提高数学公式代码的兼容性；
-  \item 页面设置改动，默认页面更宽；方便书写和阅读；
-  \item 支持目录文字以及页码跳转；
-  \item 不再维护 \hologo{pdfLaTeX} 中文支持方式，请务必使用 \hologo{XeLaTeX} 编译中文文稿。
-  \item 增加多语言选项，法语 \lstinline{lang=fr}、德语 \lstinline{lang=de}、荷兰语 \lstinline{lang=nl}、匈牙利语 \lstinline{lang=hu}、西班牙语 \lstinline{lang=es}、蒙古语 \lstinline{lang=mn} 等。
-\end{enumerate}
-
-\begin{note}
-如果你使用旧版本切换到新版本时，遇到问题时，请核对文档中是否有 \lstinline{pageanchor} 字样。如果有，请删除文档中的 \lstinline|\hypersetup{pageanchor=true}|，并且在 \lstinline{\maketitle} 和 \lstinline{\tableofcontents} 之间添加 \lstinline{\frontmatter}。2.x 版本的用户请仔细查看\href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{跨版本转换}。
-\end{note}
 
 \section{模板安装与更新}
 
@@ -152,7 +112,8 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
   \item 由 \href{https://github.com/palkotamas}{palkotamas} 提供的匈牙利语翻译 \lstinline{lang=hu}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation}；
   \item 由 Lisa 提供的德语翻译 \lstinline{lang=de}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation}；
   \item 由 Gustavo A. Corradi 提供的西班牙语的翻译 \lstinline{lang=es}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation}；
-  \item 由 \href{https://github.com/Altantsooj}{Altantsooj} 提供的蒙古语的翻译 \lstinline{lang=mn}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}。
+  \item 由 \href{https://github.com/Altantsooj}{Altantsooj} 提供的蒙古语的翻译 \lstinline{lang=mn}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}；
+  \item 由 \href{https://github.com/inusturbo}{inusturbo} 提供的日本语的翻译 \lstinline{lang=jp}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/172}{Japanese Translation}。
 \end{itemize}
 
 
@@ -796,6 +757,17 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 根据用户的反馈，我们不断修正和完善模板。截止到此次更新，ElegantBook 模板在 GitHub 上有将近 100 次提交，正式发行版本（release）有 17 次。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
 
 
+
+\datechange{2022/03/08}{版本 4.2 正式发布。}
+
+\begin{change}
+  \item 对于 newtx 系列宏包更新导致的字体 bug 的修复；
+  \item 修缮目录格式，为了达到这个目的，重新改写 \lstinline{\chaptername} 的重定义语句；
+  \item 增加日语 \lstinline{lang=jp} 设定。
+  \item 这个版本为一个临时性版本，在 \TeX Live 2022 发布之后，将尽快发布 4.3 版本，由于对于中文的改动比较大，可能会出现预期之外的 bug，有问题可以在 QQ 群或者 Github 反馈。
+\end{change}
+
+
 \datechange{2021/05/02}{版本 4.1 正式发布。}
 
 \begin{change}
@@ -933,8 +905,8 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item 颜色名字重命名。
 \end{change}
 
-\nocite{*} 
-\printbibliography
+\nocite{*}
+\printbibliography[heading=bibintoc, title=\ebibname]
 \appendix
 
 \chapter{基本数学工具}

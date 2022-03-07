@@ -5,8 +5,8 @@
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{May. 2, 2021}
-\version{4.1}
+\date{March 8, 2022}
+\version{4.2}
 \bioinfo{Bio}{Information}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
@@ -47,16 +47,15 @@ Contact Infos:
 
 \section{ElegantBook Updates}
 
-Version 4.1 is the first version of 3.x, we add support for biblatex, theorem, and multilingual translation. What\rq s new in this version:
+Version 4.2 is the \textit{temporary} version before v4.3 which will be released when \TeX Live 2022 is ready, we add quick bug fix caused by newtx package updates, and multilingual translation \lstinline{lang=jp}. What\rq s new in this version:
 
-\begin{enumerate}
-  \item \textbf{! Big Change}: Change the bibliography method from \hologo{BibTeX} to biblatex(with backend  \lstinline{biber});
-  \item \textbf{! Big Change}: Add support for the default theorem writing method (with optional name and label);
-  \item Add left and right space;
-  \item Support hyperlink from the text of TOC;
-  \item Remove the \hologo{pdfLaTeX} compatiblity check for Chinese.
-  \item Add multilingual support, for french \lstinline{lang=fr}, dutch \lstinline{lang=nl}, Hungarian  \lstinline{lang=hu}, Spanish \lstinline{lang=es}, Mongolian \lstinline{lang=mn} etc.
-\end{enumerate}
+\begin{change}
+  \item Bug fix due to the update of newtx fonts;
+  \item Add `Chapter' in TOC, and redefine \lstinline{\chaptername} to unify the logic under different languages;
+  \item Add language option for Japanese, \lstinline{lang=jp}.
+  \item \textbf{! Warnings}: Due to this `urgent' fonts bug and TOC modification, the multilingual option may cause some unexpected errors, you can report in this \href{https://github.com/ElegantLaTeX/ElegantBook/issues/170}{issue}, I will fix it after the releases of \TeX{} Live 2022.
+\end{change}
+
 
 \section{Installation and Update}
 Both portable version and installation package are available, online usage is optional as well.
@@ -639,6 +638,15 @@ We list some FAQs for users to refer to:
 \chapter{Version History}
 We revised our templates now and then. This section shows the version story of ElegantBook. We have nearly 100 submits and 17 releases on GitHub since uploaded.
 
+\datechange{2022/03/08}{release of v4.2.}
+
+\begin{change}
+  \item Bug fix due to the update of newtx fonts;
+  \item Add `Chapter' in TOC, and redefine \lstinline{\chaptername} to unify the logic under different languages;
+  \item Add language option for Japanese, \lstinline{lang=jp}.
+  \item \textbf{! Warnings}: Due to this `urgent' fonts bug and TOC modification, the multilingual option may cause some unexpected errors, you can report in this \href{https://github.com/ElegantLaTeX/ElegantBook/issues/170}{issue}, I will fix it after the releases of \TeX{} Live 2022.
+\end{change}
+
 
 \datechange{2021/05/02}{release of v4.1.}
 
@@ -688,7 +696,8 @@ We revised our templates now and then. This section shows the version story of E
 \end{change}
 
 \nocite{en2,en3}
-\printbibliography
+
+\printbibliography[heading=bibintoc, title=\ebibname]
 
 \appendix
 % \renewcommand\chaptername{\eappendix \thechapter}
