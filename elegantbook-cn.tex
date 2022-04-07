@@ -1,4 +1,4 @@
-\documentclass[lang=cn,10pt]{elegantbook}
+\documentclass[lang=cn,10pt,founder]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -16,6 +16,17 @@
 \logo{logo-blue.png}
 \cover{cover.jpg}
 
+\usepackage{lmodern}
+
+\setmainfont{texgyretermes}[
+  UprightFont = *-regular ,
+  BoldFont = *-bold ,
+  ItalicFont = *-italic ,
+  BoldItalicFont = *-bolditalic ,
+  Extension = .otf ,
+  Scale = 1.0]
+
+\usepackage[]{newtxmath}
 % 本文档命令
 \usepackage{array}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}

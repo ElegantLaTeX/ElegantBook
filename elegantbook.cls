@@ -10,8 +10,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{elegantbook}[2022/03/08 v4.2 ElegantBook document class]
 
-%%% patch for newtx v1.7 or later
-\IfFileExists{newtx.sty}{\PassOptionsToPackage{nofontspec}{newtxtext}}{}
+
 %%%
 \RequirePackage{kvoptions}
 \RequirePackage{etoolbox}
@@ -61,7 +60,6 @@
 \DeclareStringOption[numeric]{bibstyle}
 
 
-\DeclareVoidOption{newtx}{\ekv{math=newtx}}
 \DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
 \DeclareVoidOption{cm}{\ekv{math=cm}}
 
@@ -203,26 +201,7 @@
   \newcommand{\cfs}{\normalfont}
 \fi
 
-\RequirePackage{newtxtext}
 \RequirePackage{anyfontsize}
-\ifdefstring{\ELEGANT@math}{newtx}{
-  \RequirePackage{newtxmath}
-  \let\Bbbk\relax
-  \RequirePackage{esint}
-  %%% use yhmath pkg, uncomment following code
-  % \let\oldwidering\widering
-  % \let\widering\undefined
-  % \RequirePackage{yhmath}
-  % \let\widering\oldwidering
-
-  %%% use esvect pkg, uncomment following code
-  % \RequirePackage{esvect}
-
-  \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
-  \let\sumop\relax\let\prodop\relax
-  \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
-  \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
-}{\relax}
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
@@ -1159,7 +1138,7 @@
   breaklines=true,
   keywordstyle=\color{winered},
   commentstyle=\color{gray},
-  emph={elegantpaper,fontenc,fontspec,xeCJK,citestyle,FiraMono,xunicode,newtxmath,figure,fig,image,img,table,itemize,enumerate,newtxtext,newtxtt,ctex,microtype,description,times,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,ctex,listings,base,math,scheme,toc,esint,chinesefont,amsmath,bibstyle,natbib,pgfornament},
+  emph={elegantpaper,fontenc,fontspec,xeCJK,citestyle,FiraMono,xunicode,figure,fig,image,img,table,itemize,enumerate,ctex,microtype,description,times,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,ctex,listings,base,math,scheme,toc,esint,chinesefont,amsmath,bibstyle,natbib,pgfornament},
   emphstyle={\color{frenchplum}},
   morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote,bioinfo,datechange,listofchange,lvert,lastpage,songti,heiti,fangsong,setCJKfamilyfont,textbf},
   frame=single,
