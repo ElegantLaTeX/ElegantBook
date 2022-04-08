@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2022/03/08 v4.2 ElegantBook document class]
+\ProvidesClass{elegantbook}[2022/04/09 v4.3 ElegantBook document class]
 
 
 %%%
@@ -27,6 +27,7 @@
 \DeclareStringOption[marginfalse]{marginpar}
 \DeclareStringOption[onecol]{toc}
 \DeclareStringOption{scheme}
+
 % ----- backward compatibility
 \DeclareVoidOption{green}{\ekv{color=green}}
 \DeclareVoidOption{cyan}{\ekv{color=cyan}}
@@ -34,10 +35,10 @@
 \DeclareVoidOption{gray}{\ekv{color=gray}}
 \DeclareVoidOption{black}{\ekv{color=black}}
 \DeclareVoidOption{nocolor}{\ekv{color=none}}
-\DeclareStringOption[ctexfont]{chinesefont}
 
 \DeclareVoidOption{chinese}{\ekv{scheme=chinese}}
 
+\DeclareStringOption[ctexfont]{chinesefont}
 \DeclareVoidOption{ctexfont}{\ekv{chinesefont=ctexfont}}
 \DeclareVoidOption{founder}{\ekv{chinesefont=founder}}
 \DeclareVoidOption{nofont}{\ekv{chinesefont=nofont}}
@@ -45,7 +46,13 @@
 \DeclareVoidOption{en}{\ekv{lang=en}}
 \DeclareVoidOption{cn}{\ekv{lang=cn}}
 \DeclareVoidOption{it}{\ekv{lang=it}}
+\DeclareVoidOption{fr}{\ekv{lang=fr}}
+\DeclareVoidOption{nl}{\ekv{lang=nl}}
+\DeclareVoidOption{hu}{\ekv{lang=hu}}
+\DeclareVoidOption{de}{\ekv{lang=de}}
+\DeclareVoidOption{mn}{\ekv{lang=mn}}
 \DeclareVoidOption{pt}{\ekv{lang=pt}}
+\DeclareVoidOption{jp}{\ekv{lang=jp}}
 
 \DeclareVoidOption{fancy}{\ekv{mode=fancy}}
 \DeclareVoidOption{simple}{\ekv{mode=simple}}
@@ -59,7 +66,7 @@
 \DeclareStringOption[numeric-comp]{citestyle}
 \DeclareStringOption[numeric]{bibstyle}
 
-
+\DeclareVoidOption{newtx}{\ekv{math=newtx}}
 \DeclareVoidOption{mtpro2}{\ekv{math=mtpro2}}
 \DeclareVoidOption{cm}{\ekv{math=cm}}
 
@@ -69,6 +76,14 @@
 
 \DeclareVoidOption{onecol}{\ekv{toc=onecol}}
 \DeclareVoidOption{twocol}{\ekv{toc=twocol}}
+
+\DeclareStringOption[chapter]{thmcnt}
+\DeclareVoidOption{chapter}{\ekv{thmcnt=chapter}}
+\DeclareVoidOption{section}{\ekv{thmcnt=section}}
+
+\DeclareStringOption[biber]{bibend}
+\DeclareVoidOption{biber}{\ekv{bibend=biber}}
+\DeclareVoidOption{bibtex}{\ekv{bibend=bibtex}}
 
 
 % ----- Math option -----
@@ -135,6 +150,7 @@
   footskip=4mm
 }}{\relax}
 
+
 \RequirePackage{indentfirst,comment}
 % fontsetting
 \ifdefstring{\ELEGANT@math}{mtpro2}{
@@ -147,33 +163,51 @@
 
 \PassOptionsToPackage{no-math}{fontspec}
 \RequirePackage{iftex}
-\ifdefstring{\ELEGANT@lang}{cn}{
-  \ifXeTeX
-    \ifdefstring{\ELEGANT@chinesefont}{founder}{
-      \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
-      \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
-      \setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZHei-B01}
-      \setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZFangSong-Z02}
-      \setCJKfamilyfont{zhsong}{FZShuSong-Z01}
-      \setCJKfamilyfont{zhhei}{FZHei-B01}
-      \setCJKfamilyfont{zhkai}{FZKai-Z03}
-      \setCJKfamilyfont{zhfs}{FZFangSong-Z02}
-      \newcommand*{\songti}{\CJKfamily{zhsong}}
-      \newcommand*{\heiti}{\CJKfamily{zhhei}}
-      \newcommand*{\kaishu}{\CJKfamily{zhkai}}
-      \newcommand*{\fangsong}{\CJKfamily{zhfs}}}{\relax}
-    
-    \ifdefstring{\ELEGANT@chinesefont}{nofont}{
-      \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}}{\relax}
 
-    \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
-      \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
-  \else
-    \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
-      \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
-  \fi
+\ifXeTeX
+  \RequirePackage[no-math]{fontspec}
+  \setmainfont{texgyretermes}[
+    UprightFont = *-regular ,
+    BoldFont = *-bold ,
+    ItalicFont = *-italic ,
+    BoldItalicFont = *-bolditalic ,
+    Extension = .otf ,
+    Scale = 1.0]
+    
+  \setsansfont{texgyreheros}[
+    UprightFont = *-regular ,
+    BoldFont = *-bold ,
+    ItalicFont = *-italic ,
+    BoldItalicFont = *-bolditalic ,
+    Extension = .otf ,
+    Scale = 0.9]
+\else
+  \RequirePackage{newtxtext}
+  \RequirePackage[scaled=.90]{helvet}
+\fi
+
+\ifdefstring{\ELEGANT@lang}{cn}{
+  \ifdefstring{\ELEGANT@chinesefont}{founder}{
+    \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+    \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
+    \setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
+    \setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+    \setCJKfamilyfont{zhsong}{FZShuSong-Z01}
+    \setCJKfamilyfont{zhhei}{FZHei-B01}
+    \setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
+    \setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
+    \newcommand*{\songti}{\CJKfamily{zhsong}}
+    \newcommand*{\heiti}{\CJKfamily{zhhei}}
+    \newcommand*{\kaishu}{\CJKfamily{zhkai}}
+    \newcommand*{\fangsong}{\CJKfamily{zhfs}}}{\relax}
+  
+  \ifdefstring{\ELEGANT@chinesefont}{nofont}{
+    \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}}{\relax}
+
+  \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
+    \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
+  
   \AfterEndPreamble{
-    % \renewcommand{\itshape}{\kaishu}
     \setlength\parindent{2\ccwd}}
 }{\relax}
 
@@ -202,6 +236,25 @@
 \fi
 
 \RequirePackage{anyfontsize}
+\ifdefstring{\ELEGANT@math}{newtx}{
+  \RequirePackage{newtxmath}
+  \let\Bbbk\relax
+  \RequirePackage{esint}
+  %%% use yhmath pkg, uncomment following code
+  % \let\oldwidering\widering
+  % \let\widering\undefined
+  % \RequirePackage{yhmath}
+  % \let\widering\oldwidering
+
+  %%% use esvect pkg, uncomment following code
+  % \RequirePackage{esvect}
+
+  \DeclareSymbolFont{CMlargesymbols}{OMX}{cmex}{m}{n}
+  \let\sumop\relax\let\prodop\relax
+  \DeclareMathSymbol{\sumop}{\mathop}{CMlargesymbols}{"50}
+  \DeclareMathSymbol{\prodop}{\mathop}{CMlargesymbols}{"51}
+}{\relax}
+
 
 % ----- Handle Colors -----
 %% 章节以及页脚图形
@@ -330,7 +383,7 @@
 
 
 \RequirePackage[
-  backend=biber,
+  backend=\ELEGANT@bibend,
   citestyle=\ELEGANT@citestyle,
   bibstyle=\ELEGANT@bibstyle]{biblatex}
 \defbibheading{elegantbook}[\ebibname]{#1}
@@ -801,7 +854,6 @@
 
 
 
-
 %%define the note and proof environment
 \RequirePackage{pifont,manfnt,bbding}
 \RequirePackage[many]{tcolorbox}
@@ -855,37 +907,37 @@
         \node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {
           \textcolor{third}{$\spadesuit$}};}},}
   % \newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
-  \DeclareTColorBox[auto counter,number within=chapter]{definition}{ o t\label g }{
+  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{definition}{ o t\label g }{
     common,defstyle,
     IfValueTF={#1}{title={\definitionname~\thetcbcounter\ (#1)}}{title=\definitionname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}}
   % \newtcbtheorem[auto counter,number within=chapter]{theorem}{\theoremname}{thmstyle}{thm}
-  \DeclareTColorBox[auto counter,number within=chapter]{theorem}{ o t\label g }{
+  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{theorem}{ o t\label g }{
     common,thmstyle,
     IfValueTF={#1}{title={\theoremname~\thetcbcounter\ (#1)}}{title=\theoremname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}}
   % \newtcbtheorem[auto counter,number within=chapter]{postulate}{\postulatename}{thmstyle}{pos}
-  \DeclareTColorBox[auto counter,number within=chapter]{postulate}{ o t\label g }{
+  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{postulate}{ o t\label g }{
     common,thmstyle,
     IfValueTF={#1}{title={\postulatename~\thetcbcounter\ (#1)}}{title=\postulatename~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}}
   % \newtcbtheorem[auto counter,number within=chapter]{axiom}{\axiomname}{thmstyle}{axi}
-  \DeclareTColorBox[auto counter,number within=chapter]{axiom}{ o t\label g }{
+  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{axiom}{ o t\label g }{
     common,thmstyle,
     IfValueTF={#1}{title={\axiomname~\thetcbcounter\ (#1)}}{title=\axiomname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}}
   % \newtcbtheorem[auto counter,number within=chapter]{corollary}{\corollaryname}{thmstyle}{cor}
-  \DeclareTColorBox[auto counter,number within=chapter]{corollary}{ o t\label g }{
+  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{corollary}{ o t\label g }{
     common,thmstyle,
     IfValueTF={#1}{title={\corollaryname~\thetcbcounter\ (#1)}}{title=\corollaryname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}}
   % \newtcbtheorem[auto counter,number within=chapter]{lemma}{\lemmaname}{thmstyle}{lem}
-  \DeclareTColorBox[auto counter,number within=chapter]{lemma}{ o t\label g }{
+  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{lemma}{ o t\label g }{
     common,thmstyle,
     IfValueTF={#1}{title={\lemmaname~\thetcbcounter\ (#1)}}{title=\lemmaname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}}
   % \newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
-  \DeclareTColorBox[auto counter,number within=chapter]{proposition}{ o t\label g }{
+  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{proposition}{ o t\label g }{
     common,propstyle,
     IfValueTF={#1}{title={\propositionname~\thetcbcounter\ (#1)}}{title=\propositionname~\thetcbcounter},
     IfBooleanTF={#2}{label=#3}{}}}{\relax}
@@ -908,17 +960,17 @@
 
 
   \theoremstyle{defstyle} % definition style
-  \newtheorem{definition}{\definitionname}[chapter]
+  \newtheorem{definition}{\definitionname}[\ELEGANT@thmcnt]
 
   \theoremstyle{thmstyle} %theorem style
-  \newtheorem{theorem}{\theoremname}[chapter]
-  \newtheorem{lemma}{\lemmaname}[chapter]
-  \newtheorem{corollary}{\corollaryname}[chapter]
-  \newtheorem{postulate}{\postulatename}[chapter]
-  \newtheorem{axiom}{\axiomname}[chapter]
+  \newtheorem{theorem}{\theoremname}[\ELEGANT@thmcnt]
+  \newtheorem{lemma}{\lemmaname}[\ELEGANT@thmcnt]
+  \newtheorem{corollary}{\corollaryname}[\ELEGANT@thmcnt]
+  \newtheorem{postulate}{\postulatename}[\ELEGANT@thmcnt]
+  \newtheorem{axiom}{\axiomname}[\ELEGANT@thmcnt]
 
   \theoremstyle{prostyle} % proposition style
-  \newtheorem{proposition}{\propositionname}[chapter]
+  \newtheorem{proposition}{\propositionname}[\ELEGANT@thmcnt]
 }{\relax}
 
 % main（green-def): example exercise problem solution
@@ -1003,6 +1055,7 @@
 \RequirePackage{adforn}
 
 \newenvironment{problemset}[1][\xchaptertitle~\exercisename]{
+  \vspace*{10pt}
   \begin{center}
     \phantomsection\addcontentsline{toc}{section}{\texorpdfstring{\xchaptertitle~\exercisename}{\exercisename}}
     % \markboth{#1}{\rightmark}
@@ -1232,3 +1285,6 @@
     }%
   }
 }
+
+% restore the tt default family to lmodern tt family
+\renewcommand\ttdefault{lmtt}

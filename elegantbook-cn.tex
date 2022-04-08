@@ -1,12 +1,13 @@
 \documentclass[lang=cn,10pt,founder]{elegantbook}
 
+
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{March 8, 2022}
-\version{4.2}
+\date{April 9, 2022}
+\version{4.3}
 \bioinfo{自定义}{信息}
 
 \extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
@@ -16,27 +17,6 @@
 \logo{logo-blue.png}
 \cover{cover.jpg}
 
-\usepackage{lmodern}
-
-\setmainfont{texgyretermes}[
-  UprightFont = *-regular ,
-  BoldFont = *-bold ,
-  ItalicFont = *-italic ,
-  BoldItalicFont = *-bolditalic ,
-  Extension = .otf ,
-  Scale = 1.0]
-
-
-\setsansfont{texgyreheros}[
-  UprightFont = *-regular ,
-  BoldFont = *-bold ,
-  ItalicFont = *-italic ,
-  BoldItalicFont = *-bolditalic ,
-  Extension = .otf ,
-  Scale = 1.0]
-
-
-\usepackage[]{newtxmath}
 % 本文档命令
 \usepackage{array}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
@@ -59,17 +39,16 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
-  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
-  \item GitHub 网址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
+  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}（暂时歇业）
+  \item GitHub 地址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
+  \item Gitee 地址：\href{https://gitee.com/ElegantLaTeX}{https://gitee.com/ElegantLaTeX}
   \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
-  \item 微博：Elegant\LaTeX{}
-  \item 微信公众号：Elegant\LaTeX{}
-  \item 用户 QQ 群：692108391 
+  \item 微博：Elegant\LaTeX{}（密码有点忘了）
+  \item 微信公众号：Elegant\LaTeX{}（不定期更新）
+  \item 用户 QQ 群：692108391（建议加群）
   \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
-
-\textsf{hello world， 中文输入法，英文 English is not good for me}
 
 \section{模板安装与更新}
 
@@ -77,36 +56,36 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 \subsection{在线使用模板}
 
-我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络便利的用户可以直接通过 Overleaf 在线使用我们的模板。使用 Overleaf 的好处是无需安装 \TeX{} Live 2020，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
-
-\begin{remark}
-Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议使用 \hologo{pdfLaTeX} 编译。
-\end{remark}
+我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络便利的用户可以直接通过 Overleaf 在线使用我们的模板。使用 Overleaf 的好处是无需安装 \TeX{} Live，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
 
 \subsection{本地免安装使用}
 
-\textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新版，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
+\textbf{免安装}使用方法如下：从 GitHub 或者 CTAN 下载最新版，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
 
-\subsection{发行版安装使用}
+\subsection{发行版安装与更新}
 
-本模板测试环境为 Win10 和 TeX Live 2021，如果你刚安装 \TeX{} Live 2021 用户，安装后建议升级全部宏包，升级方法：使用 cmd 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新。
+本模板测试环境为 
+\begin{enumerate}
+  \item Win10 + \TeX{} Live 2022；
+  \item Ubuntu 20.04 + \TeX{} Live 2022；
+  \item macOS Monterey + Mac\TeX{} 2022。
+\end{enumerate}
 
-\subsection{更新问题}
+\TeX Live/Mac\TeX{} 的安装请参考啸行的\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases/}{一份简短的关于安装 \LaTeX{} 安装的介绍}。
 
-如果使用 \lstinline{tlshell} 无法更新模板，请使用命令行全部更新全部宏包或者使用免安装的方法使用本模板。
-
-通过命令行（管理员权限）输入下面的命令对 tlmgr 自身和全部宏包进行更新。
+安装 \TeX{} Live 之后，安装后建议升级全部宏包，升级方法：使用 cmd 或 terminal 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新，也即
 
 \begin{lstlisting}
   tlmgr update --self 
   tlmgr update --all
+  tlmgr update --self --all --reinstall-forcibly-removed
 \end{lstlisting}
 
 更多的内容请参考 \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
 
 \subsection{其他发行版本}
 
-由于宏包版本问题，本模板不支持 C\TeX{} 套装，请务必安装 TeX Live。更多关于 \TeX{} Live 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases/}{一份简短的关于安装 \LaTeX{} 安装的介绍}。
+由于宏包版本问题，本模板不支持 C\TeX{} 套装，请务必安装 TeX Live/Mac\TeX{}。更多关于 \TeX{} Live 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases/}{一份简短的关于安装 \LaTeX{} 安装的介绍}。
 
 
 \section{关于提交}
@@ -116,7 +95,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \chapter{ElegantBook 设置说明}
 
-本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。本文编写环境为 Win10 (64bit) + \TeX{} Live 2021，英文支持 \hologo{pdfLaTeX}，中文仅支持 \hologo{XeLaTeX} 编译。
+本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。
 
 \section{语言模式}
 本模板内含两套基础语言环境 \lstinline{lang=cn}、\lstinline{lang=en}。改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
@@ -125,7 +104,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 \documentclass[lang=cn]{elegantbook}
 \end{lstlisting}
 
-除模板自带的两套语言设定之外，由网友提供的其他语言环境设置如下：
+除模板自带的两套语言设定之外，由\textbf{网友}提供的其他语言环境设置如下：
 \begin{itemize}
   \item 由 \href{https://github.com/VincentMVV}{VincentMVV} 提供的意大利语翻译 \lstinline{lang=it}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
   \item 由 \href{https://github.com/abfek66}{abfek66} 提供的法语翻译 \lstinline{lang=fr}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
@@ -158,6 +137,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
 \end{lstlisting}
+
 
 \begin{table}[htbp]
   \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
@@ -356,6 +336,17 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 %   }
 %   \caption{disjoint decomposition}\label{algo_disjdecomp}
 % \end{algorithm}
+
+
+\subsection{修改计数器}
+
+当前定理等环境计数器按章计数，如果想修改定理类环境按节计数，可以修改计数器选项 thmcnt：
+
+\begin{lstlisting}
+  \documentclass[section]{elegantbook} %or
+  \documentclass[thmcnt=section]{elegantbook}
+\end{lstlisting}
+
 
 \subsection{其他环境的使用}
 
@@ -606,8 +597,8 @@ LaTeX Error:
 模板从 3.10 版本提供中文字体选项 \lstinline{chinesefont}，可选项有
 \begin{enumerate}
 \item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
-\item \lstinline{founder}：方正字体选项，调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文。
-\item \lstinline{nofont}：调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
+\item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
+\item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
 \end{enumerate}
 
 \begin{remark}
@@ -660,7 +651,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
 
 \begin{definition}[可积性] \label{def:int} 
-设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
+设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
 \begin{equation}
    \label{inter}
    \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
@@ -754,10 +745,10 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
     见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
   \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
     页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
-  \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset `Mac' is unavailable.}}
+  \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset 'Mac' is unavailable.}}
     在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。
-  \item \question{\lstinline{! LaTeX Error: Unknown option `scheme=plain' for package `ctex'.}}
-    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2021。
+  \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
+    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
   \item \question{我该使用什么版本？}
     请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
   \item \question{我该使用什么编辑器？}
@@ -766,8 +757,6 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
     模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
   \item \question{请问交叉引用是什么？}
     本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
-  \item \question{定义等环境中无法使用加粗命令么？}
-    是这样的，默认中文并没加粗命令，如果你想在定义等环境中使用加粗命令，请使用 \lstinline{\heiti} 等字体命令，而不要使用 \lstinline{\textbf}。或者，你可以将 \lstinline|\textbf| 重新定义为 \lstinline|\heiti|。英文模式不存在这个问题。
   \item \question{代码高亮环境能用其他语言吗？}
     可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lsset} 命令，更多信息请参考宏包文档。
   \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
@@ -776,7 +765,17 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 \chapter{版本更新历史}
 
-根据用户的反馈，我们不断修正和完善模板。截止到此次更新，ElegantBook 模板在 GitHub 上有将近 100 次提交，正式发行版本（release）有 17 次。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+
+
+\datechange{2022/04/09}{版本 4.3 正式发布。}
+
+\begin{change}
+  \item 放弃 newtx 系列宏包的设置，改用 TeX Gyre Terms，并设置其他字体；
+  \item 修改定理类环境内部字体设置，修复环境内部中文无法加粗问题；
+  \item 增加定理类环境的计数器选项 \lstinline{thmcnt}，可选 \lstinline{chapter} 和 \lstinline{section}；
+  \item 增加 \lstinline{bibend} 选项，可选 \lstinline{bibend=biber}（默认）和 \lstinline{bibend=bibtex}。
+\end{change}
 
 
 
