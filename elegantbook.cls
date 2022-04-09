@@ -162,6 +162,7 @@
 \renewcommand{\baselinestretch}{1.2}
 
 \PassOptionsToPackage{no-math}{fontspec}
+\PassOptionsToPackage{quiet}{fontspec}
 \RequirePackage{iftex}
 
 \ifXeTeX

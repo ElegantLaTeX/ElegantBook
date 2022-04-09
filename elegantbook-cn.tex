@@ -1,4 +1,4 @@
-\documentclass[lang=cn,10pt,founder]{elegantbook}
+\documentclass[lang=cn,10pt]{elegantbook}
 
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
@@ -21,6 +21,7 @@
 \usepackage{array}
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 
+% 修改标题页的橙色带
 % \definecolor{customcolor}{RGB}{32,178,170}
 % \colorlet{coverlinecolor}{customcolor}
 
@@ -76,9 +77,9 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 安装 \TeX{} Live 之后，安装后建议升级全部宏包，升级方法：使用 cmd 或 terminal 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新，也即
 
 \begin{lstlisting}
-  tlmgr update --self 
-  tlmgr update --all
-  tlmgr update --self --all --reinstall-forcibly-removed
+tlmgr update --self 
+tlmgr update --all
+tlmgr update --self --all --reinstall-forcibly-removed
 \end{lstlisting}
 
 更多的内容请参考 \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
@@ -214,8 +215,8 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 封面中间位置的色块的颜色可以使用下面命令进行修改：
 \begin{lstlisting}
-  \definecolor{customcolor}{RGB}{32,178,170}
-  \colorlet{coverlinecolor}{customcolor}
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
 \end{lstlisting}
 
 \subsection{封面图}
@@ -397,12 +398,18 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 \end{minipage}
 
 \section{参考文献}
+文献部分，本模板调用了 biblatex 宏包，并提供了 biber（默认） 和 bibtex 两个后端选项，可以使用 \lstinline{bibend} 进行修改：
 
-此模板使用了 \hologo{biber} 来生成参考文献，也即使用 \lstinline{biblatex} 宏包，在中文示例中，使用了 \lstinline{gbt7714} 宏包。参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+\begin{lstlisting}
+  \documentclass[bibtex]{elegantbook}
+  \documentclass[bibend=bibtex]{elegantbook}
+\end{lstlisting}
 
-你可以在谷歌学术，Mendeley，Endnote 中获得文献条目（bib item），然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。注意需要在编译的过程中添加 \hologo{biber} 编译。
+关于文献条目（bib item），你可以在谷歌学术，Mendeley，Endnote 中取，然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。
 
-为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），如果需要设置为国标 GB7714-2015，需要使用：
+为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
+
+如果需要设置为国标 GB7714-2015，需要使用：
 \begin{lstlisting}
   \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
 \end{lstlisting}
@@ -617,12 +624,12 @@ LaTeX Error:
 如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
 \begin{lstlisting}
 \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
-\setCJKsansfont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZHei-B01}
-\setCJKmonofont[BoldFont={FZHei-B01},ItalicFont={FZHei-B01}]{FZFangSong-Z02}
+\setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
+\setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
 \setCJKfamilyfont{zhsong}{FZShuSong-Z01}
 \setCJKfamilyfont{zhhei}{FZHei-B01}
-\setCJKfamilyfont{zhkai}{FZKai-Z03}
-\setCJKfamilyfont{zhfs}{FZFangSong-Z02}
+\setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
+\setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
 \newcommand*{\songti}{\CJKfamily{zhsong}}
 \newcommand*{\heiti}{\CJKfamily{zhhei}}
 \newcommand*{\kaishu}{\CJKfamily{zhkai}}
