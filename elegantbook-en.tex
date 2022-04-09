@@ -1,12 +1,12 @@
-\documentclass[11pt,fancy]{elegantbook}
+\documentclass[11pt]{elegantbook}
 
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{March 8, 2022}
-\version{4.2}
+\date{April 9, 2022}
+\version{4.3}
 \bioinfo{Bio}{Information}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
@@ -14,11 +14,9 @@
 \logo{logo-blue.png}
 \cover{cover.jpg}
 
+% modify the color in the middle of titlepage
 \definecolor{customcolor}{RGB}{32,178,170}
 \colorlet{coverlinecolor}{customcolor}
-
-
-\usepackage{mathptmx}
 
 \begin{document}
 
@@ -34,49 +32,22 @@ Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegan
 
 Contact Infos:
 \begin{itemize}
-  \item Homepage: \href{https://elegantlatex.org/}{https://elegantlatex.org/}
   \item GitHub: \href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
   \item CTAN: \href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
-  \item Wiki: \href{https://github.com/ElegantLaTeX/ElegantBook/wiki}{https://github.com/ElegantLaTeX/ElegantBook/wiki}
   \item Download: \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{release}, \href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{latest version}
-  \item Weibo: Elegant\LaTeX{}
-  \item Wechat: Elegant\LaTeX{}
-  \item QQ: 692108391
-  \item Email: \email{elegantlatex2e@gmail.com}
 \end{itemize}
 
 
-
-\section{ElegantBook Updates}
-
-Version 4.2 is the \textit{temporary} version before v4.3 which will be released when \TeX Live 2022 is ready, we add quick bug fix caused by newtx package updates, and multilingual translation \lstinline{lang=jp}. What\rq s new in this version:
-
-\begin{change}
-  \item Bug fix due to the update of newtx fonts;
-  \item Add `Chapter' in TOC, and redefine \lstinline{\chaptername} to unify the logic under different languages;
-  \item Add language option for Japanese, \lstinline{lang=jp}.
-  \item \textbf{! Warnings}: Due to this `urgent' fonts bug and TOC modification, the multilingual option may cause some unexpected errors, you can report in this \href{https://github.com/ElegantLaTeX/ElegantBook/issues/170}{issue}, I will fix it after the releases of \TeX{} Live 2022.
-\end{change}
+\section{Online Usage}
+You can visit \href{https://www.overleaf.com/}{Overleaf} to use our template online anywhere and anytime without local installation. To find our template, search \lstinline{elegantlatex} in the \lstinline{templates} or simply visit \href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{search result}, choose the template you prefer and \lstinline{Open as Template} to own a copy yourself to edit freely. To learn more about Overleaf, please refer to \href{https://www.overleaf.com/learn}{Documentation}.
 
 
-\section{Installation and Update}
-Both portable version and installation package are available, online usage is optional as well.
-
-\subsection{To Use Templates Online}
-Visit \href{https://www.overleaf.com/}{Overleaf} to use our template online anywhere and anytime without local installation. To find our template, search \lstinline{elegantlatex} in the \lstinline{templates} or simply visit \href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{search result}, choose the template you prefer and \lstinline{Open as Template} to own a copy yourself to edit freely. To learn more about Overleaf, please refer to \href{https://www.overleaf.com/learn}{Documentation}.
-
-\begin{remark}
-  On Overleaf, please use \hologo{XeLaTeX} to compile articles in Chinese and \hologo{pdfLaTeX} to compile articles in English.
-\end{remark}
-
-\subsection{To Use Portable Version}
+\section{Portable Version}
 For portable version, simply download lastest ElegantBook-master from GitHub or CTAN (to be more accurate, download \lstinline{elegantbook.cls}) and save the file(s) under your working directory. This way of installation is simple and convenient, but you have to manually update \lstinline{cls} now and then.
 
 
-\subsection{Update Templates}
-If you fail to update templates using \lstinline{tlshell}, please use cmd to update all the packages or switch to portable version instead.
-
-Use the following commands(administrator privileges) to update:
+\section{Update Templates}
+You can use cmd/terminal to update the tlmgr itself and all the packages, the commands are:
 \begin{lstlisting}
 tlmgr update --self 
 tlmgr update --all
@@ -84,16 +55,14 @@ tlmgr update --all
 
 To learn more, please refer to \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
 
-\subsection{Other Release Versions}
-If you are a \TeX{} Live 2018/2019/2020 user and would like to update, the official solution is to uninstall the previous version. If you want to save the bother of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of \TeX{} Live 2021 (default: \lstinline|C:\texlive\2021\texmf-dist\tex\latex\elegantbook| ), run \lstinline{texhash} in cmd.
+\section{Other Release Versions}
+If you are a \TeX{} Live 2018/2019/2020/2021 user and would like to update, the official solution is to uninstall the previous version. If you want to save the bother of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of \TeX{} Live 2022 (default: \lstinline|C:\texlive\2022\texmf-dist\tex\latex\elegantbook| ), run \lstinline{texhash} in cmd.
 
-\section{About Pull Request}
-For some reasons, pull requests will NOT by accepted since May 20, 2019. For those who want to help improve the templates, submit issues or clone to your own repository to modify under LPPL-1.3c.
 
 
 \chapter{ElegantBook Settings}
 
-This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10 + \TeX{} Live 2021, either \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine. \hologo{XeLaTeX} is preferred for Chinese articles.
+This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10/Ubuntu 20.04/macOS + \TeX{} Live 2022/ Mac\TeX{} 2022, either \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine.
 
 \section{Languages}
 We defined one option named \lstinline{lang} which has two basic values, \lstinline{lang=en} (default) , \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
@@ -111,7 +80,8 @@ Besides the two basic language translation, our user provide more options, here 
   \item Hungarian translation \lstinline{lang=hu}, provided by \href{https://github.com/palkotamas}{palkotamas}, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation};
   \item Deutsch translation \lstinline{lang=de}, provided by Lisa, please refer to\href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation};
   \item Spanish translation \lstinline{lang=es}, provided by Gustavo A. Corradi, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation};
-  \item Mongolian translation \lstinline{lang=mn}, provided by \href{https://github.com/Altantsooj}{Altantsooj}, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}.
+  \item Mongolian translation \lstinline{lang=mn}, provided by \href{https://github.com/Altantsooj}{Altantsooj}, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation};
+  \item Japanese translation \lstinline{lang=jp}, provided by \href{https://github.com/inusturbo}{inusturbo}, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/172}{Japanese translation}.
 \end{itemize}
 
 \begin{remark}
@@ -237,15 +207,15 @@ We defined two sets of theorem modes, \lstinline{simple} style and \lstinline{fa
 In this template, we defined four different theorem class environments
 
 \begin{itemize}
-\item \textit{Theorem Environment}, including title and content, numbering corresponding to chapter. Three types depending on the format:
+\item \textit{Theorem Environments}, including title and content, numbering corresponding to chapter. Three types depending on the format:
    \begin{itemize}
       \item \textcolor{main}{\textbf{definition}} environment, the color is  \textcolor{main}{main};
       \item \textcolor{second}{\textbf{theorem, lemma, corollary}} environment, the color is \textcolor{second} {second};
       \item \textcolor{third}{\textbf{proposition}} environment, the color is \textcolor{third}{third}.
    \end{itemize}
-\item \textit{Example Environments}, including \textbf{example, exercise, problem} environment, auto numbering corresponding to chapter.
+\item \textit{Example Environment}, including \textbf{example, exercise, problem} environment, auto numbering according to chapter.
 \item \textit{Proof Environment}, including \textbf{proof, note} environment containing introductory symbol (\textbf{note} environment) or ending symbol (\textbf{proof} environment).
-\item \textit{Conclusion Environments}, including \textbf{conclusion, assumption, property, remark and solution}\footnote{We also define an option \lstinline{result}, which can hide the \lstinline{solution} and \lstinline{proof} environments. You can switch between \lstinline{result=answer} and \lstinline{result=noanswer}.} environments, all of which begin with boldfaced words, with format consistent with normal paragraphs.
+\item \textit{Conclusion Environment}, including \textbf{conclusion, assumption, property, remark and solution}\footnote{We also define an option \lstinline{result}, which can hide the \lstinline{solution} and \lstinline{proof} environments. You can switch between \lstinline{result=answer} and \lstinline{result=noanswer}.} environments, all of which begin with boldfaced words, with format consistent with normal paragraphs.
 \end{itemize}
 
 \subsection{Theorem Class Environments}
@@ -272,22 +242,32 @@ From version 4.1, you can write your theorem environments as follows:
 Other theorem class environments with the same usage includes:
 
 \begin{table}[htbp]
-   \centering
-   \caption{Theorem Class Environments}
-     \begin{tabular}{llll}
-     \toprule
-     Environment & Label text & Prefix & Cross-reference \\
-     \midrule
-     definition & label & def   & \lstinline|\ref{def:label}| \\
-     theorem & label & thm   & \lstinline|\ref{thm:label}| \\
-     lemma & label & lem   & \lstinline|\ref{lem:label}| \\
-     corrlary & label & cor   & \lstinline|\ref{cor:label}| \\
-     proposition & label & pro   & \lstinline|\ref{pro:label}| \\
-     \bottomrule
-     \end{tabular}%
-   \label{tab:theorem-class}%
+  \centering
+  \caption{Theorem Class Environments}
+    \begin{tabular}{llll}
+    \toprule
+    Environment & Label text & Prefix & Cross-reference \\
+    \midrule
+    definition & label & def   & \lstinline|\ref{def:label}| \\
+    theorem & label & thm   & \lstinline|\ref{thm:label}| \\
+    lemma & label & lem   & \lstinline|\ref{lem:label}| \\
+    corrlary & label & cor   & \lstinline|\ref{cor:label}| \\
+    proposition & label & pro   & \lstinline|\ref{pro:label}| \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:theorem-class}%
  \end{table}%
  
+\subsection{Counter for Theorem Environments}
+
+You can use \lstinline{thmcnt} option to control the theorem counter/number display style for the theorem environments, the acceptable options are \lstinline{chapter} (default) and \lstinline{section}. 
+
+\begin{lstlisting}
+\documentclass[section]{elegantbook} % turn the Theorem 4.1 to Theorem 4.1.1 
+\documentclass[thmcnt=section]{elegantbook}
+\end{lstlisting}
+
+
 
 \subsection{Other Customized Environments}
 The other three math environments can be called directly since there are no additional option for them, e.g. \lstinline{example}:
@@ -396,9 +376,17 @@ This template uses biblatex to generate the bibliography, the default citestyle 
 If you want to use biblatex, you must create a file named \lstinline{reference.bib}, add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, then cite the bibkey in the \lstinline{tex} file. The biber will automatically generate the bibliography for the reference you cited.
 
 
-To change the bibliography style, this version introduces \lstinline{citestyle} and \lstinline{bibstyle}, please refer to \href{https://ctan.org/pkg/biblatex}{CTAN:biblatex} for more detail about these options. You can change your bibliography style as
+To change the bibliography style, this version introduces two options: \lstinline{citestyle} and \lstinline{bibstyle}, please refer to \href{https://ctan.org/pkg/biblatex}{CTAN:biblatex} for more detail about these options. You can change your bibliography style as
+
 \begin{lstlisting}
 \documentclass[citestyle=numeric-comp, bibstyle=authoryear]{elegantbook} 
+\end{lstlisting}
+
+We also add the \lstinline{bibend} option to this template, you can choose \lstinline{biber} (default) or \lstinline{bibtex} as you like, \lstinline{biber} is recommended.
+
+\begin{lstlisting}
+\documentclass[bibtex]{elegantbook} % or
+\documentclass[bibend=bibtex]{elegantbook}
 \end{lstlisting}
 
 \section{Preface}
@@ -534,7 +522,7 @@ For tables and figures, note that floating environment is not allowed. You have 
 We will define the integral of a measurable function in three steps. First, we define the integral of a nonnegative simple function. Let $E$ be the measurable set in $\mathcal{R}^N$.
 
 \begin{definition}[Left Coset]
-Let $H$ be a subgroup of a group~$G$.  A \emph{left coset} of $H$ in $G$ is a subset of $G$ that is of the form $xH$, where $x \in G$ and $xH = \{ xh : h \in H \}$. Similarly a \emph{right coset} of $H$ in $G$ is a subset of $G$ that is of the form $Hx$, where $Hx = \{ hx : h \in H \}$ $\hbar$
+Let $H$ be a subgroup of a group~$G$.  A \emph{left coset} of $H$ in $G$ is a subset of $G$ that is of the form $xH$, where $x \in G$ and $xH = \{ xh : h \in H \}$. Similarly a \emph{right coset} of $H$ in $G$ is a subset of $G$ that is of the form $Hx$, where $Hx = \{ hx : h \in H \} \hbar$ 
 \end{definition}
 
 \begin{note}
@@ -624,11 +612,11 @@ We list some FAQs for users to refer to:
   \item \question{I want to customize font and background color.}
   Please use \lstinline{pagecolor} to change background color, refer to \href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{this} to customize font.
   \item \question{Which version should I choose?}
-  Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX{} Live 2021.
+  Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX{} Live 2022.
   \item \question{Which editor should I choose?}
-  You can use \TeX{} Live 2021 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX{}works autocomplete}. \TeX{} Live 2021 + \TeX{}studio is strongly recommended. I myself use VS Code and Sublime Text. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.
+  You can use \TeX{} Live 2022 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX{}works autocomplete}. \TeX{} Live 2022 + \TeX{}studio is strongly recommended. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.
   \item \question{Hello, we want to use ElegantBook to write a book about machine learning and would like your authorization.}
-  Feel free to use our templates by pointing out our copyright. For other issues, please refer to LPPL-1.3c. If you want to show us your work, share the URL with us afterwards.
+  Feel free to use our templates by pointing out our copyright. For other issues, please refer to LPPL-1.3c. If you want to show us your work, you can share the URL with us afterwards.
   \item \question{What is cross reference?}
   This template is aimed at who are not a complete beginner for \LaTeX{}. Please learn more about \LaTeX{} before using this template.
   \item \question{Is the language for code highlighting optional?}
@@ -638,7 +626,20 @@ We list some FAQs for users to refer to:
 \end{enumerate}
 
 \chapter{Version History}
-We revised our templates now and then. This section shows the version story of ElegantBook. We have nearly 100 submits and 17 releases on GitHub since uploaded.
+We revised our templates now and then. This section shows the version story of ElegantBook.
+
+
+\datechange{2022/04/09}{release of v4.3.}
+
+\begin{change}
+  \item Remove part newtx settings, set TeX Gyre Terms/Heros fonts under \hologo{XeLaTeX}.
+  \item Fix Chinese fonts in the theorem environments.
+  \item Add theorem counter option, \lstinline{thmcnt=section}.
+  \item Add bib option \lstinline{bibend}, which can take value of biber and bibtex.
+  \item \textbf{! Warnings}: The multilingual option may cause some unexpected errors, you can report in this \href{https://github.com/ElegantLaTeX/ElegantBook/issues/170}{issue}.
+\end{change}
+
+
 
 \datechange{2022/03/08}{release of v4.2.}
 
@@ -646,7 +647,6 @@ We revised our templates now and then. This section shows the version story of E
   \item Bug fix due to the update of newtx fonts;
   \item Add `Chapter' in TOC, and redefine \lstinline{\chaptername} to unify the logic under different languages;
   \item Add language option for Japanese, \lstinline{lang=jp}.
-  \item \textbf{! Warnings}: Due to this `urgent' fonts bug and TOC modification, the multilingual option may cause some unexpected errors, you can report in this \href{https://github.com/ElegantLaTeX/ElegantBook/issues/170}{issue}, I will fix it after the releases of \TeX{} Live 2022.
 \end{change}
 
 
