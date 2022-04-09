@@ -17,8 +17,7 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Dongsheng Deng](h
 
 ## 致谢
 
-特别感谢 [sikouhjw](https://github.com/sikouhjw) 长期以来对于 Github 上 issue 的快速回应，以及各个社区论坛对于 ElegantLaTeX 相关问题的回复。
-
+特别感谢 [sikouhjw](https://github.com/sikouhjw) 和 [syvshc](https://github.com/syvshc) 长期以来对于 Github 上 issue 的快速回应，以及各个社区论坛对于 ElegantLaTeX 相关问题的回复。
 特别感谢 ChinaTeX 以及 [LaTeX 工作室](http://www.latexstudio.net/)对于本系列模板的大力宣传与推广。
 
 如果你喜欢我们的模板，你可以在 Github 上收藏我们的模板。
