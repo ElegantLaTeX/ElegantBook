@@ -1,4 +1,4 @@
-\documentclass[lang=cn,10pt]{elegantbook}
+\documentclass[lang=cn,10pt,founder]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -180,7 +180,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
 \end{table}
 
 如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
-\begin{lstlisting}[tabsize=4]]
+\begin{lstlisting}[tabsize=4]
 \definecolor{structurecolor}{RGB}{0,0,0}
 \definecolor{main}{RGB}{70,70,70}    
 \definecolor{second}{RGB}{115,45,2}    
@@ -606,10 +606,6 @@ LaTeX Error:
 \item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
 \item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
 \end{enumerate}
-
-\begin{remark}
-  使用 \lstinline{founder} 选项或者 \lstinline{nofont} 时，必须使用 \hologo{XeLaTeX} 进行编译。
-\end{remark}
 
 \subsection{方正字体选项}
 由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}

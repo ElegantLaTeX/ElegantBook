@@ -49,7 +49,7 @@ For portable version, simply download lastest ElegantBook-master from GitHub or 
 \section{Update Templates}
 You can use cmd/terminal to update the tlmgr itself and all the packages, the commands are:
 \begin{lstlisting}
-tlmgr update --self 
+tlmgr update --self
 tlmgr update --all
 \end{lstlisting}
 
@@ -58,14 +58,12 @@ To learn more, please refer to \href{https://tex.stackexchange.com/questions/554
 \section{Other Release Versions}
 If you are a \TeX{} Live 2018/2019/2020/2021 user and would like to update, the official solution is to uninstall the previous version. If you want to save the bother of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of \TeX{} Live 2022 (default: \lstinline|C:\texlive\2022\texmf-dist\tex\latex\elegantbook| ), run \lstinline{texhash} in cmd.
 
-
-
 \chapter{ElegantBook Settings}
-
 This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10/Ubuntu 20.04/macOS + \TeX{} Live 2022/ Mac\TeX{} 2022, either \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine.
 
 \section{Languages}
 We defined one option named \lstinline{lang} which has two basic values, \lstinline{lang=en} (default) , \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
+
 \begin{lstlisting}
 \documentclass[en]{elegantbook} 
 \documentclass[lang=en]{elegantbook}
@@ -78,7 +76,7 @@ Besides the two basic language translation, our user provide more options, here 
   \item French translation \lstinline{lang=fr}, provided by \href{https://github.com/abfek66}{abfek66} , please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation};
   \item Dutch Translation \lstinline{lang=nl}, provided by \href{https://github.com/inktvis75}{inktvis75} , please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/108}{Dutch Translation};
   \item Hungarian translation \lstinline{lang=hu}, provided by \href{https://github.com/palkotamas}{palkotamas}, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation};
-  \item Deutsch translation \lstinline{lang=de}, provided by Lisa, please refer to\href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation};
+  \item Deutsch translation \lstinline{lang=de}, provided by Lisa, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation};
   \item Spanish translation \lstinline{lang=es}, provided by Gustavo A. Corradi, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation};
   \item Mongolian translation \lstinline{lang=mn}, provided by \href{https://github.com/Altantsooj}{Altantsooj}, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation};
   \item Japanese translation \lstinline{lang=jp}, provided by \href{https://github.com/inusturbo}{inusturbo}, please refer to \href{https://github.com/ElegantLaTeX/ElegantBook/issues/172}{Japanese translation}.
@@ -532,19 +530,23 @@ Note that a subgroup~$H$ of a group $G$ is itself a left coset of $H$ in $G$.
 \lipsum[2]
 
 \begin{theorem}[Lagrange's Theorem] \label{thm:lg}
-Let $G$ be a finite group, and let $H$ be a subgroup of $G$.  Then the order of $H$ divides the order of $G$.
+Let $G$ be a finite group, and let $H$ be a subgroup of $G$. Then the order of $H$ divides the order of $G$.
 \end{theorem}
 
 \ref{thm:lg}
 \lipsum[3]
 
-   
+
+\begin{theorem}{theorem name}{label text}
+  The content of theorem.
+\end{theorem}
+
 \begin{proposition}[Size of Left Coset]
 Let $H$ be a finite subgroup of a group $G$.  Then each left coset of $H$ in $G$ has the same number of elements as $H$.
 \end{proposition}
 
 \begin{proof}
-Let $z$ be some element of $xH \cap yH$.  Then $z = xa$ for some $a \in H$, and $z = yb$ for some $b \in H$. If $h$ is any element of $H$ then $ah \in H$ and $a^{-1}h \in H$, since $H$ is a subgroup of $G$. But $zh = x(ah)$ and $xh = z(a^{-1}h)$ for all $h \in H$. Therefore $zH \subset xH$ and $xH \subset zH$, and thus $xH = zH$.  Similarly $yH = zH$, and thus $xH = yH$, as required. 
+  Let $z$ be some element of $xH \cap yH$. Then $z = xa$ for some $a \in H$, and $z = yb$ for some $b \in H$. If $h$ is any element of $H$ then $ah \in H$ and $a^{-1}h \in H$, since $H$ is a subgroup of $G$. But $zh = x(ah)$ and $xh = z(a^{-1}h)$ for all $h \in H$. Therefore $zH \subset xH$ and $xH \subset zH$, and thus $xH = zH$.  Similarly $yH = zH$, and thus $xH = yH$, as required. 
 \end{proof}
 
 \begin{figure}[htbp]
