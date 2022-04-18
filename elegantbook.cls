@@ -909,7 +909,7 @@
           \textcolor{third}{$\spadesuit$}};}},}
   % \newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{definition}{ g o t\label g }{
-    common,thmstyle,
+    common,defstyle,
     IfValueTF={#1}
       {title={\definitionname~\thetcbcounter\ (#1)}}
       {
@@ -975,7 +975,7 @@
     IfBooleanTF={#3}{label=#4}{label={lem:#4}}}
   % \newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{proposition}{ g o t\label g }{
-    common,thmstyle,
+    common,propstyle,
     IfValueTF={#1}
       {title={\propositionname~\thetcbcounter\ (#1)}}
       {
