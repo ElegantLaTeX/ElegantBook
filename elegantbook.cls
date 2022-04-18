@@ -1294,7 +1294,8 @@
         \@starttoc{toc}
       \end{multicols}}{
       \@starttoc{toc}}
-    \if@restonecol\twocolumn\fi}
+    \if@restonecol\twocolumn\fi
+    \hypersetup{linkcolor=winered}}
 
 
 \renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
