@@ -90,7 +90,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 \section{关于提交}
 
-出于某些因素的考虑，Elegant\LaTeX{} 项目自 2019 年 5 月 20 日开始，\textbf{不再接受任何非作者预约性质的提交}（pull request)！如果你想改进模板，你可以给我们提交 issues，或者可以在遵循协议（LPPL-1.3c）的情况下，克隆到自己仓库下进行修改。
+出于某些因素的考虑，Elegant\LaTeX{} 项目自 2019 年 5 月 20 日开始，\textbf{不再接受任何非作者预约性质的提交}（pull request）！如果你想改进模板，你可以给我们提交 issues，或者可以在遵循协议（LPPL-1.3c）的情况下，克隆到自己仓库下进行修改。
 
 
 \chapter{ElegantBook 设置说明}
@@ -258,7 +258,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
   \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
     \begin{itemize}
       \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
-      \item \textcolor{second}{\textbf{theorem、lemma、corollary}} 环境，颜色为 \textcolor{second} {second}；
+      \item \textcolor{second}{\textbf{theorem、lemma、corollary、axiom、postulate}} 环境，颜色为 \textcolor{second} {second}；
       \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
     \end{itemize}
   \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
@@ -300,6 +300,8 @@ tlmgr update --self --all --reinstall-forcibly-removed
      \midrule
      definition & label & def   & \lstinline|\ref{def:label}| \\
      theorem & label & thm   & \lstinline|\ref{thm:label}| \\
+     postulate & label & pos & \lstinline|\ref{pos:label}| \\
+     axiom & label & axi & \lstinline|\ref{axi:label}|\\
      lemma & label & lem   & \lstinline|\ref{lem:label}| \\
      corollary & label & cor   & \lstinline|\ref{cor:label}| \\
      proposition & label & pro   & \lstinline|\ref{pro:label}| \\
