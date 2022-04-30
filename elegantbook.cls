@@ -916,7 +916,7 @@
           {title={\definitionname~\thetcbcounter\ (#2)}}
           {title=\definitionname~\thetcbcounter}
       },
-    IfBooleanTF={#3}{label=#4}{label={def:#4}}}
+    IfBooleanTF={#3}{label={#4}}{label={def:#4}}}
   % \newtcbtheorem[auto counter,number within=chapter]{theorem}{\theoremname}{thmstyle}{thm}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{theorem}{ g o t\label g }{
     common,thmstyle,
@@ -927,7 +927,7 @@
           {title={\theoremname~\thetcbcounter\ (#2)}}
           {title=\theoremname~\thetcbcounter}
       },
-    IfBooleanTF={#3}{label=#4}{label={thm:#4}}}
+    IfBooleanTF={#3}{label={#4}}{label={thm:#4}}}
   % \newtcbtheorem[auto counter,number within=chapter]{postulate}{\postulatename}{thmstyle}{pos}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{postulate}{ g o t\label g }{
     common,thmstyle,
@@ -938,7 +938,7 @@
           {title={\postulatename~\thetcbcounter\ (#2)}}
           {title=\postulatename~\thetcbcounter}
       },
-    IfBooleanTF={#3}{label=#4}{label={pos:#4}}}
+    IfBooleanTF={#3}{label={#4}}{label={pos:#4}}}
   % \newtcbtheorem[auto counter,number within=chapter]{axiom}{\axiomname}{thmstyle}{axi}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{axiom}{ g o t\label g }{
     common,thmstyle,
@@ -949,7 +949,7 @@
           {title={\axiomname~\thetcbcounter\ (#2)}}
           {title=\axiomname~\thetcbcounter}
       },
-    IfBooleanTF={#3}{label=#4}{label={axi:#4}}}
+    IfBooleanTF={#3}{label={#4}}{label={axi:#4}}}
   % \newtcbtheorem[auto counter,number within=chapter]{corollary}{\corollaryname}{thmstyle}{cor}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{corollary}{ g o t\label g }{
     common,thmstyle,
@@ -960,7 +960,7 @@
           {title={\corollaryname~\thetcbcounter\ (#2)}}
           {title=\corollaryname~\thetcbcounter}
       },
-    IfBooleanTF={#3}{label=#4}{label={cor:#4}}}
+    IfBooleanTF={#3}{label={#4}}{label={cor:#4}}}
   % \newtcbtheorem[auto counter,number within=chapter]{lemma}{\lemmaname}{thmstyle}{lem}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{lemma}{ g o t\label g }{
     common,thmstyle,
@@ -971,7 +971,7 @@
           {title={\lemmaname~\thetcbcounter\ (#2)}}
           {title=\lemmaname~\thetcbcounter}
       },
-    IfBooleanTF={#3}{label=#4}{label={lem:#4}}}
+    IfBooleanTF={#3}{label={#4}}{label={lem:#4}}}
   % \newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
   \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{proposition}{ g o t\label g }{
     common,propstyle,
@@ -982,7 +982,7 @@
           {title={\propositionname~\thetcbcounter\ (#2)}}
           {title=\propositionname~\thetcbcounter}
       },
-    IfBooleanTF={#3}{label=#4}{label={pro:#4}}}
+    IfBooleanTF={#3}{label={#4}}{label={pro:#4}}}
 }{\relax}
 
 
