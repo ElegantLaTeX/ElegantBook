@@ -238,7 +238,19 @@
 
 \RequirePackage{anyfontsize}
 \ifdefstring{\ELEGANT@math}{newtx}{
+  \let\oldencodingdefault\encodingdefault
+  \let\oldrmdefault\rmdefault
+  \let\oldsfdefault\sfdefault
+  \let\oldttdefault\ttdefault
+  \RequirePackage[T1]{fontenc}
+  \renewcommand{\rmdefault}{ntxtlf}
+  \renewcommand{\sfdefault}{qhv}
+  \renewcommand{\ttdefault}{ntxtt}
   \RequirePackage{newtxmath}
+  \let\encodingdefault\oldencodingdefault
+  \let\rmdefault\oldrmdefault
+  \let\sfdefault\oldsfdefault
+  \let\ttdefault\oldttdefault
   \let\Bbbk\relax
   \RequirePackage{esint}
   %%% use yhmath pkg, uncomment following code
