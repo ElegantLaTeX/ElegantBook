@@ -165,13 +165,16 @@
 \PassOptionsToPackage{quiet}{fontspec}
 \RequirePackage{iftex}
 
-\ifXeTeX
+\ifpdftex
+  \RequirePackage{newtxtext}
+  \RequirePackage[scaled=.90]{helvet}
+\else
   \RequirePackage[no-math]{fontspec}
-  \setmainfont{texgyretermes}[
-    UprightFont = *-regular ,
-    BoldFont = *-bold ,
-    ItalicFont = *-italic ,
-    BoldItalicFont = *-bolditalic ,
+  \setmainfont{TeXGyreTermesX}[
+    UprightFont = *-Regular ,
+    BoldFont = *-Bold ,
+    ItalicFont = *-Italic ,
+    BoldItalicFont = *-BoldItalic ,
     Extension = .otf ,
     Scale = 1.0]
     
@@ -182,9 +185,6 @@
     BoldItalicFont = *-bolditalic ,
     Extension = .otf ,
     Scale = 0.9]
-\else
-  \RequirePackage{newtxtext}
-  \RequirePackage[scaled=.90]{helvet}
 \fi
 
 \ifdefstring{\ELEGANT@lang}{cn}{
