@@ -242,7 +242,7 @@
   \let\oldrmdefault\rmdefault
   \let\oldsfdefault\sfdefault
   \let\oldttdefault\ttdefault
-  \RequirePackage[T1]{fontenc}
+  \def\encodingdefault{T1}
   \renewcommand{\rmdefault}{ntxtlf}
   \renewcommand{\sfdefault}{qhv}
   \renewcommand{\ttdefault}{ntxtt}
@@ -866,7 +866,9 @@
 
 
 
-%%define the note and proof environment
+%%define the 
+%%definition theorem postulate axiom corollary lemma proposition 
+%%and proof environment
 \RequirePackage{pifont,manfnt,bbding}
 \RequirePackage[many]{tcolorbox}
 % \newlength{\normalparindent}
@@ -910,106 +912,77 @@
       overlay unbroken and last={
         \node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {
           \textcolor{second}{$\heartsuit$}};}},
-    propstyle/.style={
+    prostyle/.style={
       common,
       colframe=third,  
       colback=third!5,
       colbacktitle=third, 
       overlay unbroken and last={
         \node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {
-          \textcolor{third}{$\spadesuit$}};}},}
-  % \newtcbtheorem[auto counter,number within=chapter]{definition}{\definitionname}{defstyle}{def}
-  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{definition}{ g o t\label g }{
-      common,defstyle,
-      IfValueTF={#1}
-        {title={\definitionname~\thetcbcounter\ (#1)}}
-        {
-          IfValueTF={#2} 
-            {title={\definitionname~\thetcbcounter\ (#2)}}
-            {title=\definitionname~\thetcbcounter}
-        },
-      IfValueT={#4}
-        {IfBooleanTF={#3}{label={#4}}{label={def:#4}}}
+          \textcolor{third}{$\spadesuit$}};}},
+    ELEGANT@title/.code n args={2}
+      {
+        \ifblank{#2}
+          {\tcbset{title={\csname #1name\endcsname~\thetcbcounter}}}
+          {\tcbset{title={\csname #1name\endcsname~\thetcbcounter\ (#2)}}}
+      },
+    ELEGANT@label/.code n args={2}
+      {
+        \ifblank{#2}
+          {}{\tcbset{label={#1:#2}}}
       }
-    
-  % \newtcbtheorem[auto counter,number within=chapter]{theorem}{\theoremname}{thmstyle}{thm}
-  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{theorem}{ g o t\label g }{
-    common,thmstyle,
-    IfValueTF={#1}
-      {title={\theoremname~\thetcbcounter\ (#1)}}
-      {
-        IfValueTF={#2} 
-          {title={\theoremname~\thetcbcounter\ (#2)}}
-          {title=\theoremname~\thetcbcounter}
-      },
-    IfValueT={#4}
-      {IfBooleanTF={#3}{label={#4}}{label={thm:#4}}}
     }
-  % \newtcbtheorem[auto counter,number within=chapter]{postulate}{\postulatename}{thmstyle}{pos}
-  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{postulate}{ g o t\label g }{
-    common,thmstyle,
-    IfValueTF={#1}
-      {title={\postulatename~\thetcbcounter\ (#1)}}
-      {
-        IfValueTF={#2} 
-          {title={\postulatename~\thetcbcounter\ (#2)}}
-          {title=\postulatename~\thetcbcounter}
-      },
-    IfValueT={#4}
-      {IfBooleanTF={#3}{label={#4}}{label={pos:#4}}}
-    }
-  % \newtcbtheorem[auto counter,number within=chapter]{axiom}{\axiomname}{thmstyle}{axi}
-  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{axiom}{ g o t\label g }{
-    common,thmstyle,
-    IfValueTF={#1}
-      {title={\axiomname~\thetcbcounter\ (#1)}}
-      {
-        IfValueTF={#2} 
-          {title={\axiomname~\thetcbcounter\ (#2)}}
-          {title=\axiomname~\thetcbcounter}
-      },
-    IfValueT={#4}
-      {IfBooleanTF={#3}{label={#4}}{label={axi:#4}}}
-    }
-  % \newtcbtheorem[auto counter,number within=chapter]{corollary}{\corollaryname}{thmstyle}{cor}
-  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{corollary}{ g o t\label g }{
-    common,thmstyle,
-    IfValueTF={#1}
-      {title={\corollaryname~\thetcbcounter\ (#1)}}
-      {
-        IfValueTF={#2} 
-          {title={\corollaryname~\thetcbcounter\ (#2)}}
-          {title=\corollaryname~\thetcbcounter}
-      },
-    IfValueT={#4}
-      {IfBooleanTF={#3}{label={#4}}{label={cor:#4}}}
-    }
-  % \newtcbtheorem[auto counter,number within=chapter]{lemma}{\lemmaname}{thmstyle}{lem}
-  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{lemma}{ g o t\label g }{
-    common,thmstyle,
-    IfValueTF={#1}
-      {title={\lemmaname~\thetcbcounter\ (#1)}}
-      {
-        IfValueTF={#2} 
-          {title={\lemmaname~\thetcbcounter\ (#2)}}
-          {title=\lemmaname~\thetcbcounter}
-      },
-    IfValueT={#4}
-      {IfBooleanTF={#3}{label={#4}}{label={lem:#4}}}
-    }
-  % \newtcbtheorem[auto counter,number within=chapter]{proposition}{\propositionname}{propstyle}{pro}
-  \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{proposition}{ g o t\label g }{
-    common,propstyle,
-    IfValueTF={#1}
-      {title={\propositionname~\thetcbcounter\ (#1)}}
-      {
-        IfValueTF={#2} 
-          {title={\propositionname~\thetcbcounter\ (#2)}}
-          {title=\propositionname~\thetcbcounter}
-      },
-    IfValueT={#4}
-        {IfBooleanTF={#3}{label={#4}}{label={pro:#4}}}
-    }
+  
+  % define an internal control sequence \ELEGANT@newtheorem for fancy mode's newtheorem
+  % #1 is the environment name, #2 is the prefix of label, #3 is the style
+  % style: thmstyle, defstyle, prostyle
+  % e.g. \ELEGANT@newtheorem{theorem}{thm}{thmstyle}
+  % will define two environments: numbered ``theorem'' and no-numbered ``theorem*''
+  % WARNING FOR MULTILINGUAL: this cs will automatically find \theoremname's definition,
+  % WARNING FOR MULTILINGUAL: it should be defined in language settings.
+  \newcommand{\ELEGANT@newtheorem}[3]{
+    \ifcsundef{#1name}{%
+      \ClassError{elegantbook}{%
+        \ #1name undefined, \MessageBreak
+        Please check in language setting
+      }{}
+    }{\relax}
+    \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{#1}{ g o t\label g }{
+        common,#3,
+        IfValueTF={##1}
+          {ELEGANT@title={#1}{##1}}
+          {
+            IfValueTF={##2}
+            {ELEGANT@title={#1}{##2}}
+            {ELEGANT@title={#1}{}}
+          },
+        IfValueT={##4}
+          {
+            IfBooleanTF={##3}
+              {label={##4}}
+              {ELEGANT@label={#2}{##4}}
+          }
+      }
+    \DeclareTColorBox{#1*}{ g o }{
+        common,#3,
+        IfValueTF={##1}
+          {ELEGANT@title={#1}{##1}}
+          {
+            IfValueTF={##2}
+            {ELEGANT@title={#1}{##2}}
+            {ELEGANT@title={#1}{}}
+          },
+      }
+  }
+  % define several environment 
+  % we define headers like \definitionname before
+  \ELEGANT@newtheorem{definition}{def}{defstyle}
+  \ELEGANT@newtheorem{theorem}{thm}{thmstyle}
+  \ELEGANT@newtheorem{postulate}{pos}{thmstyle}
+  \ELEGANT@newtheorem{axiom}{axi}{thmstyle}
+  \ELEGANT@newtheorem{corollary}{cor}{thmstyle}
+  \ELEGANT@newtheorem{lemma}{lem}{thmstyle}
+  \ELEGANT@newtheorem{proposition}{pro}{prostyle}
 }{\relax}
 
 
@@ -1020,7 +993,7 @@
   % \let\proofname\relax
   \let\endproof\relax
 
-  % declare a new theorem style
+  % declare new theorem styles: defstyle, thmstyle, prostyle
   \newtheoremstyle{defstyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{main}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
   \newtheoremstyle{thmstyle}{3pt}{3pt}{\citshape}{-3pt}{
@@ -1028,20 +1001,84 @@
   \newtheoremstyle{prostyle}{3pt}{3pt}{\citshape}{-3pt}{
     \bfseries\color{third}}{}{0.5em}{\thmname{#1} \thmnumber{#2} \thmnote{(#3)}}
 
+  % define an internal control sequence \ELEGANT@newtheorem for simple mode's newtheorem
+  % #1 is the environment name, #2 is the style
+  % style: thmstyle, defstyle, prostyle
+  % e.g. \ELEGANT@newtheorem{theorem}{thmstyle}
+  % will define two environments: numbered ``theorem'' and no-numbered ``theorem*''
+  % WARNING FOR MULTILINGUAL: this cs will automatically find \theoremname's definition,
+  % WARNING FOR MULTILINGUAL: it should be defined in language settings.
+  \newcommand{\ELEGANT@newtheorem}[2]{
+    \theoremstyle{#2}
+    \newtheorem{#1}{\csname #1name\endcsname}[\ELEGANT@thmcnt]
+    \newtheorem*{#1*}{\csname #1name\endcsname}
+  }
 
-  \theoremstyle{defstyle} % definition style
-  \newtheorem{definition}{\definitionname}[\ELEGANT@thmcnt]
-
-  \theoremstyle{thmstyle} %theorem style
-  \newtheorem{theorem}{\theoremname}[\ELEGANT@thmcnt]
-  \newtheorem{lemma}{\lemmaname}[\ELEGANT@thmcnt]
-  \newtheorem{corollary}{\corollaryname}[\ELEGANT@thmcnt]
-  \newtheorem{postulate}{\postulatename}[\ELEGANT@thmcnt]
-  \newtheorem{axiom}{\axiomname}[\ELEGANT@thmcnt]
-
-  \theoremstyle{prostyle} % proposition style
-  \newtheorem{proposition}{\propositionname}[\ELEGANT@thmcnt]
+  % define several environment 
+  % we define headers like \definitionname before
+  \ELEGANT@newtheorem{definition}{defstyle}
+  \ELEGANT@newtheorem{theorem}{thmstyle}
+  \ELEGANT@newtheorem{postulate}{thmstyle}
+  \ELEGANT@newtheorem{axiom}{thmstyle}
+  \ELEGANT@newtheorem{corollary}{thmstyle}
+  \ELEGANT@newtheorem{lemma}{thmstyle}
+  \ELEGANT@newtheorem{proposition}{prostyle}
 }{\relax}
+
+% define an user control sequence \elegantnewtheorem
+% #1 is the evironment, #2 is the theorem header
+% #3 is the style       #4 is the prefix for fancy mode
+% style: thmstyle, defstyle, prostyle
+% if #4 is given in simple mode, an error will be raised
+% if #4 isn't given in fancy mode, the prefix will be set equal to #1,
+%   and a warning will be raised
+\newcommand{\ELEGANT@newtheorem@warning}{}
+\newcommand{\ELEGANT@newtheorem@error}{}
+\NewDocumentCommand\elegantnewtheorem{ m m m g }
+  {
+    \renewcommand{\ELEGANT@newtheorem@warning}{
+      \ClassWarning{elegantbook}{%
+        Because you didn't provide a prefix. \MessageBreak
+        We use #1 as the default prefix. \MessageBreak
+        You have to use \MessageBreak
+        \ref{#1:label} to refer a \MessageBreak
+        \begin{#1}{name}{label} environment. \MessageBreak
+      }
+    }
+    \renewcommand{\ELEGANT@newtheorem@error}{
+      \ClassError{elegantbook}{%
+        You can't set a prefix in mode ``simple''.\MessageBreak
+        Just use \MessageBreak
+        \elegantnewtheorem{#1}{#2}{#3}
+      }{%
+        We are using ``amsthm'' package to \MessageBreak
+        generate theorem-like theorem. \MessageBreak
+        The 4th parameter ``prefix'' isn't allowed.
+      }
+    }
+    \expandafter\def\csname #1name\endcsname{#2}
+    \ifdefstring{\ELEGANT@mode}{simple}{%
+        \IfValueTF{#4}
+          {\ELEGANT@newtheorem@error}
+          {\ELEGANT@newtheorem{#1}{#3}}
+      }{\relax}
+    \ifdefstring{\ELEGANT@mode}{fancy}{%
+        \IfValueTF{#4}
+          {
+            \def\ELEGANT@temp@prefix{#4}
+            \ifdefempty{\ELEGANT@temp@prefix}
+              {
+                \ELEGANT@newtheorem{#1}{#1}{#3}
+                \ELEGANT@newtheorem@warning
+              }
+              {\ELEGANT@newtheorem{#1}{#4}{#3}}
+          }
+          {
+            \ELEGANT@newtheorem{#1}{#1}{#3}
+            \ELEGANT@newtheorem@warning
+          }
+      }{\relax}
+  }
 
 % main（green-def): example exercise problem solution
 % second（orange-thm）: proof note remark  
@@ -1263,7 +1300,7 @@
   commentstyle=\color{gray},
   emph={elegantpaper,fontenc,fontspec,xeCJK,citestyle,FiraMono,xunicode,figure,fig,image,img,table,itemize,enumerate,ctex,microtype,description,times,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,ctex,listings,base,math,scheme,toc,esint,chinesefont,amsmath,bibstyle,natbib,pgfornament},
   emphstyle={\color{frenchplum}},
-  morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote,bioinfo,datechange,listofchange,lvert,lastpage,songti,heiti,fangsong,setCJKfamilyfont,textbf},
+  morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,section,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote,bioinfo,datechange,listofchange,lvert,lastpage,songti,heiti,fangsong,setCJKfamilyfont,textbf,elegantnewtheorem,thmcnt,colorlet},
   frame=single,
   tabsize=2,
   rulecolor=\color{structurecolor},
@@ -1327,7 +1364,7 @@
 \renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
 \hbox{}%
 \thispagestyle{empty}%
-\newpage%
+beforechap\newpage%
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 
