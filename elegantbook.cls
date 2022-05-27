@@ -844,8 +844,12 @@
 \ifdefstring{\ELEGANT@lang}{cn}{
   \ifdefstring{\ELEGANT@scheme}{chinese}{
     \newcommand{\xchaptertitle}{第\zhnumber{\arabic{chapter}}章} }{
-    \newcommand{\xchaptertitle}{第 \thechapter{} 章}} }{
-  \newcommand{\xchaptertitle}{\chaptername~\thechapter~}}
+    \newcommand{\xchaptertitle}{第 \thechapter{} 章}} 
+    \patchcmd{\NR@chapter}%
+      {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
+      {}{\fail}
+  }
+  {\newcommand{\xchaptertitle}{\chaptername~\thechapter~}}
 
 \setcounter{secnumdepth}{5}
 \titleformat{\chapter}[\style]{\bfseries}{
@@ -1369,13 +1373,17 @@ beforechap\newpage%
 
 
 % https://tex.stackexchange.com/questions/56839/chaptername-is-used-even-for-appendix-chapters-in-toc
-\usepackage{calc}
-\usepackage[titles]{tocloft}
+\RequirePackage{calc}
+\RequirePackage[titles]{tocloft}
 \ifdefstring{\ELEGANT@lang}{cn}{
-  \renewcommand{\cftchappresnum}{\beforechap\space}
-  \renewcommand{\cftchapaftersnum}{\space\afterchap}
+  % \renewcommand{\cftchappresnum}{\beforechap\space}
+  % \renewcommand{\cftchapaftersnum}{\space\afterchap}
   \setlength{\cftchapnumwidth}{\widthof{\textbf{附录~999}}}
   \g@addto@macro\appendix{%
+    % recover \thechapter in the \NR@chapter's \numberline
+    \patchcmd{\NR@chapter}
+      {\numberline{\xchaptertitle}}
+      {\numberline{\thechapter}}{}{}
     \addtocontents{toc}{%
       \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
       \protect\renewcommand{\protect\cftchapaftersnum}{}%
