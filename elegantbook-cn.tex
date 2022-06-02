@@ -271,7 +271,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 \subsection{定理类环境的使用}
 
-\subsubsection{\lstinline{fancy} 模式}
+\subsubsection{\texttt{fancy} 模式}
 
 在 \lstinline{fancy} 模式下使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，有编号定理的使用方法如下：
 
@@ -363,7 +363,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
 \end{lstlisting}
 这时引用不需要加前缀，\lstinline{\ref} 中的内容与 \lstinline{\label} 中的内容相同，换句话说，这时的使用方法与使用原生定理环境的时候几乎相同。
 
-\subsubsection{\lstinline{simple} 模式}
+\subsubsection{\texttt{simple} 模式}
 
 在 \lstinline{simple} 模式下使用了 \lstinline{amsthm} 宏包，定理类环境使用方法与原生一致，定理的使用方法如下：
 
@@ -438,7 +438,9 @@ tlmgr update --self --all --reinstall-forcibly-removed
 % simple 模式
 \elegantnewtheorem{env}{title}{style}
 \end{lstlisting}
-该命令可以同时定义编号环境 \lstinline|env| 和不编号环境 \lstinline|env*|。其中 \lstinline|style| 支持的参数有：\lstinline{defstyle}，\lstinline{thmstyle}，\lstinline{prostyle}，分别对应“定义”，“定理”，“命题”三种样式。
+该命令可以同时定义编号环境 \lstinline|env| 和不编号环境 \lstinline|env*|。
+
+其中 \lstinline|style| 支持的参数有：\lstinline|defstyle|，\lstinline|thmstyle|，\lstinline|prostyle|，分别对应“定义”，“定理”，“命题”三种样式。
 
 
 \begin{itemize}
