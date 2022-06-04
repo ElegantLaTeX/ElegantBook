@@ -844,10 +844,20 @@
 \ifdefstring{\ELEGANT@lang}{cn}{
   \ifdefstring{\ELEGANT@scheme}{chinese}{
     \newcommand{\xchaptertitle}{第\zhnumber{\arabic{chapter}}章} }{
-    \newcommand{\xchaptertitle}{第 \thechapter{} 章}} 
-    \patchcmd{\NR@chapter}%
-      {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
-      {}{\fail}
+    \newcommand{\xchaptertitle}{第 \thechapter{} 章}}
+% Hyperref 2022/05/16's changelog.txt said
+% * nameref is loaded always and earlier (issue#235) 
+    \IfPackageAtLeastTF{hyperref}{2022/05/16}
+    {
+      \patchcmd{\NR@chapter}%
+        {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
+        {}{\fail}
+    }
+    {
+      \patchcmd{\Hy@org@chapter}%
+        {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
+        {}{\fail}
+    }
   }
   {\newcommand{\xchaptertitle}{\chaptername~\thechapter~}}
 
@@ -1381,9 +1391,17 @@ beforechap\newpage%
   \setlength{\cftchapnumwidth}{\widthof{\textbf{附录~999}}}
   \g@addto@macro\appendix{%
     % recover \thechapter in the \NR@chapter's \numberline
-    \patchcmd{\NR@chapter}
-      {\numberline{\xchaptertitle}}
-      {\numberline{\thechapter}}{}{}
+    \IfPackageAtLeastTF{hyperref}{2022/05/16}
+    {
+      \patchcmd{\NR@chapter}%
+        {\numberline{\xchaptertitle}}{\numberline{\thechapter}}%
+        {}{\fail}      
+    }
+    {
+      \patchcmd{\Hy@org@chapter}%
+        {\numberline{\xchaptertitle}}{\numberline{\thechapter}}%
+      {}{\fail}  
+    }
     \addtocontents{toc}{%
       \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
       \protect\renewcommand{\protect\cftchapaftersnum}{}%
