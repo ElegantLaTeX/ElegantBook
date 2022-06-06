@@ -123,6 +123,10 @@
   pdfborder={0 0 0},
   linktocpage
 }
+\newif\ifELEGANT@Hy@later
+  \@ifpackagelater{hyperref}{2022/05/16}
+    {\ELEGANT@Hy@latertrue}
+    {\ELEGANT@Hy@laterfalse}
 
 %% device settings
 \RequirePackage{geometry}
@@ -847,16 +851,16 @@
     \newcommand{\xchaptertitle}{第 \thechapter{} 章}}
 % Hyperref 2022/05/16's changelog.txt said
 % * nameref is loaded always and earlier (issue#235) 
-    \IfPackageAtLeastTF{hyperref}{2022/05/16}
-    {
-      \patchcmd{\NR@chapter}%
-        {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
-        {}{\fail}
-    }
-    {
-      \patchcmd{\Hy@org@chapter}%
-        {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
-        {}{\fail}
+    \AtBeginDocument{
+      \ifELEGANT@Hy@later
+        \patchcmd{\NR@chapter}%
+          {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
+          {}{\fail}
+      \else    
+        \patchcmd{\Hy@org@chapter}%
+          {\numberline{\thechapter}}{\numberline{\xchaptertitle}}%
+          {}{\fail}
+      \fi
     }
   }
   {\newcommand{\xchaptertitle}{\chaptername~\thechapter~}}
@@ -1391,17 +1395,15 @@ beforechap\newpage%
   \setlength{\cftchapnumwidth}{\widthof{\textbf{附录~999}}}
   \g@addto@macro\appendix{%
     % recover \thechapter in the \NR@chapter's \numberline
-    \IfPackageAtLeastTF{hyperref}{2022/05/16}
-    {
+    \ifELEGANT@Hy@later
       \patchcmd{\NR@chapter}%
         {\numberline{\xchaptertitle}}{\numberline{\thechapter}}%
         {}{\fail}      
-    }
-    {
+    \else
       \patchcmd{\Hy@org@chapter}%
         {\numberline{\xchaptertitle}}{\numberline{\thechapter}}%
-      {}{\fail}  
-    }
+        {}{\fail}  
+    \fi
     \addtocontents{toc}{%
       \protect\renewcommand{\protect\cftchappresnum}{\appendixname\space}%
       \protect\renewcommand{\protect\cftchapaftersnum}{}%
