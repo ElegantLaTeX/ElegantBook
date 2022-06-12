@@ -191,6 +191,20 @@
 \end{solution}
 
 
-\section*{2022.06.10}
+\section*{2022.06.13}
+
+$\lim\limits_{x \to 1} \dfrac{x - x^x}{1 - x + \ln x} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $2.$
+
+  $$\lim\limits_{x \to 1} \dfrac{x - x^x}{1 - x + \ln x}
+  = \lim\limits_{x \to 0} \dfrac{e^x - e^{x e^x}}{1 - e^x + x}
+  = \lim\limits_{x \to 0} \dfrac{e^{x e^x}x(1 - e^x)}{-x^2/2}
+  = 2.
+  $$
+
+\end{solution}
 
 \end{document}
