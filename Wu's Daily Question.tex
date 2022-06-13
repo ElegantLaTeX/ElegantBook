@@ -190,6 +190,7 @@
 
 \end{solution}
 
+\newpage
 
 \section*{2022.06.13}
 
@@ -204,6 +205,44 @@ $\lim\limits_{x \to 1} \dfrac{x - x^x}{1 - x + \ln x} = \_\_\_\_.$
   = \lim\limits_{x \to 0} \dfrac{e^{x e^x}x(1 - e^x)}{-x^2/2}
   = 2.
   $$
+
+\end{solution}
+
+
+\section*{2022.06.14}
+
+$\lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{2/x} - e^2\left[1-\ln(1+x)\right]}{x} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $0.$
+
+  $\begin{aligned}
+  & \quad\ \lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{2/x} - e^2\left[1-\ln(1+x)\right]}{x} \\
+  &= e^2 \lim\limits_{x \to 0} \dfrac{\left(\dfrac{1+x}{e^x}\right)^{2/x} - 1}{x} + e^2\lim\limits_{x \to 0} \dfrac{\ln(1+x)}{x}\\
+  &= e^2 \lim\limits_{x \to 0} \dfrac{1+x-e^x}{xe^x} \cdot \dfrac{2}{x} + e^2
+  = 2e^2 \lim\limits_{x \to 0} \dfrac{-\dfrac{x^2}{2}}{x^2} + e^2 = 0.
+  \end{aligned}
+  $
+
+\end{solution}
+
+
+\section*{2022.06.15}
+
+$\lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{1/x} - \left(1+2x\right)^{1/(2x)} }{\sin x} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $\dfrac{e}{2}.$
+
+  $\begin{aligned}
+  & \quad\ \lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{1/x} - \left(1+2x\right)^{1/(2x)} }{\sin x} \\
+  &= \lim\limits_{x \to 0} \left(1+2x\right)^{1/(2x)} 
+    \lim\limits_{x \to 0} \dfrac{1}{x} \left[\left(\dfrac{(1+x)^2}{1+2x}\right)^{1/(2x)} - 1\right]\\
+  &= e \lim\limits_{x \to 0} \dfrac{1}{x}\cdot \dfrac{x^2}{(1+2x)\cdot(2x)}=\frac{e}{2}.
+  \end{aligned}
+  $
 
 \end{solution}
 
