@@ -246,4 +246,119 @@ $\lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{1/x} - \left(1+2x\right)^{1/(2x)
 
 \end{solution}
 
+\newpage
+
+\section*{2022.06.16}
+
+$\lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2})\sin x^2} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $-\dfrac{1}{12}.$
+
+  $\begin{aligned}
+  & \lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2})\sin x^2} \\
+  &= \lim\limits_{x\to 0} \dfrac{\left(1+\dfrac{x^2}{2}\right)^2-\left(\sqrt{1+x^2}\right)^2}{
+    \left[(\cos x - 1) -\left(e^{x^2} - 1\right)\right] \cdot x^2 
+    \cdot \left(1+\dfrac{x^2}{2}+\sqrt{1+x^2}\right)
+  }\\
+  &= \lim\limits_{x\to 0} \dfrac{x^4/4}{
+    2x^2 \left[\left(-x^2/2\right) -\left(x^2\right)\right]
+  } = -\dfrac{1}{12}.\\
+  \end{aligned}
+  $
+\end{solution}
+\section*{2022.06.17}
+
+$\lim\limits_{x \to 0} \dfrac{
+  x\sin x^2 - 2(1-\cos x)\sin x}{x^5} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $-\dfrac{1}{4}.$
+
+  $\begin{aligned}
+  &\quad\  \lim\limits_{x \to 0} \dfrac{
+    x\sin x^2 - 2(1-\cos x)\sin x}{x^5} \\
+  &= -\lim\limits_{x \to 0} \dfrac{
+    x(x^2-\sin x^2)}{x^5} - 
+    \lim\limits_{x \to 0} \dfrac{
+    x^3-2\sin x + \sin 2x}{x^5} \\
+  &= 0 - 
+  \lim\limits_{x \to 0} \dfrac{
+  3x^2-2\cos x + 2\cos 2x}{5x^4} 
+  = - 
+  \lim\limits_{x \to 0} \dfrac{
+  6x + 2\sin x - 4\sin 2x}{60x^2} \\
+  &= - 
+  \lim\limits_{x \to 0} \dfrac{
+  6 + 2\cos x - 8\cos 2x}{20x^3}
+  = \lim\limits_{x \to 0} \dfrac{
+  2\sin x - 16\sin 2x}{120x}
+  = -\dfrac{1}{4}.\\
+  \end{aligned}
+  $
+\end{solution}
+
+\newpage
+
+
+
+1. $\left(1+\dfrac{1}{n}\right)^n < \left(1 + \dfrac{1}{n+1}\right)^{n+1}$.
+\newline
+
+\begin{solution}
+  由基本不等式可得:
+  $$\begin{aligned}
+  \left(1+\dfrac{1}{n}\right)^n = 1 \cdot \left(1+\dfrac{1}{n}\right)^n
+  < \left[\dfrac{1}{n+1}\left(1+\sum_{k=1}^{n}\left(1 + \dfrac{1}{n}\right)\right)\right]^{n+1}
+  = \left(1+\dfrac{1}{n+1}\right)^{n+1}
+  \end{aligned}$$
+\end{solution}
+
+\vspace{1cm}
+2. $\left(1+\dfrac{1}{n}\right)^{n+1} > \left(1 + \dfrac{1}{n+1}\right)^{n+2}$.
+\newline
+
+\begin{solution}
+  由基本不等式可得:
+  $$\begin{aligned}
+    \left(1+\dfrac{1}{n}\right)^{n+1} = \dfrac{1}{1 \cdot \left(\dfrac{n}{n+1}\right)^{n+1}}
+    > \dfrac{1}{\left[\dfrac{1}{n+2}\left(1+\displaystyle\sum_{k=1}^{n+1}
+      \left(\dfrac{n}{n+1}\right)\right)\right]^{n+2}}
+    = \left(1 + \dfrac{1}{n+1}\right)^{n+2}
+  \end{aligned}$$
+\end{solution}
+
+\vspace{1cm} 
+$a_{N} := \begin{cases}
+  \dfrac{1}{N}, \text{当} N = \text{整数的平方时},\\ \\
+  \dfrac{1}{N^2}, \text{其他},
+\end{cases}$
+\vspace{4mm} 
+
+$b_{N}:=
+\begin{cases}
+  \dfrac{1}{N} {\color{red}{+ \dfrac{1}{N^2}}}, \text{当} N = \text{整数的平方时},\\ \\
+  \dfrac{1}{N^2}, \text{其他},
+\end{cases} =
+  \dfrac{1}{N^2} + \begin{cases}
+  \dfrac{1}{N}, \text{当} N = \text{整数的平方时},\\ \\
+  0, \text{其他}.
+\end{cases}$
+\vspace{4mm} 
+
+此时 $\begin{aligned}
+  S_{N} &= \sum_{k = 1}^{N} a_{k} 
+  \leqslant \sum_{k = 1}^{N} b_{k} 
+  = \sum_{k=1}^{N} \dfrac{1}{k^2} + \sum_{k^2 \leqslant N} \dfrac{1}{(k^2)^1}
+\end{aligned}$
+
+\newpage
+
+本题来自高等数学辅导讲义严选题第5页第39题:
+
+$39.$ 求极限 $\lim\limits_{n\to\infty} \left(\dfrac{1}{\sqrt{n^2}} + 
+  \dfrac{1}{\sqrt{n^2 - 1}} + \cdots + \dfrac{1}{\sqrt{n^2 - (n-1)^2}}\right).$
+
 \end{document}
