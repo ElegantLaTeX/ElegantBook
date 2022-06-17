@@ -1,0 +1,364 @@
+\documentclass[lang=cn,12pt]{elegantbook}
+
+\title{ElegantBook：优美的 \LaTeX{} 书籍模板}
+\subtitle{Elegant\LaTeX{} 经典之作}
+
+\author{Ethan Deng \& Liam Huang}
+\institute{Elegant\LaTeX{} Program}
+\date{April 9, 2022}
+\version{4.3}
+\bioinfo{自定义}{信息}
+
+\extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+% \definecolor{customcolor}{RGB}{32,178,170}
+% \colorlet{coverlinecolor}{customcolor}
+
+\renewcommand\appendix{\setcounter{secnumdepth}{-2}}
+
+\begin{document}
+
+%\maketitle
+%\frontmatter
+
+%\tableofcontents
+
+%\mainmatter
+
+
+
+\section*{2022.06.06}
+
+设 $x_{n} = \left(1+\dfrac{1}{n^2}\right)\left(1+\dfrac{2}{n^2}\right)
+  \cdots \left(1+\dfrac{n}{n^2}\right),$
+则极限 $\lim\limits_{n\to\infty} x_{n}$ = \_\_\_\_.
+\\  \\
+
+\begin{solution}
+  法一: 由于 $\dfrac{x}{1+x}<\ln\left(1+x\right)<x,$ 故 
+  $x-\ln\left(1+x\right)<\dfrac{x^2}{1+x}.$
+  因此
+  $$\left|\sum_{k=1}^{n}\ln \left(1+\dfrac{k}{n^2}\right) - 
+  \sum_{k=1}^{n}\dfrac{k}{n^2}\right| <
+  \sum_{k=1}^{n}\dfrac{\left(\dfrac{k}{n^2}\right)^2}{
+    1+\dfrac{k}{n^2}}<\sum_{k=1}^{n} \left(\dfrac{n}{n^2}\right)^2 =
+    \dfrac{1}{n} \to 0 (n\to\infty)
+  $$
+  故由夹逼准则得: $$\lim\limits_{n\to\infty} \ln \left(1+\dfrac{k}{n^2}\right) =
+    \lim\limits_{n\to\infty} \sum_{k=1}^{n}\dfrac{k}{n^2} =
+    \lim\limits_{n\to\infty} \dfrac{n+1}{2n} = \dfrac{1}{2}.$$
+  故 $$\lim\limits_{n\to\infty} x_{n} = 
+    \exp\left\{\lim\limits_{n\to\infty} \ln \left(1+\dfrac{k}{n^2}\right)\right\} =
+    \sqrt{e}.$$
+  \vspace{6pt}
+
+  法二: 因
+  $$
+  x_{n} = \exp\left\{ \sum_{k=1}^{n} \ln \left(1+\dfrac{k}{n^2}\right)\right\} = 
+  \exp\left\{ \sum_{k=1}^{n} \left[\dfrac{k}{n^2}+\mathcal{O}\left(
+    \dfrac{k^2}{n^4}\right) \right] \right\} =
+  \exp\left\{ \dfrac{1}{2} + \mathcal{O}\left(\dfrac{1}{n}\right) \right\},
+  $$
+  故 $\lim\limits_{n\to\infty} x_{n} = \sqrt{e}.$
+
+\end{solution}
+
+\newpage
+
+\section*{2022.06.07}
+
+设 $x_{0} = 1, x_{n} = \dfrac{1+2x_{n-1}}{1+x_{n-1}}, n = 1, 2, \cdots.$
+证明数列 $\{x_{n}\}$ 收敛, 并求极限 $\lim\limits_{n\to\infty} x_{n}.$
+\\ \\
+
+\begin{solution}
+  法一: $k=0$ 时, 有 $1 \leqslant x_{0} < 2$ 成立.
+  假设 $k=n\in \mathbb{N}$ 时, 有 $1 \leqslant x_{n} < 2,$ 则
+  $k=n+1$ 时, 有 
+    $$1 \leqslant 1+\dfrac{x_{n}}{1+x_{n}} = x_{n+1} = 2-\dfrac{1}{1+x_{n}} < 2,$$
+  故由数学归纳法知 $1 \leqslant x_{n} < 2.$ 又 
+  $$ x_{n+1} - x_{n}
+    =\dfrac{1+2x_{n}}{1+x_{n}} - \dfrac{1+2x_{n-1}}{1+x_{n-1}}
+    =\dfrac{x_{n}-x_{n-1}}{\left(1+x_{n}\right)\left(1+x_{n-1}\right)}>0,$$
+  且 $x_{1}-x_{0} = \dfrac{1}{2} > 0,$ 知数列 $\{x_{n}\}$ 单调增加. 由单调有界准则得:
+  数列 $\{x_{n}\}$ 收敛, 令 $A=\lim\limits_{n\to\infty} x_{n}\geqslant 1,$ 并对等式
+  $x_{n} = \dfrac{1+2x_{n-1}}{1+x_{n-1}}$ 两边同时取极限, 得 $A=\dfrac{1+2A}{1+A}$
+  即 $A^2-A-1=0.$ 解得: $A = \dfrac{\sqrt{5} + 1}{2}$ 或 
+  $\dfrac{1-\sqrt{5}}{2}$ (舍去).
+  \vspace{6pt}
+
+  法二: 由于 $x_{n} = \dfrac{1+2x_{n-1}}{1+x_{n-1}}$ 满足 $x_{n} = f(x_{n-1})$
+  这种形式, 我们尝试令 $f(x) = \dfrac{1+2x}{1+x},$ 由于
+  $f'(x) = \dfrac{1}{(1+x)^2} > 0,$ 且  $f'(x) = \dfrac{1}{(1+x)^2} > 0,$ 知
+  数列 $\{x_{n}\}$ 单调增加. 其他过程与法一类似.
+  \vspace{6pt}
+
+  法三: 由于 $$\begin{aligned} &\quad\ 
+    \left| x_{n+1} - \dfrac{\sqrt{5}+1}{2} \right| = 
+    \left| \dfrac{1+2x_{n}}{1+x_{n}} - \dfrac{\sqrt{5}+1}{2} \right| =
+    \dfrac{\left|\left(3-\sqrt{5}\right)x_{n}+1-\sqrt{5}\right|}{2\left(1+x_{n}\right)} \\ &=
+    \dfrac{2}{(3+\sqrt{5})\left(1+x_{n}\right)}\left|x_{n}-\dfrac{\sqrt{5}+1}{2}\right| <
+    \dfrac{2}{3+\sqrt{5}}\left|x_{n}-\dfrac{\sqrt{5}+1}{2}\right| <
+    \left(\dfrac{2}{3+\sqrt{5}}\right)^2\left|x_{n-1}-\dfrac{\sqrt{5}+1}{2}\right| \\ & < \cdots <
+    \left(\dfrac{2}{3+\sqrt{5}}\right)^{n+1}\left|x_{0}-\dfrac{\sqrt{5}+1}{2}\right| \to 0 (n\to\infty)
+    , \text{故由夹逼准则得到}: \lim\limits_{n\to\infty} x_{n} = \dfrac{\sqrt{5}+1}{2} .
+    \end{aligned}$$
+  \vspace{6pt}
+
+  法四: 由斐波那契数列 $\{f_{n}\}$ 与数学归纳法可证得 
+  $x_{n} = \dfrac{f_{2n+2}}{f_{2n+1}}.$
+  结合数列 $\{f_{n}\}$ 的通项公式 $$f_{n} = 
+    \dfrac{1}{\sqrt{5}}\left[\left(\dfrac{1+\sqrt{5}}{2}\right)^n-
+      \left(\dfrac{1-\sqrt{5}}{2}\right)^n\right]$$ 得到:
+  $$x_{n} = \dfrac{f_{2n+2}}{f_{2n+1}}=
+    \dfrac{\left(\dfrac{1+\sqrt{5}}{2}\right)^{2n+2}-
+      \left(\dfrac{1-\sqrt{5}}{2}\right)^{2n+2}}{
+        \left(\dfrac{1+\sqrt{5}}{2}\right)^{2n+1}-
+          \left(\dfrac{1-\sqrt{5}}{2}\right)^{2n+1}}=
+    \dfrac{\dfrac{1+\sqrt{5}}{2}-\dfrac{\sqrt{5}-1}{2}
+      \left(\dfrac{\sqrt{5}-1}{\sqrt{5}+1}\right)^{2n+1}}{
+        1+\left(\dfrac{\sqrt{5}-1}{\sqrt{5}+1}\right)^{2n+1}}.$$
+  显然 $\lim\limits_{n\to\infty} \left(\dfrac{\sqrt{5}-1}{\sqrt{5}+1}\right)^{2n+1} = 0,$
+  等式两边同时取极限得到: $\lim\limits_{n\to\infty} x_{n} = \dfrac{\sqrt{5}+1}{2}.$
+\end{solution}
+
+\newpage
+
+\section*{2022.06.08}
+
+设 $2x_{1} = 1, 2x_{n} = 1-x_{n}^2, n = 1, 2, \cdots.$
+证明数列 $\{x_{n}\}$ 收敛, 并求极限 $\lim\limits_{n\to\infty} x_{n}.$
+\\ \\
+
+\begin{solution}
+  因 $0 < x_{1} = \dfrac{1}{2} < 1,$ 假设 $k=n\in\mathbb{N}$ 时,
+  $0 < x_{n} < 1$ 成立. 则 $0 < x_{n+1} = \dfrac{1-x_{n}^2}{2} < 1.$
+  由数学归纳法知 $0 < x_{n} < 1, n = 1, 2, \cdots.$ 故
+  $$\begin{aligned}
+    \left| x_{n+1} - \left(\sqrt{2} - 1\right)\right| &=
+    \left| \dfrac{1-x_{n}^2}{2} - \sqrt{2} + 1\right| = 
+    \dfrac{x_{n}^2 + 2\sqrt{2} - 3}{2} \\ &= 
+    \dfrac{x_{n} + \sqrt{2} - 1}{2}\left| x_{n} - \left(\sqrt{2} - 1\right)\right| \\ &<
+    \dfrac{1}{\sqrt{2}}\left| x_{n} - \left(\sqrt{2} - 1\right)\right| \\ &<
+    \left(\dfrac{1}{\sqrt{2}}\right)^2\left| x_{n-1} - \left(\sqrt{2} - 1\right)\right| < \cdots \\ & <
+    \left(\dfrac{1}{\sqrt{2}}\right)^n\left| x_{1} - \left(\sqrt{2} - 1\right)\right| \to 0 (n\to\infty).
+  \end{aligned}
+  $$
+  故由夹逼准则得到: $\lim\limits_{n\to\infty} x_{n} = \sqrt{2} - 1.$
+\end{solution}
+
+\newpage
+
+\section*{2022.06.09}
+
+设 $f(x) = 1 - \cos x,$ 则 $\lim\limits_{x \to 0} 
+  \dfrac{\left(1-\sqrt{\cos x}\right)\left(1-\sqrt[3]{\cos x}\right)
+  \left(1-\sqrt[4]{\cos x}\right)\left(1-\sqrt[5]{\cos x}\right)}
+  {f\left\{f\left[f\left(x\right)\right]\right\}}=\_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $\dfrac{1}{15}.$ 
+  因 $$\begin{cases}
+    &1- \left(\cos x\right)^a = 1 - \left[1-\left(1-\cos x\right)\right]^a 
+      \sim a(1-\cos x) \sim \dfrac{ax^2}{2},\\
+    &f\left\{f\left[f\left(x\right)\right]\right\} \sim 
+      \dfrac{f^2\left[f\left(x\right)\right]}{2} \sim
+      \dfrac{\left[\dfrac{f^2\left(x\right)}{2}\right]^2}{2}\sim 
+      \dfrac{1}{8}\left(\dfrac{x^2}{2}\right)^4 = \dfrac{x^8}{128}.
+  \end{cases}$$
+
+  故 $$\begin{aligned}
+    &\quad \ \lim\limits_{x \to 0} 
+      \dfrac{\left(1-\sqrt{\cos x}\right)\left(1-\sqrt[3]{\cos x}\right)
+      \left(1-\sqrt[4]{\cos x}\right)\left(1-\sqrt[5]{\cos x}\right)}
+      {f\left\{f\left[f\left(x\right)\right]\right\}} \\
+    &= \lim\limits_{x \to 0} \dfrac{\left(\dfrac{x^2}{4}\right)\left(\dfrac{x^2}{6}\right)
+    \left(\dfrac{x^2}{8}\right)\left(\dfrac{x^2}{10}\right)}
+    {\dfrac{x^8}{128}}=\dfrac{1}{15}.
+  \end{aligned}$$
+
+\end{solution}
+
+\newpage
+
+\section*{2022.06.13}
+
+$\lim\limits_{x \to 1} \dfrac{x - x^x}{1 - x + \ln x} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $2.$
+
+  $$\lim\limits_{x \to 1} \dfrac{x - x^x}{1 - x + \ln x}
+  = \lim\limits_{x \to 0} \dfrac{e^x - e^{x e^x}}{1 - e^x + x}
+  = \lim\limits_{x \to 0} \dfrac{e^{x e^x}x(1 - e^x)}{-x^2/2}
+  = 2.
+  $$
+
+\end{solution}
+
+
+\section*{2022.06.14}
+
+$\lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{2/x} - e^2\left[1-\ln(1+x)\right]}{x} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $0.$
+
+  $\begin{aligned}
+  & \quad\ \lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{2/x} - e^2\left[1-\ln(1+x)\right]}{x} \\
+  &= e^2 \lim\limits_{x \to 0} \dfrac{\left(\dfrac{1+x}{e^x}\right)^{2/x} - 1}{x} + e^2\lim\limits_{x \to 0} \dfrac{\ln(1+x)}{x}\\
+  &= e^2 \lim\limits_{x \to 0} \dfrac{1+x-e^x}{xe^x} \cdot \dfrac{2}{x} + e^2
+  = 2e^2 \lim\limits_{x \to 0} \dfrac{-\dfrac{x^2}{2}}{x^2} + e^2 = 0.
+  \end{aligned}
+  $
+
+\end{solution}
+
+
+\section*{2022.06.15}
+
+$\lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{1/x} - \left(1+2x\right)^{1/(2x)} }{\sin x} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $\dfrac{e}{2}.$
+
+  $\begin{aligned}
+  & \quad\ \lim\limits_{x \to 0} \dfrac{\left(1+x\right)^{1/x} - \left(1+2x\right)^{1/(2x)} }{\sin x} \\
+  &= \lim\limits_{x \to 0} \left(1+2x\right)^{1/(2x)} 
+    \lim\limits_{x \to 0} \dfrac{1}{x} \left[\left(\dfrac{(1+x)^2}{1+2x}\right)^{1/(2x)} - 1\right]\\
+  &= e \lim\limits_{x \to 0} \dfrac{1}{x}\cdot \dfrac{x^2}{(1+2x)\cdot(2x)}=\frac{e}{2}.
+  \end{aligned}
+  $
+
+\end{solution}
+
+\newpage
+
+\section*{2022.06.16}
+
+$\lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2})\sin x^2} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $-\dfrac{1}{12}.$
+
+  $\begin{aligned}
+  & \lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2})\sin x^2} \\
+  &= \lim\limits_{x\to 0} \dfrac{\left(1+\dfrac{x^2}{2}\right)^2-\left(\sqrt{1+x^2}\right)^2}{
+    \left[(\cos x - 1) -\left(e^{x^2} - 1\right)\right] \cdot x^2 
+    \cdot \left(1+\dfrac{x^2}{2}+\sqrt{1+x^2}\right)
+  }\\
+  &= \lim\limits_{x\to 0} \dfrac{x^4/4}{
+    2x^2 \left[\left(-x^2/2\right) -\left(x^2\right)\right]
+  } = -\dfrac{1}{12}.\\
+  \end{aligned}
+  $
+\end{solution}
+\section*{2022.06.17}
+
+$\lim\limits_{x \to 0} \dfrac{
+  x\sin x^2 - 2(1-\cos x)\sin x}{x^5} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $\dfrac{1}{4}.$
+
+  $\begin{aligned}
+  &\quad\  \lim\limits_{x \to 0} \dfrac{
+    x\sin x^2 - 2(1-\cos x)\sin x}{x^5} \\
+  &= -\lim\limits_{x \to 0} \dfrac{
+    x(x^2-\sin x^2)}{x^5} + 
+    \lim\limits_{x \to 0} \dfrac{
+    x^3-2\sin x + \sin 2x}{x^5} \\
+  &= 0 + 
+  \lim\limits_{x \to 0} \dfrac{
+  3x^2-2\cos x + 2\cos 2x}{5x^4} 
+  = 
+  \lim\limits_{x \to 0} \dfrac{
+  6x + 2\sin x - 4\sin 2x}{20x^3} \\
+  &= 
+  \lim\limits_{x \to 0} \dfrac{
+  6 + 2\cos x - 8\cos 2x}{60x^2}
+  = \lim\limits_{x \to 0} \dfrac{
+  -2\sin x + 16\sin 2x}{120x}
+  = \dfrac{1}{4}.\\
+  \end{aligned}
+  $
+\end{solution}
+
+\newpage
+
+
+
+1. $\left(1+\dfrac{1}{n}\right)^n < \left(1 + \dfrac{1}{n+1}\right)^{n+1}$.
+\newline
+
+\begin{solution}
+  由基本不等式可得:
+  $$\begin{aligned}
+  \left(1+\dfrac{1}{n}\right)^n = 1 \cdot \left(1+\dfrac{1}{n}\right)^n
+  < \left[\dfrac{1}{n+1}\left(1+\sum_{k=1}^{n}\left(1 + \dfrac{1}{n}\right)\right)\right]^{n+1}
+  = \left(1+\dfrac{1}{n+1}\right)^{n+1}
+  \end{aligned}$$
+\end{solution}
+
+\vspace{1cm}
+2. $\left(1+\dfrac{1}{n}\right)^{n+1} > \left(1 + \dfrac{1}{n+1}\right)^{n+2}$.
+\newline
+
+\begin{solution}
+  由基本不等式可得:
+  $$\begin{aligned}
+    \left(1+\dfrac{1}{n}\right)^{n+1} = \dfrac{1}{1 \cdot \left(\dfrac{n}{n+1}\right)^{n+1}}
+    > \dfrac{1}{\left[\dfrac{1}{n+2}\left(1+\displaystyle\sum_{k=1}^{n+1}
+      \left(\dfrac{n}{n+1}\right)\right)\right]^{n+2}}
+    = \left(1 + \dfrac{1}{n+1}\right)^{n+2}
+  \end{aligned}$$
+\end{solution}
+
+\vspace{1cm} 
+$a_{N} := \begin{cases}
+  \dfrac{1}{N}, \text{当} N = \text{整数的平方时},\\ \\
+  \dfrac{1}{N^2}, \text{其他},
+\end{cases}$
+\vspace{4mm} 
+
+$b_{N}:=
+\begin{cases}
+  \dfrac{1}{N} {\color{red}{+ \dfrac{1}{N^2}}}, \text{当} N = \text{整数的平方时},\\ \\
+  \dfrac{1}{N^2}, \text{其他},
+\end{cases} =
+  \dfrac{1}{N^2} + \begin{cases}
+  \dfrac{1}{N}, \text{当} N = \text{整数的平方时},\\ \\
+  0, \text{其他}.
+\end{cases}$
+\vspace{4mm} 
+
+此时 $\begin{aligned}
+  S_{N} &= \sum_{k = 1}^{N} a_{k} 
+  \leqslant \sum_{k = 1}^{N} b_{k} 
+  = \sum_{k=1}^{N} \dfrac{1}{k^2} + \sum_{k^2 \leqslant N} \dfrac{1}{(k^2)^1}
+\end{aligned}$
+
+\newpage
+
+本题来自高等数学辅导讲义严选题第5页第39题:
+
+$39.$ 求极限 $\lim\limits_{n\to\infty} \left(\dfrac{1}{\sqrt{n^2}} + 
+  \dfrac{1}{\sqrt{n^2 - 1}} + \cdots + \dfrac{1}{\sqrt{n^2 - (n-1)^2}}\right).$
+
+\end{document}
