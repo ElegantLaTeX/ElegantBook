@@ -157,8 +157,6 @@
   故由夹逼准则得到: $\lim\limits_{n\to\infty} x_{n} = \sqrt{2} - 1.$
 \end{solution}
 
-\newpage
-
 \section*{2022.06.09}
 
 设 $f(x) = 1 - \cos x,$ 则 $\lim\limits_{x \to 0} 
@@ -190,7 +188,71 @@
 
 \end{solution}
 
-\newpage
+\section*{2022.06.10}
+
+$\begin{aligned}
+	\lim_{x\to 0} \dfrac{\tan(\sin x) - x}{\arctan x - \arcsin x} = \_\_\_\_.
+\end{aligned}$
+\\ \\
+
+\begin{solution}
+    $-\dfrac{1}{3}.$
+    $\begin{aligned}
+      \lim_{x\to 0} \dfrac{\tan(\sin x) - x}{\arctan x - \arcsin x} =
+        \lim_{x\to 0} \dfrac{\left(\tan(\sin x) - \sin x\right) - (x - \sin x)}
+        {(\arctan x - x) + (x-\arcsin x)}=
+        \lim_{x\to 0} \dfrac{(x^3/3) - (x^3/6)}
+        {(-x^3/3) + (-x^3/6)} = -\dfrac{1}{3}.
+	\end{aligned}$
+\end{solution}
+
+
+\section*{2022.06.11}
+
+$\begin{aligned}
+    \lim\limits_{x\to0} \dfrac{\sqrt[4]{1-\sqrt[3]{1-\sqrt{1- x}}}-1}
+	{(1+x)^{1/\sqrt[3]{x^2}}-1}
+    = \_\_\_\_.
+\end{aligned}$
+\\ \\
+
+\begin{solution}
+	$-\dfrac{1}{4\sqrt[3]{2}}.$
+
+	\noindent
+    $\because \sqrt[4]{1-\sqrt[3]{1-\sqrt{1- x}}}-1\sim -\dfrac{\sqrt[3]{1-\sqrt{1- x}}}{4}
+	    \sim -\dfrac{\sqrt[3]{x/2}}{4};\quad \left(1+x\right)^{1/\sqrt[3]{x^2}}-1
+		\sim \sqrt[3]{x}\ (x\to 0).$
+	$\begin{aligned}
+		\therefore \lim\limits_{x\to0} \dfrac{\sqrt[4]{1-\sqrt[3]{1-\sqrt{1- x}}}-1}
+			{(1+x)^{1/\sqrt[3]{x^2}}-1} = \lim\limits_{x\to0} \dfrac{-\sqrt[3]{x/2}/4}
+			{\sqrt[3]{x}}=-\dfrac{1}{4\sqrt[3]{2}}.
+	\end{aligned}$
+\end{solution}
+
+
+\section*{2022.06.12}
+
+$\begin{aligned}
+    \lim\limits_{x\to0} \dfrac{\left(3+\sin x^2\right)^x-3^{\sin x}}{x^3}
+    = \_\_\_\_.
+\end{aligned}$
+\\ \\
+
+\begin{solution}
+	$\dfrac{1}{3}+\dfrac{\ln 3}{6}.$
+
+	$\begin{aligned}
+		\lim\limits_{x\to0} \dfrac{\left(3+\sin x^2\right)^x-3^{\sin x}}{x^3}
+		&= \lim\limits_{x\to0} \dfrac{3^x\left\{\left[\left(1+\dfrac{\sin x^2}{3}\right)^x
+			-1\right] + \left(3^{\sin x - x} - 1\right)\right\}}{x^3}\\
+		&= \lim\limits_{x\to0} \dfrac{\left(\dfrac{x\sin x^2}{3}\right)-
+			\left[\ln 3\left(\sin x - x\right)\right]}{x^3}\\
+		&= \lim\limits_{x\to0} \dfrac{\left(\dfrac{x^3}{3}\right)-
+			\left[\ln 3 \cdot \left(-\dfrac{x^3}{6}\right)\right]}{x^3}
+		=\dfrac{1}{3}+\dfrac{\ln 3}{6}.
+	\end{aligned}$
+\end{solution}
 
 \section*{2022.06.13}
 
@@ -257,8 +319,8 @@ $\lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2}
   $-\dfrac{1}{12}.$
 
   $\begin{aligned}
-  & \lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2})\sin x^2} \\
-  &= \lim\limits_{x\to 0} \dfrac{\left(1+\dfrac{x^2}{2}\right)^2-\left(\sqrt{1+x^2}\right)^2}{
+  &\quad\  \lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2})\sin x^2}
+  = \lim\limits_{x\to 0} \dfrac{\left(1+\dfrac{x^2}{2}\right)^2-\left(\sqrt{1+x^2}\right)^2}{
     \left[(\cos x - 1) -\left(e^{x^2} - 1\right)\right] \cdot x^2 
     \cdot \left(1+\dfrac{x^2}{2}+\sqrt{1+x^2}\right)
   }\\
@@ -268,6 +330,7 @@ $\lim\limits_{x \to 0} \dfrac{1+\dfrac{x^2}{2} - \sqrt{1+x^2}}{(\cos x - e^{x^2}
   \end{aligned}
   $
 \end{solution}
+
 \section*{2022.06.17}
 
 $\lim\limits_{x \to 0} \dfrac{
@@ -296,6 +359,57 @@ $\lim\limits_{x \to 0} \dfrac{
   = \lim\limits_{x \to 0} \dfrac{
   -2\sin x + 16\sin 2x}{120x}
   = \dfrac{1}{4}.\\
+  \end{aligned}
+  $
+\end{solution}
+
+\section*{2022.06.18}
+
+$f(x)$ 在 $x = 0$ 处二阶可导, 且 $f'(0)= 0$, 求极限 $
+\lim\limits_{x \to 0} \dfrac{
+  f(x) - f(\ln (1+x))}{x^3} = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $\dfrac{f''(0)}{2}.$
+
+  $\begin{aligned}
+  &\quad\  \lim\limits_{x \to 0} \dfrac{
+    f(x) - f(\ln (1+x))}{x^3}
+  = \lim\limits_{x \to 0} \dfrac{
+    f'(\xi)(x-\ln(1+x))}{x^3} && (\ln(1+x) < \xi < x)\\
+  &= \lim\limits_{x \to 0} \dfrac{
+    f'(\xi)-f'(0)}{\xi-0} \lim\limits_{x \to 0} \dfrac{
+      \xi}{x}  \lim\limits_{x \to 0} \dfrac{
+        x-\ln(1+x)}{x^2} 
+  = \dfrac{f''(0)}{2}. && \left(1\gets \dfrac{\ln(1+x)}{x} <
+    \dfrac{\xi}{x} < 1\right)
+  \end{aligned}
+  $
+\end{solution}
+
+\section*{2022.06.19}
+
+$\lim\limits_{x \to 0^{+}} \dfrac{
+  1}{x\sqrt{x}}\left(\sqrt{a}\arctan \sqrt{\dfrac{x}{a}} - 
+    \sqrt{b}\arctan \sqrt{\dfrac{x}{b}}\right) = \_\_\_\_.$
+\\ \\
+
+\begin{solution}
+  $\dfrac{b-a}{3ab}.$
+
+  $\begin{aligned}
+  &\quad \ \lim\limits_{x \to 0^{+}} \dfrac{
+    1}{x\sqrt{x}}\left(\sqrt{a}\arctan \sqrt{\dfrac{x}{a}} - 
+      \sqrt{b}\arctan \sqrt{\dfrac{x}{b}}\right)\\
+  &= \sqrt{a} \lim\limits_{x \to 0^{+}}\dfrac{1}{x\sqrt{x}} 
+    \left(\arctan \sqrt{\dfrac{x}{a}} - \sqrt{\dfrac{x}{a}} \right) 
+    - \sqrt{b} \lim\limits_{x \to 0^{+}} \left(\arctan \sqrt{\dfrac{x}{b}} - 
+    \sqrt{\dfrac{x}{b}} \right)
+    \\
+  &= \sqrt{a} \lim\limits_{x \to 0^{+}}\dfrac{1}{x\sqrt{x}}\cdot \dfrac{x\sqrt{x}}{3a\sqrt{a}} -
+    \sqrt{b} \lim\limits_{x \to 0^{+}}\dfrac{1}{x\sqrt{x}}\cdot \dfrac{x\sqrt{x}}{3b\sqrt{b}}
+  = \dfrac{1}{3a} - \dfrac{1}{3b} = \dfrac{b-a}{3ab}
   \end{aligned}
   $
 \end{solution}
@@ -330,35 +444,26 @@ $\lim\limits_{x \to 0} \dfrac{
   \end{aligned}$$
 \end{solution}
 
-\vspace{1cm} 
-$a_{N} := \begin{cases}
-  \dfrac{1}{N}, \text{当} N = \text{整数的平方时},\\ \\
-  \dfrac{1}{N^2}, \text{其他},
-\end{cases}$
-\vspace{4mm} 
-
-$b_{N}:=
-\begin{cases}
-  \dfrac{1}{N} {\color{red}{+ \dfrac{1}{N^2}}}, \text{当} N = \text{整数的平方时},\\ \\
-  \dfrac{1}{N^2}, \text{其他},
-\end{cases} =
-  \dfrac{1}{N^2} + \begin{cases}
-  \dfrac{1}{N}, \text{当} N = \text{整数的平方时},\\ \\
-  0, \text{其他}.
-\end{cases}$
-\vspace{4mm} 
-
-此时 $\begin{aligned}
-  S_{N} &= \sum_{k = 1}^{N} a_{k} 
-  \leqslant \sum_{k = 1}^{N} b_{k} 
-  = \sum_{k=1}^{N} \dfrac{1}{k^2} + \sum_{k^2 \leqslant N} \dfrac{1}{(k^2)^1}
+3. 设 $\Omega$ 是由曲面 $z=\sqrt{x^2+y^2}$ 与 $z=\sqrt{1-x^2-y^2}$ 所围成的区域, 则
+$\begin{aligned}
+	I=\iiint\limits_{\Omega} (x+z) \mathrm{~d} v.
 \end{aligned}$
+\\ \\
 
-\newpage
+\begin{solution}
+    $\dfrac{\pi}{8}.$
+    $$\begin{aligned}
+        I&=\iiint\limits_{\Omega} (x+z) \mathrm{~d} v=\iiint\limits_{\Omega} z \mathrm{~d} v\\
+        &=\iint\limits_{D} \mathrm{d} \sigma \int_{\sqrt{x^2+y^2}}^{\sqrt{1-x^2-y^2}}
+		    z \mathrm{~d} z\\
+	    &=\dfrac{1}{2}\iint\limits_{D} z^2\bigg|_{\sqrt{x^2+y^2}}^{\sqrt{1-x^2-y^2}}\mathrm{d} \sigma\\
+		&=\iint\limits_{D} \left(\dfrac{1}{2} - x^2 - y^2\right) \mathrm{d} \sigma\\
+		&=\int_{0}^{2\pi} \mathrm{d} \theta \int_{0}^{1/\sqrt{2}}
+		    \left(\dfrac{1}{2} - r^2\right)r \mathrm{~d} r\\
+		&=2\pi \left(\dfrac{r^2}{4}-\dfrac{r^4}{4}\right)\bigg|_{0}^{1/\sqrt{2}}\\
+		&=\frac{\pi}{8}.
+	\end{aligned}$$
+\end{solution}
 
-本题来自高等数学辅导讲义严选题第5页第39题:
-
-$39.$ 求极限 $\lim\limits_{n\to\infty} \left(\dfrac{1}{\sqrt{n^2}} + 
-  \dfrac{1}{\sqrt{n^2 - 1}} + \cdots + \dfrac{1}{\sqrt{n^2 - (n-1)^2}}\right).$
 
 \end{document}
