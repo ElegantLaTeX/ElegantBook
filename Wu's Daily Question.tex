@@ -1,4 +1,5 @@
 \documentclass[lang=cn,12pt]{elegantbook}
+\usepackage{extarrows}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
@@ -415,6 +416,32 @@ $\lim\limits_{x \to 0^{+}} \dfrac{
   \end{aligned}
   $
 \end{solution}
+
+
+\section*{2022.06.25}
+
+$
+\begin{aligned}
+  \lim\limits_{x \to +\infty} \sin\dfrac{1}{x}\int_{x}^{x^2} 
+    \left(1+\dfrac{1}{2t}\right)^t \sin \dfrac{1}{\sqrt{t}} \mathrm{~d} t = \_\_\_\_.
+\end{aligned}$
+\\ \\
+
+\begin{solution}
+  $2\sqrt{e}.$
+
+  $\begin{aligned}
+    &\quad\ 
+    \lim\limits_{x \to +\infty} \sin\dfrac{1}{x}\int_{x}^{x^2} 
+      \left(1+\dfrac{1}{2t}\right)^t \sin \dfrac{1}{\sqrt{t}} \mathrm{~d} t =
+    \lim\limits_{x \to +\infty} \dfrac{1}{x} \left(1+\dfrac{1}{2\xi}\right)^{\xi}\int_{x}^{x^2} 
+      \sin \dfrac{1}{\sqrt{t}} \mathrm{~d} t \\ &\overset{洛}{=}
+    \sqrt{e}\lim\limits_{x \to +\infty} \left(
+      2x\sin\dfrac{1}{x} - x\sin\dfrac{1}{\sqrt{x}}\right) = 2\sqrt{e}. \ (\xi \in (x, x^2))
+  \end{aligned}
+  $
+\end{solution}
+
 
 \newpage
 
