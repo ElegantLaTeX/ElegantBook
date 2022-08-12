@@ -5,7 +5,7 @@
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{June, 6, 2022}
+\date{Aug, 12, 2022}
 \version{4.4}
 \bioinfo{自定义}{信息}
 
@@ -39,15 +39,14 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
-  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}（暂时歇业）
+  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
   \item GitHub 地址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
-  \item Gitee 地址：\href{https://gitee.com/ElegantLaTeX}{https://gitee.com/ElegantLaTeX}
   \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
-  \item 微博：Elegant\LaTeX{}（密码有点忘了）
-  \item 微信公众号：Elegant\LaTeX{}（不定期更新）
+  \item 微博：Elegant\LaTeX{}
+  \item 微信公众号：Elegant\LaTeX{}
   \item Bilibili：\href{https://space.bilibili.com/516479629}{ElegantLaTeX}
-  \item 用户 QQ 群：692108391（建议加群）
+  \item 用户 QQ 群：692108391
   \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
 
@@ -299,6 +298,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
   两个 {} 均可以省略不写。
 \end{theorem}
 \end{lstlisting}
+
 第一个选项 \lstinline{theorem name} 是定理的名字，如果定理没有名字请使用 \lstinline|{}|\cprotect\footnote{除非这个定理也没有标签，否则不能省略。}。第二个选项 \lstinline{label} 是交叉引用时所用到的标签，如果定理没有标签，可以不写 \lstinline|{label}| 或使用 \lstinline|{}|。交叉引用的方法为 \lstinline|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。其他相同用法的定理类环境见表 \ref{tab:theorem-class}。
 
 不编号的定理使用方法如下：
@@ -734,7 +734,7 @@ The content of introduction.
 的代码为
 \begin{lstlisting}
 \begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
+  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f} \sin x
 \end{equation}
 \end{lstlisting}
 
@@ -928,7 +928,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
 
-\datechange{2022/05/28}{版本 4.4 正式发布。}
+\datechange{2022/08/12}{版本 4.4 正式发布。}
 
 \begin{change}
   \item \textbf{重要改动}：提供了一个定义定理类环境的命令 \lstinline|\elegantnewtheorem|。
