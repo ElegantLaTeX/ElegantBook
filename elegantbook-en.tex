@@ -5,8 +5,8 @@
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{April 9, 2022}
-\version{4.3}
+\date{May 25, 2022}
+\version{4.4}
 \bioinfo{Bio}{Information}
 
 \extrainfo{Victory won\rq t come to us unless we go to it. }
@@ -17,6 +17,7 @@
 % modify the color in the middle of titlepage
 \definecolor{customcolor}{RGB}{32,178,170}
 \colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
 
 \begin{document}
 
@@ -94,7 +95,7 @@ The option for device (\lstinline{device}) was originally used in ElegantNote, n
 \end{lstlisting}
 
 \section{Color Themes}
-This template contains 5 color themes, i.e. \textcolor{structure1}{\lstinline{green}}\footnote{Original default theme.}, \textcolor{structure2}{\lstinline{cyan}}, \textcolor{structure3}{\lstinline{blue}}(default), \textcolor{structure4}{\lstinline{gray}}, \textcolor{structure5}{\lstinline{black}}. You can choose \lstinline{green} with
+This template contains 5 color themes, i.e., \textcolor{structure1}{\lstinline{green}}\footnote{Original default theme.}, \textcolor{structure2}{\lstinline{cyan}}, \textcolor{structure3}{\lstinline{blue}}(default), \textcolor{structure4}{\lstinline{gray}}, \textcolor{structure5}{\lstinline{black}}. You can choose \lstinline{green} with
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
@@ -216,57 +217,96 @@ In this template, we defined four different theorem class environments
 \item \textit{Conclusion Environment}, including \textbf{conclusion, assumption, property, remark and solution}\footnote{We also define an option \lstinline{result}, which can hide the \lstinline{solution} and \lstinline{proof} environments. You can switch between \lstinline{result=answer} and \lstinline{result=noanswer}.} environments, all of which begin with boldfaced words, with format consistent with normal paragraphs.
 \end{itemize}
 
+All of theorem environments have star versions: \textcolor{main}{\textbf{definition*}}, \textcolor{second}{\textbf{theorem*}}, \textcolor{second}{\textbf{lemma*}}, \textcolor{second}{\textbf{corollary*}}, \textcolor{second}{\textbf{axiom*}}, \textcolor{second}{\textbf{postulate*}}, \textcolor{third}{\textbf{proposition*}}. Environments with an asterisk are not numbered.
+
 \subsection{Theorem Class Environments}
-Since the template uses the \lstinline{tcolorbox} package to customize the theorem class environments, it is slightly different from the normal theorem environments. The usage is as follows:
-\begin{lstlisting}
-\begin{theorem}{theorem name}{label text}
-The content of theorem.
-\end{theorem}
-\end{lstlisting}
 
-The first parameter \lstinline{<theorem name>} represents the name of the theorem, and the second parameter \lstinline{label} represents the label used in cross-reference with \verb|ref{thm:label}|. Note that cross-references must be prefixed with \lstinline{thm:}. 
+\subsubsection{\lstinline{fancy} mode}
 
-From version 4.1, you can write your theorem environments as follows:
+In \lstinline{fancy} mode, the template uses the \lstinline{tcolorbox} package to customize the theorem class environments, it is slightly different from the normal theorem environments. The usage is as follows:
 \begin{lstlisting}
-\begin{theorem}[theorem name]\label{thm:label text}
-  The content of theorem.
-\end{theorem}
-% or
-\begin{theorem}
-  The content of theorem.
-\end{theorem}
-\end{lstlisting}
+  % name + label
+  \begin{theorem}{theorem name}{label}
+    The content of a theorem with name and label. 
+    Use \ref{thm:label} to refer this theorem.
+  \end{theorem}
+  % no name + label
+  \begin{theorem}{}{label no name}
+    The content of a theorem without name.
+    Use \ref{thm:label no name} to refer this theorem.
+  \end{theorem}
+  % name + no label
+  \begin{theorem}{theorem name}{}
+    The content of a theorem without label.
+    Can't refer this theorem.
+    The last {} can be removed.
+  \end{theorem}
+  % no name + no label
+  \begin{theorem}{}{}
+    The content of a theorem without name and label.
+    Can't refer this theorem.
+    Both of {} can be removed.
+  \end{theorem}
+  \end{lstlisting}
+
+The first parameter \lstinline{theorem name} represents the name of the theorem. If the current theorem has no name, please use \lstinline|{}|\cprotect\footnote{Unless this theorem has neither no label, you should not omit this \verb|{}|.}, and the second parameter \lstinline{label} represents the label used in cross-reference with \verb|\ref{thm:label}|. Note that cross-references must be prefixed with \lstinline{thm:}. 
 
 Other theorem class environments with the same usage includes:
 
 \begin{table}[htbp]
-  \centering
-  \caption{Theorem Class Environments}
-    \begin{tabular}{llll}
-    \toprule
-    Environment & Label text & Prefix & Cross-reference \\
-    \midrule
-    definition & label & def   & \lstinline|\ref{def:label}| \\
-    theorem & label & thm   & \lstinline|\ref{thm:label}| \\
-    postulate & label & pos & \lstinline|\ref{pos:label}| \\
-    axiom & label & axi & \lstinline|\ref{axi:label}|\\
-    lemma & label & lem   & \lstinline|\ref{lem:label}| \\
-    corrlary & label & cor   & \lstinline|\ref{cor:label}| \\
-    proposition & label & pro   & \lstinline|\ref{pro:label}| \\
-    \bottomrule
-    \end{tabular}%
-  \label{tab:theorem-class}%
- \end{table}%
+\centering
+\caption{Theorem Class Environments}
+  \begin{tabular}{llll}
+  \toprule
+  Environment & Label text & Prefix & Cross-reference \\
+  \midrule
+  definition & label & def   & \lstinline|\ref{def:label}| \\
+  theorem & label & thm   & \lstinline|\ref{thm:label}| \\
+  postulate & label & pos & \lstinline|\ref{pos:label}| \\
+  axiom & label & axi & \lstinline|\ref{axi:label}|\\
+  lemma & label & lem   & \lstinline|\ref{lem:label}| \\
+  corrlary & label & cor   & \lstinline|\ref{cor:label}| \\
+  proposition & label & pro   & \lstinline|\ref{pro:label}| \\
+  \bottomrule
+  \end{tabular}%
+\label{tab:theorem-class}%
+\end{table}%
+
+From version 4.1, you can write your theorem environments as follows:
+\begin{lstlisting}
+\begin{theorem}[theorem name]\label{thm:theorem-label}
+  The content of theorem.
+\end{theorem}
+% or
+\begin{theorem}\label{thm:theorem-without-name}
+  The content of theorem.
+\end{theorem}
+\end{lstlisting}
+
+In this case, cross-reference don't have to be prefixed, i.e. the parameter of \lstinline{\ref} is the same as that of \lstinline{\label}.
  
+\subsubsection{\lstinline{simple} mode}
+
+In \lstinline{simple} mode, the template uses the \lstinline{amsthm} package to customize the theorem class environments. The usage is as follows:
+
+\begin{lstlisting}
+\begin{theorem}[theorem name]\label{thm:theorem-label}
+  The content of theorem.
+\end{theorem}
+% or 
+\begin{theorem}\label{thm:theorem-without-name}
+  The content of theorem without name.
+\end{theorem}
+\end{lstlisting}
+
 \subsection{Counter for Theorem Environments}
 
-You can use \lstinline{thmcnt} option to control the theorem counter/number display style for the theorem environments, the acceptable options are \lstinline{chapter} (default) and \lstinline{section}. 
+You can use \lstinline{thmcnt} option to control the theorem counter/number display style for the theorem environments, the acceptable options are \lstinline{chapter} (default) and \lstinline{section}:
 
 \begin{lstlisting}
 \documentclass[section]{elegantbook} % turn the Theorem 4.1 to Theorem 4.1.1 
 \documentclass[thmcnt=section]{elegantbook}
 \end{lstlisting}
-
 
 
 \subsection{Other Customized Environments}
@@ -640,7 +680,7 @@ We revised our templates now and then. This section shows the version story of E
 \datechange{2022/04/09}{release of v4.3.}
 
 \begin{change}
-  \item Remove part newtx settings, set TeX Gyre Terms/Heros fonts under \hologo{XeLaTeX}.
+  \item Remove part newtx settings, set TeX Gyre Termes/Heros fonts under \hologo{XeLaTeX}.
   \item Fix Chinese fonts in the theorem environments.
   \item Add theorem counter option, \lstinline{thmcnt=section}.
   \item Add bib option \lstinline{bibend}, which can take value of biber and bibtex.

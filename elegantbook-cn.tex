@@ -5,8 +5,8 @@
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{April 9, 2022}
-\version{4.3}
+\date{June, 6, 2022}
+\version{4.4}
 \bioinfo{自定义}{信息}
 
 \extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
@@ -23,7 +23,7 @@
 % 修改标题页的橙色带
 % \definecolor{customcolor}{RGB}{32,178,170}
 % \colorlet{coverlinecolor}{customcolor}
-
+\usepackage{cprotect}
 \begin{document}
 
 \maketitle
@@ -46,6 +46,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
   \item 微博：Elegant\LaTeX{}（密码有点忘了）
   \item 微信公众号：Elegant\LaTeX{}（不定期更新）
+  \item Bilibili：\href{https://space.bilibili.com/516479629}{ElegantLaTeX}
   \item 用户 QQ 群：692108391（建议加群）
   \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
@@ -197,13 +198,13 @@ tlmgr update --self --all --reinstall-forcibly-removed
   \centering
   \caption{封面元素信息}
   \begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}}
-    \toprule
+    \hline
     信息 & 命令 & 信息 & 命令 & 信息 & 命令 \\
-    \midrule
+    \hline
     标题 & \lstinline|\title| & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author| \\
     机构 & \lstinline|\institute| & 日期 &  \lstinline|\date| & 版本 & \lstinline|\version| \\
     箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover| & 徽标 & \lstinline|\logo| \\
-    \bottomrule
+    \hline
   \end{tabular}
 \end{table}
 
@@ -263,56 +264,134 @@ tlmgr update --self --all --reinstall-forcibly-removed
     \end{itemize}
   \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
   \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
-  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 result 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
+  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 \lstinline|result| 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
 \end{itemize}
+
+其中，定理类环境均有带星号的版本：\textcolor{main}{\textbf{definition*}}、\textcolor{second}{\textbf{theorem*}}、\textcolor{second}{\textbf{lemma*}}、\textcolor{second}{\textbf{corollary*}}、\textcolor{second}{\textbf{axiom*}}、\textcolor{second}{\textbf{postulate*}}、\textcolor{third}{\textbf{proposition*}}，带星号的定理类环境不会编号。
 
 \subsection{定理类环境的使用}
 
-由于本模板使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，定理的使用方法如下：
+\subsubsection{\texttt{fancy} 模式}
+
+在 \lstinline{fancy} 模式下使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，有编号定理的使用方法如下：
+
 \begin{lstlisting}
+% 有名字，有标签
 \begin{theorem}{theorem name}{label}
-  The content of theorem.
+  这是一个有名字和标签的定理。
+  用 \ref{thm:label} 来引用这个定理。
+\end{theorem}
+% 无名字，有标签
+\begin{theorem}{}{label no name}
+  这是一个没有名字但是有标签的定理。
+  用 \ref{thm:label no name} 来引用这个定理。
+\end{theorem}
+% 有名字，无标签
+\begin{theorem}{theorem name}{}
+  这是一个有名字但是没有标签的定理。
+  这个定理不能被引用。
+  最后的 {} 可以省略不写。
+\end{theorem}
+% 无名字，无标签
+\begin{theorem}{}{}
+  这是一个没有名字也没有标签的定理。
+  这个定理不能被引用。
+  两个 {} 均可以省略不写。
 \end{theorem}
 \end{lstlisting}
+第一个选项 \lstinline{theorem name} 是定理的名字，如果定理没有名字请使用 \lstinline|{}|\cprotect\footnote{除非这个定理也没有标签，否则不能省略。}。第二个选项 \lstinline{label} 是交叉引用时所用到的标签，如果定理没有标签，可以不写 \lstinline|{label}| 或使用 \lstinline|{}|。交叉引用的方法为 \lstinline|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。其他相同用法的定理类环境见表 \ref{tab:theorem-class}。
 
-第一个必选项 \lstinline{theorem name} 是定理的名字，第二个必选项 \lstinline{label} 是交叉引用时所用到的标签，交叉引用的方法为 \verb|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。
-
-在用户多次反馈下，4.x 之后，引入了原生定理的支持方式，也就是使用可选项方式：
+不编号的定理使用方法如下：
 
 \begin{lstlisting}
-\begin{theorem}[theorem name] \label{thm:theorem-label}
-  The content of theorem.
-\end{theorem}
-% or 
-\begin{theorem} \label{thm:theorem-withou-name}
-  The content of theorem without name.
-\end{theorem}
+% 有名字
+\begin{theorem*}{theorem name}
+  这是一个不编号的有名字的定理。
+  这个定理不能被引用。
+\end{theorem*}
+% 无名字
+\begin{theorem*}{}
+  这是一个不编号且没有名字的定理。
+  最后的 {} 可以省略不写。
+  这个定理不能被引用。
+\end{theorem*}
 \end{lstlisting}
-
-其他相同用法的定理类环境有：
+其中的选项 \lstinline{theorem name} 是定理的名字，如果没有名字可以不写 \lstinline|{theorem name}| 或使用 \lstinline|{}|
 
 \begin{table}[htbp]
-   \centering
-   \caption{定理类环境}
-     \begin{tabular}{llll}
-     \toprule
-     环境名 & 标签名 & 前缀 & 交叉引用 \\
-     \midrule
-     definition & label & def   & \lstinline|\ref{def:label}| \\
-     theorem & label & thm   & \lstinline|\ref{thm:label}| \\
-     postulate & label & pos & \lstinline|\ref{pos:label}| \\
-     axiom & label & axi & \lstinline|\ref{axi:label}|\\
-     lemma & label & lem   & \lstinline|\ref{lem:label}| \\
-     corollary & label & cor   & \lstinline|\ref{cor:label}| \\
-     proposition & label & pro   & \lstinline|\ref{pro:label}| \\
-     \bottomrule
-     \end{tabular}%
-   \label{tab:theorem-class}%
- \end{table}%
- 
+  \centering
+  \caption{定理类环境}
+    \begin{tabular}{llll}
+    \toprule
+    环境名 & 标签名 & 前缀 & 交叉引用 \\
+    \midrule
+    definition & label & def   & \lstinline|\ref{def:label}| \\
+    theorem & label & thm   & \lstinline|\ref{thm:label}| \\
+    postulate & label & pos & \lstinline|\ref{pos:label}| \\
+    axiom & label & axi & \lstinline|\ref{axi:label}|\\
+    lemma & label & lem   & \lstinline|\ref{lem:label}| \\
+    corollary & label & cor   & \lstinline|\ref{cor:label}| \\
+    proposition & label & pro   & \lstinline|\ref{pro:label}| \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:theorem-class}%
+\end{table}%
+
+在用户多次反馈下，在 4.1 版本引入了原生定理的支持方式，使用方法如下：
+
+\begin{lstlisting}
+% 有名字，有标签
+\begin{theorem}[theorem name]\label{thm:label}
+  这是一个有名字和标签的定理。
+  用 \ref{thm:label} 来引用这个定理。
+\end{theorem}
+% 无名字，有标签
+\begin{theorem}\label{thm:label no name}
+  这是一个没有名字但是有标签的定理。
+  用 \ref{thm:label no name} 来引用这个定理。
+\end{theorem}
+% 有名字，无标签
+\begin{theorem}[theorem name]
+  这是一个有名字但是没有标签的定理。
+  这个定理不能被引用。
+\end{theorem}
+% 无名字，无标签
+\begin{theorem}
+  这是一个没有名字也没有标签的定理。
+  这个定理不能被引用。
+\end{theorem}
+\end{lstlisting}
+这时引用不需要加前缀，\lstinline{\ref} 中的内容与 \lstinline{\label} 中的内容相同，换句话说，这时的使用方法与使用原生定理环境的时候几乎相同。
+
+\subsubsection{\texttt{simple} 模式}
+
+在 \lstinline{simple} 模式下使用了 \lstinline{amsthm} 宏包，定理类环境使用方法与原生一致，定理的使用方法如下：
+
+\begin{lstlisting}
+% 有名字，有标签
+\begin{theorem}[theorem name]\label{thm:label}
+  这是一个有名字和标签的定理。
+  用 \ref{thm:label} 来引用这个定理。
+\end{theorem}
+% 无名字，有标签
+\begin{theorem}\label{thm:label no name}
+  这是一个没有名字但是有标签的定理。
+  用 \ref{thm:label no name} 来引用这个定理。
+\end{theorem}
+% 有名字，无标签
+\begin{theorem}[theorem name]
+  这是一个有名字但是没有标签的定理。
+  这个定理不能被引用。
+\end{theorem}
+% 无名字，无标签
+\begin{theorem}
+  这是一个没有名字也没有标签的定理。
+  这个定理不能被引用。
+\end{theorem}
+\end{lstlisting}
+
 % \subsection{算法环境}
 
- 
 % \begin{algorithm}\label{alg:test}
 %   \Input{A bitmap $I$ of size $w \times l$}
 %   \Output{A partition of the bitmap}
@@ -342,13 +421,93 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 \subsection{修改计数器}
 
-当前定理等环境计数器按章计数，如果想修改定理类环境按节计数，可以修改计数器选项 thmcnt：
+当前定理等环境计数器按章计数，如果想修改定理类环境按节计数，可以修改计数器选项 \lstinline{thmcnt}，可用选项为 \lstinline{chapter} （默认）与 \lstinline{section}：
 
 \begin{lstlisting}
-  \documentclass[section]{elegantbook} %or
-  \documentclass[thmcnt=section]{elegantbook}
+\documentclass[section]{elegantbook} %or
+\documentclass[thmcnt=section]{elegantbook}
 \end{lstlisting}
 
+\subsection{自定义定理类环境}
+
+4.4 版本新增了一个自定义定理类环境的命令：\lstinline|\elegantnewtheorem|，它的参数含义如下：
+
+\begin{lstlisting}
+% fancy 模式（默认）
+\elegantnewtheorem{env}{title}{style}{prefix}
+% simple 模式
+\elegantnewtheorem{env}{title}{style}
+\end{lstlisting}
+该命令可以同时定义编号环境 \lstinline|env| 和不编号环境 \lstinline|env*|。
+
+其中 \lstinline|style| 支持的参数有：\lstinline|defstyle|，\lstinline|thmstyle|，\lstinline|prostyle|，分别对应“定义”，“定理”，“命题”三种样式。
+
+
+\begin{itemize}
+  \item 在炫彩模式（\lstinline{fancy}）下，需要 4 个参数来定义一个新的定理类环境，分别是：
+  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀：
+
+\begin{lstlisting}
+% 导言区
+\elegantnewtheorem{examplefancy}{自定义定理类环境}{thmstyle}{exfancy}
+% 正文
+\begin{examplefancy}{定理名}{label}
+  这里是自定义定理类环境 \ref{exfancy:label}
+\end{examplefancy}
+\begin{examplefancy*}{定理名}
+  这里是无编号自定义定理类环境
+\end{examplefancy*}
+\end{lstlisting}
+
+  如果不给出第四个参数，或第四个参数置空的话，将会用定理类环境名来作为默认前缀，即
+\begin{lstlisting}
+% 导言区
+\elegantnewtheorem{test}{TEST}{thmstyle}
+% 或
+\elegantnewtheorem{test}{TEST}{thmstyle}{}
+% 正文
+\begin{test}{name}{label}
+  默认前缀为 test。
+  使用 \ref{test:label} 来引用这个定理类环境。
+\end{test}
+\end{lstlisting}
+
+这时会在终端以及 \verb|.log| 文件中输出一个警告信息来提示用户没有定义前缀：
+
+\begin{lstlisting}[language=bash]
+Class elegantbook Warning: Because you didn't provide a prefix. 
+(elegantbook)              We use test as the default prefix. 
+(elegantbook)              You have to use 
+(elegantbook)              \ref {test:label} to refer a 
+(elegantbook)              \begin {test}{name}{label} environment. 
+(elegantbook)               on input line 3.
+\end{lstlisting}
+
+  \item 在简单模式（\lstinline{simple}）下，需要 3 个参数来定义一个新的定理类环境，分别是：
+  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀：
+\begin{lstlisting}
+% 导言区
+\elegantnewtheorem{examplesimple}{自定义定理类环境}{thmstyle}
+% 正文
+\begin{examplesimple}[定理名]\label{exsimple:label}
+  这里是自定义定理类环境 \ref{exsimple:label}
+\end{examplesimple}
+\begin{examplesimple*}[定理名]
+  这里是无编号自定义定理类环境
+\end{examplesimple*}
+\end{lstlisting}
+
+  如果此时错误地给出了第四个参数，那么将会在终端以及 \verb|.log| 文件中输出一个错误信息：
+\begin{lstlisting}
+% elegantbook-cn.tex
+\elegantnewtheorem{test}{TEST}{thmstyle}{}
+% .log file
+./elegantbook-cn.tex:3: Class elegantbook Error: You can't set a prefix in mode ``simple''.
+(elegantbook)              Just use 
+(elegantbook)              \elegantnewtheorem {test}{TEST}{thmstyle} .
+\end{lstlisting}
+
+\end{itemize}
 
 \subsection{其他环境的使用}
 
@@ -485,7 +644,7 @@ The content of introduction.
 
 
 效果如下：
-\begin{problemset}
+\begin{problemset}[我的题目]
   \item exercise 1
   \item exercise 2
   \item exercise 3
@@ -697,7 +856,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
    \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
 \end{equation}
 
-（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\ref{eq:461} 成立。
+（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\eqref{eq:461} 成立。
 \end{theorem}
 
 \ref{thm:fubi}
@@ -749,8 +908,6 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
     见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
   \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
     页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
-  \item \question{\lstinline[breaklines]{Package ctex Error: CTeX fontset 'Mac' is unavailable.}}
-    在 Mac 系统下，中文编译请使用 \hologo{XeLaTeX}。
   \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
     你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
   \item \question{我该使用什么版本？}
@@ -771,11 +928,20 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
 
+\datechange{2022/05/28}{版本 4.4 正式发布。}
+
+\begin{change}
+  \item \textbf{重要改动}：提供了一个定义定理类环境的命令 \lstinline|\elegantnewtheorem|。
+  \item \textbf{重要改动}：为所有内置定理类环境提供了带星号的版本，带星号的定理类环境不会编号，修复 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/167}{issue: \#167}；
+  \item \textbf{重要改动}：在 \lstinline{scheme=chinese} 下将目录中的“第 1 章”修改为“第一章”；
+  \item 将 TeX Gyre Termes 改为 TeX Gyre TermesX，使英文部分字形与 newtx 系列宏包更相近；
+  \item 重写了内置定理类环境的实现方法，修复了一些 bug，由于修改部分较大，如果引入了新的 bug，请及时在 QQ 群或 \href{https://github.com/ElegantLaTeX}{Github} 上进行反馈；
+\end{change}
 
 \datechange{2022/04/09}{版本 4.3 正式发布。}
 
 \begin{change}
-  \item 放弃 newtx 系列宏包的设置，改用 TeX Gyre Terms，并设置其他字体；
+  \item 放弃 newtx 系列宏包的设置，改用 TeX Gyre Termes，并设置其他字体；
   \item 修改定理类环境内部字体设置，修复环境内部中文无法加粗问题；
   \item 增加定理类环境的计数器选项 \lstinline{thmcnt}，可选 \lstinline{chapter} 和 \lstinline{section}；
   \item 增加 \lstinline{bibend} 选项，可选 \lstinline{bibend=biber}（默认）和 \lstinline{bibend=bibtex}。
@@ -924,7 +1090,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item 修改英文字体为 \lstinline{newtx} 系列，另外大型操作符号维持 cm 字体。
   \item 中文字体改用 \lstinline{ctex} 宏包自动设置。
   \item 删除 \lstinline{xeCJK} 字体设置，原因是不同系统字体不方便统一。
-  \item 定理换用 \lstinline{tcolobox} 宏包定义，并基本维持原有的定理样式，优化显示效果，支持跨页；定理类名字重命名，如 etheorem 改为 theorem 等等。
+  \item 定理换用 \lstinline{tcolorbox} 宏包定义，并基本维持原有的定理样式，优化显示效果，支持跨页；定理类名字重命名，如 etheorem 改为 theorem 等等。
   \item 删去自定义的缩进命令 \lstinline{\Eindent}。
   \item 添加参考文献宏包 \lstinline{natbib}。
   \item 颜色名字重命名。
