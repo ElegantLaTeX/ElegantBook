@@ -21,11 +21,11 @@
 \newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
 
 % 修改标题页的橙色带
-% \definecolor{customcolor}{RGB}{32,178,170}
-% \colorlet{coverlinecolor}{customcolor}
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
 \usepackage{cprotect}
 
-\addbibresource[location=local]{reference.bib}
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
 
 \begin{document}
 
@@ -968,7 +968,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \datechange{2022/08/15}{版本 4.4 正式发布。}
 
 \begin{change}
-  \item \textbf{重要改动}：提供了一个定义定理类环境的命令 \lstinline|\elegantnewtheorem|。
+  \item \textbf{重要改动}：提供了一个定义定理类环境的命令 \lstinline|\elegantnewtheorem|；
   \item \textbf{重要改动}：为所有内置定理类环境提供了带星号的版本，带星号的定理类环境不会编号，修复 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/167}{issue: \#167}；
   \item \textbf{重要改动}：在 \lstinline{scheme=chinese} 下将目录中的“第 1 章”修改为“第一章”；
   \item 将 TeX Gyre Termes 改为 TeX Gyre TermesX，使英文部分字形与 newtx 系列宏包更相近；
