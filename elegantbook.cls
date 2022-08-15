@@ -193,7 +193,7 @@
 
 \ifdefstring{\ELEGANT@lang}{cn}{
   \ifdefstring{\ELEGANT@chinesefont}{founder}{
-    \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+    \RequirePackage[UTF8, scheme=plain, fontset=none]{ctex}
     \setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
     \setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
     \setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
@@ -207,10 +207,14 @@
     \newcommand*{\fangsong}{\CJKfamily{zhfs}}}{\relax}
   
   \ifdefstring{\ELEGANT@chinesefont}{nofont}{
-    \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}}{\relax}
+    \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+    \xeCJKsetup{AutoFakeBold=true}
+    }{\relax}
 
   \ifdefstring{\ELEGANT@chinesefont}{ctexfont}{
-    \RequirePackage[UTF8,scheme=plain]{ctex}}{\relax}
+    \RequirePackage[UTF8,scheme=plain]{ctex}
+    \xeCJKsetup{AutoFakeBold=true}
+    }{\relax}
   
   \AfterEndPreamble{
     \setlength\parindent{2\ccwd}}
@@ -1169,6 +1173,7 @@
   },
 }
 
+
 \newenvironment{introduction}[1][\introductionname]{
   \begin{tcolorbox}[introductionsty,title={#1}]
     \begin{multicols}{2}
@@ -1357,7 +1362,7 @@
   \begin{enumerate}[label=\small\protect\circled{\arabic*}]}{
   \end{enumerate}}
 
-\addbibresource[location=local]{reference.bib}
+
 
 \renewcommand\tableofcontents{%
   \hypersetup{linktoc=all, linkcolor=black}

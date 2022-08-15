@@ -19,6 +19,8 @@
 \colorlet{coverlinecolor}{customcolor}
 \usepackage{cprotect}
 
+\addbibresource[location=local]{reference.bib} % bib
+
 \begin{document}
 
 \maketitle
@@ -60,7 +62,7 @@ To learn more, please refer to \href{https://tex.stackexchange.com/questions/554
 If you are a \TeX{} Live 2018/2019/2020/2021 user and would like to update, the official solution is to uninstall the previous version. If you want to save the bother of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of \TeX{} Live 2022 (default: \lstinline|C:\texlive\2022\texmf-dist\tex\latex\elegantbook| ), run \lstinline{texhash} in cmd.
 
 \chapter{ElegantBook Settings}
-This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environment is Win10/Ubuntu 20.04/macOS + \TeX{} Live 2022/ Mac\TeX{} 2022, either \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine.
+This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environments are Win10/Ubuntu 20.04/macOS + \TeX{} Live 2022/ Mac\TeX{} 2022, either \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine for \lstinline{lang=en}.
 
 \section{Languages}
 We defined one option named \lstinline{lang} which has two basic values, \lstinline{lang=en} (default) , \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
@@ -379,13 +381,13 @@ If you use \lstinline{newtx} fonts, type in:
 
 When you are using \lstinline{newtx}, please pay attention to the hyphens. For instance,
 \begin{equation}
-\int_{R^q} f(x,y) dy.\emph{of\kern0pt f}
+\int_{R^q} f(x,y) dy.\emph{of\kern0pt f} \sin x
 \end{equation}
 
 The corresponding code is: 
 \begin{lstlisting}
 \begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of \kern0pt f}
+  \int_{R^q} f(x,y) dy.\emph{of \kern0pt f} \sin x
 \end{equation}
 \end{lstlisting}
 
@@ -414,6 +416,19 @@ The reason is that the template redefines font for math so that no new math font
 This template uses biblatex to generate the bibliography, the default citestyle and bibliography style are both \lstinline{numeric}. Let's take a glance at the citation effect. ~\cite{en1} use data from a major peer-to-peer lending \cite{en3} marketplace in China to study whether female and male investors evaluate loan performance differently \parencite{en2}. 
 
 If you want to use biblatex, you must create a file named \lstinline{reference.bib}, add bib items (from Google Scholar, Mendeley, EndNote, and etc.) to \lstinline{reference.bib} file, then cite the bibkey in the \lstinline{tex} file. The biber will automatically generate the bibliography for the reference you cited.
+
+In order to get the editors' auto-completion working, you need to add following code in your preamble:
+
+\begin{lstlisting}
+  \addbibresource[location=local]{reference.bib}
+\end{lstlisting}
+
+Then include the print commands where you want to print the bibliography:
+\begin{lstlisting}
+  \printbibliography[heading=bibintoc, title=\ebibname]
+\end{lstlisting}
+
+
 
 
 To change the bibliography style, this version introduces two options: \lstinline{citestyle} and \lstinline{bibstyle}, please refer to \href{https://ctan.org/pkg/biblatex}{CTAN:biblatex} for more detail about these options. You can change your bibliography style as
@@ -677,6 +692,20 @@ We list some FAQs for users to refer to:
 We revised our templates now and then. This section shows the version story of ElegantBook.
 
 
+\datechange{2022/08/15}{release of v4.4.}
+
+\begin{change}
+  \item Add custome theorem definition command \lstinline{\elegantnewtheorem};
+  \item Fix star environment(*) for inner environments (\href{https://github.com/ElegantLaTeX/ElegantBook/issues/167}{issue \#167});
+  \item Change English fonts from TeX Gyre Termes to TeX Gyre TermesX;
+  \item Re-construct some theorem environments to enchance compatibility;
+  \item Remove Gitee repo due the privacy policy;
+  \item Re-open Github pull requests.
+\end{change}
+
+
+
+
 \datechange{2022/04/09}{release of v4.3.}
 
 \begin{change}
@@ -745,12 +774,12 @@ We revised our templates now and then. This section shows the version story of E
   \item Revise \lstinline{problemset}.
 \end{change}
 
+
 \nocite{en2,en3}
 
 \printbibliography[heading=bibintoc, title=\ebibname]
-
 \appendix
-% \renewcommand\chaptername{\eappendix \thechapter}
+
 
 \chapter{Mathematical Tools}
 

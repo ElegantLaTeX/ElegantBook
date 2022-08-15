@@ -1,15 +1,15 @@
-\documentclass[lang=cn,10pt, newtx]{elegantbook}
+\documentclass[lang=cn,10pt,newtx]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{Aug, 12, 2022}
+\date{Aug, 15, 2022}
 \version{4.4}
 \bioinfo{自定义}{信息}
 
-\extrainfo{不要以为抹消过去，重新来过，即可发生什么改变。—— 比企谷八幡}
+\extrainfo{要让一群人团结起来，需要的不是英明的领导，而是共同的敌人。—— 比企谷八幡}
 
 \setcounter{tocdepth}{3}
 
@@ -24,6 +24,9 @@
 % \definecolor{customcolor}{RGB}{32,178,170}
 % \colorlet{coverlinecolor}{customcolor}
 \usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib}
+
 \begin{document}
 
 \maketitle
@@ -35,9 +38,9 @@
 
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
+Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。大版本改动较大，请关注版本信息，在未开始使用模板钱，建议直接选择最新正式版本！
 
-我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
+本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
   \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
   \item GitHub 地址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
@@ -49,6 +52,11 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \item 用户 QQ 群：692108391
   \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
+
+\begin{quotation}
+  \textbf{注意：} 由于 ElegantLaTeX 的模板涉及宏包和设定比较多，不建议没有 \LaTeX{} 基础的用户使用。我们会通过 \href{https://space.bilibili.com/516479629}{B 站}进行直播或者交流分享会，录屏也将发布在该账户下，如果大家在模板的使用上有问题，可以观看视频、加群咨询或者查看模板自带的文档说明（如果安装了 TeX Live，可以使用在命令行提示符下运行 \lstinline{texdoc elegantbook} 命令获得模板的说明文档。
+\end{quotation}
+
 
 \section{模板安装与更新}
 
@@ -90,8 +98,18 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 \section{关于提交}
 
-出于某些因素的考虑，Elegant\LaTeX{} 项目自 2019 年 5 月 20 日开始，\textbf{不再接受任何非作者预约性质的提交}（pull request）！如果你想改进模板，你可以给我们提交 issues，或者可以在遵循协议（LPPL-1.3c）的情况下，克隆到自己仓库下进行修改。
+由于精力有限，本人维护模板的时间并不多，考虑到模板的用户还挺多，本模板自 2022 年 8 月开始，开放特性提交（features pull requests）！不过在提交之前，请务必在 issue 区将问题、解决方式以及对应的示例（最简单的使用示例）写清楚，我们会根据 issue 的信息，接受合适的提交。
 
+
+\section{赞助}
+
+如果您非常喜爱我们的模板，你还可以选择赞助的方式支持这个项目，赞助主要用于网站域名和服务器的购买、QQ 用户群的维护以及对于管理员的奖励。赞赏费用的使用解释权归 ElegantLaTeX/EthanDeng 所有，不接受监督。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{donate.jpg}
+\end{figure}
+  
 
 \chapter{ElegantBook 设置说明}
 
@@ -558,7 +576,25 @@ Class elegantbook Warning: Because you didn't provide a prefix.
 \end{minipage}
 
 \section{参考文献}
-文献部分，本模板调用了 biblatex 宏包，并提供了 biber（默认） 和 bibtex 两个后端选项，可以使用 \lstinline{bibend} 进行修改：
+
+\subsection{打印文献}
+
+之前我们将文献调用的命令放在模板里面，然后用户反馈 \lstinline{\cite} 命令无法自动补全，因此我们新版本将其拿到外面来，新版本打印参考文献的命令的方法是，在导言区（也即 \lstinline|\begin{document}| 之前），加入：
+
+\begin{lstlisting}
+  \lstinline|\addbibresource[location=local]{reference.bib}|。
+\end{lstlisting}
+
+然后再需要打印文献的地方使用：
+\begin{lstlisting}
+  \printbibliography[heading=bibintoc, title=\ebibname]
+\end{lstlisting}
+
+其中 \lstinline{reference.bib} 为参考文献存放的文件，需要放在项目文件夹下。
+
+\subsection{修改文献格式}
+
+此外，本模板调用了 biblatex 宏包，并提供了 biber（默认） 和 bibtex 两个后端选项，可以使用 \lstinline{bibend} 进行修改：
 
 \begin{lstlisting}
   \documentclass[bibtex]{elegantbook}
@@ -574,12 +610,13 @@ Class elegantbook Warning: Because you didn't provide a prefix.
   \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
 \end{lstlisting}
 
-如果需要添加排序方式，可以在导言区加入
+如果需要添加排序方式，可以在导言区加入下面命令：
 \begin{lstlisting}
   \ExecuteBibliographyOptions{sorting=ynt}
 \end{lstlisting}
 
-启用国标之后，可以加入 \lstinline{sorting=gb7714-2015}。
+如果使用的是国标，可以将 \lstinline{ynt} 改为 \lstinline{gb7714-2015}，使文献按照国标规定进行文献排序。
+
 
 \section{添加序章}
 
@@ -928,7 +965,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
 
-\datechange{2022/08/12}{版本 4.4 正式发布。}
+\datechange{2022/08/15}{版本 4.4 正式发布。}
 
 \begin{change}
   \item \textbf{重要改动}：提供了一个定义定理类环境的命令 \lstinline|\elegantnewtheorem|。
@@ -936,6 +973,8 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item \textbf{重要改动}：在 \lstinline{scheme=chinese} 下将目录中的“第 1 章”修改为“第一章”；
   \item 将 TeX Gyre Termes 改为 TeX Gyre TermesX，使英文部分字形与 newtx 系列宏包更相近；
   \item 重写了内置定理类环境的实现方法，修复了一些 bug，由于修改部分较大，如果引入了新的 bug，请及时在 QQ 群或 \href{https://github.com/ElegantLaTeX}{Github} 上进行反馈；
+  \item 删除 Gitee 仓库地址，恢复 GitHub 提交（pull requests)；
+  \item 将参考文献命令添加到导言区，使编辑器能够对参考文献自动补全。
 \end{change}
 
 \datechange{2022/04/09}{版本 4.3 正式发布。}
@@ -1097,6 +1136,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \end{change}
 
 \nocite{*}
+
 \printbibliography[heading=bibintoc, title=\ebibname]
 \appendix
 
