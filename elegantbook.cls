@@ -16,7 +16,6 @@
 \RequirePackage{etoolbox}
 \SetupKeyvalOptions{family=ELEGANT, prefix=ELEGANT@, setkeys=\kvsetkeys}
 \newcommand{\ekv}[1]{\kvsetkeys{ELEGANT}{#1}}
-
 % ----- Colors -----
 \DeclareStringOption[blue]{color}
 \DeclareStringOption[en]{lang}
@@ -56,6 +55,7 @@
 
 \DeclareVoidOption{fancy}{\ekv{mode=fancy}}
 \DeclareVoidOption{simple}{\ekv{mode=simple}}
+\DeclareBoolOption[false]{usesamecnt}
 
 \DeclareVoidOption{answer}{\ekv{result=answer}}
 \DeclareVoidOption{noanswer}{\ekv{result=noanswer}}
@@ -895,6 +895,19 @@
 \RequirePackage[many]{tcolorbox}
 % \newlength{\normalparindent}
 % \setlength{\normalparindent}{\parindent}
+\newcommand{\ELEGANT@tmp@tl}{}
+\ifELEGANT@usesamecnt
+  \newcounter{ELEGANT@samecnt}
+  \counterwithin{ELEGANT@samecnt}{\ELEGANT@thmcnt}
+  \tcbset{
+    new/usesamecnt/.style = {use counter = ELEGANT@samecnt}
+  }
+\else
+  \tcbset{
+    new/usesamecnt/.style = {}
+  }
+\fi
+
 \ifdefstring{\ELEGANT@mode}{fancy}{
   \tcbset{
     common/.style={
@@ -962,14 +975,23 @@
   % will define two environments: numbered ``theorem'' and no-numbered ``theorem*''
   % WARNING FOR MULTILINGUAL: this cs will automatically find \theoremname's definition,
   % WARNING FOR MULTILINGUAL: it should be defined in language settings.
-  \newcommand{\ELEGANT@newtheorem}[3]{
+  \NewDocumentCommand \ELEGANT@newtheorem { m m m O{} }{
     \ifcsundef{#1name}{%
       \ClassError{elegantbook}{%
         \ #1name undefined, \MessageBreak
         Please check in language setting
       }{}
     }{\relax}
-    \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt]{#1}{ g o t\label g }{
+    \expandafter\ifblank\expandafter{#4}{
+      \tcbset{
+        new/usecnt/.style={}
+      }
+    }{
+      \tcbset{
+        new/usecnt/.style= {use counter from = #4}
+      }
+    }
+    \DeclareTColorBox[auto counter,number within=\ELEGANT@thmcnt,usesamecnt,usecnt]{#1}{ g o t\label g }{
         common,#3,
         IfValueTF={##1}
           {ELEGANT@title={#1}{##1}}
@@ -998,8 +1020,8 @@
   }
   % define several environment 
   % we define headers like \definitionname before
-  \ELEGANT@newtheorem{definition}{def}{defstyle}
   \ELEGANT@newtheorem{theorem}{thm}{thmstyle}
+  \ELEGANT@newtheorem{definition}{def}{defstyle}
   \ELEGANT@newtheorem{postulate}{pos}{thmstyle}
   \ELEGANT@newtheorem{axiom}{axi}{thmstyle}
   \ELEGANT@newtheorem{corollary}{cor}{thmstyle}
@@ -1030,16 +1052,24 @@
   % will define two environments: numbered ``theorem'' and no-numbered ``theorem*''
   % WARNING FOR MULTILINGUAL: this cs will automatically find \theoremname's definition,
   % WARNING FOR MULTILINGUAL: it should be defined in language settings.
-  \newcommand{\ELEGANT@newtheorem}[2]{
+  \NewDocumentCommand \ELEGANT@newtheorem { m m O{} } {
     \theoremstyle{#2}
-    \newtheorem{#1}{\csname #1name\endcsname}[\ELEGANT@thmcnt]
+    \ifELEGANT@usesamecnt
+      \newtheorem{#1}[ELEGANT@samecnt]{\csname #1name\endcsname}
+    \else 
+      \ifblank{#3}{
+        \newtheorem{#1}{\csname #1name\endcsname}[\ELEGANT@thmcnt]
+      }{
+        \newtheorem{#1}[#3]{\csname #1name\endcsname}
+      }
+    \fi
     \newtheorem*{#1*}{\csname #1name\endcsname}
   }
 
   % define several environment 
   % we define headers like \definitionname before
-  \ELEGANT@newtheorem{definition}{defstyle}
   \ELEGANT@newtheorem{theorem}{thmstyle}
+  \ELEGANT@newtheorem{definition}{defstyle}
   \ELEGANT@newtheorem{postulate}{thmstyle}
   \ELEGANT@newtheorem{axiom}{thmstyle}
   \ELEGANT@newtheorem{corollary}{thmstyle}
@@ -1056,12 +1086,19 @@
 %   and a warning will be raised
 \newcommand{\ELEGANT@newtheorem@warning}{}
 \newcommand{\ELEGANT@newtheorem@error}{}
-\NewDocumentCommand\elegantnewtheorem{ m m m g }
+\newcommand{\ELEGANT@usesamecnt@warning}{}
+\NewDocumentCommand\elegantnewtheorem{ m m m g O{} }
   {
+    \renewcommand{\ELEGANT@usesamecnt@warning}{
+      \ClassWarning{elegantbook}{%
+        [#5] won't make sence with option \MessageBreak
+        `usesamecnt'.
+      }
+    }
     \renewcommand{\ELEGANT@newtheorem@warning}{
       \ClassWarning{elegantbook}{%
-        Because you didn't provide a prefix. \MessageBreak
-        We use #1 as the default prefix. \MessageBreak
+        Because you didn't provide a prefix, \MessageBreak
+        we use #1 as the default prefix. \MessageBreak
         You have to use \MessageBreak
         \ref{#1:label} to refer a \MessageBreak
         \begin{#1}{name}{label} environment. \MessageBreak
@@ -1078,11 +1115,16 @@
         The 4th parameter ``prefix'' isn't allowed.
       }
     }
+    \ifELEGANT@usesamecnt
+      \ifblank{#5}{}{\ELEGANT@usesamecnt@warning}
+    \else
+      \renewcommand{\ELEGANT@tmp@tl}{#5}
+    \fi
     \expandafter\def\csname #1name\endcsname{#2}
     \ifdefstring{\ELEGANT@mode}{simple}{%
         \IfValueTF{#4}
           {\ELEGANT@newtheorem@error}
-          {\ELEGANT@newtheorem{#1}{#3}}
+          {\ELEGANT@newtheorem{#1}{#3}[\ELEGANT@tmp@tl]}
       }{\relax}
     \ifdefstring{\ELEGANT@mode}{fancy}{%
         \IfValueTF{#4}
@@ -1090,13 +1132,13 @@
             \def\ELEGANT@temp@prefix{#4}
             \ifdefempty{\ELEGANT@temp@prefix}
               {
-                \ELEGANT@newtheorem{#1}{#1}{#3}
+                \ELEGANT@newtheorem{#1}{#1}{#3}[\ELEGANT@tmp@tl]
                 \ELEGANT@newtheorem@warning
               }
-              {\ELEGANT@newtheorem{#1}{#4}{#3}}
+              {\ELEGANT@newtheorem{#1}{#4}{#3}[\ELEGANT@tmp@tl]}
           }
           {
-            \ELEGANT@newtheorem{#1}{#1}{#3}
+            \ELEGANT@newtheorem{#1}{#1}{#3}[\ELEGANT@tmp@tl]
             \ELEGANT@newtheorem@warning
           }
       }{\relax}
@@ -1323,7 +1365,7 @@
   commentstyle=\color{gray},
   emph={elegantpaper,fontenc,fontspec,xeCJK,citestyle,FiraMono,xunicode,figure,fig,image,img,table,itemize,enumerate,ctex,microtype,description,times,booktabs,tabular,PDFLaTeX,XeLaTeX,type1cm,BibTeX,device,color,mode,lang,amsthm,tcolorbox,titlestyle,cite,ctex,listings,base,math,scheme,toc,esint,chinesefont,amsmath,bibstyle,natbib,pgfornament},
   emphstyle={\color{frenchplum}},
-  morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,section,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote,bioinfo,datechange,listofchange,lvert,lastpage,songti,heiti,fangsong,setCJKfamilyfont,textbf,elegantnewtheorem,thmcnt,colorlet},
+  morekeywords={DeclareSymbolFont,SetSymbolFont,toprule,midrule,bottomrule,institute,version,includegraphics,setmainfont,setsansfont,setmonofont ,setCJKmainfont,setCJKsansfont,setCJKmonofont,RequirePackage,figref,tabref,email,maketitle,keywords,definecolor,extrainfo,logo,cover,subtitle,appendix,chapter,section,hypersetup,mainmatter,frontmatter,tableofcontents,elegantpar,heiti,kaishu,lstset,pagecolor,zhnumber,marginpar,part,equote,marginnote,bioinfo,datechange,listofchange,lvert,lastpage,songti,heiti,fangsong,setCJKfamilyfont,textbf,elegantnewtheorem,thmcnt,colorlet,usesamecnt},
   frame=single,
   tabsize=2,
   rulecolor=\color{structurecolor},
