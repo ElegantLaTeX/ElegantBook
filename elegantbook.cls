@@ -1387,7 +1387,7 @@
 \renewcommand*{\cleardoublepage}{\clearpage\if@twoside \ifodd\c@page\else
 \hbox{}%
 \thispagestyle{empty}%
-beforechap\newpage%
+\newpage%
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 
