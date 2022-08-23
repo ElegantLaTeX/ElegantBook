@@ -594,7 +594,7 @@ Class elegantbook Warning: Because you didn't provide a prefix.
 之前我们将文献调用的命令放在模板里面，然后用户反馈 \lstinline{\cite} 命令无法自动补全，因此我们新版本将其拿到外面来，新版本打印参考文献的命令的方法是，在导言区（也即 \lstinline|\begin{document}| 之前），加入：
 
 \begin{lstlisting}
-  \lstinline|\addbibresource[location=local]{reference.bib}|。
+  \addbibresource[location=local]{reference.bib}
 \end{lstlisting}
 
 然后再需要打印文献的地方使用：
