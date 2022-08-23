@@ -5,8 +5,8 @@
 
 \author{Ethan Deng \& Liam Huang}
 \institute{Elegant\LaTeX{} Program}
-\date{Aug, 15, 2022}
-\version{4.4}
+\date{Aug 17, 2022}
+\version{4.5}
 \bioinfo{自定义}{信息}
 
 \extrainfo{要让一群人团结起来，需要的不是英明的领导，而是共同的敌人。—— 比企谷八幡}
@@ -446,24 +446,36 @@ tlmgr update --self --all --reinstall-forcibly-removed
 \documentclass[thmcnt=section]{elegantbook}
 \end{lstlisting}
 
+如果希望全局的定理类环境使用同一个计数器，可以使用文档类选项 \lstinline{usesamecnt}：
+
+\begin{lstlisting}
+  \documentclass[usesamecnt]{elegantbook}
+\end{lstlisting}
+
 \subsection{自定义定理类环境}
 
 4.4 版本新增了一个自定义定理类环境的命令：\lstinline|\elegantnewtheorem|，它的参数含义如下：
 
 \begin{lstlisting}
 % fancy 模式（默认）
-\elegantnewtheorem{env}{title}{style}{prefix}
+\elegantnewtheorem{env}{title}{style}{prefix}[numbered-like]
 % simple 模式
-\elegantnewtheorem{env}{title}{style}
+\elegantnewtheorem{env}{title}{style}[numbered-like]
 \end{lstlisting}
 该命令可以同时定义编号环境 \lstinline|env| 和不编号环境 \lstinline|env*|。
 
 其中 \lstinline|style| 支持的参数有：\lstinline|defstyle|，\lstinline|thmstyle|，\lstinline|prostyle|，分别对应“定义”，“定理”，“命题”三种样式。
 
+如果添加了可选参数 \lstinline{numbered-like}，将会使该定理类环境与名为 \lstinline{numbered-like} 的定理类环境使用同一计数器。\textbf{注意}：该参数在使用 \lstinline{usesamecnt} 选项时不起作用，并且会在终端以及 \lstinline{.log} 文件中输出一个警告，来提示用户该选项不起作用：
+
+\begin{lstlisting}
+  [numbered-like] won't make sence with option
+  `usesamecnt'.
+\end{lstlisting}
 
 \begin{itemize}
-  \item 在炫彩模式（\lstinline{fancy}）下，需要 4 个参数来定义一个新的定理类环境，分别是：
-  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀：
+  \item 在炫彩模式（\lstinline{fancy}）下，需要 5 个参数来定义一个新的定理类环境，分别是：
+  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
 
 \begin{lstlisting}
 % 导言区
@@ -501,8 +513,8 @@ Class elegantbook Warning: Because you didn't provide a prefix.
 (elegantbook)               on input line 3.
 \end{lstlisting}
 
-  \item 在简单模式（\lstinline{simple}）下，需要 3 个参数来定义一个新的定理类环境，分别是：
-  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀：
+  \item 在简单模式（\lstinline{simple}）下，需要 4 个参数来定义一个新的定理类环境，分别是：
+  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
 \begin{lstlisting}
 % 导言区
 \elegantnewtheorem{examplesimple}{自定义定理类环境}{thmstyle}
@@ -964,6 +976,12 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \chapter{版本更新历史}
 
 根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+
+\datechange{2022/08/17}{版本 4.5 pre}
+\begin{change}
+  \item \textbf{重要改动}：提供了一个新的文档类选项 \lstinline|usesamecnt|，可以使全局的定理类环境使用同一个计数器。
+  \item \textbf{重要改动}：修改了 \lstinline|\elegantnewtheorem| 命令，使其有第五个（可选）参数。
+\end{change}
 
 \datechange{2022/08/15}{版本 4.4 正式发布。}
 
