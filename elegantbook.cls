@@ -1439,7 +1439,10 @@
 \ifdefstring{\ELEGANT@lang}{cn}{
   % \renewcommand{\cftchappresnum}{\beforechap\space}
   % \renewcommand{\cftchapaftersnum}{\space\afterchap}
-  \setlength{\cftchapnumwidth}{\widthof{\textbf{附录~999}}}
+  % \setlength{\cftchapnumwidth}{\widthof{\textbf{附录~十一}}}
+  \renewcommand{\numberline}[1]{%
+  \@cftbsnum #1\@cftasnum~\@cftasnumb ~%
+  }
   \g@addto@macro\appendix{%
     % recover \thechapter in the \NR@chapter's \numberline
     \ifELEGANT@Hy@later
