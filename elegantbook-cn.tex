@@ -778,12 +778,12 @@ The content of introduction.
 
 如果使用 \lstinline{newtx} 系列字体宏包，需要注意下连字符的问题。
 \begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f} \sin x
+  \int_{R^q} f(x,y)\,\mathrm dy.\emph{of\kern0pt f} \sin x
 \end{equation}
 的代码为
 \begin{lstlisting}
 \begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f} \sin x
+  \int_{R^q} f(x,y)\,\mathrm dy.\emph{of\kern0pt f} \sin x
 \end{equation}
 \end{lstlisting}
 
@@ -866,15 +866,15 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
 \begin{equation}
    \label{inter}
-   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
+   \int_{E} f\,\mathrm dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
 \end{equation}
-一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
+一般情况下 $0 \leq \int_{E} f\,\mathrm dx \leq \infty$。若 $\int_{E} f\,\mathrm dx < \infty$，则称 $f$ 在 $E$ 上可积。
 \end{definition}
 
 一个自然的问题是，Lebesgue 积分与我们所熟悉的 Riemann 积分有什么联系和区别？在 4.4 在我们将详细讨论 Riemann 积分与 Lebesgue 积分的关系。这里只看一个简单的例子。设 $D(x)$ 是区间 $[0,1]$ 上的 Dirichlet 函数。即 $D(x)=\chi_{Q_0}(x)$，其中 $Q_0$ 表示 $[0,1]$ 中的有理数的全体。根据非负简单函数积分的定义，$D(x)$ 在 $[0,1]$ 上的 Lebesgue 积分为
 \begin{equation}
    \label{inter2}
-   \int_0^1 D(x)dx = \int_0^1 \chi_{Q_0} (x) dx = m(Q_0) = 0
+   \int_0^1 D(x)\,\mathrm dx = \int_0^1 \chi_{Q_0} (x) \,\mathrm dx = m(Q_0) = 0
 \end{equation}
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 
@@ -885,7 +885,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
 \begin{equation}
    \label{ex:1}
-   I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
+   I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)\,\mathrm dx \quad t \in \mathcal{R}^1
 \end{equation}
 是 $\mathcal{R}^1$ 上的连续函数。 
 \end{exercise}
@@ -899,13 +899,13 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \end{proof}
 
 \begin{theorem}[Fubini 定理] \label{thm:fubi} 
-（1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
+（1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y)\,\mathrm dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
 \begin{equation}
    \label{eq:461}
-   \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
+   \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) \,\mathrm dx\,\mathrm dy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)\,\mathrm dy\right)\,\mathrm dx.
 \end{equation}
 
-（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\eqref{eq:461} 成立。
+（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y)\,\mathrm dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\eqref{eq:461} 成立。
 \end{theorem}
 
 \ref{thm:fubi}
