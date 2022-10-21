@@ -957,9 +957,16 @@
           \textcolor{third}{$\spadesuit$}};}},
     ELEGANT@title/.code n args={2}
       {
-        \ifblank{#2}
-          {\tcbset{title={\csname #1name\endcsname~\thetcbcounter}}}
-          {\tcbset{title={\csname #1name\endcsname~\thetcbcounter\ (#2)}}}
+
+        \tcbset
+          {
+            title=
+              {
+                \csname #1name\endcsname~%
+                \ifdef{\thetcbcounter}{\thetcbcounter}{}%
+                \ifblank{#2}{}{\ (#2)}
+              }
+          }
       },
     ELEGANT@label/.code n args={2}
       {
