@@ -1,15 +1,15 @@
-\documentclass[lang=cn,10pt,newtx,scheme=chinese]{elegantbook}
+\documentclass[lang=cn,10pt,scheme=chinese]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
-\author{Ethan Deng \& Liam Huang}
+\author{Ethan Deng \& Liam Huang \& syvshc \& sikouhjw \& Osbert Wang}
 \institute{Elegant\LaTeX{} Program}
-\date{Aug 17, 2022}
-\version{4.5}
+\date{Dec 31, 2022}
+\version{4.6}
 \bioinfo{自定义}{信息}
 
-\extrainfo{要让一群人团结起来，需要的不是英明的领导，而是共同的敌人。—— 比企谷八幡}
+\extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
 
 \setcounter{tocdepth}{3}
 
@@ -38,7 +38,12 @@
 
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。大版本改动较大，请关注版本信息，在未开始使用模板钱，建议直接选择最新正式版本！
+\begin{quotation}
+  \textbf{\textcolor{red}{本模板自 2023 年 1 月 1 日开始，不再维护，不建议使用本系列模板！为了保证之前版本的用户仍然能查到说明文档，本说明文档仍然保留过去的信息。}}
+\end{quotation}
+
+Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。大版本改动较大，请关注版本信息，在未开始使用模板前，建议直接选择最新正式版本！
+
 
 本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
@@ -46,16 +51,9 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \item GitHub 地址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
   \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
-  \item 微博：Elegant\LaTeX{}
-  \item 微信公众号：Elegant\LaTeX{}
   \item Bilibili：\href{https://space.bilibili.com/516479629}{ElegantLaTeX}
   \item 用户 QQ 群：692108391
-  \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
-
-\begin{quotation}
-  \textbf{注意：} 由于 ElegantLaTeX 的模板涉及宏包和设定比较多，不建议没有 \LaTeX{} 基础的用户使用。我们会通过 \href{https://space.bilibili.com/516479629}{B 站}进行直播或者交流分享会，录屏也将发布在该账户下，如果大家在模板的使用上有问题，可以观看视频、加群咨询或者查看模板自带的文档说明（如果安装了 TeX Live，可以使用在命令行提示符下运行 \lstinline{texdoc elegantbook} 命令获得模板的说明文档。
-\end{quotation}
 
 
 \section{模板安装与更新}
@@ -96,20 +94,6 @@ tlmgr update --self --all --reinstall-forcibly-removed
 由于宏包版本问题，本模板不支持 C\TeX{} 套装，请务必安装 TeX Live/Mac\TeX{}。更多关于 \TeX{} Live 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases/}{一份简短的关于安装 \LaTeX{} 安装的介绍}。
 
 
-\section{关于提交}
-
-由于精力有限，本人维护模板的时间并不多，考虑到模板的用户还挺多，本模板自 2022 年 8 月开始，开放特性提交（features pull requests）！不过在提交之前，请务必在 issue 区将问题、解决方式以及对应的示例（最简单的使用示例）写清楚，我们会根据 issue 的信息，接受合适的提交。
-
-
-\section{赞助}
-
-如果您非常喜爱我们的模板，你还可以选择赞助的方式支持这个项目，赞助主要用于网站域名和服务器的购买、QQ 用户群的维护以及对于管理员的奖励。赞赏费用的使用解释权归 ElegantLaTeX/EthanDeng 所有，不接受监督。
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.5\textwidth]{donate.jpg}
-\end{figure}
-  
 
 \chapter{ElegantBook 设置说明}
 
@@ -976,6 +960,8 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \chapter{版本更新历史}
 
 根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+
+\datechange{2022/12/31}{版本 4.6} \textcolor{red}{\bfseries 停止维护！}
 
 \datechange{2022/08/17}{版本 4.5 pre}
 \begin{change}
