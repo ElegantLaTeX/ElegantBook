@@ -606,12 +606,15 @@ Class elegantbook Warning: Because you didn't provide a prefix.
   \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
 \end{lstlisting}
 
-如果需要添加排序方式，可以在导言区加入下面命令：
+在使用
 \begin{lstlisting}
-  \ExecuteBibliographyOptions{sorting=ynt}
+  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
 \end{lstlisting}
-
-如果使用的是国标，可以将 \lstinline{ynt} 改为 \lstinline{gb7714-2015}，使文献按照国标规定进行文献排序。
+后，排序方式为按引用先后排序。如果不使用国标 GB7714-2015 并且需要添加排序方式，可以在导言区加入下面命令：
+\begin{lstlisting}
+  \ExecuteBibliographyOptions{sorting=<name>}
+\end{lstlisting}
+其中 \lstinline{<name>} 可以是 nty, nyt, nyvt, anyt, anyvt, ynt, ydnt, none, count, debug 的其中之一，更多排序相关请参考 biblatex 宏包手册的 3.1.2.1 节。
 
 
 \section{添加序章}
