@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 % % !Mode:: "TeX:UTF-8"
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elegantbook}[2022/12/31 v4.6 ElegantBook document class]
+\ProvidesClass{elegantbook}[2022/12/31 v4.5 ElegantBook document class]
 
 
 %%%

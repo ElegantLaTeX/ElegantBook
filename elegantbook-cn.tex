@@ -1,12 +1,12 @@
-\documentclass[lang=cn,10pt,scheme=chinese]{elegantbook}
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
 
 \title{ElegantBook：优美的 \LaTeX{} 书籍模板}
 \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{Ethan Deng \& Liam Huang \& syvshc \& sikouhjw \& Osbert Wang}
 \institute{Elegant\LaTeX{} Program}
-\date{Dec 31, 2022}
-\version{4.6}
+\date{2022/12/31}
+\version{4.5}
 \bioinfo{自定义}{信息}
 
 \extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
@@ -892,8 +892,6 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 （2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\eqref{eq:461} 成立。
 \end{theorem}
 
-\ref{thm:fubi}
-
 \begin{note}
 在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
 \end{note}
@@ -923,7 +921,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \end{property}
 
 \begin{conclusion}
-回归分析（regression analysis) 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
+回归分析（regression analysis） 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
 \end{conclusion}
 
 \begin{problemset}
@@ -961,7 +959,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
 
-\datechange{2022/12/31}{版本 4.6} \textcolor{red}{\bfseries 停止维护！}
+\datechange{2022/12/31}{版本 4.5} \textcolor{red}{\bfseries 停止维护！}
 
 \datechange{2022/08/17}{版本 4.5 pre}
 \begin{change}
@@ -977,7 +975,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item \textbf{重要改动}：在 \lstinline{scheme=chinese} 下将目录中的“第 1 章”修改为“第一章”；
   \item 将 TeX Gyre Termes 改为 TeX Gyre TermesX，使英文部分字形与 newtx 系列宏包更相近；
   \item 重写了内置定理类环境的实现方法，修复了一些 bug，由于修改部分较大，如果引入了新的 bug，请及时在 QQ 群或 \href{https://github.com/ElegantLaTeX}{Github} 上进行反馈；
-  \item 删除 Gitee 仓库地址，恢复 GitHub 提交（pull requests)；
+  \item 删除 Gitee 仓库地址，恢复 GitHub 提交（pull requests）；
   \item 将参考文献命令添加到导言区，使编辑器能够对参考文献自动补全。
 \end{change}
 

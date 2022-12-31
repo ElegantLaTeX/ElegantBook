@@ -3,13 +3,13 @@
 \title{An Elegant \LaTeX{} Template for Books}
 \subtitle{Classic Elegant\LaTeX{} Template}
 
-\author{Ethan Deng \& Liam Huang}
+\author{Ethan Deng, Liam Huang, syvshc, sikouhjw \& Osbert Wang}
 \institute{Elegant\LaTeX{} Program}
-\date{Aug 15, 2022}
-\version{4.4}
+\date{Dec. 31, 2022}
+\version{4.5}
 \bioinfo{Bio}{Information}
 
-\extrainfo{Victory won\rq t come to us unless we go to it. }
+\extrainfo{\textcolor{red}{\bfseries Caution: This template will no longer be maintained since January 1st, 2023.}}
 
 \logo{logo-blue.png}
 \cover{cover.jpg}
@@ -643,7 +643,7 @@ and expand the ones already used\index{keywords!used}.
     $R^2$           &      0.220        &       0.293    \\
     \bottomrule
     \multicolumn{3}{l}{\scriptsize Standard errors in parentheses} \\
-    \multicolumn{3}{l}{\scriptsize *** p<0.01, ** p<0.05, * p<0.1} \\
+    \multicolumn{3}{l}{\scriptsize *** $p < 0.01$, ** $p<0.05$, * $p<0.1$} \\
     \end{tabular}%
 \end{table}%
 
@@ -690,6 +690,14 @@ We list some FAQs for users to refer to:
 
 \chapter{Version History}
 We revised our templates now and then. This section shows the version story of ElegantBook.
+
+
+\datechange{2022/12/31}{release of v4.5.}  \textcolor{red}{\bfseries Stop Maintenance}
+
+\begin{change}
+  \item Add new document option \lstinline|usesamecnt| for same thm counter for all theme environments;
+  \item Add 5-th optional parameter for \lstinline|elegantnewtheorem|.
+\end{change}
 
 
 \datechange{2022/08/15}{release of v4.4.}
