@@ -14,6 +14,10 @@ ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Ethan Deng](https
 ElegantBook is designed for writing books, created by [Ethan Deng](https://github.com/EthanDeng) and [Liam Huang](https://github.com/Liam0205), and maintained by [Ethan Deng](https://github.com/EthanDeng), [syvshc](https://github.com/syvshc) and [sikouhjw](https://github.com/sikouhjw). Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues or contact us at elegantlatex2e@gmail.com.
 
 
+**本模板自 2023 年 1 月 1 日开始，不再维护，不建议使用本系列模板！为了保证之前版本的用户仍然能查到说明文档，本说明文档仍然保留过去的信息。**
+
+**Caution: This template will no longer be maintained since January 1st, 2023.**
+
 ## 致谢 Acknowledgement
 
 
