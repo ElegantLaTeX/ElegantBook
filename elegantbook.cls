@@ -682,6 +682,7 @@
       colframe=#3, % 设置边框颜色
       colback=#3!10, % 设置背景颜色
       colbacktitle=#3, % 设置标题背景颜色
+      fontupper=\songti,
       overlay unbroken and last={
           \node[anchor=south east, outer sep=0pt] at (\linewidth-width,0) {
             \textcolor{#3}{#4}};}
