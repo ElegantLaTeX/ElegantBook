@@ -726,6 +726,13 @@
   before upper={\parindent=2em} % 设置首行缩进
 }
 
+% 加载选项包
+\RequirePackage{ifthen}
+% 自定义命令 设置奇怪的自定义加粗指令
+\newcommand{\customsf}[2]{%
+  \ifthenelse{\equal{#1}{bold}}{\textbf{\textsf{#2}}}{\textsf{#2}}%
+}
+
 
 % main（green-def): example exercise problem solution
 % second（orange-thm）: proof note remark  
