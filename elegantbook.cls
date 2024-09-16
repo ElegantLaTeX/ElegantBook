@@ -697,7 +697,7 @@
 % 第一项是源码环境名称、第二项是显示出来的环境名字、第三个是环境颜色
 % 第四项是右下角填充的小图案，分为$\clubsuit$，$\heartsuit$，$\spadesuit$，三种图案，后续可能会增加。
 % 第五项是计数器，不同的环境应该使用不同的计数器免得自动编号互相影响
-\createMyColorEnv{madara}{迈特凯}{madaracolor}{$\clubsuit$}{mad}
+\createMyColorEnv{madara}{宇智波斑}{madaracolor}{$\clubsuit$}{mad}
 \createMyColorEnv{outsider}{界外魔}{outsider}{$\heartsuit$}{out}
 \createMyColorEnv{justtalk}{火影新编}{talkcolor}{$\spadesuit$}{jus}
 \createMyColorEnv{hashirama}{千手柱间}{hashiramacolor}{$\clubsuit$}{has}
