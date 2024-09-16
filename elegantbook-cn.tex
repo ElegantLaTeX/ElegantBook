@@ -70,7 +70,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 \subsection{发行版安装与更新}
 
-本模板测试环境为 
+本模板测试环境为
 \begin{enumerate}
   \item Win10 + \TeX{} Live 2022；
   \item Ubuntu 20.04 + \TeX{} Live 2022；
@@ -110,7 +110,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
 \begin{itemize}
   \item 由 \href{https://github.com/VincentMVV}{VincentMVV} 提供的意大利语翻译 \lstinline{lang=it}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
   \item 由 \href{https://github.com/abfek66}{abfek66} 提供的法语翻译 \lstinline{lang=fr}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
-  % \item 由 \href{https://github.com/stultus}{stultus} 提供的马拉雅拉姆语翻译 \lstinline{lang=}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/90}{Malayalam translation}；
+        % \item 由 \href{https://github.com/stultus}{stultus} 提供的马拉雅拉姆语翻译 \lstinline{lang=}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/90}{Malayalam translation}；
   \item 由 \href{https://github.com/inktvis75}{inktvis75} 提供的荷兰语翻译 \lstinline{lang=nl}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/108}{Dutch Translation}；
   \item 由 \href{https://github.com/palkotamas}{palkotamas} 提供的匈牙利语翻译 \lstinline{lang=hu}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation}；
   \item 由 Lisa 提供的德语翻译 \lstinline{lang=de}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation}；
@@ -122,7 +122,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 
 \begin{remark}
-以上各个语言的设定均为网友设定，我们未对上述翻译进行过校对，如果有问题，请在对应的 issue 下评论。并且，只有中文环境（\lstinline{lang=cn}）才可以输入中文。
+  以上各个语言的设定均为网友设定，我们未对上述翻译进行过校对，如果有问题，请在对应的 issue 下评论。并且，只有中文环境（\lstinline{lang=cn}）才可以输入中文。
 \end{remark}
 
 \section{设备选项}
@@ -134,7 +134,7 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 \section{颜色主题}
 
-本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
+本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
@@ -145,39 +145,39 @@ tlmgr update --self --all --reinstall-forcibly-removed
   \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
   \centering
   \begin{tabular}{ccccccc}
-  \toprule
-    & \textcolor{structure1}{green} 
-    & \textcolor{structure2}{cyan} 
-    & \textcolor{structure3}{blue}
-    & \textcolor{structure4}{gray} 
-    & \textcolor{structure5}{black} 
-    & 主要使用的环境\\
-  \midrule
+    \toprule
+              & \textcolor{structure1}{green}
+              & \textcolor{structure2}{cyan}
+              & \textcolor{structure3}{blue}
+              & \textcolor{structure4}{gray}
+              & \textcolor{structure5}{black}
+              & 主要使用的环境                         \\
+    \midrule
     structure & \ccr{structure1}
-    & \ccr{structure2}
-    & \ccr{structure3} 
-    & \ccr{structure4} 
-    & \ccr{structure5} 
-    & chapter \ section \ subsection \\
+              & \ccr{structure2}
+              & \ccr{structure3}
+              & \ccr{structure4}
+              & \ccr{structure5}
+              & chapter \ section \ subsection  \\
     main      & \ccr{main1}
-    & \ccr{main2}
-    & \ccr{main3}
-    & \ccr{main4}
-    & \ccr{main5}
-    & definition \ exercise \ problem \\
+              & \ccr{main2}
+              & \ccr{main3}
+              & \ccr{main4}
+              & \ccr{main5}
+              & definition \ exercise \ problem \\
     second    & \ccr{second1}
-    & \ccr{second2}
-    & \ccr{second3}
-    & \ccr{second4}
-    & \ccr{second5}
-    & theorem \ lemma \ corollary\\
+              & \ccr{second2}
+              & \ccr{second3}
+              & \ccr{second4}
+              & \ccr{second5}
+              & theorem \ lemma \ corollary     \\
     third     & \ccr{third1}
-    & \ccr{third2}
-    & \ccr{third3}
-    & \ccr{third4}
-    & \ccr{third5}
-    & proposition\\
-  \bottomrule
+              & \ccr{third2}
+              & \ccr{third3}
+              & \ccr{third4}
+              & \ccr{third5}
+              & proposition                     \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -200,16 +200,16 @@ tlmgr update --self --all --reinstall-forcibly-removed
   \caption{封面元素信息}
   \begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}}
     \hline
-    信息 & 命令 & 信息 & 命令 & 信息 & 命令 \\
+    信息 & 命令                     & 信息  & 命令                    & 信息 & 命令                   \\
     \hline
-    标题 & \lstinline|\title| & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author| \\
-    机构 & \lstinline|\institute| & 日期 &  \lstinline|\date| & 版本 & \lstinline|\version| \\
-    箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover| & 徽标 & \lstinline|\logo| \\
+    标题 & \lstinline|\title|     & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author|  \\
+    机构 & \lstinline|\institute| & 日期  & \lstinline|\date|     & 版本 & \lstinline|\version| \\
+    箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover|    & 徽标 & \lstinline|\logo|    \\
     \hline
   \end{tabular}
 \end{table}
 
-另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用 
+另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用
 \begin{lstlisting}
 \bioinfo{User Name}{115520}
 \end{lstlisting}
@@ -258,11 +258,11 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 \begin{itemize}
   \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
-    \begin{itemize}
-      \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
-      \item \textcolor{second}{\textbf{theorem、lemma、corollary、axiom、postulate}} 环境，颜色为 \textcolor{second} {second}；
-      \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
-    \end{itemize}
+        \begin{itemize}
+          \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
+          \item \textcolor{second}{\textbf{theorem、lemma、corollary、axiom、postulate}} 环境，颜色为 \textcolor{second} {second}；
+          \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
+        \end{itemize}
   \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
   \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
   \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 \lstinline|result| 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
@@ -323,19 +323,19 @@ tlmgr update --self --all --reinstall-forcibly-removed
 \begin{table}[htbp]
   \centering
   \caption{定理类环境}
-    \begin{tabular}{llll}
+  \begin{tabular}{llll}
     \toprule
-    环境名 & 标签名 & 前缀 & 交叉引用 \\
+    环境名         & 标签名   & 前缀  & 交叉引用                        \\
     \midrule
-    definition & label & def   & \lstinline|\ref{def:label}| \\
-    theorem & label & thm   & \lstinline|\ref{thm:label}| \\
-    postulate & label & pos & \lstinline|\ref{pos:label}| \\
-    axiom & label & axi & \lstinline|\ref{axi:label}|\\
-    lemma & label & lem   & \lstinline|\ref{lem:label}| \\
-    corollary & label & cor   & \lstinline|\ref{cor:label}| \\
-    proposition & label & pro   & \lstinline|\ref{pro:label}| \\
+    definition  & label & def & \lstinline|\ref{def:label}| \\
+    theorem     & label & thm & \lstinline|\ref{thm:label}| \\
+    postulate   & label & pos & \lstinline|\ref{pos:label}| \\
+    axiom       & label & axi & \lstinline|\ref{axi:label}| \\
+    lemma       & label & lem & \lstinline|\ref{lem:label}| \\
+    corollary   & label & cor & \lstinline|\ref{cor:label}| \\
+    proposition & label & pro & \lstinline|\ref{pro:label}| \\
     \bottomrule
-    \end{tabular}%
+  \end{tabular}%
   \label{tab:theorem-class}%
 \end{table}%
 
@@ -459,9 +459,9 @@ tlmgr update --self --all --reinstall-forcibly-removed
 
 \begin{itemize}
   \item 在炫彩模式（\lstinline{fancy}）下，需要 5 个参数来定义一个新的定理类环境，分别是：
-  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
+        定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
 
-\begin{lstlisting}
+        \begin{lstlisting}
 % 导言区
 \elegantnewtheorem{examplefancy}{自定义定理类环境}{thmstyle}{exfancy}
 % 正文
@@ -473,8 +473,8 @@ tlmgr update --self --all --reinstall-forcibly-removed
 \end{examplefancy*}
 \end{lstlisting}
 
-  如果不给出第四个参数，或第四个参数置空的话，将会用定理类环境名来作为默认前缀，即
-\begin{lstlisting}
+        如果不给出第四个参数，或第四个参数置空的话，将会用定理类环境名来作为默认前缀，即
+        \begin{lstlisting}
 % 导言区
 \elegantnewtheorem{test}{TEST}{thmstyle}
 % 或
@@ -486,9 +486,9 @@ tlmgr update --self --all --reinstall-forcibly-removed
 \end{test}
 \end{lstlisting}
 
-这时会在终端以及 \verb|.log| 文件中输出一个警告信息来提示用户没有定义前缀：
+        这时会在终端以及 \verb|.log| 文件中输出一个警告信息来提示用户没有定义前缀：
 
-\begin{lstlisting}[language=bash]
+        \begin{lstlisting}[language=bash]
 Class elegantbook Warning: Because you didn't provide a prefix. 
 (elegantbook)              We use test as the default prefix. 
 (elegantbook)              You have to use 
@@ -498,8 +498,8 @@ Class elegantbook Warning: Because you didn't provide a prefix.
 \end{lstlisting}
 
   \item 在简单模式（\lstinline{simple}）下，需要 4 个参数来定义一个新的定理类环境，分别是：
-  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
-\begin{lstlisting}
+        定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
+        \begin{lstlisting}
 % 导言区
 \elegantnewtheorem{examplesimple}{自定义定理类环境}{thmstyle}
 % 正文
@@ -511,8 +511,8 @@ Class elegantbook Warning: Because you didn't provide a prefix.
 \end{examplesimple*}
 \end{lstlisting}
 
-  如果此时错误地给出了第四个参数，那么将会在终端以及 \verb|.log| 文件中输出一个错误信息：
-\begin{lstlisting}
+        如果此时错误地给出了第四个参数，那么将会在终端以及 \verb|.log| 文件中输出一个错误信息：
+        \begin{lstlisting}
 % elegantbook-cn.tex
 \elegantnewtheorem{test}{TEST}{thmstyle}{}
 % .log file
@@ -546,28 +546,28 @@ Class elegantbook Warning: Because you didn't provide a prefix.
   \begin{itemize}
     \item first item of nesti;
     \item second item of nesti;
-      \begin{itemize}
-        \item first item of nestii;
-        \item second item of nestii;
-        \begin{itemize}
-          \item first item of nestiii;
-          \item second item of nestiii.
-        \end{itemize}   
-      \end{itemize}
+          \begin{itemize}
+            \item first item of nestii;
+            \item second item of nestii;
+                  \begin{itemize}
+                    \item first item of nestiii;
+                    \item second item of nestiii.
+                  \end{itemize}
+          \end{itemize}
   \end{itemize}
 \end{minipage}
 \begin{minipage}[b]{0.49\textwidth}
   \begin{enumerate}
     \item first item of nesti;
     \item second item of nesti;
-      \begin{enumerate}
-        \item first item of nestii;
-        \item second item of nestii;
-        \begin{enumerate}
-          \item first item of nestiii;
-          \item second item of nestiii.
-        \end{enumerate}   
-      \end{enumerate}
+          \begin{enumerate}
+            \item first item of nestii;
+            \item second item of nestii;
+                  \begin{enumerate}
+                    \item first item of nestiii;
+                    \item second item of nestiii.
+                  \end{enumerate}
+          \end{enumerate}
   \end{enumerate}
 \end{minipage}
 
@@ -619,7 +619,7 @@ Class elegantbook Warning: Because you didn't provide a prefix.
 
 \section{添加序章}
 
-如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用 
+如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用
 \begin{lstlisting}
 \chapter*{Introduction}
 \markboth{Introduction}{Introduction}
@@ -691,11 +691,11 @@ The content of introduction.
 \end{problemset}
 
 \begin{remark}
-如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
+  如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
 \end{remark}
 
 \begin{solution}
-如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
+  如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
 \end{solution}
 
 \section{旁注}
@@ -703,9 +703,9 @@ The content of introduction.
 在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
 
 \begin{remark}
-在使用旁注的时候，需要注意的是，文本和公式可以直接在旁注中使用。
+  在使用旁注的时候，需要注意的是，文本和公式可以直接在旁注中使用。
 
-\begin{lstlisting}
+  \begin{lstlisting}
 % text
 \marginpar{margin paragraph text}
 
@@ -717,9 +717,9 @@ The content of introduction.
 }
 \end{lstlisting}
 
-但是浮动体（表格、图片）需要注意，不能用浮动体环境，需要使用直接插图命令或者表格命令环境。然后使用 \lstinline{\captionof} 为其设置标题。为了得到居中的图表，可以使用 \lstinline{\centerline} 命令或者 \lstinline{center} 环境。更多详情请参考：\href{https://tex.stackexchange.com/questions/5583/caption-of-figure-in-marginpar-and-caption-of-wrapfigure-in-margin}{Caption of Figure in Marginpar}。
+  但是浮动体（表格、图片）需要注意，不能用浮动体环境，需要使用直接插图命令或者表格命令环境。然后使用 \lstinline{\captionof} 为其设置标题。为了得到居中的图表，可以使用 \lstinline{\centerline} 命令或者 \lstinline{center} 环境。更多详情请参考：\href{https://tex.stackexchange.com/questions/5583/caption-of-figure-in-marginpar-and-caption-of-wrapfigure-in-margin}{Caption of Figure in Marginpar}。
 
-\begin{lstlisting}
+  \begin{lstlisting}
 % graph with centerline command
 \marginpar{
   \centerline{
@@ -799,17 +799,17 @@ LaTeX Error:
 \section{中文字体选项}
 模板从 3.10 版本提供中文字体选项 \lstinline{chinesefont}，可选项有
 \begin{enumerate}
-\item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
-\item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
-\item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
+  \item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
+  \item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
+  \item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
 \end{enumerate}
 
 \subsection{方正字体选项}
 由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}
 
 \begin{figure}[!htb]
-\centering
-\includegraphics[width=0.9\textwidth]{founder.png}
+  \centering
+  \includegraphics[width=0.9\textwidth]{founder.png}
 \end{figure}
 
 \subsection{其他中文字体}
@@ -849,19 +849,19 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
 
-\begin{definition}[可积性] \label{def:int} 
-设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
-\begin{equation}
-   \label{inter}
-   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
-\end{equation}
-一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
+\begin{definition}[可积性] \label{def:int}
+  设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
+  \begin{equation}
+    \label{inter}
+    \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
+  \end{equation}
+  一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
 \end{definition}
 
 一个自然的问题是，Lebesgue 积分与我们所熟悉的 Riemann 积分有什么联系和区别？在 4.4 在我们将详细讨论 Riemann 积分与 Lebesgue 积分的关系。这里只看一个简单的例子。设 $D(x)$ 是区间 $[0,1]$ 上的 Dirichlet 函数。即 $D(x)=\chi_{Q_0}(x)$，其中 $Q_0$ 表示 $[0,1]$ 中的有理数的全体。根据非负简单函数积分的定义，$D(x)$ 在 $[0,1]$ 上的 Lebesgue 积分为
 \begin{equation}
-   \label{inter2}
-   \int_0^1 D(x)dx = \int_0^1 \chi_{Q_0} (x) dx = m(Q_0) = 0
+  \label{inter2}
+  \int_0^1 D(x)dx = \int_0^1 \chi_{Q_0} (x) dx = m(Q_0) = 0
 \end{equation}
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 
@@ -869,40 +869,40 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。练习题 \ref{exer:43} 是一个性质的证明。
 
 \begin{exercise}\label{exer:43}
-设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
-\begin{equation}
-   \label{ex:1}
-   I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
-\end{equation}
-是 $\mathcal{R}^1$ 上的连续函数。 
+  设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
+  \begin{equation}
+    \label{ex:1}
+    I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
+  \end{equation}
+  是 $\mathcal{R}^1$ 上的连续函数。
 \end{exercise}
 
 \begin{solution}
-即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+  即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 \end{solution}
 
 \begin{proof}
-即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+  即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 \end{proof}
 
-\begin{theorem}[Fubini 定理] \label{thm:fubi} 
-（1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
-\begin{equation}
-   \label{eq:461}
-   \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
-\end{equation}
+\begin{theorem}[Fubini 定理] \label{thm:fubi}
+  （1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
+  \begin{equation}
+    \label{eq:461}
+    \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
+  \end{equation}
 
-（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\eqref{eq:461} 成立。
+  （2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\eqref{eq:461} 成立。
 \end{theorem}
 
 \begin{note}
-在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
+  在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
 \end{note}
 
 我们说一个实变或者复变量的实值或者复值函数是在区间上平方可积的，如果其绝对值的平方在该区间上的积分是有限的。所有在勒贝格积分意义下平方可积的可测函数构成一个希尔伯特空间，也就是所谓的 $L^2$ 空间，几乎处处相等的函数归为同一等价类。形式上，$L^2$ 是平方可积函数的空间和几乎处处为 0 的函数空间的商空间。
 
 \begin{proposition}[最优性原理] \label{pro:max}
-如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
+  如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
 \end{proposition}
 
 我们知道最小二乘法可以用来处理一组数据，可以从一组测定的数据中寻求变量之间的依赖关系，这种函数关系称为经验公式。本课题将介绍最小二乘法的精确定义及如何寻求点与点之间近似成线性关系时的经验公式。假定实验测得变量之间的 $n$ 个数据，则在平面上，可以得到 $n$ 个点，这种图形称为 “散点图”，从图中可以粗略看出这些点大致散落在某直线近旁, 我们认为其近似为一线性函数，下面介绍求解步骤。
@@ -916,21 +916,21 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
 
 \begin{property}\label{property:cauchy}
-柯西列的性质
-\begin{enumerate}
-\item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。
-\item $x_k\in \mathcal{R}^n$，$\rho(x,y)$ 是欧几里得空间，则柯西列收敛，$(\mathcal{R}^n,\rho)$ 空间是完备的。
-\end{enumerate}
+  柯西列的性质
+  \begin{enumerate}
+    \item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。
+    \item $x_k\in \mathcal{R}^n$，$\rho(x,y)$ 是欧几里得空间，则柯西列收敛，$(\mathcal{R}^n,\rho)$ 空间是完备的。
+  \end{enumerate}
 \end{property}
 
 \begin{conclusion}
-回归分析（regression analysis） 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
+  回归分析（regression analysis） 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
 \end{conclusion}
 
 \begin{problemset}
-\item 设 $A$ 为数域 $K$ 上的 $n$ 级矩阵。证明：如果 $K^n$ 中任意非零列向量都是 $A$ 的特征向量，则 $A$ 一定是数量矩阵。
-\item 证明：不为零矩阵的幂零矩阵不能对角化。
-\item 设 $A = (a_{ij})$ 是数域 $K$ 上的一个 $n$ 级上三角矩阵，证明：如果 $a_{11} = a_{22} = \cdots = a_{nn}$，并且至少有一个 $a_{kl} \not = 0 (k < l)$，则 $A$ 一定不能对角化。
+  \item 设 $A$ 为数域 $K$ 上的 $n$ 级矩阵。证明：如果 $K^n$ 中任意非零列向量都是 $A$ 的特征向量，则 $A$ 一定是数量矩阵。
+  \item 证明：不为零矩阵的幂零矩阵不能对角化。
+  \item 设 $A = (a_{ij})$ 是数域 $K$ 上的一个 $n$ 级上三角矩阵，证明：如果 $a_{11} = a_{22} = \cdots = a_{nn}$，并且至少有一个 $a_{kl} \not = 0 (k < l)$，则 $A$ 一定不能对角化。
 \end{problemset}
 
 \chapter{常见问题集}
@@ -939,23 +939,23 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 \begin{enumerate}[itemsep=1.5ex]
   \item \question{有没有办法章节用“第一章，第一节，（一）”这种？}
-    见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
+        见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
   \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
-    页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
+        页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
   \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
-    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
+        你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
   \item \question{我该使用什么版本？}
-    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
+        请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
   \item \question{我该使用什么编辑器？}
-    你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
+        你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
   \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
-    模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
+        模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
   \item \question{请问交叉引用是什么？}
-    本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
+        本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
   \item \question{代码高亮环境能用其他语言吗？}
-    可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lstset} 命令，更多信息请参考宏包文档。
+        可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lstset} 命令，更多信息请参考宏包文档。
   \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
-    由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。后续确定不会再出任何主题/模板，请大家根据需要修改已有主题。
+        由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。后续确定不会再出任何主题/模板，请大家根据需要修改已有主题。
 \end{enumerate}
 
 \chapter{版本更新历史}
@@ -1155,7 +1155,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \textbf{求和算子} 是用以表达多个数求和运算的一个缩略符号，它在统计学和计量经济学分析中扮演着重要作用。如果 $\{x_i: i=1, 2, \ldots, n\}$ 表示 $n$ 个数的一个序列，那么我们就把这 $n$ 个数的和写为：
 
 \begin{equation}
-\sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
+  \sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
 \end{equation}
 
 
