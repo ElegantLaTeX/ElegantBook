@@ -1,15 +1,15 @@
 \documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
 
-\title{ElegantBook：优美的 \LaTeX{} 书籍模板}
-\subtitle{Elegant\LaTeX{} 经典之作}
+\title{深入浅出数据结构}
+\subtitle{北街学长倾力之作}
 
-\author{Ethan Deng \& Liam Huang \& syvshc \& sikouhjw \& Osbert Wang}
-\institute{Elegant\LaTeX{} Program}
+\author{北街}
+% \institute{Elegant\LaTeX{} Program}
 \date{2022/12/31}
-\version{4.5}
-\bioinfo{自定义}{信息}
+\version{1.0}
+% \bioinfo{自定义}{信息}
 
-\extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
+% \extrainfo{注意：本模板自 2023 年 1 月 122222 日开始，不再更新和维护！}
 
 \setcounter{tocdepth}{3}
 
@@ -26,7 +26,22 @@
 \usepackage{cprotect}
 
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\usepackage{listings}         % 导入listings宏包
+\usepackage{xcolor}           % 支持颜色
 
+% 配置C++代码样式
+\lstset{
+    language=C++,             % 语言设置为C++
+    basicstyle=\ttfamily,      % 基本样式
+    keywordstyle=\color{blue}, % 关键词颜色
+    commentstyle=\color{green},% 注释颜色
+    stringstyle=\color{red},   % 字符串颜色
+    numbers=left,              % 显示行号
+    numberstyle=\tiny,         % 行号样式
+    stepnumber=1,              % 每行显示行号
+    breaklines=true,           % 自动换行
+    frame=lines                % 代码块边框样式
+}
 \begin{document}
 
 \maketitle
@@ -36,1128 +51,2788 @@
 
 \mainmatter
 
-\chapter{Elegant\LaTeX{} 系列模板介绍}
+\chapter{数据结构与算法}
 
-\begin{quotation}
-  \textbf{\textcolor{red}{本模板自 2023 年 1 月 1 日开始，不再维护，不建议使用本系列模板！为了保证之前版本的用户仍然能查到说明文档，本说明文档仍然保留过去的信息。}}
-\end{quotation}
+\section{数据结构}
 
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。大版本改动较大，请关注版本信息，在未开始使用模板前，建议直接选择最新正式版本！
+\subsection{定义}
+数据结构是什么？简单来说，它是用来组织和存储数据的一种方式。就像你整理房间时，衣服放衣柜，书籍放书架，零食藏在抽屉里（别骗我，你一定有零食抽屉！）。数据结构就是计算机世界里的“收纳神器”，它决定了数据的存储方式和操作效率。
 
-
-本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
+\subsection{逻辑结构}
+逻辑结构是数据之间的关系，就像你和朋友之间的关系一样复杂（或者简单）。根据数据元素之间的关系，逻辑结构可以分为以下几类：
 \begin{itemize}
-  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
-  \item GitHub 地址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
-  \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
-  \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
-  \item Bilibili：\href{https://space.bilibili.com/516479629}{ElegantLaTeX}
-  \item 用户 QQ 群：692108391
+    \item \textbf{集合结构}：数据之间没有任何关系，就像一群互不认识的人站在公交车站。
+    \item \textbf{线性结构}：数据之间有一对一的关系，就像排队买奶茶，每个人前后都有一个邻居。
+    \item \textbf{树形结构}：数据之间有一对多的关系，就像家谱，祖宗有很多子孙。
+    \item \textbf{图形结构}：数据之间有多对多的关系，就像社交网络，人人都可能是朋友（或者敌人）。
 \end{itemize}
 
+\subsection{存储结构}
+存储结构是数据在计算机中的存储方式，决定了数据的“住址”。主要有以下两种：
+\begin{itemize}
+    \item \textbf{顺序存储}：数据存储在连续的存储单元中，就像一排整齐的书架。优点是访问速度快，缺点是插入和删除操作麻烦。
+    \item \textbf{链式存储}：数据存储在不连续的存储单元中，通过指针连接，就像一串珍珠项链。优点是插入和删除方便，缺点是访问速度稍慢。
+\end{itemize}
+选择哪种存储方式，就像选择住公寓还是住别墅，各有利弊，关键看需求。
 
-\section{模板安装与更新}
+\section{算法}
 
-你可以通过免安装的方式使用本模板，包括在线使用和本地（文件夹内）使用两种方式，也可以通过 \TeX{} 发行版安装使用。
-
-\subsection{在线使用模板}
-
-我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络便利的用户可以直接通过 Overleaf 在线使用我们的模板。使用 Overleaf 的好处是无需安装 \TeX{} Live，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
-
-\subsection{本地免安装使用}
-
-\textbf{免安装}使用方法如下：从 GitHub 或者 CTAN 下载最新版，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
-
-\subsection{发行版安装与更新}
-
-本模板测试环境为 
+\subsection{定义}
+算法是解决问题的一组明确指令。它就像做菜的菜谱，告诉你每一步该干什么。比如，“煮方便面”这个算法可能是这样的：
 \begin{enumerate}
-  \item Win10 + \TeX{} Live 2022；
-  \item Ubuntu 20.04 + \TeX{} Live 2022；
-  \item macOS Monterey + Mac\TeX{} 2022。
+    \item 烧水。
+    \item 水开后放入面饼。
+    \item 等3分钟，加入调料包。
+    \item 搅拌均匀，开吃！
 \end{enumerate}
+一个好的算法不仅要能解决问题，还要高效，毕竟没人想等水烧开等到天荒地老。
 
-\TeX Live/Mac\TeX{} 的安装请参考啸行的\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases/}{一份简短的关于安装 \LaTeX{} 安装的介绍}。
-
-安装 \TeX{} Live 之后，安装后建议升级全部宏包，升级方法：使用 cmd 或 terminal 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新，也即
-
-\begin{lstlisting}
-tlmgr update --self 
-tlmgr update --all
-tlmgr update --self --all --reinstall-forcibly-removed
-\end{lstlisting}
-
-更多的内容请参考 \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
-
-\subsection{其他发行版本}
-
-由于宏包版本问题，本模板不支持 C\TeX{} 套装，请务必安装 TeX Live/Mac\TeX{}。更多关于 \TeX{} Live 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases/}{一份简短的关于安装 \LaTeX{} 安装的介绍}。
-
-
-
-\chapter{ElegantBook 设置说明}
-
-本模板基于基础的 book 文类，所以 book 的选项对于本模板也是有效的（纸张无效，因为模板有设备选项）。默认编码为 UTF-8，推荐使用 \TeX{} Live 编译。
-
-\section{语言模式}
-本模板内含两套基础语言环境 \lstinline{lang=cn}、\lstinline{lang=en}。改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
-\begin{lstlisting}
-\documentclass[cn]{elegantbook} 
-\documentclass[lang=cn]{elegantbook}
-\end{lstlisting}
-
-除模板自带的两套语言设定之外，由\textbf{网友}提供的其他语言环境设置如下：
+\subsection{特征}
+算法有以下几个显著特征：
 \begin{itemize}
-  \item 由 \href{https://github.com/VincentMVV}{VincentMVV} 提供的意大利语翻译 \lstinline{lang=it}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
-  \item 由 \href{https://github.com/abfek66}{abfek66} 提供的法语翻译 \lstinline{lang=fr}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/85}{Italian translation}；
-  % \item 由 \href{https://github.com/stultus}{stultus} 提供的马拉雅拉姆语翻译 \lstinline{lang=}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/90}{Malayalam translation}；
-  \item 由 \href{https://github.com/inktvis75}{inktvis75} 提供的荷兰语翻译 \lstinline{lang=nl}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/108}{Dutch Translation}；
-  \item 由 \href{https://github.com/palkotamas}{palkotamas} 提供的匈牙利语翻译 \lstinline{lang=hu}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/111}{Hungarian translation}；
-  \item 由 Lisa 提供的德语翻译 \lstinline{lang=de}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/113}{Deutsch translation}；
-  \item 由 Gustavo A. Corradi 提供的西班牙语的翻译 \lstinline{lang=es}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/133}{Spanish translation}；
-  \item 由 \href{https://github.com/Altantsooj}{Altantsooj} 提供的蒙古语的翻译 \lstinline{lang=mn}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/137}{Mongolian translation}；
-  \item 由 \href{https://github.com/inusturbo}{inusturbo} 提供的日本语的翻译 \lstinline{lang=jp}，相关讨论见 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/172}{Japanese Translation}。
+    \item \textbf{有穷性}：算法必须在有限步骤内结束，就像煮方便面不能煮一辈子。
+    \item \textbf{确定性}：算法的每一步都有明确的定义，不会让你“随便加点盐”。
+    \item \textbf{可行性}：算法的每一步都可以通过基本操作实现，比如“烧水”是可行的，但“召唤龙卷风”就不行。
+    \item \textbf{输入}：算法可以有零个或多个输入，比如煮方便面需要水和面饼。
+    \item \textbf{输出}：算法至少有一个输出，比如煮好的方便面。
 \end{itemize}
 
+\subsection{目标}
+设计算法的目标是让它又快又省。具体来说：
+\begin{itemize}
+    \item \textbf{减少时间复杂度}：让算法运行得更快，就像希望快递能当天送达。
+    \item \textbf{减少空间复杂度}：让算法占用更少的内存，就像希望行李箱能装下更多东西。
+\end{itemize}
+一个好的算法就像一个优秀的厨师，既能快速做好饭，又不浪费食材。
 
+\subsection{复杂度计算}
+算法复杂度是衡量算法效率的重要指标，分为时间复杂度和空间复杂度。它们是评估算法性能的核心标准，就像评估一辆车的油耗和速度，既要省油又要跑得快才是好车。
 
-\begin{remark}
-以上各个语言的设定均为网友设定，我们未对上述翻译进行过校对，如果有问题，请在对应的 issue 下评论。并且，只有中文环境（\lstinline{lang=cn}）才可以输入中文。
-\end{remark}
+\subsubsection{时间复杂度}
+时间复杂度描述算法运行所需的时间，通常用大 $O$ 表示法来表示。以下是一些常见的时间复杂度及其含义：
 
-\section{设备选项}
-最早我们在 ElegantNote 模板中加入了设备选项（\lstinline{device}），后来，我们觉得这个设备选项的设置可以应用到 ElegantBook 中\footnote{不过因为 ElegantBook 模板封面图片的存在，在修改页面设计时，需要对图片进行裁剪。}，而且 Book 一般内容比较多，如果在 iPad 上看无需切边，放大，那用户的阅读体验将会得到巨大提升。你可以使用下面的选项将版面设置为 iPad 设备模式\footnote{默认为 normal 模式，也即 A4 纸张大小。}
-\begin{lstlisting}
-\documentclass[pad]{elegantbook} %or
-\documentclass[device=pad]{elegantbook}
-\end{lstlisting}
+\begin{itemize}
+    \item \textbf{$O(1)$：常数时间}
+    无论输入规模多大，算法的运行时间都保持不变。
+    \textit{示例}：访问数组中的某个元素，例如 $arr[5]$。
+    \textit{解释}：直接定位到数组的第六个元素（索引从 0 开始），不需要额外的计算。
 
-\section{颜色主题}
+    \item \textbf{$O(n)$：线性时间}
+    算法的运行时间与输入规模成正比。
+    \textit{示例}：计算一个数组中所有元素的和。
+    \textit{解释}：假设数组有 $n$ 个元素，算法需要遍历每个元素一次，因此运行时间为 $O(n)$。
 
-本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
-\begin{lstlisting}
-\documentclass[green]{elegantbook} %or
-\documentclass[color=green]{elegantbook}
-\end{lstlisting}
+    \item \textbf{$O(n^2)$：平方时间}
+    算法的运行时间与输入规模的平方成正比。
+    \textit{示例}：对一个数组中的所有元素两两比较，例如冒泡排序。
+    \textit{解释}：对于 $n$ 个元素，每个元素需要与其他 $n-1$ 个元素进行比较，总共需要执行 $n \times (n-1)$ 次操作，近似为 $O(n^2)$。
 
+    \item \textbf{$O(\log n)$：对数时间}
+    算法的运行时间随着输入规模的对数增长。
+    \textit{示例}：在一个有序数组中使用二分查找。
+    \textit{解释}：每次查找都会将搜索范围缩小一半，因此运行时间为 $O(\log n)$。
 
-\begin{table}[htbp]
-  \caption{ElegantBook 模板中的颜色主题\label{tab:color thm}}
+    \item \textbf{$O(n \log n)$：线性对数时间}
+    常见于高效的排序算法，例如归并排序和快速排序。
+    \textit{示例}：对一个数组进行快速排序。
+    \textit{解释}：快速排序在每次划分时需要 $O(n)$ 的时间，而划分的次数为 $O(\log n)$，因此总时间复杂度为 $O(n \log n)$。
+\end{itemize}
+
+\textbf{计算示例：}
+假设我们有一个数组 $arr = [3, 1, 4, 1, 5]$，我们想要计算数组中所有元素的平方和：
+\begin{verbatim}
+for i in arr:
+    result += i * i
+\end{verbatim}
+该算法需要遍历数组中的每个元素一次，因此时间复杂度为 $O(n)$。
+
+\subsubsection{空间复杂度}
+空间复杂度描述算法运行所需的存储空间，通常也用大 $O$ 表示法。以下是一些常见的空间复杂度及其含义：
+
+\begin{itemize}
+    \item \textbf{$O(1)$：常数空间}
+    算法所需的额外空间不随输入规模的变化而变化。
+    \textit{示例}：交换两个变量的值。
+    \textit{解释}：只需要一个临时变量来存储中间值，额外空间为常数。
+
+    \item \textbf{$O(n)$：线性空间}
+    算法所需的额外空间与输入规模成正比。
+    \textit{示例}：创建一个与输入数组大小相同的数组来存储结果。
+    \textit{解释}：如果输入数组有 $n$ 个元素，额外需要 $n$ 个存储单元。
+
+    \item \textbf{$O(n^2)$：平方空间}
+    算法所需的额外空间与输入规模的平方成正比。
+    \textit{示例}：创建一个 $n \times n$ 的二维矩阵。
+    \textit{解释}：如果矩阵的维度为 $n$，则需要 $n^2$ 个存储单元。
+\end{itemize}
+
+\textbf{计算示例：}
+假设我们需要存储一个二维数组的转置矩阵：
+\begin{verbatim}
+for i in range(n):
+    for j in range(n):
+        transpose[j][i] = matrix[i][j]
+\end{verbatim}
+如果原始矩阵的大小为 $n \times n$，则需要额外的 $n^2$ 空间来存储转置矩阵，因此空间复杂度为 $O(n^2)$。
+
+\subsubsection{综合示例}
+假设我们需要对一个数组进行排序并统计其中每个元素出现的次数：
+\begin{itemize}
+    \item 排序算法使用快速排序，时间复杂度为 $O(n \log n)$。
+    \item 统计元素出现次数需要一个哈希表，空间复杂度为 $O(n)$。
+\end{itemize}
+因此，该算法的总时间复杂度为 $O(n \log n)$，空间复杂度为 $O(n)$。
+
+通过这些示例，我们可以更直观地理解时间复杂度和空间复杂度的概念。复杂度计算就像评估一辆车的性能，既要跑得快（时间复杂度低），又要省油（空间复杂度低），才能称得上是一辆好车。
+
+\chapter{线性表}
+
+\section{线性表的逻辑结构}
+线性表是一种最基本、最常用的数据结构，它的特点是数据元素之间存在一对一的线性关系。可以把它想象成排队买奶茶的队伍，每个人前后都有一个邻居，队伍的顺序非常重要。
+
+线性表的逻辑结构可以用数学形式表示为：
+$L = \{a_1, a_2, \dots, a_n\}$，其中 $a_i$ 表示线性表中的第 $i$ 个元素，$1 \leq i \leq n$。
+\textit{示例}：假设线性表存储的是一周的日程安排：
+$L = \{\text{周一}, \text{周二}, \text{周三}, \text{周四}, \text{周五}\}$。
+
+线性表的特点：
+\begin{itemize}
+    \item 有且仅有一个“第一个”元素（队伍的开头）。
+    \item 有且仅有一个“最后一个”元素（队伍的末尾）。
+    \item 除了第一个和最后一个元素外，每个元素都有一个前驱和一个后继。
+\end{itemize}
+
+\section{顺序表}
+
+\subsection{顺序表的定义}
+顺序表是一种线性表的存储结构，它使用一组地址连续的存储单元依次存储线性表中的数据元素。可以把它想象成一排整齐的书架，每本书都有固定的位置。
+
+\textit{示例}：假设我们有一个顺序表存储学生的学号：
+$L = \{1001, 1002, 1003, 1004\}$。
+在内存中，它可能被存储为：
+\begin{table}[h]
   \centering
-  \begin{tabular}{ccccccc}
-  \toprule
-    & \textcolor{structure1}{green} 
-    & \textcolor{structure2}{cyan} 
-    & \textcolor{structure3}{blue}
-    & \textcolor{structure4}{gray} 
-    & \textcolor{structure5}{black} 
-    & 主要使用的环境\\
-  \midrule
-    structure & \ccr{structure1}
-    & \ccr{structure2}
-    & \ccr{structure3} 
-    & \ccr{structure4} 
-    & \ccr{structure5} 
-    & chapter \ section \ subsection \\
-    main      & \ccr{main1}
-    & \ccr{main2}
-    & \ccr{main3}
-    & \ccr{main4}
-    & \ccr{main5}
-    & definition \ exercise \ problem \\
-    second    & \ccr{second1}
-    & \ccr{second2}
-    & \ccr{second3}
-    & \ccr{second4}
-    & \ccr{second5}
-    & theorem \ lemma \ corollary\\
-    third     & \ccr{third1}
-    & \ccr{third2}
-    & \ccr{third3}
-    & \ccr{third4}
-    & \ccr{third5}
-    & proposition\\
-  \bottomrule
+  \begin{tabular}{|c|c|c|c|c|}
+  \hline
+  \textbf{地址} & 0 & 1 & 2 & 3 \\
+  \hline
+  \textbf{数据} & 1001 & 1002 & 1003 & 1004 \\
+  \hline
   \end{tabular}
+  \caption{顺序表的存储示例}
+  \label{tab:sequence_table}
 \end{table}
-
-如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
-\begin{lstlisting}[tabsize=4]
-\definecolor{structurecolor}{RGB}{0,0,0}
-\definecolor{main}{RGB}{70,70,70}    
-\definecolor{second}{RGB}{115,45,2}    
-\definecolor{third}{RGB}{0,80,80}
-\end{lstlisting}
-
-\section{封面}
-
-\subsection{封面个性化}
-
-从 3.10 版本开始，封面更加弹性化，用户可以自行选择输出的内容，包括 \lstinline{\title} 在内的所有封面元素都可为空。目前封面的元素有
-
-\begin{table}[htbp]
-  \centering
-  \caption{封面元素信息}
-  \begin{tabular}{p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}|p{0.07\textwidth}p{0.15\textwidth}}
-    \hline
-    信息 & 命令 & 信息 & 命令 & 信息 & 命令 \\
-    \hline
-    标题 & \lstinline|\title| & 副标题 & \lstinline|\subtitle| & 作者 & \lstinline|\author| \\
-    机构 & \lstinline|\institute| & 日期 &  \lstinline|\date| & 版本 & \lstinline|\version| \\
-    箴言 & \lstinline|\extrainfo| & 封面图 & \lstinline|\cover| & 徽标 & \lstinline|\logo| \\
-    \hline
-  \end{tabular}
-\end{table}
-
-另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用 
-\begin{lstlisting}
-\bioinfo{User Name}{115520}
-\end{lstlisting}
-
-封面中间位置的色块的颜色可以使用下面命令进行修改：
-\begin{lstlisting}
-\definecolor{customcolor}{RGB}{32,178,170}
-\colorlet{coverlinecolor}{customcolor}
-\end{lstlisting}
-
-\subsection{封面图}
-
-本模板使用的封面图片来源于 \href{https://pixabay.com/en/tea-time-poetry-coffee-reading-3240766/}{pixabay.com}\footnote{感谢 China\TeX{} 提供免费图源网站，另外还推荐 \href{https://www.pexels.com/}{pexels.com}。}，图片完全免费，可用于任何场景。封面图片的尺寸为 $1280 \times 1024$, 更换图片的时候请\textbf{严格}按照封面图片尺寸进行裁剪。推荐一个免费的在线图片裁剪网站 \href{https://www.fotor.com/cn}{fotor.com}。用户 QQ 群内有一些合适尺寸的封面，欢迎取用。
-
-\subsection{徽标}
-
-本文用到的 Logo 比例为 1:1，也即正方形图片，在更换图片的时候请选择合适的图片进行替换。
-
-\subsection{自定义封面}
-
-另外，如果使用自定义的封面，比如 Adobe illustrator 或者其他软件制作的 A4 PDF 文档，请把 \lstinline{\maketitle} 注释掉，然后借助 \lstinline{pdfpages} 宏包将自制封面插入即可。如果使用 \lstinline{titlepage} 环境，也是类似。如果需要 2.x 版本的封面，请参考 \href{https://github.com/EthanDeng/etitlepage}{etitlepage}。
-
-\section{章标标题}
-
-本模板内置 2 套\textit{章标题显示风格}，包含 \lstinline{hang}（默认）与 \lstinline{display} 两种风格，区别在于章标题单行显示（\lstinline{hang}）与双行显示（\lstinline{display}），本说明使用了 \lstinline{hang}。调用方式为
-\begin{lstlisting}
-\documentclass[hang]{elegantbook} %or
-\documentclass[titlestyle=hang]{elegantbook}
-\end{lstlisting}
-
-在章标题内，章节编号默认是以数字显示，也即{\kaishu 第 1 章}，{\kaishu 第 2 章}等等，如果想要把数字改为中文，可以使用
-\begin{lstlisting}
-\documentclass[chinese]{elegantbook} %or
-\documentclass[scheme=chinese]{elegantbook}
-\end{lstlisting}
-
-\section{数学环境简介}
-
-在我们这个模板中，我们定义了两种不同的定理模式 \lstinline{mode}，包括简单模式（\lstinline{simple}）和炫彩模式（\lstinline{fancy}），默认为 \lstinline{fancy} 模式，不同模式的选择为
-\begin{lstlisting}
-\documentclass[simple]{elegantbook} %or
-\documentclass[mode=simple]{elegantbook}
-\end{lstlisting}
-
-本模板定义了四大类环境
-
+顺序表的优点：
 \begin{itemize}
-  \item \textit{定理类环境}，包含标题和内容两部分，全部定理类环境的编号均以章节编号。根据格式的不同分为 3 种
-    \begin{itemize}
-      \item \textcolor{main}{\textbf{definition}} 环境，颜色为 \textcolor{main}{main}；
-      \item \textcolor{second}{\textbf{theorem、lemma、corollary、axiom、postulate}} 环境，颜色为 \textcolor{second} {second}；
-      \item \textcolor{third}{\textbf{proposition}} 环境，颜色为 \textcolor{third}{third}。
-    \end{itemize}
-  \item \textit{示例类环境}，有 \textbf{example、problem、exercise} 环境（对应于例、例题、练习），自动编号，编号以章节为单位，其中 \textbf{exercise} 有提示符。
-  \item \textit{提示类环境}，有 \textbf{note} 环境，特点是：无编号，有引导符。
-  \item \textit{结论类环境}，有 \textbf{conclusion、assumption、property、remark、solution} 环境\footnote{本模板还添加了一个 \lstinline|result| 选项，用于隐藏 \lstinline{solution} 和 \lstinline{proof} 环境，默认为显示（\lstinline{result=answer}），隐藏使用 \lstinline{result=noanswer}。}，三者均以粗体的引导词为开头，和普通段落格式一致。
+    \item 支持随机访问，可以通过下标快速访问任意元素，时间复杂度为 $O(1)$。
+    \item 存储结构简单，容易实现。
 \end{itemize}
 
-其中，定理类环境均有带星号的版本：\textcolor{main}{\textbf{definition*}}、\textcolor{second}{\textbf{theorem*}}、\textcolor{second}{\textbf{lemma*}}、\textcolor{second}{\textbf{corollary*}}、\textcolor{second}{\textbf{axiom*}}、\textcolor{second}{\textbf{postulate*}}、\textcolor{third}{\textbf{proposition*}}，带星号的定理类环境不会编号。
-
-\subsection{定理类环境的使用}
-
-\subsubsection{\texttt{fancy} 模式}
-
-在 \lstinline{fancy} 模式下使用了 \lstinline{tcolorbox} 宏包来定制定理类环境，所以和普通的定理环境的使用有些许区别，有编号定理的使用方法如下：
-
-\begin{lstlisting}
-% 有名字，有标签
-\begin{theorem}{theorem name}{label}
-  这是一个有名字和标签的定理。
-  用 \ref{thm:label} 来引用这个定理。
-\end{theorem}
-% 无名字，有标签
-\begin{theorem}{}{label no name}
-  这是一个没有名字但是有标签的定理。
-  用 \ref{thm:label no name} 来引用这个定理。
-\end{theorem}
-% 有名字，无标签
-\begin{theorem}{theorem name}{}
-  这是一个有名字但是没有标签的定理。
-  这个定理不能被引用。
-  最后的 {} 可以省略不写。
-\end{theorem}
-% 无名字，无标签
-\begin{theorem}{}{}
-  这是一个没有名字也没有标签的定理。
-  这个定理不能被引用。
-  两个 {} 均可以省略不写。
-\end{theorem}
-\end{lstlisting}
-
-第一个选项 \lstinline{theorem name} 是定理的名字，如果定理没有名字请使用 \lstinline|{}|\cprotect\footnote{除非这个定理也没有标签，否则不能省略。}。第二个选项 \lstinline{label} 是交叉引用时所用到的标签，如果定理没有标签，可以不写 \lstinline|{label}| 或使用 \lstinline|{}|。交叉引用的方法为 \lstinline|\ref{thm:label}|。请注意，交叉引用时必须加上前缀 \lstinline{thm:}。其他相同用法的定理类环境见表 \ref{tab:theorem-class}。
-
-不编号的定理使用方法如下：
-
-\begin{lstlisting}
-% 有名字
-\begin{theorem*}{theorem name}
-  这是一个不编号的有名字的定理。
-  这个定理不能被引用。
-\end{theorem*}
-% 无名字
-\begin{theorem*}{}
-  这是一个不编号且没有名字的定理。
-  最后的 {} 可以省略不写。
-  这个定理不能被引用。
-\end{theorem*}
-\end{lstlisting}
-其中的选项 \lstinline{theorem name} 是定理的名字，如果没有名字可以不写 \lstinline|{theorem name}| 或使用 \lstinline|{}|
-
-\begin{table}[htbp]
-  \centering
-  \caption{定理类环境}
-    \begin{tabular}{llll}
-    \toprule
-    环境名 & 标签名 & 前缀 & 交叉引用 \\
-    \midrule
-    definition & label & def   & \lstinline|\ref{def:label}| \\
-    theorem & label & thm   & \lstinline|\ref{thm:label}| \\
-    postulate & label & pos & \lstinline|\ref{pos:label}| \\
-    axiom & label & axi & \lstinline|\ref{axi:label}|\\
-    lemma & label & lem   & \lstinline|\ref{lem:label}| \\
-    corollary & label & cor   & \lstinline|\ref{cor:label}| \\
-    proposition & label & pro   & \lstinline|\ref{pro:label}| \\
-    \bottomrule
-    \end{tabular}%
-  \label{tab:theorem-class}%
-\end{table}%
-
-在用户多次反馈下，在 4.1 版本引入了原生定理的支持方式，使用方法如下：
-
-\begin{lstlisting}
-% 有名字，有标签
-\begin{theorem}[theorem name]\label{thm:label}
-  这是一个有名字和标签的定理。
-  用 \ref{thm:label} 来引用这个定理。
-\end{theorem}
-% 无名字，有标签
-\begin{theorem}\label{thm:label no name}
-  这是一个没有名字但是有标签的定理。
-  用 \ref{thm:label no name} 来引用这个定理。
-\end{theorem}
-% 有名字，无标签
-\begin{theorem}[theorem name]
-  这是一个有名字但是没有标签的定理。
-  这个定理不能被引用。
-\end{theorem}
-% 无名字，无标签
-\begin{theorem}
-  这是一个没有名字也没有标签的定理。
-  这个定理不能被引用。
-\end{theorem}
-\end{lstlisting}
-这时引用不需要加前缀，\lstinline{\ref} 中的内容与 \lstinline{\label} 中的内容相同，换句话说，这时的使用方法与使用原生定理环境的时候几乎相同。
-
-\subsubsection{\texttt{simple} 模式}
-
-在 \lstinline{simple} 模式下使用了 \lstinline{amsthm} 宏包，定理类环境使用方法与原生一致，定理的使用方法如下：
-
-\begin{lstlisting}
-% 有名字，有标签
-\begin{theorem}[theorem name]\label{thm:label}
-  这是一个有名字和标签的定理。
-  用 \ref{thm:label} 来引用这个定理。
-\end{theorem}
-% 无名字，有标签
-\begin{theorem}\label{thm:label no name}
-  这是一个没有名字但是有标签的定理。
-  用 \ref{thm:label no name} 来引用这个定理。
-\end{theorem}
-% 有名字，无标签
-\begin{theorem}[theorem name]
-  这是一个有名字但是没有标签的定理。
-  这个定理不能被引用。
-\end{theorem}
-% 无名字，无标签
-\begin{theorem}
-  这是一个没有名字也没有标签的定理。
-  这个定理不能被引用。
-\end{theorem}
-\end{lstlisting}
-
-% \subsection{算法环境}
-
-% \begin{algorithm}\label{alg:test}
-%   \Input{A bitmap $I$ of size $w \times l$}
-%   \Output{A partition of the bitmap}
-%   \BlankLine
-%   \emph{special treatment of the first line}\;
-%   \For{$i \leftarrow 2$ \KwTo $l$}{
-%     \emph{special treatment of the first element of line $i$}\;
-%     \For{$j \leftarrow 2$ \KwTo $w$}{\label{forins}
-%       $\Left \leftarrow \FindCompress{$I[i,j-1]$}$\;
-%       $\Up \leftarrow \FindCompress{$I[i-1,]$}$\;
-%       $\This \leftarrow \FindCompress{$I[i,j]$}$\;
-%       \If(\tcp*[h]{O(\Left,\This)==1}){\Left compatible with \This}{\label{lt}
-%         \lIf{$\Left < \This$}{$\Union{\Left,\This}$}
-%         \lElse{$\Union{\This,\Left}$}
-%       }
-%       \If(\tcp*[f]{O(\Up,\This)==1}){\Up compatible with \This}{\label{ut}
-%         \lIf{$\Up < \This$}{$\Union{\Up,\This}$}
-%         \tcp{\This is put under \Up to keep tree as flat as possible}\label{cmt}
-%         \lElse{$\Union{\This,\Up}$}\tcp*[r]{\This{} linked to \Up}\label{lelse}
-%       }
-%     }
-%     \lForEach{element $e$ of the line $i$}{\FindCompress{p}}
-%   }
-%   \caption{disjoint decomposition}\label{algo_disjdecomp}
-% \end{algorithm}
-
-
-\subsection{修改计数器}
-
-当前定理等环境计数器按章计数，如果想修改定理类环境按节计数，可以修改计数器选项 \lstinline{thmcnt}，可用选项为 \lstinline{chapter} （默认）与 \lstinline{section}：
-
-\begin{lstlisting}
-\documentclass[section]{elegantbook} %or
-\documentclass[thmcnt=section]{elegantbook}
-\end{lstlisting}
-
-如果希望全局的定理类环境使用同一个计数器，可以使用文档类选项 \lstinline{usesamecnt}：
-
-\begin{lstlisting}
-  \documentclass[usesamecnt]{elegantbook}
-\end{lstlisting}
-
-\subsection{自定义定理类环境}
-
-4.4 版本新增了一个自定义定理类环境的命令：\lstinline|\elegantnewtheorem|，它的参数含义如下：
-
-\begin{lstlisting}
-% fancy 模式（默认）
-\elegantnewtheorem{env}{title}{style}{prefix}[numbered-like]
-% simple 模式
-\elegantnewtheorem{env}{title}{style}[numbered-like]
-\end{lstlisting}
-该命令可以同时定义编号环境 \lstinline|env| 和不编号环境 \lstinline|env*|。
-
-其中 \lstinline|style| 支持的参数有：\lstinline|defstyle|，\lstinline|thmstyle|，\lstinline|prostyle|，分别对应“定义”，“定理”，“命题”三种样式。
-
-如果添加了可选参数 \lstinline{numbered-like}，将会使该定理类环境与名为 \lstinline{numbered-like} 的定理类环境使用同一计数器。\textbf{注意}：该参数在使用 \lstinline{usesamecnt} 选项时不起作用，并且会在终端以及 \lstinline{.log} 文件中输出一个警告，来提示用户该选项不起作用：
-
-\begin{lstlisting}
-  [numbered-like] won't make sence with option
-  `usesamecnt'.
-\end{lstlisting}
-
+顺序表的缺点：
 \begin{itemize}
-  \item 在炫彩模式（\lstinline{fancy}）下，需要 5 个参数来定义一个新的定理类环境，分别是：
-  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
-
-\begin{lstlisting}
-% 导言区
-\elegantnewtheorem{examplefancy}{自定义定理类环境}{thmstyle}{exfancy}
-% 正文
-\begin{examplefancy}{定理名}{label}
-  这里是自定义定理类环境 \ref{exfancy:label}
-\end{examplefancy}
-\begin{examplefancy*}{定理名}
-  这里是无编号自定义定理类环境
-\end{examplefancy*}
-\end{lstlisting}
-
-  如果不给出第四个参数，或第四个参数置空的话，将会用定理类环境名来作为默认前缀，即
-\begin{lstlisting}
-% 导言区
-\elegantnewtheorem{test}{TEST}{thmstyle}
-% 或
-\elegantnewtheorem{test}{TEST}{thmstyle}{}
-% 正文
-\begin{test}{name}{label}
-  默认前缀为 test。
-  使用 \ref{test:label} 来引用这个定理类环境。
-\end{test}
-\end{lstlisting}
-
-这时会在终端以及 \verb|.log| 文件中输出一个警告信息来提示用户没有定义前缀：
-
-\begin{lstlisting}[language=bash]
-Class elegantbook Warning: Because you didn't provide a prefix. 
-(elegantbook)              We use test as the default prefix. 
-(elegantbook)              You have to use 
-(elegantbook)              \ref {test:label} to refer a 
-(elegantbook)              \begin {test}{name}{label} environment. 
-(elegantbook)               on input line 3.
-\end{lstlisting}
-
-  \item 在简单模式（\lstinline{simple}）下，需要 4 个参数来定义一个新的定理类环境，分别是：
-  定理类环境名，定理类环境的标题，定理类环境的样式，该定理类环境的前缀，（可选）该定理类环境继承的定理类环境：
-\begin{lstlisting}
-% 导言区
-\elegantnewtheorem{examplesimple}{自定义定理类环境}{thmstyle}
-% 正文
-\begin{examplesimple}[定理名]\label{exsimple:label}
-  这里是自定义定理类环境 \ref{exsimple:label}
-\end{examplesimple}
-\begin{examplesimple*}[定理名]
-  这里是无编号自定义定理类环境
-\end{examplesimple*}
-\end{lstlisting}
-
-  如果此时错误地给出了第四个参数，那么将会在终端以及 \verb|.log| 文件中输出一个错误信息：
-\begin{lstlisting}
-% elegantbook-cn.tex
-\elegantnewtheorem{test}{TEST}{thmstyle}{}
-% .log file
-./elegantbook-cn.tex:3: Class elegantbook Error: You can't set a prefix in mode ``simple''.
-(elegantbook)              Just use 
-(elegantbook)              \elegantnewtheorem {test}{TEST}{thmstyle} .
-\end{lstlisting}
-
+    \item 插入和删除操作效率较低，时间复杂度为 $O(n)$。
+    \item 需要连续的存储空间，可能导致内存浪费或溢出。
 \end{itemize}
 
-\subsection{其他环境的使用}
+\subsection{顺序表的操作}
+顺序表的基本操作包括插入、删除、查找和更新。以下是每种操作的详细说明：
 
-其他三种环境没有选项，可以直接使用，比如 \lstinline{example} 环境的使用方法与效果：
-\begin{lstlisting}
-\begin{example}
-   This is the content of example environment.
-\end{example}
-\end{lstlisting}
+\textbf{创建操作}:
+创建一个空的顺序表，需要预先分配一定的存储空间。然后根据实际需求逐个插入元素。
+代码如代码\ref{lst:create_list}所示：
+\begin{lstlisting}[language=C++, caption={顺序表的创建示例代码}, label={lst:create_list}]
+  #include <stdio.h>
+  #include <stdlib.h>
+  #define MAXSIZE 100
 
-这几个都是同一类环境，区别在于
+  typedef struct {//C语言方式
+    int data[MAXSIZE];
+    int length;
+  }SqList;
 
-\begin{itemize}
-  \item 示例环境（example）、练习（exercise）与例题（problem）章节自动编号；
-  \item 注意（note），练习（exercise）环境有提醒引导符；
-  \item 结论（conclusion）等环境都是普通段落环境，引导词加粗。
-\end{itemize}
-
-\section{列表环境}
-本模板借助于 \lstinline{tikz} 定制了 \lstinline{itemize} 和 \lstinline{enumerate} 环境，其中 \lstinline{itemize} 环境修改了 3 层嵌套，而 \lstinline{enumerate} 环境修改了 4 层嵌套（仅改变颜色）。示例如下\\[2ex]
-\begin{minipage}[b]{0.49\textwidth}
-  \begin{itemize}
-    \item first item of nesti;
-    \item second item of nesti;
-      \begin{itemize}
-        \item first item of nestii;
-        \item second item of nestii;
-        \begin{itemize}
-          \item first item of nestiii;
-          \item second item of nestiii.
-        \end{itemize}   
-      \end{itemize}
-  \end{itemize}
-\end{minipage}
-\begin{minipage}[b]{0.49\textwidth}
-  \begin{enumerate}
-    \item first item of nesti;
-    \item second item of nesti;
-      \begin{enumerate}
-        \item first item of nestii;
-        \item second item of nestii;
-        \begin{enumerate}
-          \item first item of nestiii;
-          \item second item of nestiii.
-        \end{enumerate}   
-      \end{enumerate}
-  \end{enumerate}
-\end{minipage}
-
-\section{参考文献}
-
-\subsection{打印文献}
-
-之前我们将文献调用的命令放在模板里面，然后用户反馈 \lstinline{\cite} 命令无法自动补全，因此我们新版本将其拿到外面来，新版本打印参考文献的命令的方法是，在导言区（也即 \lstinline|\begin{document}| 之前），加入：
-
-\begin{lstlisting}
-  \addbibresource[location=local]{reference.bib}
-\end{lstlisting}
-
-然后再需要打印文献的地方使用：
-\begin{lstlisting}
-  \printbibliography[heading=bibintoc, title=\ebibname]
-\end{lstlisting}
-
-其中 \lstinline{reference.bib} 为参考文献存放的文件，需要放在项目文件夹下。
-
-\subsection{修改文献格式}
-
-此外，本模板调用了 biblatex 宏包，并提供了 biber（默认） 和 bibtex 两个后端选项，可以使用 \lstinline{bibend} 进行修改：
-
-\begin{lstlisting}
-  \documentclass[bibtex]{elegantbook}
-  \documentclass[bibend=bibtex]{elegantbook}
-\end{lstlisting}
-
-关于文献条目（bib item），你可以在谷歌学术，Mendeley，Endnote 中取，然后把它们添加到 \lstinline{reference.bib} 中。在文中引用的时候，引用它们的键值（bib key）即可。
-
-为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），参考文献示例：\cite{cn1,en2,en3} 使用了中国一个大型的 P2P 平台（人人贷）的数据来检验男性投资者和女性投资者在投资表现上是否有显著差异。
-
-如果需要设置为国标 GB7714-2015，需要使用：
-\begin{lstlisting}
-  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
-\end{lstlisting}
-
-在使用
-\begin{lstlisting}
-  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
-\end{lstlisting}
-后，排序方式为按引用先后排序。如果不使用国标 GB7714-2015 并且需要添加排序方式，可以在导言区加入下面命令：
-\begin{lstlisting}
-  \ExecuteBibliographyOptions{sorting=<name>}
-\end{lstlisting}
-其中 \lstinline{<name>} 可以是 nty, nyt, nyvt, anyt, anyvt, ynt, ydnt, none, count, debug 的其中之一，更多排序相关请参考 biblatex 宏包手册的 3.1.2.1 节。
-
-
-\section{添加序章}
-
-如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用 
-\begin{lstlisting}
-\chapter*{Introduction}
-\markboth{Introduction}{Introduction}
-The content of introduction.
-\end{lstlisting}
-
-\section{目录选项与深度}
-本模板添加了一个目录选项 \lstinline{toc}，可以设置目录为单栏（\lstinline{onecol}）和双栏（\lstinline{twocol}）显示，比如双栏显示可以使用
-\begin{lstlisting}
-\documentclass[twocol]{elegantbook}
-\documentclass[toc=twocol]{elegantbook}
-\end{lstlisting}
-
-默认本模板目录深度为 1，你可以在导言区使用
-\begin{lstlisting}
-\setcounter{tocdepth}{2}
-\end{lstlisting}
-将其修改为 2 级目录（章与节）显示。
-
-
-\section{章节摘要}
-模板新增了一个章节摘要环境（introduction），使用示例
-\begin{lstlisting}
-\begin{introduction}
-  \item Definition of Theorem
-  \item Ask for help
-  \item Optimization Problem
-  \item Property of Cauchy Series
-  \item Angle of Corner
-\end{introduction}
-\end{lstlisting}
-效果如下：
-\begin{introduction}
-  \item Definition of Theorem
-  \item Ask for help
-  \item Optimization Problem
-  \item Property of Cauchy Series
-  \item Angle of Corner
-\end{introduction}
-
-环境的标题文字可以通过这个环境的可选参数进行修改，修改方法为：
-\begin{lstlisting}
-\begin{introduction}[Brief Introduction]
-...
-\end{introduction}
-\end{lstlisting}
-
-\section{章后习题}
-前面我们介绍了例题和练习两个环境，这里我们再加一个，章后习题（\lstinline{problemset}）环境，用于在每一章结尾，显示本章的练习。使用方法如下
-
-\begin{lstlisting}
-\begin{problemset}
-  \item exercise 1
-  \item exercise 2
-  \item exercise 3
-\end{problemset}
-\end{lstlisting}
-
-
-效果如下：
-\begin{problemset}[我的题目]
-  \item exercise 1
-  \item exercise 2
-  \item exercise 3
-  \item 测试数学公式
-  \begin{equation}
-    a^2+b^2=c_{2_{i}} (1,2) [1,23]
-  \end{equation}
-\end{problemset}
-
-\begin{remark}
-如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
-\end{remark}
-
-\begin{solution}
-如果你想把 \lstinline{problemset} 环境的标题改为其他文字，你可以类似于 introduction 环境修改 problemset 的可选参数。另外，目前这个环境会自动出现在目录中，但是不会出现在页眉页脚信息中（待解决）。
-\end{solution}
-
-\section{旁注}
-
-在 3.08 版本中，我们引入了 旁注设置选项 \lstinline{marginpar=margintrue} 以及测试命令 \lstinline{\elegantpar} ，但是由此带来一堆问题。我们决定在 3.09 版本中将其删除，并且，在旁注命令得到大幅度优化之前，不会将此命令再次引入书籍模板中。对此造成各位用户的不方便，非常抱歉！不过我们保留了 \lstinline{marginpar} 这个选项，你可以使用 \lstinline{marginpar=margintrue} 获得保留右侧旁注的版面设计。然后使用系统自带的 \lstinline{\marginpar} 或者 \lstinline{marginnote} 宏包的 \lstinline{\marginnote} 命令。
-
-\begin{remark}
-在使用旁注的时候，需要注意的是，文本和公式可以直接在旁注中使用。
-
-\begin{lstlisting}
-% text
-\marginpar{margin paragraph text}
-
-% equation
-\marginpar{
-  \begin{equation}
-    a^2 + b^2 = c^2
-  \end{equation}
-}
-\end{lstlisting}
-
-但是浮动体（表格、图片）需要注意，不能用浮动体环境，需要使用直接插图命令或者表格命令环境。然后使用 \lstinline{\captionof} 为其设置标题。为了得到居中的图表，可以使用 \lstinline{\centerline} 命令或者 \lstinline{center} 环境。更多详情请参考：\href{https://tex.stackexchange.com/questions/5583/caption-of-figure-in-marginpar-and-caption-of-wrapfigure-in-margin}{Caption of Figure in Marginpar}。
-
-\begin{lstlisting}
-% graph with centerline command
-\marginpar{
-  \centerline{
-    \includegraphics[width=0.2\textwidth]{logo.png}
+  struct SqList {//c++方式，个人推荐这种方式，简单
+    int data[MAXSIZE];
+    int length;
+  };
+  SqList* createList(int length) {//传入要创建的顺序表的长度
+    SqList* L = (SqList*)malloc(sizeof(SqList) * length);//分配存放线性表的空间
+    int data;
+    for (int i = 0; i < length; i++)
+    {
+      printf("请输入第%d个元素", i);
+      scanf("%d", &L->data[i]);
+    }
+    L->length = length;
+    return L;
   }
-  \captionof{figure}{your figure caption}
-}
+  \end{lstlisting}
 
-% graph with center environment
-\marginpar{
-  \begin{center}
-    \includegraphics[width=0.2\textwidth]{logo.png}
-    \captionof{figure}{your figure caption}
-  \end{center}
-}
-\end{lstlisting}
+时间复杂度为$O(n)$。很明显，这个操作用到了单层循环，所以时间复杂度为$O(n)$，
 
-\end{remark}
+空间复杂度为$O(n)$。这里用到了一个数组，数组的长度为n，所以空间复杂度为$O(n)$。
 
-\chapter{字体选项}
-字体选项独立成章的原因是，我们希望本模板的用户关心模板使用的字体，知晓自己使用的字体以及遇到字体相关的问题能更加便捷地找到答案。
-
-\textcolor{red}{\bfseries 重要提示}：从 3.10 版本更新之后，沿用至今的 newtx 系列字体被重新更改为 cm 字体。并且新增中文字体（\lstinline{chinesefont}）选项。
-
-\section{数学字体选项}
-
-本模板定义了一个数学字体选项（\lstinline{math}），可选项有三个：
-\begin{enumerate}
-  \item \lstinline{math=cm}（默认），使用 \LaTeX{} 默认数学字体（推荐，无需声明）；
-  \item \lstinline{math=newtx}，使用 \lstinline{newtxmath} 设置数学字体（潜在问题比较多）。
-  \item \lstinline{math=mtpro2}，使用 \lstinline{mtpro2} 宏包设置数学字体，要求用户已经成功安装此宏包。
-\end{enumerate}
-
-\section{使用 newtx 系列字体}
-
-如果需要使用原先版本的 \lstinline{newtx} 系列字体，可以通过显示声明数学字体：
-
-\begin{lstlisting}
-\documentclass[math=newtx]{elegantbook}
-\end{lstlisting}
-
-\subsection{连字符}
-
-如果使用 \lstinline{newtx} 系列字体宏包，需要注意下连字符的问题。
-\begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f} \sin x
-\end{equation}
-的代码为
-\begin{lstlisting}
-\begin{equation}
-  \int_{R^q} f(x,y) dy.\emph{of\kern0pt f} \sin x
-\end{equation}
-\end{lstlisting}
-
-\subsection{宏包冲突}
-
-另外在 3.08 版本中，有用户反馈模板在和 \lstinline{yhmath} 以及 \lstinline{esvect} 等宏包搭配使用的时候会出现报错：
-\begin{lstlisting}
-LaTeX Error:
-   Too many symbol fonts declared.
-\end{lstlisting}
-
-原因是在使用 \lstinline{newtxmath} 宏包时，重新定义了数学字体用于大型操作符，达到了 {\heiti 最多 16 个数学字体} 的上限，在调用其他宏包的时候，无法新增数学字体。为了减少调用非常用宏包，在此给出如何调用 \lstinline{yhmath} 以及 \lstinline{esvect} 宏包的方法。
-
-请在 \lstinline{elegantbook.cls} 内搜索 \lstinline{yhmath} 或者 \lstinline{esvect}，将你所需要的宏包加载语句\textit{取消注释}即可。
-\begin{lstlisting}
-%%% use yhmath pkg, uncomment following code
-% \let\oldwidering\widering
-% \let\widering\undefined
-% \RequirePackage{yhmath}
-% \let\widering\oldwidering
-
-%%% use esvect pkg, uncomment following code
-% \RequirePackage{esvect}
-\end{lstlisting}
-
-\section{中文字体选项}
-模板从 3.10 版本提供中文字体选项 \lstinline{chinesefont}，可选项有
-\begin{enumerate}
-\item \lstinline{ctexfont}：默认选项，使用 \lstinline{ctex} 宏包根据系统自行选择字体，可能存在字体缺失的问题，更多内容参考 \lstinline{ctex} 宏包\href{https://ctan.org/pkg/ctex}{官方文档}\footnote{可以使用命令提示符，输入 \lstinline{texdoc ctex} 调出本地 \lstinline{ctex} 宏包文档}。
-\item \lstinline{founder}：方正字体选项（\textbf{需要安装方正字体}），后台调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，然后设置字体为方正四款免费字体，方正字体下载注意事项见后文，用户只需要安装方正字体即可使用该选项。
-\item \lstinline{nofont}：后台会调用 \lstinline{ctex} 宏包并且使用 \lstinline{fontset=none} 选项，不设定中文字体，用户可以自行设置中文字体，具体见后文。
-\end{enumerate}
-
-\subsection{方正字体选项}
-由于使用 \lstinline{ctex} 宏包默认调用系统已有的字体，部分系统字体缺失严重，因此，用户希望能够使用其它字体，我们推荐使用方正字体。方正的{\songti 方正书宋}、{\heiti 方正黑体}、{\kaishu 方正楷体}、{\fangsong 方正仿宋}四款字体均可免费试用，且可用于商业用途。用户可以自行从\href{http://www.foundertype.com/}{方正字体官网}下载此四款字体，在下载的时候请\textbf{务必}注意选择 GBK 字符集，也可以使用 \href{https://www.latexstudio.net/}{\LaTeX{} 工作室}提供的\href{https://pan.baidu.com/s/1BgbQM7LoinY7m8yeP25Y7Q}{方正字体，提取码为：njy9} 进行安装。安装时，{\kaishu Win 10 用户请右键选择为全部用户安装，否则会找不到字体。}
-
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.9\textwidth]{founder.png}
-\end{figure}
-
-\subsection{其他中文字体}
-如果你想完全自定义字体\footnote{这里仍然以方正字体为例。}，你可以选择 \lstinline{chinesefont=nofont}，然后在导言区设置
-\begin{lstlisting}
-\setCJKmainfont[BoldFont={FZHei-B01},ItalicFont={FZKai-Z03}]{FZShuSong-Z01}
-\setCJKsansfont[BoldFont={FZHei-B01}]{FZKai-Z03}
-\setCJKmonofont[BoldFont={FZHei-B01}]{FZFangSong-Z02}
-\setCJKfamilyfont{zhsong}{FZShuSong-Z01}
-\setCJKfamilyfont{zhhei}{FZHei-B01}
-\setCJKfamilyfont{zhkai}[BoldFont={FZHei-B01}]{FZKai-Z03}
-\setCJKfamilyfont{zhfs}[BoldFont={FZHei-B01}]{FZFangSong-Z02}
-\newcommand*{\songti}{\CJKfamily{zhsong}}
-\newcommand*{\heiti}{\CJKfamily{zhhei}}
-\newcommand*{\kaishu}{\CJKfamily{zhkai}}
-\newcommand*{\fangsong}{\CJKfamily{zhfs}}
-\end{lstlisting}
-
-\chapter{ElegantBook 写作示例}
-
-\begin{introduction}
-  \item 积分定义~\ref{def:int}
-  \item Fubini 定理~\ref{thm:fubi}
-  \item 最优性原理~\ref{pro:max}
-  \item 柯西列性质~\ref{property:cauchy}
-  \item 韦达定理
-\end{introduction}
-
-\section{Lebesgue 积分}
-在前面各章做了必要的准备后，本章开始介绍新的积分。在 Lebesgue 测度理论的基础上建立了 Lebesgue 积分，其被积函数和积分域更一般，可以对有界函数和无界函数统一处理。正是由于 Lebesgue 积分的这些特点，使得 Lebesgue 积分比 Riemann 积分具有在更一般条件下的极限定理和累次积分交换积分顺序的定理，这使得 Lebesgue 积分不仅在理论上更完善，而且在计算上更灵活有效。
-
-Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非负简单函数，非负可测函数和一般可测函数积分的方式。
-
-由于现代数学的许多分支如概率论、泛函分析、调和分析等常常用到一般空间上的测度与积分理论，在本章最后一节将介绍一般的测度空间上的积分。
-
-\subsection{积分的定义}
-
-我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
-
-\begin{definition}[可积性] \label{def:int} 
-设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的\textbf{非负简单函数}，中文其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
-\begin{equation}
-   \label{inter}
-   \int_{E} f dx = \sum_{i=1}^k a_i m(A_i) \pi \alpha\beta\sigma\gamma\nu\xi\epsilon\varepsilon. \oint_{a}^b\ointop_{a}^b\prod_{i=1}^n
-\end{equation}
-一般情况下 $0 \leq \int_{E} f dx \leq \infty$。若 $\int_{E} f dx < \infty$，则称 $f$ 在 $E$ 上可积。
-\end{definition}
-
-一个自然的问题是，Lebesgue 积分与我们所熟悉的 Riemann 积分有什么联系和区别？在 4.4 在我们将详细讨论 Riemann 积分与 Lebesgue 积分的关系。这里只看一个简单的例子。设 $D(x)$ 是区间 $[0,1]$ 上的 Dirichlet 函数。即 $D(x)=\chi_{Q_0}(x)$，其中 $Q_0$ 表示 $[0,1]$ 中的有理数的全体。根据非负简单函数积分的定义，$D(x)$ 在 $[0,1]$ 上的 Lebesgue 积分为
-\begin{equation}
-   \label{inter2}
-   \int_0^1 D(x)dx = \int_0^1 \chi_{Q_0} (x) dx = m(Q_0) = 0
-\end{equation}
-即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
+\textbf{插入操作}：
+在顺序表的第 $i$ 个位置插入一个新元素，需要将第 $i$ 个位置及其后的所有元素向后移动一位。
+\textit{示例}：在 $L = \{1001, 1002, 1003, 1004\}$ 的第 2 个位置插入 $1005$，结果为：
+$L = \{1001, 1005, 1002, 1003, 1004\}$。代码如代码\ref{lst:insert_list}所示：
+\begin{lstlisting}[language=C++, caption={顺序表的插入示例代码}, label={lst:insert_list}]
+  void insertList(SqList* L, int i, int data) {//传入要插入的顺序表，要插入的位置，要插入的数据
+    if (i < 0 || i > L->length) {
+      printf("插入位置不合法");
+      return;
+    }
+    for (int j = L->length; j > i; j--)
+    {
+      L->data[j] = L->data[j - 1];
+    }
+    L->data[i] = data;
+    L->length++;
+  }
+  \end{lstlisting}
+时间复杂度为$O(n)$。很明显，这个操作用到了单层循环，所以时间复杂度为$O(n)$，
+空间复杂度为$O(1)$。这里只用到了几个变量，所以空间复杂度为$O(1)$。
 
 
-有界变差函数是与单调函数有密切联系的一类函数。有界变差函数可以表示为两个单调递增函数之差。与单调函数一样，有界变差函数几乎处处可导。与单调函数不同，有界变差函数类对线性运算是封闭的，它们构成一线空间。练习题 \ref{exer:43} 是一个性质的证明。
 
-\begin{exercise}\label{exer:43}
-设 $f \notin\in L(\mathcal{R}^1)$，$g$ 是 $\mathcal{R}^1$ 上的有界可测函数。证明函数
-\begin{equation}
-   \label{ex:1}
-   I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
-\end{equation}
-是 $\mathcal{R}^1$ 上的连续函数。 
-\end{exercise}
+\textbf{删除操作}：
+删除顺序表的第 $i$ 个元素，需要将第 $i+1$ 个位置及其后的所有元素向前移动一位。
+\textit{示例}：从 $L = \{1001, 1002, 1003, 1004\}$ 中删除第 3 个元素，结果为：
+$L = \{1001, 1002, 1004\}$。代码如代码\ref{lst:delete_list}所示：
+\begin{lstlisting}[language=C++, caption={顺序表的删除示例代码}, label={lst:delete_list}]
+  void deleteList(SqList* L, int i) {//传入要删除的顺序表，要删除的位置
+    if (i < 0 || i >= L->length) {
+      printf("删除位置不合法");
+      return;
+    }
+    for (int j = i; j < L->length - 1; j++)
+    {
+      L->data[j] = L->data[j + 1];
+    }
+    L->length--;
+  }
+  \end{lstlisting}
+时间复杂度为$O(n)$。很明显，这个操作用到了单层循环，所以时间复杂度为$O(n)$，
+空间复杂度为$O(1)$。这里只用到了几个变量，所以空间复杂度为$O(1)$。
 
-\begin{solution}
-即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-\end{solution}
+\textbf{查找操作}：
+根据元素的值查找其在顺序表中的位置，时间复杂度为 $O(n)$。
+\textit{示例}：在 $L = \{1001, 1002, 1003, 1004\}$ 中查找 $1003$，结果为位置 3。
+代码如代码\ref{lst:search_list}所示：
+\begin{lstlisting}[language=C++, caption={顺序表的查找示例代码}, label={lst:search_list}]
+  int searchList(SqList* L, int data) {//传入要查找的顺序表，要查找的数据
+    for (int i = 0; i < L->length; i++)
+    {
+      if (L->data[i] == data) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  \end{lstlisting}
+时间复杂度为$O(n)$。很明显，这个操作用到了单层循环，所以时间复杂度为$O(n)$，
+空间复杂度为$O(1)$。这里只用到了几个变量，所以空间复杂度为$O(1)$。
 
-\begin{proof}
-即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
-\end{proof}
+\textbf{更新操作}：
+将顺序表中第 $i$ 个位置的元素更新为新的值。
+\textit{示例}：将 $L = \{1001, 1002, 1003, 1004\}$ 中第 2 个元素更新为 $2002$，结果为：
+$L = \{1001, 2002, 1003, 1004\}$。
+代码如代码\ref{lst:update_list}所示：
+\begin{lstlisting}[language=C++, caption={顺序表的更新示例代码}, label={lst:update_list}]
+  void updateList(SqList* L, int i, int data) {//传入要更新的顺序表，要更新的位置，要更新的数据
+    if (i < 0 || i >= L->length) {
+      printf("更新位置不合法");
+      return;
+    }
+    L->data[i] = data;
+  }
+  \end{lstlisting}
+时间复杂度为$O(1)$。很明显，这个操作只用到了一次赋值操作，所以时间复杂度为$O(1)$，
+空间复杂度为$O(1)$。这里只用到了几个变量，所以空间复杂度为$O(1)$。
 
-\begin{theorem}[Fubini 定理] \label{thm:fubi} 
-（1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
-\begin{equation}
-   \label{eq:461}
-   \int_{\mathcal{R}^p\times\mathcal{R}^q} f(x,y) dxdy=\int_{\mathcal{R}^p}\left(\int_{\mathcal{R}^q}f(x,y)dy\right)dx.
-\end{equation}
+\section{链表}
 
-（2）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的可积函数，则对几乎处处的 $x\in\mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的可积函数，并且 $g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的可积函数。而且~\eqref{eq:461} 成立。
-\end{theorem}
+\subsection{链表的定义}
+链表是一种线性表的存储结构，它使用一组任意的存储单元存储数据元素，并通过指针将这些存储单元连接起来。可以把它想象成一串珍珠项链，每颗珍珠（数据元素）通过线（指针）连接在一起。
 
-\begin{note}
-在本模板中，引理（lemma），推论（corollary）的样式和定理~\ref{thm:fubi} 的样式一致，包括颜色，仅仅只有计数器的设置不一样。
-\end{note}
+链表的优点：
+\begin{itemize}
+    \item 插入和删除操作效率高，时间复杂度为 $O(1)$。
+    \item 不需要连续的存储空间，内存利用率高。
+\end{itemize}
 
-我们说一个实变或者复变量的实值或者复值函数是在区间上平方可积的，如果其绝对值的平方在该区间上的积分是有限的。所有在勒贝格积分意义下平方可积的可测函数构成一个希尔伯特空间，也就是所谓的 $L^2$ 空间，几乎处处相等的函数归为同一等价类。形式上，$L^2$ 是平方可积函数的空间和几乎处处为 0 的函数空间的商空间。
+链表的缺点：
+\begin{itemize}
+    \item 不支持随机访问，查找效率较低，时间复杂度为 $O(n)$。
+    \item 需要额外的存储空间存储指针。
+\end{itemize}
 
-\begin{proposition}[最优性原理] \label{pro:max}
-如果 $u^*$ 在 $[s,T]$ 上为最优解，则 $u^*$ 在 $[s, T]$ 任意子区间都是最优解，假设区间为 $[t_0, t_1]$ 的最优解为 $u^*$ ，则 $u(t_0)=u^{*}(t_0)$，即初始条件必须还是在 $u^*$ 上。
-\end{proposition}
-
-我们知道最小二乘法可以用来处理一组数据，可以从一组测定的数据中寻求变量之间的依赖关系，这种函数关系称为经验公式。本课题将介绍最小二乘法的精确定义及如何寻求点与点之间近似成线性关系时的经验公式。假定实验测得变量之间的 $n$ 个数据，则在平面上，可以得到 $n$ 个点，这种图形称为 “散点图”，从图中可以粗略看出这些点大致散落在某直线近旁, 我们认为其近似为一线性函数，下面介绍求解步骤。
-
-\begin{figure}[htbp]
+\subsection{链表的相关术语}
+\begin{itemize}
+  \item \textbf{头指针}：指向链表的第一个节点的指针。
+  \item \textbf{尾指针}：指向链表的最后一个节点的指针。
+  \item \textbf{头结点}：不存储数据的节点，用于标识链表的起始位置。
+  \item \textbf{尾结点}：指向 NULL 的节点，表示链表的结束。
+  \item \textbf{首元结点}：第一个存储数据的节点。
+\end{itemize}
+为什么链表需要头结点？头结点是链表的起始位置，它不存储数据，只是为了方便操作。有了头结点，我们可以通过头指针快速访问链表的第一个节点，而无需特殊处理。
+常见的单链表如图\ref{fig:single_linked_list}所示,常见的双链表如图\ref{fig:double_linked_list}所示。
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\textwidth]{scatter.jpg}
-  \caption{散点图示例 $\hat{y}=a+bx$ \label{fig:scatter}}
+  \includegraphics[width=0.8\textwidth]{./image/singleLink.png}
+  \caption{单链表表示意图}
+  \label{fig:single_linked_list}
 \end{figure}
 
-以最简单的一元线性模型来解释最小二乘法。什么是一元线性模型呢？监督学习中，如果预测的变量是离散的，我们称其为分类（如决策树，支持向量机等），如果预测的变量是连续的，我们称其为回归。回归分析中，如果只包括一个自变量和一个因变量，且二者的关系可用一条直线近似表示，这种回归分析称为一元线性回归分析。如果回归分析中包括两个或两个以上的自变量，且因变量和自变量之间是线性关系，则称为多元线性回归分析。对于二维空间线性是一条直线；对于三维空间线性是一个平面，对于多维空间线性是一个超平面。
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./image/doubleLink.png}
+  \caption{双链表示意图}
+  \label{fig:double_linked_list}
+\end{figure}
 
-\begin{property}\label{property:cauchy}
-柯西列的性质
-\begin{enumerate}
-\item $\{x_k\}$ 是柯西列，则其子列 $\{x_k^i\}$ 也是柯西列。
-\item $x_k\in \mathcal{R}^n$，$\rho(x,y)$ 是欧几里得空间，则柯西列收敛，$(\mathcal{R}^n,\rho)$ 空间是完备的。
-\end{enumerate}
-\end{property}
+\subsubsection{单链表}
+单链表是链表的一种，每个节点只包含一个数据域和一个指针域，指针指向下一个节点。
+\textit{示例}：
+$L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
+单链表的结构如图\ref{fig:singleLinkStruct}所示。单链表的结构由数据域和指针域组成，其中数据域存储数据元素，指针域存储下一个节点的地址。
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/singleStruct.pdf}
+  \caption{单链表结构}
+  \label{fig:singleLinkStruct}
+\end{figure}
+单链表的结构体定义如代码\ref{lst:singleLinkStruct}所示。
+\begin{lstlisting}[language=C++, caption={单链表结构体定义}, label={lst:singleLinkStruct}]
+  struct ListNode {
+    int data;
+    ListNode* next;
+  };
+\end{lstlisting}
+单链表的基本操作包括插入、删除、查找和更新。以下是每种操作的详细说明：
+建立单链表:
 
-\begin{conclusion}
-回归分析（regression analysis） 是确定两种或两种以上变量间相互依赖的定量关系的一种统计分析方法。运用十分广泛，回归分析按照涉及的变量的多少，分为一元回归和多元回归分析；按照因变量的多少，可分为简单回归分析和多重回归分析；按照自变量和因变量之间的关系类型，可分为线性回归分析和非线性回归分析。
-\end{conclusion}
+  头插法建立单链表
 
-\begin{problemset}
-\item 设 $A$ 为数域 $K$ 上的 $n$ 级矩阵。证明：如果 $K^n$ 中任意非零列向量都是 $A$ 的特征向量，则 $A$ 一定是数量矩阵。
-\item 证明：不为零矩阵的幂零矩阵不能对角化。
-\item 设 $A = (a_{ij})$ 是数域 $K$ 上的一个 $n$ 级上三角矩阵，证明：如果 $a_{11} = a_{22} = \cdots = a_{nn}$，并且至少有一个 $a_{kl} \not = 0 (k < l)$，则 $A$ 一定不能对角化。
-\end{problemset}
+  1.首先创建一个头结点，将头结点的指针域指向 NULL。
+  2.依次读入数据元素，创建新节点，将新节点的指针域指向头结点的下一个节点，再将头结点的指针域指向新节点。
+  具体过程如图\ref{fig:headInsert}所示。
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/headInsert.pdf}
+    \caption{头插法建立单链表}
+    \label{fig:headInsert}
+  \end{figure}
+  代码如代码\ref{lst:headInsert}所示。
+  \begin{lstlisting}[language=C++, caption={头插法建立单链表示例代码}, label={lst:headInsert}]
+    singleLink* createSingleLink() {
+      int n, data;
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
+      SingleLink* L = (SingleLink*)malloc(sizeof(SingleLink));
+      L->next = NULL;
+      for (int i = 0; i < n; i++) {
+        SingleLink* s = (singleLink*)malloc(sizeof(SingleLink));
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
+        s->data = data;
+        s->next = NULL;
+        s->next = L->next;
+        L->next = s;
+      }
+      return L;
+    }
+    \end{lstlisting}
+    该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
-\chapter{常见问题集}
+    特点：头插法建立的单链表，新节点插入到链表的头部，逆序存储数据。
 
-我们根据用户社区反馈整理了下面一些常见的问题，用户在遇到问题时，应当首先查阅本手册和本部分的常见的问题。
+  尾插法建立单链表
 
-\begin{enumerate}[itemsep=1.5ex]
-  \item \question{有没有办法章节用“第一章，第一节，（一）”这种？}
-    见前文介绍，可以使用 \lstinline{scheme=chinese} 设置。
-  \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
-    页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
-  \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
-    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
-  \item \question{我该使用什么版本？}
-    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
-  \item \question{我该使用什么编辑器？}
-    你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
-  \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
-    模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
-  \item \question{请问交叉引用是什么？}
-    本群和本模板适合有一定 \LaTeX{} 基础的用户使用，新手请先学习 \LaTeX{} 的基础，理解各种概念，否则你将寸步难行。
-  \item \question{代码高亮环境能用其他语言吗？}
-    可以的，ElegantBook 模板用的是 \lstinline{listings} 宏包，你可以在环境（\lstinline{lstlisting}）之后加上语言（比如 Python 使用 \lstinline{language=Python} 选项），全局语言修改请使用 \lstinline{lstset} 命令，更多信息请参考宏包文档。
-  \item \question{群主，什么时候出 Beamer 的模板（主题），ElegantSlide 或者 ElegantBeamer？}
-    由于 Beamer 中有一个很优秀的主题 \href{https://github.com/matze/mtheme}{Metropolis}。后续确定不会再出任何主题/模板，请大家根据需要修改已有主题。
-\end{enumerate}
+  1.首先创建一个头结点，将头结点的指针域指向 NULL。
+  2.依次读入数据元素，创建新节点，将新节点的指针域指向 NULL，再将尾结点的指针域指向新节点，再将新节点作为尾结点。
+  具体过程如图\ref{fig:tailInsert}所示。
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/tailInsert.pdf}
+    \caption{尾插法建立单链表}
+    \label{fig:tailInsert}
+  \end{figure}
+  代码如代码\ref{lst:tailInsert}所示。
+  \begin{lstlisting}[language=C++, caption={尾插法建立单链表示例代码}, label={lst:tailInsert}]
+    singleLink* createSingleLink() {
+      int n, data;
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
+      SingleLink* L = (SingleLink*)malloc(sizeof(SingleLink));
+      SingleLink* r = L;
+      for (int i = 0; i < n; i++) {
+        SingleLink* s = (singleLink*)malloc(sizeof(SingleLink));
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
+        s->data = data;
+        s->next = NULL;
+        r->next = s;
+        r = s;
+      }
+      return L;
+    }
+    \end{lstlisting}
+    该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
-\chapter{版本更新历史}
+    特点：尾插法建立的单链表，新节点插入到链表的尾部，顺序存储数据。
 
-根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+创建一个空链表
 
-\datechange{2022/12/31}{版本 4.5} \textcolor{red}{\bfseries 停止维护！}
+创建一个空链表，只需要创建一个头结点，将头结点的指针域指向 NULL。
 
-\datechange{2022/08/17}{版本 4.5 pre}
-\begin{change}
-  \item \textbf{重要改动}：提供了一个新的文档类选项 \lstinline|usesamecnt|，可以使全局的定理类环境使用同一个计数器。
-  \item \textbf{重要改动}：修改了 \lstinline|\elegantnewtheorem| 命令，使其有第五个（可选）参数。
-\end{change}
+代码如代码\ref{lst:createEmptySingleLink}所示。
+\begin{lstlisting}[language=C++, caption={创建一个空链表示例代码}, label={lst:createEmptySingleLink}]
+  singleLink* createEmptySingleLink() {
+    SingleLink* L = (SingleLink*)malloc(sizeof(SingleLink));
+    L->next = NULL;
+    return L;
+  }
+\end{lstlisting}
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
 
-\datechange{2022/08/15}{版本 4.4 正式发布。}
+特点：创建的链表为空，不包含任何数据元素。
 
-\begin{change}
-  \item \textbf{重要改动}：提供了一个定义定理类环境的命令 \lstinline|\elegantnewtheorem|；
-  \item \textbf{重要改动}：为所有内置定理类环境提供了带星号的版本，带星号的定理类环境不会编号，修复 \href{https://github.com/ElegantLaTeX/ElegantBook/issues/167}{issue: \#167}；
-  \item \textbf{重要改动}：在 \lstinline{scheme=chinese} 下将目录中的“第 1 章”修改为“第一章”；
-  \item 将 TeX Gyre Termes 改为 TeX Gyre TermesX，使英文部分字形与 newtx 系列宏包更相近；
-  \item 重写了内置定理类环境的实现方法，修复了一些 bug，由于修改部分较大，如果引入了新的 bug，请及时在 QQ 群或 \href{https://github.com/ElegantLaTeX}{Github} 上进行反馈；
-  \item 删除 Gitee 仓库地址，恢复 GitHub 提交（pull requests）；
-  \item 将参考文献命令添加到导言区，使编辑器能够对参考文献自动补全。
-\end{change}
+输出单链表
 
-\datechange{2022/04/09}{版本 4.3 正式发布。}
+输出单链表的所有数据元素，需要遍历链表的所有节点，并依次输出节点的数据域。
 
-\begin{change}
-  \item 放弃 newtx 系列宏包的设置，改用 TeX Gyre Termes，并设置其他字体；
-  \item 修改定理类环境内部字体设置，修复环境内部中文无法加粗问题；
-  \item 增加定理类环境的计数器选项 \lstinline{thmcnt}，可选 \lstinline{chapter} 和 \lstinline{section}；
-  \item 增加 \lstinline{bibend} 选项，可选 \lstinline{bibend=biber}（默认）和 \lstinline{bibend=bibtex}。
-\end{change}
+代码如代码\ref{lst:printSingleLink}所示。
 
+\begin{lstlisting}[language=C++, caption={输出单链表示例代码}, label={lst:printSingleLink}]
+void printSingleLink(SingleLink* L) {
+  SingleLink* p = L->next;
+  while (p != NULL) {
+    printf("%d ", p->data);
+    p = p->next;
+  }
+  printf("\n");
+}
+\end{lstlisting}
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
+特点：输出单链表的所有数据元素。
 
-\datechange{2022/03/08}{版本 4.2 正式发布。}
+输出单链表的长度
 
-\begin{change}
-  \item 对于 newtx 系列宏包更新导致的字体 bug 的修复；
-  \item 修缮目录格式，为了达到这个目的，重新改写 \lstinline{\chaptername} 的重定义语句；
-  \item 增加日语 \lstinline{lang=jp} 设定。
-  \item 这个版本为一个临时性版本，在 \TeX Live 2022 发布之后，将尽快发布 4.3 版本，由于对于中文的改动比较大，可能会出现预期之外的 bug，有问题可以在 QQ 群或者 Github 反馈。
-\end{change}
+输出单链表的长度，需要遍历链表的所有节点，并统计节点的个数。
 
+代码如代码\ref{lst:lengthSingleLink}所示。
 
-\datechange{2021/05/02}{版本 4.1 正式发布。}
+\begin{lstlisting}[language=C++, caption={输出单链表长度示例代码}, label={lst:lengthSingleLink}]
+int lengthSingleLink(SingleLink* L) {
+  SingleLink* p = L->next;
+  int length = 0;
+  while (p != NULL) {
+    length++;
+    p = p->next;
+  }
+  return length;
+}
+\end{lstlisting}
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
-\begin{change}
-  \item \textbf{重要改动}：由原先的 \hologo{BibTeX} 改为 biblatex 编译方式（后端为 \lstinline{biber}），请注意两者之间的差异；
-  \item \textbf{重要改进}：修改对于定理写法兼容方式，提高数学公式代码的兼容性；
-  \item 页面设置改动，默认页面更宽；方便书写和阅读；
-  \item 支持目录文字以及页码跳转；
-  \item 不再维护 \hologo{pdfLaTeX} 中文支持方式，请务必使用 \hologo{XeLaTeX} 编译中文文稿。
-  \item 增加多个语言选项，法语 \lstinline{lang=fr}、荷兰语 \lstinline{lang=nl}、匈牙利语 \lstinline{lang=hu}、西班牙语 \lstinline{lang=es}、蒙古语 \lstinline{lang=mn} 等。
-\end{change}
+特点：输出单链表的长度，即链表中数据元素的个数。
 
+判断单链表是否为空
 
-\datechange{2020/04/12}{版本 3.11 正式发布，\textcolor{red}{此版本为 3.x 最后版本。}}
+判断单链表是否为空，只需要判断头结点的指针域是否为 NULL。
 
-\begin{change}
-  \item \textbf{重要修正}：修复因为 \lstinline{gbt7714} 宏包更新导致的 \lstinline{natbib option clash} 错误；
-  \item 由于 \lstinline{pgfornament} 宏包未被 \TeX{} Live 2020 收录，因此删除 base 相关的内容；
-  \item 修复部分环境的空格问题；
-  \item 增加了意大利语言选项 \lstinline{lang=it}。
-\end{change}
+代码如代码\ref{lst:isEmptySingleLink}所示。
 
+\begin{lstlisting}[language=C++, caption={判断单链表是否为空示例代码}, label={lst:isEmptySingleLink}]
+  bool isEmptySingleLink(SingleLink* L) {
+    return L->next == NULL;
+  }
+  \end{lstlisting}
+  该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
 
-\datechange{2020/02/10}{版本 3.10 正式发布}
+  特点：判断单链表是否为空，即链表中是否包含数据元素。
 
-\begin{change}
-  \item 增加数学字体选项 \lstinline{math}，可选项为 \lstinline{newtx} 和 \lstinline{cm}。\\
-  \textbf{重要提示}：原先通过 \lstinline{newtxmath} 宏包设置的数学字体改为 \LaTeX{} 默认数学字体，如果需要保持原来的字体，需要显式声明数学字体（\lstinline{math=newtx}）；
-  \item 新增中文字体选项 \lstinline{chinesefont}，可选项为 \lstinline{ctexfont}、\lstinline{founder} 和 \lstinline{nofont}。
-  \item 将封面作者信息设置为可选，并且增加自定义信息命令 \lstinline{\bioinfo}；
-  \item 在说明文档中增加版本历史，新增 \lstinline{\datechange} 命令和 \lstinline{change} 环境；
-  \item 增加汉化章节选项 \lstinline{scheme}，可选项为汉化 \lstinline{chinese}；
-  \item 由于 \lstinline{\lvert} 问题已经修复，重新调整 \lstinline{ctex} 宏包和 \lstinline{amsmath} 宏包位置。
-  \item 修改页眉设置，去除了 \lstinline{\lastpage} 以避免 page anchor 问题，加入 \lstinline{\frontmatter}。
-  \item 修改参考文献选项 \lstinline{cite}，可选项为数字 \lstinline{numbers}、 作者-年份 \lstinline{authoryear} 以及上标 \lstinline{super}。
-  \item 新增参考文献样式选项 \lstinline{bibstyle}，并将英文模式下参考文献样式 \lstinline{apalike} 设置为默认值，中文仍然使用 \lstinline{gbt7714} 宏包设置。
-\end{change}
+查找单链表的第 $i$ 个元素
 
-\datechange{2019/08/18}{版本 3.09 正式发布}
+查找单链表的第 $i$ 个元素，需要遍历链表的所有节点，直到找到第 $i$ 个节点。
 
-\begin{change}
-  \item \lstinline{\elegantpar} 存在 bug，删除 \lstinline{\elegantpar} 命令，建议用户改用 \lstinline{\marginnote} 和 \lstinline{\marginpar} 旁注命令。
-  \item 积分操作符统一更改为 \lstinline{esint} 宏包设置；
-  \item 新增目录选项 \lstinline{toc}，可选项为单栏 \lstinline{onecol} 和双栏 \lstinline{twocol}；
-  \item 手动增加参考文献选项 \lstinline{cite}，可选项为上标形式 \lstinline{super}；
-  \item 修正章节习题（\lstinline{problemset}）环境。
-\end{change}
+代码如代码\ref{lst:getSingleLink}所示。
 
-\datechange{2019/05/28}{版本 3.08 正式发布}
+\begin{lstlisting}[language=C++, caption={查找单链表的第 $i$ 个元素示例代码}, label={lst:getSingleLink}]
+  int getSingleLink(SingleLink* L, int i) {
+    SingleLink* p = L->next;
+    int j = 1;
+    while (p != NULL && j < i) {
+      p = p->next;
+      j++;
+    }
+    if (p == NULL || j > i) {
+      printf("第%d个元素不存在", i);
+      return -1;
+    }
+    return p->data;
+  }
+\end{lstlisting}
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
-\begin{change}
-  \item 修复 \lstinline{\part} 命令。
-  \item 引入 Note 模板中的 \lstinline{pad} 选项 \lstinline{device=pad}。
-  \item 数学字体加入 \lstinline{mtpro2} 可选项 \lstinline{math=mtpro2}，使用免费的 \lstinline{lite} 子集。
-  \item 将参考文献默认显示方式 \lstinline{authoyear} 改为 \lstinline{numbers}。
-  \item 引入旁注命令 \lstinline{\marginpar}（测试）。
-  \item 新增章节摘要环境 \lstinline{introduction}。
-  \item 新增章节习题环境 \lstinline{problemset}。
-  \item 将 \lstinline{\equote} 重命名为 \lstinline{\extrainfo}。
-  \item 完善说明文档，增加致谢部分。
-\end{change}
+特点：查找单链表的第 $i$ 个元素，即链表中第 $i$ 个节点的数据元素。
 
-\datechange{2019/04/15}{版本 3.07 正式发布}
+删除单链表的第 $i$ 个元素
 
-\begin{change}
-  \item 删除中英文自定义字体总设置。
-  \item 新增颜色主题，并将原绿色默认主题设置为蓝色 \lstinline{color=blue}。
-  \item 引入隐藏装饰图案选项 \lstinline{base}，可选项有显示 \lstinline{show} 和隐藏 \lstinline{hide}。
-  \item 新增定理模式 \lstinline{mode}，可选项有简单模式 \lstinline{simple} 和炫彩模式 \lstinline{fancy}。
-  \item 新增隐藏证明、答案等环境的选项 \lstinline{result=noanswer}。
-\end{change}
+删除单链表的第 $i$ 个元素，需要遍历链表的所有节点，直到找到第 $i$ 个节点，然后删除该节点。
 
-\datechange{2019/02/25}{版本 3.06 正式发布}
+代码如代码\ref{lst:deleteSingleLink}所示。
 
-\begin{change}
-  \item 删除水印。
-  \item 新封面，新装饰图案。
-  \item 添加引言使用说明。
-  \item 修复双面 \lstinline{twoside}。
-  \item 美化列表环境。
-  \item 增加 \lstinline{\subsubsection} 的设置。
-  \item 将模板拆分成中英文语言模式。
-  \item 使用 \lstinline{lstlisting} 添加代码高亮。
-  \item 增加定理类环境使用说明。
-\end{change}
+\begin{lstlisting}[language=C++, caption={删除单链表的第 $i$ 个元素示例代码}, label={lst:deleteSingleLink}]
+  void deleteSingleLink(SingleLink* L, int i) {
+    SingleLink* p = L;
+    for (int j = 0; j < i - 1; j++) {
+      p = p->next;
+    }
+    SingleLink* q = p->next;
+    p->next = q->next;
+    free(q);
+  }
+  \end{lstlisting}
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
-\datechange{2019/01/22}{版本 3.05 正式发布}
+  特点：删除单链表的第 $i$ 个元素，即删除链表中第 $i$ 个节点。
 
-\begin{change}
-  \item 添加 \lstinline{xeCJK} 宏包中文支持方案。
-  \item 修复模板之前对 Ti\textit{k}Z 单位的改动。
-  \item 更新 logo 图。
-\end{change}
+插入单链表的第 $i$ 个元素
 
-\datechange{2019/01/15}{版本 3.04 正式发布}
+插入单链表的第 $i$ 个元素，需要遍历链表的所有节点，直到找到第 $i$ 个节点，然后插入新节点。
 
-\begin{change}
-  \item 格式化模板代码。
-  \item 增加 \lstinline{\equote} 命令。
-  \item 修改 \lstinline{\date}。
-\end{change}
+代码如代码\ref{lst:insertSingleLink}所示。
 
-\datechange{2019/01/08}{版本 3.03 正式发布}
+\begin{lstlisting}[language=C++, caption={插入单链表的第 $i$ 个元素示例代码}, label={lst:insertSingleLink}]
+void insertSingleLink(SingleLink* L, int i, int data) {
+  SingleLink* p = L;
+  for (int j = 0; j < i - 1; j++) {
+    p = p->next;
+  }
+  SingleLink* s = (SingleLink*)malloc(sizeof(SingleLink));
+  s->data = data;
+  s->next = p->next;
+  p->next = s;
+}
+\end{lstlisting}
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
 
-\begin{change}
-  \item 修复附录章节显示问题。
-  \item 小幅优化封面代码。
-\end{change}
-
-\datechange{2018/12/31}{版本 3.02 正式发布}
-
-\begin{change}
-  \item 修复名字系列命令自定义格式时出现的空格问题，比如 \lstinline{\listfigurename}。
-  \item 英文定理类名字改为中文名。
-  \item 英文结构名改为中文。
-\end{change}
-
-\datechange{2018/12/16}{版本 3.01 正式发布}
-
-\begin{change}
-  \item 调整 \lstinline{ctex} 宏包。
-  \item 说明文档增加更新内容。
-\end{change}
-
-\datechange{2018/12/06}{版本 3.00 正式发布}
-
-\begin{change}
-  \item 删除 \lstinline{mathpazo} 数学字体选项。
-  \item 添加邮箱命令 \lstinline{\mailto}。
-  \item 修改英文字体为 \lstinline{newtx} 系列，另外大型操作符号维持 cm 字体。
-  \item 中文字体改用 \lstinline{ctex} 宏包自动设置。
-  \item 删除 \lstinline{xeCJK} 字体设置，原因是不同系统字体不方便统一。
-  \item 定理换用 \lstinline{tcolorbox} 宏包定义，并基本维持原有的定理样式，优化显示效果，支持跨页；定理类名字重命名，如 etheorem 改为 theorem 等等。
-  \item 删去自定义的缩进命令 \lstinline{\Eindent}。
-  \item 添加参考文献宏包 \lstinline{natbib}。
-  \item 颜色名字重命名。
-\end{change}
-
-\nocite{*}
-
-\printbibliography[heading=bibintoc, title=\ebibname]
-\appendix
-
-\chapter{基本数学工具}
-
-
-本附录包括了计量经济学中用到的一些基本数学，我们扼要论述了求和算子的各种性质，研究了线性和某些非线性方程的性质，并复习了比例和百分数。我们还介绍了一些在应用计量经济学中常见的特殊函数，包括二次函数和自然对数，前 4 节只要求基本的代数技巧，第 5 节则对微分学进行了简要回顾；虽然要理解本书的大部分内容，微积分并非必需，但在一些章末附录和第 3 篇某些高深专题中，我们还是用到了微积分。
-
-\section{求和算子与描述统计量}
-
-\textbf{求和算子} 是用以表达多个数求和运算的一个缩略符号，它在统计学和计量经济学分析中扮演着重要作用。如果 $\{x_i: i=1, 2, \ldots, n\}$ 表示 $n$ 个数的一个序列，那么我们就把这 $n$ 个数的和写为：
-
-\begin{equation}
-\sum_{i=1}^n x_i \equiv x_1 + x_2 +\cdots + x_n
-\end{equation}
+特点：插入单链表的第 $i$ 个元素，即在链表中第 $i$ 个节点的位置插入新节点。
+   
 
 
+
+  \subsubsection{双链表}
+  单链表只有指向下一个节点的指针,在某一些应用场合可能并不是那么方便，比如在删除某个节点时，需要找到该节点的前驱节点，而单链表并没有指向前驱节点的指针。双链表就是为了解决这个问题而设计的，它的每个节点有两个指针，一个指向前驱节点，一个指向后继节点。
+  
+  \textit{示例}：
+  $L = \{\text{NULL} \leftrightarrow 1001 \leftrightarrow 1002 \leftrightarrow 1003 \leftrightarrow \text{NULL}\}$。
+
+  双链表的结构如图\ref{fig:doubleLinkStruct}所示。双链表的结构由数据域、前驱指针和后继指针组成，其中数据域存储数据元素，前驱指针指向前一个节点，后继指针指向后一个节点。
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/doubleLinkStruct.pdf}
+    \caption{双链表结构}
+    \label{fig:doubleLinkStruct}
+  \end{figure}
+
+  双链表的结构体定义如代码\ref{lst:doubleLinkStruct}所示。
+  \begin{lstlisting}[language=C++, caption={双链表结构体定义}, label={lst:doubleLinkStruct}]
+    struct DLink {
+      int data;
+      DLink* pre;
+      DLink* next;
+    };
+  \end{lstlisting}
+
+  双链表的基本操作包括插入、删除、查找和更新。以下是每种操作的详细说明：
+
+  \textbf{创建操作}:
+
+  创建一个空的双链表，只需要创建一个头结点，将头结点的前驱指针和后继指针都指向 NULL。
+
+  代码如代码\ref{lst:createEmptyDoubleLink}所示。
+  \begin{lstlisting}[language=C++, caption={创建一个空双链表示例代码}, label={lst:createEmptyDoubleLink}]
+    DLink* createEmptyDoubleLink() {
+      DLink* L = (DLink*)malloc(sizeof(DLink));
+      L->pre = NULL;
+      L->next = NULL;
+      return L;
+    }
+  \end{lstlisting}
+  该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+  特点：创建的双链表为空，不包含任何数据元素。
+
+  \textbf{头插法}:
+
+  头插法建立双链表，新节点插入到链表的头部。
+
+  1.首先创建一个头结点，将头结点的前驱指针和后继指针都指向 NULL。
+
+  2.依次读入数据元素，创建新节点，将新节点的前驱指针指向头结点，将新节点的后继指针指向头结点的后继节点，再将头结点的后继指针指向新节点，最后将新节点作为头结点的后继节点。
+
+  具体过程如图\ref{fig:headInsertDouble}所示。
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/headInsertDL.pdf}
+    \caption{头插法建立双链表}
+    \label{fig:headInsertDouble}
+  \end{figure}
+  代码如代码\ref{lst:headInsertDouble}所示。
+  \begin{lstlisting}[language=C++, caption={头插法建立双链表示例代码}, label={lst:headInsertDouble}]
+    DLink* createDoubleLink() {
+      int n, data;
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
+      DLink* L = (DLink*)malloc(sizeof(DLink));
+      L->pre = NULL;
+      L->next = NULL;
+      for (int i = 0; i < n; i++) {
+        DLink* s = (DLink*)malloc(sizeof(DLink));
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
+        s->data = data;
+        s->pre = L;
+        s->next = L->next;
+        L->next = s;
+      }
+      return L;
+    }
+  \end{lstlisting}
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+  \textbf{尾插法}:
+  尾插法建立双链表，新节点插入到链表的尾部。
+
+  1.首先创建一个头结点，将头结点的前驱指针和后继指针都指向 NULL。
+
+  2.依次读入数据元素，创建新节点，将新节点的前驱指针指向尾结点，将新节点的后继指针指向 NULL，再将尾结点的后继指针指向新节点，最后将新节点作为尾结点。
+
+  具体过程如图\ref{fig:tailInsertDouble}所示。
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/tailInsertDL.pdf}
+    \caption{尾插法建立双链表}
+    \label{fig:tailInsertDouble}
+  \end{figure}
+  代码如代码\ref{lst:tailInsertDouble}所示。
+
+  \begin{lstlisting}[language=C++, caption={尾插法建立双链表示例代码}, label={lst:tailInsertDouble}]
+    DLink* createDoubleLink() {
+      int n, data;
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
+      DLink* L = (DLink*)malloc(sizeof(DLink));
+      DLink* r = L;
+      for (int i = 0; i < n; i++) {
+        DLink* s = (DLink*)malloc(sizeof(DLink));
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
+        s->data = data;
+        s->pre = r;
+        s->next = NULL;
+        r->next = s;
+        r = s;
+      }
+      return L;
+    }
+  \end{lstlisting}
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+  特点：尾插法建立的双链表，新节点插入到链表的尾部，顺序存储数据。
+
+  \textbf{输出操作}:
+
+  输出双链表的所有数据元素，需要遍历链表的所有节点，并依次输出节点的数据域。
+
+  代码如代码\ref{lst:printDoubleLink}所示。
+
+  \begin{lstlisting}[language=C++, caption={输出双链表示例代码}, label={lst:printDoubleLink}]
+    void printDoubleLink(DLink* L) {
+      DLink* p = L->next;
+      while (p != NULL) {
+        printf("%d ", p->data);
+        p = p->next;
+      }
+      printf("\n");
+    }
+  \end{lstlisting}
+
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+  特点：输出双链表的所有数据元素。
+
+  \textbf{输出双链表的长度}:
+
+  输出双链表的长度，需要遍历链表的所有节点，并统计节点的个数。
+
+  代码如代码\ref{lst:lengthDoubleLink}所示。
+
+  \begin{lstlisting}[language=C++, caption={输出双链表长度示例代码}, label={lst:lengthDoubleLink}]
+    int lengthDoubleLink(DLink* L) {
+      DLink* p = L->next;
+      int length = 0;
+      while (p != NULL) {
+        length++;
+        p = p->next;
+      }
+      return length;
+    }
+  \end{lstlisting}
+
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+  特点：输出双链表的长度，即链表中数据元素的个数。
+
+  \textbf{判断双链表是否为空}:
+
+  判断双链表是否为空，只需要判断头结点的后继指针是否为 NULL。
+
+  代码如代码\ref{lst:isEmptyDoubleLink}所示。
+
+  \begin{lstlisting}[language=C++, caption={判断双链表是否为空示例代码}, label={lst:isEmptyDoubleLink}]
+    bool isEmptyDoubleLink(DLink* L) {
+      return L->next == NULL;
+    }
+  \end{lstlisting}
+
+  该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+  特点：判断双链表是否为空，即链表中是否包含数据元素。
+
+  \textbf{查找双链表的第 $i$ 个元素}:
+
+  查找双链表的第 $i$ 个元素，需要遍历链表的所有节点，直到找到第 $i$ 个节点。
+
+  代码如代码\ref{lst:getDoubleLink}所示。
+
+  \begin{lstlisting}[language=C++, caption={查找双链表的第 $i$ 个元素示例代码}, label={lst:getDoubleLink}]
+    int getDoubleLink(DLink* L, int i) {
+      DLink* p = L->next;
+      int j = 1;
+      while (p != NULL && j < i) {
+        p = p->next;
+        j++;
+      }
+      if (p == NULL || j > i) {
+        printf("第%d个元素不存在", i);
+        return -1;
+      }
+      return p->data;
+    }
+  \end{lstlisting}
+
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+  特点：查找双链表的第 $i$ 个元素，即链表中第 $i$ 个节点的数据元素。
+
+  \textbf{删除双链表的第 $i$ 个元素}:
+
+  删除双链表的第 $i$ 个元素，需要遍历链表的所有节点，直到找到第 $i$ 个节点，然后删除该节点。
+
+  代码如代码\ref{lst:deleteDoubleLink}所示。
+
+  \begin{lstlisting}[language=C++, caption={删除双链表的第 $i$ 个元素示例代码}, label={lst:deleteDoubleLink}]
+    void deleteDoubleLink(DLink* L, int i) {
+      DLink* p = L;
+      for (int j = 0; j < i - 1; j++) {
+        p = p->next;
+      }
+      DLink* q = p->next;
+      p->next = q->next;
+      if (q->next != NULL) {
+        q->next->pre = p;
+      }
+      free(q);
+    }
+  \end{lstlisting}
+
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+  特点：删除双链表的第 $i$ 个元素，即删除链表中第 $i$ 个节点。
+
+  \textbf{插入双链表的第 $i$ 个元素}:
+
+  插入双链表的第 $i$ 个元素，需要遍历链表的所有节点，直到找到第 $i$ 个节点，然后插入新节点。
+
+  其中删除操作如图\ref{fig:deleteDoubleLink}所示。
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/deleteDL.pdf}
+    \caption{删除双链表的第 $i$ 个元素}
+    \label{fig:deleteDoubleLink}
+  \end{figure}
+
+  代码如代码\ref{lst:insertDoubleLink}所示。
+
+  \begin{lstlisting}[language=C++, caption={插入双链表的第 $i$ 个元素示例代码}, label={lst:insertDoubleLink}]
+    void insertDoubleLink(DLink* L, int i, int data) {
+      DLink* p = L;
+      for (int j = 0; j < i - 1; j++) {
+        p = p->next;
+      }
+      DLink* s = (DLink*)malloc(sizeof(DLink));
+      s->data = data;
+      s->pre = p;
+      s->next = p->next;
+      if (p->next != NULL) {
+        p->next->pre = s;
+      }
+      p->next = s;
+    }
+
+  \end{lstlisting}
+
+  该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+  特点：插入双链表的第 $i$ 个元素，即在链表中第 $i$ 个节点的位置插入新节点。
+
+  \textbf{p结点之后插入结点s}:
+
+  过程如图\ref{fig:insertAfterDoubleLink}所示。
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/insertDL.pdf}
+    \caption{p结点之后插入结点s}
+    \label{fig:insertAfterDoubleLink}
+  \end{figure}
+  代码如代码\ref{lst:insertAfterDoubleLink}所示。
+
+  \begin{lstlisting}[language=C++, caption={p结点之后插入结点s示例代码}, label={lst:insertAfterDoubleLink}]
+    void insertAfterDoubleLink(DLink* p, DLink* s) {
+      s->pre = p;
+      s->next = p->next;
+      if (p->next != NULL) {
+        p->next->pre = s;
+      }
+      p->next = s;
+    }
+  \end{lstlisting}
+
+  该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+  特点：在双链表中结点 p 之后插入结点 s。
+
+
+
+  \subsubsection{循环链表\textbackslash\&静态链表}
+  循环链表是链表的一种，最后一个节点的指针指向第一个节点，形成一个环。
+  \textit{示例}：
+  $L = \{1001 \rightarrow 1002 \rightarrow 1003 \rightarrow 1001\}$。
+
+  \textbf{循环单链表}:
+
+  循环单链表和单链表的区别在于，循环单链表的尾结点指针指向头结点。
+
+  其结构如图\ref{fig:cycleSingleLink}所示。
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/cycleSLink.pdf}
+    \caption{循环单链表结构}
+    \label{fig:cycleSingleLink}
+  \end{figure}
+
+  \textbf{循环双链表}:
+
+  循环双链表和双链表的区别在于，循环双链表的头结点的前驱指针指向尾结点，尾结点的后继指针指向头结点。
+
+  其结构如图\ref{fig:cycleDoubleLink}所示。
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/cycleDLink.pdf}
+    \caption{循环双链表结构}
+    \label{fig:cycleDoubleLink}
+  \end{figure}
+
+
+  静态链表是使用数组模拟链表的一种实现方式，每个数组元素包含数据域和指针域。与前面所讲的链表不同，静态链表的指针域
+  存储的是数组的索引，而不是指向下一个节点的指针。静态链表和顺序表一样,使用数组存储数据元素,但是静态链表可以更好地支持插入和删除操作。
+
+  如图\ref{fig:staticLink}所示，静态链表的结构由数据域和指针域组成，其中数据域存储数据元素，指针域存储数组的索引。
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/staticLink.pdf}
+    \caption{静态链表结构}
+    \label{fig:staticLink}
+  \end{figure}
+
+ 数组的第一个元素不存储数据,它的指针域存储第一个数据元素的索引,最后一个元素的指针域存储下一个空闲位置的索引。最后一个
+ 元素的指针域值为-1。
+
+  \section{顺序表与链表的比较}
+  \begin{itemize}
+      \item \textbf{存储方式}：顺序表使用数组存储数据元素，链表使用指针存储数据元素。
+      \item \textbf{插入和删除}：顺序表插入和删除操作需要移动元素，时间复杂度为 $O(n)$，链表插入和删除操作只需要修改指针，时间复杂度为 $O(1)$。
+      \item \textbf{空间复杂度}：顺序表的空间复杂度为 $O(n)$，链表的空间复杂度为 $O(n)$。
+      \item \textbf{访问速度}：顺序表的访问速度快，时间复杂度为 $O(1)$，链表的访问速度慢，时间复杂度为 $O(n)$。
+  \end{itemize}
+
+
+
+
+\textit{总结}：顺序表适合需要频繁访问的场景，而链表适合需要频繁插入和删除的场景。
+
+\chapter{栈与队列}
+从组成元素的逻辑关系来看,栈和队列都属于线性结构.栈和队列与线性表的不同之处在于它们的相关运算具有一些特殊性.
+更准确地说,一般线性表上的插入/删除运算不受限制,而栈和队列上的插入 删除运算均会受到某种特殊限制,
+因此栈和队列也称为操作受限的线性表.
+\section{栈}
+
+\subsection{栈的定义}
+
+栈是一种特殊的线性表，只能在表的一端进行插入和删除操作。栈的插入操作称为入栈，删除操作称为出栈。栈的特点是后进先出，即最后入栈的元素最先出栈。
+
+如图\ref{fig:stack}所示，栈的结构由栈顶和栈底组成，栈顶指向栈顶元素，栈底指向栈底元素。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/stack.pdf}
+  \caption{栈结构}
+  \label{fig:stack}
+\end{figure}
+
+相关术语：
+
+\begin{itemize}
+  \item \textbf{栈顶}：栈顶是栈中最后一个元素。
+  \item \textbf{栈底}：栈底是栈中第一个元素。
+  \item \textbf{空栈}：栈中不包含任何元素。
+  \item \textbf{满栈}：栈中包含的元素个数等于栈的最大容量。
+  \item \textbf{栈的大小}：栈中包含的元素个数。
+  \item \textbf{栈的容量}：栈的最大容量。
+  \item \textbf{栈的压入}：将元素压入栈中。
+  \item \textbf{栈的弹出}：将元素从栈中弹出。
+  \end{itemize}
+
+栈的特点:
+
+\begin{itemize}
+  \item 栈是一种特殊的线性表，只能在表的一端进行插入和删除操作。
+  \item 栈的插入操作称为入栈，删除操作称为出栈。
+  \item 栈的特点是后进先出，即最后入栈的元素最先出栈。
+\end{itemize}
+\subsection{栈的操作}
+
+栈的基本操作包括创建、销毁、压入、弹出、获取栈顶元素、判断栈是否为空、判断栈是否为满、获取栈的大小和获取栈的容量。
+
+\begin{itemize}
+  \item \textbf{创建操作}：创建一个空栈。
+  \item \textbf{销毁操作}：销毁栈。
+  \item \textbf{压入操作}：将元素压入栈中。
+  \item \textbf{弹出操作}：将元素从栈中弹出。
+  \item \textbf{获取栈顶元素}：获取栈顶元素。
+  \item \textbf{判断栈是否为空}：判断栈中是否包含元素。
+  \item \textbf{判断栈是否为满}：判断栈中是否包含元素。
+  \item \textbf{获取栈的大小}：获取栈中包含的元素个数。
+  \item \textbf{获取栈的容量}：获取栈的最大容量。
+  \item \textbf{清空栈}：清空栈中的所有元素。
+  \item \textbf{遍历栈}：遍历栈中的所有元素。
+\end{itemize}
+
+
+\subsection{顺序栈}
+
+顺序栈是使用数组实现的栈，栈的大小是固定的，栈的容量是数组的大小。
+
+顺序栈的结构体定义如代码\ref{lst:seqStackStruct}所示。
+
+\begin{lstlisting}[language=C++, caption={顺序栈结构体定义}, label={lst:seqStackStruct}]
+  struct SeqStack {
+    int* data;//栈的数据元素
+    int top;//栈顶指针
+    int capacity;//栈的容量
+  };
+\end{lstlisting}
+
+顺序栈的存放过程如图\ref{fig:seqStack}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/processOfSeqStack.pdf}
+  \caption{顺序栈存放过程}
+  \label{fig:seqStack}
+\end{figure}
+
+顺序栈的基本操作包括创建、销毁、压入、弹出、获取栈顶元素、判断栈是否为空、判断栈是否为满、获取栈的大小和获取栈的容量。
+
+\textbf{创建操作}:
+
+创建一个空的顺序栈，需要为栈分配内存空间，并初始化栈的大小、栈的容量和栈顶指针。
+
+代码如代码\ref{lst:createSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={创建一个空顺序栈示例代码}, label={lst:createSeqStack}]
+  SeqStack* createSeqStack(int capacity) {
+    SeqStack* S = (SeqStack*)malloc(sizeof(SeqStack));
+    S->data = (int*)malloc(sizeof(int) * capacity);
+    S->top = -1;
+    S->capacity = capacity;
+    return S;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(n)$。
+
+特点：创建的顺序栈为空，不包含任何数据元素。
+
+\textbf{销毁操作}:
+
+销毁顺序栈，需要释放栈的内存空间。
+
+代码如代码\ref{lst:destroySeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={销毁顺序栈示例代码}, label={lst:destroySeqStack}]
+  void destroySeqStack(SeqStack* S) {
+    free(S->data);
+    free(S);
+  }
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：销毁顺序栈，释放栈的内存空间。
+
+\textbf{判满操作}:
+
+判断顺序栈是否为满，即栈中包含的元素个数等于栈的容量。
+
+代码如代码\ref{lst:isFullSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={判断顺序栈是否为满示例代码}, label={lst:isFullSeqStack}]
+  bool isFullSeqStack(SeqStack* S) {
+    return S->top == S->capacity - 1;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断顺序栈是否为满，即栈中包含的元素个数等于栈的容量。
+
+\textbf{判空操作}:
+
+判断顺序栈是否为空，即栈中不包含任何元素。
+
+代码如代码\ref{lst:isEmptySeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={判断顺序栈是否为空示例代码}, label={lst:isEmptySeqStack}]
+  bool isEmptySeqStack(SeqStack* S) {
+    return S->top == -1;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断顺序栈是否为空，即栈中不包含任何元素。
+
+\textbf{压入操作}:
+
+将元素压入顺序栈中，即将元素放入栈顶。
+
+代码如代码\ref{lst:pushSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={压入顺序栈示例代码}, label={lst:pushSeqStack}]
+  void pushSeqStack(SeqStack* S, int data) {
+    if (isFullSeqStack(S)) {
+      printf("栈已满，无法压入元素\n");
+      return;
+    }
+    S->data[++S->top] = data;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素压入顺序栈中，即将元素放入栈顶。
+
+\textbf{弹出操作}:
+
+将元素从顺序栈中弹出，即将栈顶元素删除。
+
+代码如代码\ref{lst:popSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={弹出顺序栈示例代码}, label={lst:popSeqStack}]
+  void popSeqStack(SeqStack* S) {
+    if (isEmptySeqStack(S)) {
+      printf("栈为空，无法弹出元素\n");
+      return;
+    }
+    S->top--;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素从顺序栈中弹出，即将栈顶元素删除。
+
+\textbf{获取栈顶元素}:
+
+获取顺序栈的栈顶元素，即获取栈顶元素的值。
+
+代码如代码\ref{lst:getTopSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={获取顺序栈的栈顶元素示例代码}, label={lst:getTopSeqStack}]
+  int getTopSeqStack(SeqStack* S) {
+    if (isEmptySeqStack(S)) {
+      printf("栈为空，无法获取栈顶元素\n");
+      return -1;
+    }
+    return S->data[S->top];
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取顺序栈的栈顶元素，即获取栈顶元素的值。
+
+\textbf{获取栈的大小}:
+
+获取顺序栈的大小，即获取栈中包含的元素个数。
+
+代码如代码\ref{lst:sizeSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={获取顺序栈的大小示例代码}, label={lst:sizeSeqStack}]
+  int sizeSeqStack(SeqStack* S) {
+    return S->top + 1;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取顺序栈的大小，即获取栈中包含的元素个数。
+
+\textbf{获取栈的容量}:
+
+获取顺序栈的容量，即获取栈的最大容量。
+
+代码如代码\ref{lst:capacitySeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={获取顺序栈的容量示例代码}, label={lst:capacitySeqStack}]
+  int capacitySeqStack(SeqStack* S) {
+    return S->capacity;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取顺序栈的容量，即获取栈的最大容量。
+
+\textbf{清空栈}:
+
+清空顺序栈，即将栈中的所有元素删除。
+
+代码如代码\ref{lst:clearSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={清空顺序栈示例代码}, label={lst:clearSeqStack}]
+  void clearSeqStack(SeqStack* S) {
+    S->top = -1;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：清空顺序栈，即将栈中的所有元素删除。
+
+\textbf{遍历栈}:
+
+遍历顺序栈，即输出栈中的所有元素。
+
+代码如代码\ref{lst:traverseSeqStack}所示。
+
+\begin{lstlisting}[language=C++, caption={遍历顺序栈示例代码}, label={lst:traverseSeqStack}]
+  void traverseSeqStack(SeqStack* S) {
+    for (int i = 0; i <= S->top; i++) {
+      printf("%d ", S->data[i]);
+    }
+    printf("\n");
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：遍历顺序栈，即输出栈中的所有元素。
+
+
+
+
+\subsection{链栈}
+
+栈是线性表的特例,线性表的存储结构还有链式存储结构,因此栈也可以使用链式存储结构实现,称为链栈.
+
+链栈的结构体定义如代码\ref{lst:linkStackStruct}所示。
+
+\begin{lstlisting}[language=C++, caption={链栈结构体定义}, label={lst:linkStackStruct}]
+  struct LinkStack {
+    int data;//栈的数据元素
+    LinkStack* next;//栈的下一个元素
+  };
+\end{lstlisting}
+
+链栈结构如图\ref{fig:linkStack}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/linkStack.pdf}
+  \caption{链栈}
+  \label{fig:linkStack}
+\end{figure}
+
+我们可以发现,链栈的结构与单链表的结构相似,只是链栈的操作受到了限制,只能在栈顶进行插入和删除操作。
+
+链栈的基本操作包括创建、销毁、压入、弹出、获取栈顶元素、判断栈是否为空、获取栈的大小和遍历栈。
+
+\textbf{创建操作}:
+
+创建一个空链栈，需要为栈分配内存空间，并初始化栈顶指针。
+
+代码如代码\ref{lst:createLinkStack}所示。
+
+\begin{lstlisting}[language=C++, caption={创建一个空链栈示例代码}, label={lst:createLinkStack}]
+  LinkStack* createLinkStack() {
+    LinkStack* S = (LinkStack*)malloc(sizeof(LinkStack));
+    S->next = NULL;
+    return S;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：创建的链栈为空，不包含任何数据元素。
+
+\textbf{销毁操作}:
+
+销毁链栈，需要释放栈的内存空间。
+
+代码如代码\ref{lst:destroyLinkStack}所示。
+
+\begin{lstlisting}[language=C++, caption={销毁链栈示例代码}, label={lst:destroyLinkStack}]
+  void destroyLinkStack(LinkStack* S) {
+    LinkStack* p = S;
+    while (p != NULL) {
+      LinkStack* q = p;
+      p = p->next;
+      free(q);
+    }
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：销毁链栈，释放栈的内存空间。
+
+\textbf{判空操作}:
+
+判断链栈是否为空，即栈中不包含任何元素。
+
+代码如代码\ref{lst:isEmptyLinkStack}所示。
+
+\begin{lstlisting}[language=C++, caption={判断链栈是否为空示例代码}, label={lst:isEmptyLinkStack}]
+  bool isEmptyLinkStack(LinkStack* S) {
+    return S->next == NULL;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断链栈是否为空，即栈中不包含任何元素。
+
+\textbf{压入操作}:
+
+将元素压入链栈中，即将元素放入栈顶。
+
+代码如代码\ref{lst:pushLinkStack}所示。
+
+\begin{lstlisting}[language=C++, caption={压入链栈示例代码}, label={lst:pushLinkStack}]
+  void pushLinkStack(LinkStack* S, int data) {
+    LinkStack* p = (LinkStack*)malloc(sizeof(LinkStack));
+    p->data = data;
+    p->next = S->next;
+    S->next = p;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素压入链栈中，即将元素放入栈顶。
+
+\textbf{弹出操作}:
+
+将元素从链栈中弹出，即将栈顶元素删除。
+
+代码如代码\ref{lst:popLinkStack}所示。
+
+\begin{lstlisting}[language=C++, caption={弹出链栈示例代码}, label={lst:popLinkStack}]
+  void popLinkStack(LinkStack* S) {
+    if (isEmptyLinkStack(S)) {
+      printf("栈为空，无法弹出元素\n");
+      return;
+    }
+    LinkStack* p = S->next;
+    S->next = p->next;
+    free(p);
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素从链栈中弹出，即将栈顶元素删除。
+
+\textbf{获取栈顶元素}:
+
+获取链栈的栈顶元素，即获取栈顶元素的值。
+
+代码如代码\ref{lst:getTopLinkStack}所示。
+
+\begin{lstlisting}[language=C++, caption={获取链栈的栈顶元素示例代码}, label={lst:getTopLinkStack}]
+  int getTopLinkStack(LinkStack* S) {
+    if (isEmptyLinkStack(S)) {
+      printf("栈为空，无法获取栈顶元素\n");
+      return -1;
+    }
+    return S->next->data;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取链栈的栈顶元素，即获取栈顶元素的值。
+
+\textbf{遍历栈}:
+
+遍历链栈，即输出栈中的所有元素。
+
+代码如代码\ref{lst:traverseLinkStack}所示。
+
+\begin{lstlisting}[language=C++, caption={遍历链栈示例代码}, label={lst:traverseLinkStack}]
+  void traverseLinkStack(LinkStack* S) {
+    LinkStack* p = S->next;
+    while (p != NULL) {
+      printf("%d ", p->data);
+      p = p->next;
+    }
+    printf("\n");
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：遍历链栈，即输出栈中的所有元素。
+
+
+
+\subsection{共享栈}
+
+共享栈是两个栈共享一个存储空间的栈，两个栈的栈底分别位于共享空间的两端，两个栈的栈顶向中间延伸。
+
+共享栈的结构如图\ref{fig:sharedStack}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/shareStack.pdf}
+  \caption{共享栈}
+  \label{fig:sharedStack}
+\end{figure}
+
+
+共享栈的结构体定义如代码\ref{lst:sharedStackStruct}所示。
+
+\begin{lstlisting}[language=C++, caption={共享栈结构体定义}, label={lst:sharedStackStruct}]
+  struct SharedStack {
+    int* data;//栈的数据元素
+    int top1;//栈1的栈顶指针
+    int top2;//栈2的栈顶指针
+    int capacity;//栈的容量
+  };
+\end{lstlisting}
+
+共享栈的基本操作包括创建、销毁、压入、弹出、获取栈顶元素、判断栈是否为空、判断栈是否为满、获取栈的大小和获取栈的容量。
+
+\textbf{创建操作}:
+
+创建一个空共享栈，需要为栈分配内存空间，并初始化栈的大小、栈的容量和栈顶指针。
+
+代码如代码\ref{lst:createSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={创建一个空共享栈示例代码}, label={lst:createSharedStack}]
+  SharedStack* createSharedStack(int capacity) {
+    SharedStack* S = (SharedStack*)malloc(sizeof(SharedStack));
+    S->data = (int*)malloc(sizeof(int) * capacity);
+    S->top1 = -1;
+    S->top2 = capacity;
+    S->capacity = capacity;
+    return S;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：创建的共享栈为空，不包含任何数据元素。
+
+\textbf{销毁操作}:
+
+销毁共享栈，需要释放栈的内存空间。
+
+代码如代码\ref{lst:destroySharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={销毁共享栈示例代码}, label={lst:destroySharedStack}]
+  void destroySharedStack(SharedStack* S) {
+    free(S->data);
+    free(S);
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：销毁共享栈，释放栈的内存空间。
+
+\textbf{判空操作}:
+
+判断共享栈是否为空，即栈中不包含任何元素。
+
+代码如代码\ref{lst:isEmptySharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={判断共享栈是否为空示例代码}, label={lst:isEmptySharedStack}]
+  bool isEmptySharedStack(SharedStack* S, int stackNumber) {
+    if (stackNumber == 1) {
+      return S->top1 == -1;
+    } else if (stackNumber == 2) {
+      return S->top2 == S->capacity;
+    } else {
+      return false;
+    }
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断共享栈是否为空，即栈中不包含任何元素。
+
+\textbf{判满操作}:
+
+判断共享栈是否为满，即栈中包含的元素个数等于栈的容量。
+
+代码如代码\ref{lst:isFullSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={判断共享栈是否为满示例代码}, label={lst:isFullSharedStack}]
+  bool isFullSharedStack(SharedStack* S) {
+    return S->top1 + 1 == S->top2;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断共享栈是否为满，即栈中包含的元素个数等于栈的容量。
+
+\textbf{压入操作}:
+
+将元素压入共享栈中，即将元素放入栈顶。
+
+代码如代码\ref{lst:pushSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={压入共享栈示例代码}, label={lst:pushSharedStack}]
+  void pushSharedStack(SharedStack* S, int data, int stackNumber) {
+    if (isFullSharedStack(S)) {
+      printf("栈已满，无法压入元素\n");
+      return;
+    }
+    if (stackNumber == 1) {
+      S->data[++S->top1] = data;
+    } else if (stackNumber == 2) {
+      S->data[--S->top2] = data;
+    }
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素压入共享栈中，即将元素放入栈顶。
+
+\textbf{弹出操作}:
+
+将元素从共享栈中弹出，即将栈顶元素删除。
+
+代码如代码\ref{lst:popSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={弹出共享栈示例代码}, label={lst:popSharedStack}]
+  void popSharedStack(SharedStack* S, int stackNumber) {
+    if (isEmptySharedStack(S, stackNumber)) {
+      printf("栈为空，无法弹出元素\n");
+      return;
+    }
+    if (stackNumber == 1) {
+      S->top1--;
+    } else if (stackNumber == 2) {
+      S->top2++;
+    }
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素从共享栈中弹出，即将栈顶元素删除。
+
+\textbf{获取栈顶元素}:
+
+获取共享栈的栈顶元素，即获取栈顶元素的值。
+
+代码如代码\ref{lst:getTopSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={获取共享栈的栈顶元素示例代码}, label={lst:getTopSharedStack}]
+  int getTopSharedStack(SharedStack* S, int stackNumber) {
+    if (isEmptySharedStack(S, stackNumber)) {
+      printf("栈为空，无法获取栈顶元素\n");
+      return -1;
+    }
+    if (stackNumber == 1) {
+      return S->data[S->top1];
+    } else if (stackNumber == 2) {
+      return S->data[S->top2];
+    } else {
+      return -1;
+    }
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取共享栈的栈顶元素，即获取栈顶元素的值。
+
+\textbf{获取栈的大小}:
+
+获取共享栈的大小，即获取栈中包含的元素个数。
+
+代码如代码\ref{lst:sizeSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={获取共享栈的大小示例代码}, label={lst:sizeSharedStack}]
+  int sizeSharedStack(SharedStack* S) {
+    return S->top1 + 1 + S->capacity - S->top2;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取共享栈的大小，即获取栈中包含的元素个数。
+
+\textbf{获取栈的容量}:
+
+获取共享栈的容量，即获取栈的最大容量。
+
+代码如代码\ref{lst:capacitySharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={获取共享栈的容量示例代码}, label={lst:capacitySharedStack}]
+  int capacitySharedStack(SharedStack* S) {
+    return S->capacity;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取共享栈的容量，即获取栈的最大容量。
+
+\textbf{清空栈}:
+
+清空共享栈，即将栈中的所有元素删除。
+
+代码如代码\ref{lst:clearSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={清空共享栈示例代码}, label={lst:clearSharedStack}]
+  void clearSharedStack(SharedStack* S) {
+    S->top1 = -1;
+    S->top2 = S->capacity;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：清空共享栈，即将栈中的所有元素删除。
+
+\textbf{遍历栈}:
+
+遍历共享栈，即输出栈中的所有元素。
+
+代码如代码\ref{lst:traverseSharedStack}所示。
+
+\begin{lstlisting}[language=C++, caption={遍历共享栈示例代码}, label={lst:traverseSharedStack}]
+  void traverseSharedStack(SharedStack* S) {
+    for (int i = 0; i <= S->top1; i++) {
+      printf("%d ", S->data[i]);
+    }
+    for (int i = S->capacity - 1; i >= S->top2; i--) {
+      printf("%d ", S->data[i]);
+    }
+    printf("\n");
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：遍历共享栈，即输出栈中的所有元素。
+
+
+\section{队列}
+
+
+
+\subsection{队列的定义}
+
+队列是一种先进先出的线性表，只允许在表的一端进行插入，而在另一端进行删除操作。
+
+
+\subsection{队列的操作}
+
+队列的基本操作包括创建、销毁、入队、出队、获取队头元素、判断队列是否为空、判断队列是否为满、获取队列的大小和获取队列的容量。
+
+
+\subsection{顺序队列}
+
+顺序队列是使用数组实现的队列，队列的大小是固定的，队列的容量是数组的大小。
+
+顺序队列的结构如如图\ref{fig:seqQueue}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.1\textwidth]{./figure/pdf/cropped/seqQueue.pdf}
+  \caption{顺序队列}
+  \label{fig:seqQueue}
+\end{figure}
+
+顺序队列的结构体定义如代码\ref{lst:seqQueueStruct}所示。
+
+\begin{lstlisting}[language=C++, caption={顺序队列结构体定义}, label={lst:seqQueueStruct}]
+  struct SeqQueue {
+    int* data;//队列的数据元素
+    int front;//队头指针
+    int rear;//队尾指针
+    int capacity;//队列的容量
+  };
+\end{lstlisting}
+
+顺序队列的存放过程如图\ref{fig:seqQueuePut}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/seqQueuePut.pdf}
+  \caption{顺序队列的存放过程}
+  \label{fig:seqQueuePut}
+\end{figure}
+
+相关术语：
+
+\begin{itemize}
+  \item 队头指针：指向队头元素的前一个位置。
+  \item 队尾指针：指向队尾元素。
+  \item 队列的容量：队列的最大容量。
+  \item 队列的大小：队列中包含的元素个数。
+  \item 队列的长度：队列中包含的元素个数。
+  \item 队列的空间：队列的容量减去队列的大小。
+  \item 队列的空：队列的大小为0。
+  \item 队列的满：队列的大小等于队列的容量。
+\end{itemize}
+
+顺序队列的基本操作包括创建、销毁、入队、出队、获取队头元素、判断队列是否为空、判断队列是否为满、获取队列的大小和获取队列的容量。
+
+\textbf{创建操作}:
+
+创建一个空顺序队列，需要为队列分配内存空间，并初始化队头指针、队尾指针和队列的容量。
+
+代码如代码\ref{lst:createSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={创建一个空顺序队列示例代码}, label={lst:createSeqQueue}]
+  SeqQueue* createSeqQueue(int capacity) {
+    SeqQueue* Q = (SeqQueue*)malloc(sizeof(SeqQueue));
+    Q->data = (int*)malloc(sizeof(int) * capacity);
+    Q->front = 0;
+    Q->rear = 0;
+    Q->capacity = capacity;
+    return Q;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：创建的顺序队列为空，不包含任何数据元素。
+
+\textbf{销毁操作}:
+
+销毁顺序队列，需要释放队列的内存空间。
+
+代码如代码\ref{lst:destroySeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={销毁顺序队列示例代码}, label={lst:destroySeqQueue}]
+  void destroySeqQueue(SeqQueue* Q) {
+    free(Q->data);
+    free(Q);
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：销毁顺序队列，释放队列的内存空间。
+
+\textbf{判空操作}:
+
+判断顺序队列是否为空，即队列中不包含任何元素。
+
+代码如代码\ref{lst:isEmptySeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={判断顺序队列是否为空示例代码}, label={lst:isEmptySeqQueue}]
+  bool isEmptySeqQueue(SeqQueue* Q) {
+    return Q->front == Q->rear;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断顺序队列是否为空，即队列中不包含任何元素。
+
+\textbf{判满操作}:
+
+判断顺序队列是否为满，即队列中包含的元素个数等于队列的容量。
+
+代码如代码\ref{lst:isFullSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={判断顺序队列是否为满示例代码}, label={lst:isFullSeqQueue}]
+  bool isFullSeqQueue(SeqQueue* Q) {
+    return (Q->rear + 1) % Q->capacity == Q->front;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断顺序队列是否为满，即队列中包含的元素个数等于队列的容量。
+
+\textbf{入队操作}:
+
+将元素入队，即将元素放入队尾。
+
+代码如代码\ref{lst:enQueueSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={入队示例代码}, label={lst:enQueueSeqQueue}]
+  void enQueueSeqQueue(SeqQueue* Q, int data) {
+    if (isFullSeqQueue(Q)) {
+      printf("队列已满，无法入队\n");
+      return;
+    }
+    Q->data[Q->rear] = data;
+    Q->rear = (Q->rear + 1) % Q->capacity;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素入队，即将元素放入队尾。
+
+\textbf{出队操作}:
+
+将元素出队，即将队头元素删除。
+
+代码如代码\ref{lst:deQueueSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={出队示例代码}, label={lst:deQueueSeqQueue}]
+  void deQueueSeqQueue(SeqQueue* Q) {
+    if (isEmptySeqQueue(Q)) {
+      printf("队列为空，无法出队\n");
+      return;
+    }
+    Q->front = (Q->front + 1) % Q->capacity;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素出队，即将队头元素删除。
+
+\textbf{获取队头元素}:
+
+获取顺序队列的队头元素，即获取队头元素的值。
+
+代码如代码\ref{lst:getFrontSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={获取队头元素示例代码}, label={lst:getFrontSeqQueue}]
+  int getFrontSeqQueue(SeqQueue* Q) {
+    if (isEmptySeqQueue(Q)) {
+      printf("队列为空，无法获取队头元素\n");
+      return -1;
+    }
+    return Q->data[Q->front];
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取顺序队列的队头元素，即获取队头元素的值。
+
+\textbf{获取队列的大小}:
+
+获取顺序队列的大小，即获取队列中包含的元素个数。
+
+代码如代码\ref{lst:sizeSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={获取队列的大小示例代码}, label={lst:sizeSeqQueue}]
+  int sizeSeqQueue(SeqQueue* Q) {
+    return (Q->rear - Q->front + Q->capacity) % Q->capacity;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取顺序队列的大小，即获取队列中包含的元素个数。
+
+\textbf{获取队列的容量}:
+
+获取顺序队列的容量，即获取队列的最大容量。
+
+代码如代码\ref{lst:capacitySeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={获取队列的容量示例代码}, label={lst:capacitySeqQueue}]
+  int capacitySeqQueue(SeqQueue* Q) {
+    return Q->capacity;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取顺序队列的容量，即获取队列的最大容量。
+
+\textbf{清空队列}:
+
+清空顺序队列，即将队列中的所有元素删除。
+
+代码如代码\ref{lst:clearSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={清空队列示例代码}, label={lst:clearSeqQueue}]
+  void clearSeqQueue(SeqQueue* Q) {
+    Q->front = 0;
+    Q->rear = 0;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：清空顺序队列，即将队列中的所有元素删除。
+
+\textbf{遍历队列}:
+
+遍历顺序队列，即输出队列中的所有元素。
+
+代码如代码\ref{lst:traverseSeqQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={遍历队列示例代码}, label={lst:traverseSeqQueue}]
+  void traverseSeqQueue(SeqQueue* Q) {
+    for (int i = Q->front; i != Q->rear; i = (i + 1) % Q->capacity) {
+      printf("%d ", Q->data[i]);
+    }
+    printf("\n");
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：遍历顺序队列，即输出队列中的所有元素。
+
+针对循环队列，我们还可以使用另外两种方法来判断队列是否为空和队列是否为满。
+
+第一种：使用一个变量记录队列的大小，当队列为空时，队列的大小为0；当队列为满时，队列的大小等于队列的容量。
+
+第二种：新增一个tag变量，当队列为空时，tag等于0；当队列为满时，tag等于1。
+第一种的结构体为：
+
+\begin{lstlisting}[language=C++, caption={循环队列结构体定义}, label={lst:circleQueueStruct}]
+  struct CircleQueue {
+    int* data;//队列的数据元素
+    int front;//队头指针
+    int rear;//队尾指针
+    int size;//队列的大小
+    int capacity;//队列的容量
+  };
+\end{lstlisting}
+
+\textbf{判空操作}:
+
+判断循环队列是否为空，即队列中不包含任何元素。
+
+代码如代码\ref{lst:isEmptyCircleQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={判断循环队列是否为空示例代码}, label={lst:isEmptyCircleQueue}]
+  bool isEmptyCircleQueue(CircleQueue* Q) {
+    return Q->size == 0;
+  }
+
+\end{lstlisting}
+
+\textbf{判满操作}:
+
+判断循环队列是否为满，即队列中包含的元素个数等于队列的容量。
+
+代码如代码\ref{lst:isFullCircleQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={判断循环队列是否为满示例代码}, label={lst:isFullCircleQueue}]
+  bool isFullCircleQueue(CircleQueue* Q) {
+    return Q->size == Q->capacity;
+  }
+
+\end{lstlisting}
+
+第二种的结构体为：
+
+\begin{lstlisting}[language=C++, caption={循环队列结构体定义}, label={lst:circleQueueStruct}]
+  struct CircleQueue {
+    int* data;//队列的数据元素
+    int front;//队头指针
+    int rear;//队尾指针
+    int tag;//标记队列是否为满
+    int capacity;//队列的容量
+  };
+\end{lstlisting}
+
+\textbf{判空操作}:
+
+判断循环队列是否为空，即队列中不包含任何元素。
+
+代码如代码\ref{lst:isEmptyCircleQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={判断循环队列是否为空示例代码}, label={lst:isEmptyCircleQueue}]
+  bool isEmptyCircleQueue(CircleQueue* Q) {
+    return Q->front == Q->rear && Q->tag == 0;
+  }
+
+\end{lstlisting}
+
+\textbf{判满操作}:
+
+判断循环队列是否为满，即队列中包含的元素个数等于队列的容量。
+
+代码如代码\ref{lst:isFullCircleQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={判断循环队列是否为满示例代码}, label={lst:isFullCircleQueue}]
+  bool isFullCircleQueue(CircleQueue* Q) {
+    return Q->front == Q->rear && Q->tag == 1;
+  }
+
+\end{lstlisting}
+
+\subsection{链式队列}
+
+链式队列是使用链表实现的队列，队列的大小是动态的，队列的容量是无限的。
+
+链式队列的结构如如图\ref{fig:linkQueue}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/linkQueue.pdf}
+  \caption{链式队列}
+  \label{fig:linkQueue}
+\end{figure}
+
+图中示出了两类链式队列，一类带头结点，一类不带头结点。
+
+我们可以发现，不带头结点的链式队列需要特殊处理队列为空的情况，因为队列为空时，
+队头指针和队尾指针都为空。因此，我们通常使用带头结点的链式队列。
+
+链式队列的结构体定义如代码\ref{lst:linkQueueStruct}所示。
+
+\begin{lstlisting}[language=C++, caption={链式队列结构体定义}, label={lst:linkQueueStruct}]
+  struct singleLink {
+	NODETYPE data;
+	singleLink* next;
+  }; 
+  struct LinkQueue {
+    singleLink* front, * rear;
+  };
+\end{lstlisting}
+
+链式队列的基本操作包括创建、销毁、入队、出队、获取队头元素、判断队列是否为空、获取队列的大小。
+
+\textbf{创建操作}:
+
+创建一个空链式队列，需要为队列分配内存空间，并初始化队头指针和队尾指针。
+
+代码如代码\ref{lst:createLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={创建一个空链式队列示例代码}, label={lst:createLinkQueue}]
+  LinkQueue* createLinkQueue() {
+    singleLink* h = (singleLink*)malloc(sizeof(singleLink));
+    LinkQueue* Q = (LinkQueue*)malloc(sizeof(LinkQueue));
+    Q->front = h;
+    Q->rear = h;
+    return Q;
+  }
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：创建的链式队列为空，不包含任何数据元素。
+
+\textbf{销毁操作}:
+
+销毁链式队列，需要释放队列的内存空间。
+
+代码如代码\ref{lst:destroyLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={销毁链式队列示例代码}, label={lst:destroyLinkQueue}]
+  void destroyLinkQueue(LinkQueue* Q) {
+    singleLink* p = Q->front;
+    while (p != NULL) {
+      singleLink* q = p;
+      p = p->next;
+      free(q);
+    }
+    free(Q);
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：销毁链式队列，释放队列的内存空间。
+
+\textbf{判空操作}:
+
+判断链式队列是否为空，即队列中不包含任何元素。
+
+代码如代码\ref{lst:isEmptyLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={判断链式队列是否为空示例代码}, label={lst:isEmptyLinkQueue}]
+  bool isEmptyLinkQueue(LinkQueue* Q) {
+    return Q->front == Q->rear;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：判断链式队列是否为空，即队列中不包含任何元素。
+
+\textbf{入队操作}:
+
+将元素入队，即将元素放入队尾。
+
+代码如代码\ref{lst:enQueueLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={入队示例代码}, label={lst:enQueueLinkQueue}]
+  void enQueueLinkQueue(LinkQueue* Q, NODETYPE data) {
+    singleLink* p = (singleLink*)malloc(sizeof(singleLink));
+    p->data = data;
+    p->next = NULL;
+    Q->rear->next = p;
+    Q->rear = p;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素入队，即将元素放入队尾。
+
+\textbf{出队操作}:
+
+将元素出队，即将队头元素删除。
+
+代码如代码\ref{lst:deQueueLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={出队示例代码}, label={lst:deQueueLinkQueue}]
+  void deQueueLinkQueue(LinkQueue* Q) {
+    if (isEmptyLinkQueue(Q)) {
+      printf("队列为空，无法出队\n");
+      return;
+    }
+    singleLink* p = Q->front->next;
+    Q->front->next = p->next;
+    if (Q->rear == p) {
+      Q->rear = Q->front;
+    }
+    free(p);
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：将元素出队，即将队头元素删除。
+
+\textbf{获取队头元素}:
+
+获取链式队列的队头元素，即获取队头元素的值。
+
+代码如代码\ref{lst:getFrontLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={获取队头元素示例代码}, label={lst:getFrontLinkQueue}]
+  NODETYPE getFrontLinkQueue(LinkQueue* Q) {
+    if (isEmptyLinkQueue(Q)) {
+      printf("队列为空，无法获取队头元素\n");
+      return -1;
+    }
+    return Q->front->next->data;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取链式队列的队头元素，即获取队头元素的值。
+
+\textbf{获取队列的大小}:
+
+获取链式队列的大小，即获取队列中包含的元素个数。
+
+代码如代码\ref{lst:sizeLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={获取队列的大小示例代码}, label={lst:sizeLinkQueue}]
+  int sizeLinkQueue(LinkQueue* Q) {
+    int size = 0;
+    singleLink* p = Q->front->next;
+    while (p != NULL) {
+      size++;
+      p = p->next;
+    }
+    return size;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：获取链式队列的大小，即获取队列中包含的元素个数。
+
+\textbf{清空队列}:
+
+清空链式队列，即将队列中的所有元素删除。
+
+代码如代码\ref{lst:clearLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={清空队列示例代码}, label={lst:clearLinkQueue}]
+  void clearLinkQueue(LinkQueue* Q) {
+    singleLink* p = Q->front->next;
+    while (p != NULL) {
+      singleLink* q = p;
+      p = p->next;
+      free(q);
+    }
+    Q->rear = Q->front;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：清空链式队列，即将队列中的所有元素删除。
+
+\textbf{遍历队列}:
+
+遍历链式队列，即输出队列中的所有元素。
+
+代码如代码\ref{lst:traverseLinkQueue}所示。
+
+\begin{lstlisting}[language=C++, caption={遍历队列示例代码}, label={lst:traverseLinkQueue}]
+  void traverseLinkQueue(LinkQueue* Q) {
+    singleLink* p = Q->front->next;
+    while (p != NULL) {
+      printf("%d ", p->data);
+      p = p->next;
+    }
+    printf("\n");
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：遍历链式队列，即输出队列中的所有元素。
+
+
+
+
+
+\subsection{双端队列}
+
+双端队列是一种具有队列和栈的性质的线性表，双端队列的两端都可以进行插入和删除操作。
+
+双端队列的结构如如图\ref{fig:deque}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.1\textwidth]{./figure/pdf/cropped/DQueue.pdf}
+  \caption{双端队列}
+  \label{fig:deque}
+\end{figure}
+
+
+\section{栈和队列的应用}
+
+\subsection{栈的应用}
+
+\subsubsection{简单表达式求值}
+
+这里限定的简单表达式是用户输入的一个包含+、-、*、/、(、)和正整数的合法算数表达式，计算该表达式的运算结果。
+
+在算术表达式中， 运算符位于两个操作数中间的表达式称为中缀表达式 (infix
+expression) ,例如 1十2* 3 就是一个中绥表达式。中组表达式是一种最常用的表达式形式，
+日常生活中的表达式一般都是中绥表达式。
+
+对中组表达式的运算一般遵循“先乘除,后加减,从左到右计算,先括号内,后括号外?的
+规则,因此中组表达式不仅要依赖运算符优先级,还要处理括号。
+
+算术表达式的另一种形式是后缀表达式(postfix expression)或逆波兰表达式,就是在
+算术表达式中运算符在操作数的后面,如1+2* 3 的后组表达式为12 3 * +。在后缀表
+达式中已经考虑了运算符的优先级,没有括号,只有操作数和运算符,而且越放在前面的运
+算符越优先执行。
+
+同样,在算术表达式中,如果运算符在操作数的前面,称为前缀表达式 (prefix
+expression) ,如 1+2* 3 的前缀表达式为+1 * 2 3。
+
+后缀表达式是一种十分有用的表达式,它将复杂表达式转换为可以依靠简单的操作得
+到计算结果的表达式。所以对中绥表达式的求值过程是先将中绥算术表达式转换成后缀表
+达式,然后对该后缀表达式求值。
+
+
+\textbf{中缀表达式转后缀表达式}
+
+中缀表达式转后缀表达式的算法如下：
+
+1. 从左到右扫描中缀表达式。
+
+2. 如果是操作数，则直接输出。
+
+3. 如果是运算符，则判断其与栈顶运算符的优先级，是右括号或优先级低于栈顶运算符，则栈顶运算符依次出栈并输出，直到遇到左括号或栈空为止。此时将当前运算符入栈。
+
+4. 如果是左括号，则直接入栈。
+
+5. 如果是右括号，则依次出栈并输出直到遇到左括号，左括号出栈。
+
+6. 重复2-5步骤，直到表达式的最右端。
+
+7. 将栈中的运算符依次出栈并输出。
+
+例如，中缀表达式$3+5*8-(6 + 2)$转换为后缀表达式的过程如表\ref{tab:infixToPostfix}所示。
+
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|c|c|c|}
+  \hline
+  \textbf{扫描的符号} & \textbf{栈 (Stack)} & \textbf{输出 (Output)} \\ \hline
+  3 &  & 3 \\ \hline
+  + & + & 3 \\ \hline
+  5 & + & 3 5 \\ \hline
+  * & + * & 3 5 \\ \hline
+  8 & + * & 3 5 8 \\ \hline
+  - & - & 3 5 8 * + \\ \hline
+  ( & - ( & 3 5 8 * + \\ \hline
+  6 & - ( & 3 5 8 * + 6 \\ \hline
+  + & - ( + & 3 5 8 * + 6 \\ \hline
+  2 & - ( + & 3 5 8 * + 6 2 \\ \hline
+  ) & - & 3 5 8 * + 6 2 + \\ \hline
+  (结束) &  & 3 5 8 * + 6 2 + - \\ \hline
+  \end{tabular}
+  \caption{前缀转后缀}
+  \label{tab:infixToPostfix}
+  \end{table}
+
+代码如代码\ref{lst:infixToPostfix}所示。
+
+\begin{lstlisting}[language=C++, caption={中缀表达式转后缀表达式示例代码}, label={lst:infixToPostfix}]
+  bool isOperator(char c) {
+    return c == '+' || c == '-' || c == '*' || c == '/';
+  }
+
+  int priority(char c) {
+    if (c == '+' || c == '-') {
+      return 1;
+    }
+    if (c == '*' || c == '/') {
+      return 2;
+    }
+    return 0;
+  }
+
+  string infixToPostfix(string infix) {
+    stack<char> s;
+    string postfix = "";
+    for (int i = 0; i < infix.size(); i++) {
+      if (isdigit(infix[i])) {
+        postfix += infix[i];
+      } else if (infix[i] == '(') {
+        s.push(infix[i]);
+      } else if (infix[i] == ')') {
+        while (!s.empty() && s.top() != '(') {
+          postfix += s.top();
+          s.pop();
+        }
+        s.pop();
+      } else if (isOperator(infix[i])) {
+        while (!s.empty() && priority(s.top()) >= priority(infix[i])) {
+          postfix += s.top();
+          s.pop();
+        }
+        s.push(infix[i]);
+      }
+    }
+    while (!s.empty()) {
+      postfix += s.top();
+      s.pop();
+    }
+    return postfix;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
+
+特点：中缀表达式转后缀表达式。
+
+\textbf{后缀表达式求值}
+
+后缀表达式求值的算法如下：
+
+1. 从左到右扫描后缀表达式。
+
+2. 如果是操作数，则入栈。
+
+3. 如果是运算符，则从栈中弹出两个操作数，进行运算，将运算结果入栈。
+
+4. 重复2-3步骤，直到表达式的最右端。
+
+5. 栈中的元素即为表达式的运算结果。
+
+例如，后缀表达式$3 5 8 * + 6 2 + -$的求值过程如表\ref{tab:postfixEvaluation}所示。
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|c|c|}
+  \hline
+  \textbf{扫描的符号} & \textbf{栈 (Stack)} \\ \hline
+  3 & 3 \\ \hline
+  5 & 3 5 \\ \hline
+  8 & 3 5 8 \\ \hline
+  * & 3 40 \\ \hline
+  + & 43 \\ \hline
+  6 & 43 6 \\ \hline
+  2 & 43 6 2 \\ \hline
+  + & 43 8 \\ \hline
+  - & 35 \\ \hline
+  \end{tabular}
+  \caption{后缀表达式求值}
+  \label{tab:postfixEvaluation}
+  \end{table}
+
+代码如代码\ref{lst:postfixEvaluation}所示。
+
+\begin{lstlisting}[language=C++, caption={后缀表达式求值示例代码}, label={lst:postfixEvaluation}]
+  int postfixEvaluation(string postfix) {
+    stack<int> s;
+    for (int i = 0; i < postfix.size(); i++) {
+      if (isdigit(postfix[i])) {
+        s.push(postfix[i] - '0');
+      } else {
+        int b = s.top();
+        s.pop();
+        int a = s.top();
+        s.pop();
+        if (postfix[i] == '+') {
+          s.push(a + b);
+        } else if (postfix[i] == '-') {
+          s.push(a - b);
+        } else if (postfix[i] == '*') {
+          s.push(a * b);
+        } else if (postfix[i] == '/') {
+          s.push(a / b);
+        }
+      }
+    }
+    return s.top();
+  }
+
+\end{lstlisting}
+
+
+\subsubsection{括号匹配}
+
+括号匹配是指对于一个字符串，其中包含的括号必须是成对出现的，且左括号必须在右括号的前面。
+
+例如，字符串“((()))”是括号匹配的，而字符串“(()))”不是括号匹配的。
+
+括号匹配的算法如下：
+
+1. 从左到右扫描字符串。
+
+2. 如果是左括号，则入栈。
+
+3. 如果是右括号，则判断栈是否为空，如果为空，则返回false；否则，出栈。
+
+4. 重复2-3步骤，直到字符串的最右端。
+
+5. 如果栈为空，则返回true；否则，返回false。
+
+例如，字符串“(())()”的括号匹配过程如表\ref{tab:bracketMatching}所示。
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{|c|c|c|}
+  \hline
+  \textbf{扫描的符号} & \textbf{栈 (Stack)} & \textbf{是否匹配} \\ \hline
+  ( & ( &  \\ \hline
+  ( & (( &  \\ \hline
+  ) & ( &  \\ \hline
+  ) &  &  \\ \hline
+  ( & ( &  \\ \hline
+  ) &  &  \\ \hline
+  (结束) &  & 是 \\ \hline
+  \end{tabular}
+  \caption{括号匹配}
+  \label{tab:bracketMatching}
+  \end{table}
+
+代码如代码\ref{lst:bracketMatching}所示。
+
+\begin{lstlisting}[language=C++, caption={括号匹配示例代码}, label={lst:bracketMatching}]
+  bool bracketMatching(string s) {
+    stack<char> st;
+    for (int i = 0; i < s.size(); i++) {
+      if (s[i] == '(') {
+        st.push(s[i]);
+      } else if (s[i] == ')') {
+        if (st.empty()) {
+          return false;
+        }
+        st.pop();
+      }
+    }
+    return st.empty();
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
+
+特点：括号匹配。
+
+\subsection{队列的应用}
+
+\subsubsection{约瑟夫环问题}
+
+约瑟夫环问题是一个著名的问题，是一个数学的应用问题，该问题的大致描述如下：
+
+设有n个人围成一圈，从第一个人开始报数，报到m的人出列，然后从出列的下一个人开始重新报数，报到m的人出列，如此循环，直到所有的人都出列为止。
+
+例如，当n=6，m=5时，出列的顺序为5、4、6、2、3、1。
+
+约瑟夫环问题的算法如下：
+
+1. 创建一个队列，将所有的人依次入队。
+
+2. 从队头开始，依次出队，报数，如果报数为m，则出队；否则，重新入队。
+
+3. 重复2步骤，直到队列为空。
+
+例如，当n=6，m=5时，出列的顺序为5、4、6、2、3、1。
+
+代码如代码\ref{lst:josephus}所示。
+
+\begin{lstlisting}[language=C++, caption={约瑟夫环问题示例代码}, label={lst:josephus}]
+  void josephus(int n, int m) {
+    queue<int> q;
+    for (int i = 1; i <= n; i++) {
+      q.push(i);
+    }
+    while (!q.empty()) {
+      for (int i = 1; i < m; i++) {
+        q.push(q.front());
+        q.pop();
+      }
+      cout << q.front() << " ";
+      q.pop();
+    }
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(nm)$，空间复杂度为 $O(n)$。
+
+特点：约瑟夫环问题。
+
+
+
+
+\chapter{串}
+
+串(string)是由零个或多个字符组成的有限序列。含零个字符的串称为空串,用多表
+示。串中所含字符的个数称为该串的长度(或串长)。通常将一个串表示成"aa …a， 的形
+式,其中最外边的双引号(或单引号)不是串的内容,它们是串的标志,用于将串与标识符(如
+变量名等)加以区别。每个 w(1委未站代表一个字符,不同的机器和编程语言对合法字符
+〈即人允许使用的字符)有不同的规定。但在一般情况下,英文字母.数字(0,1,…,9)和常用的
+标点符号以及空格符等都是合法的字符。
+
+两个串相等当且仅当这两个串的长度相等并且各对应位置上的字符都
+相同。一个串中任意个连续字符组成的序列称为该串的子串(substring)，
+例如串"abcde"的子串有"a"、ab"、abc"和"abcd"等。为了表述清楚,在串
+中空格字符用“0D"”符号表示,例如"aDOb"是一个长度为4的串,其中含有两
+个空格字符。空串是不包含任何字符的串,其长度为 0,空串是任何串的
+子串
+
+
+\section{串的存储结构}
+
+串的存储结构有两种，即顺序存储结构和链式存储结构。
+\subsection{顺序存储结构}
+
+
+顺序串中的字符被依次存放在一组连续的存储单元里。一般来说,一个字节(8 位)可
+以表示一个字符(存放其 ASCII 码) 。而计算机内存是按字编址的,即以字为存储单位,一
+个存储单元指的是一个字。而一个字可能包含多个字节,其所包含的字节数随机器而异。
+
+顺序串的存储方式有两种: 一种是每个字只存一个字符,如图 4. 1 所示(假设一个字包
+含4个字节) ,这称为非紧缩格式(其存储密度小); 另一种是每个字存放多个字符,如图 4. 2
+所示 ,这称为紧缩格式(其存储密度大) 。在这两个图中,有阴影的字节为空闲部分。
+
+非紧缩格式如表 \ref{}
+\subsection{链式存储结构}
+
+\section{串的操作}
+
+\subsection{串的基本操作}
+
+\subsection{模式匹配算法}
+
+\subsubsection{BF算法}
+
+\subsubsection{KMP算法}
+
+\chapter{稀疏矩阵和广义表}
+
+\section{稀疏矩阵}
+
+\subsection{稀疏矩阵的定义}
+
+\subsection{稀疏矩阵的三元组表示}
+
+\section{广义表}
+
+\subsection{广义表的定义}
+
+\subsection{广义表的存储结构}
+
+\subsection{广义表的运算}
+
+\chapter{树}
+
+\section{树的基本概念}
+
+\subsection{树的定义}
+
+\subsection{树的基本术语}
+
+\subsection{树的基本性质}
+
+\section{树的存储结构}
+
+\subsection{顺序存储结构}
+
+\subsection{链式存储结构}
+
+\section{二叉树}
+
+\subsection{二叉树的定义}
+
+\subsection{二叉树的性质}
+
+\subsection{二叉树的五种基本形态}
+
+\subsection{特殊二叉树}
+
+\subsubsection{满二叉树}
+
+\subsubsection{完全二叉树}
+
+\subsubsection{二叉搜索树}
+
+\subsubsection{平衡二叉树}
+
+\subsubsection{线索二叉树}
+
+\section{二叉树的存储结构}
+
+\subsection{顺序存储结构}
+
+\subsection{链式存储结构}
+
+\section{二叉树的遍历}
+
+\subsection{遍历的定义}
+
+\subsection{遍历的方法}
+
+\subsubsection{递归遍历}
+
+\paragraph{先序遍历}
+
+\paragraph{中序遍历}
+
+\paragraph{后序遍历}
+
+\subsubsection{非递归遍历}
+
+\paragraph{先序遍历}
+
+\paragraph{中序遍历}
+
+\paragraph{后序遍历}
+
+\subsubsection{层次遍历}
+
+\section{二叉树的基本运算}
+
+\subsection{二叉树的创建}
+
+\section{树、森林和二叉树的转换}
+
+\subsection{树和森林的转换}
+
+\subsection{二叉树和森林的转换}
+
+\subsection{哈夫曼树和哈夫曼编码}
+
+\subsection{并查集}
+
+\chapter{图}
+
+\section{图的基本概念}
+
+\subsection{图的定义}
+
+\subsection{图的分类}
+
+\subsection{图的基本术语}
+
+\section{图的存储结构}
+
+\subsection{邻接矩阵}
+
+\subsection{邻接表}
+
+\subsection{十字链表}
+
+\subsection{邻接多重表}
+
+\section{图的遍历}
+
+\subsection{深度优先搜索}
+
+\subsection{广度优先搜索}
+
+\section{最小生成树}
+
+\subsection{Prim算法}
+
+\subsection{Kruskal算法}
+
+\section{最短路径}
+
+\subsection{Dijkstra算法}
+
+\subsection{Floyd算法}
+
+\section{拓扑排序}
+
+\section{关键路径}
+
+\chapter{查找}
+
+\section{查找的基本概念}
+
+\subsection{查找的定义}
+
+\subsection{查找的基本术语}
+
+\section{顺序查找}
+
+\section{折半查找}
+
+\section{分块查找}
+
+\section{哈希查找}
+
+\section{红黑树}
+
+\section{B树}
+
+\section{B+树}
+
+\chapter{排序}
+
+\section{排序的基本概念}
+
+\subsection{排序的定义}
+
+\subsection{排序的基本术语}
+
+\section{插入排序}
+
+\subsection{直接插入排序}
+
+\subsection{希尔排序}
+
+\section{交换排序}
+
+\subsection{冒泡排序}
+
+\subsection{快速排序}
+
+\section{选择排序}
+
+\subsection{直接选择排序}
+
+\subsection{堆排序}
+
+\section{归并排序}
+
+\section{基数排序}
+
+\section{排序算法的比较}
+
+\section{外部排序}
 
 \end{document}
