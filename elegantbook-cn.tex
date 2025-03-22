@@ -2624,24 +2624,1138 @@ expression) ,如 1+2* 3 的前缀表达式为+1 * 2 3。
 以表示一个字符(存放其 ASCII 码) 。而计算机内存是按字编址的,即以字为存储单位,一
 个存储单元指的是一个字。而一个字可能包含多个字节,其所包含的字节数随机器而异。
 
-顺序串的存储方式有两种: 一种是每个字只存一个字符,如图 4. 1 所示(假设一个字包
-含4个字节) ,这称为非紧缩格式(其存储密度小); 另一种是每个字存放多个字符,如图 4. 2
+顺序串的存储方式有两种: 一种是每个字只存一个字符,如图\ref{fig:seqString}所示(假设一个字包
+含4个字节) ,这称为非紧缩格式(其存储密度小); 另一种是每个字存放多个字符,如图\ref{fig:tightSeqString}
 所示 ,这称为紧缩格式(其存储密度大) 。在这两个图中,有阴影的字节为空闲部分。
 
-非紧缩格式如表 \ref{}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/narrowString.pdf}
+  \caption{非紧缩格式的顺序串}
+  \label{fig:seqString}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/notNarrowString.pdf}
+  \caption{紧缩格式的顺序串}
+  \label{fig:tightSeqString}
+\end{figure}
+
+串的紧缩格式存储方式是将串中的字符紧凑地存放在存储单元中,这样可以节省存储空间。
+但是,在插入和删除操作时,需要移动大量的字符,因此效率较低。非紧缩格式存储方式是将 串中的字符依次存放在存储单元中,字符之间不留空,这样可以方便地进行插入和删除操作。
+但是,由于字符之间没有留空,因此存储密度较低。
+我们主要讨论非紧缩格式的顺序串。
+
+顺序串的结构如代码\ref{lst:seqStringStruct}所示。
+
+\begin{lstlisting}[language=C++, caption={顺序串结构体定义}, label={lst:seqStringStruct}]
+  struct SeqString {
+    char data[MAXSIZE];//存放串的字符数组
+    int length;//串的长度
+  };
+\end{lstlisting}
+
+顺序串的基本操作包括创建、销毁、清空、获取长度、获取字符、连接、比较、插入、删除、替换、复制、判断相等、求子串、输出等。
+
+\textbf{创建操作}:
+
+创建一个空串，需要为串分配内存空间，并初始化串的长度。
+
+代码如代码\ref{lst:createSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={创建一个空串示例代码}, label={lst:createSeqString}]
+  SeqString* createSeqString() {
+    SeqString* s = (SeqString*)malloc(sizeof(SeqString));
+    s->length = 0;
+    return s;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：创建一个空串。
+
+\textbf{销毁操作}:
+
+销毁串，需要释放串的内存空间。
+
+代码如代码\ref{lst:destroySeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={销毁串示例代码}, label={lst:destroySeqString}]
+  void destroySeqString(SeqString* s) {
+    free(s);
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：销毁串。
+
+\textbf{清空操作}:
+
+清空串，即将串的长度设置为0。
+
+代码如代码\ref{lst:clearSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={清空串示例代码}, label={lst:clearSeqString}]
+  void clearSeqString(SeqString* s) {
+    s->length = 0;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：清空串。
+
+\textbf{获取长度操作}:
+
+获取串的长度。
+
+代码如代码\ref{lst:lengthSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={获取串的长度示例代码}, label={lst:lengthSeqString}]
+  int lengthSeqString(SeqString* s) {
+    return s->length;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取串的长度。
+
+\textbf{获取字符操作}:
+
+获取串中指定位置的字符。
+
+代码如代码\ref{lst:getSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={获取串中指定位置的字符示例代码}, label={lst:getSeqString}]
+  char getSeqString(SeqString* s, int i) {
+    if (i < 0 || i >= s->length) {
+      printf("位置不合法\n");
+      return -1;
+    }
+    return s->data[i];
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取串中指定位置的字符。
+
+\textbf{连接操作}:
+
+连接两个串，即将两个串连接成一个串。
+
+代码如代码\ref{lst:concatSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={连接两个串示例代码}, label={lst:concatSeqString}]
+  SeqString* concatSeqString(SeqString* s1, SeqString* s2) {
+    SeqString* s = createSeqString();
+    for (int i = 0; i < s1->length; i++) {
+      s->data[s->length++] = s1->data[i];
+    }
+    for (int i = 0; i < s2->length; i++) {
+      s->data[s->length++] = s2->data[i];
+    }
+    return s;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
+
+特点：连接两个串。
+
+\textbf{比较操作}:
+
+比较两个串的大小。
+
+代码如代码\ref{lst:compareSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={比较两个串的大小示例代码}, label={lst:compareSeqString}]
+  int compareSeqString(SeqString* s1, SeqString* s2) {//s1>s2返回正数，s1=s2返回0，s1<s2返回负数
+    int i = 0;
+    while (i < s1->length && i < s2->length) {//比较两个串的公共部分
+      if (s1->data[i] != s2->data[i]) {//如果两个串的字符不相等
+        return s1->data[i] - s2->data[i];
+      }
+      i++;
+    }
+    return s1->length - s2->length;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：比较两个串的大小。
+
+\textbf{插入操作}:
+
+在指定位置插入子串。
+
+代码如代码\ref{lst:insertSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={在指定位置插入子串示例代码}, label={lst:insertSeqString}]
+  void insertSeqString(SeqString* s, int i, SeqString* t) {
+    if (i < 0 || i > s->length) {
+      printf("位置不合法\n");
+      return;
+    }
+    for (int j = s->length - 1; j >= i; j--) {//将i位置及其后面的字符后移
+      s->data[j + t->length] = s->data[j];
+    }
+    for (int j = 0; j < t->length; j++) {//将t中的字符插入到i位置
+      s->data[i + j] = t->data[j];
+    }
+    s->length += t->length;//修改串的长度
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：在指定位置插入子串。
+
+\textbf{删除操作}:
+
+删除指定位置的子串。
+
+代码如代码\ref{lst:deleteSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={删除指定位置的子串示例代码}, label={lst:deleteSeqString}]
+  void deleteSeqString(SeqString* s, int i, int len) {
+    if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
+      printf("位置不合法\n");
+      return;
+    }
+    for (int j = i + len; j < s->length; j++) {//将i+len位置及其后面的字符前移
+      s->data[j - len] = s->data[j];
+    }
+    s->length -= len;//修改串的长度
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：删除指定位置的子串。
+
+\textbf{替换操作}:
+
+替换指定位置的子串。
+
+代码如代码\ref{lst:replaceSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={替换指定位置的子串示例代码}, label={lst:replaceSeqString}]
+  void replaceSeqString(SeqString* s, int i, int len, SeqString* t) {
+    if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
+      printf("位置不合法\n");
+      return;
+    }
+    for (int j = i + len; j < s->length; j++) {//将i+len位置及其后面的字符前移
+      s->data[j - len + t->length] = s->data[j];
+    }
+    for (int j = 0; j < t->length; j++) {//将t中的字符插入到i位置
+      s->data[i + j] = t->data[j];
+    }
+    s->length = s->length - len + t->length;//修改串的长度
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：替换指定位置的子串。
+
+\textbf{复制操作}:
+
+复制串。
+
+代码如代码\ref{lst:copySeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={复制串示例代码}, label={lst:copySeqString}]
+  SeqString* copySeqString(SeqString* s) {
+    SeqString* t = createSeqString();
+    for (int i = 0; i < s->length; i++) {
+      t->data[i] = s->data[i];
+    }
+    t->length = s->length;
+    return t;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
+
+特点：复制串。
+
+\textbf{判断相等操作}:
+
+判断两个串是否相等。
+
+代码如代码\ref{lst:equalSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={判断两个串是否相等示例代码}, label={lst:equalSeqString}]
+  bool equalSeqString(SeqString* s1, SeqString* s2) {
+    if (s1->length != s2->length) {
+      return false;
+    }
+    for (int i = 0; i < s1->length; i++) {
+      if (s1->data[i] != s2->data[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：判断两个串是否相等。
+
+\textbf{求子串操作}:
+
+求串的子串。
+
+代码如代码\ref{lst:subSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={求串的子串示例代码}, label={lst:subSeqString}]
+  SeqString* subSeqString(SeqString* s, int i, int len) {
+    if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
+      printf("位置不合法\n");
+      return NULL;
+    }
+    SeqString* t = createSeqString();
+    for (int j = 0; j < len; j++) {
+      t->data[j] = s->data[i + j];
+    }
+    t->length = len;
+    return t;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
+
+特点：求串的子串。
+
+\textbf{输出操作}:
+
+输出串。
+
+代码如代码\ref{lst:printSeqString}所示。
+
+\begin{lstlisting}[language=C++, caption={输出串示例代码}, label={lst:printSeqString}]
+  void printSeqString(SeqString* s) {
+    for (int i = 0; i < s->length; i++) {
+      printf("%c", s->data[i]);
+    }
+    printf("\n");
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：输出串。
+
+
 \subsection{链式存储结构}
+
+串采用链式存储结构存储时称为链串,这里采用带头结点的单链表作为链串。链串的
+组织形式与一般的单链表类似,主要区别在于链串中的一个结点可以存储多个字符。通常
+将链串中每个结点所存储的字符个数称为结点大小。图\ref{fig:linkStr_fourNodes}和图 \ref{fig:linkStr_oneNode}分别表示同一个串
+"ABCDEFGHIJKLMN "的结点大小为 4(存储密度大)和 1(存储密度小)时的链串结构 。
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/linkStr_fourNodes.pdf}
+  \caption{结点大小为4的链串}
+  \label{fig:linkStr_fourNodes}
+
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/linkStr_oneNode.pdf}
+  \caption{结点大小为1的链串}
+  \label{fig:linkStr_oneNode}
+
+\end{figure}
+
+当绪点大小大于 1(例如结点大小为4)时,链串的尾结点的各个数据域不一定总能全被
+字符占满,此时应在这些未占用的数据域里补上不属于字符集的特殊符号(例如' \# '字符)，
+以示区别(参见图\ref{fig:linkStr_fourNodes} 中的尾结点) 。
+
+在链串中 ,结点大小越大,存储密度越大,但一些基本操作(如插入、删除、替换等)有所
+不便,且可能引起大量字符移动,因此它适合于串很少修改的情况; 结点大小越小(如结点
+大小为 1 时) ,相关操作的实现越方便,但存储密度下降。为简便起见,这里规定链串结点大
+小均为1。
+
+链串的结构如代码\ref{lst:linkStringStruct}所示。
+
+\begin{lstlisting}[language=C++, caption={链串结构体定义}, label={lst:linkStringStruct}]
+  struct LinkNode {
+    char data;//存放字符
+    LinkNode* next;//指向下一个结点
+  };
+
+  struct LinkString {
+    LinkNode* head;//头结点
+    int length;//串的长度
+  };
+\end{lstlisting}
 
 \section{串的操作}
 
-\subsection{串的基本操作}
+串的操作包括创建、销毁、清空、获取长度、获取字符、连接、比较、插入、删除、替换、复制、判断相等、求子串、输出等。
 
-\subsection{模式匹配算法}
+\textbf{创建操作}:
 
-\subsubsection{BF算法}
+创建一个空串，需要为串分配内存空间，并初始化串的长度。
 
-\subsubsection{KMP算法}
+代码如代码\ref{lst:createLinkString}所示。
 
-\chapter{稀疏矩阵和广义表}
+\begin{lstlisting}[language=C++, caption={创建一个空串示例代码}, label={lst:createLinkString}]
+  LinkString* createLinkString() {
+    LinkString* s = (LinkString*)malloc(sizeof(LinkString));
+    s->head = NULL;
+    s->length = 0;
+    return s;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：创建一个空串。
+
+\textbf{销毁操作}:
+
+销毁串，需要释放串的内存空间。
+
+代码如代码\ref{lst:destroyLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={销毁串示例代码}, label={lst:destroyLinkString}]
+  void destroyLinkString(LinkString* s) {
+    LinkNode* p = s->head;
+    while (p != NULL) {
+      LinkNode* q = p;
+      p = p->next;
+      free(q);
+    }
+    free(s);
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：销毁串。
+
+\textbf{清空操作}:
+
+清空串，即将串的长度设置为0。
+
+代码如代码\ref{lst:clearLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={清空串示例代码}, label={lst:clearLinkString}]
+  void clearLinkString(LinkString* s) {
+    LinkNode* p = s->head;
+    while (p != NULL) {
+      LinkNode* q = p;
+      p = p->next;
+      free(q);
+    }
+    s->head = NULL;
+    s->length = 0;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：清空串。
+
+\textbf{获取长度操作}:
+
+获取串的长度。
+
+代码如代码\ref{lst:lengthLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={获取串的长度示例代码}, label={lst:lengthLinkString}]
+  int lengthLinkString(LinkString* s) {
+    return s->length;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(1)$，空间复杂度为 $O(1)$。
+
+特点：获取串的长度。
+
+\textbf{获取字符操作}:
+
+获取串中指定位置的字符。
+
+代码如代码\ref{lst:getLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={获取串中指定位置的字符示例代码}, label={lst:getLinkString}]
+  char getLinkString(LinkString* s, int i) {
+    if (i < 0 || i >= s->length) {
+      printf("位置不合法\n");
+      return -1;
+    }
+    LinkNode* p = s->head;
+    for (int j = 0; j < i; j++) {
+      p = p->next;
+    }
+    return p->data;
+  }
+
+\end{lstlisting}
+
+该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
+
+特点：获取串中指定位置的字符。
+
+\textbf{连接操作}:
+
+连接两个串，即将两个串连接成一个串。
+
+代码如代码\ref{lst:concatLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={连接两个串示例代码}, label={lst:concatLinkString}]
+  LinkString* concatLinkString(LinkString* s1, LinkString* s2) {
+    LinkString* s = createLinkString();//创建一个新串
+    LinkNode* p = s1->head;//将s1中的字符复制到s中
+    
+    while (p != NULL) {//复制s1中的字符
+      LinkNode* q = (LinkNode*)malloc(sizeof(LinkNode));//创建一个新结点
+      q->data = p->data;//复制字符
+      q->next = NULL;
+      if (s->head == NULL) {//将新结点插入到s中
+        s->head = q;
+      } else {//将新结点插入到s的末尾
+        LinkNode* r = s->head;
+        while (r->next != NULL) {
+          r = r->next;
+        }
+        r->next = q;
+      }
+      s->length++;
+      p = p->next;
+    }
+    p = s2->head;//将s2中的字符复制到s中
+    while (p != NULL) {//复制s2中的字符
+      LinkNode* q = (LinkNode*)malloc(sizeof(LinkNode));//创建一个新结点
+      q->data = p->data;
+      q->next = NULL;
+      if (s->head == NULL) {//将新结点插入到s中
+        s->head = q;
+      } else {//将新结点插入到s的末尾
+        LinkNode* r = s->head;
+        while (r->next != NULL) {
+          r = r->next;
+        }
+        r->next = q;
+      }
+      s->length++;
+      p = p->next;
+    }
+    return s;
+  }
+
+
+
+\end{lstlisting}
+
+
+\textbf{比较操作}:
+
+比较两个串的大小。
+
+代码如代码\ref{lst:compareLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={比较两个串的大小示例代码}, label={lst:compareLinkString}]
+  int compareLinkString(LinkString* s1, LinkString* s2) {//s1>s2返回正数，s1=s2返回0，s1<s2返回负数
+    LinkNode* p = s1->head;
+    LinkNode* q = s2->head;
+    while (p != NULL && q != NULL) {//比较两个串的公共部分
+      if (p->data != q->data) {//如果两个串的字符不相等
+        return p->data - q->data;
+      }
+      p = p->next;
+      q = q->next;
+    }
+    return s1->length - s2->length;
+  }
+
+\end{lstlisting}
+
+\textbf{插入操作}:
+
+在指定位置插入子串。
+
+代码如代码\ref{lst:insertLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={在指定位置插入子串示例代码}, label={lst:insertLinkString}]
+  void insertLinkString(LinkString* s, int i, LinkString* t) {
+    if (i < 0 || i > s->length) {
+      printf("位置不合法\n");
+      return;
+    }
+    LinkNode* p = s->head;
+    for (int j = 0; j < i - 1; j++) {//找到第i-1个结点
+      p = p->next;
+    }
+    LinkNode* q = t->head;
+    while (q != NULL) {//将t中的字符插入到s中
+      LinkNode* r = (LinkNode*)malloc(sizeof(LinkNode));//创建一个新结点
+      r->data = q->data;
+      r->next = p->next;
+      p->next = r;
+      s->length++;
+      p = r;
+      q = q->next;
+    }
+  }
+
+\end{lstlisting}
+
+\textbf{删除操作}:
+
+删除指定位置的子串。
+
+代码如代码\ref{lst:deleteLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={删除指定位置的子串示例代码}, label={lst:deleteLinkString}]
+  void deleteLinkString(LinkString* s, int i, int len) {
+    if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
+      printf("位置不合法\n");
+      return;
+    }
+    LinkNode* p = s->head;
+    for (int j = 0; j < i - 1; j++) {//找到第i-1个结点
+      p = p->next;
+    }
+    LinkNode* q = p->next;
+    for (int j = 0; j < len; j++) {//删除子串
+      LinkNode* r = q;
+      q = q->next;
+      free(r);
+      s->length--;
+    }
+    p->next = q;
+  }
+
+\end{lstlisting}
+
+\textbf{替换操作}:
+
+替换指定位置的子串。
+
+代码如代码\ref{lst:replaceLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={替换指定位置的子串示例代码}, label={lst:replaceLinkString}]
+  void replaceLinkString(LinkString* s, int i, int len, LinkString* t) {
+    if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
+      printf("位置不合法\n");
+      return;
+    }
+    LinkNode* p = s->head;
+    for (int j = 0; j < i - 1; j++) {//找到第i-1个结点
+      p = p->next;
+    }
+    LinkNode* q = p->next;
+    for (int j = 0; j < len; j++) {//删除子串
+      LinkNode* r = q;
+      q = q->next;
+      free(r);
+      s->length--;
+    }
+    p->next = q;
+    LinkNode* r = t->head;
+    while (r != NULL) {//插入子串
+      LinkNode* s = (LinkNode*)malloc(sizeof(LinkNode));//创建一个新结点
+      s->data = r->data;
+      s->next = p->next;
+      p->next = s;
+      s->length++;
+      p = s;
+      r = r->next;
+    }
+  }
+
+\end{lstlisting}
+
+\textbf{复制操作}:
+
+复制串。
+
+代码如代码\ref{lst:copyLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={复制串示例代码}, label={lst:copyLinkString}]
+  LinkString* copyLinkString(LinkString* s) {
+    LinkString* t = createLinkString();
+    LinkNode* p = s->head;
+    LinkNode* q = NULL;
+    while (p != NULL) {
+      LinkNode* r = (LinkNode*)malloc(sizeof(LinkNode));
+      r->data = p->data;
+      r->next = NULL;
+      if (t->head == NULL) {
+        t->head = r;
+      } else {
+        q->next = r;
+      }
+      t->length++;
+      q = r;
+      p = p->next;
+    }
+    return t;
+  }
+
+\end{lstlisting}
+
+\textbf{判断相等操作}:
+
+判断两个串是否相等。
+
+代码如代码\ref{lst:equalLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={判断两个串是否相等示例代码}, label={lst:equalLinkString}]
+  bool equalLinkString(LinkString* s1, LinkString* s2) {
+    LinkNode* p = s1->head;
+    LinkNode* q = s2->head;
+    while (p != NULL && q != NULL) {
+      if (p->data != q->data) {
+        return false;
+      }
+      p = p->next;
+      q = q->next;
+    }
+    return p == NULL && q == NULL;
+  }
+
+\end{lstlisting}
+
+\textbf{求子串操作}:
+
+求串的子串。
+
+代码如代码\ref{lst:subLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={求串的子串示例代码}, label={lst:subLinkString}]
+  LinkString* subLinkString(LinkString* s, int i, int len) {
+    if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
+      printf("位置不合法\n");
+      return NULL;
+    }
+    LinkString* t = createLinkString();
+    LinkNode* p = s->head;
+    for (int j = 0; j < i; j++) {
+      p = p->next;
+    }
+    LinkNode* q = NULL;
+    while (len > 0) {
+      LinkNode* r = (LinkNode*)malloc(sizeof(LinkNode));
+      r->data = p->data;
+      r->next = NULL;
+      if (t->head == NULL) {
+        t->head = r;
+      } else {
+        q->next = r;
+      }
+      t->length++;
+      q = r;
+      p = p->next;
+      len--;
+    }
+    return t;
+  }
+
+\end{lstlisting}
+
+\textbf{输出操作}:
+
+输出串。
+
+代码如代码\ref{lst:printLinkString}所示。
+
+\begin{lstlisting}[language=C++, caption={输出串示例代码}, label={lst:printLinkString}]
+  void printLinkString(LinkString* s) {
+    LinkNode* p = s->head;
+    while (p != NULL) {
+      printf("%c", p->data);
+      p = p->next;
+    }
+    printf("\n");
+  }
+
+\end{lstlisting}
+
+
+\section{串模式匹配}
+
+设有两个串* 和+，,串上的定位就是要在串s 中找到一个与上相等的子串。通常把 * 称
+为目标串(target string) ,把 上 称为模式串(pattern string),因此串定位查找也称为模式匹配
+Cpattern matching) 。模式匹配成功是指在目标串 s 中找到了一个模式串 上; 不成功则指目
+标串 * 中不存在模式串+。
+
+模式匹配是一个比较复杂的串操作 ,许多人对此提出了很多效率各不相同的算法。在
+此介绍两种算法 ,并设串均采用顺序存储结构 。
+
+\subsection{BF算法}
+
+BF(Brute Force)算法是一种简单直观的模式匹配算法，也称为朴素模式匹配算法。
+BF算法的基本思想是从目标串的第一个字符开始，依次与模式串的每一个字符进行比较，如果相等，
+则继续比较下一个字符，如果不相等，则从目标串的下一个字符开始，重新与模式串的第一个字符比较，
+直到找到与模式串相等的子串或目标串的所有字符都比较完为止。
+
+例如 ，设目标串为"ababcabcacbab"，模式串为"abcac"，BF算法的匹配过程如下：
+
+\begin{itemize}
+  \item 从目标串的第一个字符"a"开始，与模式串的第一个字符"a"比较，相等，继续比较下一个字符；
+  \item 与模式串的第二个字符"b"比较，不相等，从目标串的第二个字符"b"开始，重新与模式串的第一个字符比较；
+  \item 与模式串的第一个字符"a"比较，不相等，从目标串的第三个字符"a"开始，重新与模式串的第一个字符比较；
+  \item 与模式串的第一个字符"a"比较，相等，继续比较下一个字符；
+  \item 与模式串的第二个字符"b"比较，相等，继续比较下一个字符；
+  \item 与模式串的第三个字符"c"比较，相等，继续比较下一个字符；
+  \item 与模式串的第四个字符"a"比较，相等，继续比较下一个字符；
+  \item 与模式串的第五个字符"c"比较，相等，匹配成功。
+\end{itemize}
+
+BF算法的代码如代码\ref{lst:BF}所示。
+
+\begin{lstlisting}[language=C++, caption={BF算法示例代码}, label={lst:BF}]
+  int BF(char* s, char* t) {
+    int i = 0, j = 0;
+    while (s[i] != '\0' && t[j] != '\0') {
+      if (s[i] == t[j]) {
+        i++;
+        j++;
+      } else {
+        i = i - j + 1;
+        j = 0;
+      }
+    }
+    if (t[j] == '\0') {
+      return i - j;
+    } else {
+      return -1;
+    }
+  }
+
+\end{lstlisting}
+
+BF算法的时间复杂度为$O(m*n)$，空间复杂度为$O(1)$。
+
+这个算法简单且易于理解，但效率不高，主要原因是主串指针 $i$ 在若干个字符比较相等后，若有一个字符比较不相等，
+就需回溯（即 $i = i - j + 1$）。该算法在最好情况下的时间复杂度为 $O(m)$，
+即主串的前 $m$ 个字符正好等于模式串的 $m$ 个字符。在最坏情况下的时间复杂度为 $O(n \times m)$。
+可以证明其平均时间复杂度也是 $O(n \times m)$，也就是说，该算法的平均时间性能接近最坏的情况。
+\subsection{KMP算法}
+
+KMP 算法是 D. E. Knuth、J. H. Morris 和 V. R. Pratt 共同提出的,称之为 Knuth-
+Morris-Pratt 算法 ,简称 KMP 算法。该算法与 Brute-Force 算法相比有较大的改进,主要是
+消除了主串指针的回溯,从而使算法效率有了某种程度的提高。
+
+KMP算法的核心，是一个被称为部分匹配表(Partial Match Table)的数组。
+这里我们抛开所有的枝枝蔓蔓，先来解释一下这个数据到底是什么。对于字符串“abababca”，它的PMT如表\ref{table:PMT}所示。
+
+
+\begin{table}[htbp]
+  \centering
+  \caption{PMT表}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    字符串 & a & b & a & b & a & b & c & a \\
+    \hline
+    index： & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+    \hline
+    PMT值 & 0 & 0 & 1 & 2 & 3 & 4 & 0 & 1 \\
+    \hline
+  \end{tabular}
+  \label{table:PMT}
+\end{table}
+
+就像例子中所示，如果待匹配的模式字符串有8个字符，那么PMT就有8个值。
+
+在这里要先解释一下字符串的前缀和后缀。所谓前缀，顾名思义，就是除了最后一个字符以外，一个字符串的全部头部组合；
+后缀则是除了第一个字符以外，一个字符串的全部尾部组合。比如字符串“ABCD”的前缀包括“A”、“AB”和“ABC”，后缀包括“BCD”、“CD”和“D”。
+
+例如，对于字符串“abababca”，它的前缀和后缀的匹配情况如下：
+
+\begin{itemize}
+  \item “a”：前缀为空集，后缀为空集，匹配长度为0；
+  \item “ab”：前缀为{“a”}，后缀为{“b”}，匹配长度为0；
+  \item “aba”：前缀为{“a”，“ab”}，后缀为{“ba”，“a”}，匹配长度为1；
+  \item “abab”：前缀为{“a”，“ab”，“aba”}，后缀为{“bab”，“ab”，“b”}，匹配长度为2；
+  \item “ababa”：前缀为{“a”，“ab”，“aba”，“abab”}，后缀为{“baba”，“aba”，“ba”，“a”}，匹配长度为3；
+  \item “ababab”：前缀为{“a”，“ab”，“aba”，“abab”，“ababa”}，后缀为{“babab”，“abab”，“bab”，“ab”，“b”}，匹配长度为4；
+  \item “abababc”：前缀为{“a”，“ab”，“aba”，“abab”，“ababa”，“ababab”}，后缀为{“bababc”，“ababc”，“babc”，“abc”，“bc”，“c”}，匹配长度为0；
+  \item “abababca”：前缀为{“a”，“ab”，“aba”，“abab”，“ababa”，“ababab”，“abababc”}，后缀为{“babca”，“abca”，“bca”，“ca”，“a”}，匹配长度为1。
+\end{itemize}
+
+有了这个定义，就可以说明PMT的含义了。PMT的值是字符串的前缀集合与后缀集合的交集中最长元素的长度。
+
+
+在清楚这个表所表达的意思之后，我们再来看看如何使用这个表来加速字符串的查找，以及这样使用的道理是什么。
+
+如图\ref{fig:KMP}所示，当模式串与主串匹配失败时，根据PMT表，模式串向右移动的位数为失配字符的位置减去对应的PMT值。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/KMP.pdf}
+  \caption{KMP算法示意图}
+  \label{fig:KMP}
+
+\end{figure}
+
+在主字符串 "ababababca" 中查找模式字符串 "abababca" 时，如果在位置 j 处字符不匹配，根据模式字符串的 PMT（部分匹配表）性质，可以跳过一些字符的比较。
+
+假设主字符串的 i 指针在位置 i 处失配，这意味着主字符串从位置 i−j 到 i 的这一段，与模式字符串从位置 0 到 j 的这一段是完全相同的。而 PMT[j−1] 表示模式字符串从位置 0 到 j−1 的最长前缀和后缀的匹配长度。
+
+因此，我们可以断定主字符串中 i 指针之前的 PMT[j−1] 位，与模式字符串的第 0 位到第 PMT[j−1] 位是相同的。这样一来，这些字符的比较就可以跳过。
+
+具体做法是：
+
+1. 保持主字符串的 i 指针不动。
+
+2. 将模式字符串的 j 指针移动到 PMT[j−1] 位置。
+
+例如，在位置 i 处失配时，主字符串和模式字符串的前 6 位是相同的。而模式字符串的前 6 位中，其前 4 位的前缀和后 4 位的后缀是相同的。
+因此，我们可以推断主字符串中 i 指针之前的 4 位，与模式字符串开头的 4 位是相同的（即灰色部分）。这部分无需再次比较。并且我们知道根据
+PMT表就已经是最长公共前后缀了，所以我们可以放心的将模式串的指针移动到 PMT[j−1] 位置。
+
+有了上面的思路，我们就可以使用PMT加速字符串的查找了。
+我们看到如果是在 j 位 失配，那么影响 j 指针回溯的位置的其实是第 j −1 位的 PMT 值，所以为了编程的方便， 
+我们不直接使用PMT数组，而是将PMT数组向后偏移一位。我们把新得到的这个数组称为next数组。
+下面给出根据next数组进行字符串匹配加速的字符串匹配程序。其中要注意的一个技巧是，
+在把PMT进行向右偏移时，第0位的值，我们将其设成了-1，这只是为了编程的方便，并没有其他的意义。
+在本节的例子中，next数组如表\ref{table:next}所示。
+
+\begin{table}[htbp]
+  \centering
+  \caption{next表}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    字符串 & a & b & a & b & a & b & c & a \\
+    \hline
+    index： & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+    \hline
+    next值 & -1 & 0 & 0 & 1 & 2 & 3 & 4 & 0 \\
+    \hline
+  \end{tabular}
+  \label{table:next}
+\end{table}
+
+
+KMP算法的代码如代码\ref{lst:KMP}所示。
+
+\begin{lstlisting}[language=C++, caption={KMP算法示例代码}, label={lst:KMP}]
+  void getNext(char* t, int* next) {
+    int j = 0, k = -1;
+    next[0] = -1;
+    while (t[j] != '\0') {
+      if (k == -1 || t[j] == t[k]) {
+        j++;
+        k++;
+        next[j] = k;
+      } else {
+        k = next[k];
+      }
+    }
+  }
+
+  int KMP(char* s, char* t) {
+    int i = 0, j = 0;
+    int next[100];
+    getNext(t, next);
+    while (s[i] != '\0' && t[j] != '\0') {
+      if (j == -1 || s[i] == t[j]) {
+        i++;
+        j++;
+      } else {
+        j = next[j];
+      }
+    }
+    if (t[j] == '\0') {
+      return i - j;
+    } else {
+      return -1;
+    }
+  }
+
+\end{lstlisting}
+
+
+KMP算法的时间复杂度为$O(m+n)$，空间复杂度为$O(m)$。
+
+
+在上述代码中，我们使用到了一个next数组，在之前的学习中我们知道所谓next数组就是PMT表的变形，现在我们一起来看看如何求解next数组。
+
+\subsection{next数组的求解}
+
+
+
+
+
+\chapter{数组和广义表}
+
+\section{数组}
+
+\subsection{数组的基本概念}
+
+从逻辑结构上看，数组是具有相同数据类型的有限个数据元素的有序序列。
+
+从存储结构上看，数组是一种顺序存储结构，它的元素在内存中是连续存储的。
+
+几乎所有的计算机高级语言都实现了数组这种数据结构，数组是一种非常重要的数据结构，它在计算机程序设计中有着广泛的应用。
+这里以C语言为例，介绍数组的基本性质：
+
+\begin{itemize}
+  \item 数组的长度：数组的长度是数组中元素的个数，数组的长度是固定的，一旦定义就不能改变。
+  \item 数组的下标：数组的下标是从0开始的整数，数组的第一个元素的下标为0，第二个元素的下标为1，依次类推。
+  \item 数组的元素：数组的元素是具有相同数据类型的数据元素，数组的元素可以是基本数据类型，也可以是结构体、类等复合数据类型。
+  \item 数组的随机访问：数组的元素可以通过下标随机访问，数组的随机访问时间复杂度为O(1)。
+\end{itemize}
+\subsection{数组的存储结构}
+
+在设计数组的存储结构时，通常将数组的所有元素存储到一块连续的内存空间中，这样可以通过数组的下标随机访问数组的元素。
+\subsubsection{一维数组的存储结构}
+
+对于一维数组 $(a_1, a_2, \dots, a_i, \dots, a_n)$，按元素顺序存储到一块地址连续的内存单元中。  
+假设第一个元素 $a_1$ 的存储地址用 $\text{LOC}(a_1)$ 表示，每个元素占用 $R$ 个存储单元，则任一数组元素 $a_i$ 的存储地址 $\text{LOC}(a_i)$ 即可由以下公式求出：
+
+\begin{equation}
+    \text{LOC}(a_i) = \text{LOC}(a_1) + (i - 1) \times R \quad (1 \leq i \leq n)
+\end{equation}
+
+该式说明一维数组中任一元素的存储地址可直接计算得到，即一维数组中的任一元素可直接存取，正因为如此，一维数组具有随机存储特性。
+\subsubsection{二维数组的存储结构}
+
+对于一个 $m$ 行 $n$ 列的二维数组 $A_{m \times n}$：
+
+\[
+\begin{bmatrix}
+a_{0,0} & a_{0,1} & \dots & a_{0,n-1} \\
+a_{1,0} & a_{1,1} & \dots & a_{1,n-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
+\end{bmatrix}
+\]
+
+将 $A_{m \times n}$ 简记为 $A$，$A$ 是这样的一维数组：
+\[
+A = (a_{0,0}, a_{0,1}, \dots, a_{0,n-1}, a_{1,0}, a_{1,1}, \dots, a_{m-1,n-1})
+\]
+其中，$a_{i,j}$ 表示二维数组中第 $i$ 行第 $j$ 列的元素，$0 \leq i \leq m -1 , 0 \leq j \leq n-1$。
+
+对于二维数组来说，其存储方式主要有两种，即按行优先存放（或者以行序为主序存放）和按列优先存放（或者以列序为主序存放）。
+
+\subsubsection{二维数组按行优先存放}
+
+二维数组按行优先存放的示意图如图\ref{fig:row_major_array}所示，即先存储第 1 行，紧接着存储第 2 行……依此类推，最后存储第 $m$ 行。
+
+\[
+\begin{bmatrix}
+a_{0,0} & a_{0,1} & \dots & a_{0,n-1} \\
+a_{1,0} & a_{1,1} & \dots & a_{1,n-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
+\end{bmatrix}
+\]
+
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[scale=0.8, every node/.style={minimum width=1.5cm, minimum height=1cm, draw, anchor=center}]
+      % 绘制一维数组的单元格
+      \node (a00) at (0, 0) {$a_{0,0}$};
+      \node (a01) at (1.5, 0) {$a_{0,1}$};
+      \node (dots1) at (3, 0) {$\dots$};
+      \node (a0n) at (4.5, 0) {$a_{0,n-1}$};
+      \node (a10) at (6, 0) {$a_{1,0}$};
+      \node (a11) at (7.5, 0) {$a_{1,1}$};
+      \node (dots2) at (9, 0) {$\dots$};
+      \node (a1n) at (10.5, 0) {$a_{1,n-1}$};
+      \node (dots3) at (12, 0) {$\dots$};
+      \node (amn) at (13.5, 0) {$a_{m-1,n-1}$};
+  \end{tikzpicture}
+  \caption{二维数组按行优先存储的一维数组表示（下标从0开始）}
+  \label{fig:row_major_array}
+\end{figure}
+
+假设第一个元素 $a_{0,0}$ 的存储地址用 $\text{LOC}(a_{0,0})$ 表示，每个元素占用 $R$ 个存储单元，则该二维数组中的任一元素 $a_{i,j}$ 的存储地址可由下式确定：
+
+\[
+\text{LOC}(a_{i,j}) = \text{LOC}(a_{0,0}) + [i \times n + j] \times R
+\]
+
+上式推导的思路是，在内存中元素 $a_{i,j}$ 前面有 $i$ 行，每行 $n$ 个元素，即已存放了 $i \times n$ 个元素，占用了 $i \times n \times R$ 个内存单元；在第 $i$ 行中，元素 $a_{i,j}$ 前面有 $j$ 个元素，即已存放了 $j$ 个元素，占用了 $j \times R$ 个内存单元。因此，元素 $a_{i,j}$ 的存储地址为上述公式所示。
+
+二维数组按列优先存放的示意图如图\ref{fig:column_major_array}所示，即先存储第 0 列，紧接着存储第 1 列……依此类推，最后存储第 $n-1$ 列。
+
+\[
+\begin{bmatrix}
+a_{0,0} & a_{0,1} & \dots & a_{0,n-1} \\
+a_{1,0} & a_{1,1} & \dots & a_{1,n-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
+\end{bmatrix}
+\]
+
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[scale=0.8, every node/.style={minimum width=1.5cm, minimum height=1cm, draw, anchor=center}]
+      % 绘制一维数组的单元格
+      \node (a00) at (0, 0) {$a_{0,0}$};
+      \node (a10) at (1.5, 0) {$a_{1,0}$};
+      \node (dots1) at (3, 0) {$\dots$};
+      \node (am0) at (4.5, 0) {$a_{m-1,0}$};
+      \node (a01) at (6, 0) {$a_{0,1}$};
+      \node (a11) at (7.5, 0) {$a_{1,1}$};
+      \node (dots2) at (9, 0) {$\dots$};
+      \node (am1) at (10.5, 0) {$a_{m-1,1}$};
+      \node (dots3) at (12, 0) {$\dots$};
+      \node (amn) at (13.5, 0) {$a_{m-1,n-1}$};
+  \end{tikzpicture}
+  \caption{二维数组按列优先存储的一维数组表示（下标从0开始）}
+  \label{fig:column_major_array}
+\end{figure}
+
+假设第一个元素 $a_{0,0}$ 的存储地址用 $\text{LOC}(a_{0,0})$ 表示，每个元素占用 $R$ 个存储单元，则该二维数组中的任一元素 $a_{i,j}$ 的存储地址可由下式确定：
+
+\[
+\text{LOC}(a_{i,j}) = \text{LOC}(a_{0,0}) + [j \times m + i] \times R
+\]
+
+上式推导的思路是，在内存中元素 $a_{i,j}$ 前面有 $j$ 列，每列 $m$ 个元素，即已存放了 $j \times m$ 个元素，占用了 $j \times m \times R$ 个内存单元；在第 $j$ 列中，元素 $a_{i,j}$ 前面有 $i$ 个元素，即已存放了 $i$ 个元素，占用了 $i \times R$ 个内存单元。因此，元素 $a_{i,j}$ 的存储地址为上述公式所示。
+
+特殊矩阵是指非零元素或零元素的分布有一定规律的矩阵,为了节省存储空间 ,特别是在
+高阶矩阵的情况下 ,可以利用特殊矩阵的规律对它们进行压缩存储,以提高存储空间效率。
+特殊和矩阵的主要形式有对称和矩阵、对角和抑阵等。它们都是方阵 ,即行数和列数相同。
+
+\textbf{对称矩阵的压缩存储}
+
+对称矩阵是指矩阵的元素以主对角线为对称轴对应相等的矩阵,即 $a_{i,j} = a_{j,i}$,对称矩阵的主对角线上的元素都是对称轴上的元素。
+
+对称矩阵的压缩存储方法是只存储矩阵的上三角元素或下三角元素,这样可以节省一半的存储空间。
+
 
 \section{稀疏矩阵}
 
