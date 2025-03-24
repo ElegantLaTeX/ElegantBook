@@ -3668,7 +3668,7 @@ A = (a_{0,0}, a_{0,1}, \dots, a_{0,n-1}, a_{1,0}, a_{1,1}, \dots, a_{m-1,n-1})
 
 对于二维数组来说，其存储方式主要有两种，即按行优先存放（或者以行序为主序存放）和按列优先存放（或者以列序为主序存放）。
 
-\subsubsection{二维数组按行优先存放}
+\textbf{二维数组按行优先存放}
 
 二维数组按行优先存放的示意图如图\ref{fig:row_major_array}所示，即先存储第 1 行，紧接着存储第 2 行……依此类推，最后存储第 $m$ 行。
 
@@ -3681,32 +3681,22 @@ a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
 \end{bmatrix}
 \]
 
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
-  \begin{tikzpicture}[scale=0.8, every node/.style={minimum width=1.5cm, minimum height=1cm, draw, anchor=center}]
-      % 绘制一维数组的单元格
-      \node (a00) at (0, 0) {$a_{0,0}$};
-      \node (a01) at (1.5, 0) {$a_{0,1}$};
-      \node (dots1) at (3, 0) {$\dots$};
-      \node (a0n) at (4.5, 0) {$a_{0,n-1}$};
-      \node (a10) at (6, 0) {$a_{1,0}$};
-      \node (a11) at (7.5, 0) {$a_{1,1}$};
-      \node (dots2) at (9, 0) {$\dots$};
-      \node (a1n) at (10.5, 0) {$a_{1,n-1}$};
-      \node (dots3) at (12, 0) {$\dots$};
-      \node (amn) at (13.5, 0) {$a_{m-1,n-1}$};
-  \end{tikzpicture}
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/rowFirst.pdf}
   \caption{二维数组按行优先存储的一维数组表示（下标从0开始）}
   \label{fig:row_major_array}
 \end{figure}
 
 假设第一个元素 $a_{0,0}$ 的存储地址用 $\text{LOC}(a_{0,0})$ 表示，每个元素占用 $R$ 个存储单元，则该二维数组中的任一元素 $a_{i,j}$ 的存储地址可由下式确定：
 
-\[
+\begin{equation}
 \text{LOC}(a_{i,j}) = \text{LOC}(a_{0,0}) + [i \times n + j] \times R
-\]
+\end{equation}
 
 上式推导的思路是，在内存中元素 $a_{i,j}$ 前面有 $i$ 行，每行 $n$ 个元素，即已存放了 $i \times n$ 个元素，占用了 $i \times n \times R$ 个内存单元；在第 $i$ 行中，元素 $a_{i,j}$ 前面有 $j$ 个元素，即已存放了 $j$ 个元素，占用了 $j \times R$ 个内存单元。因此，元素 $a_{i,j}$ 的存储地址为上述公式所示。
+
+\textbf{二维数组按列优先存放}
 
 二维数组按列优先存放的示意图如图\ref{fig:column_major_array}所示，即先存储第 0 列，紧接着存储第 1 列……依此类推，最后存储第 $n-1$ 列。
 
@@ -3719,30 +3709,18 @@ a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
 \end{bmatrix}
 \]
 
-\begin{figure}[h!]
+\begin{figure}[h]
   \centering
-  \begin{tikzpicture}[scale=0.8, every node/.style={minimum width=1.5cm, minimum height=1cm, draw, anchor=center}]
-      % 绘制一维数组的单元格
-      \node (a00) at (0, 0) {$a_{0,0}$};
-      \node (a10) at (1.5, 0) {$a_{1,0}$};
-      \node (dots1) at (3, 0) {$\dots$};
-      \node (am0) at (4.5, 0) {$a_{m-1,0}$};
-      \node (a01) at (6, 0) {$a_{0,1}$};
-      \node (a11) at (7.5, 0) {$a_{1,1}$};
-      \node (dots2) at (9, 0) {$\dots$};
-      \node (am1) at (10.5, 0) {$a_{m-1,1}$};
-      \node (dots3) at (12, 0) {$\dots$};
-      \node (amn) at (13.5, 0) {$a_{m-1,n-1}$};
-  \end{tikzpicture}
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/columnFirst.pdf}
   \caption{二维数组按列优先存储的一维数组表示（下标从0开始）}
   \label{fig:column_major_array}
 \end{figure}
 
 假设第一个元素 $a_{0,0}$ 的存储地址用 $\text{LOC}(a_{0,0})$ 表示，每个元素占用 $R$ 个存储单元，则该二维数组中的任一元素 $a_{i,j}$ 的存储地址可由下式确定：
 
-\[
+\begin{equation}
 \text{LOC}(a_{i,j}) = \text{LOC}(a_{0,0}) + [j \times m + i] \times R
-\]
+\end{equation}
 
 上式推导的思路是，在内存中元素 $a_{i,j}$ 前面有 $j$ 列，每列 $m$ 个元素，即已存放了 $j \times m$ 个元素，占用了 $j \times m \times R$ 个内存单元；在第 $j$ 列中，元素 $a_{i,j}$ 前面有 $i$ 个元素，即已存放了 $i$ 个元素，占用了 $i \times R$ 个内存单元。因此，元素 $a_{i,j}$ 的存储地址为上述公式所示。
 
@@ -3757,17 +3735,447 @@ a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
 对称矩阵的压缩存储方法是只存储矩阵的上三角元素或下三角元素,这样可以节省一半的存储空间。
 
 
+若一个阶为 $n$ 的方阵 $A$ 中的元素满足 $a_{i,j} = a_{j,i} \ (0 \leq i, j \leq n-1)$，则称其为 $n$ 阶对称矩阵（symmetric matrix）。
+
+一般情况下，一个 $n$ 阶方阵的所有元素可以分为 3 个部分，即主对角部分（含 $n$ 个元素）、上三角部分和下三角部分，如图\ref{fig:common_matrix}所示。
+已知一个元素的下标，就可以确定它属于哪个部分。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/commonMatrix.pdf}
+  \caption{一般矩阵的三个部分}
+  \label{fig:common_matrix}
+\end{figure}
+
+对称矩阵中的元素是按对角线对称的，即上三角部分和下三角部分中的对应元素相等，因此在存储时可以只存储主对角线加上三角部分的元素，
+或者主对角线加下三角部分的元素，让对称的两个元素共享一个存储空间。
+
+不失一般性，对称矩阵采用以行序为主序存储主对角线加下三角部分的元素。如图\ref{fig:downMatrix}所示，假设以一维数组
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/downMatrix.pdf}
+  \caption{对称矩阵的压缩存储}
+  \label{fig:downMatrix}
+\end{figure}
+\[
+B[0 \dots \frac{n(n+1)}{2} - 1]
+\]
+
+作为 $n$ 阶对称矩阵 $A$ 的存储结构，$A$ 中的元素 $a_{i,j}$ 存储在 $B$ 中的元素 $B[k]$ 中，那么 $k$ 与 $i,j$ 的关系分为以下
+两种情况：
+
+(1) 若 $a_{i,j}$ 是 $A$ 中主对角线或者下三角部分的元素，有 $i \geq j$。在以行序为主序的存储方式下，不计行下标为 $i$ 的行，
+元素 $a_{i,j}$ 的前面共存储了 $i$ 行（行下标为 $0$ 到 $i-1$，行下标为 $0$ 的行有一个元素，行下标为 $1$ 的行有两个元素，……，
+行下标为 $i-1$ 的行有 $i$ 个元素），这 $i$ 行有 $1 + 2 + \dots + i = \frac{i(i+1)}{2}$ 个元素；在行下标为 $i$ 的行中，
+元素 $a_{i,j}$ 的前面也存储了 $j$ 个元素。所以元素 $a_{i,j}$ 的前面共存储了 $\frac{i(i+1)}{2} + j$ 个元素，而一维数组的下标
+是从 $0$ 开始的，所以有：
+\[
+k = \frac{i(i+1)}{2} + j
+\]
+
+(2) 若 $a_{i,j}$ 是 $A$ 中上三角部分的元素，有 $i < j$。其值等于 $a_{j,i}$，而元素 $a_{j,i}$ 属于情况 (1)，它存放在 $B$ 中
+下标为 $k = \frac{j(j+1)}{2} + i$ 的位置，所以此时有：
+\[
+k = \frac{j(j+1)}{2} + i
+\]
+
+将两种情况合起来，得到 $k$ 与 $i,j$ 的关系如下：
+\[
+k =
+\begin{cases} 
+\frac{i(i+1)}{2} + j, & \text{当 } i \geq j \\ 
+\frac{j(j+1)}{2} + i, & \text{当 } i < j 
+\end{cases}
+\]
+
+显然，一维数组 $B$ 中存放的元素个数为 $1 + 2 + \dots + n = \frac{n(n+1)}{2}$。如果将 $A$ 直接采用一个 $n \times n$ 的二维数组存储，所需要的存储空间为 $n^2$ 个元素，所以这种压缩存储方法几乎节省了一半的存储空间。另外，由于一维数组 $B$ 具有随机存取特性，所以采用这种压缩存储方法后，对称矩阵 $A$ 仍然具有随机存取特性。
+
+归纳起来，在计算 $A$ 中元素 $a_{i,j}$ 在 $B$ 中存储位置 $k$ 时，首先求出元素 $a_{i,j}$ 前面共存放多少个元素（设为 $m$ 个）；再看 $B$ 中存放元素的下标是从 $0$ 开始还是从 $1$ 开始（设 $B$ 的初始下标为 $s$），则有：
+\[
+k = m + s
+\]
+\textbf{上、下三角矩阵的压缩存储}
+
+上、下三角矩阵是指矩阵的主对角线以下（或以上）的元素都是零的矩阵。上三角矩阵是指主对角线以下的元素都是零的矩阵，下三角矩阵是指主对角线以上的元素都是零的矩阵。
+
+上、下三角矩阵的压缩存储方法是只存储矩阵的上三角元素或下三角元素，这样可以节省一半的存储空间。
+
+我们以上三角矩阵为例，对于上三角矩阵，其压缩存储方法是采用以行序为主序存储其主对角线加上三角部分的元素，
+另外用一个元素存储常数 $c$，并将压缩结果存放在一维数组 $B$ 中，如图\ref{fig:upperMatrix}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/upperMatrix.pdf}
+  \caption{上三角矩阵的压缩存储}
+  \label{fig:upperMatrix}
+\end{figure}
+显然，$B$ 中元素的个数为 $\frac{n(n+1)}{2} + 1$，即用 $B[0 \dots \frac{n(n+1)}{2}]$ 存放矩阵 $A$ 中的元素。
+
+同样，$A$ 中元素 $a_{i,j}$ 存储在 $B$ 的元素 $B[k]$ 中，那么 $k$ 与 $i,j$ 的关系分为以下两种情况：
+
+(1) 若 $a_{i,j}$ 是 $A$ 中主对角线或者上三角部分的元素，有 $i \leq j$。在以行序为主序的存储方式下，不计行下标为 $i$ 的行，元素 $a_{i,j}$ 的前面共存储了 $i$ 行（行下标为 $0 \sim i-1$，行下标为 $0$ 的行有 $n$ 个元素，行下标为 $1$ 的行有 $n-1$ 个元素，……，行下标为 $i-1$ 的行有 $n-i+1$ 个元素），这 $i$ 行有：
+\[
+n + (n-1) + \dots + (n-i+1) = \frac{i(2n-i+1)}{2}
+\]
+个元素；在行下标为 $i$ 的行中，元素 $a_{i,j}$ 的前面也存储了 $j-i$ 个元素。所以元素 $a_{i,j}$ 的前面共存储了：
+\[
+\frac{i(2n-i+1)}{2} + (j-i)
+\]
+个元素，而一维数组的下标是从 $0$ 开始的，所以有：
+\[
+k = \frac{i(2n-i+1)}{2} + (j-i)
+\]
+
+(2) 若 $a_{i,j}$ 是 $A$ 中下三角部分的元素，有 $i > j$。其值为常数 $c$，用 $B$ 中最后一个位置（即下标为 $\frac{n(n+1)}{2}$ 的元素）存放常数 $c$。
+
+将两种情况合起来，得到 $k$ 与 $i,j$ 的关系如下：
+\[
+k =
+\begin{cases} 
+\frac{i(2n-i+1)}{2} + (j-i), & \text{当 } i \leq j \\ 
+\frac{n(n+1)}{2}, & \text{当 } i > j
+\end{cases}
+\]
+
+对于下三角矩阵 $A$，其常见的压缩存储方法是采用以行序为主序存储其主对角线加下三角部分的元素，另外用一个元素存储常数 $c$，
+并将压缩结果存放在一维数组 $B$ 中。采用类似于对称矩阵的推导过程，得到 $k$ 与 $i,j$ 的关系如下：
+\[
+k =
+\begin{cases} 
+\frac{i(2n-i+1)}{2} + (j-i), & \text{当 } i \leq j \\ 
+\frac{n(n+1)}{2}, & \text{当 } i > j
+\end{cases}
+\]
 \section{稀疏矩阵}
+
+
 
 \subsection{稀疏矩阵的定义}
 
+稀疏矩阵是指矩阵中绝大多数元素为零的矩阵。在实际应用中，许多矩阵都是稀疏矩阵，例如，图像处理中的二值图像、灰度图像等。
+
+例如 $m \times n$ 的矩阵 $A$ 如表\ref{table:sparse_matrix}所示，其中 $m = 6$，$n = 7$
+
+\begin{table}[htbp]
+  \centering
+  \caption{稀疏矩阵示例}
+  \begin{tabular}{||ccccccc||c}
+    
+    1 & 0 & 3 & 0 & 0 & 0 & 0 \\
+    0 & 2 & 0 & 0 & 0 & 0 & 0 \\
+    4 & 0 & 5 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 9 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 4 \\
+    
+  \end{tabular}
+  \label{table:sparse_matrix}
+\end{table}
+
+在表\ref{table:sparse_matrix}中，矩阵 $A$ 中有 $t = 7$ 个非零元素，占矩阵 $A$ 的总元素个数的比例为 $\frac{t}{m \times n} = \frac{7}{42} \approx 0.1667$，因此矩阵 $A$ 是一个稀疏矩阵。
+
 \subsection{稀疏矩阵的三元组表示}
+
+稀疏矩阵的三元组表示是指用三个一维数组来表示稀疏矩阵，这三个数组分别存储非零元素的行号、列号和元素值。
+
+
+\begin{table}[htbp]
+  \centering
+  \caption{稀疏矩阵的三元组表示}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    行号 & 列号 & 元素值 \\
+    \hline
+    0 & 0 & 1 \\
+    0 & 2 & 3 \\
+    1 & 1 & 2 \\
+    2 & 0 & 4 \\
+    2 & 2 & 5 \\
+    3 & 4 & 9 \\
+    5 & 6 & 4 \\
+    \hline
+  \end{tabular}
+  \label{table:sparse_matrix_triplet}
+\end{table}
+
+表\ref{table:sparse_matrix_triplet}中的三元组表示了表\ref{table:sparse_matrix}中的稀疏矩阵，其中第一列存储了非零元素的行号，第二列存储了非零元素的列号，第三列存储了非零元素的值。
+
+三元组顺序表的数据类型定义如下：
+
+\begin{lstlisting}[language=C++, caption={三元组顺序表的数据类型定义}]
+  typedef struct {
+    int r, c; // 非零元素的行号和列号
+    ElemType d; // 非零元素的值
+  } Triple;
+  typedef struct {
+    Triple data[MAXSIZE + 1]; // 非零元素三元组表，data[0]未用
+    int rows, cols, nums; // 矩阵的行数、列数和非零元素个数
+  } TSMatrix;
+\end{lstlisting}
+
+
+稀疏矩阵的运算包括矩阵的转置、矩阵的相加、矩阵的相乘等，这里仅讨论一些基本运算算法。
+
+\textbf{从一个二维稀疏矩阵创建三元组顺序表}
+
+采用以行序为主序的方式扫描二维稀疏矩阵$A$，将非零元素的行号、列号和元素值存入三元组顺序表$B$中。算法如下：
+
+\begin{lstlisting}[language=C++, caption={从一个二维稀疏矩阵创建三元组顺序表}]
+  void CreateSMatrix(TSMatrix &A, int a[][N], int m, int n) {
+    A.rows = m;
+    A.cols = n;
+    A.nums = 0;
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (a[i][j] != 0) {// 非零元素
+          A.nums++;
+          A.data[A.nums].r = i;
+          A.data[A.nums].c = j;
+          A.data[A.nums].d = a[i][j];
+        }
+      }
+    }
+  }
+\end{lstlisting}
+
+
+\textbf{三元组元素的赋值}
+
+该运算就是对于稀疏矩阵 $A$ 执行 $A[i][j] = x$（$x$ 通常是一个非零值）。先在三元组顺序表 $A$ 中找到适当的位置 $k$，如果该位置对应一个非零元素，将其 $A.data[k]$ 数据域修改为 $x$；否则需要插入一个非零元素，将 $A.data[k \dots A.nums-1]$ 的元素均后移一个位置，再将非零元素插入到 $A.data[k]$ 处。算法如下：
+
+\begin{lstlisting}[language=C++, caption={稀疏矩阵三元组顺序表的赋值操作}]
+  void AssignSMatrix(TSMatrix &A, int i, int j, int x) {
+    int k = 1;
+    // 找到适当的位置 k
+    while (k <= A.nums && (A.data[k].r < i || (A.data[k].r == i && A.data[k].c < j))) {
+      k++;
+    }
+    // 如果位置 k 对应一个非零元素
+    if (k <= A.nums && A.data[k].r == i && A.data[k].c == j) {
+      if (x != 0) {
+        A.data[k].d = x; // 修改数据域为 x
+      } else {
+        // 删除该非零元素
+        for (int p = k; p < A.nums; p++) {
+          A.data[p] = A.data[p + 1];
+        }
+        A.nums--;
+      }
+    } else if (x != 0) { // 插入一个非零元素
+      for (int p = A.nums; p >= k; p--) {
+        A.data[p + 1] = A.data[p];
+      }
+      A.data[k].r = i;
+      A.data[k].c = j;
+      A.data[k].d = x;
+      A.nums++;
+    }
+  }
+\end{lstlisting}
+
+\textbf{将指定位置的元素值赋给变量}
+
+该运算就是对于稀疏矩阵 $A$ 执行 $x = A[i][j]$，即将稀疏矩阵 $A$ 中第 $i$ 行第 $j$ 列的元素值赋给变量 $x$。
+先在三元组顺序表 $A$ 中找到适当的位置 $k$，如果该位置对应一个非零元素，将其 $A.data[k]$ 数据域赋给 $x$；
+否则 $x$ 赋值为 $0$。算法如下：
+
+\begin{lstlisting}[language=C++, caption={稀疏矩阵三元组顺序表的取值操作}]
+  void ValueSMatrix(TSMatrix A, int i, int j, int &x) {
+    int k = 1;
+    // 找到适当的位置 k
+    while (k <= A.nums && (A.data[k].r < i || (A.data[k].r == i && A.data[k].c < j))) {
+      k++;
+    }
+    // 如果位置 k 对应一个非零元素
+    if (k <= A.nums && A.data[k].r == i && A.data[k].c == j) {
+      x = A.data[k].d;
+    } else {
+      x = 0;
+    }
+  }
+\end{lstlisting}
+
+\textbf{输出三元组}
+
+该运算就是将稀疏矩阵 $A$ 以三元组的形式输出。算法如下：
+
+\begin{lstlisting}[language=C, caption={输出稀疏矩阵的三元组}]
+  void PrintSMatrix(TSMatrix A) {
+    for (int i = 1; i <= A.nums; i++) {
+      printf("(%d, %d, %d)\n", A.data[i].r, A.data[i].c, A.data[i].d);
+    }
+  }
+
+\end{lstlisting}
+
+\textbf{稀疏矩阵的转置}
+
+该运算对于一个稀疏矩阵 $A$，求其转置矩阵 $B$，即 $b_{i,j} = a_{j,i}$，其中 $0 \leq i < \text{cols}$，$0 \leq j < \text{rows}$。采用的算法思路是：$A$ 对应的三元组顺序表为 $TA$，其转置矩阵 $B$ 也对应一个三元组顺序表 $TB$。按 $c = 0, 1, \dots, \text{cols}-1$ 在 $TA$ 中找列号为 $c$ 的元素，每找到一个这样的元素，将行、列交换后添加到 $TB$ 中。算法如下：
+
+\begin{lstlisting}[language=C++, caption={稀疏矩阵的转置}]
+  void TransposeSMatrix(TSMatrix A, TSMatrix &B) {
+    B.rows = A.cols;
+    B.cols = A.rows;
+    B.nums = A.nums;
+    int k = 1;
+    for (int c = 0; c < A.cols; c++) { // 按列号 c 遍历
+      for (int i = 1; i <= A.nums; i++) {
+        if (A.data[i].c == c) { // 找到列号为 c 的元素
+          B.data[k].r = A.data[i].c; // 行列交换
+          B.data[k].c = A.data[i].r;
+          B.data[k].d = A.data[i].d;
+          k++;
+        }
+      }
+    }
+  }
+\end{lstlisting}
 
 \section{广义表}
 
-\subsection{广义表的定义}
+广义表是线性表的推广，是一种递归定义的数据结构。广义表的元素可以是原子元素，也可以是广义表。
+广义表的元素个数称为广义表的长度，广义表的深度是指广义表中括号的层数。其逻辑结构采用括号表示法如下：
+
+\[
+L = (a_1, a_2, \dots, a_i, \dots, a_n)
+\]
+
+其中 $L$ 为广义表的名称，$a_1, a_2, \dots, a_i, \dots, a_n$ 为广义表的元素，每个元素可以是原子元素，也可以是广义表。
+
+广义表具有以下重要的特性：
+
+\begin{itemize}
+  \item 广义表中的数据元素是有相对次序。
+  \item 广义表的长度定义为最外层包含元素的个数
+  \item 广义表的深度定义为广义表中括号的层数，其中原子元素的深度为 0，空表的深度为 1。
+  \item 广义表可以共享，一个广义表可以被其他广义表共享，这种共享广义表称为再入表。
+  \item 广义表可以是一个递归的表，一个广义表可以是自己的子表，这种广义表称为递归表。递归表的深度是无限的，但是递归表的长度是有限的。
+\end{itemize}
+
+为了简单起见，下面讨论的广义表不包括前面定义的再入表和递归表，即只讨论一般的广义表。另外，规定用小写字母表示原子，用大写字母表示广义表的表名。例如：
+
+\[
+A = ()
+\]
+
+\[
+ B = (e)
+\]
+
+\[
+C = (a, (b, c, d))
+\]
+
+\[
+D = (A, B, C) = ((), (e), (a, (b, c, d)))
+\]
+
+\[
+E = ((a, (a, b)), ((a, b), c))
+\]
+
+其中：
+\begin{itemize}
+  \item $A$ 是一个空表，其长度为 0；
+  \item $B$ 是一个只含有单个原子 $e$ 的表，其长度为 1；
+  \item $C$ 中有两个元素，一个是原子 $a$，另一个是子表 $(b, c, d)$，$C$ 的长度为 2；
+  \item $D$ 中有 3 个元素，每个元素又都是一个子表，$D$ 的长度为 3；
+  \item $E$ 中只含有一个元素，该元素是一个子表，$E$ 的长度为 1。
+\end{itemize}
+
+如果把每个表的名称（若有）写在其表的前面（没有给出名称的子表为匿名表，用“.”表示），则可以更清晰地表示广义表的结构。
+
+若用括号表示法（即将每个表的名称写在其表的前面，没有给出名称的子表为匿名表，用“.”表示），则上面的 5 个广义表可相应地表示如下：
+
+\[
+A = ()
+\]
+
+\[
+  B = (e)
+\]
+
+\[
+  C = (a, .(b, c, d))
+\]
+
+\[
+D = (A(), B(e), C(a, .(b, c, d)))
+\]
+\[
+E = ((a, .(a, b)), .((a, b), c))
+\]
+
+若用圆圈和方框分别表示表和原子，并用线段把表和它的元素（元素结点应在其表结点的下方）连接起来，则可得到一个广义表的图形表示。
+例如，上面 5 个广义表的图形表示如图\ref{fig:generalized_table}所示。
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/GLGraph.pdf}
+  \caption{广义表的图形表示}
+  \label{fig:generalized_table}
+\end{figure}
+
+广义表 $GL$ 的表头为第一个元素 $a_1$，其余部分 $(a_2, \dots, a_i, \dots, a_n)$ 为 $GL$ 的表尾，分别记作 $\text{head}(GL) = a_1$ 和 $\text{tail}(GL) = (a_2, \dots, a_i, \dots, a_n)$。显然，一个广义表的表尾始终是一个广义表。空表无表头、表尾。这里仍取上面的示例：
+
+\begin{itemize}
+  \item $A$ 无表头、表尾；
+  \item $\text{head}(B) = e$, $\text{tail}(B) = ()$；
+  \item $\text{head}(C) = a$, $\text{tail}(C) = ((b, c, d))$；
+  \item $\text{head}(D) = ()$, $\text{tail}(D) = ((e), (a, (b, c, d)))$；
+  \item $\text{head}(E) = (a,(a,b),((a,b),c))$, $\text{tail}(E) = ()$。
+\end{itemize}
+
+其中，广义表 $A$ 和 $B$ 的深度为 1（注意广义表 $A$ 和广义表 $B$ 的深度相同，因为它们均只有一重括号），
+广义表 $C, D, E$ 的深度分别为 2, 3 和 4。
 
 \subsection{广义表的存储结构}
+
+广义表是一种递归的数据结构，因此很难为每个广义表分配固定大小的存储空间，所以其存储结构只好采用链式存储结构。
+
+从图\ref{fig:generalized_table_node} 中可以看到，广义表有两类结点，一类为圆圈结点，在这里对应子表；另一类为方形结点，在这里对应原子。
+
+为了使子表和原子两类结点既能在形式上保持一致，又能进行区别，可采用以下结构形式：
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/GLStruct.pdf}
+  \caption{广义表的存储结构}
+  \label{fig:generalized_table_node}
+\end{figure}
+
+其中，$tag$ 为标志域，用于区分两类结点，即由 $tag$ 决定是使用结点的$sublist$ 域还是 $data$ 域:
+
+\begin{itemize}
+  \item 当 $tag = 0$ 时，表示该结点是原子结点，此时 $data$ 域存放原子值；
+  \item 当 $tag = 1$ 时，表示该结点是子表结点，此时 $sublist$ 域存放指向子表的指针。
+  \end{itemize}
+
+  $link$ 域是指向下一个结点的指针，用于将广义表中的各个结点连接起来。当没有下一个结点时，$link$ 域为 $NULL$。
+
+  例如前面的广义表$C$的存储结构如图\ref{fig:GLStructGraph}所示。
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/GLStructGraph.pdf}
+    \caption{广义表$C$的存储结构}
+    \label{fig:GLStructGraph}
+  \end{figure}
+
+
+  采用C/C++语言的结构体定义广义表的存储结构如代码\ref{code:GLStruct}所示。
+
+  \begin{lstlisting}[language=C++, caption={广义表的存储结构}, label={code:GLStruct}]
+  typedef struct GLNode {
+    int tag; // 标志域，0表示原子结点，1表示子表结点
+    union {
+      AtomType data; // 原子结点的值域，AtomType为原子结点的数据类型
+      struct GLNode *sublist; // 子表结点的指针域，指向子表
+    } val;
+    struct GLNode *link; // 指向下一个结点的指针域
+  } GLNode, *GList;
+  \end{lstlisting}
 
 \subsection{广义表的运算}
 
