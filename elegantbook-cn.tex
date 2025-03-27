@@ -5351,8 +5351,307 @@ F(G) =
 \end{figure}
 \subsection{哈夫曼树和哈夫曼编码}
 
+\subsubsection{哈夫曼树}
+
+在许多应用中，经常将树中的结点赋予一个有某种意义的数值，称此数值为该结点的权。从根结点到该结点之间的路径长度与该结点上的权的乘积称为结点的带权路径长度。树中所有叶子结点的带权路径长度之和称为树的带权路径长度，通常记为：
+
+\[
+WPL = \sum_{i=1}^{n_0} w_i l_i
+\]
+
+其中，$n_0$ 表示叶子结点的个数，$w_i$ 和 $l_i$ 分别表示第 $i$ 个叶子结点的权值和根到它之间的路径长度（即从根结点到该叶子结点的路径上经过的分支数）。
+
+在 $n_0$ 个带权叶子结点构成的所有二叉树中，带权路径长度 $WPL$ 最小的二叉树称为哈夫曼树或最优二叉树。如图\ref{fig:weightBTree}带权二叉树，它们的带权路径长度为：
+
+\[
+\begin{cases}
+(a) \ WPL = 1 \times 2 + 4 \times 3 + 5 \times 3 + 6 \times 3 = 47 \\
+(b) \ WPL = 1 \times 3 + 4 \times 3 + 5 \times 2 + 6 \times 1 = 31 \\
+(c) \ WPL = 1 \times 2 + 4 \times 2 + 5 \times 2 + 6 \times 2 = 32
+\end{cases}
+\]
+
+\begin{figure}[h!]
+  
+  \centering
+
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/treeWeight.pdf}
+  \caption{带权二叉树}
+  \label{fig:weightBTree}
+\end{figure}
+
+显然，带权路径长度最小的是图\ref{fig:weightBTree}(b)的二叉树，所以图\ref{fig:weightBTree}(b)是哈夫曼树。
+
+哈夫曼树的构造过程如下：
+
+\begin{enumerate}
+  \item 从 $n$ 个权值 $\{w_1, w_2, \dots, w_n\}$ 中选择两个最小的权值 $w_i$ 和 $w_j$，构造一棵新的二叉树，其根结点的权值为 $w_i + w_j$；
+  \item 将 $w_i$ 和 $w_j$ 从权值集合中删除，将 $w_i + w_j$ 加入权值集合中；
+  \item 重复上述两步，直到所有的权值都被选出，构造成一棵二叉树为止。
+  \end{enumerate}
+
+如图\ref{fig:HuffmanTree}所示，构造哈夫曼树的过程。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/createHaffman.pdf}
+  \caption{构造哈夫曼树}
+  \label{fig:HuffmanTree}
+\end{figure}
+
+相关定理：对于具有 $n$ 个叶子结点的哈夫曼树，其带权路径长度最小，且有 $2n-1$ 个结点，其中有 $n$ 个叶子结点，$n-1$ 个度为 $1$ 的结点。
+证明：在哈夫曼树的构造过程中，每次都是将两棵树合并为一棵树，所以哈夫曼树中不存在度为 1 的结点，即 $n_1 = 0$。由二叉树的性质可知，$n_0 = n_2 + 1$，即 $n_2 = n_0 - 1$。因此：
+
+\[
+n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
+\]
+
+其中，$n$ 表示哈夫曼树的总结点数，$n_0$ 表示叶子结点的个数，$n_1$ 表示度为 1 的结点个数，$n_2$ 表示度为 2 的结点个数。
+
+\subsubsection{哈夫曼编码}
+\subsubsection{哈夫曼树的结点类型定义}
+
+我们要清楚，结点的结构体的构建都是为了更好地表述相应的构造算法，所以在这里我们要从算法的角度去分析结构体的构造。
+
+大家可以想一想，在这里哈夫曼树应该用什么样的存储结构来表示呢？
+还是和之前二叉树那样链接的方式吗？显然不恰当，因为我们会重复利用这里由两个最小权值结点之和形成的新的结点。
+所以我们需要有双亲结点指向孩子结点的“指针”，而我们的哈夫曼编码是需要去判断当前结点是其双亲结点的左孩子亦或右孩子。
+一般而言，左孩子编码为“0”，右孩子编码为“1”。这样的话，我们就必须有从孩子结点指向双亲的“指针”。也就是说，一般性的二叉树无法满足我们这里的要求。
+
+因此，在这里我们设计一种新的结构体：
+
+\begin{lstlisting}[language=C++, caption={哈夫曼树结点类型定义}]
+  typedef struct HTNode {
+    char data;//结点数据
+    int weight;//结点权值
+    int parent, lchild, rchild;//双亲、左孩子、右孩子的下标
+  } HTNode, *HuffmanTree;
+\end{lstlisting}
+
+通过上述哈夫曼树的结构体，我们便可以进行哈夫曼树的构造。构造代码如下：
+
+\begin{lstlisting}[language=C++, caption={构造哈夫曼树}]
+
+  void Select(HuffmanTree HT, int n, int &s1, int &s2) {
+    int min1 = INT_MAX, min2 = INT_MAX;
+    for (int i = 1; i <= n; i++) {
+      if (HT[i].parent == 0) {
+        if (HT[i].weight < min1) {
+          min2 = min1;
+          s2 = s1;
+          min1 = HT[i].weight;
+          s1 = i;
+        } else if (HT[i].weight < min2) {
+          min2 = HT[i].weight;
+          s2 = i;
+        }
+      }
+    }
+  }
+
+  void CreateHuffmanTree(HuffmanTree &HT, int n) {
+    if (n <= 1) {
+      return;
+    }
+    int m = 2 * n - 1;
+    HT = (HuffmanTree)malloc((m + 1) * sizeof(HTNode));
+    if (!HT) {
+      exit(OVERFLOW);
+    }
+    for (int i = 1; i <= m; i++) {
+      HT[i].parent = 0;
+      HT[i].lchild = 0;
+      HT[i].rchild = 0;
+    }
+    for (int i = 1; i <= n; i++) {
+      scanf("%d", &HT[i].weight);
+    }
+    for (int i = n + 1; i <= m; i++) {
+      int s1, s2;
+      Select(HT, i - 1, s1, s2);
+      HT[s1].parent = i;
+      HT[s2].parent = i;
+      HT[i].lchild = s1;
+      HT[i].rchild = s2;
+      HT[i].weight = HT[s1].weight + HT[s2].weight;
+    }
+  }
+\end{lstlisting}
+
+
+进一步我们可以对哈夫曼树进行编码，代码如下：
+
+\begin{lstlisting}[language=C++, caption={哈夫曼编码}]
+  void HuffmanCoding(HuffmanTree HT, HuffmanCode &HC, int n) {
+    HC = (HuffmanCode)malloc((n + 1) * sizeof(char *));
+    char *cd = (char *)malloc(n * sizeof(char));
+    cd[n - 1] = '\0';
+    for (int i = 1; i <= n; i++) {
+      int start = n - 1;
+      int c = i;
+      int f = HT[i].parent;
+      while (f != 0) {
+        --start;
+        if (HT[f].lchild == c) {
+          cd[start] = '0';
+        } else {
+          cd[start] = '1';
+        }
+        c = f;
+        f = HT[f].parent;
+      }
+      HC[i] = (char *)malloc((n - start) * sizeof(char));
+      strcpy(HC[i], &cd[start]);
+    }
+    free(cd);
+  }
+\end{lstlisting}
+
+说明：在一组字符的哈夫曼编码中，各字符的编码不一定是等长的，但一定是没有前缀的。这样的编码称为前缀编码。前缀编码的一个重要性质是：任何字符的编码都不是另一个字符编码的前缀。
 \subsection{并查集}
 
+\textbf{并查集是什么}
+
+所谓并查集，是用来解决元素分组问题的一种数据结构。并查集的基本操作有两个：查找和合并。查找即是找到某个元素所在的集合，合并即是将两个集合合并为一个集合。
+
+更为形象的理解并查集：并查集的重要思想就在于要用集合中的一个元素来代表集合。就好比把集合比喻成帮派，而代表元素则是帮主。我们利用这个比喻来看看并查集是如何运作的。
+
+初始状态如图\ref{fig:unionFind1}所示，每个元素都是一个单独的集合，每个集合的代表元素就是自己。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(a).pdf}
+  \caption{并查集初始状态}
+  \label{fig:unionFind1}
+\end{figure}
+
+初始状态，所有人自成一派，自己就是帮主（对于只有一个元素的集合，代表元素自然也只能是那个唯一的元素）
+
+现在，1号与4号进行比武，假设1号赢，那么按照江湖规矩，4号就得当1号的小弟（合并），此时1号帮派就有两个人了，帮主（代表元素就是1号）
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(b).pdf}
+  \caption{并查集合并}
+  \label{fig:unionFind2}
+\end{figure}
+
+过了一段时间，5号选手想和想和4号pk，首先他们得看看他们得帮主是不是同一个人，如果是同一个人那就不能开战，发现不是同一人，
+5号的帮主就是他自己，而4号帮主是1号，1号出马迎接5号的挑战，假设仍然1号胜出，那么5号也必须加入1号帮派，1号仍然作为帮主。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(c).pdf}
+  \caption{并查集合并}
+  \label{fig:unionFind3}
+\end{figure}
+
+假设2 3 6 号也同样进行了激烈的帮派斗争，形成以下格局：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(d).pdf}
+  \caption{并查集合并}
+  \label{fig:unionFind4}
+\end{figure}
+
+现在江湖上形成了两强局面，某一天4号和6号想要pk。首先他们的帮主不是同一人，所以他们喊各自的帮主，1号和3号出手，假设1号胜利，则3号拜入1号门下，当然2号和6号作为3号小弟也成为了1号的小弟。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(e).pdf}
+  \caption{并查集合并}
+  \label{fig:unionFind5}
+\end{figure}
+
+善于观察的同学已经发现这其实是一个树状的结构，要寻找集合的代表元素，只需要一步一步的向上寻找即可，可以发现，代表元素的箭头是永远指向自己的，这也是我们去判断是否找到代表元素的一个条件。
+
+\textbf{并查集的实现}
+
+我们上面的描述可以知道，我们的每一个结点都要能够找到他的双亲结点，而且最开始的祖先结点就是结点本身。
+鉴于此我们可以设置一个数组用来达到此目的，即将数组下标代表各元素，
+而下标对应的值为其双亲序号，这样层层寻找就可以找到其祖先元素。由此并查集代码实现可分为以下三个部分：
+
+\begin{itemize}
+  \item 初始化：每个元素的父亲都是自己
+  \item 查找：找到元素的祖先元素
+  \item 合并：将两个元素的祖先元素合并
+  \end{itemize}
+
+  初始化一个并查集：
+
+  \begin{lstlisting}[language=C++, caption={并查集初始化}]
+    void Init(int *parent, int n) {
+      for (int i = 0; i < n; i++) {
+        parent[i] = i;
+      }
+    }
+  \end{lstlisting}
+
+  查找元素的祖先元素：
+
+  \begin{lstlisting}[language=C++, caption={查找元素的祖先元素}]
+    int Find(int *parent, int i) {
+      if (parent[i] == i) {
+        return i;
+      }
+      return Find(parent, parent[i]);
+    }
+
+  \end{lstlisting}
+
+  合并两个元素的祖先元素，即将两个“帮派”进行合并，即将前者的父节点指向后者的父节点：
+
+  \begin{lstlisting}[language=C++, caption={合并两个元素的祖先元素}]
+    void Union(int *parent, int i, int j) {
+      int rootI = Find(parent, i);
+      int rootJ = Find(parent, j);
+      if (rootI != rootJ) {
+        parent[rootI] = rootJ;
+      }
+    }
+  \end{lstlisting}
+
+  通过上述三个函数，我们就可以实现一个简单的并查集。并查集的应用非常广泛，比如在图的最小生成树算法中的Kruskal算法中就用到了并查集。
+
+  \textbf{并查集的优化}
+
+  上面的并查集的效率是比较低的，例如如果我们遇到下面的场景：
+
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindLow.pdf}
+    \caption{并查集低效率}
+    \label{fig:unionFind6}
+  \end{figure}
+
+  在合并 $2, 3$ 时，我们找到 $2$ 的祖先是 $1$，然后将 $1$ 的祖先设置为 $3$；同理，第二步时将 $3$ 的祖先设置为 $4$。大家可以发现，这样的一种做法会使得我们的查询效率变得十分低下。假如有 $10000$ 个数，那么最大的查找次数就会达到 $10000$ 次。
+
+  而我们也可以发现，我们的目的是找到“代表元素”。直观地来看，我们完全可以将父亲节点直接设置为“代表元素”，就像这样：
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/pathCompress.pdf}
+    \caption{并查集高效率}
+    \label{fig:unionFind7}
+  \end{figure}
+
+  这样我们每次就可以以0(1)的时间复杂度找到我们的“代表元素”。这种方法也叫做路径压缩，现在我们看看代码应该如何实现，如下所示：
+
+  \begin{lstlisting}[language=C++, caption={路径压缩}]
+    int Find(int *parent, int i) {
+      if (parent[i] != i) {
+        parent[i] = Find(parent, parent[i]);
+      }
+      return parent[i];
+    }
+
+    //上述代码也可以简化为如下形式
+
+    int Find(int *parent, int i) {
+      return parent[i] == i ? i : parent[i] = Find(parent, parent[i]);
+    }
+  \end{lstlisting}
 \chapter{图}
 
 \section{图的基本概念}
