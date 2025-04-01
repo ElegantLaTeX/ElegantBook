@@ -5656,37 +5656,1229 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 \section{图的基本概念}
 
+
+
 \subsection{图的定义}
+图是由两个集合，顶点集（Vertex）和边集（Edge）组成的，记为 $G = (V, E)$。其中，$V$ 是顶点的有穷非空集合，$E$ 是边的有穷集合。图中的边可以是有向的，也可以是无向的。
+
+注：在我们的这些数据结构中，线性表可以是空表，树可以是空树，但是图不可以是空图，至少要有一个顶点。
 
 \subsection{图的分类}
 
+\textbf{根据图中边的有无方向，图可以分为有向图和无向图。}
+
+\begin{itemize}
+  \item 无向图：图中的边没有方向，即边 $(v_i, v_j)$ 和边 $(v_j, v_i)$ 是等价的，如图\ref{fig:undirectedGraph}所示，边 $(v_i, v_j)$ 和边 $(v_j, v_i)$ 是等价的。
+  \item 有向图：图中的边有方向，即边 $(v_i, v_j)$ 和边 $(v_j, v_i)$ 是不等价的，如图\ref{fig:directedGraph}所示，边 $(v_i, v_j)$ 称为弧，$v_i$ 称为弧尾，$v_j$ 称为弧头。
+  \end{itemize}
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/undirection.pdf}
+    \caption{无向图}
+    \label{fig:undirectedGraph}
+  \end{figure}
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/direction.pdf}
+    \caption{有向图}
+    \label{fig:directedGraph}
+
+  \end{figure}
+
+  \textbf{根据图中边的权值，图可以分为无权图和带权图。}
+
+  \begin{itemize}
+    \item 无权图：图中的边没有权值，如图\ref{fig:undirectedGraph}和图\ref{fig:directedGraph}所示。
+    \item 带权图：图中的边有权值，如图\ref{fig:weightedGraph}所示。
+    \end{itemize}
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/weightedGraph.pdf}
+      \caption{带权图}
+      \label{fig:weightedGraph}
+    \end{figure}
+
+\textbf{简单图和多重图}
+
+\begin{itemize}
+  \item 简单图：图中不存在顶点到自身的边，且同一条边不重复出现，如图\ref{fig:simpleGraph}所示。
+  \item 多重图：图中存在顶点到自身的边，或者同一条边重复出现，如图\ref{fig:multipleGraph}所示。
+  \end{itemize}
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/unDirection.pdf}
+    \caption{简单图}
+    \label{fig:simpleGraph}
+  \end{figure}
+
+  \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/mutipleGraph.pdf}
+    \caption{多重图}
+    \label{fig:multipleGraph}
+  \end{figure}
+
+\textbf{完全图}
+
+对于无向图，如果图中任意两个顶点之间都存在边，则称该图为完全图，如图\ref{fig:completeGraph}所示。包含 $n$ 个顶点的完全图有 $\frac{n(n-1)}{2}$ 条边。
+
+对于有向图，如果图中任意两个顶点之间都存在方向相同的边，则称该图为完全有向图，如图\ref{fig:completeDirectedGraph}所示。包含 $n$ 个顶点的完全有向图有 $n(n-1)$ 条边。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/unDirection.pdf}
+  \caption{完全无向图}
+  \label{fig:completeGraph}
+
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/directedComGraph.pdf}
+  \caption{完全有向图}
+  \label{fig:completeDirectedGraph}
+\end{figure}
+
+
+\textbf{子图}
+
+设 $G = (V, E)$ 是一个图，$G' = (V', E')$ 是 $G$ 的一个子图，如果 $V' \subseteq V$ 且 $E' \subseteq E$，则称 $G'$ 是 $G$ 的子图。如图 \ref{fig:subGraph}所示，$G'$ 是 $G$ 的子图。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/subGraph.pdf}
+  \caption{子图}
+  \label{fig:subGraph}
+\end{figure}
+
+      
+
+
 \subsection{图的基本术语}
 
+
+\textbf{端点和邻接点}
+
+对于无向图，如果边 $(v_i, v_j)$ 存在，则称 $v_i$ 和 $v_j$ 互为邻接点，$v_i$ 和 $v_j$ 称为边 $(v_i, v_j)$ 的端点。
+
+对于有向图，如果弧 $(v_i, v_j)$ 存在，则称 $v_i$ 邻接到 $v_j$，$v_i$ 称为弧 $(v_i, v_j)$ 的弧尾，$v_j$ 称为弧 $(v_i, v_j)$ 的弧头。
+
+\textbf{度}
+在无向图中，一个顶点所关联的边的数目称为该顶点的度（degree）。在有向图中，顶点的入度（indegree）是以该顶点为终点的边的数目，出度（outdegree）是以该顶点为起点的边的数目。一个顶点的入度与出度的和为该顶点的度。
+
+若一个图中有 $n$ 个顶点和 $e$ 条边，每个顶点的度为 $d_i \ (0 \leq i \leq n-1)$，则有：
+
+\[
+e = \frac{\sum_{i=0}^{n-1} d_i}{2}
+\]
+
+也就是说，一个图中所有顶点的度之和等于边数的两倍。因为图中的每条边分别作为两个邻接点的度各计一次。
+
+\textbf{路径和路径长度}
+
+在图 $G = (V, E)$ 中，从顶点 $v_i$ 到顶点 $v_j$ 的路径是一个顶点序列 $v_{i_0}, v_{i_1}, \dots, v_{i_k}$，其中 $v_{i_0} = v_i$，$v_{i_k} = v_j$，且 $(v_{i_{m-1}}, v_{i_m}) \in E \ (1 \leq m \leq k)$。路径的长度是路径上边或弧的数目。
+
+\textbf{回路或环}
+
+如果路径的起点和终点相同，则称该路径为回路或环。
+
+\textbf{简单路径}
+
+如果路径中除起点和终点外，其余顶点均不相同，则称该路径为简单路径。
+
+\textbf{连通、连通图和连通分量}
+
+在无向图中，如果从顶点 $v_i$ 到顶点 $v_j$ 有路径，则称 $v_i$ 和 $v_j$ 是连通的。如果无向图中任意两个顶点都是连通的，则称该无向图是连通图。无向图的极大连通子图称为连通分量。
+
+在有向图中，如果从顶点 $v_i$ 到顶点 $v_j$ 有路径，且从顶点 $v_j$ 到顶点 $v_i$ 也有路径，则称 $v_i$ 和 $v_j$ 是强连通的。如果有向图中任意两个顶点都是强连通的，则称该有向图是强连通图。有向图的极大强连通子图称为强连通分量。
+
+
+
+
 \section{图的存储结构}
+图的存储结构除了要存储图中各个顶点本身的信息以外,同时还要存储顶点与顶点之
+间的所有关系(边的信息)。常用的图的存储结构有邻接矩阵和邻接表。 本他主要这论首
+两种存储结构和基本运算算法的设计。
 
 \subsection{邻接矩阵}
+图的邻接矩阵是一种采用邻接矩阵数组表示顶点之间相邻关系的存储结构。
+邻接矩阵说白了就是一个二维数组，数组下标代表顶点序号，数组值，即行列交叉处代表两个顶点之间的权值，如果是无权图，
+那么我们简单设置为1即可。如果两顶点之间没有边，
+那我们就可以将数组对应位置设置为$\infty$ 或者0都可以。
+
+不带权无向图的邻接矩阵如图\ref{fig:adjacencyMatrix_UnWeightUndirected}所示。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyMatrix_UnWeightUndirected.pdf}
+  \caption{无权无向图的邻接矩阵}
+  \label{fig:adjacencyMatrix_UnWeightUndirected}
+\end{figure}
+
+带权有向图的邻接矩阵如图\ref{fig:adjacencyMatrix_WeightedDirected}所示。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyMatrix_weightDirected.pdf}
+  \caption{带权有向图的邻接矩阵}
+  \label{fig:adjacencyMatrix_WeightedDirected}
+\end{figure}
+
+
+带权无向图的邻接矩阵如图\ref{fig:adjacencyMatrix_WeightedUndirected}所示。
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyMatrix_weightUnDirected.pdf}
+  \caption{邻接矩阵}
+  \label{fig:adjacencyMatrix_WeightedUndirected}
+\end{figure}
+
+由此可见，邻接矩阵的结构体可以定义如下：
+
+\begin{lstlisting}[language=C++, caption={邻接矩阵结构体}]
+  #define MAX_VERTEX_NUM 20
+  typedef struct {
+    char vexs[MAX_VERTEX_NUM];//顶点表
+    int arc[MAX_VERTEX_NUM][MAX_VERTEX_NUM];//邻接矩阵
+    int vexnum, arcnum;//顶点数和边数
+  } MGraph;
+\end{lstlisting}
+
+\textbf{邻接矩阵的特点}
+
+\begin{itemize}
+  \item 图的邻接矩阵表示唯一，无向图的邻接矩阵是对称的。
+  \item 对于含有 $n$ 个顶点的图，当采用邻接矩阵表示时，需要 $n^2$ 个存储单元，因此，邻接矩阵的存储空间是 $O(n^2)$。所以邻接矩阵适合存储边数相对较多的图。
+  \item 对于无向图，邻接矩阵中的非零元素的个数是边的条数的两倍。
+  \item 对于有向图，邻接矩阵中的非零元素的个数是边的条数。
+  \item 对于无向图，邻接矩阵数组的第 $i$ 行或第 $i$ 列中非零元素的个数是顶点 $v_i$ 的度。
+  \item 对于有向图，邻接矩阵数组的第 $i$ 行中非零元素的个数是顶点 $v_i$ 的出度，第 $i$ 列中非零元素的个数是顶点 $v_i$ 的入度。
+  \item 在邻接矩阵中，判断图中两个顶点之间是否有边或者边的权值是非常方便的，只需要 $O(1)$ 的时间。
+  \end{itemize}
+
 
 \subsection{邻接表}
+图的邻接表是一种采用链式存储结构表示顶点之间相邻关系的存储结构。邻接表是图的一种链式存储结构，
+它的基本思想是：对图 $G$ 的每个顶点 $v_i$，建立一个单链表，
+链表中的结点称为顶点 $v_i$ 的边表，边表中的结点存储了与顶点 $v_i$ 相邻接的顶点在顶点表中的位置和边上的权值。如图 \ref{fig:adjacencyList} 所示。
 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyList.pdf}
+  \caption{邻接表}
+  \label{fig:adjacencyList}
+\end{figure}
+
+对邻接表的理解：
+
+首先我们要明白结构体是可以嵌套的，也就是说结构体中可以有结构体，这样我们就可以很方便地表示图的结构。第一步划分如图\ref{fig:adjacencyList_struct}所示，
+我们可以看到，整个邻接表被我们划分为三个单链表，其实也很容易想到，我们说过邻接表是顺序表和链表的结合，
+当我们单独划分出单链表的时候，那么第一个节点就是我们的头结点，比如上面的0号位置的结点1,1号位置的结点2..，
+然后我们可以发现，我有很多个头结点，每一个头结点都引出了该节点的邻接顶点，那同样地，我们很自然地想到用一个数组来存储我们的头结点，
+即我们构造一个顶点数组，数组中的元素类型为顶点，包含顶点本身信息，和指向下一个邻接点的指针，显然的是，
+图中的每一个顶点均会作为头结点来连接它的邻接顶点，哪怕没有邻接点（如点3）。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyList_struct.pdf}
+  \caption{邻接表结构体}
+  \label{fig:adjacencyList_struct}
+\end{figure}
+
+接下来我们进一步拆分，以1号顶点为例,如图 \ref{fig:adjacencyList_struct2}所示，我们可以看到，绿色框框出的就是单个链表所基于的最小单位，
+也就是我们所说的单表结点，注意这里头结点和后续结点不是完全一样的，
+头结点属于顶点表数组，其结点为顶点表节点，而后续结点则是表达邻接点的关系，属于边表结点。
+
+其中，顶点表结点包含顶点信息info和第一条邻接边firstEdge；
+边表结点包含该顶点在顶点表数组中的下标（这样我们就可以很容易拿到该顶点的信息以及连接信息）、到该邻接点的边的权重以及下一个邻接点（同样是边表结点）。
+经过上面的阐释我们的顶点表结点的结构体以及边表结点结构体也就呼之欲出了。如代码所示：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyList_struct2.pdf}
+  \caption{邻接表结构体}
+  \label{fig:adjacencyList_struct2}
+
+\end{figure}
+
+\begin{lstlisting}[language=C++, caption={邻接表结构体}]
+  typedef struct EdgeNode {
+    int adjvex;//邻接点域
+    int weight;//权值
+    struct EdgeNode *next;//指针域
+  } EdgeNode;
+
+  typedef struct VertexNode {
+    char data;//顶点域
+    EdgeNode *firstEdge;//边表头指针
+  } VertexNode;
+
+\end{lstlisting}
+
+但这里我们可以发现，如果仅使用上面两个结构体，我们可能只能表示一个顶点的邻接关系，还记得我们说过，
+全部的顶点都归属于同一个顶点表数组吗，在这里我们就需要创建一个顶点表数组，将所有的顶点都放入这个数组，通过数组来访问其顶点信息以及邻接点信息。如代码所示：
+
+\begin{lstlisting}[language=C++, caption={邻接表结构体}]
+  #define MAX_VERTEX_NUM 20
+  typedef struct {
+    VertexNode adjList[MAX_VERTEX_NUM];//顶点表
+    int numVertexes, numEdges;//顶点数和边数
+  } ALGraph;
+\end{lstlisting}
+
+可以看到，我们在ALGraph中创建了一个顶点数组，数组元素类型为VertexNode，即顶点表类型，然后还设立了边数和顶点数，这两个信息是基础信息，会时常用到。
+如图 \ref{fig:adjacencyList_struct3}所示。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjList_array.pdf}
+  \caption{邻接表结构体}
+  \label{fig:adjacencyList_struct3}
+\end{figure}
+
+邻接表的特点如下：
+
+\begin{enumerate}
+  \item 邻接表的表示不唯一，这是因为在每个顶点对应的单链表中，各边结点的链接次序可以是任意的，取决于建立邻接表的算法以及边的输入次序。
+  
+  \item 对于有 $n$ 个顶点和 $e$ 条边的无向图，其邻接表有 $n$ 个头结点和 $2e$ 个边结点；对于有 $n$ 个顶点和 $e$ 条边的有向图，其邻接表有 $n$ 个头结点和 $e$ 个边结点。显然，对于边数目较少的稀疏图，邻接表比邻接矩阵更节省存储空间。
+  
+  \item 对于无向图，邻接表中顶点 $v_i$ 对应的第 $i$ 个单链表的边结点数目正好是顶点 $v_i$ 的度。
+  
+  \item 对于有向图，邻接表中顶点 $v_i$ 对应的第 $i$ 个单链表的边结点数目仅仅是顶点 $v_i$ 的出度。顶点 $v_j$ 的入度为邻接表中所有 $adjvex$ 域值为 $v_j$ 的边结点数目。
+  
+  \item 在邻接表中，查找顶点 $v_i$ 关联的所有边是非常快速的，所以在需要提取某个顶点的所有邻接点的算法中通常采用邻接表存储结构。
+\end{enumerate}
 \subsection{十字链表}
 
 \subsection{邻接多重表}
 
-\section{图的遍历}
+\section{图的基本运算}
 
+
+\subsection{图的创建}
+
+\subsubsection{邻接矩阵的创建}
+
+我们可以根据用户的输入来创建一个图的邻接矩阵，首先输入顶点数和边数，然后输入顶点信息，最后输入边的信息，即边的两个顶点的下标和权值。
+
+\begin{lstlisting}[language=C++, caption={邻接矩阵的创建}]
+  void CreateMGraph(MGraph *G) {
+    int i, j, k, w;
+    printf("输入顶点数和边数：\n");
+    scanf("%d %d", &G->vexnum, &G->arcnum);
+    printf("输入顶点信息：\n");
+    for (i = 0; i < G->vexnum; i++) {
+      scanf("%c", &G->vexs[i]);
+    }
+    for (i = 0; i < G->vexnum; i++) {
+      for (j = 0; j < G->vexnum; j++) {
+        G->arc[i][j] = 0;
+      }
+    }
+    for (k = 0; k < G->arcnum; k++) {
+      printf("输入边(vi, vj)的下标i, 下标j和权值w：\n");
+      scanf("%d %d %d", &i, &j, &w);
+      G->arc[i][j] = w;
+      G->arc[j][i] = w;
+    }
+  }
+\end{lstlisting}
+
+\subsubsection{邻接表的创建}
+
+我们可以根据用户的输入来创建一个图的邻接表，首先输入顶点数和边数，然后输入顶点信息，最后输入边的信息，即边的两个顶点的下标。
+\begin{lstlisting}[language=C++, caption={邻接表的创建}]
+  void CreateALGraph(ALGraph *G) {
+    int i, j, k;
+    EdgeNode *e;
+    printf("输入顶点数和边数：\n");
+    scanf("%d %d", &G->numVertexes, &G->numEdges);
+    printf("输入顶点信息：\n");
+    for (i = 0; i < G->numVertexes; i++) {
+      scanf("%c", &G->adjList[i].data);
+      G->adjList[i].firstEdge = NULL;
+    }
+    for (k = 0; k < G->numEdges; k++) {
+      printf("输入边(vi, vj)的下标i, 下标j：\n");
+      scanf("%d %d", &i, &j);
+      e = (EdgeNode *)malloc(sizeof(EdgeNode));
+      e->adjvex = j;
+      e->next = G->adjList[i].firstEdge;
+      G->adjList[i].firstEdge = e;
+
+      e = (EdgeNode *)malloc(sizeof(EdgeNode));
+      e->adjvex = i;
+      e->next = G->adjList[j].firstEdge;
+      G->adjList[j].firstEdge = e;
+    }
+  }
+
+\end{lstlisting}
+
+\subsection{输出图}
+
+\subsubsection{邻接矩阵的输出}
+
+\begin{lstlisting}[language=C++, caption={邻接矩阵的输出}]
+  void PrintMGraph(MGraph G) {
+    int i, j;
+    for (i = 0; i < G.vexnum; i++) {
+      for (j = 0; j < G.vexnum; j++) {
+        printf("%d ", G.arc[i][j]);
+      }
+      printf("\n");
+    }
+  }
+\end{lstlisting}
+
+\subsubsection{邻接表的输出}
+
+扫描邻接表G的头结点数组adjlist，对于每个单链表，先输出头结点的信息，然后扫描边表，输出边表结点的信息。
+\begin{lstlisting}[language=C++, caption={邻接表的输出}]
+  void PrintALGraph(ALGraph G) {
+    int i;
+    EdgeNode *e;
+    for (i = 0; i < G.numVertexes; i++) {
+      printf("%c", G.adjList[i].data);
+      e = G.adjList[i].firstEdge;
+      while (e != NULL) {
+        printf("%d", e->adjvex);
+        e = e->next;
+      }
+      printf("\n");
+    }
+  }
+\end{lstlisting}
+
+
+\section{图的遍历}
+从给定图中任意指定的顶点（称为初始点）出发，按照某种搜索方法沿着图的边访问图中的所有顶点，使每个顶点仅被访问一次，这个过程称为图的遍历。
+如果给定图是连通的无向图或者是强连通的有向图，则遍历过程一次就能完成，并可按访问的先后顺序得到由该图的所有顶点组成的一个序列。
+
+图的遍历比树的遍历更复杂，因为从树根到达树中的任意结点只有一条路径，而从图的初始点到达图中的每个顶点可能存在着多条路径。
+当沿着图中的一条路径访问过某一顶点之后，可能还沿着另一条路径回到该顶点，即存在回路。为了避免同一个顶点被重复访问，必须记住每个被访问过的顶点。
+为此，可设置一个访问标记数组 \texttt{visited}，当顶点 $v_i$ 被访问过时，数组中的元素 \texttt{visited[$i$]} 置为 $1$，否则置为 $0$。
+
+根据搜索方法的不同，图的遍历方法有两种：
+\begin{itemize}
+  \item 深度优先遍历（Depth First Search, DFS）；
+  \item 广度优先遍历（Breadth First Search, BFS）。
+\end{itemize}
 \subsection{深度优先搜索}
+
+\subsubsection{深度优先搜索的基本思想}
+深度优先遍历见名知意，就是在图的遍历中，从初始顶点开始，不断地往更深处去遍历。假设我们从图中的某个初始点 $i$ 出发，首先访问该初始点，
+然后选择一个与顶点 $i$ 相邻且未被访问过的顶点 $j$，再以 $j$ 为初始顶点，从它出发进行深度优先遍历，直到图中所有的顶点全部被访问完。
+
+从以上描述可以看出，深度优先遍历其实是一个递归过程。
+
+如图 \ref{fig:DFS} 所示，从顶点 $v_0$ 出发，首先访问顶点 $1$，然后选择与顶点 $1$ 相邻且未被访问过的顶点 $1$，再以 $1$ 为初始顶点，
+从它出发进行深度优先遍历，直到图中所有的顶点全部被访问完。那么访问序列为：1 2 3 4或1 2 4 3。
+
+注意：深度优先遍历可能会产生不同的遍历序列，主要是因为我们去选择邻接点时可能存在多个邻接点 ，这就使得深优序列可能不同*
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/depthFirstGraph.pdf}
+  \caption{深度优先搜索}
+  \label{fig:DFS}
+\end{figure}
+
+其深度优先访问过程如图 \ref{fig:depthFirst} 所示。可以大致分为以下几步：
+
+\begin{itemize}
+  \item 初始顶点为 $1$，访问顶点 $1$，将 \texttt{visited} 数组对应位置置为 $1$，然后寻找邻接点 $2$。  
+  \item 判断顶点 $2$ 未被访问，递归调用深度优先算法，以 $2$ 为“起始点”，访问顶点 $2$，将 \texttt{visited} 数组对应位置置为 $1$，然后寻找邻接点 $4$。  
+  \item 判断顶点 $4$ 未被访问，递归调用深度优先算法，以 $4$ 为“起始点”，访问顶点 $4$，将 \texttt{visited} 数组对应位置置为 $1$，然后寻找邻接点。  
+  \item 未找到邻接点，退出以顶点 $4$ 为“起始点”的递归，回到以 $2$ 为“起始点”的递归，继续寻找邻接点 $3$。  
+  \item 判断顶点 $3$ 未被访问，递归调用深度优先算法，以 $3$ 为“起始点”，访问顶点 $3$，将 \texttt{visited} 数组对应位置置为 $1$，然后寻找邻接点 $2$。  
+  \item 判断邻接点 $2$ 已被访问，不再进入递归。  
+  \item 顶点 $3$ 无其他未被访问的邻接点，退出以顶点 $3$ 为“起始点”的递归，回到以 $2$ 为“起始点”的递归，继续寻找邻接点。  
+  \item 顶点 $2$ 无其他未被访问的邻接点，退出以顶点 $2$ 为“起始点”的递归，回到以 $1$ 为“起始点”的递归，继续寻找邻接点。  
+  \item 顶点 $1$ 无其他未被访问的邻接点，退出以顶点 $1$ 为“起始点”的递归，程序结束。
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/depthFirst.pdf}
+  \caption{深度优先搜索}
+  \label{fig:depthFirst}
+\end{figure}
+
+紧接着我们将上述过程转化为代码，如下所示：
+
+\textbf{邻接表DFS}
+
+\begin{lstlisting}[language=C++, caption={邻接表DFS}]
+  void DFS(ALGraph G, int i) {
+    EdgeNode *p;
+    visited[i] = 1;
+    printf("%c", G.adjList[i].data);
+    p = G.adjList[i].firstEdge;
+    while (p != NULL) {
+      if (!visited[p->adjvex]) {
+        DFS(G, p->adjvex);
+      }
+      p = p->next;
+    }
+  }
+\end{lstlisting}
+
+空间复杂度 $O(n)$，这是因为 $visited$ 数组的大小为 $n$，递归调用的深度最大为 $n$。
+
+时间复杂度为 $O(n+e)$，其中 $n$ 为顶点数，$e$ 为边数。因为每个顶点只会被访问一次，每条边也只会被访问一次。
+\textbf{邻接矩阵DFS}
+
+\begin{lstlisting}[language=C++, caption={邻接矩阵DFS}]
+  void DFS(MGraph G, int i) {
+    int j;
+    visited[i] = 1;
+    printf("%c", G.vexs[i]);
+    for (j = 0; j < G.vexnum; j++) {
+      if (G.arc[i][j] == 1 && !visited[j]) {
+        DFS(G, j);
+      }
+    }
+  }
+\end{lstlisting}
+
+\textbf{空间复杂度}：由于 DFS 是一个递归算法，递归需要一个工作栈来辅助工作，最多需要图中所有顶点进栈，所以空间复杂度为 $O(|V|)$。
+
+\textbf{时间复杂度}：
+\begin{itemize}
+  \item \textbf{邻接表}：遍历过程的主要操作是对顶点遍历它的邻接点，由于通过访问边表来查找邻接点，所以时间复杂度为 $O(|E|)$；访问顶点的时间为 $O(|V|)$，所以总的时间复杂度为 $O(|V| + |E|)$。
+  \item \textbf{邻接矩阵}：查找每个顶点的邻接点时间复杂度为 $O(|V|)$，对每个顶点都进行查找，所以总的时间复杂度为 $O(|V|^2)$。
+\end{itemize}
+
 
 \subsection{广度优先搜索}
 
+\subsubsection{广度优先搜索的基本思想}
+
+广度优先搜索是一种从图中某个顶点 $v$ 出发，首先访问顶点 $v$，然后依次访问 $v$ 的各个未曾访问过的邻接点，再依次访问这些邻接点的邻接点，直到图中所有顶点都被访问过为止。
+
+广度优先搜索的访问过程如图 \ref{fig:breadthFirst} 所示,我们从顶点1开始，最终遍历序列为 1 2 3 4 5 6或1 3 2 4 5 6。
+
+注意：广度优先遍历可能会产生不同的遍历序列，主要是因为我们去选择邻接点时可能存在多个邻接点 ，这就使得广度优序列可能不同。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/breadthFirst.pdf}
+  \caption{广度优先搜索}
+  \label{fig:breadthFirst}
+\end{figure}
+
+
+\subsubsection{广度优先搜索的实现}
+
+\textbf{邻接表BFS}
+
+\begin{lstlisting}[language=C++, caption={邻接表BFS}]
+  void BFS(ALGraph G, int i) {
+    int j;
+    EdgeNode *p;
+    int queue[MAX_VERTEX_NUM];
+    int front = 0, rear = 0;
+    printf("%c", G.adjList[i].data);
+    visited[i] = 1;
+    rear = (rear + 1) % MAX_VERTEX_NUM;
+    queue[rear] = i;
+    while (front != rear) {
+      front = (front + 1) % MAX_VERTEX_NUM;
+      j = queue[front];
+      p = G.adjList[j].firstEdge;
+      while (p != NULL) {
+        if (!visited[p->adjvex]) {
+          printf("%c", G.adjList[p->adjvex].data);
+          visited[p->adjvex] = 1;
+          rear = (rear + 1) % MAX_VERTEX_NUM;
+          queue[rear] = p->adjvex;
+        }
+        p = p->next;
+      }
+    }
+  }
+
+\end{lstlisting}
+
+\textbf{邻接矩阵BFS}
+
+\begin{lstlisting}[language=C++, caption={邻接矩阵BFS}]
+  void BFS(MGraph G, int i) {
+    int j;
+    int queue[MAX_VERTEX_NUM];
+    int front = 0, rear = 0;
+    printf("%c", G.vexs[i]);
+    visited[i] = 1;
+    rear = (rear + 1) % MAX_VERTEX_NUM;
+    queue[rear] = i;
+    while (front != rear) {
+      front = (front + 1) % MAX_VERTEX_NUM;
+      j = queue[front];
+      for (int k = 0; k < G.vexnum; k++) {
+        if (G.arc[j][k] == 1 && !visited[k]) {
+          printf("%c", G.vexs[k]);
+          visited[k] = 1;
+          rear = (rear + 1) % MAX_VERTEX_NUM;
+          queue[rear] = k;
+        }
+      }
+    }
+  }
+\end{lstlisting}
+
+\textbf{空间复杂度}：由于 BFS 是一个迭代算法，需要一个队列来辅助工作，最多需要图中所有顶点进队列，所以空间复杂度为 $O(|V|)$。
+
+\textbf{时间复杂度}：
+
+\begin{itemize}
+  \item \textbf{邻接表}：遍历过程的主要操作是对顶点遍历它的邻接点，由于通过访问边表来查找邻接点，所以时间复杂度为 $O(|E|)$；访问顶点的时间为 $O(|V|)$，所以总的时间复杂度为 $O(|V| + |E|)$。
+  \item \textbf{邻接矩阵}：查找每个顶点的邻接点时间复杂度为 $O(|V|)$，对每个顶点都进行查找，所以总的时间复杂度为 $O(|V|^2)$。
+  \end{itemize}
+
 \section{最小生成树}
+一个连通图的生成树（spanning tree）是一个极小连通子图，其中含有图中的全部顶点，和构成一棵树的 $(n-1)$ 条边。如果在一棵生成树上添加任何一条边，必定构成一个环，因为添加的这条边使得它关联的那两个顶点之间有了第 2 条路径。
 
+一棵有 $n$ 个顶点的生成树（连通无回路图）有且仅有 $(n-1)$ 条边。如果一个图有 $n$ 个顶点和小于 $(n-1)$ 条边，则是非连通图。如果它多于 $(n-1)$ 条边，则一定有回路。
+
+对于一个带权（假设每条边上的权均为大于零的实数）连通无向图 $G$ 中的不同生成树，其每棵树的所有边上的权值之和也可能不同；图的所有生成树中具有边上的权值之和最小的树称为图的最小生成树（minimal spanning tree）。
+
+按照生成树的定义，$n$ 个顶点的连通图的生成树有 $n$ 个顶点和 $(n-1)$ 条边。因此，构造最小生成树的准则有以下 3 条：
+
+\begin{enumerate}
+  \item 必须只使用该图中的边来构造最小生成树；
+  \item 必须使用且仅使用 $(n-1)$ 条边来连接图中的所有顶点；
+  \item 不能使用产生回路的边。
+\end{enumerate}
+
+求图的最小生成树有很多实际应用，例如城市之间的交通工程造价最优问题就是一个最小生成树问题。
+求图的最小生成树的两个算法即普里姆算法（Prim 算法）和克鲁斯卡尔算法（Kruskal 算法），将在后面介绍。
 \subsection{Prim算法}
+普利姆（Prim）算法是一种构造性算法。假设 $G = (V, E)$ 是一个具有 $n$ 个顶点的带权连通图，$T = (U, TE)$ 是 $G$ 的最小生成树，其中 $U$ 是 $T$ 的顶点集，$TE$ 是 $T$ 的边集，则由 $G$ 构造从起点 $v$ 出发的最小生成树 $T$ 的步骤如下：
 
+\begin{itemize}
+  \item ① 从图中找第一个起始顶点 $v_0$，作为生成树的第一个顶点，然后从这个顶点到其他顶点的所有边中选一条权值最小的边。然后把这条边的另一个顶点 $v$ 和这条边加入到生成树中。
+  \item ② 对剩下的其他所有顶点，分别检查这些顶点与顶点 $v$ 的权值是否比这些顶点在 \texttt{lowcost} 数组中对应的权值小，如果更小，则用较小的权值更新 \texttt{lowcost} 数组。
+  \item ③ 从更新后的 \texttt{lowcost} 数组中继续挑选权值最小而且不在生成树中的边，然后加入到生成树。
+  \item ④ 反复执行步骤 ② 和 ③，直到所有顶点都加入到生成树中。
+\end{itemize}
+
+如图\ref{fig:prim}所示，我们形象地观察其构造过程：
+
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/prime.pdf}
+  \caption{Prim算法}
+  \label{fig:prim}
+\end{figure}
+
+从上面的例子可以看出，Prim 算法是一种增量算法，逐步选择最小边，并在 $U$ 集合中添加相应的顶点。每一步都是从 $U$ 和 $V-U$ 两个顶点集合中选择最小边，并在前面的基础上进行扩展。现在我们来分析如何使用代码实现 Prim 算法：
+
+\begin{itemize}
+  \item 首先，我们尝试在邻接矩阵的基础上实现 Prim 算法。因为 Prim 算法会频繁地取一条条边的权值，所以采用邻接矩阵更合适。当然，后面我们也会用邻接表的方式实现。
+  
+  \item 当我们拿到一个连通图的邻接矩阵时，我们需要从给定顶点开始，依次加入当前最小边。对于 Prim 函数而言，首先需要传入图和起点。
+
+  \item 回想一下我们是如何选出第一条边的：首先将起点 $0$ 到其他顶点的直接距离记录下来。我们会发现 $0$ 只能到达 $1$ 和 $5$，其余全是无穷。然后根据规则，选择最小的距离对应的顶点，即顶点 $5$。为了实现这一逻辑，我们可以用一个数组存储 $0$ 号顶点到其他顶点的距离，并将其命名为 \texttt{lowCost}。初始状态为：
+  \[
+  \texttt{lowCost} = [0, 28, 32767, 32767, 32767, 10, 32767]
+  \]
+  其中，$32767$ 表示无穷大。
+
+  \item 当我们有了 \texttt{lowCost} 数组后，就可以选出 $5$ 号顶点。接下来，我们需要更新 \texttt{lowCost} 数组。根据 Prim 算法，每次从新加入集合的顶点出发，寻找当前可达的最短距离顶点。例如，在加入 $5$ 号顶点后，之前 $0$ 号顶点无法到达的顶点现在通过 $5$ 号顶点可以到达了，比如 $4$ 号顶点。此时，\texttt{lowCost} 更新为：
+  \[
+  \texttt{lowCost} = [0, 28, 32767, 32767, 25, 10, 32767]
+  \]
+
+  \item 为了避免重复选择已经加入集合的顶点，我们可以使用一个标志数组 \texttt{visited}。初始状态为：
+  \[
+  \texttt{visited} = [0, 0, 0, 0, 0, 0, 0]
+  \]
+  当加入 $0$ 号顶点时，更新为：
+  \[
+  \texttt{visited} = [1, 0, 0, 0, 0, 0, 0]
+  \]
+  当加入 $5$ 号顶点时，更新为：
+  \[
+  \texttt{visited} = [1, 0, 0, 0, 1, 0, 0]
+  \]
+
+  \item 当所有顶点都加入后，整个寻找过程结束。为了存储寻找结果，可以用一个二维数组存储每次加入的边，或者用一个一维数组存储每次加入的顶点，以便复盘时快速还原最小生成树。
+\end{itemize}
+
+至此，Prim 算法的关键逻辑已经清晰。接下来，我们通过实际的 C 语言代码实现 Prim 算法：
+
+\begin{lstlisting}[language=C++, caption={Prim算法}]
+  void prim(AMGraph* G, int start) {
+	int flag[MAXSIZE];//标记数组
+	int lowCost[MAXSIZE];//当前已加入最小生成树的邻接顶点的边的权值
+	int prims[MAXSIZE];//存储最小生成树结果数组
+	int record,index=0;
+	for (int i = 0; i < G->numV; i++) {
+		lowCost[i] = G->Edge[start][i];//初始化start到各顶点的距离
+		prims[i] = 0;//初始化
+		flag[i] = 0;
+	}
+	flag[start] = 1;//传入的顶点设为已访问
+	prims[index++] = start;
+	for (int i = 1; i < G->numV; i++) {//因为源点已加入集合，则共进行G->numV-1次循环
+		int min = 32767;
+		//找目前能到达的权值最小顶点
+		for (int j = 0; j < G->numV; j++) {
+			if (!flag[j] && lowCost[j] < min) {//lowCost不为0代表未访问过
+				min = lowCost[j];
+				record = j;
+			}
+		}
+		flag[record] = 1;
+		prims[index++] = record;//一旦发生更换将m处的值设为record，代表由record处的顶点指向m处的顶点目前最近，即record是m的前驱
+		//当我们加入新顶点时，我们要判断加入新顶点后是否路径会缩短，如果有这种情况，就要更新lowCost
+		for (int m = 0; m < G->numV; m++) {
+			if (!flag[m] && lowCost[m] > G->Edge[record][m]) {//当前 记录的从源点到record的距离 大于 加入record后的距离，进行更新！！
+				lowCost[m] = G->Edge[record][m] ;
+			}
+		}
+	}
+	printf("%d ", getSum(G, prims));
+	for (int i = 0; i < G->numV; i++) {
+		printf("%c ", G->Vertex[prims[i]]);
+	}
+}
+
+以上代码是在邻接矩阵存储方式中进行prim算法的写法,而在邻接表中进行操作,整体算法思想并无不同,
+但是因为存储方式的不同,会在有些地方进行对应调整,代码如下,有兴趣的同学可以细细研究:
+
+void prim(ALGraph* G, int start) {
+  /*
+	prim算法(采用邻接表)：
+		算法核心：
+				根据邻接矩阵改编！！
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+int getSum(ALGraph* G, int* lowCost) {//获得最小生成树的权值
+	int sum = 0;
+	for (int i = 0; i < G->numV; i++) {
+		sum += lowCost[i];
+	}
+	return sum;
+}
+void primInAL(ALGraph *G, int start) {
+	int prims[MAXSIZE];//存储最小生成树结果数组
+	int lowCost[MAXSIZE];//当前已加入最小生成树的邻接顶点的权值
+	int flag[MAXSIZE];
+	int min, index, primIndex = 0;// min 寻找最小值  index 记录最小值下标 primIndex prim数组下标 
+	for (int i = 0; i < G->numV; i++) {
+		lowCost[i] = 32767;//把所有值设为无穷
+		flag[i] = 0;
+		prims[i] = -1;
+	}
+	//初始化
+	for (EdgeNode *p = G->adjlist[start].firstEdge; p; p = p->next) {
+		lowCost[p->index] = p->weight;//把当前传入顶点的所有连接顶点的边的权值存入
+	}
+	lowCost[start] = 0;//自己到自己的距离为0
+	prims[primIndex++] = start;//将源点加入生成树数组
+	flag[start] = 1;
+	for (int i = 0; i < G->numV-1; i++) {//进行顶点数-1轮的循环，每次循环加入一个顶点
+		min = 32767;
+		for (int j = 0; j < G->numV; j++) {
+			if (!flag[j] && lowCost[j] < min) {//如果当前顶点未曾加入最小树中且小于目前最小值，更新
+				min = lowCost[j];
+				index = j;//记录位置
+			}
+
+		}
+		//已找到最小值,更新prims数组
+		prims[primIndex++] = index;
+		//lowCost[index] = 0;//将第index个顶点置为已访问，即代表它已加入最小生成树
+		flag[index] = 1;
+		//如有顶点未处理，则看情况需更新lowCost数组
+		EdgeNode* p = G->adjlist[index].firstEdge;//寻找下标为index的顶点可到达的顶点
+		while (p) {
+			if (!flag[p->index] && p->weight < lowCost[p->index]) {//在index处的旧值大于我们加入新节点后的
+				lowCost[p->index] = p->weight;
+			}
+			p = p->next;
+		}
+		
+	}
+	printf("最小生成树权值为：%d ", getSum(G, lowCost));
+	printf("\n");
+	for (int i = 0; i < G->numV; i++) {
+		printf("%c ", G->adjlist[prims[i]].info);
+	}
+
+}
+
+int main() {
+	ALGraph *G = (ALGraph *)malloc(sizeof(ALGraph));
+	void createGraphFromFile(ALGraph *);
+	void dispGraph(ALGraph *);
+	createGraphFromFile(G);//创建图
+	dispGraph(G);
+	primInAL(G, 0);
+	return 0;
+}
+\end{lstlisting}
 \subsection{Kruskal算法}
+Kruskal 算法是基于贪心思想得到的。首先，我们将所有的边按照权值从小到大排序，接着按照顺序选取每条边。如果这条边的两个端点不属于同一集合，那么就将它们合并，直到所有的点都属于同一个集合为止。至于如何合并到一个集合，这里我们可以用到一个工具——并查集（Union-Find）。换而言之，Kruskal 算法就是基于并查集的贪心算法。
 
+我们用下面的流程图来模拟 Kruskal 算法的过程，并简单描述其步骤：
+
+\begin{itemize}
+  \item 首先，Kruskal 算法是一个不断添加边的操作方法。我们会从未选择的边中选取当前权值最小的边加入集合，且不构成环。显然，边 $\langle 0, 5 \rangle$ 符合条件。
+  \item 然后选择边 $\langle 2, 3 \rangle$、$\langle 1, 6 \rangle$ 和 $\langle 1, 2 \rangle$。
+  \item 此时剩下的边有 5 条，最小的是边 $\langle 3, 6 \rangle$，权值为 18。但是我们不能选择这一条边，因为如果选择它，就会产生环，这是不允许的。所以我们只能退而求其次选择边 $\langle 3, 4 \rangle$，权值为 22。
+  \item 最后，同样的道理，按理说权值最小的边是 $\langle 4, 6 \rangle$，但是如果加入这条边就会形成环，所以我们选择边 $\langle 4, 5 \rangle$。
+  \item 到这里，我们已经加入了 $n-1$ 条边（$n$ 是顶点数），已经找到最小生成树，算法结束。
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/kruskal.pdf}
+  \caption{Kruskal算法}
+  \label{fig:kruskal}
+\end{figure}
+代码分析构造：
+
+\begin{itemize}
+  \item 整个 Kruskal 算法并不复杂，我们用邻接矩阵存储来进行分析。Kruskal 的整体思路无非就是不断加入当前最小的边并确保不构成环。
+  
+  \item 首先我们可以确定的是，与 Prim 算法不同，这一次并不需要指定起点，我们只需要传入整幅图即可。
+  
+  \item 在这里，我们直接给出避免形成环的方法——并查集。在后续章节中我们会详细讲解，这里大家先有一个概念即可，记住并查集可以帮助我们避免形成环。
+  
+  \item 接下来就是常规的代码逻辑了，指定一个循环，该循环保证我们能够加入 $n-1$ 条边。
+  
+  \item 然后找到符合不形成环的最小权值边，加入最小生成树集合。
+\end{itemize}
+
+\begin{lstlisting}[language=C++, caption={Kruskal算法}]
+  /*
+	kruskal 算法：每次选择最短的一条边加入集合，直至所有顶点被包含，而且会用到并查集
+*/
+#include<stdio.h>
+#include <stdlib.h>
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+
+void outPut(ALGraph *G, int **weights) {//输出最小生成树
+	for (int i = 0; i < G->numV; i++) {
+		for (int j = i; j < G->numV; j++) {
+			if (weights[i][j] != 0) {
+				printf("%c->%c(%d)\n", G->adjlist[i].info, G->adjlist[j].info, weights[i][j]);
+			}
+		}
+	}
+}
+int findAncestor(int *fa, int i) {
+	if (fa[i] == i)return i;//找到返回
+	else {
+		fa[i] = findAncestor(fa, i);//路径压缩
+		return findAncestor(fa,fa[i]);
+	}
+}
+void unionn(int *fa, int i, int j) {
+	int i_a = findAncestor(fa, i);
+	int j_a = findAncestor(fa, j);
+	fa[i_a] = j_a;//i的祖先指向j的祖先
+}
+void kruskal(ALGraph *G) {
+	int **weights = (int **)malloc(sizeof(int *)*G->numV);//两点间的权值数据
+	int *fa = (int *)malloc(sizeof(int)*G->numV);//并查集数组
+	for (int i = 0; i < G->numV; i++) {
+		fa[i] = i;//最开始将每个节点的祖先设置为自己
+	}
+	for (int i = 0; i < G->numV; i++) {
+		weights[i] = (int *)malloc(sizeof(int)*G->numV);
+	}
+	for (int i = 0; i < G->numV; i++) {
+		for (int j = 0; j < G->numV; j++) {
+			weights[i][j] = 0;//初始化该二位数组
+		}
+	}
+	int edges = 0;
+	while (edges < G->numV - 1) {//最小生成树的边数一定是顶点数减一
+		int weight = 32767;
+		int start, end;
+		for (int i = 0; i < G->numV; i++) {//遍历每一个顶点的所有边
+			for (EdgeNode *p = G->adjlist[i].firstEdge; p; p = p->next) {
+				//寻找最短边
+				if (p->weight < weight && findAncestor(fa, i) != findAncestor(fa, p->index)) {
+					weight = p->weight;
+					start = i;
+					end = p->index;
+				}
+			}
+		}
+		unionn(fa, start, end);
+		weights[start][end] = weight;
+		weights[end][start] = weight;
+		edges++;
+	}
+	outPut(G, weights);
+
+}
+int main() {
+	ALGraph *G = (ALGraph *)malloc(sizeof(ALGraph));
+	void createGraphFromFile(ALGraph *);
+	void dispGraph(ALGraph *);
+	createGraphFromFile(G);//创建图
+	dispGraph(G);
+	kruskal(G);
+	return 0;
+}
+
+\end{lstlisting}
 \section{最短路径}
+在一个不带权图中，若从一个顶点到另一个顶点存在着一条路径，则称该路径长度为该路径上所经过的边的数目，它等于该路径上的顶点数减 $1$。由于从一顶点到另一顶点可能存在着多条路径，每条路径上所经过的边数可能不同，即路径长度不同，把路径长度最短（即经过的边数最少）的那条路径称为最短路径，其长度称为最短路径长度或最短距离。
 
+对于带权图，考虑路径上各边上的权，则把一条路径上所经过的权之和定义为该路径的路径长度。从源点到终点可能有不止一条路径，把路径长度最小的那条路径称为最短路径，其路径长度（权之和）称为最短路径长度。
+
+实际上，只要把不带权图上的每条边看成是权值为 $1$ 的边，那么不带权图和带权图的最短路径和最短距离的定义就一致了。
+
+求图的最短路径有两个方面的问题：
+\begin{itemize}
+  \item 求图中某一顶点到其余各顶点的最短路径；
+  \item 求图中每一对顶点之间的最短路径。
+\end{itemize}
 \subsection{Dijkstra算法}
+迪杰斯特拉（Dijkstra）算法不太容易理解，我们先从一个例子着手：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/directedWeightGraph.pdf}
+  \caption{一个带权有向图}
+  \label{fig:dijkstra}
+\end{figure}
+
+\textbf{Dijkstra算法的执行过程:}
+
+\begin{enumerate}
+  \item \textbf{初始化}：  
+  $S = \{0\}, U = \{1, 2, 3, 4, 5, 6\}$，  
+  $\texttt{dist} = [0, 4, 6, 6, \infty, \infty, \infty]$（源点 $0$ 到其他各顶点的权值，直接来源于邻接矩阵），  
+  $\texttt{path} = [0, 0, 0, 0, -1, -1, -1]$（若源点 $0$ 到顶点 $i$ 有边 $\langle 0, i \rangle$，则 $\texttt{path}[i] = 0$；否则 $\texttt{path}[i] = -1$ 表示没有路径）。
+
+  \item 从 $U$ 中找最小的顶点（即 $\texttt{dist}$ 值最小的顶点）为顶点 $1$，将它添加到 $S$ 中：  
+  $S = \{0, 1\}, U = \{2, 3, 4, 5, 6\}$。  
+  考查顶点 $1$，发现从顶点 $1$ 到顶点 $2$ 和 $4$ 有边：
+  \[
+  \texttt{dist}[2] = \min(\texttt{dist}[2], \texttt{dist}[1] + 1) = 5 \quad (\text{修改})
+  \]
+  \[
+  \texttt{dist}[4] = \min(\texttt{dist}[4], \texttt{dist}[1] + 7) = 11 \quad (\text{修改})
+  \]
+  更新后：  
+  $\texttt{dist} = [0, 4, 5, 6, 11, \infty, \infty]$，  
+  $\texttt{path} = [0, 0, 1, 0, 1, -1, -1]$。
+
+  \item 从 $U$ 中找最小的顶点为顶点 $2$，将它添加到 $S$ 中：  
+  $S = \{0, 1, 2\}, U = \{3, 4, 5, 6\}$。  
+  考查顶点 $2$，发现从顶点 $2$ 到顶点 $4$ 和 $5$ 有边：
+  \[
+  \texttt{dist}[4] = \min(\texttt{dist}[4], \texttt{dist}[2] + 6) = 11
+  \]
+  \[
+  \texttt{dist}[5] = \min(\texttt{dist}[5], \texttt{dist}[2] + 4) = 9 \quad (\text{修改})
+  \]
+  更新后：  
+  $\texttt{dist} = [0, 4, 5, 6, 11, 9, \infty]$，  
+  $\texttt{path} = [0, 0, 1, 0, 1, 2, -1]$。
+
+  \item 从 $U$ 中找最小的顶点为顶点 $3$，将它添加到 $S$ 中：  
+  $S = \{0, 1, 2, 3\}, U = \{4, 5, 6\}$。  
+  考查顶点 $3$，发现从顶点 $3$ 到顶点 $2$ 和 $5$ 有边，但顶点 $2$ 已经考查过，不进行修改：
+  \[
+  \texttt{dist}[5] = \min(\texttt{dist}[5], \texttt{dist}[3] + 5) = 9
+  \]
+  无修改，$\texttt{dist}$ 和 $\texttt{path}$ 不变。
+
+  \item 从 $U$ 中找最小的顶点为顶点 $5$，将它添加到 $S$ 中：  
+  $S = \{0, 1, 2, 3, 5\}, U = \{4, 6\}$。  
+  考查顶点 $5$，发现从顶点 $5$ 到顶点 $4$ 和 $6$ 有边：
+  \[
+  \texttt{dist}[4] = \min(\texttt{dist}[4], \texttt{dist}[5] + 1) = 10 \quad (\text{修改})
+  \]
+  \[
+  \texttt{dist}[6] = \min(\texttt{dist}[6], \texttt{dist}[5] + 8) = 17 \quad (\text{修改})
+  \]
+  更新后：  
+  $\texttt{dist} = [0, 4, 5, 6, 10, 9, 17]$，  
+  $\texttt{path} = [0, 0, 1, 0, 5, 2, 5]$。
+
+  \item 从 $U$ 中找最小的顶点为顶点 $4$，将它添加到 $S$ 中：  
+  $S = \{0, 1, 2, 3, 5, 4\}, U = \{6\}$。  
+  考查顶点 $4$，发现从顶点 $4$ 到顶点 $6$ 有边：
+  \[
+  \texttt{dist}[6] = \min(\texttt{dist}[6], \texttt{dist}[4] + 6) = 16 \quad (\text{修改})
+  \]
+  更新后：  
+  $\texttt{dist} = [0, 4, 5, 6, 10, 9, 16]$，  
+  $\texttt{path} = [0, 0, 1, 0, 5, 2, 4]$。
+
+  \item 从 $U$ 中找最小的顶点为顶点 $6$，将它添加到 $S$ 中：  
+  $S = \{0, 1, 2, 3, 5, 4, 6\}, U = \{\}$。  
+  从顶点 $6$ 不能到达任何顶点，过程结束。其过程如下表所示。
+
+  \item \textbf{输出最短路径}：  
+  以源点 $0$ 到顶点 $6$ 的最短路径为例，$\texttt{dist}[6] = 16$，即最短路径长度为 $16$。  
+  $\texttt{path}[6] = 4, \texttt{path}[4] = 5, \texttt{path}[5] = 2, \texttt{path}[2] = 1, \texttt{path}[1] = 0$，  
+  反推出最短路径为 $0 \to 1 \to 2 \to 5 \to 4 \to 6$。
+\end{enumerate}
+从源点 $0$ 到所有其他顶点的最短路径结果如下：
+
+\begin{itemize}
+  \item 从顶点 $0$ 到顶点 $1$ 的路径长度为：$4$，路径为：$0 \to 1$。
+  \item 从顶点 $0$ 到顶点 $2$ 的路径长度为：$5$，路径为：$0 \to 1 \to 2$。
+  \item 从顶点 $0$ 到顶点 $3$ 的路径长度为：$6$，路径为：$0 \to 3$。
+  \item 从顶点 $0$ 到顶点 $4$ 的路径长度为：$10$，路径为：$0 \to 1 \to 2 \to 5 \to 4$。
+  \item 从顶点 $0$ 到顶点 $5$ 的路径长度为：$9$，路径为：$0 \to 1 \to 2 \to 5$。
+  \item 从顶点 $0$ 到顶点 $6$ 的路径长度为：$16$，路径为：$0 \to 1 \to 2 \to 5 \to 4 \to 6$。
+\end{itemize}
+\textbf{Dijkstra算法的特点:}
+
+\begin{itemize}
+  \item (1) 在执行中，一个顶点一旦添加到 $S$ 中后，其最短路径长度不再改变。
+  \item (2) 正是由于具有特点 (1)，所以 Dijkstra 算法不适合含有负权值的带权图求单源最短路径。
+  通过一个反例说明：假设一个含有 3 个顶点的带权有向图，$\langle 0, 1 \rangle$ 的权值为 $1$，$\langle 0, 2 \rangle$ 的权值
+  为 $2$，$\langle 2, 1 \rangle$ 的权值为 $-3$，如图 \ref{fig:negativeWeight} 所示。
+  若源点为 $0$，在执行 Dijkstra 算法时，首先选取的中间点为 $1$，求出源点 $0$ 到顶点 $1$ 的最短路径长度为 $1$，以后不再改变。
+  而实际上，$0 \to 2 \to 1$ 才是源点 $0$ 到顶点 $1$ 的最短路径，其长度为 $-1$。
+  
+  \item (3) 按顶点进入 $S$ 的先后顺序，最短路径长度越来越长。
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/negativeWeightGraph.pdf}
+  \caption{含有负权值的带权图}
+  \label{fig:negativeWeight}
+\end{figure}
+
+\textbf{初始化}
+\[
+S = \{0\}, \quad U = \{1, 2, 3, 4, 5, 6\}
+\]
+
+\[
+\text{dist} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{dist} & 0 & 4 & 6 & 6 & \infty & \infty & \infty 
+\end{array}
+\]
+
+\[
+\text{path} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{path} & 0 & 0 & 0 & 0 & -1 & -1 & -1
+\end{array}
+\]
+
+\textbf{步骤 1：选择最短路径的顶点 1}
+\[
+S = \{0,1\}, \quad U = \{2, 3, 4, 5, 6\}
+\]
+
+\[
+\text{dist} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{dist} & 0 & 4 & 5 & 6 & 11 & \infty & \infty 
+\end{array}
+\]
+
+\[
+\text{path} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{path} & 0 & 0 & 1 & 0 & 1 & -1 & -1
+\end{array}
+\]
+
+\textbf{步骤 2：选择最短路径的顶点 2}
+\[
+S = \{0,1,2\}, \quad U = \{3, 4, 5, 6\}
+\]
+
+\[
+\text{dist} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{dist} & 0 & 4 & 5 & 6 & 11 & 9 & \infty
+\end{array}
+\]
+
+\[
+\text{path} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{path} & 0 & 0 & 1 & 0 & 1 & 2 & -1
+\end{array}
+\]
+
+\textbf{步骤 3：选择最短路径的顶点 3}
+\[
+S = \{0,1,2,3\}, \quad U = \{4, 5, 6\}
+\]
+
+\[
+\text{dist} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{dist} & 0 & 4 & 5 & 6 & 11 & 9 & \infty
+\end{array}
+\]
+
+\[
+\text{path} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{path} & 0 & 0 & 1 & 0 & 1 & 2 & -1
+\end{array}
+\]
+
+\textbf{步骤 4：选择最短路径的顶点 5}
+\[
+S = \{0,1,2,3,5\}, \quad U = \{4, 6\}
+\]
+
+\[
+\text{dist} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{dist} & 0 & 4 & 5 & 6 & 10 & 9 & 17
+\end{array}
+\]
+
+\[
+\text{path} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{path} & 0 & 0 & 1 & 0 & 5 & 2 & 5
+\end{array}
+\]
+
+\textbf{步骤 5：选择最短路径的顶点 4}
+\[
+S = \{0,1,2,3,5,4\}, \quad U = \{6\}
+\]
+
+\[
+\text{dist} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{dist} & 0 & 4 & 5 & 6 & 10 & 9 & 16
+\end{array}
+\]
+
+\[
+\text{path} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{path} & 0 & 0 & 1 & 0 & 5 & 2 & 4
+\end{array}
+\]
+
+\textbf{步骤 6：选择最短路径的顶点 6}
+\[
+S = \{0,1,2,3,5,4,6\}, \quad U = \emptyset
+\]
+
+\[
+\text{dist} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{dist} & 0 & 4 & 5 & 6 & 10 & 9 & 16
+\end{array}
+\]
+
+\[
+\text{path} =
+\begin{array}{c|ccccccc}
+ & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+\text{path} & 0 & 0 & 1 & 0 & 5 & 2 & 4
+\end{array}
+\]
+
+对应的 Dijkstra 算法如下（$v$为源点）：
+
+\begin{lstlisting}[language=C++, caption={Dijkstra算法}]
+  /*
+  迪杰斯特拉算法：求单源最短路径
+*/
+#include<stdio.h>
+#include <stdlib.h>
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+void dijkstra(ALGraph *G, int v) {
+  int *dist = (int *)malloc(sizeof(int)*G->numV);//源点到各点的最短路径长度
+  int *path = (int *)malloc(sizeof(int)*G->numV);//源点到各点的最短路径
+  int *flag = (int *)malloc(sizeof(int)*G->numV);//标记是否已经加入最短路径
+  for (int i = 0; i < G->numV; i++) {
+    dist[i] = G->Edge[v][i];
+    flag[i] = 0;
+    if (G->Edge[v][i] < 32767) {
+      path[i] = v;
+    }
+    else {
+      path[i] = -1;
+    }
+  }
+  dist[v] = 0;
+  flag[v] = 1;
+  for (int i = 0; i < G->numV; i++) {
+    int min = 32767;
+    int u = v;
+    for (int j = 0; j < G->numV; j++) {
+      if (!flag[j] && dist[j] < min) {
+        u = j;
+        min = dist[j];
+      }
+    }
+    flag[u] = 1;
+    for (int j = 0; j < G->numV; j++) {
+      if (!flag[j] && G->Edge[u][j] < 32767) {
+        if (dist[j] > dist[u] + G->Edge[u][j]) {
+          dist[j] = dist[u] + G->Edge[u][j];
+          path[j] = u;
+        }
+      }
+    }
+  }
+  for (int i = 0; i < G->numV; i++) {
+    printf("源点到%d的最短路径长度为：%d\n", i, dist[i]);
+  }
+  for (int i = 0; i < G->numV; i++) {
+    printf("源点到%d的最短路径为：", i);
+    int j = i;
+    while (j != v) {
+      printf("%d<-", j);
+      j = path[j];
+    }
+    printf("%d\n", v);
+  }
+}
+int main() {
+  ALGraph *G = (ALGraph *)malloc(sizeof(ALGraph));
+  void createGraphFromFile(ALGraph *);
+  void dispGraph(ALGraph *);
+  createGraphFromFile(G);//创建图
+  dispGraph(G);
+  dijkstra(G, 0);
+  return 0;
+}
+\end{lstlisting}
+
 
 \subsection{Floyd算法}
 
