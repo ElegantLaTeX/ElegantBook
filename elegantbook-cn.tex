@@ -6882,9 +6882,617 @@ int main() {
 
 \subsection{Floyd算法}
 
+Floyd 算法是一种动态规划算法，用于求解带权图中各对顶点之间的最短路径。
+Floyd 算法的基本思想是：假设图 $G$ 中的顶点集合为 $\{0, 1, 2, \ldots, n-1\}$，对于任意两个顶点
+ $i$ 和 $j$，我们定义 $k$ 为从 $0$ 到 $n-1$ 中的一个数，如果顶点 $k$ 在顶点 $i$ 到顶点 $j$ 的路径上，
+ 则顶点 $k$ 是从顶点 $i$ 到顶点 $j$ 的中间顶点。Floyd 算法的基本思想是：对于每一对顶点 $i$ 和 $j$，
+ 我们检查是否存在顶点 $k$ 使得从顶点 $i$ 到顶点 $k$ 再到顶点 $j$ 的路径比已知的从顶点 $i$ 到顶点 $j$ 的路径更短。
+ 如果是，我们更新从顶点 $i$ 到顶点 $j$ 的路径为更短的路径。我们以下图为例进行说明。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/floyd_directedWeightGraph.pdf}
+  \caption{一个带权有向图}
+  \label{fig:floyd}
+\end{figure}
+
+\textbf{Floyd算法的执行过程:}
+ 
+
+
+
+\textbf{初始邻接矩阵}
+给定图的初始邻接矩阵为：
+\[
+D^{(-1)} =
+\begin{bmatrix}
+0 & 5 & \infty & 7 \\
+\infty & 0 & 4 & 2 \\
+3 & 3 & 0 & 2 \\
+\infty & \infty & 1 & 0
+\end{bmatrix}
+\]
+
+初始路径矩阵为：
+\[
+P^{(-1)} =
+\begin{bmatrix}
+-1 & 0 & 1 & 0 \\
+2 & -1 & 1 & 1 \\
+2 & 2 & -1 & 2 \\
+2 & 2 & 3 & -1
+\end{bmatrix}
+\]
+
+
+\textbf{1. 以顶点 0 作为中间点}
+
+通过顶点 0 作为中间点计算最短路径矩阵：
+\[
+D^{(0)} =
+\begin{bmatrix}
+0 & 5 & \infty & 7 \\
+\infty & 0 & 4 & 2 \\
+3 & 3 & 0 & 2 \\
+\infty & \infty & 1 & 0
+\end{bmatrix}
+\]
+矩阵无变化。
+
+路径矩阵 \( P^{(0)} \) 也保持不变：
+\[
+P^{(0)} =
+\begin{bmatrix}
+-1 & 0 & 1 & 0 \\
+2 & -1 & 1 & 1 \\
+2 & 2 & -1 & 2 \\
+2 & 2 & 3 & -1
+\end{bmatrix}
+\]
+
+\textbf{2. 以顶点 1 作为中间点}
+
+通过顶点 1 作为中间点计算最短路径矩阵：
+\[
+D^{(1)} =
+\begin{bmatrix}
+0 & 5 & 9 & 7 \\
+\infty & 0 & 4 & 2 \\
+3 & 3 & 0 & 2 \\
+\infty & \infty & 1 & 0
+\end{bmatrix}
+\]
+更新：
+\[
+D[0][2] = 9, \quad P[0][2] = 1
+\]
+
+更新后的路径矩阵 \( P^{(1)} \) 为：
+\[
+P^{(1)} =
+\begin{bmatrix}
+-1 & 0 & 1 & 0 \\
+2 & -1 & 1 & 1 \\
+2 & 2 & -1 & 2 \\
+2 & 2 & 3 & -1
+\end{bmatrix}
+\]
+
+\textbf{3. 以顶点 2 作为中间点}
+
+通过顶点 2 作为中间点计算最短路径矩阵：
+\[
+D^{(2)} =
+\begin{bmatrix}
+0 & 5 & 9 & 7 \\
+7 & 0 & 4 & 2 \\
+3 & 3 & 0 & 2 \\
+4 & 4 & 1 & 0
+\end{bmatrix}
+\]
+更新：
+\[
+D[3][1] = 4, \quad P[3][1] = 2
+\]
+
+更新后的路径矩阵 \( P^{(2)} \) 为：
+\[
+P^{(2)} =
+\begin{bmatrix}
+-1 & 0 & 1 & 0 \\
+2 & -1 & 1 & 1 \\
+2 & 2 & -1 & 2 \\
+2 & 2 & 3 & -1
+\end{bmatrix}
+\]
+
+\textbf{4. 以顶点 3 作为中间点}
+
+通过顶点 3 作为中间点计算最短路径矩阵：
+\[
+D^{(3)} =
+\begin{bmatrix}
+0 & 5 & 8 & 7 \\
+6 & 0 & 3 & 2 \\
+3 & 3 & 0 & 2 \\
+4 & 4 & 1 & 0
+\end{bmatrix}
+\]
+更新：
+\[
+D[0][2] = 8, \quad D[1][0] = 6, \quad D[1][2] = 3
+\]
+
+更新后的路径矩阵 \( P^{(3)} \) 为：
+\[
+P^{(3)} =
+\begin{bmatrix}
+-1 & 0 & 3 & 0 \\
+2 & -1 & 3 & 1 \\
+2 & 2 & -1 & 2 \\
+2 & 2 & 3 & -1
+\end{bmatrix}
+\]
+
+\textbf{最终最短路径矩阵}
+
+最终计算得到的最短路径矩阵为：
+\[
+D =
+\begin{bmatrix}
+0 & 5 & 8 & 7 \\
+6 & 0 & 3 & 2 \\
+3 & 3 & 0 & 2 \\
+4 & 4 & 1 & 0
+\end{bmatrix}
+\]
+
+\textbf{最终路径矩阵}
+
+最终计算得到的路径矩阵为：
+\[
+P =
+\begin{bmatrix}
+-1 & 0 & 3 & 0 \\
+2 & -1 & 3 & 1 \\
+2 & 2 & -1 & 2 \\
+2 & 2 & 3 & -1
+\end{bmatrix}
+\]
+
+在考试中，如果我们对于每一个顶点都要去进行计算，那么计算量十分巨大，所以我们在考试中可以通过一些小技巧来作出不同顶点加入后的最短路径矩阵。
+
+具体规则就是：
+
+\begin{itemize}
+  \item 对角线永远为0；
+  \item 以哪个顶点为中间点，就在该点为中心画出十字线，十字线上的数据不变；
+  \item 如果十字线上有$\infty$ ，那么$\infty$ 对应的横线或者竖线上的数据同样不变；
+  \item 其余数据则需要进行比较，如果横线上的数据大于十字线上的数据加上竖线上的数据，那么横线上的数据就变为十字线上的数据加上竖线上的数据。
+\end{itemize}
+
+
+上述规则应用与图 \ref{fig:floyd} 中的图，其过程如下图所示。
+
+\textbf{第一步，加入顶点 0}：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum0.pdf}
+  \caption{加入顶点 0}
+  \label{fig:floyd_0}
+\end{figure}
+
+\textbf{第二步，加入顶点 1}：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum1.pdf}
+  \caption{加入顶点 1}
+  \label{fig:floyd_1}
+
+\end{figure}
+
+\textbf{第三步，加入顶点 2}：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum2.pdf}
+  \caption{加入顶点 2}
+  \label{fig:floyd_2}
+
+\end{figure}
+
+\textbf{第四步，加入顶点 3}：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum3.pdf}
+  \caption{加入顶点 3}
+  \label{fig:floyd_3}
+
+\end{figure}
+
+
+上述过程对应的 Floyd 算法如下：
+
+\begin{lstlisting}[language=C++, caption={Floyd算法}]
+  /*
+  Floyd算法：求多源最短路径
+*/
+#include<stdio.h>
+#include <stdlib.h>
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+void floyd(ALGraph *G) {
+  int **dist = (int **)malloc(sizeof(int *)*G->numV);//源点到各点的最短路径长度
+  int **path = (int **)malloc(sizeof(int *)*G->numV);//源点到各点的最短路径
+  for (int i = 0; i < G->numV; i++) {
+    dist[i] = (int *)malloc(sizeof(int)*G->numV);
+    path[i] = (int *)malloc(sizeof(int)*G->numV);
+    for (int j = 0; j < G->numV; j++) {
+      dist[i][j] = G->Edge[i][j];
+      if (G->Edge[i][j] < 32767) {
+        path[i][j] = i;
+      }
+      else {
+        path[i][j] = -1;
+      }
+    }
+  }
+  for (int k = 0; k < G->numV; k++) {
+    for (int i = 0; i < G->numV; i++) {
+      for (int j = 0; j < G->numV; j++) {
+        if (dist[i][j] > dist[i][k] + dist[k][j]) {
+          dist[i][j] = dist[i][k] + dist[k][j];
+          path[i][j] = path[k][j];
+        }
+      }
+    }
+  }
+  for (int i = 0; i < G->numV; i++) {
+    for (int j = 0; j < G->numV; j++) {
+      printf("源点%d到%d的最短路径长度为：%d\n", i, j, dist[i][j]);
+    }
+  }
+  for (int i = 0; i < G->numV; i++) {
+    for (int j = 0; j < G->numV; j++) {
+      printf("源点%d到%d的最短路径为：", i, j);
+      int k = j;
+      while (k != i) {
+        printf("%d<-", k);
+        k = path[i][k];
+      }
+      printf("%d\n", i);
+    }
+  }
+}
+int main() {
+  ALGraph *G = (ALGraph *)malloc(sizeof(ALGraph));
+  void createGraphFromFile(ALGraph *);
+  void dispGraph(ALGraph *);
+  createGraphFromFile(G);//创建图
+  dispGraph(G);
+  floyd(G);
+  return 0;
+}
+\end{lstlisting}
+
+输出多源最短路径的display()函数如下：
+
+\begin{lstlisting}[language=C, caption={输出最短路径的 Dispath 函数}]
+  void Dispath(MatGraph g, int A[MAXV][MAXV], int path[MAXV][MAXV]) {
+      int i, j, k, s;
+      int apath[MAXV], d; // 存放一条最短路径中间顶点（反向）及其顶点个数
+  
+      for (i = 0; i < g.n; i++) {
+          for (j = 0; j < g.n; j++) {
+              if (A[i][j] != INF && i != j) { // 若顶点 i 和 j 之间存在路径
+                  printf("从顶点 %d 到顶点 %d 的路径为: ", i, j);
+                  k = path[i][j];
+                  d = 0;
+                  apath[d] = j; // 路径上添加终点
+                  while (k != -1 && k != i) { // 路径上添加中间点
+                      d++;
+                      apath[d] = k;
+                      k = path[i][k];
+                  }
+                  d++;
+                  apath[d] = i; // 路径上添加起点
+                  printf("%d", apath[d]); // 输出起点
+                  for (s = d - 1; s >= 0; s--) { // 输出路径上的中间顶点
+                      printf(", %d", apath[s]);
+                  }
+                  printf("\t路径长度为: %d\n", A[i][j]);
+              }
+          }
+      }
+  }
+  \end{lstlisting}
+
 \section{拓扑排序}
 
-\section{关键路径}
+设 $G = (V, E)$ 是一个具有 $n$ 个顶点的有向图，$V$ 中的顶点序列 $w_1, w_2, \dots, w_n$ 称为一个拓扑序列（topological sequence）。若 $\langle w_i, w_j \rangle$ 是图中的一条边或者从顶点 $w_i$ 到顶点 $w_j$ 有路径，则在该序列中顶点 $w_i$ 必须排在顶点 $w_j$ 之前。
+
+在一个有向图中找一个拓扑序列的过程称为拓扑排序（topological sort）。
+
+例如，计算机专业的学生必须完成一系列规定的基础课和专业课才能毕业，假设这些课程的名称与相应代号如表 \ref{tab:course} 所示：
+
+\begin{table}[h!]
+  \centering
+  \caption{课程名称与相应代号的关系}
+  \label{tab:course}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    课程代号 & 课程名称 & 先修课程 \\ \hline
+    G & 高等数学 & 无 \\ \hline
+    C & 程序设计 & 无 \\ \hline
+    D & 离散数学 & G \\ \hline
+    E & 数据结构 & C \\ \hline
+    F & 编译原理 & E \\ \hline
+    H & 操作系统 & E \\ \hline
+    I & 计算机组成原理 & H \\ \hline
+  \end{tabular}
+\end{table}
+
+课程之间的先修关系可以用有向图表示，如图 \ref{fig:course} 所示。这种用顶点表示活动，用有向边表示活动之间的先后关系的有向图称为顶点活动网（activity on vertex network）。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/toposort.pdf}
+  \caption{课程之间的先修关系}
+  \label{fig:course}
+\end{figure}
+
+对课程 AOV 网进行拓扑排序可得到一个拓扑序列：$C_1 \to C_3 \to C_2 \to C_4 \to C_7 \to C_6 \to C_5$。  
+也可得到另一个拓扑序列：$C_2 \to C_7 \to C_1 \to C_3 \to C_4 \to C_5 \to C_6$，还可以得到其他的拓扑序列。  
+学生可以按照任何一个拓扑序列的顺序进行课程学习。
+
+\textbf{拓扑排序方法如下：}
+
+\begin{enumerate}
+  \item 从有向图中选择一个没有前驱（即入度为 $0$）的顶点并且输出它。
+  \item 从图中删去该顶点，并且删去从该顶点发出的全部有向边。
+  \item 重复上述两步，直到剩余的图中不再存在没有前驱的顶点为止。
+\end{enumerate}
+
+这样操作的结果有两种：
+\begin{itemize}
+  \item 图中全部顶点都被输出，即该图中所有顶点都在其拓扑序列中，这说明图中不存在回路；
+  \item 图中顶点未被全部输出，这说明图中存在回路（以课程之间的先修关系为例，存在回路说明一些课程以自己为先修关系）。
+\end{itemize}
+
+因此，可以通过对一个有向图进行拓扑排序，观察是否产生全部顶点的拓扑序列来确定该图中是否存在回路。
+
+\textbf{拓扑排序的算法如下：}
+
+\begin{lstlisting}[language=C++, caption={拓扑排序算法}]
+  /*
+	拓扑排序：
+			每次将入度为0的顶点输出，输出的同时将出边删除，直至所有顶点输出
+*/
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include "stackStruct.h"//通过头文件加载栈结构体
+void inDegree(ALGraph* G, int* indegree) {//统计每个顶点的入度，用数组保存
+	for (int j = 0; j < G->numV; j++) {
+		for (EdgeNode* p = G->adjlist[j].firstEdge; p; p = p->next) {
+			indegree[p->index] += 1;
+		}
+	}
+
+}
+void topoSort(ALGraph* G) {
+	Stack* s = (Stack*)malloc(sizeof(Stack));
+	Stack* createStack_S(int);
+	bool push(Stack*, int data);
+	bool empty(Stack*);
+	int top(Stack*);
+	bool pop(Stack*);
+	int* indegree = (int*)malloc(sizeof(int) * G->numV);
+	for (int i = 0; i < G->numV; i++) {
+		indegree[i] = 0;
+	}
+	int index;
+	inDegree(G, indegree);
+	s = createStack_S(G->numV);
+	for (int i = 0; i < G->numV; i++) {//将入度为0的顶点入栈
+		if (indegree[i] == 0) {
+			push(s, i);
+		}
+	}
+	while (!empty(s)) {//栈不空，输出栈顶
+		index = top(s);//查看栈顶元素
+		printf("%c ", G->adjlist[index].info);//打印
+		pop(s);//出栈
+		for (EdgeNode* p = G->adjlist[index].firstEdge; p; p = p->next) {//将当前出栈的顶点所指向的顶点的入度均-1
+			indegree[p->index]--;
+			if (!indegree[p->index]) {//出现了入度为0，入栈
+				push(s, p->index);
+			}
+		}
+
+	}
+}
+int main() {
+	ALGraph* G = (ALGraph*)malloc(sizeof(ALGraph));
+	void createGraphFromFile(ALGraph*);
+	void dispGraph(ALGraph*);
+	createGraphFromFile(G);//创建图
+	dispGraph(G);
+	topoSort(G);
+	return 0;
+}
+\end{lstlisting}
+
+\textbf{逆拓扑排序}
+
+逆拓扑排序是指对一个有向无环图（DAG）的逆拓扑序列的求解。逆拓扑排序的过程与拓扑排序的过程类似，只是在拓扑排序的过程中，每次选择入度为 $0$ 的顶点输出，
+而在逆拓扑排序的过程中，每次选择出度为 $0$ 的顶点输出。
+
+例如对课程AOV网进行逆拓扑排序，可以得到一个逆拓扑序列：$C_5 \to C_6 \to C_7 \to C_4 \to C_2 \to C_3 \to C_1$,或者
+ $C_6 \to C_5 \to C_7 \to C_4 \to C_2 \to C_3 \to C_1$，还可以得到其他的逆拓扑序列。
+
+\textbf{逆拓扑排序的算法如下：}
+
+\begin{lstlisting}[language=C++, caption={逆拓扑排序算法}]
+  /*
+  逆拓扑排序：
+      每次将出度为0的顶点输出，输出的同时将入边删除，直至所有顶点输出
+*/
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include "stackStruct.h"//通过头文件加载栈结构体
+void outDegree(ALGraph* G, int* outdegree) {//统计每个顶点的出度，用数组保存
+    for (int j = 0; j < G->numV; j++) {
+        for (EdgeNode* p = G->adjlist[j].firstEdge; p; p = p->next) {
+            outdegree[j] += 1;
+        }
+    }
+
+}
+void reverseTopoSort(ALGraph* G) {
+    Stack* s = (Stack*)malloc(sizeof(Stack));
+    Stack* createStack_S(int);
+    bool push(Stack*, int data);
+    bool empty(Stack*);
+    int top(Stack*);
+    bool pop(Stack*);
+    int* outdegree = (int*)malloc(sizeof(int) * G->numV);
+    for (int i = 0; i < G->numV; i++) {
+        outdegree[i] = 0;
+    }
+    int index;
+    outDegree(G, outdegree);
+    s = createStack_S(G->numV);
+    for (int i = 0; i < G->numV; i++) {//将出度为0的顶点入栈
+        if (outdegree[i] == 0) {
+            push(s, i);
+        }
+    }
+    while (!empty(s)) {//栈不空，输出栈顶
+        index = top(s);//查看栈顶元素
+        printf("%c ", G->adjlist[index].info);//打印
+        pop(s);//出栈
+        for (EdgeNode* p = G->adjlist[index].firstEdge; p; p = p->next) {//将当前出栈的顶点所指向的顶点的出度均-1
+            outdegree[p->index]--;
+            if (!outdegree[p->index]) {//出现了出度为0，入栈
+                push(s, p->index);
+            }
+        }
+
+    }
+}
+int main() {
+    ALGraph* G = (ALGraph*)malloc(sizeof(ALGraph));
+    void createGraphFromFile(ALGraph*);
+    void dispGraph(ALGraph*);
+    createGraphFromFile(G);//创建图
+    dispGraph(G);
+    reverseTopoSort(G);
+    return 0;
+}
+\end{lstlisting}
+\textbf{快速查找拓扑序列}
+
+在拓扑排序的过程中，每次选择入度为 $0$ 的顶点输出，这样的操作需要对每一个顶点的入度进行统计，然后再进行操作。这样的操作效率较低，
+可以通过快速查找拓扑序列的方法来提高效率。
+
+我们可以使用大括号来进行辅助，具体方法如图 \ref{fig:topoMethod} 所示。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/topoMethod.pdf}
+  \caption{快速查找拓扑序列的方法}
+  \label{fig:topoMethod}
+\end{figure}
+
+采用大括号的形式，这样能够确保不遗漏任何一个序列。
+\section{AOE网与关键路径}
+
+AOE网（Activity on Edge Network）是指在边上表示活动的网，是一种有向无环图（DAG）。AOE网中的顶点表示事件，边表示活动，边上的权值表示活动持续的时间。
+
+AOE网中的关键路径是指从开始事件到结束事件的所有路径中，耗时最长的路径。关键路径上的活动称为关键活动，关键路径上的事件称为关键事件。
+
+在 AOE 网中，每个活动用三个参数来描述：活动的持续时间、活动的最早开始时间和活动的最晚开始时间。
+活动的最早开始时间是指在不推迟整个工程完成时间的前提下，活动尽早开始的时间；
+活动的最晚开始时间是指在不推迟整个工程完成时间的前提下，活动必须开始的最晚时间。
+
+例如，图 \ref{fig:AOE} 所示的 AOE 网中，共有 $9$ 个事件，$11$ 个活动，其中$A$ 为开始事件，$I$ 为结束事件。每个活动的持续时间如图所示。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/AOE.pdf}
+  \caption{AOE网}
+  \label{fig:AOE}
+\end{figure}
+
+通过该图我们便可以得到每个活动的最早开始时间和最晚开始时间，如表 \ref{tab:AOE} 所示。
+
+\textbf{计算最早发生时间 $ve$}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+        \toprule
+        \textbf{节点} & \textbf{计算方式} & \textbf{最早发生时间 $ve$} \\
+        \midrule
+        A & 初始点，$ve=0$ & 0 \\
+        B & $\max(ve(A) + 6) = 6$ & 6 \\
+        C & $\max(ve(A) + 4) = 4$ & 4 \\
+        D & $\max(ve(A) + 5) = 5$ & 5 \\
+        E & $\max(ve(B) + 1, ve(C) + 1) = 7$ & 7 \\
+        F & $\max(ve(E) + 9) = 16$ & 16 \\
+        G & $\max(ve(E) + 7) = 14$ & 14 \\
+        H & $\max(ve(D) + 2) = 7$ & 7 \\
+        I & $\max(ve(F) + 2, ve(G) + 4) = 18$ & 18 \\
+        \bottomrule
+    \end{tabular}
+    \caption{最早发生时间计算表}
+\end{table}
+
+\textbf{计算最晚发生时间 $vl$}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+        \toprule
+        \textbf{节点} & \textbf{计算方式} & \textbf{最晚发生时间 $vl$} \\
+        \midrule
+        A & $\min(vl(B) - 6, vl(C) - 4, vl(D) - 5) = 0$ & 0 \\
+        B & $\min(vl(E) - 1) = 6$ & 6 \\
+        C & $\min(vl(E) - 1) = 6$ & 6 \\
+        D & $\min(vl(H) - 2) = 12$ & 12 \\
+        E & $\min(vl(F) - 9, vl(G) - 7) = 7$ & 7 \\
+        F & $\min(vl(I) - 2) = 16$ & 16 \\
+        G & $\min(vl(I) - 4) = 14$ & 14 \\
+        H & $\min(vl(I) - 4) = 14$ & 14 \\
+        I & 终点，$vl = ve(I) = 18$ & 18 \\
+        \bottomrule
+    \end{tabular}
+    \caption{最晚发生时间计算表}
+\end{table}
+
+\textbf{计算关键路径}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \toprule
+        \textbf{活动} & \textbf{起点} & \textbf{终点} & \textbf{活动时间} & $e (ve(起点))$ & $l (vl(终点) - 活动时间)$ & \textbf{是否关键} \\
+        \midrule
+        $a_1$ & A & B & 6 & 0 & 0 & $\checkmark$ \\
+        $a_2$ & B & E & 1 & 6 & 6 & $\checkmark$ \\
+        $a_7$ & E & F & 9 & 7 & 7 & $\checkmark$ \\
+        $a_9$ & F & I & 2 & 16 & 16 & $\checkmark$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{关键路径计算表}
+\end{table}
+
+\textbf{关键路径结果}
+
+关键路径为：
 
 \chapter{查找}
 
