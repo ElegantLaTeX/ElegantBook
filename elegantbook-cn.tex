@@ -4561,13 +4561,13 @@ F(G) =
 \subsection{递归遍历}
 
 二叉树的递归遍历是指在遍历过程中，每个结点的左子树和右子树都是通过递归调用同一个遍历函数来实现的。具体又可分为先序遍历、中序遍历和后序遍历。我们将以图
-\ref{fig:binary_tree_link}所示的二叉树为例，介绍这三种递归遍历方法。
+\ref{fig:one_binary_tree_link}所示的二叉树为例，介绍这三种递归遍历方法。
 
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/oneBTree.pdf}
   \caption{二叉树的链式存储结构}
-  \label{fig:binary_tree_link}
+  \label{fig:one_binary_tree_link}
 \end{figure}
 
 \subsubsection{先序遍历}
@@ -6917,10 +6917,10 @@ D^{(-1)} =
 \[
 P^{(-1)} =
 \begin{bmatrix}
--1 & 0 & 1 & 0 \\
-2 & -1 & 1 & 1 \\
+-1 & 0 & -1 & 0 \\
+-1 & -1 & 1 & 1 \\
 2 & 2 & -1 & 2 \\
-2 & 2 & 3 & -1
+-1 & -1 & 3 & -1
 \end{bmatrix}
 \]
 
@@ -6943,10 +6943,10 @@ D^{(0)} =
 \[
 P^{(0)} =
 \begin{bmatrix}
--1 & 0 & 1 & 0 \\
-2 & -1 & 1 & 1 \\
+-1 & 0 & -1 & 0 \\
+-1 & -1 & 1 & 1 \\
 2 & 2 & -1 & 2 \\
-2 & 2 & 3 & -1
+-1 & -1 & 3 & -1
 \end{bmatrix}
 \]
 
@@ -6972,9 +6972,9 @@ D[0][2] = 9, \quad P[0][2] = 1
 P^{(1)} =
 \begin{bmatrix}
 -1 & 0 & 1 & 0 \\
-2 & -1 & 1 & 1 \\
+-1 & -1 & 1 & 1 \\
 2 & 2 & -1 & 2 \\
-2 & 2 & 3 & -1
+-1 & -1 & 3 & -1
 \end{bmatrix}
 \]
 
@@ -7475,47 +7475,354 @@ AOE网中的关键路径是指从开始事件到结束事件的所有路径中�
 \end{table}
 
 \textbf{计算关键路径}
-\begin{table}[h]
-    \centering
-    \begin{tabular}{c|c|c|c|c|c|c}
-        \toprule
-        \textbf{活动} & \textbf{起点} & \textbf{终点} & \textbf{活动时间} & $e (ve(起点))$ & $l (vl(终点) - 活动时间)$ & \textbf{是否关键} \\
-        \midrule
-        $a_1$ & A & B & 6 & 0 & 0 & $\checkmark$ \\
-        $a_2$ & B & E & 1 & 6 & 6 & $\checkmark$ \\
-        $a_7$ & E & F & 9 & 7 & 7 & $\checkmark$ \\
-        $a_9$ & F & I & 2 & 16 & 16 & $\checkmark$ \\
-        \bottomrule
-    \end{tabular}
-    \caption{关键路径计算表}
-\end{table}
+\begin{itemize}
+  \item 活动 $a_1$:  
+    $e(a_1) = ve(A) = 0$，  
+    $l(a_1) = vl(B) - 6 = 0$，  
+    $d(a_1) = l(a_1) - e(a_1) = 0$。
+
+  \item 活动 $a_2$:  
+    $e(a_2) = ve(A) = 0$，  
+    $l(a_2) = vl(C) - 4 = 2$，  
+    $d(a_2) = l(a_2) - e(a_2) = 2$。
+
+  \item 活动 $a_3$:  
+    $e(a_3) = ve(A) = 0$，  
+    $l(a_3) = vl(D) - 5 = 7$，  
+    $d(a_3) = l(a_3) - e(a_3) = 7$。
+
+  \item 活动 $a_4$:  
+    $e(a_4) = ve(B) = 6$，  
+    $l(a_4) = vl(E) - 1 = 6$，  
+    $d(a_4) = l(a_4) - e(a_4) = 0$。
+
+  \item 活动 $a_5$:  
+    $e(a_5) = ve(C) = 4$，  
+    $l(a_5) = vl(E) - 1 = 6$，  
+    $d(a_5) = l(a_5) - e(a_5) = 2$。
+
+  \item 活动 $a_6$:  
+    $e(a_6) = ve(D) = 5$，  
+    $l(a_6) = vl(H) - 2 = 12$，  
+    $d(a_6) = l(a_6) - e(a_6) = 7$。
+
+  \item 活动 $a_7$:  
+    $e(a_7) = ve(E) = 7$，  
+    $l(a_7) = vl(F) - 9 = 7$，  
+    $d(a_7) = l(a_7) - e(a_7) = 0$。
+
+  \item 活动 $a_8$:  
+    $e(a_8) = ve(E) = 7$，  
+    $l(a_8) = vl(G) - 7 = 7$，  
+    $d(a_8) = l(a_8) - e(a_8) = 0$。
+
+  \item 活动 $a_9$:  
+    $e(a_9) = ve(H) = 7$，  
+    $l(a_9) = vl(G) - 4 = 10$，  
+    $d(a_9) = l(a_9) - e(a_9) = 3$。
+
+  \item 活动 $a_{10}$:  
+    $e(a_{10}) = ve(F) = 16$，  
+    $l(a_{10}) = vl(I) - 2 = 16$，  
+    $d(a_{10}) = l(a_{10}) - e(a_{10}) = 0$。
+
+  \item 活动 $a_{11}$:  
+    $e(a_{11}) = ve(G) = 14$，  
+    $l(a_{11}) = vl(I) - 4 = 14$，  
+    $d(a_{11}) = l(a_{11}) - e(a_{11}) = 0$。
+\end{itemize}
 
 \textbf{关键路径结果}
 
-关键路径为：
+关键路径为：  
+1. $A \to B \to E \to F \to I$  
+
+2. $A \to C \to E \to G \to I$
+
+下面为一个简单的作图例子，如图\ref{fig:AOETable}所示：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/ve vl.pdf}
+  \caption{AOE网与关键路径}
+  \label{fig:AOETable}
+
+\end{figure}
+
+从左到右计算最早发生时间 $ve$，从右到左计算最晚发生时间 $vl$。 $ve$ 和 $vl$ 相等的顶点即为关键路径。
+
+
+
+
+
+
 
 \chapter{查找}
 
 \section{查找的基本概念}
 
-\subsection{查找的定义}
+被查找对象是由一组元素（或记录）组成的表或文件，称为查找表。查找表中的每个元素则由若干个数据项组成，其中指定一个数据项为关键字（key），所有元素在关键字上的取值是唯一的。在这种条件下，查找（search）的定义是：给定一个值 $A$，在含有 $n$ 个元素的表中找出关键字等于 $A$ 的元素。若找到，则查找成功，返回该元素的信息或该元素在表中的位置；否则查找失败，返回相关的指示信息。
 
-\subsection{查找的基本术语}
+因为查找是对已存入到计算机中的数据进行的运算，因此在研究各种查找方法时，首先必须弄清这些查找方法所需要的数据结构（尤其是存储结构）是什么，对表中关键字的次序有何要求，例如，是对无序数据查找还是对有序数据查找？为了提高查找速度，常常用某些特殊的数据结构来组织表，或对表事先进行诸如排序这样的运算。
+
+若在查找的同时对表做修改操作（如插入和删除），则相应的查找表称为动态查找表（dynamic search table）。
+若在查找中不涉及表的修改操作，则相应的查找表称为静态查找表（static search table）。
+
+查找也有内查找和外查找之分。若整个查找过程都在内存中进行，则称之为内查找（Internal search）；反之，若查找过程需要访问外存，则称之为外查找（External search）。
+
+在查找运算中，时间主要花费在关键字的比较上。把平均需要和给定值 $A$ 进行比较的关键字次数称为平均查找长度（Average Search Length, ASL），其定义如下：
+
+\[
+\text{ASL} = \sum_{i=1}^n P_i \cdot C_i
+\]
+
+其中：
+\begin{itemize}
+  \item $n$ 表示查找表中元素的个数；
+  \item $P_i$ 表示查找第 $i$ 个元素的概率；
+  \item $C_i$ 表示查找第 $i$ 个元素时需要比较的关键字次数。
+\end{itemize}
+
+平均查找长度（ASL）分为查找成功情况下的 $\text{ASL}_{\text{成功}}$ 和查找失败情况下的 $\text{ASL}_{\text{失败}}$。
+
+\textbf{1. 查找成功情况下的 $\text{ASL}_{\text{成功}}$}  
+$\text{ASL}_{\text{成功}}$ 表示成功查找到查找表中的元素时，平均需要的关键字比较次数。  
+假设查找到第 $i$ 个元素的概率为 $P_i$，则有：
+\[
+\text{ASL}_{\text{成功}} = \sum_{i=1}^n P_i \cdot C_i
+\]
+其中：
+\begin{itemize}
+  \item $n$ 表示查找表中元素的个数；
+  \item $P_i$ 表示查找第 $i$ 个元素的概率；
+  \item $C_i$ 表示查找第 $i$ 个元素时需要比较的关键字次数。
+\end{itemize}
+
+\textbf{2. 查找失败情况下的 $\text{ASL}_{\text{失败}}$}  
+$\text{ASL}_{\text{失败}}$ 表示没有找到查找表中的元素时，平均需要的关键字比较次数。  
+假设共有 $m$ 种查找失败的情况，第 $j$ 种失败情况的概率为 $Q_j$，则有：
+\[
+\text{ASL}_{\text{失败}} = \sum_{j=1}^m Q_j \cdot D_j
+\]
+其中：
+\begin{itemize}
+  \item $m$ 表示查找失败的情况数；
+  \item $Q_j$ 表示第 $j$ 种失败情况的概率；
+  \item $D_j$ 表示第 $j$ 种失败情况时需要比较的关键字次数。
+\end{itemize}
+
+显然，$\text{ASL}$ 是衡量查找算法性能好坏的重要指标。一个查找算法的 $\text{ASL}$ 越大，其时间性能越差；
+反之，一个查找算法的 $\text{ASL}$ 越小，其时间性能越好。
+
 
 \section{顺序查找}
 
-\section{折半查找}
+顺序查找是最简单的一种查找方法。它的基本思想是从查找表的第一个元素开始，依次与每个元素进行比较，直到找到所要查找的元素为止。
 
+如代码\ref{lst:seqSearch} 所示：
+
+\begin{lstlisting}[language=C++, caption={顺序查找算法} label={lst:seqSearch}]
+  /*
+  顺序查找：
+      从第一个元素开始，依次与每个元素进行比较，直到找到所要查找的元素为止。
+*/
+int seqSearch(int *a, int n, int key) {
+    for (int i = 0; i < n; i++) {
+        if (a[i] == key) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+\end{lstlisting}
+
+顺序查找的时间复杂度为 $O(n)$，其中 $n$ 为查找表中元素的个数。
+
+$ASL_{\text{成功}}$ 和 $ASL_{\text{失败}}$ 的计算方法如下：
+
+\begin{itemize}
+  \item $ASL_{\text{成功}} = \frac{1 + 2 + \cdots + n}{n} = \frac{n + 1}{2}$
+  \item $ASL_{\text{失败}} = n$
+  \end{itemize}
+
+也就是说 ，顺序查找方法在查找成功时的平均比较次数约为表长的一半，而在查找失败时的平均比较次数为表长。
+顺序查找的优点是简单易懂，适用于小规模数据的查找；缺点是效率较低，尤其在数据量较大时，查找效率较低。
+
+\section{折半查找}
+折半查找（binary search）又称二分查找，它是一种效率较高的查找方法。但是，折半查找要求线性表是有序表，即表中的元素按关键字有序。在下面的讨论中，假设有序表是递增有序的。
+
+折半查找的基本思路是设 $R[low..high]$ 是当前的查找区间，首先确定该区间的中点位置：
+\[
+mid = \left\lfloor \frac{low + high}{2} \right\rfloor
+\]
+然后将待查的值 $A$ 与 $R[mid].key$ 比较：
+
+\begin{enumerate}
+  \item 若 $A = R[mid].key$，则查找成功并返回该元素的逻辑序号。
+  \item 若 $A < R[mid].key$，则由表的有序性可知 $R[mid..high].key$ 均大于 $A$，因此若表中存在关键字等于 $A$ 的元素，则该元素必定在位置 $mid$ 左边的子表 $R[low..mid-1]$ 中，故新的查找区间是左子表 $R[low..mid-1]$。
+  \item 若 $A > R[mid].key$，则关键字为 $A$ 的元素必在 $mid$ 的右子表 $R[mid+1..high]$ 中，即新的查找区间是右子表 $R[mid+1..high]$。
+\end{enumerate}
+
+上述过程如图 \ref{fig:halfSearch} 所示。可以从初始的查找区间 $R[0..n-1]$ 开始，每经过一次与当前查找区间的中点位置上的关键字比较，就可确定查找是否成功；若不成功，则当前的查找区间缩小一半。重复这一过程，
+直到找到关键字为 $A$ 的元素，或者直到当前的查找区间为空（即查找失败）时为止。
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/halfSearch.pdf}
+  \caption{折半查找}
+  \label{fig:halfSearch}
+\end{figure}
+
+其算法如下：
+
+\begin{lstlisting}[language=C++, caption={折半查找算法}]
+  /*
+  折半查找：
+      设 R[low..high] 是当前的查找区间，首先确定该区间的中点位置：
+      mid = (low + high) / 2
+      然后将待查的值 A 与 R[mid].key 比较：
+*/
+int binarySearch(int *a, int n, int key) {
+    int low = 0, high = n - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (a[mid] == key) {
+            return mid;
+        } else if (a[mid] < key) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+\end{lstlisting}
+折半查找过程可用二叉树来描述。将当前查找区间的中间位置上的元素作为根，由左子表和右子表构造的二叉树分别作为根的左子树和右子树。由此得到的二叉树称为描述折半查找过程的判定树（decision tree）或比较树（comparison tree）。
+
+判定树中：
+\begin{itemize}
+  \item 查找成功对应的结点称为内部结点；
+  \item 查找失败对应的结点称为外部结点。
+\end{itemize}
+
+构造外部结点的方法如下：
+\begin{itemize}
+  \item 对于内部结点中的每个单分支结点，添加一个作为它的孩子的外部结点，使其变成双分支结点；
+  \item 对于内部结点中的每个叶子结点，添加两个作为孩子的外部结点，使其变成双分支结点。
+\end{itemize}
+
+判定树刻画了在所有查找情况下进行折半查找的比较过程。
+
+\textbf{注意}：折半查找判定树的形态只与表中元素的个数 $n$ 相关，而与输入实例中 $R[0..n-1].key$ 的取值无关。
+
+例如，含有 11 个元素（$R[0..10]$）的有序表可用图 \ref{fig:decisionTree} 所示的判定树来表示：
+\begin{itemize}
+  \item 图中的圆形结点表示内部结点，内部结点中的数字表示该元素在有序表中的下标；
+  \item 图中的长方形结点表示外部结点，外部结点中的两个值表示查找不成功时关键字等于给定值的元素所对应的元素序号范围。
+\end{itemize}
+
+例如：
+\begin{itemize}
+  \item 外部结点中的值 “$6 \leq A < 7$” 表示被查找值 $A$ 是介于 $R[6].key$ 和 $R[7].key$ 之间的，即 $R[6].key < A < R[7].key$；
+  \item 外部结点中的值 “$A < R[0].key$” 表示 $A < R[0].key$；
+  \item 外部结点中的值 “$A > R[10].key$” 表示 $A > R[10].key$。
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/decisionTree.pdf}
+  \caption{R[0..10]的二分折半查找的判定树}
+  \label{fig:decisionTree}
+\end{figure}
+
+
+显然，若查找的元素是表中的元素 $R[5]$（处于第 1 层），只需进行 1 次比较；  
+若查找的元素是表中的元素 $R[2]$ 或 $R[8]$（均处于第 2 层），分别需进行 2 次比较；  
+若查找的元素是表中的元素 $R[0]$、$R[3]$、$R[6]$ 或 $R[9]$（均处于第 3 层），分别需进行 3 次比较；  
+若查找的元素是表中的元素 $R[1]$、$R[4]$、$R[7]$ 或 $R[10]$（均处于第 4 层），分别需进行 4 次比较。
+
+\textbf{说明}：上述关键字比较次数并不是算法中严格的比较次数。在 \texttt{BinSearch} 算法中，首先将 $A$ 与 $R[mid].key$ 进行 1 次比较，若不相等，再进行 $A < R[mid].key$ 或 $A > R[mid].key$ 的比较。也就是说：
+\begin{itemize}
+  \item 若 $A = R[mid].key$，需要 1 次比较；
+  \item 若 $A < R[mid].key$，需要 2 次比较；
+  \item 若 $A > R[mid].key$，也需要 2 次比较。
+\end{itemize}
+这里讨论的关键字比较次数是假设与 $R[mid].key$ 比较 1 次就可以知道 3 种情况，即关键字比较的个数。实际上，这样简化的计算不影响算法的时间复杂度，后续讨论中都采用这种假设。
+
+---
+
+在查找元素的折半查找判定树中，设关键字序列为 $\{A_1, A_2, \dots, A_n\}$，查找 $A_i$ 的概率为 $P_i$，显然有 $n$ 种查找成功的情况，对应的内部结点有 $n$ 个。成功的折半查找过程恰好是走了一条从判定树的根到被查结点（内部结点）的路径，经历比较的关键字次数恰好为该元素在树中的层数。所以查找成功的平均查找长度为：
+\[
+\text{ASL}_{\text{成功}} = \sum_{i=1}^n P_i \cdot \text{level}(A_i)
+\]
+其中，$\text{level}(A_i)$ 表示关键字 $A_i$ 对应内部结点的层次。
+
+在这样的判定树中，总共有 $n+1$ 种查找失败的情况，对应的外部结点有 $n+1$ 个。用 $U_j$ 表示外部结点 $j$，$U_j$ 包含的所有关键字满足条件：
+\begin{itemize}
+  \item $U_0$：所有关键字 $A$ 满足 $A < R[0].key$；
+  \item $U_j$：所有关键字 $A$ 满足 $R[j-1].key < A < R[j].key$，$1 \leq j \leq n$；
+  \item $U_{n+1}$：所有关键字 $A$ 满足 $A > R[n].key$。
+\end{itemize}
+
+失败的查找，其比较过程是经历了一条从判定树根到某个外部结点的路径，所需的关键字比较次数是该路径上内部结点的总数。设 $Q_j$ 是查找属于 $U_j$ 中关键字的概率，那么查找失败的平均查找长度为：
+\[
+\text{ASL}_{\text{失败}} = \sum_{j=1}^{n+1} Q_j \cdot (\text{level}(U_j) - 1)
+\]
+其中，$\text{level}(U_j)$ 表示 $U_j$ 对应外部结点的层次。
+
+
+为讨论方便，不妨设判定树中内部结点的总数为 $n = 2^h - 1$，将该判定树近似看成是高度为 $h = \lfloor \log_2 (n+1) \rfloor$ 的满二叉树（
+高度 $h$ 不计外部结点）。树中第 $k$ 层上的结点个数为 $2^{k-1}$，查找该层上的每个结点恰好需要进行 $k$ 次比较。因此，在等概率假设下，折半查找成功时的平均查找长度为：
+\[
+\text{ASL}_{\text{bin}} = \sum_{i=1}^{n} p_i c_i = \frac{1}{n} \sum_{i=1}^{h} 2^{i-1} \times i = \frac{n+1}{n} \times \log_2 (n+1) -1 \approx \log_2 (n+1) -1
+\]
+
+
+折半查找在查找失败时所需比较的关键字个数不超过判定树的高度，在最坏情况下查找成功的比较次数也不超过判定树的高度。
+
+一般情况下，判定树中度数小于 2 的结点只可能在最下面的两层上（不计外部结点），所以 $n$ 个结点的判定树高度和 $n$ 个结点的完全二叉树高度相同，即为：
+\[
+\lfloor \log_2 (n+1) \rfloor
+\]
+由此可见，折半查找的最坏性能和平均性能相当接近。归纳起来，折半查找算法的时间复杂度为 $O(\log_2 n)$。
+
+也可以通过以下递推式简单地推导：
+\[
+C(n) = 
+\begin{cases} 
+1, & n = 1 \\ 
+C\left(\lfloor n/2 \rfloor\right) + 1, & n > 1 
+\end{cases}
+\]
+
+展开递推式：
+\[
+C(n) = C\left(\lfloor n/2 \rfloor\right) + 1 = C\left(\lfloor n/4 \rfloor\right) + 1 + 1 = \dots = C\left(\lfloor n/2^k \rfloor\right) + k
+\]
+
+当 $\lfloor n/2^k \rfloor = 1$ 时，$k = \lfloor \log_2 n \rfloor$，因此：
+\[
+C(n) = \lfloor \log_2 n \rfloor + 1 = O(\log_2 n)
+\]
+
+虽然折半查找的效率较高，但它要求查找表是按关键字有序的。另外，折半查找需要确定查找的区间，因此要求查找表的存储结构具有随机存取特性，所以只适用于顺序表，不适合于链式存储结构。
+
+需要注意的是，不能说折半查找不能用于链式存储结构，只是说采用顺序表时，折半查找算法设计更方便，效率更高。
 \section{分块查找}
 
 \section{哈希查找}
 
-\section{红黑树}
+\section{二叉排序树}
+
+\section{平衡二叉树}
+
 
 \section{B树}
 
 \section{B+树}
 
+\section{红黑树}
 \chapter{排序}
 
 \section{排序的基本概念}
