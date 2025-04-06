@@ -7809,16 +7809,546 @@ C(n) = \lfloor \log_2 n \rfloor + 1 = O(\log_2 n)
 虽然折半查找的效率较高，但它要求查找表是按关键字有序的。另外，折半查找需要确定查找的区间，因此要求查找表的存储结构具有随机存取特性，所以只适用于顺序表，不适合于链式存储结构。
 
 需要注意的是，不能说折半查找不能用于链式存储结构，只是说采用顺序表时，折半查找算法设计更方便，效率更高。
-\section{分块查找}
+\section{索引存储结构和分块查找}
 
+\subsection{索引存储结构}
+
+索引存储结构是指在查找表中设置一个索引表，索引表中存放的是查找表中元素的关键字和相应的地址。索引表中的关键字按一定的顺序排列，索引表中的每个元素称为索引项。
+索引项的关键字称为索引关键字，索引项中存放的地址称为索引地址。如下表所示。
+
+\textbf{索引表}：
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{地址} & \textbf{关键字} &\textbf{地址}\\ \hline
+        300 & 010&100 \\ \hline
+        310 & 021  &130 \\ \hline
+        320 & 025 &220\\ \hline
+        330 & 027 &160\\ \hline
+        340 & 029 & 190 \\ \hline
+    \end{tabular}
+    \caption{索引表}
+    \label{tab:indexTable}
+\end{table}
+
+\textbf{主数据表}：
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{地址} & \textbf{区号} & \textbf{城市名} & \textbf{说明} \\ \hline
+         100 & 010 & Beijing & 首都 \\ \hline
+         130 & 021 & Shanghai & 直辖市 \\ \hline
+         160 & 027 & Wuhan & 湖北省省会 \\ \hline
+        190 & 029 & Xian & 陕西省省会 \\ \hline
+        220 & 025 & Nanjing & 江苏省省会 \\ \hline
+    \end{tabular}
+    \caption{主数据表}
+    \label{tab:mainDataTable}
+\end{table}
+
+在索引存储结构中进行关键字查找时，先在索引表中快速查找（因为索引表中按关键字有序排列，可以采用折半查找）找到相应的关键字，
+然后通过对应的地址找到主数据表中的元素。
+索引存储结构可以提高按关键字查找元素的效率，但其缺点是需要建立索引表，从而增加时间和空间的开销。
+
+
+\subsection{分块查找（Block Search）}
+
+分块查找（block search）是一种性能介于顺序查找和折半查找之间的查找方法。它要求按如下的索引方式来存储线性表：
+
+1. 将表 $R[0..n-1]$ 均分为 $b$ 块，前 $b-1$ 块中的元素个数为 $t = \lfloor n/b \rfloor$，最后一块（即第 $b$ 块）的元素数小于等于 $t$。
+2. 每一块中的关键字不一定是有序的，但前一块中的最大关键字必须小于后一块中的最小关键字，即要求整个表是“分块有序”（block order）的。
+
+从各块中抽取最大关键字及其起始位置构成一个索引表 $IDX[0..b-1]$，其中：
+\begin{itemize}
+  \item $IDX[i]$（$0 \leq i \leq b-1$）存放第 $i+1$ 块的最大关键字及该块在表 $R$ 中的起始位置。
+\end{itemize}
+
+由于表 $R$ 是分块有序的，因此索引表 $IDX$ 是一个递增有序表。
+
+以下图为例：
+
+假设要查找关键字 38 的具体位置。首先将 38 依次与索引表中各最大关键字进行比较，因为 $22 < 38 < 48$，所以可以确定 38 如果存在，肯定在第二个子表中。
+
+由于索引表中显示第二子表的起始位置在查找表的第 7 个位置上(下标6)，所以从该位置开始进行顺序查找，
+一直查找到该子表的最后一个关键字（一般将查找表进行等分，具体子表个数根据实际情况而定）。结果在第 10 个位置上(下标9)确定该关键字即为所查找的关键字。
+
+\begin{figure}
+  
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/indexTable.pdf}
+    \caption{分块查找}
+    \label{fig:blockSearch}
+
+\end{figure}
+
+
+由于分块查找实际上是进行了两次查找过程（因此分块查找最少需要 2 次关键字比较），故整个查找过程的平均查找长度是两次查找的平均查找长度之和。
+
+假设有 $n$ 个元素，每块中有 $s$ 个元素（$R$ 中总块数 $b = \lceil n/s \rceil$），分析分块查找在成功情况下的平均查找长度如下：
+
+1. 采用折半查找确定元素所在的块  
+
+   若以折半查找来确定元素所在的块，则分块查找成功时的平均查找长度为：
+   \[
+   \text{ASL}_{\text{成功}} = \text{ASL}_{\text{索引}} + \text{ASL}_{\text{块内}}
+   \]
+   其中：
+   \[
+   \text{ASL}_{\text{索引}} = \lfloor \log_2 (n/s + 1) \rfloor, \quad \text{ASL}_{\text{块内}} = \frac{s+1}{2}
+   \]
+   因此：
+   \[
+   \text{ASL}_{\text{成功}} = \lfloor \log_2 (n/s + 1) \rfloor + \frac{s+1}{2}
+   \]
+   显然，当 $s$ 越小时，$\text{ASL}_{\text{成功}}$ 的值越小，即当采用折半查找确定块时，每块的长度越小越好。
+
+2. 采用顺序查找确定元素所在的块  
+
+   若以顺序查找来确定元素所在的块，则分块查找成功时的平均查找长度为：
+   \[
+   \text{ASL}_{\text{成功}} = \text{ASL}_{\text{索引}} + \text{ASL}_{\text{块内}}
+   \]
+   其中：
+   \[
+   \text{ASL}_{\text{索引}} = \frac{b+1}{2}, \quad \text{ASL}_{\text{块内}} = \frac{s+1}{2}
+   \]
+   因此：
+   \[
+   \text{ASL}_{\text{成功}} = \frac{b+1}{2} + \frac{s+1}{2} = \frac{n/s + s}{2} + 1
+   \]
+   显然，当 $s = \sqrt{n}$ 时，$\text{ASL}_{\text{成功}}$ 取极小值 $\sqrt{n} + 1$，即当采用顺序查找确定块时，各块中的元素数选定为 $\sqrt{n}$ 时效果最佳。
+
+\textbf{分块查找的缺点}  
+分块查找的主要缺点是增加了一个索引表的存储空间，并增加了建立索引表的时间。
 \section{哈希查找}
 
 \section{二叉排序树}
 
+二叉排序数（binary search tree）是二叉树的一种特殊形式。又称二叉搜索树，二叉查找树，简称 BST。
+二叉排序树是一个空树或具有下列性质的二叉树：
+
+\begin{itemize}
+  \item 若左子树不空，则左子树上所有结点的关键字均小于根结点的关键字；
+  \item 若右子树不空，则右子树上所有结点的关键字均大于根结点的关键字；
+  \item 左、右子树也分别为二叉排序树。
+  \end{itemize}
+
+\subsection{二叉排序树的基本操作}
+
+\subsubsection{插入操作}
+
+\begin{lstlisting}[language=C++, caption={二叉排序树的插入操作}]
+  /*
+  二叉排序树的插入操作：
+      1. 如果树为空，则新结点成为根结点；
+      2. 如果树不空，则从根结点开始，依次与当前结点进行比较：
+          1. 如果新结点的关键字小于当前结点的关键字，则向左子树查找；
+          2. 如果新结点的关键字大于当前结点的关键字，则向右子树查找；
+          3. 如果新结点的关键字等于当前结点的关键字，则不进行插入。
+*/
+void insertNode(BSTree *&T, int key) {
+    if (T == NULL) {
+        T = new BSTree;
+        T->key = key;
+        T->lchild = NULL;
+        T->rchild = NULL;
+    } else if (key < T->key) {
+        insertNode(T->lchild, key);
+    } else if (key > T->key) {
+        insertNode(T->rchild, key);
+    } else {
+        printf("The key %d already exists.\n", key);
+    }
+}
+\end{lstlisting}
+
+
+
+\subsubsection{创建操作}
+
+二叉排序树的创建操作其实就是利用我们前面的插入操作来实现的。不断地将新结点插入到树中，直到所有结点都插入完毕为止。
+
+其实现代码如下：
+
+\begin{lstlisting}[language=C++, caption={二叉排序树的创建操作}]
+  /*
+  二叉排序树的创建操作：
+      1. 创建一个空树 T；
+      2. 从输入中读入关键字，依次插入到树 T 中。
+*/
+void createBSTree(BSTree *&T) {
+    T = NULL;
+    int key;
+    printf("Please input the key (end with -1):\n");
+    while (1) {
+        scanf("%d", &key);
+        if (key == -1) {
+            break;
+        }
+        insertNode(T, key);
+    }
+}
+\end{lstlisting}
+
+我们以输入 的关键字序列为 50、30、70为例，创建的二叉排序树的过程如下：
+
+\begin{itemize}
+  \item 第一步，输入50，此时树为空，50成为根结点；
+  \item 第二步，输入30，30小于50，再次进入insertNode函数，插入到50的左子树中；
+  \item 第三步，输入70，70大于50，再次进入insertNode函数，插入到50的右子树中；
+  \end{itemize}
+最终创建的二叉排序树如下图所示：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/bsTree.pdf}
+  \caption{二叉排序树}
+  \label{fig:bstree}
+\end{figure}
+
+而当我们以30、50、70为输入时，创建的二叉排序树如下图所示：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/bsTree2.pdf}
+  \caption{二叉排序树}
+  \label{fig:bstree2}
+\end{figure}
+
+
+由上面两种结果我们可知，二叉排序树的结构与输入的关键字序列的顺序有关。
+
+并且我们可以发现，图\ref{fig:bstree} 的查找效率比图\ref{fig:bstree2} 的查找效率要高。
+这就是二叉排序树的一个特点：当输入的关键字序列是有序的时，创建的二叉排序树是一个链式结构，查找效率很低；而当输入的关键字序列是随机的时，创建的二叉排序树是一个平衡的结构，查找效率较高。
+
+
+
+\subsubsection{查找操作}
+
+因为二叉排序树可看成是有序的，所以在二叉排序树中查找关键字的操作与折半查找类似，也是一个逐步缩小查找范围的过程。其查找算法可分为递归和非递归两种方式。
+
+\textbf{递归查找算法}：
+
+\begin{lstlisting}[language=C++, caption={二叉排序树的递归查找操作}]
+  /*
+  二叉排序树的递归查找操作：
+      1. 如果树为空，则查找失败；
+      2. 如果树不空，则从根结点开始，依次与当前结点进行比较：
+          1. 如果要查找的关键字小于当前结点的关键字，则向左子树查找；
+          2. 如果要查找的关键字大于当前结点的关键字，则向右子树查找；
+          3. 如果要查找的关键字等于当前结点的关键字，则查找成功。
+*/
+int searchBSTree(BSTree *T, int key) {
+    if (T == NULL) {
+        return -1;
+    } else if (key < T->key) {
+        return searchBSTree(T->lchild, key);
+    } else if (key > T->key) {
+        return searchBSTree(T->rchild, key);
+    } else {
+        return T->key;
+    }
+}
+\end{lstlisting}
+
+\textbf{非递归查找算法}：
+
+\begin{lstlisting}[language=C++, caption={二叉排序树的非递归查找操作}]
+  /*
+  二叉排序树的非递归查找操作：
+      1. 如果树为空，则查找失败；
+      2. 如果树不空，则从根结点开始，依次与当前结点进行比较：
+          1. 如果要查找的关键字小于当前结点的关键字，则向左子树查找；
+          2. 如果要查找的关键字大于当前结点的关键字，则向右子树查找；
+          3. 如果要查找的关键字等于当前结点的关键字，则查找成功。
+*/
+int searchBSTree(BSTree *T, int key) {
+    while (T != NULL) {
+        if (key < T->key) {
+            T = T->lchild;
+        } else if (key > T->key) {
+            T = T->rchild;
+        } else {
+            return T->key;
+        }
+    }
+    return -1;
+}
+\end{lstlisting}
+
+接下来，我们以一组关键字序列(25,18,46,2,53,39,32,4,74,67,60,11)为例，来演示其查找过程。并计算出查找成功的平均查找长度和查找失败的平均查找长度。
+
+首先根据该序列创建二叉排序树，得到如下图所示的二叉排序树：
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/bTree3withOut.pdf}
+  \caption{一棵二叉排序树及加上的外部结点}
+  \label{fig:bstree3}
+\end{figure}
+
+
+在图 \ref{fig:bstree3} 中，外部结点表示查找失败的情况。
+
+外部结点中的值表示查找失败时关键字等于给定值的元素所对应的元素序号范围。
+
+例如：
+
+\begin{itemize}
+  \item 外部结点中的值 “$2 \leq A < 4$” 表示被查找值 $A$ 是介于 $R[2].key$ 和 $R[4].key$ 之间的，即 $R[2].key < A < R[4].key$；
+  \item 外部结点中的值 “$A < R[0].key$” 表示 $A < R[0].key$；
+  \item 外部结点中的值 “$A > R[11].key$” 表示 $A > R[11].key$。
+  \end{itemize}
+
+  生成的二叉排序树如图 9.11(a) 所示。
+
+因此，有：
+\[
+\text{ASL}_{\text{成功}} = \frac{1 \cdot 1 + 2 \cdot 2 + 3 \cdot 3 + 3 \cdot 4 +  2 \cdot 5 + 1 \cdot 6}{12} = \frac{1 + 4 + 9 + 12 + 10 + 6}{12} = \frac{42}{12} = 3.5
+\]
+
+加上外部结点的二叉排序树如图 9.11(b) 所示，因此有：
+\[
+\text{ASL}_{\text{失败}} = \frac{1 \cdot 2 + 3 \cdot 3 + 4 \cdot 4 + 3 \cdot 5  + 2 \cdot 6 }{13} = \frac{2 + 9 + 16 + 15 + 12}{13} = \frac{54}{13} \approx 4.15
+\]
+
+\subsubsection{删除操作}
+
+在从二叉排序树中删除一个结点时，不能直接把以该结点为根的子树都删去，只能删除该结点本身，并且还要保证删除后所得的二叉树仍然满足 BST（Binary Search Tree）性质。也就是说，在二叉排序树中删去一个结点相当于删去有序序列（即该树的中序序列）中的一个元素。
+
+删除操作必须首先进行查找，假设在查找结束时，指针 $p$ 指向要删除的结点。删除过程分为以下几种情况：
+
+1. 若结点是叶子结点  
+   直接删去该结点。如图 9.12(a) 所示，直接删除结点 9。这是最简单的删除结点的情况。
+
+2. 若结点只有左子树而无右子树  
+   根据二叉排序树的特点，可以直接将其左孩子替代结点 $p$（结点替换）。如图 9.12(b) 所示，$p$ 指向结点 4，要删除结点 $p$，只需将其左孩子结点 3 替代它。
+
+3. 若结点只有右子树而无左子树  
+   根据二叉排序树的特点，可以直接将其右孩子替代结点 $p$（结点替换）。如图 9.12(c) 所示，$p$ 指向结点 7，要删除结点 $p$，只需将其右孩子结点 8 替代它。
+
+4. 若结点同时存在左、右子树  
+   根据二叉排序树的特点，可以从其左子树中选择关键字最大的结点，用该结点的值替代结点 $p$ 的值（结点值替换），并删除该结点（由于该结点一定没有右子树，删除它属于情况 (2)）。其原理是用中序前驱替代被删结点。
+
+   也可以从其右子树中选择关键字最小的结点，用该结点的值替代结点 $p$ 的值（结点值替换），并删除该结点（由于该结点一定没有左子树，删除它属于情况 (3)）。其原理是用中序后继替代被删结点。
+
+   通常采用前一种删除方式。如图 9.12(d) 所示，$p$ 指向结点 5，它的左子树中关键字最大的结点是结点 4，将结点 $p$ 的关键字改为 4，并删除结点 4。
+
+---
+
+\textbf{实现删除只有右子树的结点的算法}  
+下面以删除只有右子树的结点 $p$ 为例进行说明。首先要查找关键字为 $A$ 的被删结点 $p$，其算法如下：
+
+\begin{lstlisting}[language=C++, caption={二叉排序树的删除操作}]
+  /*
+  二叉排序树的删除操作：
+      1. 查找关键字为 A 的结点 p；
+      2. 如果 p 的右子树不空，则将 p 的右子树的根结点替代 p；
+      3. 如果 p 的右子树为空，则将 p 的左子树的根结点替代 p。
+*/
+
+void deleteNode(BSTree *&T, int key) {
+    BSTree *p = T;
+    BSTree *q = NULL;
+    while (p != NULL && p->key != key) {//查找关键字为 key 的结点 p
+        q = p;
+        if (key < p->key) {
+            p = p->lchild;
+        } else {
+            p = p->rchild;
+        }
+    }
+    if (p == NULL) {
+        printf("The key %d does not exist.\n", key);
+        return;
+    }
+    if (p->lchild == NULL) {//删除结点 p 的左子树为空
+        if (q == NULL) {//
+            T = p->rchild;
+        } else if (q->lchild == p) {
+            q->lchild = p->rchild;
+        } else {
+            q->rchild = p->rchild;
+        }
+    } else if (p->rchild == NULL) {//删除结点 p 的右子树为空
+        if (q == NULL) {
+            T = p->lchild;
+        } else if (q->lchild == p) {
+            q->lchild = p->lchild;
+        } else {
+            q->rchild = p->lchild;
+        }
+    } else {//删除结点 p 的左右子树都不为空
+        BSTree *s = p->lchild;
+        while (s->rchild != NULL) {
+            s = s->rchild;
+        }
+        s->rchild = p->rchild;
+        if (q == NULL) {
+            T = p->lchild;
+        } else if (q->lchild == p) {
+            q->lchild = p->lchild;
+        } else {
+            q->rchild = p->lchild;
+        }
+    }
+    delete p;
+}
+\end{lstlisting}
+
+
+
+
+
+
 \section{平衡二叉树}
+
+在含有 $n$ 个结点的二叉排序树中，查找操作的执行时间与树的形态有关。在最坏情况下，执行时间为 $O(n)$。为了避免这种情况发生，人们研究了许多种动态平衡的方法，使得在往树中插入或删除结点时，通过调整树的形态来保持树的“平衡”，使之既保持 BST（Binary Search Tree）性质不变，又保证树的高度在任何情况下均为 $O(\log_2 n)$，从而确保树上的查找操作在最坏情况下的时间复杂度也是 $O(\log_2 n)$。
+
+平衡的二叉排序树有很多种，较为著名的有 AVL 树。AVL 树是由两位前苏联数学家 Adel'son-Vel'sii 和 Landis 于 1962 年提出的，故用他们的名字命名。
+下面讨论的平衡二叉树均指 AVL 树。
+
+---
+
+\textbf{平衡二叉树的定义}  
+
+若一棵二叉树中每个结点的左、右子树的高度最多相差 1，则称此二叉树为平衡二叉树（balanced binary tree）。
+在算法中，通过平衡因子（balance factor, bf）来具体实现上述平衡二叉树的定义。
+一个结点的平衡因子是该结点左子树的高度减去右子树的高度（或者该结点右子树的高度减去左子树的高度）。从平衡因子的角度来看：
+\begin{itemize}
+  \item 若一棵二叉树中某个结点的平衡因子的绝对值小于或等于 1，即平衡因子的取值为 $\{-1, 0, 1\}$，则该结点是平衡的；
+  \item 若某个结点的平衡因子的绝对值大于 1，则该结点是不平衡的。
+\end{itemize}
+
+若一棵二叉树的所有结点都是平衡的，则称该树为平衡二叉树。
+
+
+\textbf{平衡二叉树与二叉排序树的关系}  
+
+一般情况下，一棵平衡二叉树总是二叉排序树，因为脱离二叉排序树来讨论平衡二叉树是没有意义的。因此，平衡二叉树是在二叉排序树的基础上增加了树形约束，即每个结点的平衡因子满足上述条件。
+
+图 \ref{fig:banlanceTree} 是平衡二叉树和不平衡二叉树的例子，图中结点旁边的数字为该结点的平衡因子。其中，图 \ref{fig:banlanceTree}(a) 是一棵平衡二叉树，所有结点的平衡因子绝对值均为 0 或 1；而图 \ref{fig:banlanceTree}(b) 是一棵不平衡二叉树，结点 1 的平衡因子绝对值为 2。
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/balanceTree.pdf}
+  \caption{平衡二叉树和不平衡二叉树}
+  \label{fig:banlanceTree}
+
+\end{figure}
+
+\subsection{平衡二叉树的插入调整}
+
+按照现有教科书的说法，平衡二叉树的调整分为四种情况，为避免讲解枯燥，我们直接使用一个例子来进行说明这四种情况。
+
+输入关键字序列(16,3,7,11,9,26,18,14,15) , 我们一步一步的构造出平衡二叉树。其过程如图 \ref{fig:insertAdjust} 所示。
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/balanceTree_insert.pdf}
+  \caption{平衡二叉树的插入调整}
+  \label{fig:insertAdjust}
+\end{figure}
+
+当插入进行到图 \ref{fig:insertAdjust}(c) 时,结点16的平衡因子为2，此时发生不平衡，观察其结构是LR型的，因此需要进行双旋转调整。
+先左旋变成LL型结构，再右旋变成图 \ref{fig:insertAdjust}(d)。
+
+当插入进行到图 \ref{fig:insertAdjust}(f) 时,结点16的平衡因子为2，此时发生不平衡，观察其结构是LL型的，因此需要进行单旋转调整。
+直接右旋变成图 \ref{fig:insertAdjust}(g)。
+
+当插入进行到图 \ref{fig:insertAdjust}(h) 时,结点7的平衡因子为-2，此时发生不平衡，观察其结构是RR型的，因此需要进行单旋转调整。
+直接左旋变成图 \ref{fig:insertAdjust}(i)。
+
+当插入进行到图 \ref{fig:insertAdjust}(j) 时,结点16的平衡因子为-2，此时发生不平衡，观察其结构是RL型的，因此需要进行双旋转调整。
+先右旋变成RR型结构，再左旋变成图 \ref{fig:insertAdjust}(k)。
+
+当插入进行到图 \ref{fig:insertAdjust}(m) 时,结点16的平衡因子为2，此时发生不平衡，观察其结构是LR型的，因此需要进行双旋转调整。
+先左旋变成LL型结构，再右旋变成图 \ref{fig:insertAdjust}(n)。
+
+
+大家是不是被这些旋转搞晕了呢？
+没关系，上述的各种类型是为了代码方便而进行的分类，实际上我们只需要掌握如何画出正确的旋转图就可以了。按照以下步骤进行作图：
+
+\begin{itemize}
+  \item 当我们插入一个结点后，发现树不平衡时，首先要找到最小不平衡结点
+  \item 然后以该结点为起点，向插入结点方向找到3个结点（包括起点）
+  \item 紧接着将这3个结点构造成一个三角形的二叉排序树（该树唯一）
+  \item 最后，将其余结点按照二叉排序数的规则从根节点开始进行比较插入即可。
+\end{itemize}
+
+图\ref{fig:banlanceTree_insert_LR}和图\ref{fig:banlanceTree_insert_RR}是LR型和RR型的旋转图，大家可以对照上面的步骤进行作图。
+\begin{figure}
+  
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/balanceTree_insert_LR.pdf}
+    \caption{LR型的旋转图}
+    \label{fig:banlanceTree_insert_LR}
+\end{figure}
+
+\begin{figure}
+  
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/balanceTree_insert_RR.pdf}
+    \caption{RR型的旋转图}
+    \label{fig:banlanceTree_insert_RR}
+
+\end{figure}
+
+\subsection{平衡二叉树的删除调整}
+
+在平衡二叉树中删除一个结点与二叉排序树中删除结点类似，只是增加了调整这一步骤。其过程如下：
+
+1. 查找  
+
+   先在平衡二叉树中查找到关键字为 $A$ 的结点 $p$。
+
+2. 删除  
+
+   删除结点 $p$ 分以下几种情况：
+   \begin{itemize}
+     \item \textbf{叶子结点}：直接删除该结点。
+     \item \textbf{单分支结点}：用结点的左或右孩子结点替代结点 $p$（结点替换）。
+     \item \textbf{双分支结点}：用结点 $p$ 的中序前驱（或中序后继）结点 $q$ 的值替代结点 $p$ 的值（结点值替换）。再删除结点 $q$。
+   \end{itemize}
+
+3. 调整  
+
+   若被删除的是结点 $p$，则从结点 $p$ 的父结点向根结点方向查找第一个失去平衡的结点：
+   \begin{itemize}
+     \item 若所有结点都是平衡的，则不需要调整。
+     \item 假设找到某个结点的平衡因子为 $-2$：
+       \begin{itemize}
+         \item 若其右孩子的平衡因子为 $-1$，则作 \textbf{RR 型调整}；
+         \item 若其右孩子的平衡因子为 $1$，则作 \textbf{RL 型调整}；
+         \item 若其右孩子的平衡因子为 $0$，则作 \textbf{RR 型}或 \textbf{RL 型调整}均可。
+       \end{itemize}
+     \item 假设找到某个结点的平衡因子为 $2$：
+       \begin{itemize}
+         \item 若其左孩子的平衡因子为 $-1$，则作 \textbf{LR 型调整}；
+         \item 若其左孩子的平衡因子为 $1$，则作 \textbf{LL 型调整}；
+         \item 若其左孩子的平衡因子为 $0$，则作 \textbf{LR 型}或 \textbf{LL 型调整}均可。
+       \end{itemize}
+   \end{itemize}
+
+   当然，调整部分按照简便方式进行处理即可。
+
+   \subsection{平衡二叉树的查找操作}
+
+平衡二叉树的查找操作与二叉排序树的查找操作类似，都是从根结点开始，依次与当前结点进行比较：
+\begin{itemize}
+  \item 如果要查找的关键字小于当前结点的关键字，则向左子树查找；
+  \item 如果要查找的关键字大于当前结点的关键字，则向右子树查找；
+  \item 如果要查找的关键字等于当前结点的关键字，则查找成功。
+  \item 如果当前结点为空，则查找失败。
+  \end{itemize}
+
+
 
 
 \section{B树}
+
+B树（B-tree）是由 Bayer 和 McCreight 于 1972 年提出的。B 树是一种自平衡的多路搜索树，具有以下性质：
+
 
 \section{B+树}
 
