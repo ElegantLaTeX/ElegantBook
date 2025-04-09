@@ -9574,17 +9574,580 @@ O(1)
 由于在插入过程中不会改变相同关键字元素的相对位置，因此折半插入排序是一种稳定的排序方法。
 
 \subsection{希尔排序}
+希尔排序（Shell Sort）是一种插入排序方法，实际上是一种分组插入方法。其基本思想如下：
 
-希尔排序是对直接插入排序的一种改进方法。它的基本思想是：将待排序的元素分为若干个子序列，对每个子序列进行直接插入排序，然后再对整个序列进行直接插入排序。 
+1. 先取一个小于表长 $n$ 的整数 $d_1$ 作为第一个增量，一般取$d = length/2$将表的全部元素分成 $d_1$ 个组；
+
+2. 将所有距离为 $d_1$ 的倍数的元素放在同一个组中；
+
+3. 对每个组内的元素进行直接插入排序；
+
+4. 然后取第 2 个增量 $d_2$（$d_2 < d_1$），重复上述的分组和排序过程；
+
+5. 依次缩小增量，直到所取的增量 $d_k = 1$，即所有元素放在同一组中，进行最后一次直接插入排序。
+
+由于希尔排序通过逐步减少增量的方式进行排序，因此也称为减少增量的排序方法。
+
+我们以关键字序列 $[7,6,9,3,1,5,2,4]$ 为例，演示希尔排序的过程：
+初始增量 $d_1 = 4$，将序列分为 4 组，如图 \ref{fig:shellSort1} 所示：
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(a).pdf}
+    \caption{初始增量 $d_1 = 4$ 的分组}
+    \label{fig:shellSort1}
+\end{figure}
+
+第二趟排序时，增量 $d_2 = 2$，将序列分为 2 组，如图 \ref{fig:shellSort2} 所示：
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(b).pdf}
+    \caption{增量 $d_2 = 2$ 的分组}
+    \label{fig:shellSort2}
+\end{figure}
+
+第三趟排序时，增量 $d_3 = 1$，将序列分为 1 组，如图 \ref{fig:shellSort3} 所示：
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(c).pdf}
+    \caption{增量 $d_3 = 1$ 的分组}
+    \label{fig:shellSort3}
+\end{figure}
+
+最后得到排序后的序列 $[1,2,3,4,5,6,7,9]$。如图 \ref{fig:shellSort4} 所示：
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(d).pdf}
+    \caption{排序后的序列}
+    \label{fig:shellSort4}
+\end{figure}
+
+希尔排序的算法代码如下：
+\begin{lstlisting}[language=C++, caption=希尔排序的算法代码]
+
+void shellSort(int arr[], int n) {
+    for (int gap = n / 2; gap > 0; gap /= 2) {// 逐步缩小增量
+        // 对每个组进行直接插入排序
+        for (int i = gap; i < n; i++) {
+            int key = arr[i];
+            int j = i;
+            while (j >= gap && arr[j - gap] > key) {// 从后向前查找插入位置
+                arr[j] = arr[j - gap];
+                j -= gap;
+            }
+            arr[j] = key;
+        }
+    }
+}
+
+\end{lstlisting}
+
+\textbf{希尔排序的性能分析}
+
+希尔排序的性能分析是一个复杂的问题，因为其时间复杂度是增量序列的函数。目前为止，增量序列的选取尚无定论，但无论增量序列如何选取，最后一个增量必须等于 1。如果按照常见的增量序列取法，即 $d_k = \lfloor d_{k-1} / 2 \rfloor$，则经过 $\lceil \log_2(n) \rceil$ 次后，$d_k = 1$。
+
+
+\textbf{时间复杂度}  
+
+希尔排序的时间复杂度难以精确分析，但一般认为其平均时间复杂度为：
+\[
+O(n^{1.3})
+\]
+希尔排序的速度通常比直接插入排序快。
+
+
+\textbf{性能优于直接插入排序的原因}
+
+1. 当增量 $d = 1$ 时，希尔排序与直接插入排序基本一致。
+2. 在希尔排序开始时，增量 $d$ 较大，分组较多，每组的元素数目较少，因此组内直接插入排序较快。
+3. 随着增量 $d$ 的逐渐缩小，分组数减少，每组的元素数目增多，但由于之前的排序使数据接近于有序状态，新一趟排序的效率较高。
+
+例如，对于 $n = 10$ 的元素进行递增排序：
+\begin{itemize}
+  \item 直接插入排序的平均时间大约为 $10^2 = 100$；
+  \item 希尔排序的过程：
+    \begin{itemize}
+      \item $d_1 = 5$，分为 5 组，每组 2 个元素，执行时间大约为 $5 \times 2 = 10$；
+      \item $d_2 = 2$，分为 2 组，每组 5 个元素，执行时间大约为 $2 \times 5^2 = 50$；
+      \item $d_3 = 1$，分为 1 组，10 个元素，此时数据基本有序，直接插入排序呈现最好性能，执行时间大约为 $1 \times 10 = 10$。
+    \end{itemize}
+  \item 累计时间为 $10 + 50 + 10 = 70$，优于直接插入排序。
+\end{itemize}
+
+
+\textbf{空间复杂度}  
+
+希尔排序算法中仅使用 $i$ 和 $tmp$ 这两个辅助变量，与问题规模无关，因此辅助空间复杂度为：
+\[
+O(1)
+\]
+这表明希尔排序是一种就地排序算法。
+
+
+\textbf{稳定性}  
+
+希尔排序是一种不稳定的排序算法。例如：
+\begin{itemize}
+  \item 假设初始序列为 $\{3, 10, 7, |8|, 20, 5, 8, 2, 1, 6\}$；
+  \item 分组后，第 1 组为 $\{3, 7, |8|, 20\}$，第 2 组为 $\{5, 8, 2, 1, 6\}$；
+  \item 组内直接插入排序后，第 1 组变为 $\{3, 7, |8|, 20\}$，第 2 组变为 $\{1, 2, 5, 6, 8\}$；
+  \item 此时，第 1 组的 $|8|$ 排列到了第 2 组的 $8$ 的前面，破坏了稳定性。
+\end{itemize}
+
+
+\textbf{排序算法稳定性的说明}
+
+一般情况下，一个排序算法在排序过程中需要以较大的间隔交换元素或移动元素时，该排序方法是不稳定的。  
+\begin{itemize}
+  \item 证明一个排序算法是不稳定的，只需要给出一个反例即可；
+  \item 证明一个排序算法是稳定的，则需要给出完整的证明过程。
+\end{itemize}
+
 \section{交换排序}
+交换排序的基本思想是两两比较待排序元素的关键字 ,发现这两个元素的次序相反
+时即进行交换,直到没有反序的元素为止。本节介绍两种交换排序,即冒泡排序和快速
+排序。
 
 \subsection{冒泡排序}
+\subsection{冒泡排序}
+
+冒泡排序（bubble sort），也称为气泡排序，是一种典型的交换排序方法。其基本思想是通过无序区中相邻元素关键字间的比较和位置的交换，使关键字最小的元素如气泡一般逐渐往上“漂浮”直至“水面”。
+
+
+\textbf{基本思想}  
+
+冒泡排序从最下面的元素开始，对每两个相邻的关键字进行比较，并将关键字较小的元素交换到关键字较大的元素之上。  
+\begin{itemize}
+  \item 经过一趟冒泡排序后，关键字最小的元素到达最上端；
+  \item 接着，在剩下的元素中找关键字次小的元素，并将其换至第二个位置；
+  \item 依此类推，直到所有元素都有序。
+\end{itemize}
+
+\textbf{冒泡过程}  
+
+\begin{itemize}
+  \item 第 1 趟：将关键字最小的元素“冒泡”到最上端；
+  \item 第 2 趟：将关键字次小的元素“冒泡”到第二个位置；
+  \item 重复上述过程，直到排序完成。
+\end{itemize}
+
+我们以关键字序列 $[5, 2, 3,6,1,4]$ 为例，演示冒泡排序的第一趟过程，如图 \ref{fig:bubbleSort} 所示：
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/bubbleSort.pdf}
+    \caption{冒泡排序的第一趟过程}
+    \label{fig:bubbleSort}
+\end{figure}
+
+其完整的冒泡排序过程如下表所示：
+\begin{table}[h!]
+\centering
+\caption{冒泡排序每一趟的结果}
+
+\label{tab:bubbleSort}
+
+\begin{tabular}{|c|l|}
+\hline
+\textbf{趟数} & \textbf{排序结果} \\ \hline
+
+初始 & [5, 2, 3, 6, 1, 4] \\ \hline
+
+第1趟 & [2, 3, 5, 1, 4, 6] \\ \hline
+
+第2趟 & [1, 2, 3, 4, 5, 6] \\ \hline
+
+第 3趟 & [1, 2, 3, 4, 5, 6] \\ \hline
+
+第4趟 & [1, 2, 3, 4, 5, 6] \\ \hline
+
+第5趟 & [1, 2, 3, 4, 5, 6] \\ \hline
+\end{tabular}
+
+\end{table}
+
+冒泡排序的算法代码如下：
+
+\begin{lstlisting}[language=C++, caption=冒泡排序的算法代码]
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {// 比较相邻元素
+                swap(arr[j], arr[j + 1]);// 交换元素
+            }
+        }
+    }
+}
+
+\end{lstlisting}
+
+\subsubsection{算法分析}
+
+\textbf{1. 最好情况  }
+
+   若初始数据序列是正序的，则一趟扫描即可完成排序，所需的关键字比较和元素移动次数均达到最小值：
+   \[
+   C_o = n - 1, \quad M_o = 0
+   \]
+
+\textbf{2. 最坏情况  }
+
+   若初始数据序列是反序的，则需要进行 $n - 1$ 趟排序。每趟排序要对无序区 $R[i..n-1]$ 中的 $n - i$ 个元素两两比较，比较次数为：
+   \[
+   C_u = \sum_{i=0}^{n-2} (n - i - 1) = \frac{n(n-1)}{2} = O(n^2)
+   \]
+   且每次比较都必须移动元素 3 次来交换位置，总移动次数为：
+   \[
+   M_u = 3 \times C_u = 3 \times \frac{n(n-1)}{2} = O(n^2)
+   \]
+
+  \textbf{3. 平均情况  }
+
+   平均情况下，算法可能在中间某一趟排序完成后终止，但可以证明平均的排序趟数仍为 $O(n)$。因此，总的比较次数和移动次数的平均值分别为：
+   \[
+   C_a = O(n^2), \quad M_a = O(n^2)
+   \]
+
+\textbf{时间复杂度 }
+
+\begin{itemize}
+  \item 最好情况（正序）：$O(n)$；
+  \item 最坏情况（反序）：$O(n^2)$；
+  \item 平均情况：$O(n^2)$。
+\end{itemize}
+
+\textbf{空间复杂度 } 
+
+冒泡排序算法中仅使用 $i$ 和 $tmp$ 这两个辅助变量，与问题规模无关，因此辅助空间复杂度为：
+\[
+O(1)
+\]
+这表明冒泡排序是一种就地排序算法。
+
+\textbf{稳定性 }  
+
+冒泡排序是一种稳定的排序方法。当 $R[j].\text{key} = R[j+1].\text{key}$ 时，两者没有逆序关系，不会发生交换，因此相对位置保持不变。
+
 
 \subsection{快速排序}
 
-\section{选择排序}
+ 
 
+快速排序(quick sort)是由冒泡排序改进而得的,它的基本思想是在待排序的$n$个元素
+中任取一个元素(通常取第一个元素)作为基准,把该元素放人适当位置后,数据序列被此元
+素划分成两部分。所有关键字比该元素关键字小的元素放置在前一部分,所有比它大的元
+素放置在后一部分,并把该元素排在这两部分的中间(称为该元素归位),这个过程称为一趟
+快速排序,即一趟划分。
+
+之后对产生的两个部分分别重复上述过程,直至每部分内只有一个元素或空为止。简
+而言之,每趟使表的第一个元素放人适当位置,将表一分为二,对子表按递归方式继续这种
+划分,直至划分的子表的长为1或0。
+
+首先我们先理清楚何为划分。划分是指将一个序列分为两个部分，使得左边的元素都小于等于右边的元素。我们以关键字序列 $[6,8,7,9,0,1,3,2,4,5]$ 为例，
+演示快速排序的一次划分过程，枢纽元素为数组第一个元素6。
+
+从$high$指针开始向左扫描，找到第一个小于枢纽元素的元素5，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_a}所示：
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_a.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_a}
+
+\end{figure}
+
+从 $low$指针开始向右扫描，找到第一个大于枢纽元素的元素8，并将其移往$high$指针所在的位置，如图 \ref{fig:patition_b}所示：
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_b.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_b}
+
+    \end{figure}
+
+再从$high$指针开始向左扫描，找到第一个小于枢纽元素的元素4，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_c}所示：
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_c.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_c}
+\end{figure}
+
+从 $low$指针开始向右扫描，找到第一个大于枢纽元素的元素7，并将其移往$high$指针所在的位置，如图 \ref{fig:patition_d}所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_d.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_d}
+\end{figure}
+
+再从$high$指针开始向左扫描，找到第一个小于枢纽元素的元素2，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_e}所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_e.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_e}
+\end{figure}
+
+从 $low$指针开始向右扫描，找到第一个大于枢纽元素的元素9，并将其移往$high$指针所在的位置，如图 \ref{fig:patition_f}所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_f.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_f}
+\end{figure}
+
+再从 $high$指针开始向左扫描，找到第一个小于枢纽元素的元素3，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_g}所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_g.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_g}
+\end{figure}
+
+
+最后继续从$low$指针开始向右扫描，直到$low$指针和$high$指针相遇为止，如图 \ref{fig:patition_h}所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_h.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_h}
+\end{figure}
+
+此时，$low$指针和$high$指针相遇，划分完成。我们将枢纽元素6与$low$指针所在的元素3交换位置，如图 \ref{fig:patition_i}所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_i.pdf}
+    \caption{快速排序的划分过程}
+    \label{fig:patition_i}
+\end{figure}
+
+
+划分完成后，枢纽元素6已经归位。此时，左边的元素都小于等于6，右边的元素都大于等于6。
+接下来，我们对左边的元素和右边的元素分别进行快速排序。其整体过程如图 \ref{fig:quickSort}所示：
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/quickSort.pdf}
+    \caption{快速排序的整体过程}
+    \label{fig:quickSort}
+\end{figure}
+
+最后结果如图\ref{fig:quickSort}(g) 所示，这样的一棵树称为快速排序递归树，其中每个分支结点对应一次递归调用，这里的递归次数为 7 次。从中可以看出，
+左、右分区处理的顺序是无关的，也就是说，当一次划分产生两个子区间时，先处理左分区还是右分区不影响排序的结果，因为这两个子问题是独立的。
+
+
+由此过程我们可以完善快速排序的算法代码如下：
+
+\begin{lstlisting}[language=C++, caption=快速排序的算法代码]
+  int partition(int arr[], int low, int high) {
+    int pivot = arr[low];// 选择第一个元素作为枢纽元素
+    while (low < high) {
+        while (low < high && arr[high] >= pivot) {
+            high--;// 从右向左扫描，找到第一个小于枢纽元素的元素
+        }
+        arr[low] = arr[high];// 将该元素移到左边
+        while (low < high && arr[low] <= pivot) {
+            low++;// 从左向右扫描，找到第一个大于枢纽元素的元素
+        }
+        arr[high] = arr[low];// 将该元素移到右边
+    }
+    arr[low] = pivot;// 将枢纽元素放到正确的位置
+    return low;// 返回枢纽元素的位置
+
+  }
+
+  void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pivotIndex = partition(arr, low, high);// 划分
+        quickSort(arr, low, pivotIndex - 1);// 递归排序左半部分
+        quickSort(arr, pivotIndex + 1, high);// 递归排序右半部分
+    }
+  }
+\end{lstlisting}
+
+\subsubsection{算法分析}
+
+快速排序的性能取决于每次划分的结果，具体分析如下：
+
+1. 最好情况  
+
+   每一次划分都将 $n$ 个元素划分为两个长度差不多相同的子区间，也就是说，每次划分所取的基准都是当前无序区的“中值”元素。  
+   \begin{itemize}
+     \item 划分结果是基准的左、右两个无序子区间长度大致相等；
+     \item 此时递归树的高度为 $O(\log n)$，每一层划分的时间为 $O(n)$；
+     \item 因此，算法的时间复杂度为：
+       \[
+       O(n \log n)
+       \]
+     \item 空间复杂度为：
+       \[
+       O(\log n)
+       \]
+   \end{itemize}
+
+2. 最坏情况  
+
+   每次划分选取的基准都是当前无序区中关键字最小（或最大）的元素，划分结果是基准左边的子区间为空（或右边的子区间为空）。  
+   \begin{itemize}
+     \item 每次划分后，非空子区间的元素数目仅比划分前减少一个；
+     \item 此时递归树的高度为 $O(n)$，需要做 $n-1$ 次划分；
+     \item 算法的时间复杂度为：
+       \[
+       O(n^2)
+       \]
+     \item 空间复杂度为：
+       \[
+       O(n)
+       \]
+   \end{itemize}
+
+3. 平均情况  
+
+   每一次划分将 $n$ 个元素划分为两个长度分别为 $k-1$ 和 $n-k$ 的子区间，其中 $k$ 的取值范围是 $1 \sim n$，共 $n$ 种情况。  
+   \begin{itemize}
+     \item 设执行时间为 $T(n)$，则有递归关系：
+       \[
+       T(n) = c \cdot n + \frac{1}{n} \sum_{k=1}^n \left(T(k-1) + T(n-k)\right)
+       \]
+     \item 由此可以推出：
+       \[
+       T(n) = O(n \log n)
+       \]
+     \item 其中 $c \cdot n$ 表示划分的时间。
+   \end{itemize}
+
+快速排序的平均时间复杂度为 $O(n \log n)$，接近于最好情况。
+
+
+\textbf{空间复杂度}  
+
+快速排序算法中每次递归使用 $i$、$j$ 和 $tmp$ 这 3 个辅助变量，为常量级。  
+\begin{itemize}
+  \item 若每一趟排序都将元素序列均匀地分割成两个长度接近的子区间，递归树的高度为 $O(\log n)$，所需栈空间为 $O(\log n)$；
+  \item 在最坏情况下，递归树的高度为 $O(n)$，所需栈空间为 $O(n)$；
+  \item 平均情况下，所需栈空间为 $O(\log n)$。
+\end{itemize}
+因此，快速排序的空间复杂度为：
+\[
+O(\log n)
+\]
+
+
+\textbf{稳定性}  
+
+快速排序是一种不稳定的排序方法。例如，排序序列为 $\{5, 2, 4, 8, 7, |4|\}$，基准为 $5$，在进行划分时，
+后面的 $|4|$ 会放置到前面 $2$ 的位置上，从而使其放到第一个 $4$ 的前面，两个相同关键字（$4$）的相对位置发生了改变。
+
+\section{选择排序}
+选择排序的基本思想是：每一趟从待排序的元素中选出关键字最小的元素，顺序放在已排好序的子表的最后，直到全部元素排序完毕。
+
+由于选择排序方法每一趟总是从无序区中选出全局最小（或最大）的关键字，因此适合于从大量元素中选择一部分排序元素。例如，从 10,000 个元素中选择出关键字大小为前 10 位的元素，就适合采用选择排序方法。
+
+本节介绍两种选择排序方法：
+\begin{itemize}
+  \item 简单选择排序（或称直接选择排序）；
+  \item 堆排序。
+\end{itemize}
 \subsection{直接选择排序}
+
+直接选择排序（direct selection sort）是选择排序的一种简单实现方法。其基本思想是：每一趟从待排序的元素中选出关键字最小的元素，
+顺序放在已排好序的子表的最后，直到全部元素排序完毕。
+
+我们以关键字序列 $[5, 2, 3, 6, 1, 4]$ 为例，演示直接选择排序的过程，如下表所示：
+
+\begin{table}[h!]
+\centering
+
+\caption{直接选择排序每一趟的结果}
+
+\label{tab:directSelectSort}
+
+\begin{tabular}{|c|c|c|c|c|c|c|}
+
+\hline
+
+\textbf{趟数} & \textbf{初始序列} & \textbf{最小值} & \textbf{交换位置} & \textbf{排序结果} \\ \hline
+
+
+初始 & [5, 2, 3, 6, 1, 4] & - & - & [5, 2, 3, 6, 1, 4] \\ \hline
+
+第1趟 & [5, 2, 3, 6, 1, 4] & 1 & 0 和 4 & [1, 2, 3, 6, 5, 4] \\ \hline
+
+第2趟 & [1, 2, 3, 6, 5, 4] & 2 & 1 和 1 & [1, 2, 3, 6, 5, 4] \\ \hline
+
+第3趟 & [1, 2, 3, 6, 5, 4] & 3 & 2 和 2 & [1, 2, 3, 6, 5, 4] \\ \hline
+
+第4趟 & [1, 2, 3, 6, 5, 4] & 4 & 3 和 5 & [1, 2, 3, 4, 5, 6] \\ \hline
+
+第5趟 & [1, 2, 3, 4, 5, 6] & 5 & 4 和 4 & [1, 2, 3, 4, 5, 6] \\ \hline
+
+\end{tabular}
+
+\end{table}
+
+直接选择排序的算法代码如下：
+
+\begin{lstlisting}[language=C++, caption=直接选择排序的算法代码]
+
+void directSelectSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;// 假设当前元素为最小值
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {// 找到最小值的下标
+                minIndex = j;
+            }
+        }
+        swap(arr[i], arr[minIndex]);// 交换位置
+    }
+}
+
+\end{lstlisting}
+
+\subsubsection{算法分析}
+显然，无论初始数据序列的状态如何，在第 $i$ 趟排序中选出最小关键字的元素，内 \texttt{for} 循环需做 $n - i - 1$ 次比较。因此，总的比较次数为：
+\[
+C = \sum_{i=0}^{n-2} (n - i - 1) = \frac{n(n-1)}{2} = O(n^2)
+\]
+
+至于元素的移动次数：
+
+\begin{itemize}
+  \item 当初始表为正序时，移动次数为 $0$；
+  \item 当表初态为反序时，每趟排序均要执行交换操作，总的移动次数为最大值 $3(n-1)$。
+\end{itemize}
+
+然而，无论元素的初始序列如何排列，所需进行的关键字比较次数是相同的。因此，总的平均时间复杂度为：
+\[
+O(n^2)
+\]
+
+在简单选择排序算法中，仅使用 $i$ 和 $tmp$ 这两个辅助变量，与问题规模无关，因此辅助空间复杂度为：
+\[
+O(1)
+\]
+这表明简单选择排序是一种就地排序算法。
+
+另外，简单选择排序算法是一种不稳定的排序方法。例如，排序序列为 $\{5, 3, 2, |5|, 4, 1, 8, 7\}$，第 1 趟排序时选择出最小关键字 $1$，
+将其与第 1 个位置上的元素交换，得到 $\{1, 3, 2, 5, 4, |5|, 8, 7\}$。从中可以看到两个 $5$ 的相对位置发生了改变。
+
+
+
+
 
 \subsection{堆排序}
 
