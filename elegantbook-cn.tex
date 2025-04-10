@@ -9942,7 +9942,7 @@ O(1)
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/quickSort.pdf}
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/quickSort.pdf}
     \caption{快速排序的整体过程}
     \label{fig:quickSort}
 \end{figure}
@@ -10151,8 +10151,301 @@ O(1)
 
 \subsection{堆排序}
 
+堆排序（heap sort）是一种树形选择排序方法，其特点是将 $R[1..n]$（关键字为 $K_1, K_2, \dots, K_n$）看成是一棵完全二叉树的顺序存储结构。
+
+
+\textbf{堆的定义}  
+
+$R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 称为堆，当且仅当该序列满足以下性质（简称为堆性质）：
+\begin{itemize}
+  \item (1) $K_i \leq K_{2i}$ 且 $K_i \leq K_{2i+1}$（若 $2i$ 和 $2i+1$ 存在），即每个分支结点的关键字都小于或等于其孩子结点的关键字。满足此性质的堆称为\textbf{小根堆}。
+  \item (2) $K_i \geq K_{2i}$ 且 $K_i \geq K_{2i+1}$（若 $2i$ 和 $2i+1$ 存在），即每个分支结点的关键字都大于或等于其孩子结点的关键字。满足此性质的堆称为\textbf{大根堆}。
+\end{itemize}
+
+如图 \ref{fig:heap}所示，$R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 形成了一棵完全二叉树。
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/heap.pdf}
+    \caption{堆的定义}
+    \label{fig:heap}
+\end{figure}
+\begin{itemize}
+  \item 小根堆：树中任何分支结点的关键字都小于其孩子结点的关键字；
+  \item 大根堆：树中任何分支结点的关键字都大于或等于其孩子结点的关键字。
+\end{itemize}
+
+以下主要讨论\textbf{大根堆}。
+
+
+\textbf{堆排序的基本思想}  
+
+堆排序的排序过程与简单选择排序类似，但挑选最大或最小元素时采用的方法不同。堆排序的基本过程如下：
+\begin{itemize}
+  \item 构建一个大根堆，使堆顶元素（即 $R[1]$）为当前无序区的最大值；
+  \item 将堆顶元素与无序区的最后一个元素交换，使最大元素归位；
+  \item 调整剩余元素为新的大根堆，重复上述过程，直到无序区元素个数为 1。
+\end{itemize}
+
+
+\textbf{筛选方法}  
+
+挑选最大元素是通过\textbf{筛选}方法实现的。筛选的过程是从堆顶开始，将不满足堆性质的结点调整到正确的位置，从而重新构建堆。
+
+
+\textbf{堆排序的特点} 
+
+堆排序每次产生的有序区一定是全局有序区，也就是说，每次产生的有序区中的所有元素都已经归位。
+
+上述定义未免过于枯燥，我们分为两部分来逐一进行分析：
+\begin{itemize}
+  \item 第一部分：调整堆；
+  \item 第二部分：构建大根堆。
+  \end{itemize}
+\subsubsection{调整堆}
+
+调整堆的过程是从堆顶开始，将不满足堆性质的结点调整到正确的位置，从而重新构建堆。
+\begin{itemize}
+  \item 设 $R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 形成了一棵完全二叉树；
+  \item 设 $i$ 为当前结点的下标，$2i$ 和 $2i+1$ 分别为当前结点的左孩子和右孩子的下标；
+  \item 若 $K_{2i+1} < K_{2i} \&\& k_i < k_{2i}$ 或 $K_{2i} < K_{2i+1} \&\& K_i < K_{2i+1}$，则当前结点的关键字小于其孩子结点的关键字；
+  \item 重复上述过程，直到当前结点的关键字大于或等于其孩子结点的关键字。
+\end{itemize}
+
+我们以关键字序列 $[2,8,6,3,4,4,1]$ 为例，演示调整堆的过程，如图 \ref{fig:adjustHeap} 所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/heapAdjust.pdf}
+    \caption{调整堆的过程}
+    \label{fig:adjustHeap}
+\end{figure}
+
+\subsubsection{构建大根堆}
+
+构建大根堆的过程是从最后一个非叶子结点开始，将不满足堆性质的结点调整到正确的位置，从而重新构建堆。至于为什么要从最后一个非叶子结点开始？
+
+在构建初始堆时，从最后一个非叶子节点（分支节点）开始，而不是从最后一个子节点开始，这是因为这样可以确保从该节点开始到所有叶子节点的子树都是堆有序的。
+
+
+\textbf{堆的性质}  
+
+在最大堆中，父节点的值总是大于或等于其子节点的值。因此，当我们从下往上（即从叶子节点向根节点）构建堆时，需要确保每个父节点都满足这个性质。
+
+
+\textbf{原因分析}  
+
+1. \textbf{叶子节点无需调整}  
+
+   叶子节点没有子节点，因此它们自然满足堆的性质（因为没有子节点可以违反这个性质）。
+
+2. \textbf{非叶子节点可能需要调整}  
+
+   对于非叶子节点（即分支节点），需要检查它们是否满足堆的性质。如果不满足（其自身比其某一个子节点小），需要通过交换节点值来修复它，并可能递归地检查其子树。
+
+3. \textbf{效率}  
+
+   从最后一个非叶子节点开始构建堆，
+   可以确保从该节点到所有叶子节点的子树都是堆有序的。当向上移动到父节点时，只需要关注该节点及其子树，而无需考虑该节点以上的部分。这减少了不必要的比较和交换操作，从而提高了效率。
+
+
+\textbf{总结}  
+
+简单来说，从最后一个非叶子节点开始构建堆就像一个“从下往上”的修复过程，
+它确保了我们只关注那些可能不满足要求的节点并修复它们，而不是浪费时间在已经满足要求的叶子节点上。
+
+
+我们以关键字序列 $[6,8,7,9,0,1,3,2,4,5]$ 为例，演示构建大根堆的过程，如图 \ref{fig:heapBuild} 所示：
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/heapBuild.pdf}
+    \caption{构建大根堆的过程}
+    \label{fig:heapBuild}
+\end{figure}
+
+
+\subsubsection{堆排序}
+
+前面我们已经介绍了如何调整堆和构建大根堆，接下来我们将这两部分结合起来，完成堆排序的过程。
+堆排序的基本过程如下：
+\begin{itemize}
+  \item 构建一个大根堆，使堆顶元素（即 $R[1]$）为当前无序区的最大值；
+  \item 将堆顶元素与无序区的最后一个元素交换，使最大元素归位；
+  \item 调整剩余元素为新的大根堆，重复上述过程，直到无序区元素个数为 1。
+  \item 最后得到的有序区就是排序后的结果。
+  \end{itemize}
+我们同样以关键字序列 $[6,8,7,9,0,1,3,2,4,5]$ 为例，演示堆排序的过程，如图 \ref{fig:heapSort} 所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/heapSort.pdf}
+    \caption{堆排序的过程}
+    \label{fig:heapSort}
+\end{figure}
+
+堆排序的算法代码如下：
+
+\begin{lstlisting}[language=C++, caption=堆排序的算法代码]
+
+void heapAdjust(int arr[],int low,int high){
+  int i = low,j = 2*i;
+  int tmp = arr[i];
+
+  while (j <= high) {
+    if (j < high && arr[j] < arr[j + 1]) {
+      j++;// 找到较大的孩子结点
+    }
+    if (tmp >= arr[j]) {
+      break;// 满足堆性质，退出循环
+    }
+    arr[i] = arr[j];// 将较大的孩子结点上移
+    i = j;
+    j = 2 * i;
+  }
+
+  arr[i] = tmp;// 将当前结点的值放入正确的位置
+}
+
+void heapSort(int arr[], int n) {
+  // 构建大根堆
+  for (int i = n / 2; i >= 1; i--) {
+    heapAdjust(arr, i, n);
+  }
+
+  // 堆排序
+  for (int i = n; i > 1; i--) {
+    swap(arr[1], arr[i]);// 将堆顶元素与最后一个元素交换
+    heapAdjust(arr, 1, i - 1);// 调整剩余元素为新的大根堆
+  }
+}
+\end{lstlisting}
+
+
+\subsubsection{算法分析}
+
+堆排序的时间主要由建立初始堆和反复重建堆这两部分的时间构成，它们均是通过调用 \texttt{heapAdjust()} 实现的。
+
+
+\textbf{建立初始堆的时间分析} 
+
+对于高度为 $h$ 的完全二叉树/子树，调用 \texttt{heapAdjust()} 算法时，其中 \texttt{while} 循环最多执行 $h - 1$ 次，因此最多进行 $2(h - 1)$ 次关键字比较，最多进行 $h + 1$ 次元素移动。以下主要以关键字比较来分析时间性能。
+
+对于 $n$ 个结点的完全二叉树，其高度为 $h = \lfloor \log_2 n \rfloor + 1$。在建立初始堆时，需要筛选调整的层为 $h - 1$ 层。以第 $i$ 层中某个结点为根的子树的高度为 $h - i + 1$，并且第 $i$ 层中最多有 $2^{i-1}$ 个结点。设建立初始堆所需要的关键字比较次数最多为 $C_c(n)$，则有：
+\[
+C_c(n) = \sum_{i=1}^{h-1} 2^{i-1} \cdot (h - i + 1)
+\]
+
+令 $j = h - i$，当 $i = 1$ 时，$j = h - 1$；当 $i = h - 1$ 时，$j = 0$。因此：
+\[
+C_c(n) = \sum_{j=0}^{h-2} 2^{h-j-2} \cdot (j + 1)
+\]
+
+经过推导可得：
+\[
+C_c(n) < 2n
+\]
+因此，建立初始堆所需的关键字比较次数不超过 $2n$。
+
+
+\textbf{重建堆的时间分析} 
+
+设重建堆中对 \texttt{heapAdjust()} 的 $n-1$ 次调用所需的比较总次数为 $C_s(n)$。其中每次对 $R[1..n-i]$ 的一个结点的完全二叉树进行筛选调整，该树的高度为 $\lfloor \log_2 (n-i) \rfloor + 1$。因此：
+\[
+C_s(n) = \sum_{i=1}^{n-1} \lfloor \log_2 (n-i) \rfloor + 1
+\]
+
+经过推导可得：
+\[
+C_s(n) \approx 2n \log_2 n
+\]
+
+
+\textbf{总时间复杂度} 
+
+堆排序所需的关键字比较总次数为：
+\[
+C(n) = C_c(n) + C_s(n) = O(n \log_2 n)
+\]
+
+综上所述，堆排序的最坏时间复杂度为 $O(n \log_2 n)$。堆排序的平均性能分析较难，但实验研究表明，其平均性能接近最坏性能。实际上，堆排序和简单选择排序算法一样，其时间性能与初始序列的顺序无关，也就是说，堆排序算法的最好、最坏和平均时间复杂度均为：
+\[
+O(n \log_2 n)
+\]
+
+
+\textbf{空间复杂度}  
+
+堆排序只使用 $i$、$j$ 和 $tmp$ 等辅助变量，其辅助空间复杂度为：
+\[
+O(1)
+\]
+
+
+\textbf{稳定性}  
+
+在进行筛选时，可能会将后面相同关键字的元素调整到前面，因此堆排序算法是一种不稳定的排序方法。
+
+
+
+
+
 \section{归并排序}
 
+归并排序（merge sort）是一种通过多次将两个或两个以上的有序表合并成一个新的有序表的排序方法。最简单的归并是直接将两个有序的子表合并成一个有序表，即二路归并。
+
+
+\textbf{二路归并排序的基本思路} 
+
+二路归并排序（2-way merge sort）的基本思路如下：
+\begin{itemize}
+  \item 将 $R[0..n-1]$ 看成是 $n$ 个长度为 1 的有序序列；
+  \item 进行两两归并，得到 $\lceil n/2 \rceil$ 个长度为 2 的有序序列（最后一个有序序列的长度可能为 1）；
+  \item 再进行两两归并，得到 $\lceil n/4 \rceil$ 个长度为 4 的有序序列（最后一个有序序列的长度可能小于 4）；
+  \item 重复上述过程，直到得到一个长度为 $n$ 的有序序列。
+\end{itemize}
+
+
+\textbf{说明} 
+
+归并排序每趟产生的有序区只是局部有序的，也就是说，在最后一趟排序结束前，所有元素并不一定归位。
+
+
+我们以关键字序列 $[8,4,5,7,1,3,6,2]$ 为例，演示二路归并排序的过程，如图 \ref{fig:mergeSort} 所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/mergeSort_process.pdf}
+    \caption{二路归并排序的过程}
+    \label{fig:mergeSort}
+\end{figure}
+
+可以看到，归并排序的结构很像一棵完全二叉树。本文中的归并排序采用递归的方式实现（也可以采用迭代的方式实现）。
+
+分阶段可以理解为递归拆分子序列的过程，其递归深度为 $\log_2 n$。
+
+再来看看治阶段，我们需要将两个已经有序的子序列合并成一个有序序列。例如，上图中的最后一次合并，需要将 $[4, 5, 7, 8]$ 和 $[1, 2, 3, 6]$ 两个已经有序的子序列合并为最终序列 $[1, 2, 3, 4, 5, 6, 7, 8]$。
+
+以下是实现步骤：
+\begin{itemize}
+  \item 初始化两个指针，分别指向两个子序列的起始位置；
+  \item 比较两个指针所指向的元素，将较小的元素加入到结果序列中，并移动对应的指针；
+  \item 重复上述步骤，直到某一子序列的所有元素都被加入到结果序列中；
+  \item 将另一个子序列中剩余的所有元素依次加入到结果序列中。
+  \item 最后将结果序列复制回原数组中。
+\end{itemize}
+其过程如图 \ref{fig:merge} 所示：
+
+\begin{figure}
+[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{./figure/pdf/cropped/merge.pdf}
+    \caption{二路归并的过程}
+    \label{fig:merge}
+\end{figure}
 \section{基数排序}
 
 \section{排序算法的比较}
