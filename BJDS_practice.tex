@@ -1,0 +1,562 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{elegantbook}
+
+\title{基础提高练习题}
+\subtitle{北街学长倾力之作}
+
+\author{北街}
+% \institute{Elegant\LaTeX{} Program}
+\date{2022/12/31}
+\version{1.0}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{注意：本模板自 2023 年 1 月 122222 日开始，不再更新和维护！}
+
+\setcounter{tocdepth}{3}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\usepackage{listings}         % 导入listings宏包
+\usepackage{xcolor}           % 支持颜色
+
+% 配置C++代码样式
+\lstset{
+    language=C++,             % 语言设置为C++
+    basicstyle=\ttfamily,      % 基本样式
+    keywordstyle=\color{blue}, % 关键词颜色
+    commentstyle=\color{green},% 注释颜色
+    stringstyle=\color{red},   % 字符串颜色
+    numbers=left,              % 显示行号
+    numberstyle=\tiny,         % 行号样式
+    stepnumber=1,              % 每行显示行号
+    breaklines=true,           % 自动换行
+    frame=lines                % 代码块边框样式
+}
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{数据结构与算法}
+\section{选择题}
+
+\begin{enumerate}
+
+  \item 设 $n$ 是描述问题规模的非负整数，下列程序段的时间复杂度是 （ \quad）。  
+  【2019 年全国硕士研究生入学计算机学科专业基础综合试题】  
+  \begin{lstlisting}[language=C]
+  x = 0;
+  while (n >= (x + 1) * (x + 1))
+      x = x + 1;
+  \end{lstlisting}
+  A. $O(\log n)$ \quad B. $O(\sqrt{n})$ \quad C. $O(n)$ \quad D. $O(n^2)$
+
+  \item 下列函数的时间复杂度是 （ \quad）。  
+  【2017 年全国试题】  
+  \begin{lstlisting}[language=C]
+  int func(int n) {
+      int i = 0, sum = 0;
+      while (sum < n)
+          sum += ++i;
+      return i;
+  }
+  \end{lstlisting}
+  A. $O(\log n)$ \quad B. $O(\sqrt{n})$ \quad C. $O(n)$ \quad D. $O(n \log n)$
+
+  \item 设 $n$ 是描述问题规模的非负整数，下面程序片段的时间复杂度是 （ \quad）。  
+  【2011 年全国试题】  
+  \begin{lstlisting}[language=C]
+  x = 2;
+  while (x < n / 2)
+      x = 2 * x;
+  \end{lstlisting}
+  A. $O(\log_2 n)$ \quad B. $O(n)$ \quad C. $O(n \log_2 n)$ \quad D. $O(n^2)$
+
+  \item 求整数 $n!$ 的算法如下，其时间复杂度是 （ \quad）。  
+  【2012 年全国试题】  
+  \begin{lstlisting}[language=C]
+  int fact(int n) {
+      if (n <= 1) return 1;
+      return n * fact(n - 1);
+  }
+  \end{lstlisting}
+  A. $O(\log_2 n)$ \quad B. $O(n)$ \quad C. $O(n \log_2 n)$ \quad D. $O(n^2)$
+
+  \item 已知两个长度分别为 $m$ 和 $n$ 的升序链表，若将它们合并为一个长度为 $m + n$ 的降序链表，则最坏情况下的时间复杂度是 （ \quad）。  
+  【2013 年全国试题】  
+  A. $O(m + n)$ \quad B. $O(m \cdot n)$ \quad C. $O(\min(m, n))$ \quad D. $O(\max(m, n))$
+
+  \item 下列程序段的时间复杂度是 （ \quad）。  
+  【2014 年全国试题】  
+  \begin{lstlisting}[language=C]
+  count = 0;
+  for (k = 1; k <= n; k *= 2)
+      for (j = 1; j <= n; j++)
+          count++;
+  \end{lstlisting}
+  A. $O(n \log n)$ \quad B. $O(n)$ \quad C. $O(n \log_2 n)$ \quad D. $O(n^2)$
+
+  \item 在数据结构中，数据的最小单位是 （ \quad）。  
+  【北京理工大学 2006 九、1（1 分）】  
+
+  A. 数据元素 \quad B. 字节 \quad C. 数据项 \quad D. 结点
+
+  \item 在数据结构中，数据的基本单位是 （ \quad）。  
+  【北京理工大学 2004 五、1（1 分）】  
+  
+  A. 数据元素 \quad B. 数据项 \quad C. 记录 \quad D. 结点
+
+  \item 数据对象是指 （ \quad）。【北京工业大学 2005—31（2 分）】  
+   
+  A. 描述客观事物且由计算机处理的数值、字符等符号的总称  
+    B. 数据的基本单位  
+    C. 性质相同的数据元素的集合  
+    D. 相互之间存在一种或多种特定关系的数据元素的集合  
+
+    \item 以下说法正确的是 （ \quad）。【北京理工大学 2006 五、2（1 分）】  
+   
+    A. 数据元素是数据的最小单位  
+    B. 数据项是数据的基本单位  
+    C. 数据结构是带有结构的数据元素的集合  
+    D. 数据结构是带有结构的各数据项的集合  
+
+    \item 数据结构研究的内容涉及 （ \quad）。【武汉理工大学 2004 九、7（3 分）】  
+   
+    A. 数据如何组织  
+    B. 数据如何存储  
+    C. 数据的运算如何实现  
+    D. 算法用什么语言来描述  
+
+    \item 在定义 ADT 时，除数据对象和数据关系外，还需说明 （ \quad）。【北京理工大学 2005 一、2（1 分）】  
+   
+    A. 数据元素  
+    B. 算法  
+    C. 基本操作  
+    D. 数据项  
+
+    \item 在数据结构中，从逻辑上可以将之分为 （ \quad）。【中南大学 2005 一、1（2 分）】  
+    
+    A. 动态结构和静态结构  
+    B. 紧凑结构和非紧凑结构  
+    C. 内部结构和外部结构  
+    D. 线性结构和非线性结构  
+
+    \item 从逻辑上可以把数据结构分为 （ \quad）两大类。【电子科技大学 2013 二、1（2 分）】  
+    
+    A. 动态结构、静态结构  
+    B. 顺序结构、链式结构  
+    C. 线性结构、非线性结构  
+    D. 初等结构、构造型结构  
+
+    \item 数据结构中数据元素之间的逻辑关系被称为 （ \quad）。【北京理工大学 2005 一、1（1 分）】  
+   
+    A. 数据的存储结构  
+    B. 数据的基本操作  
+    C. 程序的算法  
+    D. 数据的逻辑结构  
+
+    \item 以下与数据的存储结构无关的术语是 （ \quad）。【北方交通大学 2000 二、1（2 分）】  
+   
+    A. 循环队列  
+    B. 链表  
+    C. 哈希表  
+    D. 栈  
+
+    \item 以下数据结构中，哪一个是线性结构 （ \quad）。【北方交通大学 2001 二、1（2 分）】  
+    
+    A. 广义表  
+    B. 二叉树  
+    C. 稀疏矩阵  
+    D. 串  
+
+    \item 以下哪个数据结构不是多型数据类型 （ \quad）。【中山大学 1999 一、3（1 分）】  
+    
+    A. 栈  
+    B. 广义表  
+    C. 有向图  
+    D. 字符串  
+
+    \item 以下数据结构中， （ \quad）是非线性数据结构。【中山大学 1999 一、4】  
+    
+    A. 树  
+    B. 字符串  
+    C. 队列  
+    D. 栈  
+
+    \item 下列数据中， （ \quad）是非线性数据结构。【北京理工大学 2001 六、1（2 分）】  
+    
+    A. 栈  
+    B. 队列  
+    C. 完全二叉树  
+    D. 堆  
+
+    \item 连续存储设计时，存储单元的地址 （ \quad）。【中山大学 1999 一、1（1 分）】  
+   
+    A. 一定连续  
+    B. 一定不连续  
+    C. 不一定连续  
+    D. 部分连续，部分不连续  
+
+    \item 以下属于逻辑结构的是 （ \quad）。【西安电子科技大学应用 2001 一、1】  
+    
+    A. 顺序表  
+    B. 哈希表  
+    C. 有序表  
+    D. 单链表  
+
+    \item 算法的计算量的大小称为计算的 （ \quad）。【北京邮电大学 2000 二、3（20/8 分）】  
+    
+    A. 效率  
+    B. 复杂性  
+    C. 现实性  
+    D. 难度  
+
+    \item 计算机算法指的是（1），它必须具备（2）这三个特性。【南京理工大学 1999 一、1（2 分）】  
+    (1)  
+    A. 计算方法 \quad B. 排序方法 \quad C. 解决问题的步骤序列 \quad D. 调度方法  
+    (2)  
+    A. 可执行性、可移植性、可扩充性 \quad B. 可执行性、确定性、有穷性  
+    C. 确定性、有穷性、稳定性 \quad D. 易读性、稳定性、安全性  
+
+    \item 一个算法应该是 （ \quad）。【中山大学 1998 二、1（2 分）】  
+    A. 程序 \quad B. 问题求解步骤的描述 \quad C. 要满足五个基本特性 \quad D. A 和 C  
+
+    \item 下面说法错误的是 （ \quad）。【南京理工大学 2000 一、2（1.5 分）】  
+    (1) 算法原地工作的含义是指不需要任何额外的辅助空间  
+    (2) 在相同的规模 $n$ 下，复杂度 $O(n)$ 的算法在时间上总是优于复杂度 $O(n^2)$ 的算法  
+    (3) 所谓时间复杂度是指最坏情况下，估算算法执行时间的一个上界  
+    (4) 同一个算法，实现语言的级别越高，执行效率就越低  
+    A. (1) \quad B. (1), (2) \quad C. (1), (4) \quad D. (3)  
+
+    \item 计算算法的时间复杂度是属于一种 （ \quad）。【北京理工大学 2005 十一、4（1 分）】  
+    A. 事前统计的方法 \quad B. 事前分析估算的方法  
+    C. 事后统计的方法 \quad D. 事后分析估算的方法  
+
+    \item 以下可以用于定义一个完整的数据结构的是 （ \quad）。【烟台大学 2019 一、9（2 分）】  
+    A. 数据元素 \quad B. 数据对象 \quad C. 数据关系 \quad D. 抽象数据类型  
+
+    \item 当输入非法错误时，一个“好”的算法会进行适当处理，而不会产生难以理解的输出结果。这称为算法的 （ \quad）。【中山大学 2004 一、2（1 分）】  
+    A. 可读性 \quad B. 健壮性 \quad C. 正确性 \quad D. 有穷性  
+
+    \item 算法分析的目的是 （ \quad）。【北京理工大学 2006 五、1（1 分）】【暨南大学 2011 一、1（2 分）】  
+    A. 找出数据结构的合理性  
+    B. 研究算法中的输入和输出的关系  
+    C. 分析算法的效率以求改进  
+    D. 分析算法的易懂性和文档性  
+
+    \item 设计一个“好”的算法应考虑达到的目标有 （ \quad）。【华中科技大学 2006 二、3（2 分）】  
+    A. 是可行的 \quad B. 是健壮的 \quad C. 无二义性 \quad D. 可读性好  
+
+    \item 数据元素之间的关系称为 （ \quad）。【北京理工大学 2006 九、2（1 分）】  
+    A. 操作 \quad B. 结构 \quad C. 数据对象 \quad D. 数据集合  
+
+    \item （多选）一个算法具有 （ \quad）等特点。【华中科技大学 2007 二、17（2 分）】  
+    A. 有 0 个或多个输入量 \quad B. 健壮性 \quad C. 正确性 \quad D. 可行性  
+
+    \item 下面程序的时间复杂性为 （ \quad）。【南京理工大学 2004 一、4（1 分）】  
+    \begin{lstlisting}[language=C]
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+            i * j;
+    \end{lstlisting}
+    A. $O(n^2)$ \quad B. $O(m \cdot n)$ \quad C. $O(n)$ \quad D. $O(m + n)$
+
+    \item 在下列算法中，“x = x * 2”的执行次数是 （ \quad）。【华中科技大学 2006 一、16（2 分）】  
+    \begin{lstlisting}[language=C]
+    int suanfa1(int n) {
+        int i, j, x = 1;
+        for (i = 0; i < n; i++)
+            for (j = i; j < n; j++)
+                x = x * 2;
+        return x;
+    }
+    \end{lstlisting}
+    A. $n(n + 1)/2$ \quad B. $n \log_2 n$ \quad C. $n$ \quad D. $n(n - 1)/2$
+
+    \item 执行下列算法 \texttt{suanfa2(1000)}，输出结果是 （ \quad）。【华中科技大学 2006 一、17（2 分）】  
+    \begin{lstlisting}[language=C]
+    int suanfa2(int n) {
+        int i = 1;
+        while (i < n)
+            i *= 2;
+        printf("%d", i);
+    }
+    \end{lstlisting}
+    A. 2000 \quad B. 512 \quad C. 1024 \quad D. 2
+
+    \item 当 $n$ 足够大时，下述函数中渐近时间最小的是 （ \quad）。【哈尔滨工业大学 2005 二、4（1 分）】  
+    A. $T(n) = n \log_2 n - 1000 \log_2 n$  
+    B. $T(n) = n \log_2 3 - 1000 \log_2 n$  
+    C. $T(n) = n^2 - 1000 \log_2 n$  
+    D. $T(n) = 2n \log_2 n - 1000 \log_2 n$
+
+    \item 下面算法的时间复杂度是 （ \quad）。【华中科技大学 2006 一、18（2 分）】  
+    \begin{lstlisting}[language=C]
+    int suanfa3(int n) {
+        int i = 1, s = 1;
+        while (s < n)
+            s += ++i;
+        return i;
+    }
+    \end{lstlisting}
+    A. $O(n)$ \quad B. $O(2^n)$ \quad C. $O(\log n)$ \quad D. $O(\sqrt{n})$
+
+    \item 下列函数中渐近时间复杂度最小的是 （ \quad）。【暨南大学 2011 一、2（2 分）】  
+    A. $T_1(n) = \log_2 n + 5000n$  
+    B. $T_2(n) = n - 8000n$  
+    C. $T_3(n) = n + 5000n$  
+    D. $T_4(n) = 2n \log_2 n - 1000n$
+
+    \item 某算法的时间复杂度为 $O(n^2)$，表明该算法的 （ \quad）。【武汉大学 2006】  
+    A. 问题规模是 $n^2$  
+    B. 执行时间等于 $n^2$  
+    C. 执行时间与 $n^2$ 成正比  
+    D. 问题规模与 $n$ 成正比  
+
+    \item 数据结构和数据类型的形式定义分别为：  
+    \[
+    \text{Data Structure} = (D, R), \quad \text{Data Type} = (D, R, P)
+    \]
+    试选择 $D, R, P$ 的确切含义 （ \quad）。【西南交通大学 2005】  
+    A. 数据 \quad B. 数据元素 \quad C. 数据对象  
+    D. 关系 \quad E. 存储结构 \quad F. 基本操作  
+
+    \item 在汉诺塔递归中，假设碟子的个数为 $n$，则时间复杂度为 （ \quad）。【北京大学 2015 一、2（1.5 分）】  
+    A. $O(n)$ \quad B. $O(n^2)$ \quad C. $O(2^n)$ \quad D. $O(\log n)$  
+
+    \item 下面程序段中带下划线的语句的执行次数的数量级是 （ \quad）。【南开大学 2005】  
+    \begin{lstlisting}[language=Pascal]
+    i := n * n;
+    WHILE i <> 1 DO
+        i := i DIV 2;
+    \end{lstlisting}
+    A. $n$ \quad B. $n^2$ \quad C. $n \log_2 n$ \quad D. $\log_2 n^2$
+
+    \item 算法的时间复杂度主要取决于 （ \quad）。【烟台大学 2019 一、1（2 分）】  
+    A. 计算的环境 \quad B. 待处理数据的值  
+    C. 问题的规模 \quad D. 数据的类型  
+
+    \item 数据的存储结构是指 （ \quad）。【北京工业大学 2017 一、1（2 分）】  
+    A. 从问题空间中抽象出来的数学模型  
+    B. 性质相同的数据元素的集合  
+    C. 数据结构在计算机内存中的表示  
+    D. 相互之间存在一种或多种特定关系的数据元素的集合  
+
+    \item 下列说法中错误的是 （ \quad）。【北京工业大学 2018 一、1（2 分）】  
+    A. 算法具有可行性、确定性和有穷性等重要特性  
+    B. 算法的时间复杂度是指获知算法执行时间的复杂程度  
+    C. 算法执行时间需通过依据该算法编制的程序在计算机上运行时所消耗的时间来度量  
+    D. 算法中描述的操作都是可以通过已经实现的基本运算执行有限次来实现  
+
+
+    \item 算法的计算量的大小称为 （ \quad）。【北京邮电大学 2000 二、3 (20/8 分)】  
+    
+    A. 效率 \quad B. 复杂性 \quad C. 现实性 \quad D. 难度
+
+    \item 算法的时间复杂度取决于 （ \quad）。【中科院计算所 1998 二、1 (2 分)】  
+    
+    A. 问题的规模 \quad B. 待处理数据的初态 \quad C. A 和 B
+
+    \item 计算机算法指的是（1），它必须具备（2）这三个特性。  
+    
+    (1) A. 计算方法 \quad B. 排序方法 \quad C. 解决问题的步骤序列 \quad D. 调度方法  
+    
+    (2) A. 可执行性、可移植性、可扩充性 \quad B. 可执行性、确定性、有穷性  
+    \quad C. 确定性、有穷性、稳定性 \quad D. 易读性、稳定性、安全性  
+    【南京理工大学 1999 一、1 (2 分)】【武汉交通科技大学 1996 一、1 (4 分)】
+
+    \item 一个算法应该是 （ \quad）。【中山大学 1998 二、1 (2 分)】  
+    
+    A. 程序 \quad B. 问题求解步骤的描述 \quad C. 要满足五个基本特性 \quad D. A 和 B
+
+    \item 下面关于算法的说法错误的是 （ \quad）。【南京理工大学 2000 一、1 (1.5 分)】  
+    
+    A. 算法最终必须由计算机程序实现  
+    B. 为解决某问题的算法同为该问题编写的程序含义是相同的  
+    C. 算法的可行性是指指令不能有二义性  
+    D. 以上几个都是错误的
+
+    \item 下面说法错误的是 （ \quad）。【南京理工大学 2000 一、2 (1.5 分)】  
+    
+    (1) 算法原地工作的含义是指不需要任何额外的辅助空间  
+    (2) 在相同的规模 $n$ 下，复杂度 $O(n)$ 的算法在时间上总是优于复杂度 $O(n^2)$ 的算法  
+    (3) 所谓时间复杂度是指最坏情况下，估算算法执行时间的一个上界  
+    (4) 同一个算法，实现语言的级别越高，执行效率就越低  
+    
+    A. (1) \quad B. (1), (2) \quad C. (1), (4) \quad D. (3)
+
+    \item 从逻辑上可以把数据结构分为 （ \quad）两大类。【武汉交通科技大学 1996 一、4 (2 分)】  
+    
+    A. 动态结构、静态结构 \quad B. 顺序结构、链式结构  
+    C. 线性结构、非线性结构 \quad D. 初等结构、构造型结构
+
+    \item 以下与数据的存储结构无关的术语是 （ \quad）。【北方交通大学 2000 二、1 (2 分)】  
+    
+    A. 循环队列 \quad B. 链表 \quad C. 哈希表 \quad D. 栈
+
+    \item 以下数据结构中，哪一个是线性结构 （ \quad）。【北方交通大学 2001 一、1 (2 分)】  
+    
+    A. 广义表 \quad B. 二叉树 \quad C. 稀疏矩阵 \quad D. 串
+
+    \item 以下哪一个术语与数据的存储结构无关 （ \quad）。【北方交通大学 2001 一、2 (2 分)】  
+    
+    A. 栈 \quad B. 哈希表 \quad C. 线索树 \quad D. 双向链表
+
+    \item 在下面的程序段中，对 $x$ 的赋值语句的频度为 （ \quad）。【北京工商大学 2001 一、10 (3 分)】  
+    
+    \begin{lstlisting}[language=Pascal]
+    FOR i := 1 TO n DO
+      FOR j := 1 TO n DO
+        X := X + 1;
+    \end{lstlisting}
+    
+    A. $O(n^2)$ \quad B. $O(n)$ \quad C. $O(2n)$ \quad D. $O(\log n)$
+
+    \item 程序段  
+    \begin{lstlisting}[language=Pascal]
+    FOR i := n-1 DOWNTO 1 DO
+      FOR j := 1 TO i DO
+        IF A[j] > A[j+1] THEN
+          A[j] 与 A[j+1] 对换，
+    \end{lstlisting}
+    其中 $n$ 为正整数，则最后一行的语句频度在最坏情况下是 （ \quad）。  
+    
+    A. $O(n)$ \quad B. $O(n \log n)$ \quad C. $O(n^2)$ \quad D. $O(\log n)$
+
+    \item 以下数据结构中， （ \quad）是非线性数据结构。【北京理工大学 2001 六、1 (2 分)】  
+    
+    A. 树 \quad B. 队列 \quad C. 有向图 \quad D. 栈
+
+    \item 以下哪个数据结构不是多型数据类型 （ \quad）。【中山大学 1999 一、3 (1 分)】  
+    
+    A. 栈 \quad B. 广义表 \quad C. 字符串 \quad D. 队列
+
+    \item 下列数据中， （ \quad）是非线性数据结构。【中山大学 1999 一、4 (1 分)】  
+    
+    A. 树 \quad B. 队列 \quad C. 完全二叉树 \quad D. 栈
+
+    \item 连续存储设计时，存储单元的地址 （ \quad）。【中山大学 1999 一、1 (1 分)】  
+   
+    A. 一定连续 \quad B. 一定不连续 \quad C. 不一定连续 \quad D. 部分连续，部分不连续
+
+    \item 以下属于逻辑结构的是 （ \quad）。【西安电子科技大学应用 2001 一、1 (2 分)】  
+   
+    A. 顺序表 \quad B. 哈希表 \quad C. 有序表 \quad D. 单链表
+\end{enumerate}
+
+\section{应用题}
+
+\begin{enumerate}
+    \item 分析下面程序段中循环语句的执行次数。  
+    \begin{lstlisting}[language=Pascal]
+    i := 0; s := 0; n := 100;
+    REPEAT
+        i := i + 1;
+        s := s + 10 * i;
+    UNTIL NOT((i < n) AND (s < n));
+    \end{lstlisting}
+    【北京邮电大学 1998 四、1（5 分）】
+
+    \item 下列算法对一个 $n$ 位二进制数加 1，假如无溢出，该算法的最坏时间复杂性是什么？并分析它的平均时间复杂性。  
+    \begin{lstlisting}[language=Pascal]
+    TYPE num = ARRAY [1..n] of [0..1];
+    PROCEDURE Inc(VAR a: num);
+    VAR i: integer;
+    BEGIN
+        i := n;
+        WHILE A[i] = 1 DO
+        BEGIN
+            A[i] := 0;
+            i := i - 1;
+        END;
+        A[i] := 1;
+    END Inc;
+    \end{lstlisting}
+    【东南大学 1998 三 (8 分) 1994 二（15 分）】
+
+    \item 阅读下列算法，指出算法 A 的功能和时间复杂性。  
+    \begin{lstlisting}[language=Pascal]
+    PROCEDURE A(h, g: pointer);
+    (h, g 分别为单循环链表（single linked circular list）中两个结点指针)
+    PROCEDURE B(s, q: pointer);
+    VAR p: pointer;
+    BEGIN
+        p := s;
+        WHILE p^.next <> q DO
+            p := p^.next;
+        p^.next := s;
+    END; (of B)
+    BEGIN
+        B(h, g);
+        B(g, h);
+    END; (of A)
+    \end{lstlisting}
+    【东南大学 1999 二（10 分）】
+
+    \item 调用下列 C 函数 \texttt{f(n)} 或 Pascal 函数 \texttt{f(n)}，回答下列问题：  
+    （1）试指出 \texttt{f(n)} 值的大小，并写出 \texttt{f(n)} 值的推导过程；  
+    （2）假定 $n = 5$，试指出 \texttt{f(5)} 值的大小和执行 \texttt{f(5)} 时的输出结果。  
+    \begin{lstlisting}[language=C]
+    int f(int n) {
+        int i, j, k, sum = 0;
+        for (i = 1; i < n + 1; i++) {
+            for (j = n; j > i - 1; j--) {
+                for (k = 1; k < j + 1; k++) {
+                    sum++;
+                }
+            }
+            printf("sum = %d\n", sum);
+        }
+        return (sum);
+    }
+    \end{lstlisting}
+    【华中理工大学 2000 六（10 分）】
+
+    \item 设 $n$ 是偶数，试计算运行下列程序段后 $m$ 的值并给出该程序段的时间复杂度。  
+    \begin{lstlisting}[language=Pascal]
+    m := 0;
+    FOR i := 1 TO n DO
+        FOR j := 2 * i TO n DO
+            m := m + 1;
+    \end{lstlisting}
+    【南京邮电大学 2000 一、1】
+
+    \item 试给出下面两个算法的运算时间：  
+    （1）  
+    \begin{lstlisting}[language=Pascal]
+    for i := 1 to n do
+        x := x + 1;
+    \end{lstlisting}
+    （2）  
+    \begin{lstlisting}[language=Pascal]
+    for i := 1 to n do
+        for j := 1 to n do
+            x := x + 1;
+    \end{lstlisting}
+    【中科院自动化研究所 1995 二、2 （6 分）】
+
+    \item 斐波那契数列 $F_n$ 定义如下：  
+    \[
+    F_0 = 0, \quad F_1 = 1, \quad F_n = F_{n-1} + F_{n-2}, \quad n = 2, 3, \dots
+    \]
+    请就此斐波那契数列，回答下列问题：  
+    （1）（7 分）在递归计算 $F_n$ 的时候，需要对较小的 $F_{n-1}, F_{n-2}, \dots, F_1, F_0$ 精确计算多少次？  
+    （2）（5 分）如果用大 $O$ 表示法，试给出递归计算 $F_n$ 时递归函数的时间复杂度是多少？  
+    【清华大学 2000 二（12 分）】
+\end{enumerate}
+
+\end{document}

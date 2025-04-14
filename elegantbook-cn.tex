@@ -4410,7 +4410,6 @@ F(G) =
   并把这 $m$ 棵树作为该结点的子树，则森林就变成了一棵树。
 \end{enumerate}
 \subsection{树的基本性质}
-\subsection{树的基本性质}
 
 \begin{enumerate}
   \item \textbf{树中的结点数等于所有结点的度数加 1}：
@@ -4440,7 +4439,6 @@ F(G) =
 
 \subsection{二叉树的定义}
 
-\subsection{二叉树的定义}
 
 \begin{itemize}
   \item 二叉树是 $n$ ($n \geq 0$) 个结点的有限集合：
@@ -4811,7 +4809,6 @@ F(G) =
 
 
 
-\subsubsection{后序遍历}
 \subsubsection{后序遍历}
 
 后序遍历的顺序是：先访问左子树，再访问右子树，最后访问根结点。为了实现这一顺序，我们需要先将根结点及其左下结点依次压入栈中。即使栈顶结点 $p$ 的左子树已经遍历完或为空，也不能立即访问结点 $p$，因为它的右子树还没有遍历。只有当结点 $p$ 的右子树也遍历完后，才能访问结点 $p$。因此，后序遍历的实现比前序和中序遍历更复杂，因为它有更多的条件限制。
@@ -5408,9 +5405,9 @@ F(G) =
   \label{fig:BiTree2Forest}
 
 \end{figure}
-\subsection{哈夫曼树和哈夫曼编码}
+\section{哈夫曼树和哈夫曼编码}
 
-\subsubsection{哈夫曼树}
+\subsection{哈夫曼树}
 
 在许多应用中，经常将树中的结点赋予一个有某种意义的数值，称此数值为该结点的权。从根结点到该结点之间的路径长度与该结点上的权的乘积称为结点的带权路径长度。树中所有叶子结点的带权路径长度之和称为树的带权路径长度，通常记为：
 
@@ -5467,7 +5464,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 其中，$n$ 表示哈夫曼树的总结点数，$n_0$ 表示叶子结点的个数，$n_1$ 表示度为 1 的结点个数，$n_2$ 表示度为 2 的结点个数。
 
-\subsubsection{哈夫曼编码}
+\subsection{哈夫曼编码}
 \subsubsection{哈夫曼树的结点类型定义}
 
 我们要清楚，结点的结构体的构建都是为了更好地表述相应的构造算法，所以在这里我们要从算法的角度去分析结构体的构造。
@@ -5567,7 +5564,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 \end{lstlisting}
 
 说明：在一组字符的哈夫曼编码中，各字符的编码不一定是等长的，但一定是没有前缀的。这样的编码称为前缀编码。前缀编码的一个重要性质是：任何字符的编码都不是另一个字符编码的前缀。
-\subsection{并查集}
+\section{并查集}
 
 \textbf{并查集是什么}
 
@@ -6169,6 +6166,8 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   \label{fig:depthFirst}
 \end{figure}
 
+
+\subsubsection{深度优先搜索的实现}
 紧接着我们将上述过程转化为代码，如下所示：
 
 \textbf{邻接表DFS}
@@ -6191,6 +6190,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 空间复杂度 $O(n)$，这是因为 $visited$ 数组的大小为 $n$，递归调用的深度最大为 $n$。
 
 时间复杂度为 $O(n+e)$，其中 $n$ 为顶点数，$e$ 为边数。因为每个顶点只会被访问一次，每条边也只会被访问一次。
+
 \textbf{邻接矩阵DFS}
 
 \begin{lstlisting}[language=C++, caption={邻接矩阵DFS}]
@@ -9388,6 +9388,8 @@ O(\log_m n)
    
       其调整过程与 B-树的删除操作相似。
 \section{红黑树}
+
+
 \chapter{排序}
 
 \section{排序的基本概念}
@@ -9767,7 +9769,6 @@ O(1)
 排序。
 
 \subsection{冒泡排序}
-\subsection{冒泡排序}
 
 冒泡排序（bubble sort），也称为气泡排序，是一种典型的交换排序方法。其基本思想是通过无序区中相邻元素关键字间的比较和位置的交换，使关键字最小的元素如气泡一般逐渐往上“漂浮”直至“水面”。
 
@@ -9840,7 +9841,7 @@ void bubbleSort(int arr[], int n) {
 
 \end{lstlisting}
 
-\subsubsection{算法分析}
+\textbf{算法分析}
 
 \textbf{1. 最好情况  }
 
@@ -10039,7 +10040,7 @@ O(1)
   }
 \end{lstlisting}
 
-\subsubsection{算法分析}
+\textbf{算法分析}
 
 快速排序的性能取决于每次划分的结果，具体分析如下：
 
@@ -10177,7 +10178,7 @@ void directSelectSort(int arr[], int n) {
 
 \end{lstlisting}
 
-\subsubsection{算法分析}
+\textbf{算法分析}
 显然，无论初始数据序列的状态如何，在第 $i$ 趟排序中选出最小关键字的元素，内 \texttt{for} 循环需做 $n - i - 1$ 次比较。因此，总的比较次数为：
 \[
 C = \sum_{i=0}^{n-2} (n - i - 1) = \frac{n(n-1)}{2} = O(n^2)
@@ -10587,7 +10588,7 @@ a_i.\text{key} = (a_{i1}, a_{i2}, \dots, a_{id})
     \label{fig:radixSort}
 \end{figure}
 
-\subsubsection{算法分析}
+\textbf{算法分析}
 
 在基数排序过程中，共进行了 $d$ 趟的分配和收集。每一趟中：
 \begin{itemize}
