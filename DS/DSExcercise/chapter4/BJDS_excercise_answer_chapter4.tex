@@ -1,0 +1,473 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{../../../elegantbook}
+
+\title{基础提高练习题}
+\subtitle{北街学长倾力之作}
+
+\author{北街}
+% \institute{Elegant\LaTeX{} Program}
+\date{2022/12/31}
+\version{1.0}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{注意：本模板自 2023 年 1 月 122222 日开始，不再更新和维护！}
+
+\setcounter{tocdepth}{3}
+
+\logo{../../figure/logo-blue.png}
+\cover{../../figure/cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{\#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\usepackage{listings}         % 导入listings宏包
+\usepackage{xcolor}           % 支持颜色
+
+% 配置C++代码样式
+\lstset{
+    language=C++,             % 语言设置为C++
+    basicstyle=\ttfamily,      % 基本样式
+    keywordstyle=\color{blue}, % 关键词颜色
+    commentstyle=\color{green},% 注释颜色
+    stringstyle=\color{red},   % 字符串颜色
+    numbers=left,              % 显示行号
+    numberstyle=\tiny,         % 行号样式
+    stepnumber=1,              % 每行显示行号
+    breaklines=true,           % 自动换行
+    frame=lines                % 代码块边框样式
+}
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{串}
+\begin{enumerate}
+
+    \item 设主串 $S = \texttt{"abaabaabcabaabc"}$，模式串 $P = \texttt{"abaabc"}$，采用 KMP 算法进行模式匹配，到匹配成功时为止，在匹配过程中进行的单个字符间的比较次数是（ ）。  
+    【2019 年全国试题 9（2 分）】
+
+    A. 9 \quad B. 10 \quad C. 12 \quad D. 15  
+
+    答案:\textcolor{red}{C}
+
+    解析：\\
+        在 KMP 算法中，模式匹配的核心是利用部分匹配表（\textbf{\textcolor{blue}{Next 数组}}）来减少字符的重复比较。以下是匹配过程的详细分析：
+                
+                主串 $S = \texttt{"abaabaabcabaabc"}$\\
+                模式串 $P = \texttt{"abaabc"}$\\
+                \textbf{\textcolor{blue}{Next 数组的计算}}\\
+                模式串 $P$ 的 \textbf{\textcolor{blue}{Next 数组}}为：\\
+                Next = [-1, 0, 0, 1, 1, 2]\\
+                
+                \textbf{\textcolor{blue}{匹配过程}}\\
+                
+                初始时，$i = 0$（主串指针），$j = 0$（模式串指针）。\\
+                每次比较 $S[i]$ 和 $P[j]$，如果匹配成功，则 $i$ 和 $j$ 同时加 1；如果失配，则根据 \textbf{\textcolor{blue}{Next 数组}}调整 $j$ 的位置。\\
+                \textbf{\textcolor{blue}{匹配步骤：}}\\
+                
+                比较 $S[0]$ 和 $P[0]$，匹配（$i = 1, j = 1$）。\\
+                比较 $S[1]$ 和 $P[1]$，匹配（$i = 2, j = 2$）。\\
+                比较 $S[2]$ 和 $P[2]$，匹配（$i = 3, j = 3$）。\\
+                比较 $S[3]$ 和 $P[3]$，匹配（$i = 4, j = 4$）。\\
+                比较 $S[4]$ 和 $P[4]$，匹配（$i = 5, j = 5$）。\\
+                比较 $S[5]$ 和 $P[5]$，\textbf{\textcolor{red}{失配}}（$i = 5, j = 2$，根据 \textbf{\textcolor{blue}{Next 数组}}调整 $j$）。\\
+                比较 $S[5]$ 和 $P[2]$，匹配（$i = 6, j = 3$）。\\
+                比较 $S[6]$ 和 $P[3]$，匹配（$i = 7, j = 4$）。\\
+                比较 $S[7]$ 和 $P[4]$，匹配（$i = 8, j = 5$）。\\
+                比较 $S[8]$ 和 $P[5]$，匹配（$i = 9, j = 6$，\textbf{\textcolor{green}{匹配成功}}）。
+                
+                \textbf{\textcolor{blue}{比较次数统计}}\\
+                
+                匹配成功的比较次数：\textbf{\textcolor{green}{9 次}}。\\
+                失配后重新比较的次数：\textbf{\textcolor{red}{3 次}}（$S[5]$ 和 $P[2]$，$S[6]$ 和 $P[3]$，$S[7]$ 和 $P[4]$）。\\
+                \textbf{\textcolor{blue}{总比较次数：$9 + 3 = 12$}}。\\
+                因此，匹配过程中进行的单个字符间的比较次数是 \textbf{\textcolor{blue}{12}}。\\
+
+    \item 已知字符串 $S = \texttt{"abaabaabacacaabaabcc"}$，模式串 $P = \texttt{"abaabc"}$，采用 KMP 算法进行匹配，第一次出现“失配”（$S[i] \neq P[j]$）时，$i=5$ 且 $j=5$，则下次开始匹配时，$i$ 和 $j$ 的值分别是（ ）。  
+    【2015 年全国试题 8（2 分）】  
+
+    A. $i=1, j=0$ \quad B. $i=5, j=0$ \quad C. $i=5, j=2$ \quad D. $i=6, j=2$  
+
+    答案:\textcolor{red}{D}
+
+    解析：\\
+    在 KMP 算法中，当发生失配时，模式串指针 $j$ 的位置会根据 \textbf{\textcolor{blue}{Next 数组}}的值进行调整，而主串指针 $i$ 保持不变或继续向后移动。\\
+
+    \textbf{\textcolor{blue}{已知条件：}}\\
+    主串 $S = \texttt{"abaabaabacacaabaabcc"}$。\\
+    模式串 $P = \texttt{"abaabc"}$。\\
+    失配发生时，$i = 5$ 且 $j = 5$。\\
+
+    \textbf{\textcolor{blue}{计算模式串 $P$ 的 Next 数组：}}\\
+
+    Next = [-1,0, 0, 1, 1, 2]\\
+
+    模式串 $P = \texttt{"abaabc"}$ 的 \textbf{\textcolor{blue}{Next 数组}}为：\\
+
+    \textbf{\textcolor{blue}{匹配过程分析：}}\\
+    当前失配位置为 $i = 5$（主串指针），$j = 5$（模式串指针）。\\
+    根据 \textbf{\textcolor{blue}{Next 数组}}，当 $j = 5$ 时，失配后模式串指针 $j$ 应调整为 $Next[5] = 2$。\\
+    主串指针 $i$ 保持不变或向后移动，因此下次匹配从 $i = 6$ 开始。\\
+
+    \textbf{\textcolor{blue}{下次匹配的起始位置：}}\\
+    主串指针 $i = 6$。\\
+    模式串指针 $j = 2$。\\
+
+    因此，答案是 \textbf{\textcolor{red}{D}}. $i=6, j=2$。
+
+    \item 下面关于串的叙述中，哪一个是不正确的（ ）。  
+    【北方交通大学 2001 一、5（2 分）；江苏大学 2005 一、6（2 分）】  
+
+    A. 串是字符的有限序列  
+
+    B. 空串是由空格构成的串  
+
+    C. 模式匹配是串的一种重要运算 
+
+    D. 串既可以采用顺序存储，也可以采用链式存储  
+
+    答案:\textcolor{red}{B}
+    解析：\\
+    \textbf{\textcolor{blue}{选项分析：}}\\
+    A. 正确，串是字符的有限序列。\\
+    B. 错误，空串是长度为 0 的串，不是由空格构成的串。\\
+    C. 正确，模式匹配是串的一种重要运算。\\
+    D. 正确，串既可以采用顺序存储，也可以采用链式存储。\\
+    因此，答案是 \textbf{\textcolor{red}{B}}. 空串是由空格构成的串（错误）。\\
+
+    \item 若串 $S_1 = \texttt{"ABCDEFG"}$，$S_2 = \texttt{"9898"}$，$S_3 = \texttt{"\#\#\#"}$，$S_4 = \texttt{"012345"}$，
+    执行  
+    \texttt{concat(replace(S1, substr(S1, length(S2), length(S3)), S3), substr(S4, index(S2, '8'), length(S2)))}  
+    其结果为（ ）。  
+    【北方交通大学 1999 一、5（2 分）】  
+
+    A. \texttt{"ABC\#\#\#{G0123}"} \quad B. \texttt{"ABCD\#\#\#{2345}"}  
+
+    C. \texttt{"ABC\#\#\#{G2345}"} \quad D. \texttt{"ABC\#\#\#{2345}"}  
+
+    E. \texttt{"ABC\#\#\#{G1234}"} \quad F. \texttt{"ABCD\#\#\#{1234}"}  
+
+    G. \texttt{"ABC\#\#{01234}"}
+
+    答案：C. \texttt{"ABC\#\#\#{G2345}"}
+
+    解析：\\
+    我们逐步分析题目中函数的执行过程：
+
+    已知：\\
+    $S_1 = \texttt{"ABCDEFG"}$\\
+    $S_2 = \texttt{"9898"}$\\
+    $S_3 = \texttt{"\#\#\#"}$\\
+    $S_4 = \texttt{"012345"}$\\
+    执行的函数为：\\
+    \textbf{concat(replace(S1, substr(S1, length(S2), length(S3)), S3), substr(S4, index(S2, '8'), length(S2)))}\\
+
+    \textbf{第一步：计算 replace(S1, substr(S1, length(S2), length(S3)), S3)}\\
+    计算 \textbf{length(S2)} 和 \textbf{length(S3)}：\\
+
+    $S_2 = \texttt{"9898"}$，长度为 \textbf{4}。\\
+    $S_3 = \texttt{"\#\#\#"}$，长度为 \textbf{3}。\\
+    计算 \textbf{substr(S1, length(S2), length(S3))}：\\
+
+    $S_1 = \texttt{"ABCDEFG"}$。\\
+    \textbf{substr(S1, length(S2), length(S3))} 表示从 $S_1$ 的第 \textbf{4} 个字符开始（即 \texttt{D}），截取长度为 \textbf{3} 的子串。\\
+    结果为：\texttt{"DEF"}。\\
+    执行 \textbf{replace(S1, substr(S1, length(S2), length(S3)), S3)}：\\
+
+    用 $S_3 = \texttt{"\#\#\#"}$ 替换 $S_1$ 中的子串 \texttt{"DEF"}。\\
+    替换后的结果为：\texttt{"ABC\#\#\#G"}。\\
+
+    \textbf{第二步：计算 substr(S4, index(S2, '8'), length(S2))}\\
+    计算 \textbf{index(S2, '8')}：
+
+    $S_2 = \texttt{"9898"}$。\\
+    字符 \texttt{8} 第一次出现的位置是第 \textbf{2} 个字符（从 1 开始计数）。\\
+    计算 \textbf{substr(S4, index(S2, '8'), length(S2))}：\\
+
+    $S_4 = \texttt{"012345"}$。\\
+    从 $S_4$ 的第 \textbf{2} 个字符开始（即 \texttt{1}），截取长度为 \textbf{length(S2) = 4} 的子串。\\
+    结果为：\texttt{"2345"}。\\
+
+    \textbf{第三步：执行 concat(...)}\\
+    连接结果：\\
+    前半部分：\texttt{"ABC\#\#\#G"}。\\
+    后半部分：\texttt{"2345"}。\\
+    连接后的结果为：\texttt{"ABC\#\#\#{G2345}"}。\\
+
+    \textbf{最终答案：}\\
+    C. \texttt{"ABC\#\#\#{G2345}"}\\
+    \item 设有两个串 $S_1$ 和 $S_2$，求 $S_2$ 在 $S_1$ 中首次出现的位置的运算称作（ ）。  
+    【中南大学 2005 一、3（2 分）】  
+
+    A. 求子串 \quad B. 判断是否相等 \quad C. 模式匹配 \quad D. 连接  
+
+    答案：C. 模式匹配
+    解析：\\
+    在计算机科学中，模式匹配是指在一个主串中查找一个模式串的过程。\\
+    该过程通常涉及到比较主串和模式串的字符，以确定模式串在主串中首次出现的位置。\\
+    因此，答案是 \textbf{\textcolor{red}{C}}. 模式匹配。\\
+
+    \item 已知串 $S = \texttt{"aaab"}$，其 Next 数组值为（ ）。  
+    【西安电子科技大学 1996 一、7（2 分）】 
+
+    A. $(0, 1, 2, 3)$ \quad B. $(1, 1, 2, 3)$ \quad C. $(1, 2, 3, 1)$ \quad D. $(1, 2, 1, 1)$  
+
+    答案：\textcolor{red}{A. $(0, 1, 2, 3)$}
+    解析：\\
+    在 KMP 算法中，Next 数组用于存储模式串中每个字符的最长相等前后缀的长度。\\
+    对于串 \texttt{"ababaaababaa"}，我们可以计算其 Next 数组：\\
+    我们的讲义上面提过如何求解 Next 数组,我们先严格按照初值从-1 0 开始的next 数组来求解,\\
+    1. 对于 下标 0 所在字符 \texttt{a}，没有前缀，因此 Next[0] = -1(默认)。\\
+    2. 对于 下标 1 所在字符 \texttt{a}，没有前缀和后缀，因此 Next[1] = 0。\\
+    3. 对于 下标 2 所在字符 \texttt{a}，前缀为 \texttt{a}，后缀为 \texttt{a}，最长公共前后缀为 1，因此 Next[2] = 1。\\
+    4. 对于 下标 3 所在字符 \texttt{b}，前缀为 \texttt{a,aa}，后缀为 \texttt{a,aa}，最长公共前后缀为 2，因此 Next[3] = 2。\\
+
+    综上,next 数组为 $(-1,0,1,2)$。\\
+    但是我们在这里需要注意的是，Next 数组的定义有两种，一种是从 0 开始的 Next 数组，另一种是从 -1 开始的 Next 数组。\\
+    在本题中，Next 数组是从 0 开始的，因此我们需要将 Next 数组的值加 1。\\
+    因此，最终的 Next 数组为 $(0, 1, 2, 3)$。\\
+
+    \item 串 \texttt{"ababaaababaa"} 的 Next 数组为（ ）。  
+    【中山大学 1999 一、7；江苏大学 2006 一、1（2 分）】  
+
+    A. $(0, 1, 2, 3, 4, 5, 6, 7, 8,9,9,9)$  
+
+    B. $(0, 1, 2, 1, 2, 1, 1, 1, 1,2,1,2)$  
+
+    C. $(0, 1, 1, 2, 3, 4, 2, 2, 3,4,5,6)$  
+
+    D. $(0, 1, 2, 3, 0, 1, 2, 3, 2,2,3,4)$  
+
+    答案:\textcolor{red}{C. $(0, 1, 1, 2, 3, 4, 2, 2, 3,4,5,6)$}\\
+    解析：\\
+    在 KMP 算法中，Next 数组用于存储模式串中每个字符的最长相等前后缀的长度。\\
+    对于串 \texttt{"ababaaababaa"}，我们可以计算其 Next 数组：\\
+    我们的讲义上面提过如何求解 Next 数组,我们先严格按照初值从-1 0 开始的next 数组来求解,\\
+    1. 对于 下标 0 所在字符 \texttt{a}，没有前缀，因此 Next[0] = -1(默认)。\\
+    2. 对于 下标 1 所在字符 \texttt{b}，没有前缀和后缀，因此 Next[1] = 0。\\
+    3. 对于 下标 2 所在字符 \texttt{a}，前缀为 \texttt{a}，后缀为 \texttt{b}，无相等前后缀，因此 Next[2] = 0。\\
+    4. 对于 下标 3 所在字符 \texttt{b}，前缀为 \texttt{a,ab,}，后缀为 \texttt{a,ba}，最大公共前后缀长度为 1，因此 Next[3] = 1。\\
+    5. 对于 下标 4 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,}，后缀为 \texttt{b,ab,bab}，最大公共前后缀长度为 2，因此 Next[4] = 2。\\
+    6. 对于 下标 5 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,abab,}，后缀为 \texttt{a,ba,aba,baba}，最大公共前后缀长度为 3，因此 Next[5] = 3。\\
+    7. 对于 下标 6 所在字符 \texttt{b}，前缀为 \texttt{a,ab,aba,abab,ababa,}，后缀为 \texttt{a,aa,baa,abaa,babaa}，最大公共前后缀长度为 1，因此 Next[6] = 1。\\
+    8. 对于 下标 7 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,abab,ababa,ababaa,}，后缀为 \texttt{a,aa,aaa,baaa,abaaa,babaaa}，最大公共前后缀长度为 1，因此 Next[7] = 1。\\
+    9. 对于 下标 8 所在字符 \texttt{b}，前缀为 \texttt{a,ab,aba,abab,ababa,ababaa,ababaaa,}，后缀为 \texttt{b,ab,aab,aaab,baaab,abaaab,babaaab}，最大公共前后缀长度为 2，因此 Next[8] = 2。\\
+    10. 对于 下标 9 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,abab,ababa,ababaa,ababaaa,ababaaab,}，后缀为 \texttt{a,ba,aba,aaba,aaaba,baaaba,abaaaba,babaaaba}，最大公共前后缀长度为 3，因此 Next[9] = 3。\\
+    11. 对于 下标 10 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,abab,ababa,ababaa,ababaaa,ababaaab,ababaaaba,}，后缀为 \texttt{b,ab,bab,baab,aabaab,aaabaab,baaabaab,babaaabab}，最大公共前后缀长度为 4，因此 Next[10] = 4。\\
+    12. 对于 下标 11 所在字符 \texttt{b}，前缀为 \texttt{a,ab,aba,abab,ababa,ababaa,ababaaa,ababaaab,ababaaaba,ababaaabaa,}，后缀为 \texttt{a,aa,baa,baba,aababa,aaababa,baaababa,babaaababa}，最大公共前后缀长度为 5，因此 Next[11] = 5。\\
+
+    综上所述，Next 数组为 $(-1,0,0,1,2,3,1,1,2,3,4,5)$。\\
+    但是我们在这里需要注意的是，Next 数组的定义有两种，一种是从 0 开始的 Next 数组，另一种是从 -1 开始的 Next 数组。\\
+    在本题中，Next 数组是从 0 开始的，因此我们需要将 Next 数组的值加 1。\\
+    因此，最终的 Next 数组为 $(0, 1, 1, 2, 3, 4, 2, 2, 3,4,5,6)$。\\
+    \item 字符串 \texttt{"ababaabab"} 的 NextVal 数组为（ ）。  
+    【北京邮电大学 1999 一、1（2 分）；烟台大学 2007 一、8（2 分）】  
+
+    A. $(0, 1, 0, 1, 0, 4, 1, 0, 1)$  
+
+    B. $(0, 1, 0, 1, 0, 2, 1, 0, 1)$  
+
+    C. $(0, 1, 0, 1, 0, 0, 0, 1, 1)$  
+
+    D. $(0, 1, 0, 1, 0, 1, 0, 1, 1)$  
+
+    答案:\textcolor{red}{A. $(0, 1, 0, 1, 0, 4, 1, 0, 1)$}\\
+
+    解析：\\
+    在 KMP 算法中，NextVal 数组是对 Next 数组的进一步优化，用于减少模式串的比较次数。\\
+    对于串 \texttt{"ababaabab"}，我们可以计算其 NextVal 数组：\\
+    我们的讲义上面提过如何求解 Next 数组,我们先严格按照初值从-1 0 开始的next 数组来求解,\\
+    1. 对于 下标 0 所在字符 \texttt{a}，没有前缀，因此 Next[0] = -1(默认)。\\
+    2. 对于 下标 1 所在字符 \texttt{b}，没有前缀和后缀，因此 Next[1] = 0。\\
+    3. 对于 下标 2 所在字符 \texttt{a}，前缀为 \texttt{a}，后缀为 \texttt{b}，无相等前后缀，因此 Next[2] = 0。\\
+    4. 对于 下标 3 所在字符 \texttt{b}，前缀为 \texttt{a,ab,}，后缀为 \texttt{a,ba}，最大公共前后缀长度为 1，因此 Next[3] = 1。\\
+    5. 对于 下标 4 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,}，后缀为 \texttt{b,ab,bab}，最大公共前后缀长度为 2，因此 Next[4] = 2。\\
+    6. 对于 下标 5 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,abab,}，后缀为 \texttt{a,ba,aba,baba}，最大公共前后缀长度为 3，因此 Next[5] = 3。\\
+    7. 对于 下标 6 所在字符 \texttt{b}，前缀为 \texttt{a,ab,aba,abab,ababa,}，后缀为 \texttt{a,aa,baa,abaa,babaa}，最大公共前后缀长度为 1，因此 Next[6] = 1。\\
+    8. 对于 下标 7 所在字符 \texttt{a}，前缀为 \texttt{a,ab,aba,abab,ababa,ababaa,}，后缀为 \texttt{b,ab,aab,baab,abaab,babaab}，最大公共前后缀长度为 1，因此 Next[7] = 2。\\
+    9. 对于 下标 8 所在字符 \texttt{b}，前缀为 \texttt{a,ab,aba,abab,ababa,ababaa,ababaaa,}，后缀为 \texttt{a,ba,aba,aaba,baaba,abaaba,babaaba}，最大公共前后缀长度为 2，因此 Next[8] = 3。\\
+    综上所述，Next 数组为 $(-1,0,0,1,2,3,1,2,3)$。\\
+
+    我们可以通过next 数组来计算 NextVal 数组。\\
+    
+    1. 对于 下标 8 ,我们可以发现str[8] == str[next[8]] == str[next[next[8]]]=str[next[next[next[9]]]] ,因此我们可以将next[8] 赋值为 next[next[next[8]]] = 0。\\
+
+    2. 对于 下标 7 ,我们可以发现str[7] == str[next[7]] == str[next[next[7]]] ,因此我们可以将next[7] 赋值为 next[next[7]] = -1。\\
+    3. 对于 下标 6 ,我们可以发现str[6] == str[next[6]] == str[next[next[6]]] ,因此我们可以将next[6] 赋值为 next[next[6]] = 0。\\
+
+    同理,可以求出其他下标的值。\\
+
+    最终求得的nextVal值为 $(-1,0,-1,0,-1,3,0,-1,0)$。\\
+    但是我们在这里需要注意的是，NextVal 数组的定义有两种，一种是从 0 开始的 NextVal 数组，另一种是从 -1 开始的 NextVal 数组。\\
+    在本题中，NextVal 数组是从 0 开始的，因此我们需要将 NextVal 数组的值加 1。\\
+    因此，最终的 NextVal 数组为 $(0,1,0,1,0,4,1,0,1)$。\\
+
+    \item 模式串 $P = \texttt{"abcaabbcabcaabdab"}$，该模式串的 Next 数组的值为（ ），NextVal 数组的值为（ ）。  
+    
+    A. 0 1 1 1 2 2 1 1 1 2 3 4 5 6 7 1 2 
+
+    B. 0 1 1 1 2 1 2 1 1 2 3 4 5 6 1 1 2 
+
+    C. 0 1 1 1 0 0 1 3 1 0 1 1 0 0 7 0 1 
+
+    D. 0 1 1 1 2 2 3 1 1 2 3 4 5 6 7 1 2 
+
+    E. 0 1 1 0 0 1 1 1 0 1 1 0 0 1 7 0 1 
+
+    F. 0 1 1 0 2 1 3 1 0 1 0 1 2 1 7 0 1 
+
+    答案：\textcolor{red}{A. 0 1 1 1 2 2 1 1 1 2 3 4 5 6 7 1 2}\\ 
+    \textcolor{red}{D. 0 1 1 1 2 2 3 1 1 2 3 4 5 6 7 1 2}\\
+    解析：\\
+    在 KMP 算法中，Next 数组用于存储模式串中每个字符的最长相等前后缀的长度。\\
+    对于模式串 $P = \texttt{"abcaabbcabcaabdab"}$，我们可以计算其 Next 数组：\\
+    我们的讲义上面提过如何求解 Next 数组,我们先严格按照初值从-1 0 开始的next 数组来求解,\\
+    1. 对于 下标 0 所在字符 \texttt{a}，没有前缀，因此 Next[0] = -1(默认)。\\
+    2. 对于 下标 1 所在字符 \texttt{b}，没有前缀和后缀，因此 Next[1] = 0。\\
+    3. 对于 下标 2 所在字符 \texttt{c}，前缀为 \texttt{a}，后缀为 \texttt{b}，无相等前后缀，因此 Next[2] = 0。\\
+    4. 对于 下标 3 所在字符 \texttt{a}，前缀为 \texttt{a,ab,}，后缀为 \texttt{c,bc}，最大公共前后缀长度为 0，因此 Next[3] = 0。\\
+    5. 对于 下标 4 所在字符 \texttt{a}，前缀为 \texttt{a,ab,abc,}，后缀为 \texttt{a,ca,bca}，最大公共前后缀长度为 1，因此 Next[4] = 1。\\
+
+    同理,求出next数组为 $(-1,0,0,0,1,1,0,0,0,1,2,3,4,5,6,0,1)$\\
+    
+    将next数组转换为nextval数组,简单来说就是观察next数组,如果next[i] == next[next[i]] ,那么就将next[i] 赋值为 next[next[i]]。\\
+    为了清晰观察,我们将字符串和next数组对应起来,如下表所示：\\
+    \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{下标} & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\
+    \hline
+    \textbf{字符} & a & b & c & a & a & b & b & c & a & b & c & a & a & b & d & a & b \\
+    \hline
+    \textbf{next} & -1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 0 & 1 \\
+    \hline
+    \end{tabular}
+    \end{center}
+
+    求解nextVal数组的过程如下：\\
+    1. 对于下标16,我们可以发现str[16] == str[next[16]] !== str[next[next[16]]] ,因此我们可以将next[16] 赋值为 next[next[16]] = 0。\\
+    2. 对于下标15,我们可以发现str[15] == str[next[15]] ,因此我们可以将next[15] 赋值为 next[next[15]] = -1。\\
+    \dots\dots\\
+
+    综上,我们可以得到nextVal数组为 $(-1,0,0,0,1,1,0,0,0,1,2,3,4,5,6,-1,0)$。\\
+    但是我们在这里需要注意的是，NextVal 数组的定义有两种，一种是从 0 开始的 NextVal 数组，另一种是从 -1 开始的 NextVal 数组。\\
+    在本题中，NextVal 数组是从 0 开始的，因此我们需要将 NextVal 数组的值加 1。\\
+    因此，最终的 NextVal 数组为 $(0,1,1,1,2,2,3,1,1,2,3,4,5,6,7,1,2)$。\\
+
+    \item 若串 $S = \texttt{"myself"}$，则其子串的数目是（ ）。  
+    【北京理工大学 2007 一、6（1 分）】  
+
+    A. 20 \quad B. 21 \quad C. 22 \quad D. 23  
+
+    
+    答案：\textcolor{red}{B. 21}\\
+    解析：\\
+    对于一个长度为 $n$ 的字符串，其子串的个数可以通过以下公式计算：\\
+    \[
+    \text{子串个数} = \frac{n(n+1)}{2}
+    \]
+    其中 $n$ 是字符串的长度。\\
+    在本题中，字符串 $S = \texttt{"myself"}$ 的长度为 6。\\
+    因此，子串的个数为：\\
+    \[
+        \text{子串个数} = \frac{6(6+1)}{2} = \frac{6 \times 7}{2} = 21
+    \]
+
+    所以，答案是 \textbf{\textcolor{red}{B}}. 21。\\
+
+    \item 若串 $S = \texttt{"software"}$，则其子串的数目是（ ）。  
+    【西安电子科技大学 2001 应用一、2（2 分）】  
+
+    A. 8 \quad B. 37 \quad C. 36 \quad D. 9  
+
+    答案：\textcolor{red}{C. 36}\\
+    解析：\\
+    对于一个长度为 $n$ 的字符串，其子串的个数可以通过以下公式计算：\\
+    \[
+    \text{子串个数} = \frac{n(n+1)}{2}
+    \]
+    其中 $n$ 是字符串的长度。\\
+    在本题中，字符串 $S = \texttt{"software"}$ 的长度为 8。\\
+    因此，子串的个数为：\\
+    \[
+        \text{子串个数} = \frac{8(8+1)}{2} = \frac{8 \times 9}{2} = 36
+    \]
+    所以，答案是 \textbf{\textcolor{red}{C}}. 36。\\
+
+    \item 设 $S$ 是一个长度为 $m$ 的字符串，其中的字符各不相同，则 $S$ 中互异的非平凡子串（非空且不同于 $S$ 本身）的个数为（ ）。  
+    【中科院计算所 1997；烟台大学 2007 一、7（2 分）】  
+
+    A. $2m - 1$  
+
+    B. $m^2$  
+
+    C. $\frac{m^2}{2} + m/2$  
+
+    D. $\frac{m^2}{2} + m/2 - 1$  
+
+    E. $\frac{m^2}{2} - m/2 - 1$  
+
+    F. 其他情况  
+
+    答案：\textcolor{red}{C. $\frac{m^2}{2} + m/2$}\\
+    解析：\\
+    对于一个长度为 $m$ 的字符串，其中的字符各不相同，则 $S$ 中互异的非平凡子串（非空且不同于 $S$ 本身）的个数可以通过以下公式计算：\\
+    \[
+    \text{子串个数} = \frac{m(m+1)}{2} - 1
+    \]
+    其中 $m$ 是字符串的长度。\\
+    在本题中，字符串 $S$ 的长度为 $m$。\\
+    因此，子串的个数为：\\
+    \[
+        \text{子串个数} = \frac{m(m+1)}{2} - 1
+    \]
+    但是我们需要注意的是，题目中要求的是互异的非平凡子串，因此我们需要将结果减去 1。\\
+    所以，答案是 \textbf{\textcolor{red}{C}}. $\frac{m^2}{2} + m/2$。\\
+
+    \item 串是一种特殊的线性表，其特殊性体现在（ ）。  
+    【暨南大学 2010 一、11（2 分）】  
+
+    A. 可以顺序存储  
+
+    B. 数据元素是一个字符  
+
+    C. 可以链接存储  
+
+    D. 数据元素可以是多个字符  
+
+    答案：\textcolor{red}{D. 数据元素可以是多个字符}\\
+    解析：\\
+    串是一种特殊的线性表，其特殊性体现在数据元素可以是多个字符。\\
+    串的定义是由零个或多个字符组成的有限序列。\\
+    因此，答案是 \textbf{\textcolor{red}{D}}. 数据元素可以是多个字符。\\
+
+    \item 在下列表述中，（ ）是错误的。  
+    【华中科技大学 2006 二、2（2 分）】  
+
+
+    A. 含有一个或多个空格字符的串称为空格串  
+
+    B. 对 $n$ ($n > 0$) 个顶点的网，求出权最小的 $n-1$ 条边便可构成其最小生成树  
+
+    C. 选择排序算法是不稳定的  
+
+    D. 平衡二叉树的左右子树的结点数之差的绝对值不超过 1   
+
+    答案：\textcolor{red}{A. 含有一个或多个空格字符的串称为空格串}\\
+    解析：\\
+    在计算机科学中，空格串是指只包含空格字符的字符串。\\
+    含有一个或多个空格字符的串称为空格串是错误的。\\
+    因此，答案是 \textbf{\textcolor{red}{A}}. 含有一个或多个空格字符的串称为空格串。\\
+\end{enumerate}
+\end{document}

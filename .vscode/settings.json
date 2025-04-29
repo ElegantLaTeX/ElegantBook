@@ -68,13 +68,13 @@
   //tex文件浏览器，可选项为"none" "browser" "tab" "external"
   "latex-workshop.view.pdf.viewer": "tab",
   //自动编译tex文件
-  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "latex-workshop.latex.autoBuild.run": "onSave",
   //显示内容菜单：（1）编译文件；（2）定位游标
   "latex-workshop.showContextMenu": true,
   //显示错误
-  "latex-workshop.message.error.show": false,
+  "latex-workshop.message.error.show": true,
   //显示警告
-  "latex-workshop.message.warning.show": false,
+  "latex-workshop.message.warning.show": true,
   //从使用的包中自动补全命令和环境
   "latex-workshop.intellisense.package.enabled": true,
   //设置为never，为不清除辅助文件
