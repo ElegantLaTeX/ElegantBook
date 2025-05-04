@@ -1,0 +1,319 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{../../elegantbook}
+
+\title{基础提高练习题}
+\subtitle{北街学长倾力之作}
+
+\author{北街}
+% \institute{Elegant\LaTeX{} Program}
+\date{2022/12/31}
+\version{1.0}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{注意：本模板自 2023 年 1 月 122222 日开始，不再更新和维护！}
+
+\setcounter{tocdepth}{3}
+
+\logo{../../figure/logo-blue.png}
+\cover{../../figure/cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\usepackage{listings}         % 导入listings宏包
+\usepackage{xcolor}           % 支持颜色
+
+% 配置C++代码样式
+\lstset{
+    language=C++,             % 语言设置为C++
+    basicstyle=\ttfamily,      % 基本样式
+    keywordstyle=\color{blue}, % 关键词颜色
+    commentstyle=\color{green},% 注释颜色
+    stringstyle=\color{red},   % 字符串颜色
+    numbers=left,              % 显示行号
+    numberstyle=\tiny,         % 行号样式
+    stepnumber=1,              % 每行显示行号
+    breaklines=true,           % 自动换行
+    frame=lines                % 代码块边框样式
+}
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{课堂练习题}
+\section{操作系统概述}
+\subsection{单项选择题}
+\begin{enumerate}
+    \item (名校考研真题，单项选择题，2分) 对于一台PC而言，下列各项中 (    ) 对系统必不可少。
+    \begin{enumerate}[A.]
+        \item OS
+        \item BIOS
+        \item C语言编辑器
+        \item 杀毒软件
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) 从用户的角度看，OS是 (   )。
+    \begin{enumerate}[A.]
+        \item 用户与计算机硬件系统之间的接口
+        \item 控制和管理计算机系统资源的软件
+        \item 合理组织计算机工作流程的软件
+        \item 一个大型的工具软件
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 计算机开机后，OS最终被加载到 (    )。
+    \begin{enumerate}[A.]
+        \item BIOS
+        \item ROM
+        \item EPROM
+        \item RAM
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) 配置了OS的计算机是一台比原来的物理计算机功能更加强大的计算机，这样的计算机只是一台逻辑上的计算机，称为 (    ) 计算机。
+    \begin{enumerate}[A.]
+        \item 虚拟
+        \item 物理
+        \item 并行
+        \item 共享
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 与单道程序系统相比，多道程序系统的优点是 (    )。
+    \begin{enumerate}[A.]
+        \item 仅 I、III
+        \item 仅 I、IV
+        \item 仅 II、III
+        \item 仅 I、II、IV
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) 引入多道程序技术的前提条件之一是系统具有 (    )。
+    \begin{enumerate}[A.]
+        \item 分时功能
+        \item 中断功能
+        \item 多CPU技术
+        \item SPOOLing技术
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) 下列对OS的叙述中，正确的是 (    )。
+    \begin{enumerate}[A.]
+        \item OS都在内核态运行
+        \item 分时系统中常用的原则是使时间片越小越好
+        \item 批处理系统的主要缺点是缺少交互性
+        \item DOS是一个单用户多任务的OS
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) OS的基本类型主要有 (    )。
+    \begin{enumerate}[A.]
+        \item 批处理系统、分时系统和多任务系统
+        \item 批处理系统、分时系统和实时系统
+        \item 单用户系统、多用户系统和批处理系统
+        \item 实时系统、分时系统和多用户系统
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 下列关于批处理系统的叙述中，正确的是 (    )。
+    \begin{enumerate}[A.]
+        \item 仅 II、III
+        \item 仅 I
+        \item 仅 I、II
+        \item 仅 I、III
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) (    ) 系统允许一台主机上同时连接多台终端，多个用户可以通过各自的终端同时交互地使用计算机。
+    \begin{enumerate}[A.]
+        \item 网络
+        \item 分布式
+        \item 分时
+        \item 实时
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) 分时系统的主要目的是 (    )。
+    \begin{enumerate}[A.]
+        \item 充分利用IO设备
+        \item 比较快速地响应用户
+        \item 提高系统吞吐量
+        \item 充分利用内存
+    \end{enumerate}
+    \item (名校考研真题，单项选择题，2分) 下列 (    ) 等的实现最好采用实时系统平台。
+    \begin{enumerate}[A.]
+        \item 航空订票系统、机床控制系统
+        \item 办公自动化系统、机床控制系统、AutoCAD
+        \item 机床控制系统、工资管理系统
+        \item 航空订票系统、机床控制系统、股票交易系统
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 下列关于多任务OS的叙述中，正确的是 (    )。
+    \begin{enumerate}[A.]
+        \item 仅 I
+        \item 仅 II
+        \item 仅 I、II
+        \item I、II、III
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) 并发性是指若干事件在 (    ) 发生。
+    \begin{enumerate}[A.]
+        \item 同一时刻
+        \item 不同时刻
+        \item 同一时间间隔内
+        \item 不同时间间隔内
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 单处理机系统中，可并行的是 (    )。
+    \begin{enumerate}[A.]
+        \item 进程与进程
+        \item 处理机与设备
+        \item 处理机与通道
+        \item 设备与设备
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 中断处理和子程序调用都需要压栈以保护现场，中断处理一定会保存而子程序调用不需要保存其内容的是 (    )。
+    \begin{enumerate}[A.]
+        \item 程序计数器
+        \item 程序状态字寄存器
+        \item 通用数据寄存器
+        \item 通用地址寄存器
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 内部异常(内中断)可分为故障(fault)、陷阱(trap)和终止(abort)3类。下列有关内部异常的叙述中，错误的是 (    )。
+    \begin{enumerate}[A.]
+        \item 内部异常的产生与当前执行的指令相关
+        \item 内部异常的检测由CPU的内部逻辑实现
+        \item 内部异常的响应发生在指令执行过程中
+        \item 内部异常处理后系统会返回到发生异常的指令继续执行
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 异常是指令执行过程中在处理机内部发生的特殊事件，中断是来自处理机外部的请求事件。下列关于中断和异常的叙述中，错误的是 (    )。
+    \begin{enumerate}[A.]
+        \item “访问内存时缺页”属于中断
+        \item “整数除以零”属于异常
+        \item “DMA传送结束”属于中断
+        \item “存储保护错”属于异常
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 处理外部中断时，应该由OS保存的是 (    )。
+    \begin{enumerate}[A.]
+        \item 程序计数器的内容
+        \item 通用寄存器的内容
+        \item 快表中的内容
+        \item Cache中的内容
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 本地用户通过键盘登录系统时，首先获得键盘输入信息的程序是 (    )。
+    \begin{enumerate}[A.]
+        \item 命令解释程序
+        \item 中断处理程序
+        \item 系统调用服务程序
+        \item 用户登录程序
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 定时器产生时钟中断后，由时钟中断处理程序更新的部分内容是 (    )。
+    \begin{enumerate}[A.]
+        \item 仅内核中时钟变量的值
+        \item 仅当前进程在时间片内的剩余执行时间
+        \item 仅内核中时钟变量的值和当前进程占用CPU的时间
+        \item 内核中时钟变量的值、当前进程在时间片内的剩余执行时间和当前进程占用CPU的时间
+    \end{enumerate}
+    \item (全国统考真题，单项选择题，2分) 下列选项中，会导致用户进程从用户态切换到内核态的操作是 (    )。
+    \begin{enumerate}[A.]
+        \item 整数除以零
+        \item sin()函数调用
+        \item read系统调用
+        \item I、II、III
+    \end{enumerate}
+
+    \item (名校考研真题，单项选择题，2分) OS中有一组特殊的程序，它们不能被系统中断。在OS中它们称为 (    )。
+    \begin{enumerate}[A.]
+        \item 初始化程序
+        \item 原语
+        \item 子程序
+        \item 控制模块
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 下列选项中，OS提供给应用程序的接口是 (    )。
+    \begin{enumerate}[A.]
+        \item 系统调用
+        \item 中断
+        \item 库函数
+        \item 原语
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 若一个用户进程通过read系统调用读取一个磁盘文件中的数据，则下列关于此过程的叙述中，正确的是 (    )。
+    \begin{enumerate}[A.]
+        \item 若该文件的数据不在内存中，则该进程进入睡眠等待状态
+        \item 请求read系统调用会导致CPU从用户态切换到内核态
+        \item read系统调用的参数应包含文件名称
+        \item I、II、III
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 执行系统调用的过程包括如下主要操作：①返回用户态；②执行陷入(trap)指令；③传递系统调用参数；④执行相应的服务程序。正确的执行顺序是 (    )。
+    \begin{enumerate}[A.]
+        \item ①②③④
+        \item ②③④①
+        \item ③④①②
+        \item ③②④①
+    \end{enumerate}
+
+    \item (全国统考真题，单项选择题，2分) 下列关于系统调用的叙述中，正确的是 (    )。
+    \begin{enumerate}[A.]
+        \item 在执行系统调用服务程序的过程中，CPU处于内核态
+        \item OS通过提供系统调用来避免用户程序直接访问外设
+        \item 不同的OS为应用程序提供了统一的系统调用接口
+        \item 系统调用是OS内核为应用程序提供服务的接口
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{填空题}
+
+\begin{enumerate}
+    \item (名校考研真题，填空题，2分) OS是计算机系统中的一个 (    )，它负责管理和控制计算机系统中的 (    )。
+
+    \item (名校考研真题，填空题，2分) 现代OS的基本特性是并发性、(    )、(    ) 和异步性。
+
+    \item (全国统考真题，填空题，2分) 某设备中断请求的响应时间和处理时间为100ns，每400ns发出一次中断请求，中断响应所允许的最长时延为0ns，则在该设备持续工作的过程中，CPU用于该设备的I/O时间占整个CPU时间的百分比至少是 (    )。
+
+    \item (名校考研真题，填空题，2分) 系统执行原语操作时，要 (    ) （允许/禁止）中断。
+
+    \item (全国统考真题，填空题，2分) UNIX系统是一个 (    )。
+
+    \item (名校考研真题，填空题，2分) (    ) 是指OS仅将应用必需的所有核心功能放入内核，其他功能都放在内核之外，由处在用户态运行的服务进程实现。
+\end{enumerate}
+
+\subsection{简答题}
+\begin{enumerate}
+    \item (名校考研真题，简答题，10分) 方便性和有效性是设计OS的两个主要目标，以两种OS的技术为例，分别说明它们是如何实现这两个目标（一个是实现方便性的例子，一个是实现有效性的例子）。
+
+    \item (名校考研真题，简答题，10分) 在分时系统中，为使多个进程能够及时与系统交互，最关键的问题是能在短时间内使所有就绪进程都能运行。当就绪进程数为100时，为保证响应时间不超过2s，此时的时间片最大是多少？
+
+    \item (全国统考真题，简答题，10分) 某单CPU系统中有输入设备和输出设备各1台，现有3个并发执行的作业，每个作业的输入、计算和输出时间分别为2ms、3ms和4ms，且都按输入、计算和输出的顺序执行，则执行完这3个作业需要的时间最少是多少？
+
+    \item (名校考研真题，简答题，10分) 处理机为什么要区分内核态和用户态？在什么情况下进行两种状态的转换？
+
+    \item (名校考研真题，简答题，10分) 叙述系统调用的概念和OS提供系统调用的原因。
+\end{enumerate}
+\subsection{综合应用题}
+
+\begin{enumerate}
+    \item (名校考研真题，综合应用题，8分) 现有A、B两个程序，程序A按顺序使用CPU 10s，使用设备甲5s，使用CPU 5s，使用设备乙5s，最后使用CPU 10s。程序B按顺序使用设备甲10s，使用CPU 10s，使用设备乙5s，使用CPU 5s，使用设备乙10s，试问：
+    \begin{enumerate}
+        \item 在顺序执行程序A和程序B的情况下，CPU的利用率是多少？
+        \item 在多道程序环境下，CPU的利用率是多少？请画出A、B程序的执行过程。
+        \item 在多道批处理系统中，是否并发的进程越多，资源利用率越好？为什么？
+    \end{enumerate}
+
+    \item (名校考研真题，综合应用题，8分) 设某计算机系统中有一个CPU、一台输入设备、一台打印机。现有两个进程同时进入就绪状态，且进程A先得到CPU运行，进程B后运行。进程A的运行情况为：计算50ms，打印信息100ms，再计算50ms，再打印信息100ms，结束。进程B的运行情况为：计算50ms，输入数据80ms，再计算100ms，结束。画出它们的运行图，并说明：
+    \begin{enumerate}
+        \item 开始运行后，CPU有无进行空闲等待？若有，则请说明其在哪段时间内进行了空闲等待，并计算CPU的利用率。
+        \item 进程A运行时有无等待现象？若有，在何时发生等待现象？
+        \item 进程B运行时有无等待现象？若有，在何时发生等待现象？
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
