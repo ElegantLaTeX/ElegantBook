@@ -28,7 +28,7 @@
 \addbibresource[location=local]{reference.bib} % 参考文献，不要删除
 \usepackage{listings}         % 导入listings宏包
 \usepackage{xcolor}           % 支持颜色
-
+\usepackage{graphicx}        % 支持图形
 % 配置C++代码样式
 \lstset{
     language=C++,             % 语言设置为C++
@@ -50,29 +50,119 @@
 
 \mainmatter
 
+
 \chapter{数据结构与算法}
 
 \section{数据结构}
 
 \subsection{定义}
-数据结构是什么？简单来说，它是用来组织和存储数据的一种方式。就像你整理房间时，衣服放衣柜，书籍放书架，零食藏在抽屉里（别骗我，你一定有零食抽屉！）。数据结构就是计算机世界里的“收纳神器”，它决定了数据的存储方式和操作效率。
+数据结构是计算机存储、组织数据的方式，它定义了数据元素之间的逻辑关系和在计算机中的存储方式。就像你整理房间时，衣服放衣柜，书籍放书架，零食藏在抽屉里（别骗我，你一定有零食抽屉！）。数据结构就是计算机世界里的“收纳神器”，它决定了数据的存储方式和操作效率。
 
-\subsection{逻辑结构}
+\subsection{数据结构的分类}
+
+\subsubsection{按逻辑结构分类}
 逻辑结构是数据之间的关系，就像你和朋友之间的关系一样复杂（或者简单）。根据数据元素之间的关系，逻辑结构可以分为以下几类：
 \begin{itemize}
-    \item \textbf{集合结构}：数据之间没有任何关系，就像一群互不认识的人站在公交车站。
-    \item \textbf{线性结构}：数据之间有一对一的关系，就像排队买奶茶，每个人前后都有一个邻居。
-    \item \textbf{树形结构}：数据之间有一对多的关系，就像家谱，祖宗有很多子孙。
-    \item \textbf{图形结构}：数据之间有多对多的关系，就像社交网络，人人都可能是朋友（或者敌人）。
+    \item \textbf{集合结构}：数据之间没有任何关系，就像一群互不认识的人站在公交车站。数据元素除了同属一个集合外，没有其他关系。
+    
+    \item \textbf{线性结构}：数据之间有一对一的关系，就像排队买奶茶，每个人前后都有一个邻居。特点是：
+    \begin{itemize}
+        \item 有且仅有一个开始节点
+        \item 有且仅有一个终端节点
+        \item 其余节点都有且仅有一个直接前驱和一个直接后继
+        \item 常见例子：数组、链表、栈、队列
+    \end{itemize}
+    
+    \item \textbf{树形结构}：数据之间有一对多的关系，就像家谱，祖宗有很多子孙。特点是：
+    \begin{itemize}
+        \item 有且仅有一个根节点
+        \item 根节点没有前驱，其余节点有且仅有一个前驱
+        \item 每个节点可以有零个或多个后继
+        \item 常见例子：二叉树、B树、红黑树、AVL树、堆
+    \end{itemize}
+    
+    \item \textbf{图形结构}：数据之间有多对多的关系，就像社交网络，人人都可能是朋友（或者敌人）。特点是：
+    \begin{itemize}
+        \item 每个节点可以有任意个前驱和后继
+        \item 节点之间的关系是任意的
+        \item 可分为有向图和无向图
+        \item 可分为加权图和无权图
+    \end{itemize}
 \end{itemize}
 
 \subsection{存储结构}
 存储结构是数据在计算机中的存储方式，决定了数据的“住址”。主要有以下两种：
 \begin{itemize}
-    \item \textbf{顺序存储}：数据存储在连续的存储单元中，就像一排整齐的书架。优点是访问速度快，缺点是插入和删除操作麻烦。
-    \item \textbf{链式存储}：数据存储在不连续的存储单元中，通过指针连接，就像一串珍珠项链。优点是插入和删除方便，缺点是访问速度稍慢。
+    \item \textbf{顺序存储}：数据存储在连续的存储单元中，就像一排整齐的书架。
+    \begin{itemize}
+        \item 优点：随机访问，访问速度快（$O(1)$），节省存储空间
+        \item 缺点：插入和删除操作需要移动大量元素（$O(n)$），预分配空间可能造成浪费
+        \item 例子：数组、顺序栈、顺序队列
+    \end{itemize}
+    
+    \item \textbf{链式存储}：数据存储在不连续的存储单元中，通过指针连接，就像一串珍珠项链。
+    \begin{itemize}
+        \item 优点：插入和删除方便（$O(1)$），动态分配空间，灵活性强
+        \item 缺点：只能顺序访问（$O(n)$），需要额外空间存储指针
+        \item 例子：链表、链栈、链队列、二叉链表
+    \end{itemize}
+    
+    \item \textbf{索引存储}：在存储数据的同时，建立额外的索引表来指示数据的存储位置。
+    \begin{itemize}
+        \item 优点：查找速度快
+        \item 缺点：需要额外的索引空间，维护索引的开销
+        \item 例子：数据库索引、哈希表
+    \end{itemize}
+    
+    \item \textbf{散列存储}：根据数据的关键字直接计算出数据的存储地址。
+    \begin{itemize}
+        \item 优点：查找、插入、删除的期望时间复杂度为$O(1)$
+        \item 缺点：可能产生冲突，需要处理冲突
+        \item 例子：哈希表、散列表
+    \end{itemize}
 \end{itemize}
 选择哪种存储方式，就像选择住公寓还是住别墅，各有利弊，关键看需求。
+
+\subsubsection{按实现方式分类}
+\begin{itemize}
+    \item \textbf{静态数据结构}：大小和结构在编译时确定，运行期间不能改变。
+    \begin{itemize}
+        \item 例子：数组、静态链表
+        \item 特点：内存分配固定，访问效率高，但灵活性差
+    \end{itemize}
+    
+    \item \textbf{动态数据结构}：大小和结构在运行时可以改变。
+    \begin{itemize}
+        \item 例子：动态数组、链表、树、图
+        \item 特点：内存动态分配，灵活性强，但管理复杂
+    \end{itemize}
+\end{itemize}
+
+\subsection{基本数据结构}
+常见的基本数据结构包括：
+
+\begin{itemize}
+    \item \textbf{数组（Array）}：最基础的线性结构，支持随机访问
+    \item \textbf{链表（Linked List）}：动态线性结构，包括单链表、双链表、循环链表
+    \item \textbf{栈（Stack）}：后进先出（LIFO）的线性结构
+    \item \textbf{队列（Queue）}：先进先出（FIFO）的线性结构
+    \item \textbf{树（Tree）}：层次化的非线性结构
+    \item \textbf{图（Graph）}：表示复杂关系的非线性结构
+    \item \textbf{哈希表（Hash Table）}：基于散列函数的高效查找结构
+\end{itemize}
+
+\subsection{数据结构的选择标准}
+选择合适的数据结构需要考虑以下因素：
+
+\begin{itemize}
+    \item \textbf{时间复杂度}：不同操作（查找、插入、删除）的时间效率
+    \item \textbf{空间复杂度}：存储数据所需的内存空间
+    \item \textbf{操作频率}：哪些操作更频繁，需要优化
+    \item \textbf{数据规模}：数据量的大小对性能的影响
+    \item \textbf{数据特性}：数据是否有序、是否需要动态改变等
+\end{itemize}
+
+选择数据结构就像选择交通工具：短途用自行车（数组），长途用汽车（链表），需要快速到达用飞机（哈希表），关键看具体需求和场景。
 
 \section{算法}
 
@@ -86,23 +176,124 @@
 \end{enumerate}
 一个好的算法不仅要能解决问题，还要高效，毕竟没人想等水烧开等到天荒地老。
 
-\subsection{特征}
+从数学角度看，算法可以定义为：给定输入集合 $I$ 和输出集合 $O$，算法是一个函数 $f: I \rightarrow O$，它能够在有限时间内将输入转换为正确的输出。
+
+\subsection{算法的特征}
 算法有以下几个显著特征：
 \begin{itemize}
-    \item \textbf{有穷性}：算法必须在有限步骤内结束，就像煮方便面不能煮一辈子。
+    \item \textbf{有穷性（Finiteness）}：算法必须在有限步骤内结束，就像煮方便面不能煮一辈子。这意味着：
+    \begin{itemize}
+        \item 算法的执行步数是有限的
+        \item 每个步骤在有限时间内完成
+        \item 算法能在可接受的时间内得到结果
+    \end{itemize}
     \item \textbf{确定性}：算法的每一步都有明确的定义，不会让你“随便加点盐”。
     \item \textbf{可行性}：算法的每一步都可以通过基本操作实现，比如“烧水”是可行的，但“召唤龙卷风”就不行。
     \item \textbf{输入}：算法可以有零个或多个输入，比如煮方便面需要水和面饼。
     \item \textbf{输出}：算法至少有一个输出，比如煮好的方便面。
 \end{itemize}
 
-\subsection{目标}
-设计算法的目标是让它又快又省。具体来说：
+这五个特征构成了算法的基本要求，就像建筑的地基一样，缺一不可。
+
+\subsection{算法设计目标}
+设计算法的目标是让它又快又省，同时还要正确可靠。具体来说：
+
 \begin{itemize}
-    \item \textbf{减少时间复杂度}：让算法运行得更快，就像希望快递能当天送达。
-    \item \textbf{减少空间复杂度}：让算法占用更少的内存，就像希望行李箱能装下更多东西。
+    \item \textbf{正确性（Correctness）}：算法必须能正确解决问题
+    \begin{itemize}
+        \item 对于所有合法输入都能产生正确输出
+        \item 能处理边界情况和异常情况
+        \item 算法逻辑符合问题的数学定义
+    \end{itemize}
+    
+    \item \textbf{时间效率}：让算法运行得更快，就像希望快递能当天送达
+    \begin{itemize}
+        \item 减少算法的时间复杂度
+        \item 优化常数因子，减少实际运行时间
+        \item 选择合适的算法策略（如分治、动态规划等）
+    \end{itemize}
+    
+    \item \textbf{空间效率}：让算法占用更少的内存，就像希望行李箱能装下更多东西
+    \begin{itemize}
+        \item 减少空间复杂度
+        \item 合理利用内存，避免空间浪费
+        \item 在时间和空间之间找到平衡点
+    \end{itemize}
+    
+    \item \textbf{可读性与可维护性}：算法应该易于理解和修改
+    \begin{itemize}
+        \item 代码结构清晰，逻辑简洁
+        \item 变量命名有意义，注释完整
+        \item 模块化设计，便于测试和调试
+    \end{itemize}
+    
+    \item \textbf{健壮性（Robustness）}：算法应该能处理意外情况
+    \begin{itemize}
+        \item 对异常输入有适当的处理
+        \item 程序不会因为边界条件而崩溃
+        \item 有合理的错误处理机制
+    \end{itemize}
 \end{itemize}
-一个好的算法就像一个优秀的厨师，既能快速做好饭，又不浪费食材。
+
+一个好的算法就像一个优秀的厨师，既能快速做好饭，又不浪费食材，还要保证食物安全美味。
+
+\subsection{算法分类}
+根据不同的标准，算法可以有多种分类方式：
+
+\subsubsection{按设计策略分类}
+\begin{itemize}
+    \item \textbf{枚举算法}：通过列举所有可能的解来找到最优解
+    \begin{itemize}
+        \item 例子：暴力搜索、穷举法
+        \item 优点：思路简单，一定能找到解
+        \item 缺点：时间复杂度高，效率低
+    \end{itemize}
+    
+    \item \textbf{分治算法}：将大问题分解为小问题，递归求解
+    \begin{itemize}
+        \item 例子：归并排序、快速排序、二分查找
+        \item 优点：降低问题复杂度，便于并行处理
+        \item 缺点：可能产生重复子问题
+    \end{itemize}
+    
+    \item \textbf{动态规划}：将问题分解为子问题，存储子问题的解避免重复计算
+    \begin{itemize}
+        \item 例子：斐波那契数列、背包问题、最长公共子序列
+        \item 优点：避免重复计算，时间效率高
+        \item 缺点：需要额外空间存储中间结果
+    \end{itemize}
+    
+    \item \textbf{贪心算法}：每一步都做局部最优选择
+    \begin{itemize}
+        \item 例子：最短路径（Dijkstra）、最小生成树（Kruskal）
+        \item 优点：简单高效，时间复杂度低
+        \item 缺点：不一定能得到全局最优解
+    \end{itemize}
+    
+    \item \textbf{回溯算法}：通过试错来寻找解，遇到死路就回退
+    \begin{itemize}
+        \item 例子：N皇后问题、数独求解、迷宫寻路
+        \item 优点：能找到所有解，适用范围广
+        \item 缺点：时间复杂度可能很高
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{按功能分类}
+\begin{itemize}
+    \item \textbf{搜索算法}：在数据集合中查找特定元素
+    \item \textbf{排序算法}：将数据按照特定顺序排列
+    \item \textbf{图算法}：处理图结构相关问题
+    \item \textbf{字符串算法}：处理字符串匹配、搜索等问题
+    \item \textbf{数值算法}：解决数值计算相关问题
+\end{itemize}
+
+\subsubsection{按实现方式分类}
+\begin{itemize}
+    \item \textbf{递归算法}：通过函数调用自身来解决问题
+    \item \textbf{迭代算法}：通过循环重复执行操作
+    \item \textbf{并行算法}：利用多个处理器同时执行
+    \item \textbf{分布式算法}：在多台计算机上协同工作
+\end{itemize}
 
 \subsection{复杂度计算}
 算法复杂度是衡量算法效率的重要指标，分为时间复杂度和空间复杂度。它们是评估算法性能的核心标准，就像评估一辆车的油耗和速度，既要省油又要跑得快才是好车。
@@ -184,6 +375,64 @@ for i in range(n):
 
 通过这些示例，我们可以更直观地理解时间复杂度和空间复杂度的概念。复杂度计算就像评估一辆车的性能，既要跑得快（时间复杂度低），又要省油（空间复杂度低），才能称得上是一辆好车。
 
+\subsection{算法分析方法}
+分析算法性能是算法设计中的重要环节，需要从多个角度进行评估：
+
+\subsubsection{复杂度分析}
+\begin{itemize}
+    \item \textbf{最坏情况分析}：算法在最不利输入下的性能
+    \begin{itemize}
+        \item 提供性能的上界保证
+        \item 大多数算法分析采用此方法
+        \item 例如：快速排序的最坏时间复杂度为 $O(n^2)$
+    \end{itemize}
+    
+    \item \textbf{平均情况分析}：算法在随机输入下的期望性能
+    \begin{itemize}
+        \item 更接近实际使用情况
+        \item 需要知道输入的概率分布
+        \item 例如：快速排序的平均时间复杂度为 $O(n \log n)$
+    \end{itemize}
+    
+    \item \textbf{最好情况分析}：算法在最有利输入下的性能
+    \begin{itemize}
+        \item 提供性能的下界
+        \item 实际意义相对较小
+        \item 例如：插入排序的最好时间复杂度为 $O(n)$
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{渐近分析}
+使用大 $O$ 记号族来描述算法的渐近行为：
+\begin{itemize}
+    \item \textbf{$O$-记号}：渐近上界，$f(n) = O(g(n))$ 表示存在常数 $c > 0$ 和 $n_0 > 0$，使得对所有 $n \geq n_0$，有 $f(n) \leq c \cdot g(n)$
+    \item \textbf{$\Omega$-记号}：渐近下界，$f(n) = \Omega(g(n))$ 表示存在常数 $c > 0$ 和 $n_0 > 0$，使得对所有 $n \geq n_0$，有 $f(n) \geq c \cdot g(n)$
+    \item \textbf{$\Theta$-记号}：渐近紧界，$f(n) = \Theta(g(n))$ 表示 $f(n) = O(g(n))$ 且 $f(n) = \Omega(g(n))$
+\end{itemize}
+
+\subsubsection{实验分析}
+通过实际运行程序来测试算法性能：
+\begin{itemize}
+    \item \textbf{优点}：反映真实运行环境下的性能
+    \item \textbf{缺点}：受硬件、编程语言、编译器等因素影响
+    \item \textbf{方法}：使用不同规模的测试数据，记录运行时间和内存使用情况
+\end{itemize}
+
+\subsection{算法优化技巧}
+提高算法效率的常用方法：
+
+\begin{itemize}
+    \item \textbf{减少循环层数}：避免不必要的嵌套循环
+    \item \textbf{预处理优化}：通过预先计算减少重复工作
+    \item \textbf{空间换时间}：使用额外存储空间来提高时间效率
+    \item \textbf{时间换空间}：通过增加计算来减少存储需求
+    \item \textbf{分治策略}：将大问题分解为小问题并行处理
+    \item \textbf{缓存优化}：利用数据的局部性原理提高访问效率
+    \item \textbf{算法改进}：选择更适合的算法策略
+\end{itemize}
+
+算法分析和优化是一个持续的过程，需要在正确性、效率、可读性和可维护性之间找到平衡。
+
 \chapter{线性表}
 
 \section{线性表的逻辑结构}
@@ -209,7 +458,7 @@ $L = \{\text{周一}, \text{周二}, \text{周三}, \text{周四}, \text{周五}
 \textit{示例}：假设我们有一个顺序表存储学生的学号：
 $L = \{1001, 1002, 1003, 1004\}$。
 在内存中，它可能被存储为：
-\begin{table}[h]
+\begin{table}[!htbp]
   \centering
   \begin{tabular}{|c|c|c|c|c|}
   \hline
@@ -219,7 +468,7 @@ $L = \{1001, 1002, 1003, 1004\}$。
   \hline
   \end{tabular}
   \caption{顺序表的存储示例}
-  \label{tab:sequence_table}
+\label{tab:sequence_table}
 \end{table}
 顺序表的优点：
 \begin{itemize}
@@ -258,8 +507,8 @@ $L = \{1001, 1002, 1003, 1004\}$。
     int data;
     for (int i = 0; i < length; i++)
     {
-      printf("请输入第%d个元素", i);
-      scanf("%d", &L->data[i]);
+      printf(``请输入第%d个元素``, i);
+      scanf(``%d``, &L->data[i]);
     }
     L->length = length;
     return L;
@@ -277,7 +526,7 @@ $L = \{1001, 1005, 1002, 1003, 1004\}$。代码如代码\ref{lst:insert_list}所
 \begin{lstlisting}[language=C++, caption={顺序表的插入示例代码}, label={lst:insert_list}]
   void insertList(SqList* L, int i, int data) {//传入要插入的顺序表，要插入的位置，要插入的数据
     if (i < 0 || i > L->length) {
-      printf("插入位置不合法");
+      printf(``插入位置不合法``);
       return;
     }
     for (int j = L->length; j > i; j--)
@@ -300,7 +549,7 @@ $L = \{1001, 1002, 1004\}$。代码如代码\ref{lst:delete_list}所示：
 \begin{lstlisting}[language=C++, caption={顺序表的删除示例代码}, label={lst:delete_list}]
   void deleteList(SqList* L, int i) {//传入要删除的顺序表，要删除的位置
     if (i < 0 || i >= L->length) {
-      printf("删除位置不合法");
+      printf(``删除位置不合法``);
       return;
     }
     for (int j = i; j < L->length - 1; j++)
@@ -339,7 +588,7 @@ $L = \{1001, 2002, 1003, 1004\}$。
 \begin{lstlisting}[language=C++, caption={顺序表的更新示例代码}, label={lst:update_list}]
   void updateList(SqList* L, int i, int data) {//传入要更新的顺序表，要更新的位置，要更新的数据
     if (i < 0 || i >= L->length) {
-      printf("更新位置不合法");
+      printf(``更新位置不合法``);
       return;
     }
     L->data[i] = data;
@@ -375,14 +624,14 @@ $L = \{1001, 2002, 1003, 1004\}$。
 \end{itemize}
 为什么链表需要头结点？头结点是链表的起始位置，它不存储数据，只是为了方便操作。有了头结点，我们可以通过头指针快速访问链表的第一个节点，而无需特殊处理。
 常见的单链表如图\ref{fig:single_linked_list}所示,常见的双链表如图\ref{fig:double_linked_list}所示。
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./image/singleLink.png}
   \caption{单链表表示意图}
   \label{fig:single_linked_list}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./image/doubleLink.png}
   \caption{双链表示意图}
@@ -394,7 +643,7 @@ $L = \{1001, 2002, 1003, 1004\}$。
 \textit{示例}：
 $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
 单链表的结构如图\ref{fig:singleLinkStruct}所示。单链表的结构由数据域和指针域组成，其中数据域存储数据元素，指针域存储下一个节点的地址。
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/singleStruct.pdf}
   \caption{单链表结构}
@@ -415,7 +664,7 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
   1.首先创建一个头结点，将头结点的指针域指向 NULL。
   2.依次读入数据元素，创建新节点，将新节点的指针域指向头结点的下一个节点，再将头结点的指针域指向新节点。
   具体过程如图\ref{fig:headInsert}所示。
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/headInsert.pdf}
     \caption{头插法建立单链表}
@@ -425,14 +674,14 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
   \begin{lstlisting}[language=C++, caption={头插法建立单链表示例代码}, label={lst:headInsert}]
     singleLink* createSingleLink() {
       int n, data;
-      printf("请输入创建链表的节点个数：");
-      scanf("%d", &n);
+      printf(``请输入创建链表的节点个数：``);
+      scanf(``%d``, &n);
       SingleLink* L = (SingleLink*)malloc(sizeof(SingleLink));
       L->next = NULL;
       for (int i = 0; i < n; i++) {
         SingleLink* s = (singleLink*)malloc(sizeof(SingleLink));
-        printf("请输入第%d个节点的值(int)：", i + 1);
-        scanf("%d", &data);
+        printf(``请输入第%d个节点的值(int)：``, i + 1);
+        scanf(``%d``, &data);
         s->data = data;
         s->next = NULL;
         s->next = L->next;
@@ -450,7 +699,7 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
   1.首先创建一个头结点，将头结点的指针域指向 NULL。
   2.依次读入数据元素，创建新节点，将新节点的指针域指向 NULL，再将尾结点的指针域指向新节点，再将新节点作为尾结点。
   具体过程如图\ref{fig:tailInsert}所示。
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/tailInsert.pdf}
     \caption{尾插法建立单链表}
@@ -460,14 +709,14 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
   \begin{lstlisting}[language=C++, caption={尾插法建立单链表示例代码}, label={lst:tailInsert}]
     singleLink* createSingleLink() {
       int n, data;
-      printf("请输入创建链表的节点个数：");
-      scanf("%d", &n);
+      printf(``请输入创建链表的节点个数：``);
+      scanf(``%d``, &n);
       SingleLink* L = (SingleLink*)malloc(sizeof(SingleLink));
       SingleLink* r = L;
       for (int i = 0; i < n; i++) {
         SingleLink* s = (singleLink*)malloc(sizeof(SingleLink));
-        printf("请输入第%d个节点的值(int)：", i + 1);
-        scanf("%d", &data);
+        printf(``请输入第%d个节点的值(int)：``, i + 1);
+        scanf(``%d``, &data);
         s->data = data;
         s->next = NULL;
         r->next = s;
@@ -505,10 +754,10 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
 void printSingleLink(SingleLink* L) {
   SingleLink* p = L->next;
   while (p != NULL) {
-    printf("%d ", p->data);
+    printf(``%d ``, p->data);
     p = p->next;
   }
-  printf("\n");
+  printf(``\n``);
 }
 \end{lstlisting}
 该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
@@ -566,7 +815,7 @@ int lengthSingleLink(SingleLink* L) {
       j++;
     }
     if (p == NULL || j > i) {
-      printf("第%d个元素不存在", i);
+      printf(``第%d个元素不存在``, i);
       return -1;
     }
     return p->data;
@@ -629,7 +878,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   $L = \{\text{NULL} \leftrightarrow 1001 \leftrightarrow 1002 \leftrightarrow 1003 \leftrightarrow \text{NULL}\}$。
 
   双链表的结构如图\ref{fig:doubleLinkStruct}所示。双链表的结构由数据域、前驱指针和后继指针组成，其中数据域存储数据元素，前驱指针指向前一个节点，后继指针指向后一个节点。
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/doubleLinkStruct.pdf}
     \caption{双链表结构}
@@ -673,7 +922,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   2.依次读入数据元素，创建新节点，将新节点的前驱指针指向头结点，将新节点的后继指针指向头结点的后继节点，再将头结点的后继指针指向新节点，最后将新节点作为头结点的后继节点。
 
   具体过程如图\ref{fig:headInsertDouble}所示。
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/headInsertDL.pdf}
     \caption{头插法建立双链表}
@@ -683,15 +932,15 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   \begin{lstlisting}[language=C++, caption={头插法建立双链表示例代码}, label={lst:headInsertDouble}]
     DLink* createDoubleLink() {
       int n, data;
-      printf("请输入创建链表的节点个数：");
-      scanf("%d", &n);
+      printf(``请输入创建链表的节点个数：``);
+      scanf(``%d``, &n);
       DLink* L = (DLink*)malloc(sizeof(DLink));
       L->pre = NULL;
       L->next = NULL;
       for (int i = 0; i < n; i++) {
         DLink* s = (DLink*)malloc(sizeof(DLink));
-        printf("请输入第%d个节点的值(int)：", i + 1);
-        scanf("%d", &data);
+        printf(``请输入第%d个节点的值(int)：``, i + 1);
+        scanf(``%d``, &data);
         s->data = data;
         s->pre = L;
         s->next = L->next;
@@ -710,7 +959,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   2.依次读入数据元素，创建新节点，将新节点的前驱指针指向尾结点，将新节点的后继指针指向 NULL，再将尾结点的后继指针指向新节点，最后将新节点作为尾结点。
 
   具体过程如图\ref{fig:tailInsertDouble}所示。
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/tailInsertDL.pdf}
     \caption{尾插法建立双链表}
@@ -721,14 +970,14 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   \begin{lstlisting}[language=C++, caption={尾插法建立双链表示例代码}, label={lst:tailInsertDouble}]
     DLink* createDoubleLink() {
       int n, data;
-      printf("请输入创建链表的节点个数：");
-      scanf("%d", &n);
+      printf(``请输入创建链表的节点个数：``);
+      scanf(``%d``, &n);
       DLink* L = (DLink*)malloc(sizeof(DLink));
       DLink* r = L;
       for (int i = 0; i < n; i++) {
         DLink* s = (DLink*)malloc(sizeof(DLink));
-        printf("请输入第%d个节点的值(int)：", i + 1);
-        scanf("%d", &data);
+        printf(``请输入第%d个节点的值(int)：``, i + 1);
+        scanf(``%d``, &data);
         s->data = data;
         s->pre = r;
         s->next = NULL;
@@ -752,10 +1001,10 @@ void insertSingleLink(SingleLink* L, int i, int data) {
     void printDoubleLink(DLink* L) {
       DLink* p = L->next;
       while (p != NULL) {
-        printf("%d ", p->data);
+        printf(``%d ``, p->data);
         p = p->next;
       }
-      printf("\n");
+      printf(``\n``);
     }
   \end{lstlisting}
 
@@ -816,7 +1065,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
         j++;
       }
       if (p == NULL || j > i) {
-        printf("第%d个元素不存在", i);
+        printf(``第%d个元素不存在``, i);
         return -1;
       }
       return p->data;
@@ -858,7 +1107,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
   其中删除操作如图\ref{fig:deleteDoubleLink}所示。
 
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/deleteDL.pdf}
     \caption{删除双链表的第 $i$ 个元素}
@@ -893,7 +1142,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
   过程如图\ref{fig:insertAfterDoubleLink}所示。
 
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/insertDL.pdf}
     \caption{p结点之后插入结点s}
@@ -929,7 +1178,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
   其结构如图\ref{fig:cycleSingleLink}所示。
 
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/cycleSLink.pdf}
     \caption{循环单链表结构}
@@ -942,7 +1191,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
   其结构如图\ref{fig:cycleDoubleLink}所示。
 
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/cycleDLink.pdf}
     \caption{循环双链表结构}
@@ -955,7 +1204,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
   如图\ref{fig:staticLink}所示，静态链表的结构由数据域和指针域组成，其中数据域存储数据元素，指针域存储数组的索引。
 
-  \begin{figure}[h]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/staticLink.pdf}
     \caption{静态链表结构}
@@ -990,7 +1239,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 如图\ref{fig:stack}所示，栈的结构由栈顶和栈底组成，栈顶指向栈顶元素，栈底指向栈底元素。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/stack.pdf}
   \caption{栈结构}
@@ -1052,7 +1301,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 顺序栈的存放过程如图\ref{fig:seqStack}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/processOfSeqStack.pdf}
   \caption{顺序栈存放过程}
@@ -1142,7 +1391,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={压入顺序栈示例代码}, label={lst:pushSeqStack}]
   void pushSeqStack(SeqStack* S, int data) {
     if (isFullSeqStack(S)) {
-      printf("栈已满，无法压入元素\n");
+      printf(``栈已满，无法压入元素\n``);
       return;
     }
     S->data[++S->top] = data;
@@ -1163,7 +1412,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={弹出顺序栈示例代码}, label={lst:popSeqStack}]
   void popSeqStack(SeqStack* S) {
     if (isEmptySeqStack(S)) {
-      printf("栈为空，无法弹出元素\n");
+      printf(``栈为空，无法弹出元素\n``);
       return;
     }
     S->top--;
@@ -1184,7 +1433,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取顺序栈的栈顶元素示例代码}, label={lst:getTopSeqStack}]
   int getTopSeqStack(SeqStack* S) {
     if (isEmptySeqStack(S)) {
-      printf("栈为空，无法获取栈顶元素\n");
+      printf(``栈为空，无法获取栈顶元素\n``);
       return -1;
     }
     return S->data[S->top];
@@ -1256,9 +1505,9 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={遍历顺序栈示例代码}, label={lst:traverseSeqStack}]
   void traverseSeqStack(SeqStack* S) {
     for (int i = 0; i <= S->top; i++) {
-      printf("%d ", S->data[i]);
+      printf(``%d ``, S->data[i]);
     }
-    printf("\n");
+    printf(``\n``);
   }
 
 \end{lstlisting}
@@ -1285,7 +1534,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 链栈结构如图\ref{fig:linkStack}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/linkStack.pdf}
   \caption{链栈}
@@ -1383,7 +1632,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={弹出链栈示例代码}, label={lst:popLinkStack}]
   void popLinkStack(LinkStack* S) {
     if (isEmptyLinkStack(S)) {
-      printf("栈为空，无法弹出元素\n");
+      printf(``栈为空，无法弹出元素\n``);
       return;
     }
     LinkStack* p = S->next;
@@ -1406,7 +1655,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取链栈的栈顶元素示例代码}, label={lst:getTopLinkStack}]
   int getTopLinkStack(LinkStack* S) {
     if (isEmptyLinkStack(S)) {
-      printf("栈为空，无法获取栈顶元素\n");
+      printf(``栈为空，无法获取栈顶元素\n``);
       return -1;
     }
     return S->next->data;
@@ -1428,10 +1677,10 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   void traverseLinkStack(LinkStack* S) {
     LinkStack* p = S->next;
     while (p != NULL) {
-      printf("%d ", p->data);
+      printf(``%d ``, p->data);
       p = p->next;
     }
-    printf("\n");
+    printf(``\n``);
   }
 
 \end{lstlisting}
@@ -1448,7 +1697,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 共享栈的结构如图\ref{fig:sharedStack}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/shareStack.pdf}
   \caption{共享栈}
@@ -1558,7 +1807,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={压入共享栈示例代码}, label={lst:pushSharedStack}]
   void pushSharedStack(SharedStack* S, int data, int stackNumber) {
     if (isFullSharedStack(S)) {
-      printf("栈已满，无法压入元素\n");
+      printf(``栈已满，无法压入元素\n``);
       return;
     }
     if (stackNumber == 1) {
@@ -1583,7 +1832,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={弹出共享栈示例代码}, label={lst:popSharedStack}]
   void popSharedStack(SharedStack* S, int stackNumber) {
     if (isEmptySharedStack(S, stackNumber)) {
-      printf("栈为空，无法弹出元素\n");
+      printf(``栈为空，无法弹出元素\n``);
       return;
     }
     if (stackNumber == 1) {
@@ -1608,7 +1857,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取共享栈的栈顶元素示例代码}, label={lst:getTopSharedStack}]
   int getTopSharedStack(SharedStack* S, int stackNumber) {
     if (isEmptySharedStack(S, stackNumber)) {
-      printf("栈为空，无法获取栈顶元素\n");
+      printf(``栈为空，无法获取栈顶元素\n``);
       return -1;
     }
     if (stackNumber == 1) {
@@ -1687,12 +1936,12 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={遍历共享栈示例代码}, label={lst:traverseSharedStack}]
   void traverseSharedStack(SharedStack* S) {
     for (int i = 0; i <= S->top1; i++) {
-      printf("%d ", S->data[i]);
+      printf(``%d ``, S->data[i]);
     }
     for (int i = S->capacity - 1; i >= S->top2; i--) {
-      printf("%d ", S->data[i]);
+      printf(``%d ``, S->data[i]);
     }
-    printf("\n");
+    printf(``\n``);
   }
 
 \end{lstlisting}
@@ -1722,7 +1971,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 顺序队列的结构如如图\ref{fig:seqQueue}所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.1\textwidth]{./figure/pdf/cropped/seqQueue.pdf}
   \caption{顺序队列}
@@ -1743,7 +1992,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 顺序队列的存放过程如图\ref{fig:seqQueuePut}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/seqQueuePut.pdf}
   \caption{顺序队列的存放过程}
@@ -1848,7 +2097,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={入队示例代码}, label={lst:enQueueSeqQueue}]
   void enQueueSeqQueue(SeqQueue* Q, int data) {
     if (isFullSeqQueue(Q)) {
-      printf("队列已满，无法入队\n");
+      printf(``队列已满，无法入队\n``);
       return;
     }
     Q->data[Q->rear] = data;
@@ -1870,7 +2119,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={出队示例代码}, label={lst:deQueueSeqQueue}]
   void deQueueSeqQueue(SeqQueue* Q) {
     if (isEmptySeqQueue(Q)) {
-      printf("队列为空，无法出队\n");
+      printf(``队列为空，无法出队\n``);
       return;
     }
     Q->front = (Q->front + 1) % Q->capacity;
@@ -1891,7 +2140,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取队头元素示例代码}, label={lst:getFrontSeqQueue}]
   int getFrontSeqQueue(SeqQueue* Q) {
     if (isEmptySeqQueue(Q)) {
-      printf("队列为空，无法获取队头元素\n");
+      printf(``队列为空，无法获取队头元素\n``);
       return -1;
     }
     return Q->data[Q->front];
@@ -1964,9 +2213,9 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={遍历队列示例代码}, label={lst:traverseSeqQueue}]
   void traverseSeqQueue(SeqQueue* Q) {
     for (int i = Q->front; i != Q->rear; i = (i + 1) % Q->capacity) {
-      printf("%d ", Q->data[i]);
+      printf(``%d ``, Q->data[i]);
     }
-    printf("\n");
+    printf(``\n``);
   }
 
 \end{lstlisting}
@@ -2019,7 +2268,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 第二种的结构体为：
 
-\begin{lstlisting}[language=C++, caption={循环队列结构体定义}, label={lst:circleQueueStruct}]
+\begin{lstlisting}[language=C++, caption={循环队列结构体定义}, label={lst:circleQueueStruct2}]
   struct CircleQueue {
     int* data;//队列的数据元素
     int front;//队头指针
@@ -2033,9 +2282,9 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 判断循环队列是否为空，即队列中不包含任何元素。
 
-代码如代码\ref{lst:isEmptyCircleQueue}所示。
+代码如代码\ref{lst:isEmptyCircleQueue2}所示。
 
-\begin{lstlisting}[language=C++, caption={判断循环队列是否为空示例代码}, label={lst:isEmptyCircleQueue}]
+\begin{lstlisting}[language=C++, caption={判断循环队列是否为空示例代码}, label={lst:isEmptyCircleQueue2}]
   bool isEmptyCircleQueue(CircleQueue* Q) {
     return Q->front == Q->rear && Q->tag == 0;
   }
@@ -2046,9 +2295,9 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 判断循环队列是否为满，即队列中包含的元素个数等于队列的容量。
 
-代码如代码\ref{lst:isFullCircleQueue}所示。
+代码如代码\ref{lst:isFullCircleQueue2}所示。
 
-\begin{lstlisting}[language=C++, caption={判断循环队列是否为满示例代码}, label={lst:isFullCircleQueue}]
+\begin{lstlisting}[language=C++, caption={判断循环队列是否为满示例代码}, label={lst:isFullCircleQueue2}]
   bool isFullCircleQueue(CircleQueue* Q) {
     return Q->front == Q->rear && Q->tag == 1;
   }
@@ -2061,7 +2310,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 链式队列的结构如如图\ref{fig:linkQueue}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/linkQueue.pdf}
   \caption{链式队列}
@@ -2177,7 +2426,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={出队示例代码}, label={lst:deQueueLinkQueue}]
   void deQueueLinkQueue(LinkQueue* Q) {
     if (isEmptyLinkQueue(Q)) {
-      printf("队列为空，无法出队\n");
+      printf(``队列为空，无法出队\n``);
       return;
     }
     singleLink* p = Q->front->next;
@@ -2203,7 +2452,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取队头元素示例代码}, label={lst:getFrontLinkQueue}]
   NODETYPE getFrontLinkQueue(LinkQueue* Q) {
     if (isEmptyLinkQueue(Q)) {
-      printf("队列为空，无法获取队头元素\n");
+      printf(``队列为空，无法获取队头元素\n``);
       return -1;
     }
     return Q->front->next->data;
@@ -2271,10 +2520,10 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   void traverseLinkQueue(LinkQueue* Q) {
     singleLink* p = Q->front->next;
     while (p != NULL) {
-      printf("%d ", p->data);
+      printf(``%d ``, p->data);
       p = p->next;
     }
-    printf("\n");
+    printf(``\n``);
   }
 
 \end{lstlisting}
@@ -2293,7 +2542,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 双端队列的结构如如图\ref{fig:deque}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.1\textwidth]{./figure/pdf/cropped/DQueue.pdf}
   \caption{双端队列}
@@ -2350,7 +2599,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 例如，中缀表达式$3+5*8-(6 + 2)$转换为后缀表达式的过程如表\ref{tab:infixToPostfix}所示。
 
 
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \begin{tabular}{|c|c|c|}
   \hline
@@ -2391,7 +2640,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
   string infixToPostfix(string infix) {
     stack<char> s;
-    string postfix = "";
+    string postfix = ````;
     for (int i = 0; i < infix.size(); i++) {
       if (isdigit(infix[i])) {
         postfix += infix[i];
@@ -2440,7 +2689,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
 例如，后缀表达式$3 5 8 * + 6 2 + -$的求值过程如表\ref{tab:postfixEvaluation}所示。
 
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \begin{tabular}{|c|c|}
   \hline
@@ -2509,7 +2758,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
 例如，字符串“(())()”的括号匹配过程如表\ref{tab:bracketMatching}所示。
 
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \begin{tabular}{|c|c|c|}
   \hline
@@ -2582,7 +2831,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
         q.push(q.front());
         q.pop();
       }
-      cout << q.front() << " ";
+      cout << q.front() << `` ``;
       q.pop();
     }
   }
@@ -2598,7 +2847,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \chapter{串}
 
 串(string)是由零个或多个字符组成的有限序列。含零个字符的串称为空串,用多表
-示。串中所含字符的个数称为该串的长度(或串长)。通常将一个串表示成"aa …a， 的形
+示。串中所含字符的个数称为该串的长度(或串长)。通常将一个串表示成``aa …a， 的形
 式,其中最外边的双引号(或单引号)不是串的内容,它们是串的标志,用于将串与标识符(如
 变量名等)加以区别。每个字符（即使是空格）都占用一个存储单元，不同的机器和编程语言对合法字符
 （即允许使用的字符）有不同的规定。但在一般情况下，英文字母、数字（0,1,…,9）和常用的
@@ -2606,8 +2855,8 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
 两个串相等当且仅当这两个串的长度相等并且各对应位置上的字符都
 相同。一个串中任意个连续字符组成的序列称为该串的子串(substring)，
-例如串"abcde"的子串有"a"、"ab"、"abc"和"abcd"等。为了表述清楚，
-在串中空格字符用“␣”符号表示，例如"a␣b"是一个长度为3的串，其中含有一个空格字符。空串是不包含任何字符的串，其长度为0，空串是任何串的子串。
+例如串``abcde``的子串有``a``、``ab``、``abc``和``abcd``等。为了表述清楚，
+在串中空格字符用“␣”符号表示，例如``a␣b``是一个长度为3的串，其中含有一个空格字符。空串是不包含任何字符的串，其长度为0，空串是任何串的子串。
 
 
 \section{串的存储结构}
@@ -2626,7 +2875,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
 
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/narrowString.pdf}
   \caption{非紧缩格式的顺序串}
@@ -2634,7 +2883,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/notNarrowString.pdf}
   \caption{紧缩格式的顺序串}
@@ -2732,7 +2981,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={获取串中指定位置的字符示例代码}, label={lst:getSeqString}]
   char getSeqString(SeqString* s, int i) {
     if (i < 0 || i >= s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return -1;
     }
     return s->data[i];
@@ -2798,7 +3047,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={在指定位置插入子串示例代码}, label={lst:insertSeqString}]
   void insertSeqString(SeqString* s, int i, SeqString* t) {
     if (i < 0 || i > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return;
     }
     for (int j = s->length - 1; j >= i; j--) {//将i位置及其后面的字符后移
@@ -2824,7 +3073,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={删除指定位置的子串示例代码}, label={lst:deleteSeqString}]
   void deleteSeqString(SeqString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return;
     }
     for (int j = i + len; j < s->length; j++) {//将i+len位置及其后面的字符前移
@@ -2847,7 +3096,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={替换指定位置的子串示例代码}, label={lst:replaceSeqString}]
   void replaceSeqString(SeqString* s, int i, int len, SeqString* t) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return;
     }
     for (int j = i + len; j < s->length; j++) {//将i+len位置及其后面的字符前移
@@ -2918,7 +3167,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={求串的子串示例代码}, label={lst:subSeqString}]
   SeqString* subSeqString(SeqString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return NULL;
     }
     SeqString* t = createSeqString();
@@ -2943,9 +3192,9 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={输出串示例代码}, label={lst:printSeqString}]
   void printSeqString(SeqString* s) {
     for (int i = 0; i < s->length; i++) {
-      printf("%c", s->data[i]);
+      printf(``%c``, s->data[i]);
     }
-    printf("\n");
+    printf(``\n``);
   }
 
 \end{lstlisting}
@@ -2959,10 +3208,10 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 串采用链式存储结构存储时称为链串,这里采用带头结点的单链表作为链串。链串的
 组织形式与一般的单链表类似,主要区别在于链串中的一个结点可以存储多个字符。通常
 将链串中每个结点所存储的字符个数称为结点大小。图\ref{fig:linkStr_fourNodes}和图 \ref{fig:linkStr_oneNode}分别表示同一个串
-"ABCDEFGHIJKLMN "的结点大小为 4(存储密度大)和 1(存储密度小)时的链串结构 。
+``ABCDEFGHIJKLMN ``的结点大小为 4(存储密度大)和 1(存储密度小)时的链串结构 。
 
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/linkStr_fourNodes.pdf}
   \caption{结点大小为4的链串}
@@ -2970,7 +3219,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/linkStr_oneNode.pdf}
   \caption{结点大小为1的链串}
@@ -3094,7 +3343,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={获取串中指定位置的字符示例代码}, label={lst:getLinkString}]
   char getLinkString(LinkString* s, int i) {
     if (i < 0 || i >= s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return -1;
     }
     LinkNode* p = s->head;
@@ -3192,7 +3441,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={在指定位置插入子串示例代码}, label={lst:insertLinkString}]
   void insertLinkString(LinkString* s, int i, LinkString* t) {
     if (i < 0 || i > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return;
     }
     LinkNode* p = s->head;
@@ -3222,7 +3471,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={删除指定位置的子串示例代码}, label={lst:deleteLinkString}]
   void deleteLinkString(LinkString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return;
     }
     LinkNode* p = s->head;
@@ -3250,7 +3499,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={替换指定位置的子串示例代码}, label={lst:replaceLinkString}]
   void replaceLinkString(LinkString* s, int i, int len, LinkString* t) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return;
     }
     LinkNode* p = s->head;
@@ -3339,7 +3588,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={求串的子串示例代码}, label={lst:subLinkString}]
   LinkString* subLinkString(LinkString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf("位置不合法\n");
+      printf(``位置不合法\n``);
       return NULL;
     }
     LinkString* t = createLinkString();
@@ -3377,10 +3626,10 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
   void printLinkString(LinkString* s) {
     LinkNode* p = s->head;
     while (p != NULL) {
-      printf("%c", p->data);
+      printf(``%c``, p->data);
       p = p->next;
     }
-    printf("\n");
+    printf(``\n``);
   }
 
 \end{lstlisting}
@@ -3403,17 +3652,17 @@ BF算法的基本思想是从目标串的第一个字符开始，依次与模式
 则继续比较下一个字符，如果不相等，则从目标串的下一个字符开始，重新与模式串的第一个字符比较，
 直到找到与模式串相等的子串或目标串的所有字符都比较完为止。
 
-例如 ，设目标串为"ababcabcacbab"，模式串为"abcac"，BF算法的匹配过程如下：
+例如 ，设目标串为``ababcabcacbab``，模式串为``abcac``，BF算法的匹配过程如下：
 
 \begin{itemize}
-  \item 从目标串的第一个字符"a"开始，与模式串的第一个字符"a"比较，相等，继续比较下一个字符；
-  \item 与模式串的第二个字符"b"比较，不相等，从目标串的第二个字符"b"开始，重新与模式串的第一个字符比较；
-  \item 与模式串的第一个字符"a"比较，不相等，从目标串的第三个字符"a"开始，重新与模式串的第一个字符比较；
-  \item 与模式串的第一个字符"a"比较，相等，继续比较下一个字符；
-  \item 与模式串的第二个字符"b"比较，相等，继续比较下一个字符；
-  \item 与模式串的第三个字符"c"比较，相等，继续比较下一个字符；
-  \item 与模式串的第四个字符"a"比较，相等，继续比较下一个字符；
-  \item 与模式串的第五个字符"c"比较，相等，匹配成功。
+  \item 从目标串的第一个字符``a``开始，与模式串的第一个字符``a``比较，相等，继续比较下一个字符；
+  \item 与模式串的第二个字符``b``比较，不相等，从目标串的第二个字符``b``开始，重新与模式串的第一个字符比较；
+  \item 与模式串的第一个字符``a``比较，不相等，从目标串的第三个字符``a``开始，重新与模式串的第一个字符比较；
+  \item 与模式串的第一个字符``a``比较，相等，继续比较下一个字符；
+  \item 与模式串的第二个字符``b``比较，相等，继续比较下一个字符；
+  \item 与模式串的第三个字符``c``比较，相等，继续比较下一个字符；
+  \item 与模式串的第四个字符``a``比较，相等，继续比较下一个字符；
+  \item 与模式串的第五个字符``c``比较，相等，匹配成功。
 \end{itemize}
 
 BF算法的代码如代码\ref{lst:BF}所示。
@@ -3484,7 +3733,9 @@ KMP算法的核心，是一个被称为部分匹配表(Partial Match Table)的�
   \item “abab”：前缀为{“a”，“ab”，“aba”}，后缀为{“bab”，“ab”，“b”}，匹配长度为2；
   \item “ababa”：前缀为{“a”，“ab”，“aba”，“abab”}，后缀为{“baba”，“aba”，“ba”，“a”}，匹配长度为3；
   \item “ababab”：前缀为{“a”，“ab”，“aba”，“abab”，“ababa”}，后缀为{“babab”，“abab”，“bab”，“ab”，“b”}，匹配长度为4；
-  \item “abababc”：前缀为{“a”，“ab”，“aba”，“abab”，“ababa”，“ababab”}，后缀为{“bababc”，“ababc”，“babc”，“abc”，“bc”，“c”}，匹配长度为0；
+  \item “abababc”：前缀为{“a”，“ab”，“aba”，“abab”，“ababa”，“ababab”}，后缀为{“bababc”，“ababc”，“babc”，“abc”，“bc”，
+  
+  “c”}，匹配长度为0；
   \item “abababca”：前缀为{“a”，“ab”，“aba”，“abab”，“ababa”，“ababab”，“abababc”}，后缀为{“babca”，“abca”，“bca”，“ca”，“a”}，匹配长度为1。
 \end{itemize}
 
@@ -3495,7 +3746,7 @@ KMP算法的核心，是一个被称为部分匹配表(Partial Match Table)的�
 
 如图\ref{fig:KMP}所示，当模式串与主串匹配失败时，根据PMT表，模式串向右移动的位数为失配字符的位置减去对应的PMT值。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/KMP.pdf}
   \caption{KMP算法示意图}
@@ -3503,7 +3754,7 @@ KMP算法的核心，是一个被称为部分匹配表(Partial Match Table)的�
 
 \end{figure}
 
-在主字符串 "ababababca" 中查找模式字符串 "abababca" 时，如果在位置 j 处字符不匹配，根据模式字符串的 PMT（部分匹配表）性质，可以跳过一些字符的比较。
+在主字符串 ``ababababca`` 中查找模式字符串 ``abababca`` 时，如果在位置 j 处字符不匹配，根据模式字符串的 PMT（部分匹配表）性质，可以跳过一些字符的比较。
 
 假设主字符串的 i 指针在位置 i 处失配，这意味着主字符串从位置 i−j 到 i 的这一段，与模式字符串从位置 0 到 j 的这一段是完全相同的。而 PMT[j−1] 表示模式字符串从位置 0 到 j−1 的最长前缀和后缀的匹配长度。
 
@@ -3718,7 +3969,7 @@ a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
 \end{bmatrix}
 \]
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/rowFirst.pdf}
   \caption{二维数组按行优先存储的一维数组表示（下标从0开始）}
@@ -3746,7 +3997,7 @@ a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
 \end{bmatrix}
 \]
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/columnFirst.pdf}
   \caption{二维数组按列优先存储的一维数组表示（下标从0开始）}
@@ -3777,7 +4028,7 @@ a_{m-1,0} & a_{m-1,1} & \dots & a_{m-1,n-1}
 一般情况下，一个 $n$ 阶方阵的所有元素可以分为 3 个部分，即主对角部分（含 $n$ 个元素）、上三角部分和下三角部分，如图\ref{fig:common_matrix}所示。
 已知一个元素的下标，就可以确定它属于哪个部分。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/commonMatrix.pdf}
   \caption{一般矩阵的三个部分}
@@ -3841,7 +4092,7 @@ k = m + s
 我们以上三角矩阵为例，对于上三角矩阵，其压缩存储方法是采用以行序为主序存储其主对角线加上三角部分的元素，
 另外用一个元素存储常数 $c$，并将压缩结果存放在一维数组 $B$ 中，如图\ref{fig:upperMatrix}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/upperMatrix.pdf}
   \caption{上三角矩阵的压缩存储}
@@ -4040,7 +4291,7 @@ k =
 \begin{lstlisting}[language=C, caption={输出稀疏矩阵的三元组}]
   void PrintSMatrix(TSMatrix A) {
     for (int i = 1; i <= A.nums; i++) {
-      printf("(%d, %d, %d)\n", A.data[i].r, A.data[i].c, A.data[i].d);
+      printf(``(%d, %d, %d)\n``, A.data[i].r, A.data[i].c, A.data[i].d);
     }
   }
 
@@ -4147,7 +4398,7 @@ E = ((a, .(a, b)), .((a, b), c))
 若用圆圈和方框分别表示表和原子，并用线段把表和它的元素（元素结点应在其表结点的下方）连接起来，则可得到一个广义表的图形表示。
 例如，上面 5 个广义表的图形表示如图\ref{fig:generalized_table}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/GLGraph.pdf}
   \caption{广义表的图形表示}
@@ -4175,7 +4426,7 @@ E = ((a, .(a, b)), .((a, b), c))
 
 为了使子表和原子两类结点既能在形式上保持一致，又能进行区别，可采用以下结构形式：
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/GLStruct.pdf}
   \caption{广义表的存储结构}
@@ -4193,7 +4444,7 @@ E = ((a, .(a, b)), .((a, b), c))
 
   例如前面的广义表$C$的存储结构如图\ref{fig:GLStructGraph}所示。
 
-  \begin{figure}[h!]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/GLStructGraph.pdf}
     \caption{广义表$C$的存储结构}
@@ -4310,18 +4561,18 @@ F(G) =
     }
     GLNode *gl;
     if (L->tag == 0) {// 原子结点
-      printf("%c", L->val.data);// 输出原子结点的值
+      printf(``%c``, L->val.data);// 输出原子结点的值
     } else {// 子表结点
-      printf("(");
+      printf(``(``);
       gl = L->val.sublist;
       while (gl) {
         PrintGList(gl);// 递归输出子表
         gl = gl->link;
         if (gl) {
-          printf(",");
+          printf(``,``);
         }
       }
-      printf(")");
+      printf(``)``);
     }
   }
 \end{lstlisting}
@@ -4346,7 +4597,7 @@ F(G) =
 \textbf{说明}：在树形表示法中，尽管用没有箭头的连线表示结点之间的关系，但实际上树中结点之间的关系是一种有向关系。
 例如，图\ref{fig:tree}中结点 $A$ 和 $B$ 之间的连线对应序偶 $\langle A, B \rangle$。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/tree.pdf}
   \caption{树的逻辑表示}
@@ -4449,7 +4700,7 @@ F(G) =
 
 
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/fiveBTree.pdf}
   \caption{二叉树的五种基本形态}
@@ -4465,7 +4716,7 @@ F(G) =
 
 在一颗二叉树中，如果所有分支结点都存在左子树和右子树，并且所有叶子结点都在同一层上，这样的二叉树称为满二叉树。如图\ref{fig:full_binary_tree}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/fullBTree.pdf}
   \caption{满二叉树}
@@ -4486,7 +4737,7 @@ F(G) =
 在一颗二叉树中，最多只有最下面的两层结点的度数可以小于 2，并且最下一层的结点都集中在该层最左边的若干位置上，这样的二叉树称为完全二叉树。如图\ref{fig:complete_binary_tree}所示。
 如图\ref{fig:complete_binary_tree}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/comBTree.pdf}
   \caption{完全二叉树}
@@ -4536,7 +4787,7 @@ F(G) =
 例如，上图所示的完全二叉树对应的顺序存储结构如下图所示，编号为 $i$ 的结点值存放在数组下标为$i$的元素中（`\#` 表示空结点）。
 由于 C/C++ 语言中的数组下标从 0 开始，这里为了一致性而没有使用下标为 0 的数组元素。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/seqBTree.pdf}
   \caption{完全二叉树的顺序存储结构}
@@ -4552,7 +4803,7 @@ F(G) =
 
 二叉树链式存储结构的标准存储结构如图\ref{fig:binary_tree_node}所示，其中 $data$ 为结点的数据域，$lchild$ 和 $rchild$ 分别为结点的左孩子和右孩子指针域。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/BTreeStruct.pdf}
   \caption{二叉树的链式存储结构}
@@ -4574,7 +4825,7 @@ F(G) =
 
 例如，图 \ref{fig:binary_tree_link}（左） 所示的二叉树的链式存储结构如图\ref{fig:binary_tree_link}（右）所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/BTreeGraph.pdf}
   \caption{二叉树的链式存储结构}
@@ -4598,7 +4849,7 @@ F(G) =
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/oneBTree.pdf}
+  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/oneBTree.pdf}
   \caption{二叉树的链式存储结构}
   \label{fig:one_binary_tree_link}
 \end{figure}
@@ -4609,12 +4860,13 @@ F(G) =
 
 先序遍历的代码如\ref{code:precode}所示：
 
+
 \begin{lstlisting}[language=C++, caption={先序遍历}, label={code:precode}]
   void PreOrderTraverse(BiTree T) {
     if (T == NULL) {
       return;
     }
-    printf("%c", T->data);
+    printf(``%c``, T->data);
     PreOrderTraverse(T->lchild);
     PreOrderTraverse(T->rchild);
   }
@@ -4643,7 +4895,7 @@ F(G) =
       return;
     }
     InOrderTraverse(T->lchild);
-    printf("%c", T->data);
+    printf(``%c``, T->data);
     InOrderTraverse(T->rchild);
   }
 
@@ -4664,7 +4916,7 @@ F(G) =
     }
     PostOrderTraverse(T->lchild);
     PostOrderTraverse(T->rchild);
-    printf("%c", T->data);
+    printf(``%c``, T->data);
   }
 
 \end{lstlisting}
@@ -4688,7 +4940,7 @@ F(G) =
     BiTree p = T;
     while (p != NULL || !StackEmpty(S)) {//栈不空或者p不空
       if (p != NULL) {//一直向左并将沿途结点压入栈
-        printf("%c", p->data);//访问结点
+        printf(``%c``, p->data);//访问结点
         Push(S, p);
         p = p->lchild;
       } else {//结点弹出栈
@@ -4705,7 +4957,7 @@ F(G) =
 
 先序遍历过程中指针和栈的变化如表\ref{tab:preorder_stack}所示。
 
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \caption{先序遍历过程中指针和栈的变化}
   \begin{tabular}{|c|c|c|c|}
@@ -4745,7 +4997,7 @@ F(G) =
         p = p->lchild;
       } else {
         Pop(S, p);
-        printf("%c", p->data);
+        printf(``%c``, p->data);
         p = p->rchild;
       }
     }
@@ -4754,7 +5006,7 @@ F(G) =
 
 中序遍历过程中指针和栈的变化如表\ref{tab:inorder_stack}所示。
 
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \caption{中序遍历过程中指针和栈的变化}
   \begin{tabular}{|c|c|c|c|}
@@ -4830,7 +5082,7 @@ F(G) =
           p = p->rchild;
         } else {
           Pop(S, p);
-          printf("%c", p->data);
+          printf(``%c``, p->data);
           r = p;
           p = NULL;
         }
@@ -4840,30 +5092,30 @@ F(G) =
 \end{lstlisting}
 
 后序遍历过程中指针和栈的变化如表\ref{tab:postorder_stack}所示。
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \caption{后序遍历过程中指针和栈的变化}
   \begin{tabular}{|c|c|c|c|c|}
   \hline
-  \textbf{p指针的值} & \textbf{r指针的值} & \textbf{当前访问元素} & \textbf{当前栈操作} & \textbf{当前栈内元素（栈底 $\to$ 栈顶）} \\ \hline
+  \textbf{p指针的值} & \textbf{r指针的值} & \textbf{当前访问元素} & \textbf{当前栈操作} & \textbf{bottom $\to$ top} \\ \hline
   A & NULL &  & A入栈 & A \\ \hline
   B & NULL &  & B入栈 & AB \\ \hline
   E & NULL &  & E入栈 & ABE \\ \hline
   NULL & NULL &  &  & ABE \\ \hline
-  E(没有右孩子) & NULL & E & E出栈 & AB \\ \hline
+  E (没有右孩子) & NULL & E & E出栈 & AB \\ \hline
   NULL & E &  &  & AB \\ \hline
   B & E &  &  & AB \\ \hline
   F & E &  & F入栈 & ABF \\ \hline
   NULL & E &  &  & ABF \\ \hline
-  F(没有右孩子) & F & F & F出栈 & AB \\ \hline
-  B(右孩子与r同) & F & B & B出栈 & A \\ \hline
-  A(右孩子不等于r,继续向右遍历) & B &  &  & A \\ \hline
+  F (没有右孩子) & F & F & F出栈 & AB \\ \hline
+  B (右孩子与r同) & F & B & B出栈 & A \\ \hline
+  A (右孩子不等于r,继续向右遍历) & B &  &  & A \\ \hline
   C & B &  & C入栈 & AC \\ \hline
   H & B &  & H入栈 & ACH \\ \hline
   NULL & B &  &  & ACH \\ \hline
-  H(没有右孩子) & B & H & H出栈 & AC \\ \hline
-  C(没有右孩子) & H & C & C出栈 & A \\ \hline
-  A(右孩子与r同) & C & A & A出栈 & 程序结束 \\ \hline
+  H (没有右孩子) & B & H & H出栈 & AC \\ \hline
+  C (没有右孩子) & H & C & C出栈 & A \\ \hline
+  A (右孩子与r同) & C & A & A出栈 & 程序结束 \\ \hline
   \end{tabular}
   \label{tab:postorder_stack}
   \end{table}
@@ -4889,7 +5141,7 @@ F(G) =
     EnQueue(Q, T);
     while (!QueueEmpty(Q)) {
       DeQueue(Q, p);
-      printf("%c", p->data);
+      printf(``%c``, p->data);
       if (p->lchild != NULL) {
         EnQueue(Q, p->lchild);
       }
@@ -4917,18 +5169,19 @@ F(G) =
     if (T == NULL) {
       return;
     }
-    printf("%c", T->data);
+    printf(``%c``, T->data);
     PreOrderTraverse(T->lchild);
     PreOrderTraverse(T->rchild);
   }
 \end{lstlisting}
 
-首先，我们应该明确，创建一棵二叉树的过程就是根据先序遍历的顺序，依次输入结点的值，当输入的值为某个特定值（例如 \texttt{\#}）时，表示该结点为空。代码如 \ref{code:create} 所示。
+首先，我们应该明确，创建一棵二叉树的过程就是根据先序遍历的顺序，依次输入结点的值，
+当输入的值为某个特定值（例如 \texttt{\#}）时，表示该结点为空。代码如~\ref{code:create} 所示。
 
 \begin{lstlisting}[language=C++, caption={创建二叉树}, label={code:create}]
   void CreateBiTree(BiTree &T) {
     TElemType ch;
-    scanf("%c", &ch);
+    scanf(``%c``, &ch);
     if (ch == '#') {
       T = NULL;
     } else {
@@ -5068,27 +5321,34 @@ F(G) =
 
 如图\ref{fig:samePre}所示，5颗不同的二叉树具有相同的先序遍历序列 $ABC$
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/preBTree.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/fix/pdf/preBTree.pdf}
   \caption{具有相同先序遍历序列的不同二叉树}
   \label{fig:samePre}
 \end{figure}
 
+% \begin{figure}[!htbp]
+%   \centering
+%   \includegraphics[width=0.8\textwidth]{./figure/fix/preBTree.svg}
+%   \caption{具有相同先序遍历序列的不同二叉树}
+%   \label{fig:samePre}
+% \end{figure}
+
 如图\ref{fig:sameIn}所示，5颗不同的二叉树具有相同的中序遍历序列 $ACB$
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/inBTree.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/fix/pdf/inBTree.pdf}
   \caption{具有相同中序遍历序列的不同二叉树}
   \label{fig:sameIn}
 \end{figure}
 
 如图\ref{fig:samePost}所示，5颗不同的二叉树具有相同的后序遍历序列 $CBA$
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/postBTree.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/fix/pdf/postBTree.pdf}
   \caption{具有相同后序遍历序列的不同二叉树}
   \label{fig:samePost}
 \end{figure}
@@ -5106,9 +5366,9 @@ F(G) =
 
 根据先序遍历和中序遍历构造二叉树的过程如图\ref{fig:preIn}所示。
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/pre+in.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/fix/pdf/preAndIn.pdf}
   \caption{根据先序遍历和中序遍历构造二叉树}
   \label{fig:preIn}
 \end{figure}
@@ -5183,7 +5443,7 @@ F(G) =
   \item 图\ref{fig:threadedBTree}(b) 是先序线索二叉树（先序序列为 $A, B, D, G, C, E, F$）；
   \item 图\ref{fig:threadedBTree}(d) 是后序线索二叉树（后序序列为 $G, D, B, E, F, C, A$）。
 \end{itemize}
-\begin{figure}[h]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/threadBTree.pdf}
   \caption{线索二叉树}
@@ -5290,10 +5550,10 @@ F(G) =
       while (p->ltag == 0) {
         p = p->lchild;
       }
-      printf("%c", p->data);
+      printf(``%c``, p->data);
       while (p->rtag == 1 && p->rchild != T) {
         p = p->rchild;
-        printf("%c", p->data);
+        printf(``%c``, p->data);
       }
       p = p->rchild;
     }
@@ -5315,7 +5575,7 @@ F(G) =
 
 如图\ref{fig:tree2BiTree}所示，将树转换成二叉树的过程。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/tree2Btree.pdf}
   \caption{树转换成二叉树}
@@ -5335,7 +5595,7 @@ F(G) =
 
 如图\ref{fig:BiTree2Tree}所示，将二叉树还原成树的过程。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/Btree2Tree.pdf}
   \caption{二叉树还原成树}
@@ -5357,7 +5617,7 @@ F(G) =
 
 如图\ref{fig:forest2BiTree}所示，将森林转换成二叉树的过程。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/forest2Btree.pdf}
   \caption{森林转换成二叉树}
@@ -5374,7 +5634,7 @@ F(G) =
 
 如图\ref{fig:BiTree2Forest}所示，将二叉树还原成森林的过程。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/Btree2Forest.pdf}
   \caption{二叉树还原成森林}
@@ -5403,7 +5663,7 @@ WPL = \sum_{i=1}^{n_0} w_i l_i
 \end{cases}
 \]
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   
   \centering
 
@@ -5424,7 +5684,7 @@ WPL = \sum_{i=1}^{n_0} w_i l_i
 
 如图\ref{fig:HuffmanTree}所示，构造哈夫曼树的过程。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/createHaffman.pdf}
   \caption{构造哈夫曼树}
@@ -5496,7 +5756,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
       HT[i].rchild = 0;
     }
     for (int i = 1; i <= n; i++) {
-      scanf("%d", &HT[i].weight);
+      scanf(``%d``, &HT[i].weight);
     }
     for (int i = n + 1; i <= m; i++) {
       int s1, s2;
@@ -5550,7 +5810,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 初始状态如图\ref{fig:unionFind1}所示，每个元素都是一个单独的集合，每个集合的代表元素就是自己。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(a).pdf}
   \caption{并查集初始状态}
@@ -5561,9 +5821,9 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 现在，1号与4号进行比武，假设1号赢，那么按照江湖规矩，4号就得当1号的小弟（合并），此时1号帮派就有两个人了，帮主（代表元素就是1号）
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(b).pdf}
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/unionFindExample(b).pdf}
   \caption{并查集合并}
   \label{fig:unionFind2}
 \end{figure}
@@ -5571,27 +5831,27 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 过了一段时间，5号选手想和想和4号pk，首先他们得看看他们得帮主是不是同一个人，如果是同一个人那就不能开战，发现不是同一人，
 5号的帮主就是他自己，而4号帮主是1号，1号出马迎接5号的挑战，假设仍然1号胜出，那么5号也必须加入1号帮派，1号仍然作为帮主。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(c).pdf}
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/unionFindExample(c).pdf}
   \caption{并查集合并}
   \label{fig:unionFind3}
 \end{figure}
 
 假设2 3 6 号也同样进行了激烈的帮派斗争，形成以下格局：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(d).pdf}
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/unionFindExample(d).pdf}
   \caption{并查集合并}
   \label{fig:unionFind4}
 \end{figure}
 
 现在江湖上形成了两强局面，某一天4号和6号想要pk。首先他们的帮主不是同一人，所以他们喊各自的帮主，1号和3号出手，假设1号胜利，则3号拜入1号门下，当然2号和6号作为3号小弟也成为了1号的小弟。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(e).pdf}
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/unionFindExample(e).pdf}
   \caption{并查集合并}
   \label{fig:unionFind5}
 \end{figure}
@@ -5652,7 +5912,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
   \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindLow.pdf}
+    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/unionFindLow.pdf}
     \caption{并查集低效率}
     \label{fig:unionFind6}
   \end{figure}
@@ -5661,9 +5921,9 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
   而我们也可以发现，我们的目的是找到“代表元素”。直观地来看，我们完全可以将父亲节点直接设置为“代表元素”，就像这样：
 
-  \begin{figure}[h!]
+  \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/pathCompress.pdf}
+    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/pathCompress.pdf}
     \caption{并查集高效率}
     \label{fig:unionFind7}
   \end{figure}
@@ -5704,14 +5964,14 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
   \item 有向图：图中的边有方向，即边 $(v_i, v_j)$ 和边 $(v_j, v_i)$ 是不等价的，如图\ref{fig:directedGraph}所示，边 $(v_i, v_j)$ 称为弧，$v_i$ 称为弧尾，$v_j$ 称为弧头。
   \end{itemize}
 
-  \begin{figure}[h!]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/undirection.pdf}
     \caption{无向图}
     \label{fig:undirectedGraph}
   \end{figure}
 
-  \begin{figure}[h!]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/direction.pdf}
     \caption{有向图}
@@ -5726,7 +5986,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
     \item 带权图：图中的边有权值，如图\ref{fig:weightedGraph}所示。
     \end{itemize}
 
-    \begin{figure}[h!]
+    \begin{figure}[!htbp]
       \centering
       \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/weightedGraph.pdf}
       \caption{带权图}
@@ -5740,14 +6000,14 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
   \item 多重图：图中存在顶点到自身的边，或者同一条边重复出现，如图\ref{fig:multipleGraph}所示。
   \end{itemize}
 
-  \begin{figure}[h!]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/unDirection.pdf}
     \caption{简单图}
     \label{fig:simpleGraph}
   \end{figure}
 
-  \begin{figure}[h!]
+  \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/mutipleGraph.pdf}
     \caption{多重图}
@@ -5760,7 +6020,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 对于有向图，如果图中任意两个顶点之间都存在方向相同的边，则称该图为完全有向图，如图\ref{fig:completeDirectedGraph}所示。包含 $n$ 个顶点的完全有向图有 $n(n-1)$ 条边。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/unDirection.pdf}
   \caption{完全无向图}
@@ -5768,7 +6028,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/directedComGraph.pdf}
   \caption{完全有向图}
@@ -5780,7 +6040,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 设 $G = (V, E)$ 是一个图，$G' = (V', E')$ 是 $G$ 的一个子图，如果 $V' \subseteq V$ 且 $E' \subseteq E$，则称 $G'$ 是 $G$ 的子图。如图 \ref{fig:subGraph}所示，$G'$ 是 $G$ 的子图。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/subGraph.pdf}
   \caption{子图}
@@ -5844,7 +6104,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 
 不带权无向图的邻接矩阵如图\ref{fig:adjacencyMatrix_UnWeightUndirected}所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyMatrix_UnWeightUndirected.pdf}
   \caption{无权无向图的邻接矩阵}
@@ -5853,7 +6113,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 
 带权有向图的邻接矩阵如图\ref{fig:adjacencyMatrix_WeightedDirected}所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyMatrix_weightDirected.pdf}
   \caption{带权有向图的邻接矩阵}
@@ -5862,7 +6122,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 
 
 带权无向图的邻接矩阵如图\ref{fig:adjacencyMatrix_WeightedUndirected}所示。
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyMatrix_weightUnDirected.pdf}
   \caption{邻接矩阵}
@@ -5898,7 +6158,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 它的基本思想是：对图 $G$ 的每个顶点 $v_i$，建立一个单链表，
 链表中的结点称为顶点 $v_i$ 的边表，边表中的结点存储了与顶点 $v_i$ 相邻接的顶点在顶点表中的位置和边上的权值。如图 \ref{fig:adjacencyList} 所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyList.pdf}
   \caption{邻接表}
@@ -5914,9 +6174,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 即我们构造一个顶点数组，数组中的元素类型为顶点，包含顶点本身信息，和指向下一个邻接点的指针，显然的是，
 图中的每一个顶点均会作为头结点来连接它的邻接顶点，哪怕没有邻接点（如点3）。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyList_struct.pdf}
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/adjacencyList_struct.pdf}
   \caption{邻接表结构体}
   \label{fig:adjacencyList_struct}
 \end{figure}
@@ -5929,9 +6189,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 边表结点包含该顶点在顶点表数组中的下标（这样我们就可以很容易拿到该顶点的信息以及连接信息）、到该邻接点的边的权重以及下一个邻接点（同样是边表结点）。
 经过上面的阐释我们的顶点表结点的结构体以及边表结点结构体也就呼之欲出了。如代码所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjacencyList_struct2.pdf}
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/adjacencyList_struct2.pdf}
   \caption{邻接表结构体}
   \label{fig:adjacencyList_struct2}
 
@@ -5965,9 +6225,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 可以看到，我们在ALGraph中创建了一个顶点数组，数组元素类型为VertexNode，即顶点表类型，然后还设立了边数和顶点数，这两个信息是基础信息，会时常用到。
 如图 \ref{fig:adjacencyList_struct3}所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/adjList_array.pdf}
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/adjList_array.pdf}
   \caption{邻接表结构体}
   \label{fig:adjacencyList_struct3}
 \end{figure}
@@ -6001,11 +6261,11 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 \begin{lstlisting}[language=C++, caption={邻接矩阵的创建}]
   void CreateMGraph(MGraph *G) {
     int i, j, k, w;
-    printf("输入顶点数和边数：\n");
-    scanf("%d %d", &G->vexnum, &G->arcnum);
-    printf("输入顶点信息：\n");
+    printf(``输入顶点数和边数：\n``);
+    scanf(``%d %d``, &G->vexnum, &G->arcnum);
+    printf(``输入顶点信息：\n``);
     for (i = 0; i < G->vexnum; i++) {
-      scanf("%c", &G->vexs[i]);
+      scanf(``%c``, &G->vexs[i]);
     }
     for (i = 0; i < G->vexnum; i++) {
       for (j = 0; j < G->vexnum; j++) {
@@ -6013,8 +6273,8 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
       }
     }
     for (k = 0; k < G->arcnum; k++) {
-      printf("输入边(vi, vj)的下标i, 下标j和权值w：\n");
-      scanf("%d %d %d", &i, &j, &w);
+      printf(``输入边(vi, vj)的下标i, 下标j和权值w：\n``);
+      scanf(``%d %d %d``, &i, &j, &w);
       G->arc[i][j] = w;
       G->arc[j][i] = w;
     }
@@ -6028,16 +6288,16 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   void CreateALGraph(ALGraph *G) {
     int i, j, k;
     EdgeNode *e;
-    printf("输入顶点数和边数：\n");
-    scanf("%d %d", &G->numVertexes, &G->numEdges);
-    printf("输入顶点信息：\n");
+    printf(``输入顶点数和边数：\n``);
+    scanf(``%d %d``, &G->numVertexes, &G->numEdges);
+    printf(``输入顶点信息：\n``);
     for (i = 0; i < G->numVertexes; i++) {
-      scanf("%c", &G->adjList[i].data);
+      scanf(``%c``, &G->adjList[i].data);
       G->adjList[i].firstEdge = NULL;
     }
     for (k = 0; k < G->numEdges; k++) {
-      printf("输入边(vi, vj)的下标i, 下标j：\n");
-      scanf("%d %d", &i, &j);
+      printf(``输入边(vi, vj)的下标i, 下标j：\n``);
+      scanf(``%d %d``, &i, &j);
       e = (EdgeNode *)malloc(sizeof(EdgeNode));
       e->adjvex = j;
       e->next = G->adjList[i].firstEdge;
@@ -6061,9 +6321,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     int i, j;
     for (i = 0; i < G.vexnum; i++) {
       for (j = 0; j < G.vexnum; j++) {
-        printf("%d ", G.arc[i][j]);
+        printf(``%d ``, G.arc[i][j]);
       }
-      printf("\n");
+      printf(``\n``);
     }
   }
 \end{lstlisting}
@@ -6076,13 +6336,13 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     int i;
     EdgeNode *e;
     for (i = 0; i < G.numVertexes; i++) {
-      printf("%c", G.adjList[i].data);
+      printf(``%c``, G.adjList[i].data);
       e = G.adjList[i].firstEdge;
       while (e != NULL) {
-        printf("%d", e->adjvex);
+        printf(``%d``, e->adjvex);
         e = e->next;
       }
-      printf("\n");
+      printf(``\n``);
     }
   }
 \end{lstlisting}
@@ -6114,9 +6374,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 
 注意：深度优先遍历可能会产生不同的遍历序列，主要是因为我们去选择邻接点时可能存在多个邻接点 ，这就使得深优序列可能不同*
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/depthFirstGraph.pdf}
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/depthFirstGraph.pdf}
   \caption{深度优先搜索}
   \label{fig:DFS}
 \end{figure}
@@ -6135,9 +6395,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   \item 顶点 $1$ 无其他未被访问的邻接点，退出以顶点 $1$ 为“起始点”的递归，程序结束。
 \end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/depthFirst.pdf}
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/depthFirst.pdf}
   \caption{深度优先搜索}
   \label{fig:depthFirst}
 \end{figure}
@@ -6152,7 +6412,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   void DFS(ALGraph G, int i) {
     EdgeNode *p;
     visited[i] = 1;
-    printf("%c", G.adjList[i].data);
+    printf(``%c``, G.adjList[i].data);
     p = G.adjList[i].firstEdge;
     while (p != NULL) {
       if (!visited[p->adjvex]) {
@@ -6173,7 +6433,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   void DFS(MGraph G, int i) {
     int j;
     visited[i] = 1;
-    printf("%c", G.vexs[i]);
+    printf(``%c``, G.vexs[i]);
     for (j = 0; j < G.vexnum; j++) {
       if (G.arc[i][j] == 1 && !visited[j]) {
         DFS(G, j);
@@ -6201,7 +6461,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 
 注意：广度优先遍历可能会产生不同的遍历序列，主要是因为我们去选择邻接点时可能存在多个邻接点 ，这就使得广度优序列可能不同。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/breadthFirst.pdf}
   \caption{广度优先搜索}
@@ -6219,7 +6479,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     EdgeNode *p;
     int queue[MAX_VERTEX_NUM];
     int front = 0, rear = 0;
-    printf("%c", G.adjList[i].data);
+    printf(``%c``, G.adjList[i].data);
     visited[i] = 1;
     rear = (rear + 1) % MAX_VERTEX_NUM;
     queue[rear] = i;
@@ -6229,7 +6489,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
       p = G.adjList[j].firstEdge;
       while (p != NULL) {
         if (!visited[p->adjvex]) {
-          printf("%c", G.adjList[p->adjvex].data);
+          printf(``%c``, G.adjList[p->adjvex].data);
           visited[p->adjvex] = 1;
           rear = (rear + 1) % MAX_VERTEX_NUM;
           queue[rear] = p->adjvex;
@@ -6248,7 +6508,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     int j;
     int queue[MAX_VERTEX_NUM];
     int front = 0, rear = 0;
-    printf("%c", G.vexs[i]);
+    printf(``%c``, G.vexs[i]);
     visited[i] = 1;
     rear = (rear + 1) % MAX_VERTEX_NUM;
     queue[rear] = i;
@@ -6257,7 +6517,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
       j = queue[front];
       for (int k = 0; k < G.vexnum; k++) {
         if (G.arc[j][k] == 1 && !visited[k]) {
-          printf("%c", G.vexs[k]);
+          printf(``%c``, G.vexs[k]);
           visited[k] = 1;
           rear = (rear + 1) % MAX_VERTEX_NUM;
           queue[rear] = k;
@@ -6307,7 +6567,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 
 
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/prime.pdf}
   \caption{Prim算法}
@@ -6381,9 +6641,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 			}
 		}
 	}
-	printf("%d ", getSum(G, prims));
+	printf(``%d ``, getSum(G, prims));
 	for (int i = 0; i < G->numV; i++) {
-		printf("%c ", G->Vertex[prims[i]]);
+		printf(``%c ``, G->Vertex[prims[i]]);
 	}
 }
 
@@ -6398,7 +6658,7 @@ void prim(ALGraph* G, int start) {
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
 int getSum(ALGraph* G, int* lowCost) {//获得最小生成树的权值
 	int sum = 0;
 	for (int i = 0; i < G->numV; i++) {
@@ -6446,10 +6706,10 @@ void primInAL(ALGraph *G, int start) {
 		}
 		
 	}
-	printf("最小生成树权值为：%d ", getSum(G, lowCost));
-	printf("\n");
+	printf(``最小生成树权值为：%d ``, getSum(G, lowCost));
+	printf(``\n``);
 	for (int i = 0; i < G->numV; i++) {
-		printf("%c ", G->adjlist[prims[i]].info);
+		printf(``%c ``, G->adjlist[prims[i]].info);
 	}
 
 }
@@ -6477,7 +6737,7 @@ Kruskal 算法是基于贪心思想得到的。首先，我们将所有的边按
   \item 到这里，我们已经加入了 $n-1$ 条边（$n$ 是顶点数），已经找到最小生成树，算法结束。
 \end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/kruskal.pdf}
   \caption{Kruskal算法}
@@ -6503,13 +6763,13 @@ Kruskal 算法是基于贪心思想得到的。首先，我们将所有的边按
 */
 #include<stdio.h>
 #include <stdlib.h>
-#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
 
 void outPut(ALGraph *G, int **weights) {//输出最小生成树
 	for (int i = 0; i < G->numV; i++) {
 		for (int j = i; j < G->numV; j++) {
 			if (weights[i][j] != 0) {
-				printf("%c->%c(%d)\n", G->adjlist[i].info, G->adjlist[j].info, weights[i][j]);
+				printf(``%c->%c(%d)\n``, G->adjlist[i].info, G->adjlist[j].info, weights[i][j]);
 			}
 		}
 	}
@@ -6588,7 +6848,7 @@ int main() {
 \subsection{Dijkstra算法}
 迪杰斯特拉（Dijkstra）算法不太容易理解，我们先从一个例子着手：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/directedWeightGraph.pdf}
   \caption{一个带权有向图}
@@ -6692,7 +6952,7 @@ int main() {
   \item (3) 按顶点进入 $S$ 的先后顺序，最短路径长度越来越长。
 \end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/negativeWeightGraph.pdf}
   \caption{含有负权值的带权图}
@@ -6854,7 +7114,7 @@ S = \{0,1,2,3,5,4,6\}, \quad U = \emptyset
 */
 #include<stdio.h>
 #include <stdlib.h>
-#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
 void dijkstra(ALGraph *G, int v) {
   int *dist = (int *)malloc(sizeof(int)*G->numV);//源点到各点的最短路径长度
   int *path = (int *)malloc(sizeof(int)*G->numV);//源点到各点的最短路径
@@ -6891,16 +7151,16 @@ void dijkstra(ALGraph *G, int v) {
     }
   }
   for (int i = 0; i < G->numV; i++) {
-    printf("源点到%d的最短路径长度为：%d\n", i, dist[i]);
+    printf(``源点到%d的最短路径长度为：%d\n``, i, dist[i]);
   }
   for (int i = 0; i < G->numV; i++) {
-    printf("源点到%d的最短路径为：", i);
+    printf(``源点到%d的最短路径为：``, i);
     int j = i;
     while (j != v) {
-      printf("%d<-", j);
+      printf(``%d<-``, j);
       j = path[j];
     }
-    printf("%d\n", v);
+    printf(``%d\n``, v);
   }
 }
 int main() {
@@ -6924,7 +7184,7 @@ Floyd 算法的基本思想是：假设图 $G$ 中的顶点集合为 $\{0, 1, 2,
  我们检查是否存在顶点 $k$ 使得从顶点 $i$ 到顶点 $k$ 再到顶点 $j$ 的路径比已知的从顶点 $i$ 到顶点 $j$ 的路径更短。
  如果是，我们更新从顶点 $i$ 到顶点 $j$ 的路径为更短的路径。我们以下图为例进行说明。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/floyd_directedWeightGraph.pdf}
   \caption{一个带权有向图}
@@ -7111,18 +7371,18 @@ P =
 
 \textbf{第一步，加入顶点 0}：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum0.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/floyd_addNum0.pdf}
   \caption{加入顶点 0}
   \label{fig:floyd_0}
 \end{figure}
 
 \textbf{第二步，加入顶点 1}：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum1.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/floyd_addNum1.pdf}
   \caption{加入顶点 1}
   \label{fig:floyd_1}
 
@@ -7130,9 +7390,9 @@ P =
 
 \textbf{第三步，加入顶点 2}：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum2.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/floyd_addNum2.pdf}
   \caption{加入顶点 2}
   \label{fig:floyd_2}
 
@@ -7140,9 +7400,9 @@ P =
 
 \textbf{第四步，加入顶点 3}：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/floyd_addNum3.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/floyd_addNum3.pdf}
   \caption{加入顶点 3}
   \label{fig:floyd_3}
 
@@ -7157,7 +7417,7 @@ P =
 */
 #include<stdio.h>
 #include <stdlib.h>
-#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
 void floyd(ALGraph *G) {
   int **dist = (int **)malloc(sizeof(int *)*G->numV);//源点到各点的最短路径长度
   int **path = (int **)malloc(sizeof(int *)*G->numV);//源点到各点的最短路径
@@ -7186,18 +7446,18 @@ void floyd(ALGraph *G) {
   }
   for (int i = 0; i < G->numV; i++) {
     for (int j = 0; j < G->numV; j++) {
-      printf("源点%d到%d的最短路径长度为：%d\n", i, j, dist[i][j]);
+      printf(``源点%d到%d的最短路径长度为：%d\n``, i, j, dist[i][j]);
     }
   }
   for (int i = 0; i < G->numV; i++) {
     for (int j = 0; j < G->numV; j++) {
-      printf("源点%d到%d的最短路径为：", i, j);
+      printf(``源点%d到%d的最短路径为：``, i, j);
       int k = j;
       while (k != i) {
-        printf("%d<-", k);
+        printf(``%d<-``, k);
         k = path[i][k];
       }
-      printf("%d\n", i);
+      printf(``%d\n``, i);
     }
   }
 }
@@ -7222,7 +7482,7 @@ int main() {
       for (i = 0; i < g.n; i++) {
           for (j = 0; j < g.n; j++) {
               if (A[i][j] != INF && i != j) { // 若顶点 i 和 j 之间存在路径
-                  printf("从顶点 %d 到顶点 %d 的路径为: ", i, j);
+                  printf(``从顶点 %d 到顶点 %d 的路径为: ``, i, j);
                   k = path[i][j];
                   d = 0;
                   apath[d] = j; // 路径上添加终点
@@ -7233,11 +7493,11 @@ int main() {
                   }
                   d++;
                   apath[d] = i; // 路径上添加起点
-                  printf("%d", apath[d]); // 输出起点
+                  printf(``%d``, apath[d]); // 输出起点
                   for (s = d - 1; s >= 0; s--) { // 输出路径上的中间顶点
-                      printf(", %d", apath[s]);
+                      printf(``, %d``, apath[s]);
                   }
-                  printf("\t路径长度为: %d\n", A[i][j]);
+                  printf(``\t路径长度为: %d\n``, A[i][j]);
               }
           }
       }
@@ -7252,7 +7512,7 @@ int main() {
 
 例如，计算机专业的学生必须完成一系列规定的基础课和专业课才能毕业，假设这些课程的名称与相应代号如表 \ref{tab:course} 所示：
 
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \caption{课程名称与相应代号的关系}
   \label{tab:course}
@@ -7271,7 +7531,7 @@ int main() {
 
 课程之间的先修关系可以用有向图表示，如图 \ref{fig:course} 所示。这种用顶点表示活动，用有向边表示活动之间的先后关系的有向图称为顶点活动网（activity on vertex network）。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/toposort.pdf}
   \caption{课程之间的先修关系}
@@ -7308,8 +7568,8 @@ int main() {
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
-#include "stackStruct.h"//通过头文件加载栈结构体
+#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
+#include ``stackStruct.h``//通过头文件加载栈结构体
 void inDegree(ALGraph* G, int* indegree) {//统计每个顶点的入度，用数组保存
 	for (int j = 0; j < G->numV; j++) {
 		for (EdgeNode* p = G->adjlist[j].firstEdge; p; p = p->next) {
@@ -7339,7 +7599,7 @@ void topoSort(ALGraph* G) {
 	}
 	while (!empty(s)) {//栈不空，输出栈顶
 		index = top(s);//查看栈顶元素
-		printf("%c ", G->adjlist[index].info);//打印
+		printf(``%c ``, G->adjlist[index].info);//打印
 		pop(s);//出栈
 		for (EdgeNode* p = G->adjlist[index].firstEdge; p; p = p->next) {//将当前出栈的顶点所指向的顶点的入度均-1
 			indegree[p->index]--;
@@ -7379,8 +7639,8 @@ int main() {
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
-#include "stackStruct.h"//通过头文件加载栈结构体
+#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
+#include ``stackStruct.h``//通过头文件加载栈结构体
 void outDegree(ALGraph* G, int* outdegree) {//统计每个顶点的出度，用数组保存
     for (int j = 0; j < G->numV; j++) {
         for (EdgeNode* p = G->adjlist[j].firstEdge; p; p = p->next) {
@@ -7410,7 +7670,7 @@ void reverseTopoSort(ALGraph* G) {
     }
     while (!empty(s)) {//栈不空，输出栈顶
         index = top(s);//查看栈顶元素
-        printf("%c ", G->adjlist[index].info);//打印
+        printf(``%c ``, G->adjlist[index].info);//打印
         pop(s);//出栈
         for (EdgeNode* p = G->adjlist[index].firstEdge; p; p = p->next) {//将当前出栈的顶点所指向的顶点的出度均-1
             outdegree[p->index]--;
@@ -7438,9 +7698,9 @@ int main() {
 
 我们可以使用大括号来进行辅助，具体方法如图 \ref{fig:topoMethod} 所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/topoMethod.pdf}
+  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/topoMethod.pdf}
   \caption{快速查找拓扑序列的方法}
   \label{fig:topoMethod}
 \end{figure}
@@ -7456,19 +7716,19 @@ AOE网中的关键路径是指从开始事件到结束事件的所有路径中�
 活动的最早开始时间是指在不推迟整个工程完成时间的前提下，活动尽早开始的时间；
 活动的最晚开始时间是指在不推迟整个工程完成时间的前提下，活动必须开始的最晚时间。
 
-例如，图 \ref{fig:AOE} 所示的 AOE 网中，共有 $9$ 个事件，$11$ 个活动，其中$A$ 为开始事件，$I$ 为结束事件。每个活动的持续时间如图所示。
+例如，图~\ref{fig:AOE} 所示的 AOE 网中，共有 $9$ 个事件，$11$ 个活动，其中$A$ 为开始事件，$I$ 为结束事件。每个活动的持续时间如图所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/AOE.pdf}
   \caption{AOE网}
   \label{fig:AOE}
 \end{figure}
 
-通过该图我们便可以得到每个活动的最早开始时间和最晚开始时间，如表 \ref{tab:AOE} 所示。
+通过该图我们便可以得到每个活动的最早开始时间和最晚开始时间，如表~\ref{tab:AOE} 所示。
 
 \textbf{计算最早发生时间 $ve$}
-\begin{table}[h]
+\begin{table}[!htbp]
     \centering
     \begin{tabular}{c|c|c}
         \toprule
@@ -7486,10 +7746,11 @@ AOE网中的关键路径是指从开始事件到结束事件的所有路径中�
         \bottomrule
     \end{tabular}
     \caption{最早发生时间计算表}
+    \label{tab:AOE}
 \end{table}
 
 \textbf{计算最晚发生时间 $vl$}
-\begin{table}[h]
+\begin{table}[!htbp]
     \centering
     \begin{tabular}{c|c|c}
         \toprule
@@ -7576,7 +7837,7 @@ AOE网中的关键路径是指从开始事件到结束事件的所有路径中�
 
 下面为一个简单的作图例子，如图\ref{fig:AOETable}所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/ve vl.pdf}
   \caption{AOE网与关键路径}
@@ -7656,7 +7917,7 @@ $\text{ASL}_{\text{失败}}$ 表示没有找到查找表中的元素时，平均
 
 如代码\ref{lst:seqSearch} 所示：
 
-\begin{lstlisting}[language=C++, caption={顺序查找算法} label={lst:seqSearch}]
+\begin{lstlisting}[language=C++, caption={顺序查找算法} ,label={lst:seqSearch}]
   /*
   顺序查找：
       从第一个元素开始，依次与每个元素进行比较，直到找到所要查找的元素为止。
@@ -7702,7 +7963,7 @@ mid = \left\lfloor \frac{low + high}{2} \right\rfloor
 上述过程如图 \ref{fig:halfSearch} 所示。可以从初始的查找区间 $R[0..n-1]$ 开始，每经过一次与当前查找区间的中点位置上的关键字比较，就可确定查找是否成功；若不成功，则当前的查找区间缩小一半。重复这一过程，
 直到找到关键字为 $A$ 的元素，或者直到当前的查找区间为空（即查找失败）时为止。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/halfSearch.pdf}
   \caption{折半查找}
@@ -7764,7 +8025,7 @@ int binarySearch(int *a, int n, int key) {
   \item 外部结点中的值 “$A > R[10].key$” 表示 $A > R[10].key$。
 \end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/decisionTree.pdf}
   \caption{R[0..10]的二分折半查找的判定树}
@@ -7852,7 +8113,7 @@ C(n) = \lfloor \log_2 n \rfloor + 1 = O(\log_2 n)
 索引项的关键字称为索引关键字，索引项中存放的地址称为索引地址。如下表所示。
 
 \textbf{索引表}：
-\begin{table}[h!]
+\begin{table}[!htbp]
     \centering
     \begin{tabular}{|c|c|c|}
         \hline
@@ -7868,7 +8129,7 @@ C(n) = \lfloor \log_2 n \rfloor + 1 = O(\log_2 n)
 \end{table}
 
 \textbf{主数据表}：
-\begin{table}[h!]
+\begin{table}[!htbp]
     \centering
     \begin{tabular}{|c|c|c|c|}
         \hline
@@ -8063,9 +8324,9 @@ f(\text{key}) = a \times \text{key} + b \quad (a, b \text{ 为常数})
 
 如果关键字是位数较多的数字，比如11位手机号“130xxx1234”，其中前三位是接入号，一般对应不同运营商公司的子品牌，如130是联通如意通、136是移动神州行、153是电信等；中间四位是HLR识别号，表示用户号码的归属地；后四位才是真正的用户号：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/digital_judge.pdf}
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/digital_judge.pdf}
   \caption{手机号的组成}
   \label{fig:phoneNumber}
 \end{figure}
@@ -8192,7 +8453,7 @@ d_i = (d + i) \bmod m \quad (i = 1, 2, \dots, m-1)
     \end{itemize}
 \end{itemize}
 
-假设哈希表的长度 $m = 13$，采用除留余数法加线性探测法建立关键字集合 $(16, 74, 60, 43, 54, 90, 46, 31, 29, 88, 77)$ 的哈希表。  
+假设哈希表的长度 $m = 13$，采用除留余数法加线性探测法建立关键字集合 $(16, 74, 60, 43, 54, 90, 46, 31, 29, 88, \\77)$ 的哈希表。  
 哈希函数为：
 \[
 H(k) = k \bmod 13
@@ -8228,7 +8489,7 @@ H(k) = k \bmod 13
 
 建立的哈希表 $ha[0..12]$ 如表所示：
 
-\begin{table}[h!]
+\begin{table}[!htbp]
   \centering
   \caption{哈希表 $ha[0..12]$}
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
@@ -8325,7 +8586,7 @@ h(k) = k \bmod 13\]
 \end{tabular}
 \end{center}
 未发生冲突，直接插入哈希表中。如图 \ref{fig:hash1} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/chaining(a).pdf}
   \caption{哈希表}
@@ -8336,7 +8597,7 @@ h(k) = k \bmod 13\]
 \[
 h(40) = 40 \bmod 13 = 1\]
 发生冲突，将40插入到哈希表的链表中，如图 \ref{fig:hash2} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/chaining(b).pdf}
   \caption{哈希表}
@@ -8355,7 +8616,7 @@ h(40) = 40 \bmod 13 = 1\]
 \end{center}
 
 未发生冲突，直接插入哈希表中，如图 \ref{fig:hash3} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/chaining(c).pdf}
   \caption{哈希表}
@@ -8366,7 +8627,7 @@ h(40) = 40 \bmod 13 = 1\]
 \[
 h(26) = 26 \bmod 13 = 0\]
 发生冲突，将26插入到哈希表的链表中，如图 \ref{fig:hash4} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/chaining(d).pdf}
   \caption{哈希表}
@@ -8377,7 +8638,7 @@ h(26) = 26 \bmod 13 = 0\]
 \[
 h(49) = 49 \bmod 13 = 10\]
 发生冲突，将49插入到哈希表的链表中，如图 \ref{fig:hash5} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/chaining(e).pdf}
   \caption{哈希表}
@@ -8429,7 +8690,7 @@ void insertNode(BSTree *&T, int key) {
     } else if (key > T->key) {
         insertNode(T->rchild, key);
     } else {
-        printf("The key %d already exists.\n", key);
+        printf(``The key %d already exists.\n``, key);
     }
 }
 \end{lstlisting}
@@ -8451,9 +8712,9 @@ void insertNode(BSTree *&T, int key) {
 void createBSTree(BSTree *&T) {
     T = NULL;
     int key;
-    printf("Please input the key (end with -1):\n");
+    printf(``Please input the key (end with -1):\n``);
     while (1) {
-        scanf("%d", &key);
+        scanf(``%d``, &key);
         if (key == -1) {
             break;
         }
@@ -8471,18 +8732,18 @@ void createBSTree(BSTree *&T) {
   \end{itemize}
 最终创建的二叉排序树如下图所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.5\textwidth]{./figure/pdf/cropped/bsTree.pdf}
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/bsTree.pdf}
   \caption{二叉排序树}
   \label{fig:bstree}
 \end{figure}
 
 而当我们以30、50、70为输入时，创建的二叉排序树如下图所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/bsTree2.pdf}
+  \includegraphics[width=0.2\textwidth]{./figure/pdf/cropped/bsTree2.pdf}
   \caption{二叉排序树}
   \label{fig:bstree2}
 \end{figure}
@@ -8552,7 +8813,7 @@ int searchBSTree(BSTree *T, int key) {
 
 首先根据该序列创建二叉排序树，得到如下图所示的二叉排序树：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/bTree3withOut.pdf}
   \caption{一棵二叉排序树及加上的外部结点}
@@ -8631,7 +8892,7 @@ void deleteNode(BSTree *&T, int key) {
         }
     }
     if (p == NULL) {
-        printf("The key %d does not exist.\n", key);
+        printf(``The key %d does not exist.\n``, key);
         return;
     }
     if (p->lchild == NULL) {//删除结点 p 的左子树为空
@@ -8700,7 +8961,7 @@ void deleteNode(BSTree *&T, int key) {
 一般情况下，一棵平衡二叉树总是二叉排序树，因为脱离二叉排序树来讨论平衡二叉树是没有意义的。因此，平衡二叉树是在二叉排序树的基础上增加了树形约束，即每个结点的平衡因子满足上述条件。
 
 图 \ref{fig:banlanceTree} 是平衡二叉树和不平衡二叉树的例子，图中结点旁边的数字为该结点的平衡因子。其中，图 \ref{fig:banlanceTree}(a) 是一棵平衡二叉树，所有结点的平衡因子绝对值均为 0 或 1；而图 \ref{fig:banlanceTree}(b) 是一棵不平衡二叉树，结点 1 的平衡因子绝对值为 2。
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/balanceTree.pdf}
   \caption{平衡二叉树和不平衡二叉树}
@@ -8713,7 +8974,7 @@ void deleteNode(BSTree *&T, int key) {
 按照现有教科书的说法，平衡二叉树的调整分为四种情况，为避免讲解枯燥，我们直接使用一个例子来进行说明这四种情况。
 
 输入关键字序列(16,3,7,11,9,26,18,14,15) , 我们一步一步的构造出平衡二叉树。其过程如图 \ref{fig:insertAdjust} 所示。
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/balanceTree_insert.pdf}
   \caption{平衡二叉树的插入调整}
@@ -8859,7 +9120,7 @@ B-树（B-tree）中所有结点的孩子结点的最大值称为 B-树的阶，
 4. 除根结点以外的所有结点的关键字个数大于等于 $\lceil m/2 \rceil - 1 = 1$，小于等于 $m-1 = 2$；
 5. 所有外部结点都在同一层上，树中总共有 17 个关键字，外部结点有 18 个。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/B-tree.pdf}
   \caption{3 阶 B-树}
@@ -8945,7 +9206,8 @@ O(\log_m n)
 
 一棵 B-树的创建过程就是从一棵空树开始，逐个插入关键字而得到的。
 
-我们以一棵5阶 B-树为例，给出创建 B-树的过程。假设要插入的关键字序列为：$(1, 2, 6, 7, 11, 4, 8, 13, 10, 5, 17, 9, 16, 20, 3, 12, 14, 18, 19, 15)$。
+我们以一棵5阶 B-树为例，给出创建 B-树的过程。假设要插入的关键字序列为：$(1, 2, 6, 7, 11, 4, 8, 13, 10, \\
+5, 17, 9, 16, 20, 3, 12, 14, 18, 19, 15)$。
 
 已知关键字序列为 $(1, 2, 6, 7, 11, 4, 8, 13, 10, 5, 17, 9, 16, 20, 3, 12, 14, 18, 19, 15)$，创建一棵 5 阶 B-树（$m=5$）。5 阶 B-树的性质如下：
 \begin{itemize}
@@ -8989,7 +9251,7 @@ O(\log_m n)
 
    其过程如图 \ref{fig:Btree_create} 所示。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/Btree_create.pdf}
   \caption{创建 B-树的过程}
@@ -9034,9 +9296,9 @@ O(\log_m n)
 
 以下图为例，我们依次删除关键字$8,20,18,5$。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/Btree_del1.pdf}
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/Btree_del1.pdf}
   \caption{删除 B-树中的关键字}
   \label{fig:Btree_delete}
 
@@ -9061,7 +9323,7 @@ O(\log_m n)
 
      调整后的树如下图所示：
 
-     \begin{figure}[h!]
+     \begin{figure}[!htbp]
         
         \centering
         \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/Btree_del2.pdf}
@@ -9102,10 +9364,10 @@ O(\log_m n)
      \end{itemize}
 
      调整后的树如下图所示：
-     \begin{figure}[h!]
+     \begin{figure}[!htbp]
         
           \centering
-          \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/Btree_del3.pdf}
+          \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/Btree_del3.pdf}
           \caption{删除关键字 20 后的 B-树}
           \label{fig:Btree_delete_20}
      \end{figure}
@@ -9143,10 +9405,10 @@ O(\log_m n)
      \end{itemize}
 
      调整后的树如下图所示：
-      \begin{figure}[h!]
+      \begin{figure}[!htbp]
           
             \centering
-            \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/Btree_del4.pdf}
+            \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/Btree_del4.pdf}
             \caption{删除关键字 18 后的 B-树}
             \label{fig:Btree_delete_18}
 
@@ -9187,9 +9449,9 @@ O(\log_m n)
       \end{itemize}
 
       此时调整后的状态为：
-      \begin{figure}[h!]
+      \begin{figure}[!htbp]
           \centering
-          \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/Btree_del5.pdf}
+          \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/Btree_del5.pdf}
           \caption{删除关键字 5 后的 B-树}
           \label{fig:Btree_delete_5}
 
@@ -9223,9 +9485,9 @@ O(\log_m n)
 
 最终调整后的B树如下图所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/Btree_del6.pdf}
+    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/Btree_del6.pdf}
     \caption{最终调整后的 B-树}
     \label{fig:Btree_final}
 
@@ -9274,7 +9536,7 @@ O(\log_m n)
 \end{itemize}
 
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
   \centering
   \includegraphics[width=1\textwidth]{./figure/pdf/cropped/B+Tree.pdf}
   \caption{4 阶 B+树}
@@ -9451,7 +9713,7 @@ K_{p_0} \leq K_{p_1} \leq \dots \leq K_{p_{n-1}}
 
 例如有一组元素 $[5, 2, 9, 1, 5, 6]$，直接插入排序的过程如下表所示：
 
-\begin{table}[h!]
+\begin{table}[!htbp]
 \centering
 \caption{直接插入排序每一趟的结果}
 \label{tab:directInsertionSort}
@@ -9627,7 +9889,7 @@ O(1)
 
 我们以关键字序列 $[7,6,9,3,1,5,2,4]$ 为例，演示希尔排序的过程：
 初始增量 $d_1 = 4$，将序列分为 4 组，如图 \ref{fig:shellSort1} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(a).pdf}
     \caption{初始增量 $d_1 = 4$ 的分组}
@@ -9635,7 +9897,7 @@ O(1)
 \end{figure}
 
 第二趟排序时，增量 $d_2 = 2$，将序列分为 2 组，如图 \ref{fig:shellSort2} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(b).pdf}
     \caption{增量 $d_2 = 2$ 的分组}
@@ -9643,7 +9905,7 @@ O(1)
 \end{figure}
 
 第三趟排序时，增量 $d_3 = 1$，将序列分为 1 组，如图 \ref{fig:shellSort3} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(c).pdf}
     \caption{增量 $d_3 = 1$ 的分组}
@@ -9651,7 +9913,7 @@ O(1)
 \end{figure}
 
 最后得到排序后的序列 $[1,2,3,4,5,6,7,9]$。如图 \ref{fig:shellSort4} 所示：
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/shell(d).pdf}
     \caption{排序后的序列}
@@ -9768,7 +10030,7 @@ O(1)
 
 我们以关键字序列 $[5, 2, 3,6,1,4]$ 为例，演示冒泡排序的第一趟过程，如图 \ref{fig:bubbleSort} 所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/bubbleSort.pdf}
     \caption{冒泡排序的第一趟过程}
@@ -9776,7 +10038,7 @@ O(1)
 \end{figure}
 
 其完整的冒泡排序过程如下表所示：
-\begin{table}[h!]
+\begin{table}[!htbp]
 \centering
 \caption{冒泡排序每一趟的结果}
 
@@ -9884,7 +10146,7 @@ O(1)
 
 从$high$指针开始向左扫描，找到第一个小于枢纽元素的元素5，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_a}所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_a.pdf}
     \caption{快速排序的划分过程}
@@ -9894,7 +10156,7 @@ O(1)
 
 从 $low$指针开始向右扫描，找到第一个大于枢纽元素的元素8，并将其移往$high$指针所在的位置，如图 \ref{fig:patition_b}所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_b.pdf}
     \caption{快速排序的划分过程}
@@ -9904,7 +10166,7 @@ O(1)
 
 再从$high$指针开始向左扫描，找到第一个小于枢纽元素的元素4，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_c}所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_c.pdf}
     \caption{快速排序的划分过程}
@@ -9914,7 +10176,7 @@ O(1)
 从 $low$指针开始向右扫描，找到第一个大于枢纽元素的元素7，并将其移往$high$指针所在的位置，如图 \ref{fig:patition_d}所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_d.pdf}
     \caption{快速排序的划分过程}
@@ -9924,7 +10186,7 @@ O(1)
 再从$high$指针开始向左扫描，找到第一个小于枢纽元素的元素2，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_e}所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_e.pdf}
     \caption{快速排序的划分过程}
@@ -9934,7 +10196,7 @@ O(1)
 从 $low$指针开始向右扫描，找到第一个大于枢纽元素的元素9，并将其移往$high$指针所在的位置，如图 \ref{fig:patition_f}所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_f.pdf}
     \caption{快速排序的划分过程}
@@ -9944,7 +10206,7 @@ O(1)
 再从 $high$指针开始向左扫描，找到第一个小于枢纽元素的元素3，并将其移往$low$指针所在的位置，如图 \ref{fig:patition_g}所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_g.pdf}
     \caption{快速排序的划分过程}
@@ -9955,7 +10217,7 @@ O(1)
 最后继续从$low$指针开始向右扫描，直到$low$指针和$high$指针相遇为止，如图 \ref{fig:patition_h}所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_h.pdf}
     \caption{快速排序的划分过程}
@@ -9965,7 +10227,7 @@ O(1)
 此时，$low$指针和$high$指针相遇，划分完成。我们将枢纽元素6与$low$指针所在的元素3交换位置，如图 \ref{fig:patition_i}所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/patition_i.pdf}
     \caption{快速排序的划分过程}
@@ -9976,7 +10238,7 @@ O(1)
 划分完成后，枢纽元素6已经归位。此时，左边的元素都小于等于6，右边的元素都大于等于6。
 接下来，我们对左边的元素和右边的元素分别进行快速排序。其整体过程如图 \ref{fig:quickSort}所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/quickSort.pdf}
     \caption{快速排序的整体过程}
@@ -10106,7 +10368,7 @@ O(\log n)
 
 我们以关键字序列 $[5, 2, 3, 6, 1, 4]$ 为例，演示直接选择排序的过程，如下表所示：
 
-\begin{table}[h!]
+\begin{table}[!htbp]
 \centering
 
 \caption{直接选择排序每一趟的结果}
@@ -10200,7 +10462,7 @@ $R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 称为堆，当且仅当�
 
 如图 \ref{fig:heap}所示，$R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 形成了一棵完全二叉树。
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/heap.pdf}
     \caption{堆的定义}
@@ -10251,7 +10513,7 @@ $R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 称为堆，当且仅当�
 我们以关键字序列 $[2,8,6,3,4,4,1]$ 为例，演示调整堆的过程，如图 \ref{fig:adjustHeap} 所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/heapAdjust.pdf}
     \caption{调整堆的过程}
@@ -10294,7 +10556,7 @@ $R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 称为堆，当且仅当�
 
 我们以关键字序列 $[6,8,7,9,0,1,3,2,4,5]$ 为例，演示构建大根堆的过程，如图 \ref{fig:heapBuild} 所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/heapBuild.pdf}
     \caption{构建大根堆的过程}
@@ -10315,7 +10577,7 @@ $R[1..n]$ 中的关键字序列 $K_1, K_2, \dots, K_n$ 称为堆，当且仅当�
 我们同样以关键字序列 $[6,8,7,9,0,1,3,2,4,5]$ 为例，演示堆排序的过程，如图 \ref{fig:heapSort} 所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/heapSort.pdf}
     \caption{堆排序的过程}
@@ -10452,7 +10714,7 @@ O(1)
 我们以关键字序列 $[8,4,5,7,1,3,6,2]$ 为例，演示二路归并排序的过程，如图 \ref{fig:mergeSort} 所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/mergeSort_process.pdf}
     \caption{二路归并排序的过程}
@@ -10476,7 +10738,7 @@ O(1)
 其过程如图 \ref{fig:merge} 所示：
 
 \begin{figure}
-[h!]
+[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/merge.pdf}
     \caption{二路归并的过程}
@@ -10557,7 +10819,7 @@ a_i.\text{key} = (a_{i1}, a_{i2}, \dots, a_{id})
 
 我们以关键字序列 $[12,38,333,63,436,2]$ 为例，演示基数排序的过程，如图 \ref{fig:radixSort} 所示：
 
-\begin{figure}[h!]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{./figure/pdf/cropped/radixSort.pdf}
     \caption{基数排序的过程}
@@ -10593,7 +10855,7 @@ O(r)
 \section{排序算法的比较}
 
 各种排序算法的性能比较如下表所示：
-\begin{table}[h!]
+\begin{table}[!htbp]
 \centering
 \caption{各种排序方法的性能}
 \begin{tabular}{|l|c|c|c|c|c|c|}
