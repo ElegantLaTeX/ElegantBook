@@ -1,41 +1,158 @@
-<!-- Author : Dongsheng Deng & Liam Huang-->
-<!-- Program Email: elegantlatex2e@gmail.com -->
+# BJBook - 北街学长学习资料库
 
-[Homepage](https://elegantlatex.org/) | [Github](https://github.com/ElegantLaTeX/ElegantBook) | [CTAN](https://ctan.org/pkg/elegantbook) | [Download](https://github.com/ElegantLaTeX/ElegantBook/releases) | 
+[![License](https://img.shields.io/badge/License-LPPL%201.3c-blue.svg)](https://www.latex-project.org/lppl/)
+[![LaTeX](https://img.shields.io/badge/LaTeX-3.0-blue.svg)](https://www.latex-project.org/)
 
-![License](https://img.shields.io/ctan/l/elegantbook.svg) ![CTAN Version](https://img.shields.io/ctan/v/elegantbook.svg) ![Github Version](https://img.shields.io/github/release/ElegantLaTeX/ElegantBook.svg) ![Repo Size](https://img.shields.io/github/repo-size/ElegantLaTeX/ElegantBook.svg)
+## 📚 项目简介
 
--------
+BJBook 是北街学长倾力打造的数据结构与操作系统学习资料库，采用 LaTeX 排版系统制作，提供高质量的 PDF 教材和练习题。
 
-# ElegantBook: 优美的 LaTeX 书籍模板 An Elegant LaTeX Template for Books 
+### 🎯 项目特色
 
-ElegantBook 是为 LaTeX 书籍写作而设计的模板，由 [Ethan Deng](https://github.com/EthanDeng) 和 [Liam Huang](https://github.com/Liam0205) 创立，现在主要由 [Ethan Deng](https://github.com/EthanDeng)、[乙醇](https://github.com/syvshc)和[死抠](https://github.com/sikouhjw)维护。如果你有其他问题、建议或者报告 bug，可以提交 issues 或者加入我们的 QQ 用户交流群：692108391。
+- **深入浅出的讲解**：用通俗易懂的语言解释复杂的概念
+- **丰富的图表资源**：包含大量精心绘制的 SVG 图表和 Excalidraw 文件
+- **完整的练习体系**：每章都配有详细的练习题和答案
+- **专业的排版**：使用 ElegantBook 模板，确保文档美观易读
 
-ElegantBook is designed for writing books, created by [Ethan Deng](https://github.com/EthanDeng) and [Liam Huang](https://github.com/Liam0205), and maintained by [Ethan Deng](https://github.com/EthanDeng), [syvshc](https://github.com/syvshc) and [sikouhjw](https://github.com/sikouhjw). Just enjoy it! If you have any questions, suggestions or bug reports, you can create issues or contact us at elegantlatex2e@gmail.com.
+## 📁 项目结构
 
+```
+BJBook/
+├── DS/                          # 数据结构部分
+│   ├── DSBook.tex              # 数据结构主教材
+│   ├── DSBook.pdf              # 编译后的PDF教材
+│   ├── DSExcercise/            # 数据结构练习题
+│   │   ├── BJDS_excercise.pdf  # 练习题PDF
+│   │   └── chapter1-9/         # 各章节答案
+│   └── figure/                 # 图表资源
+│       ├── excalidraw/         # Excalidraw 源文件
+│       ├── svg/                # SVG 矢量图
+│       ├── pdf/                # PDF 图表
+│       └── png/                # PNG 位图
+├── OS/                          # 操作系统部分
+│   ├── OSClassExcecise/        # 课堂练习题
+│   │   ├── BJOSClass_excercise.pdf
+│   │   └── BJOSClass_excercise_answer.pdf
+│   ├── OSExcercise/            # 课后练习题
+│   │   ├── BJOSAfterClass_excercise.pdf
+│   │   └── [北街学长]操作系统课后选择题.pdf
+│   └── figure/                 # 操作系统图表资源
+├── elegantbook.cls             # LaTeX 模板文件
+├── reference.bib               # 参考文献
+└── License                     # LPPL 许可证
+```
 
-**本模板自 2023 年 1 月 1 日开始，不再维护，不建议使用本系列模板！为了保证之前版本的用户仍然能查到说明文档，本说明文档仍然保留过去的信息。**
+## 📖 内容概览
 
-**Caution: This template will no longer be maintained since January 1st, 2023.**
+### 数据结构 (DS)
 
-## 致谢 Acknowledgement
+**主教材：《深入浅出数据结构》**
 
+涵盖内容：
+- 数据结构基础概念
+- 线性结构（数组、链表、栈、队列）
+- 树形结构（二叉树、B树、红黑树、AVL树、堆）
+- 图形结构（图的基本概念、遍历算法）
+- 查找与排序算法
+- 高级数据结构
 
-特别感谢 [sikouhjw](https://github.com/sikouhjw) 和 [syvshc](https://github.com/syvshc) 长期以来对于 Github 上 issue 的快速回应，以及各个社区论坛对于 ElegantLaTeX 相关问题的回复。特别感谢 ChinaTeX 以及 [LaTeX 工作室](http://www.latexstudio.net/)对于本系列模板的大力宣传与推广。
+**练习题体系：**
+- 每章配套练习题
+- 详细的解题思路和答案
+- 涵盖基础题到综合应用题
 
-Thank [sikouhjw](https://github.com/sikouhjw) and [syvshc](https://github.com/syvshc) for their quick response to Github issues and continuously support work for ElegantLaTeX community. Thank ChinaTeX and [LaTeX Studio](http://www.latexstudio.net/) for their promotion. 
+### 操作系统 (OS)
 
+**课堂练习题：**
+- 操作系统概述
+- 进程管理
+- 内存管理
+- 文件系统
+- 设备管理
 
-## 协议 License
+**课后练习题：**
+- 名校考研真题
+- 全国统考真题
+- 综合应用题
 
-本模板发布遵循 LaTeX 项目公共许可证 1.3 c 或更高版本。
-如果是衍生作品，请务必加入协议声明和模板信息（github、CTAN 地址）。
+## 🛠️ 使用说明
 
-This work is released under the LaTeX Project Public License, v1.3c or later.
+### 环境要求
 
+- LaTeX 发行版（推荐 TeX Live 或 MiKTeX）
+- 支持中文的编译器（XeLaTeX 或 LuaLaTeX）
+- ElegantBook 模板
 
-## 衍生品 Derivative Works
+### 编译方法
 
-+ [ElegantBookdown](https://github.com/XiangyunHuang/ElegantBookdown)：[XiangyunHuang](https://github.com/XiangyunHuang) 开发并维护的基于 ElegantBook 的 Bookdown 模板。
-+ [bookdownplus](https://github.com/pzhaonet/bookdownplus)：应网友要求，[pzhaonet](https://github.com/pzhaonet) 在 bookdownplus 收录了 ElegantPaper 模板，并为 Mac 做了字体适配。
-+ [PanBook](https://github.com/annProg/PanBook)：[annProg](https://github.com/annProg) 开发并维护的基于 Markdown 写作的工作流，收录了 ElegantBook 和 ElegantPaper 模板。
+1. **编译主教材：**
+   ```bash
+   xelatex DS/DSBook.tex
+   ```
+
+2. **编译练习题：**
+   ```bash
+   xelatex DS/DSExcercise/BJDS_excercise.tex
+   xelatex OS/OSExcercise/BJOSAfterClass_excercise.tex
+   ```
+
+### 查看文档
+
+- 直接打开对应的 PDF 文件即可阅读
+- 建议使用支持中文的 PDF 阅读器
+
+## 🎨 图表资源
+
+项目包含丰富的图表资源：
+
+- **Excalidraw 文件**：可编辑的矢量图源文件
+- **SVG 格式**：高质量的矢量图
+- **PDF 格式**：适合打印的图表
+- **PNG 格式**：适合网页显示的位图
+
+## 📝 贡献指南
+
+欢迎提交 Issue 和 Pull Request 来改进这个项目！
+
+### 贡献方式
+
+1. Fork 本仓库
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 开启 Pull Request
+
+### 代码规范
+
+- 使用标准的 LaTeX 语法
+- 保持文档结构清晰
+- 添加适当的注释
+
+## 📄 许可证
+
+本项目采用 [LaTeX Project Public License (LPPL) 1.3c](https://www.latex-project.org/lppl/) 许可证。
+
+## 👨‍💻 作者
+
+**北街学长**
+
+- 专注于数据结构与算法教学
+- 致力于制作高质量的学习资料
+- 用通俗易懂的方式讲解复杂概念
+
+## 🙏 致谢
+
+- 感谢 ElegantLaTeX 团队提供的优秀模板
+- 感谢所有为这个项目做出贡献的朋友
+- 感谢使用和推荐这个项目的同学们
+
+## 📞 联系方式
+
+如有问题或建议，欢迎通过以下方式联系：
+
+- 提交 GitHub Issue
+- 发送邮件至作者
+
+---
+
+⭐ 如果这个项目对你有帮助，请给它一个星标！
