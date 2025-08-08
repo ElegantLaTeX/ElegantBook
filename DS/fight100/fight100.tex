@@ -345,10 +345,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
   \vspace{1cm}  
 
   \begin{tikzpicture}[
-    node distance = 1cm,
+    node distance = 0.5cm,
     start chain = going right,
     every node/.style = {
-        draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
         on chain, join=by {->, thick}
     }
 ]
@@ -363,10 +363,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 
 \vspace{1cm}
 \begin{tikzpicture}[
-  node distance = 1cm,
+  node distance = 0.5cm,
   start chain = going right,
   every node/.style = {
-      draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+      draw, rectangle, minimum width=1cm, minimum height=0.8cm,
       on chain, join=by {->, thick}
   }
 ]
@@ -386,10 +386,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 
   \vspace{1cm}
   \begin{tikzpicture}[
-    node distance = 1cm,
+    node distance = 0.5cm,
     start chain = going right,
     every node/.style = {
-        draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
         on chain, join=by {->, thick}
     }
   ]
@@ -404,10 +404,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 \vspace{1cm}
 
   \begin{tikzpicture}[
-    node distance = 1cm,
+    node distance = 0.5cm,
     start chain = going right,
     every node/.style = {
-        draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
         on chain, join=by {->, thick}
     }
   ]
@@ -428,10 +428,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
   \vspace{1cm}
 
   \begin{tikzpicture}[
-    node distance = 1cm,
+    node distance = 0.5cm,
     start chain = going right,
     every node/.style = {
-        draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
         on chain, join=by {->, thick}
     }
   ]
@@ -446,10 +446,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 \vspace{1cm}
 
   \begin{tikzpicture}[
-    node distance = 1cm,
+    node distance = 0.5cm,
     start chain = going right,
     every node/.style = {
-        draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
         on chain, join=by {->, thick}
     }
   ]
@@ -467,10 +467,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
   \vspace{1cm}
 
   \begin{tikzpicture}[
-    node distance = 1cm,
+    node distance = 0.5cm,
     start chain = going right,
     every node/.style = {
-        draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
         on chain, join=by {->, thick}
     }
   ]
@@ -486,10 +486,10 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 \vspace{1cm}
 
   \begin{tikzpicture}[
-    node distance = 1cm,
+    node distance = 0.5cm,
     start chain = going right,
     every node/.style = {
-        draw, rectangle, minimum width=1.5cm, minimum height=0.8cm,
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
         on chain, join=by {->, thick}
     }
   ]
@@ -503,60 +503,423 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 \vspace{5cm}
 \item
   
-  在一个\textbf{递增有序}的线性表中，有数值相同的元素存在，若存储方式为单链表，设计算法去掉数值相同的元素，使表中不再有重复的元素。
+在一个\textbf{递增有序}的线性表中，有数值相同的元素存在，若存储方式为单链表，设计算法去掉数值相同的元素，使表中不再有重复的元素。
 
-  
-  
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {2};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+
 \vspace{5cm}
 \item
   
   用单链表保存m个整数，结点的结构为{[}data{]}{[}next{]},且\textbar data\textbar\textless=n。现要求设计一个时间复杂度尽可能高效算法，对于链表中绝对值相等的结点，仅保留第一次出现的结点而删除其余绝对值相等的结点。
   
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {-1};  % 节点3
+    \node {5};  % 节点3
+    \node {-5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
 \vspace{5cm}
 \item
   
   在带头结点的单链表L中,删除所有值为X的结点，并释放其空间，假设值为X的结点不唯一
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {2};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {5};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
   
 \vspace{5cm}
 \item
   
   设计一个递归算法，删除一个\textbf{不带头结点}的单链表中所有值为x的结点
-  
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {2};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {1};  % 节点3
+    \node {5};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
 \vspace{5cm}
 \item
   
   将一个带头结点单链表A分解成两个带头结点的单链表A和B，使得A中含有原表中序号为奇数的元素，B中含有原表中序号为偶数的元素，且保持其相对位置不变。
-  
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {A};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {A};  % 节点1
+    \node {1};  % 节点3
+    \node {5};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {B};  % 节点1
+    \node {2};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
 \vspace{5cm}
 \item
   
   设A、B是两个单链表（带头结点），其中元素\textbf{递增有序}，设计一个算法从A、B中的公共元素产生单链表C，要求不破坏A、B结点
-  
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {A};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {B};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {3};  % 节点3
+    \node {5};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {C};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
 \vspace{5cm}
 \item
   
   存在这样一种情况，如果两个单词有相同的后缀，那我们可以将后缀作为公共部分存储，比如being和loading，其中ing就可以作为公共部分，现在存在两个链表，含有公共部分，设计一个高效算法找到其公共后缀真实位置。
+
+  \begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../figure/fight100/pdf/commonSuffix.pdf}
+  \end{figure}
+
+ 
   
 \vspace{5cm}
 \item
   
-  设计一个算法找到单链表中最后一个最小值。
+  设计一个算法找到单链表中最后一个最小值。例如：下面的链表中，最后一个最小值是1，尾节点。
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {1};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
   
 \vspace{5cm}
 \item
   
-  求单链表中的中间位置结点元素，结点为偶数则向上取整。
-  
+  求单链表中的中间位置结点元素，结点为偶数则向上取整。例如：下面的A链表中，中间位置结点是5，B链表中，中间位置结点是2。
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {A};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 节点3
+    \node {1};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {B};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {10};  % 节点3
+    \node {1};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
 \vspace{5cm}
 \item
   
-  有一个带头结点的单链表，设计一个函数找到指定的倒数第k个结点，输出结点值，并返回1，否则返回0，前提不能改变链表，尽可能高效。
-  
+  有一个带头结点的单链表，设计一个函数找到指定的倒数第k个结点，输出结点值，并返回1，否则返回0，前提不能改变链表，尽可能高效。例如：下面的链表中，倒数第2个结点是5。
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
 \vspace{5cm}
 \item
   
-  设计算法在单链表中的第一个最大值前面插入值为x的结点。
-  
+  设计算法在单链表中的第一个最大值前面插入值为x的结点。例如：下面的链表中，第一个最大值是10，在10前面插入值为8的结点。
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node {8};  % 节点3
+    \node {10};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {8};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node {8};  % 节点3
+    \node {10};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+
 \vspace{5cm}
 \item
   
@@ -566,22 +929,163 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 \item
   
   设计一个算法判断一个单链表是否有环。
+
+  \begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../figure/fight100/pdf/sLinkWithcircle.pdf}
+  \end{figure}
+
+  \vspace{1cm}
+
+
   
 \vspace{5cm}
 \item
   
-  存在两个单链表序列A、B，设计函数判断B是否为A的子序列。
-  
+  存在两个单链表序列A、B，设计函数判断B是否为A的子序列。例如：下面的链表中，B链表是A链表的子序列。
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {A};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {B};  % 节点1
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
 \vspace{5cm}
 \item
   
   假设有两个按元素值\textbf{递增}次序排列的线性表，均以单链表形式存储。请编写算法将这两个单链表归并为一个按元素递减的单链表，并要求利用原来两个单链表的结点存放归并后的单链表。
-  
+  如下面的链表A和链表B，归并后的链表C为10,6,5,4,3,2,1。注意链表C并不是新创建的，而是利用了原来两个链表的结点。
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {A};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ] 
+    \node {B};  % 节点1
+    \node {1};  % 节点3
+    \node {3};  % 节点3
+    \node {4};  % 节点3
+    \node {5};  % 最后一个节点N
+    \node {6};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+\begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ] 
+    \node {C};  % 节点1
+    \node {10};  % 节点3
+    \node {6};  % 节点3
+    \node {5};  % 节点3
+    \node {4};  % 节点3
+    \node {3};  % 节点3
+    \node {2};  % 节点3
+    \node {1};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
 \vspace{5cm}
 \item
   
-  将单链表里的所有零元素移动到非零元素前面。
-  
+  将单链表里的所有零元素移动到非零元素前面。例如：下面的链表中，将所有零元素移动到非零元素前面。
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node {0};  % 节点3
+    \node {0};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {0};  % 节点3
+    \node {0};  % 节点3
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+   
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
 \vspace{5cm}
 \item
   
@@ -591,7 +1095,44 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 \item
   
   设计一个算法就地逆置单链表。所谓就地指的是空间复杂度为O（1）。
-  
+
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ]
+    \node {head};  % 节点1
+    \node {10};  % 节点3
+    \node {5};  % 节点3
+    \node {2};  % 节点3
+    \node {1};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+
 \vspace{5cm}
 \item
   
@@ -600,9 +1141,45 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
 \vspace{5cm}
 \item
   
-  有一个带头结点的单链表L，设计一个算法使其递增有序。
-  
+  有一个带头结点的单链表L，设计一个算法使其递增有序。注意：不能仅仅交换数据域，而是要交换结点。
 
+  \vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ] 
+    \node {head};  % 节点1
+    \node {10};  % 节点3
+    \node {5};  % 节点3
+    \node {2};  % 节点3
+    \node {1};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
+
+\vspace{1cm}
+
+  \begin{tikzpicture}[
+    node distance = 0.5cm,
+    start chain = going right,
+    every node/.style = {
+        draw, rectangle, minimum width=1cm, minimum height=0.8cm,
+        on chain, join=by {->, thick}
+    }
+  ] 
+    \node {head};  % 节点1
+    \node {1};  % 节点3
+    \node {2};  % 节点3
+    \node {5};  % 节点3
+    \node {10};  % 最后一个节点N
+    \node {10};  % 节点3
+    \node[draw=none, join=by {}] {NULL};  % NULL 指针（不画边框）
+\end{tikzpicture}
 \end{enumerate}
 
 \chapter{循环单链表、非循环双链表、循环双链表}
@@ -695,7 +1272,7 @@ p=3: & 6 & 7 & 8 & 1 & 2 & 4 \\
     假设一个算法表达式包含圆括号、方括号、和花括号3种类型的括号，编写一个算法来判断表达式里的括号是否配对，以字符`\textbackslash0'作为算术表达式的结束符。
   \vspace{5cm}
 \item
-    有一个队列和一个栈，设计一个算法是队列中的元素逆置。
+    有一个队列和一个栈，设计一个算法使队列中的元素逆置。
   \vspace{5cm}
 \item
     设有两个栈s1、s2都采用顺序栈方式，并共享一个存储区，大小为max，为了尽量利用空间，减少溢出的可能，可采用栈顶相向、迎面增长的存储方式，试设计s1、s2有关入栈和出栈的算法。
