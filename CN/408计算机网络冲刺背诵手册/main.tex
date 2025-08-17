@@ -1,0 +1,2179 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{../../elegantbook}
+
+\title{408计算机网络冲刺背诵手册}
+\subtitle{北街学长倾力之作}
+
+\author{北街}
+\date{2025/08/17}
+\version{1.0}
+
+
+\setcounter{tocdepth}{3}
+
+\logo{../../figure/logo-blue.png}
+\cover{../../figure/cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\usepackage{listings}         % 导入listings宏包
+\usepackage{xcolor}           % 支持颜色
+\usepackage{graphicx}        % 支持图形
+% 配置C++代码样式
+\lstset{
+    language=C++,             % 语言设置为C++
+    basicstyle=\ttfamily,      % 基本样式
+    keywordstyle=\color{blue}, % 关键词颜色
+    commentstyle=\color[rgb]{0,0.5,0},% 注释颜色  stringstyle=\color{red},   % 字符串颜色
+    numbers=left,              % 显示行号
+    numberstyle=\tiny,         % 行号样式
+    stepnumber=1,              % 每行显示行号
+    breaklines=true,           % 自动换行
+    frame=lines                % 代码块边框样式
+}
+
+\usepackage{tikz}
+\usetikzlibrary{chains, positioning, arrows.meta}
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+% ================== 408计算机网络冲刺背诵手册 ==================
+% 根据典型 408 大纲结构生成章节骨架，逐步填充 PDF 原文内容
+
+% ========== 第1章 计算机网络概述 ==========
+\chapter{计算机网络概述}
+
+\section{计算机网络的定义、功能和分类}
+
+\textbf{定义：}互连的、自主的计算机集合，通过通信线路连接，实现资源共享和信息传递。
+
+\textbf{主要功能：}
+\begin{itemize}
+  \item \textbf{数据通信}：点对点数据传输
+  \item \textbf{资源共享}：硬件、软件、数据共享
+  \item \textbf{分布式处理}：多台计算机协同处理任务
+  \item \textbf{提高可靠性}：备用设备和冗余路径
+  \item \textbf{负载均衡}：任务分配优化
+\end{itemize}
+
+\textbf{分类方式：}
+\begin{longtable}{@{}llp{6cm}@{}}
+\toprule
+\textbf{分类标准} & \textbf{类型} & \textbf{特点} \\\\ \midrule
+\endhead
+
+\multirow{4}{*}{覆盖范围} & PAN (个域网) & 10m以内，蓝牙、红外 \\\\
+& LAN (局域网) & 几km，以太网 \\\\
+& MAN (城域网) & 10-100km，城市范围 \\\\
+& WAN (广域网) & 100km以上，Internet \\\\
+\hline
+
+\multirow{3}{*}{拓扑结构} & 总线型 & 共享总线，冲突检测 \\\\
+& 星型 & 中心节点，易扩展 \\\\
+& 环型 & 令牌传递，无冲突 \\\\
+\hline
+
+\multirow{2}{*}{传输技术} & 广播式 & 共享信道，竞争访问 \\\\
+& 点对点 & 专用链路，存储转发 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{计算机网络的组成与结构}
+
+\textbf{网络组成三要素：}
+\begin{enumerate}
+  \item \textbf{硬件}：计算机、通信线路、网络设备
+  \item \textbf{软件}：网络操作系统、网络管理软件
+  \item \textbf{协议}：通信规则和标准
+\end{enumerate}
+
+\textbf{网络结构：}
+\begin{itemize}
+  \item \textbf{网络边缘}：主机（端系统），运行应用程序
+  \item \textbf{接入网}：连接端系统到边缘路由器
+  \item \textbf{网络核心}：路由器网状网络，分组交换
+\end{itemize}
+
+\section{计算机网络的性能指标}
+
+\subsection{速率相关指标}
+
+\textbf{核心概念对比：}
+\begin{longtable}{@{}p{2.5cm}p{5cm}p{6cm}@{}}
+\toprule
+\textbf{指标} & \textbf{定义} & \textbf{区别} \\\\ \midrule
+\endhead
+
+速率(Rate) & 数据传输速率，单位时间传输比特数 & 理论最大值，bps \\\\
+带宽(Bandwidth) & 信道能通过的最高数据率 & 物理概念，Hz或bps \\\\
+吞吐量(Throughput) & 实际单位时间传输的数据量 & 实际测量值 ≤ 带宽 \\\\
+
+\bottomrule
+\end{longtable}
+
+\subsection{时延相关指标}
+
+\textbf{四种时延组成：}
+\begin{align}
+\text{总时延} &= \text{发送时延} + \text{传播时延} + \text{处理时延} + \text{排队时延}
+\end{align}
+
+\begin{itemize}
+  \item \textbf{发送时延} = $\frac{L}{R}$ （L：分组长度，R：发送速率）
+  \item \textbf{传播时延} = $\frac{d}{s}$ （d：物理距离，s：传播速率）
+  \item \textbf{处理时延}：路由器处理分组的时间
+  \item \textbf{排队时延}：分组在队列中等待的时间
+\end{itemize}
+
+\textbf{重要概念：}
+\begin{itemize}
+  \item \textbf{时延带宽积} = 传播时延 × 带宽（"管道"中的比特数）
+  \item \textbf{往返时间RTT}：从发送方到接收方再返回的时间
+\end{itemize}
+
+\subsection{其他性能指标}
+
+\begin{itemize}
+  \item \textbf{信道利用率}：$U = \frac{T_0}{T_0 + RTT}$（停止等待协议）
+  \item \textbf{网络利用率}：信道利用率加权平均值
+  \item \textbf{丢包率}：丢失分组数/总分组数
+  \item \textbf{误码率BER}：传输中出错的比特占总比特数的比率
+\end{itemize}
+
+\textbf{记忆要点：}
+\begin{enumerate}
+  \item 发送时延看发送方，传播时延看距离
+  \item 利用率过高导致时延急剧增加
+  \item 时延带宽积 = 链路容量
+\end{enumerate}
+
+\section{计算机网络体系结构}
+
+\subsection{网络协议与分层}
+
+\textbf{协议三要素：}
+\begin{enumerate}
+  \item \textbf{语法}：数据格式、编码、信号电平
+  \item \textbf{语义}：控制信息的含义，差错处理
+  \item \textbf{同步}：事件顺序的详细说明
+\end{enumerate}
+
+\textbf{分层的优点：}
+\begin{itemize}
+  \item 降低复杂性，便于设计和维护
+  \item 标准化接口，促进互操作性
+  \item 模块化设计，便于更新和扩展
+\end{itemize}
+
+\subsection{OSI七层模型}
+
+\begin{longtable}{@{}clp{4cm}p{5cm}@{}}
+\toprule
+\textbf{层次} & \textbf{名称} & \textbf{主要功能} & \textbf{关键设备/协议} \\\\ \midrule
+\endhead
+
+7 & 应用层 & 为应用程序提供网络服务 & HTTP, FTP, SMTP, DNS \\\\
+6 & 表示层 & 数据加密、压缩、格式转换 & SSL/TLS, JPEG, MPEG \\\\
+5 & 会话层 & 建立、管理、终止会话 & NetBIOS, RPC \\\\
+4 & 传输层 & 端到端可靠传输 & TCP, UDP \\\\
+3 & 网络层 & 路径选择，逻辑寻址 & IP, ICMP, 路由器 \\\\
+2 & 数据链路层 & 成帧，差错检测与纠正 & 以太网, PPP, 交换机 \\\\
+1 & 物理层 & 比特流传输 & 集线器, 中继器 \\\\
+
+\bottomrule
+\end{longtable}
+
+\subsection{TCP/IP四层模型}
+
+\begin{longtable}{@{}p{3cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{TCP/IP层} & \textbf{对应OSI层} & \textbf{主要协议} \\\\ \midrule
+\endhead
+
+应用层 & 应用层+表示层+会话层 & HTTP, FTP, SMTP, DNS, Telnet \\\\
+传输层 & 传输层 & TCP, UDP \\\\
+网际层 & 网络层 & IP, ICMP, ARP, RARP \\\\
+网络接口层 & 数据链路层+物理层 & 以太网, PPP, SLIP \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{记忆口诀：}
+\begin{itemize}
+  \item OSI：\textbf{物数网传会表应}
+  \item 各层PDU：比特 → 帧 → 分组/包 → 段 → 报文
+\end{itemize}
+
+% ========== 第2章 物理层 ==========
+\chapter{物理层}
+
+\section{物理层基本概念}
+
+\textbf{物理层任务：}在物理媒体上传输比特流，定义电气、机械、功能、过程特性。
+
+\textbf{四个特性：}
+\begin{enumerate}
+  \item \textbf{机械特性}：接口形状、尺寸、引脚数
+  \item \textbf{电气特性}：电压范围、传输速率、距离限制
+  \item \textbf{功能特性}：引脚的功能分配
+  \item \textbf{过程特性}：建立连接的工作步骤
+\end{enumerate}
+
+\section{数据通信基础}
+
+\subsection{基本术语}
+
+\textbf{通信基础概念：}
+\begin{itemize}
+  \item \textbf{数据}：传送信息的实体
+  \item \textbf{信号}：数据的电气/光学表现
+    \begin{itemize}
+      \item 模拟信号：连续变化
+      \item 数字信号：离散变化
+    \end{itemize}
+  \item \textbf{信道}：传输信号的通道
+    \begin{itemize}
+      \item 单工：单向传输（广播）
+      \item 半双工：双向交替传输（对讲机）
+      \item 全双工：双向同时传输（电话）
+    \end{itemize}
+  \item \textbf{信源}：产生和发送数据的源点
+  \item \textbf{信宿}：接收数据的终点
+\end{itemize}
+
+\textbf{重要术语：}
+\begin{itemize}
+  \item \textbf{码元}：在数字通信中时间轴上的一个信号单元
+  \item \textbf{波特率}：每秒传输的码元个数，单位Baud
+  \item \textbf{比特率}：每秒传输的比特个数，单位bps
+  \item \textbf{关系}：比特率 = 波特率 × $\log_2V$（V为每个码元可能的离散值个数）
+\end{itemize}
+
+\textbf{编码与调制：}
+\begin{itemize}
+  \item \textbf{编码}：数据变换为数字信号
+    \begin{itemize}
+      \item 不归零编码(NRZ)：1用高电平，0用低电平
+      \item 归零编码(RZ)：信号在码元结束前归零
+      \item 曼彻斯特编码：位中间有跳变，自同步
+      \item 差分曼彻斯特编码：位开始有无跳变表示数据
+    \end{itemize}
+  \item \textbf{调制}：数据变换为模拟信号
+    \begin{itemize}
+      \item 调幅(ASK)：改变载波幅度
+      \item 调频(FSK)：改变载波频率  
+      \item 调相(PSK)：改变载波相位
+      \item 正交调幅(QAM)：同时调幅和调相
+    \end{itemize}
+\end{itemize}
+
+\textbf{三种交换方式：}
+\begin{longtable}{@{}p{3cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{交换方式} & \textbf{特点} & \textbf{应用场景} \\\\ \midrule
+\endhead
+
+电路交换 & 建立专用物理连接 & 传统电话网络 \\\\
+& 三阶段：建立、通信、释放 & 实时通信 \\\\
+\hline
+
+报文交换 & 整个报文存储转发 & 早期数据网络 \\\\
+& 存储转发延迟大 & 电子邮件 \\\\
+\hline
+
+分组交换 & 将报文分割成分组 & 现代数据网络 \\\\
+& 存储转发延迟小 & Internet \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{数据报vs虚电路：}
+\begin{itemize}
+  \item \textbf{数据报}：每个分组独立路由，无连接
+  \item \textbf{虚电路}：预先建立路径，面向连接
+\end{itemize}
+
+\subsection{奈奎斯特定理和香农定理}
+
+\textbf{奈奎斯特定理（理想信道）：}
+\[
+C = 2W \log_2 V \text{ (bps)}
+\]
+其中：W=带宽(Hz)，V=信号电平数
+
+\textbf{香农定理（实际信道）：}
+\[
+C = W \log_2(1 + S/N) \text{ (bps)}
+\]
+其中：S/N=信噪比，单位dB时：$S/N_{dB} = 10\log_{10}(S/N)$
+
+\textbf{记忆要点：}
+\begin{itemize}
+  \item 奈奎斯特：理想无噪声，主要看电平数
+  \item 香农：考虑噪声，实际信道极限
+  \item 两者取较小值为实际极限
+\end{itemize}
+
+\section{传输介质}
+
+\subsection{有线传输介质}
+
+\begin{longtable}{@{}p{2.5cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{介质类型} & \textbf{特点} & \textbf{应用场景} \\\\ \midrule
+\endhead
+
+双绞线 & 抗干扰能力强，成本低 & 局域网，电话线 \\\\
+& 5类线：100Mbps & \\\\
+& 6类线：1Gbps & \\\\
+\hline
+
+同轴电缆 & 带宽大，抗干扰强 & 有线电视，早期以太网 \\\\
+& 50Ω：数字传输 & \\\\
+& 75Ω：模拟传输 & \\\\
+\hline
+
+光纤 & 带宽极大，不受电磁干扰 & 长距离高速传输 \\\\
+& 单模：长距离 & 主干网络 \\\\
+& 多模：短距离 & 建筑物内部 \\\\
+
+\bottomrule
+\end{longtable}
+
+\subsection{无线传输介质}
+\begin{itemize}
+  \item \textbf{无线电波}：长距离，穿透性强，全向传播
+  \item \textbf{微波}：视距传播，点对点通信
+  \item \textbf{红外线}：短距离，需要视距，安全性好
+  \item \textbf{激光}：高带宽，方向性强，易受干扰
+\end{itemize}
+
+\section{信道复用技术}
+
+\textbf{复用目的：}提高信道利用率，多个用户共享信道
+
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{复用方式} & \textbf{原理} & \textbf{特点} \\\\ \midrule
+\endhead
+
+频分复用FDM & 不同频率载波传输 & 模拟通信，频谱分割 \\\\
+时分复用TDM & 不同时间片传输 & 数字通信，时间分割 \\\\
+统计时分复用STDM & 按需分配时间片 & 提高效率，复杂控制 \\\\
+波分复用WDM & 不同波长光信号 & 光纤通信，容量巨大 \\\\
+码分复用CDM & 不同编码序列 & CDMA，抗干扰强 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{记忆技巧：}
+\begin{itemize}
+  \item FDM：频率分开用
+  \item TDM：时间轮流用  
+  \item WDM：波长分开用
+  \item CDM：编码区分用
+\end{itemize}
+
+\section{物理层设备}
+
+\textbf{中继器(Repeater)：}
+\begin{itemize}
+  \item \textbf{功能}：放大和重新整形信号，延长传输距离
+  \item \textbf{工作层次}：物理层
+  \item \textbf{特点}：
+    \begin{itemize}
+      \item 两端口设备，连接同种传输媒体
+      \item 不理解帧、分组等高层概念
+      \item 简单的信号放大，不检查数据内容
+      \item 延长单段传输距离，但不增加总带宽
+    \end{itemize}
+  \item \textbf{限制}：5-4-3规则（以太网中最多5段，4个中继器，3段有主机）
+\end{itemize}
+
+\textbf{集线器(Hub)：}
+\begin{itemize}
+  \item \textbf{功能}：多端口中继器，星型拓扑中心
+  \item \textbf{工作层次}：物理层
+  \item \textbf{特点}：
+    \begin{itemize}
+      \item 所有端口共享总带宽
+      \item 半双工工作方式
+      \item 单一冲突域和广播域
+      \item 使用CSMA/CD协议
+    \end{itemize}
+  \item \textbf{缺点}：
+    \begin{itemize}
+      \item 冲突域大，效率低
+      \item 不能隔离冲突
+      \item 所有端口必须同速率
+      \item 已基本被交换机取代
+    \end{itemize}
+\end{itemize}
+
+\textbf{中继器vs集线器：}
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{设备} & \textbf{中继器} & \textbf{集线器} \\\\ \midrule
+\endhead
+
+端口数量 & 2个 & 多个(4-24) \\\\
+拓扑结构 & 总线延长 & 星型中心 \\\\
+冲突域 & 1个 & 1个 \\\\
+主要用途 & 距离延长 & 网络集中 \\\\
+
+\bottomrule
+\end{longtable}
+
+
+
+% ========== 第3章 数据链路层 ==========
+\chapter{数据链路层}
+
+\section{数据链路层基本概念}
+
+\textbf{数据链路层功能：}
+\begin{enumerate}
+  \item \textbf{封装成帧}：在网络层分组前后添加帧头和帧尾
+  \item \textbf{透明传输}：保证任何比特组合都能传输
+  \item \textbf{差错检测}：检测传输中的差错
+  \item \textbf{差错纠正}：纠正某些传输差错
+  \item \textbf{流量控制}：防止接收方缓存溢出
+\end{enumerate}
+
+\textbf{三个基本问题：}
+\begin{itemize}
+  \item \textbf{封装成帧}：确定帧的边界
+  \item \textbf{透明传输}：解决帧定界符在数据中出现的问题
+  \item \textbf{差错检测}：接收方检测传输差错
+\end{itemize}
+
+\section{封装成帧}
+
+\textbf{帧的结构：}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+帧头 & 数据部分(IP数据报) & 帧尾 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{帧定界方法：}
+\begin{enumerate}
+  \item \textbf{字符计数法}：帧头指明帧长度
+  \item \textbf{字符填充法}：使用特殊字符作为定界符
+  \item \textbf{零比特填充法}：连续5个1后插入0
+  \item \textbf{违法编码法}：使用物理层违法信号
+\end{enumerate}
+
+\textbf{透明传输：}
+确保数据中任意比特组合都不会被误认为控制信息
+\begin{itemize}
+  \item \textbf{字符填充}：遇到定界符时前面加转义字符
+  \item \textbf{比特填充}：遇到连续5个1时插入0
+\end{itemize}
+
+\section{差错控制}
+
+\subsection{差错检测}
+
+\textbf{差错产生原因：}
+\begin{itemize}
+  \item 噪声干扰、设备故障、传输衰减
+  \item 误码率BER：出错比特数/传输总比特数
+\end{itemize}
+
+\textbf{奇偶校验：}
+\begin{itemize}
+  \item \textbf{简单奇偶校验}：检测奇数个比特错误
+  \item \textbf{二维奇偶校验}：按行列分别校验，可定位错误
+\end{itemize}
+
+\textbf{循环冗余校验CRC：}
+\begin{enumerate}
+  \item 选择生成多项式G(x)，k个数据位，r个校验位
+  \item 发送方：将数据左移r位，除以G(x)得余数作为CRC
+  \item 接收方：收到数据除以G(x)，余数为0则无错
+\end{enumerate}
+
+\textbf{CRC特点：}
+\begin{itemize}
+  \item 检错能力强，漏检概率为$2^{-r}$
+  \item 能检测出所有奇数位错误
+  \item 能检测出长度≤r的突发错误
+  \item 只能检错，不能纠错
+\end{itemize}
+
+\subsection{差错纠正}
+
+\textbf{海明码：}
+\begin{itemize}
+  \item \textbf{海明距离}：两个等长字符串对应位不同的个数
+  \item \textbf{纠错能力}：纠正t个错误需要海明距离≥2t+1
+  \item \textbf{检错能力}：检测t个错误需要海明距离≥t+1
+\end{itemize}
+
+\textbf{海明码编码规则：}
+\begin{enumerate}
+  \item 校验位位置：$2^0, 2^1, 2^2, ...$
+  \item 数据位：其余位置
+  \item 每个校验位负责特定位置的奇偶性
+\end{enumerate}
+
+\section{流量控制与可靠传输}
+
+\subsection{停止等待协议}
+
+\textbf{工作原理：}
+\begin{enumerate}
+  \item 发送方发送一帧后停止，等待确认
+  \item 收到ACK后发送下一帧
+  \item 超时则重传当前帧
+\end{enumerate}
+
+\textbf{自动重传请求ARQ：}
+\begin{itemize}
+  \item \textbf{确认机制}：接收方发送ACK确认
+  \item \textbf{超时重传}：发送方设置定时器
+  \item \textbf{编号机制}：数据帧和ACK帧编号
+\end{itemize}
+
+\textbf{效率分析：}
+\[
+\text{信道利用率} = \frac{T_0}{T_0 + RTT}
+\]
+其中$T_0$为发送时间，RTT为往返时间
+
+\subsection{滑动窗口协议}
+
+\textbf{基本概念：}
+\begin{itemize}
+  \item \textbf{发送窗口}：发送方可连续发送的帧数
+  \item \textbf{接收窗口}：接收方可接收的帧数
+  \item \textbf{窗口滑动}：确认后窗口向前移动
+\end{itemize}
+
+\textbf{后退N帧协议(GBN)：}
+\begin{itemize}
+  \item 发送窗口：1~$W_T$，接收窗口：1
+  \item 累积确认：确认序号n表示n之前的帧都正确接收
+  \item 出错处理：重传出错帧及其后所有帧
+  \item 序号范围：$W_T + 1 \leq 2^k$
+\end{itemize}
+
+\textbf{选择重传协议(SR)：}
+\begin{itemize}
+  \item 发送窗口：$W_T$，接收窗口：$W_R$
+  \item 单独确认：每帧单独确认
+  \item 出错处理：只重传出错帧
+  \item 序号范围：$W_T + W_R \leq 2^k$
+\end{itemize}
+
+\textbf{协议对比：}
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{特性} & \textbf{GBN} & \textbf{SR} \\\\ \midrule
+\endhead
+
+接收窗口 & 1 & $W_R \geq 1$ \\\\
+确认方式 & 累积确认 & 单独确认 \\\\
+重传策略 & 回退重传 & 选择重传 \\\\
+复杂度 & 较简单 & 较复杂 \\\\
+效率 & 较低 & 较高 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{介质访问控制}
+
+\textbf{问题：}多个节点共享同一广播信道，如何协调访问？
+
+\subsection{信道划分}
+
+\textbf{频分多址FDMA：}
+\begin{itemize}
+  \item 将信道按频率划分给不同用户
+  \item 无冲突，但频谱利用率低
+\end{itemize}
+
+\textbf{时分多址TDMA：}
+\begin{itemize}
+  \item 将信道按时间划分给不同用户
+  \item 需要严格同步，有时隙浪费
+\end{itemize}
+
+\textbf{码分多址CDMA：}
+\begin{itemize}
+  \item 每用户分配唯一的码序列
+  \item 抗干扰能力强，频谱利用率高
+  \item 应用：3G移动通信
+\end{itemize}
+
+\subsection{随机访问}
+
+\textbf{ALOHA协议：}
+\begin{itemize}
+  \item \textbf{纯ALOHA}：想发就发，冲突后随机延时重发
+    \begin{itemize}
+      \item 最大吞吐量：18.4\%
+      \item 冲突检测：通过确认机制
+    \end{itemize}
+  \item \textbf{时隙ALOHA}：将时间分成时隙，只能在时隙开始发送
+    \begin{itemize}
+      \item 最大吞吐量：36.8\%
+      \item 减少了冲突概率
+    \end{itemize}
+\end{itemize}
+
+\textbf{载波监听多路访问CSMA：}
+\begin{itemize}
+  \item \textbf{基本思想}：发送前先监听信道
+  \item \textbf{1-坚持CSMA}：信道空闲立即发送，忙则持续监听
+  \item \textbf{非坚持CSMA}：信道忙则等待随机时间再监听
+  \item \textbf{p-坚持CSMA}：信道空闲以概率p发送
+\end{itemize}
+
+\textbf{CSMA/CD（载波监听/冲突检测）：}
+\begin{enumerate}
+  \item \textbf{发送前}：载波监听，信道空闲才发送
+  \item \textbf{发送中}：边发送边监听，检测冲突
+  \item \textbf{冲突处理}：停止发送，发送干扰信号
+  \item \textbf{退避算法}：二进制指数退避
+\end{enumerate}
+
+\textbf{最小帧长要求：}
+\[
+L_{min} = 2 \times \tau \times R
+\]
+其中$\tau$为单程传播时延，R为发送速率
+
+\textbf{CSMA/CA（载波监听/冲突避免）：}
+\begin{itemize}
+  \item 用于无线网络（难以检测冲突）
+  \item 预约信道：RTS/CTS机制
+  \item 确认机制：ACK确认
+  \item 应用：WiFi (IEEE 802.11)
+\end{itemize}
+
+\subsection{轮流协议}
+
+\textbf{令牌传递：}
+\begin{itemize}
+  \item 令牌按固定顺序在节点间传递
+  \item 持有令牌的节点可发送数据
+  \item 应用：令牌环网、FDDI
+\end{itemize}
+
+\textbf{轮询：}
+\begin{itemize}
+  \item 主节点轮询各从节点
+  \item 被轮询节点可发送数据
+  \item 开销：轮询时延、等待时延
+\end{itemize}
+
+\section{局域网}
+
+\subsection{局域网基本概念}
+
+\textbf{局域网特点：}
+\begin{itemize}
+  \item 覆盖范围小（几km以内）
+  \item 数据传输速率高（10Mbps~10Gbps）
+  \item 误码率低（$10^{-8}$~$10^{-12}$）
+  \item 各站点地位平等
+  \item 共享传输媒体
+\end{itemize}
+
+\textbf{局域网拓扑结构：}
+\begin{itemize}
+  \item \textbf{总线型}：所有节点连在一条总线上
+  \item \textbf{星型}：所有节点连接到中央节点
+  \item \textbf{环型}：节点连成环状结构
+  \item \textbf{树型}：层次结构，有根节点
+\end{itemize}
+
+\subsection{以太网}
+
+\textbf{IEEE 802.3标准特点：}
+\begin{itemize}
+  \item 使用CSMA/CD访问控制
+  \item 无连接、不可靠的服务
+  \item 发送前不握手
+  \item 不确认接收到的帧
+\end{itemize}
+
+\textbf{以太网帧格式：}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+前导码 & 帧开始符 & 目的地址 & 源地址 & 类型 & 数据 & 填充 & FCS \\
+\hline
+7字节 & 1字节 & 6字节 & 6字节 & 2字节 & 46-1500字节 & 0-46字节 & 4字节 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{字段说明：}
+\begin{itemize}
+  \item \textbf{前导码}：7个字节的10101010，用于同步
+  \item \textbf{帧开始符}：10101011，标识帧开始
+  \item \textbf{地址字段}：MAC地址，48位
+  \item \textbf{类型字段}：上层协议类型（如0x0800表示IP）
+  \item \textbf{数据字段}：46-1500字节，不足46字节需填充
+  \item \textbf{FCS}：帧校验序列，CRC校验
+\end{itemize}
+
+\textbf{MAC地址：}
+\begin{itemize}
+  \item 48位（6字节），全球唯一
+  \item 前24位：厂商标识（OUI）
+  \item 后24位：厂商内部编号
+  \item 广播地址：FF-FF-FF-FF-FF-FF
+  \item 组播地址：第一字节最低位为1
+\end{itemize}
+
+\textbf{以太网发展：}
+\begin{longtable}{@{}p{3cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{标准} & \textbf{速率} & \textbf{特点} \\\\ \midrule
+\endhead
+
+10BASE-T & 10 Mbps & 双绞线，星型拓扑 \\\\
+100BASE-TX & 100 Mbps & 快速以太网，保持帧格式 \\\\
+1000BASE-T & 1 Gbps & 千兆以太网，4对双绞线 \\\\
+10GBASE-T & 10 Gbps & 万兆以太网，光纤为主 \\\\
+
+\bottomrule
+\end{longtable}
+
+\subsection{无线局域网}
+
+\textbf{IEEE 802.11标准：}
+\begin{itemize}
+  \item 使用CSMA/CA访问控制
+  \item 隐藏终端问题：A能听到B，C能听到B，但A听不到C
+  \item 暴露终端问题：不必要的等待
+\end{itemize}
+
+\textbf{RTS/CTS机制：}
+\begin{enumerate}
+  \item 发送方先发RTS（请求发送）
+  \item 接收方回应CTS（允许发送）
+  \item 其他节点听到CTS后保持静默
+  \item 发送数据，接收方发送ACK
+\end{enumerate}
+
+\textbf{WiFi标准演进：}
+\begin{longtable}{@{}p{2.5cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{标准} & \textbf{速率} & \textbf{频段} \\\\ \midrule
+\endhead
+
+802.11 & 2 Mbps & 2.4 GHz \\\\
+802.11b & 11 Mbps & 2.4 GHz \\\\
+802.11g & 54 Mbps & 2.4 GHz \\\\
+802.11n & 600 Mbps & 2.4/5 GHz \\\\
+802.11ac & 6.93 Gbps & 5 GHz \\\\
+802.11ax & 9.6 Gbps & 2.4/5 GHz \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{广域网}
+
+\textbf{广域网特点：}
+\begin{itemize}
+  \item 覆盖范围广（几十到几万公里）
+  \item 通常使用点对点链路
+  \item 主要解决路由和流量控制问题
+\end{itemize}
+
+\textbf{点对点协议PPP：}
+
+\textbf{PPP协议特点：}
+\begin{itemize}
+  \item 面向字节，异步串行
+  \item 不可靠传输（无确认机制）
+  \item 支持多种网络层协议
+  \item 有差错检测功能
+\end{itemize}
+
+\textbf{PPP帧格式：}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+标志字段 & 地址字段 & 控制字段 & 协议字段 & 信息字段 & FCS & 标志字段 \\
+\hline
+7E & FF & 03 & 2字节 & 可变长 & 2字节 & 7E \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{PPP工作状态：}
+\begin{enumerate}
+  \item \textbf{静止状态}：物理层不可用
+  \item \textbf{建立状态}：建立链路，配置选项
+  \item \textbf{认证状态}：身份认证（可选）
+  \item \textbf{网络状态}：进行网络层配置
+  \item \textbf{打开状态}：链路可用，传输数据
+  \item \textbf{终止状态}：关闭链路
+\end{enumerate}
+
+\textbf{高级数据链路控制HDLC：}
+\begin{itemize}
+  \item 面向比特的协议
+  \item 使用零比特填充法
+  \item 支持半双工和全双工
+  \item 主要用于同步串行线路
+\end{itemize}
+
+\section{数据链路层设备}
+
+\subsection{网桥}
+
+\textbf{网桥功能：}
+\begin{itemize}
+  \item 连接两个或多个局域网
+  \item 存储转发工作方式
+  \item 根据MAC地址表转发帧
+  \item 可以隔离冲突域
+\end{itemize}
+
+\textbf{透明网桥工作原理：}
+\begin{enumerate}
+  \item \textbf{学习}：根据源MAC地址学习站点位置
+  \item \textbf{转发}：查表决定转发端口
+  \item \textbf{过滤}：同一段内通信不转发
+  \item \textbf{老化}：定期删除过期表项
+\end{enumerate}
+
+
+\subsection{以太网交换机}
+
+\textbf{交换机特点：}
+\begin{itemize}
+  \item 多端口网桥，每端口一个冲突域
+  \item 全双工工作，无冲突
+  \item 支持不同速率端口
+  \item 可构成星型拓扑
+\end{itemize}
+
+\textbf{交换方式：}
+\begin{itemize}
+  \item \textbf{存储转发}：接收完整帧后检查再转发
+  \item \textbf{直通交换}：读取目的地址后立即转发
+  \item \textbf{无片段交换}：读取64字节后开始转发
+\end{itemize}
+
+\textbf{生成树协议STP：}
+\begin{itemize}
+  \item 目的：消除网络中的环路
+  \item 方法：构造生成树，阻塞部分端口
+  \item 根网桥：优先级最高的交换机
+  \item 端口状态：根端口、指定端口、阻塞端口
+\end{itemize}
+
+\textbf{VLAN虚拟局域网：}
+\begin{itemize}
+  \item 逻辑分割物理网络
+  \item 同一VLAN内可通信，不同VLAN间需路由
+  \item 实现方式：端口VLAN、MAC VLAN、协议VLAN
+  \item 标准：IEEE 802.1Q（VLAN标记）
+\end{itemize}
+
+\textbf{记忆要点：}
+\begin{itemize}
+  \item 数据链路层负责相邻节点间的可靠传输
+  \item CRC只能检错不能纠错，海明码可以纠错
+  \item CSMA/CD用于有线网络，CSMA/CA用于无线网络
+  \item 以太网帧最小64字节，数据部分最少46字节
+  \item 交换机学习MAC地址，路由器学习IP地址
+\end{itemize}
+
+% ========== 第4章 网络层 ==========
+\chapter{网络层}
+
+\section{网络层概述}
+
+\textbf{网络层主要功能：}
+\begin{enumerate}
+  \item \textbf{路由选择}：确定分组从源到目的的最佳路径
+  \item \textbf{分组转发}：根据路由表转发分组到下一跳
+  \item \textbf{异构网络互连}：连接不同的网络
+  \item \textbf{拥塞控制}：防止网络过载
+\end{enumerate}
+
+\textbf{网络层设计思路：}
+\begin{itemize}
+  \item \textbf{网络层向上提供的服务}：无连接、尽力而为
+  \item \textbf{网络层核心功能}：转发和路由
+  \item \textbf{路由器功能}：存储转发、路由选择
+\end{itemize}
+
+\textbf{SDN基本概念：}
+\begin{itemize}
+  \item \textbf{软件定义网络}：控制平面与数据平面分离
+  \item \textbf{核心思想}：网络可编程、集中控制、开放接口
+  \item \textbf{架构组成}：
+    \begin{itemize}
+      \item 应用层：网络应用程序
+      \item 控制层：SDN控制器（大脑）
+      \item 基础设施层：SDN交换机（执行）
+    \end{itemize}
+  \item \textbf{优势}：灵活配置、统一管理、快速创新
+  \item \textbf{协议}：OpenFlow协议（控制器与交换机通信）
+\end{itemize}
+
+\section{网络层提供的两种服务}
+
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{服务类型} & \textbf{虚电路服务} & \textbf{数据报服务} \\\\ \midrule
+\endhead
+
+连接方式 & 面向连接 & 无连接 \\\\
+可靠性 & 网络保证可靠性 & 主机保证可靠性 \\\\
+路径 & 所有分组同一路径 & 每个分组独立路由 \\\\
+分组顺序 & 有序到达 & 可能乱序 \\\\
+差错处理 & 网络负责重传 & 端系统负责重传 \\\\
+拥塞控制 & 网络负责 & 端系统负责 \\\\
+典型应用 & X.25, ATM & Internet (IP) \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{Internet采用数据报服务的原因：}
+\begin{itemize}
+  \item 网络核心部分简单、可靠性高
+  \item 端系统智能化，差错处理能力强
+  \item 能够适应多种应用需求
+  \item 网络造价大大降低
+\end{itemize}
+
+\section{IPv4}
+
+\subsection{IPv4地址}
+
+\textbf{IPv4地址格式：}
+\begin{itemize}
+  \item 32位二进制，通常用点分十进制表示
+  \item 结构：网络号 + 主机号
+  \item 分为A、B、C、D、E五类
+\end{itemize}
+
+\textbf{IPv4地址分类：}
+\begin{longtable}{@{}p{1.5cm}p{4cm}p{3cm}p{4cm}@{}}
+\toprule
+\textbf{类别} & \textbf{第一字节范围} & \textbf{网络号位数} & \textbf{网络数量} \\\\ \midrule
+\endhead
+
+A类 & 1-126 & 8位 & $2^7-2=126$个 \\\\
+B类 & 128-191 & 16位 & $2^{14}=16384$个 \\\\
+C类 & 192-223 & 24位 & $2^{21}=2097152$个 \\\\
+D类 & 224-239 & \multicolumn{2}{c}{组播地址} \\\\
+E类 & 240-255 & \multicolumn{2}{c}{保留地址} \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{特殊IP地址：}
+\begin{itemize}
+  \item \textbf{0.0.0.0}：本网络本主机
+  \item \textbf{255.255.255.255}：受限广播地址
+  \item \textbf{127.x.x.x}：环回地址（loopback）
+  \item \textbf{169.254.x.x}：链路本地地址
+  \item \textbf{私有地址}：
+    \begin{itemize}
+      \item A类：10.0.0.0/8
+      \item B类：172.16.0.0/12
+      \item C类：192.168.0.0/16
+    \end{itemize}
+\end{itemize}
+
+\textbf{子网划分与CIDR：}
+\begin{itemize}
+  \item \textbf{子网掩码}：区分网络号和主机号
+  \item \textbf{VLSM}：可变长子网掩码
+  \item \textbf{CIDR}：无类域间路由，消除传统分类限制
+  \item \textbf{CIDR表示法}：192.168.1.0/24
+\end{itemize}
+
+\textbf{子网划分计算：}
+\begin{align}
+\text{子网数} &= 2^n \\\\
+\text{每个子网主机数} &= 2^m - 2 \\\\
+\text{子网掩码长度} &= 32 - m
+\end{align}
+其中n为借用的主机位数，m为剩余主机位数
+
+\subsection{地址解析协议ARP}
+
+\textbf{ARP功能：}将IP地址解析为MAC地址
+
+\textbf{ARP工作过程：}
+\begin{enumerate}
+  \item 主机A要发送给主机B，查找ARP缓存表
+  \item 若无对应项，广播ARP请求（Who has IP\_B? Tell IP\_A）
+  \item 主机B收到请求，单播ARP应答（IP\_B is at MAC\_B）
+  \item 主机A收到应答，更新ARP表，发送数据帧
+\end{enumerate}
+
+\textbf{ARP报文格式：}
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+硬件类型 & 2字节 \\
+\hline
+协议类型 & 2字节 \\
+\hline
+硬件地址长度 & 1字节 \\
+\hline
+协议地址长度 & 1字节 \\
+\hline
+操作码 & 2字节 \\
+\hline
+发送方硬件地址 & 6字节 \\
+\hline
+发送方协议地址 & 4字节 \\
+\hline
+目标硬件地址 & 6字节 \\
+\hline
+目标协议地址 & 4字节 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{ARP相关协议：}
+\begin{itemize}
+  \item \textbf{RARP}：反向地址解析，MAC→IP
+  \item \textbf{免费ARP}：检测地址冲突、更新ARP表
+  \item \textbf{代理ARP}：路由器代为应答ARP请求
+\end{itemize}
+
+\subsection{网络地址转换NAT}
+
+\textbf{NAT产生背景：}
+\begin{itemize}
+  \item IPv4地址空间不足
+  \item 私有网络需要访问Internet
+  \item 节约公有IP地址
+\end{itemize}
+
+\textbf{NAT工作原理：}
+\begin{enumerate}
+  \item 内部主机使用私有IP地址
+  \item 访问外网时，NAT设备替换源IP为公网IP
+  \item 维护NAT转换表记录对应关系
+  \item 外网回复时，根据转换表还原私有IP
+\end{enumerate}
+
+\textbf{NAT类型：}
+\begin{itemize}
+  \item \textbf{静态NAT}：一对一固定映射
+  \item \textbf{动态NAT}：一对多动态分配
+  \item \textbf{NAPT}：端口地址转换，多对一映射
+\end{itemize}
+
+\textbf{NAT转换表示例：}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{内部IP:端口} & \textbf{外部IP:端口} & \textbf{目标IP:端口} & \textbf{状态} \\
+\hline
+192.168.1.2:1024 & 202.1.1.1:8001 & 8.8.8.8:53 & 活跃 \\
+192.168.1.3:1025 & 202.1.1.1:8002 & 163.1.1.1:80 & 活跃 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{NAT的优缺点：}
+\begin{itemize}
+  \item \textbf{优点}：节约IP地址、提供安全性、灵活组网
+  \item \textbf{缺点}：违反端到端原则、影响某些协议、增加延迟
+\end{itemize}
+
+\subsection{动态主机配置协议DHCP}
+
+\textbf{DHCP功能：}
+\begin{itemize}
+  \item 自动为主机分配IP地址
+  \item 配置子网掩码、默认网关、DNS服务器
+  \item 统一管理网络配置参数
+\end{itemize}
+
+\textbf{DHCP工作过程（四次握手）：}
+\begin{enumerate}
+  \item \textbf{DHCP Discover}：客户端广播发现DHCP服务器
+  \item \textbf{DHCP Offer}：服务器提供IP地址配置
+  \item \textbf{DHCP Request}：客户端请求使用该配置
+  \item \textbf{DHCP ACK}：服务器确认分配
+\end{enumerate}
+
+\textbf{DHCP地址分配方式：}
+\begin{itemize}
+  \item \textbf{静态分配}：为特定MAC地址预留IP
+  \item \textbf{动态分配}：从地址池临时分配
+  \item \textbf{自动分配}：永久分配，类似静态
+\end{itemize}
+
+\textbf{DHCP租约管理：}
+\begin{itemize}
+  \item \textbf{租约时间}：IP地址的使用期限
+  \item \textbf{续约}：租约到期前自动续租
+  \item \textbf{释放}：主机主动释放IP地址
+  \item \textbf{回收}：租约到期后回收地址
+\end{itemize}
+
+\textbf{DHCP中继：}
+\begin{itemize}
+  \item 跨子网DHCP服务
+  \item 路由器转发DHCP报文
+  \item 避免每个子网部署DHCP服务器
+\end{itemize}
+
+\subsection{IP数据报}
+
+\textbf{IP数据报格式：}
+\begin{center}
+\small
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{0 \quad\quad\quad\quad\quad\quad\quad\quad 16 \quad\quad\quad\quad\quad\quad\quad\quad 31} \\
+\hline
+版本 & 首部长度 & 服务类型 & 总长度 \\
+\hline
+\multicolumn{2}{|c|}{标识} & 标志 & 片偏移 \\
+\hline
+生存时间TTL & 协议 & \multicolumn{2}{c|}{首部校验和} \\
+\hline
+\multicolumn{4}{|c|}{源IP地址} \\
+\hline
+\multicolumn{4}{|c|}{目的IP地址} \\
+\hline
+\multicolumn{4}{|c|}{可选字段（长度可变）} \\
+\hline
+\multicolumn{4}{|c|}{数据部分} \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{重要字段说明：}
+\begin{itemize}
+  \item \textbf{版本}：4位，IPv4=4，IPv6=6
+  \item \textbf{首部长度}：4位，以4字节为单位，最小值5
+  \item \textbf{总长度}：16位，包括首部和数据，最大65535字节
+  \item \textbf{标识}：16位，唯一标识数据报的分片
+  \item \textbf{标志}：3位，DF（不分片）、MF（更多分片）
+  \item \textbf{片偏移}：13位，以8字节为单位
+  \item \textbf{TTL}：8位，跳数限制，每经过路由器减1
+  \item \textbf{协议}：8位，指示上层协议（TCP=6，UDP=17）
+\end{itemize}
+
+\textbf{IP分片与重组：}
+
+\textbf{分片原因：}
+\begin{itemize}
+  \item 数据报长度超过网络的MTU（最大传输单元）
+  \item 以太网MTU=1500字节，其他网络可能更小
+\end{itemize}
+
+\textbf{分片过程：}
+\begin{enumerate}
+  \item 保持标识字段相同
+  \item 除最后一片外，MF=1，最后一片MF=0
+  \item 片偏移=前面所有分片数据长度÷8
+  \item 除最后一片外，数据长度必须是8的倍数
+\end{enumerate}
+
+\textbf{重组过程：}
+\begin{itemize}
+  \item 目的主机根据标识字段识别分片
+  \item 根据片偏移确定分片位置
+  \item 直到收到MF=0的分片才开始重组
+  \item 重组失败则丢弃所有分片
+\end{itemize}
+
+\textbf{分片计算示例：}
+原数据报3800字节，MTU=1500字节
+\begin{itemize}
+  \item 第一片：20字节首部+1480字节数据，片偏移=0
+  \item 第二片：20字节首部+1480字节数据，片偏移=1480÷8=185
+  \item 第三片：20字节首部+840字节数据，片偏移=2960÷8=370
+\end{itemize}
+
+\subsection{网际控制报文协议ICMP}
+
+\textbf{ICMP功能：}
+\begin{itemize}
+  \item 差错报告：向源主机报告差错情况
+  \item 网络探测：测试网络连通性
+  \item 不纠正差错，只报告差错
+\end{itemize}
+
+\textbf{ICMP报文类型：}
+\begin{longtable}{@{}p{1cm}p{4cm}p{7cm}@{}}
+\toprule
+\textbf{类型} & \textbf{名称} & \textbf{用途} \\\\ \midrule
+\endhead
+
+0 & 回送应答 & ping响应 \\\\
+3 & 目标不可达 & 网络/主机/端口不可达 \\\\
+4 & 源点抑制 & 拥塞控制（已废弃） \\\\
+5 & 重定向 & 路由重定向 \\\\
+8 & 回送请求 & ping请求 \\\\
+11 & 时间超过 & TTL=0或重组超时 \\\\
+12 & 参数问题 & IP首部字段错误 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{ICMP应用：}
+\begin{itemize}
+  \item \textbf{ping}：使用回送请求和应答测试连通性
+  \item \textbf{traceroute}：利用TTL超时逐跳探测路径
+    \begin{enumerate}
+      \item 发送TTL=1的数据包，第一个路由器返回超时
+      \item 发送TTL=2的数据包，第二个路由器返回超时
+      \item 重复直到到达目标主机
+    \end{enumerate}
+\end{itemize}
+
+\section{IPv6}
+
+\textbf{IPv6产生背景：}
+\begin{itemize}
+  \item IPv4地址空间不足（43亿个地址）
+  \item IPv4首部复杂，处理效率低
+  \item 缺乏对实时服务的支持
+  \item 安全性不足
+\end{itemize}
+
+\textbf{IPv6地址特点：}
+\begin{itemize}
+  \item \textbf{地址长度}：128位（16字节）
+  \item \textbf{地址数量}：$2^{128} \approx 3.4 \times 10^{38}$个
+  \item \textbf{表示方法}：冒号十六进制，如2001:0db8:85a3::8a2e:0370:7334
+  \item \textbf{地址压缩}：连续的0组可用::表示（只能用一次）
+\end{itemize}
+
+\textbf{IPv6地址类型：}
+\begin{itemize}
+  \item \textbf{单播地址}：一对一通信
+  \item \textbf{组播地址}：一对多通信（FF00::/8）
+  \item \textbf{任播地址}：一对最近一个通信
+  \item \textbf{没有广播地址}：用组播代替
+\end{itemize}
+
+\textbf{IPv6数据报格式：}
+\begin{itemize}
+  \item \textbf{固定首部}：40字节，简化处理
+  \item \textbf{扩展首部}：可选，提供灵活性
+  \item \textbf{取消校验和}：由上层协议负责
+  \item \textbf{取消分片}：只能在源端分片
+\end{itemize}
+
+\textbf{IPv6与IPv4对比：}
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{特性} & \textbf{IPv4} & \textbf{IPv6} \\\\ \midrule
+\endhead
+
+地址长度 & 32位 & 128位 \\\\
+首部长度 & 20-60字节（可变） & 40字节（固定） \\\\
+校验和 & 有 & 无 \\\\
+分片 & 路由器可分片 & 只能源端分片 \\\\
+地址配置 & 手动或DHCP & 自动配置 \\\\
+安全性 & 可选IPSec & 强制IPSec \\\\
+QoS支持 & 有限 & 内置支持 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{IPv4到IPv6过渡技术：}
+\begin{itemize}
+  \item \textbf{双协议栈}：同时运行IPv4和IPv6
+  \item \textbf{隧道技术}：IPv6数据包封装在IPv4中传输
+  \item \textbf{地址转换}：NAT64等技术
+\end{itemize}
+
+\section{路由算法与路由协议}
+
+\subsection{路由算法}
+
+\textbf{路由算法分类：}
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{分类标准} & \textbf{类型1} & \textbf{类型2} \\\\ \midrule
+\endhead
+
+适应性 & 静态路由（人工配置） & 动态路由（自动计算） \\\\
+信息来源 & 全局信息 & 局部信息 \\\\
+算法类型 & 距离向量算法 & 链路状态算法 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{距离向量算法（DV）：}
+\begin{itemize}
+  \item \textbf{基本思想}：每个节点维护到所有目的地的距离向量
+  \item \textbf{更新规则}：$D_x(y) = \min_v\{c(x,v) + D_v(y)\}$
+  \item \textbf{信息交换}：定期与邻居交换距离向量
+  \item \textbf{优点}：简单、分布式
+  \item \textbf{缺点}：收敛慢、无穷计数问题
+\end{itemize}
+
+\textbf{链路状态算法（LS）：}
+\begin{itemize}
+  \item \textbf{基本思想}：每个节点维护整个网络拓扑
+  \item \textbf{算法核心}：Dijkstra最短路径算法
+  \item \textbf{信息传播}：LSA（链路状态通告）洪泛
+  \item \textbf{优点}：收敛快、无环路
+  \item \textbf{缺点}：内存消耗大、计算复杂
+\end{itemize}
+
+\textbf{Dijkstra算法步骤：}
+\begin{enumerate}
+  \item 初始化：设源节点距离为0，其他为∞
+  \item 选择当前未访问节点中距离最小的节点
+  \item 更新该节点所有邻居的距离
+  \item 标记该节点为已访问
+  \item 重复直到所有节点被访问
+\end{enumerate}
+
+\subsection{自治系统与路由协议}
+
+\textbf{自治系统（AS）：}
+\begin{itemize}
+  \item 在统一管理下的路由器集合
+  \item 使用相同的路由协议
+  \item AS号（ASN）全球唯一
+\end{itemize}
+
+\textbf{路由协议分类：}
+\begin{itemize}
+  \item \textbf{内部网关协议（IGP）}：AS内部使用
+  \item \textbf{外部网关协议（EGP）}：AS之间使用
+\end{itemize}
+
+\textbf{RIP协议（距离向量）：}
+\begin{itemize}
+  \item \textbf{度量}：跳数（最大15跳）
+  \item \textbf{更新}：每30秒广播路由表
+  \item \textbf{特点}：简单、适合小型网络
+  \item \textbf{版本}：RIPv1（有类）、RIPv2（无类）
+  \item \textbf{防环机制}：水平分割、毒性逆转
+\end{itemize}
+
+\textbf{OSPF协议（链路状态）：}
+\begin{itemize}
+  \item \textbf{度量}：带宽（代价值）
+  \item \textbf{更新}：LSA洪泛，增量更新
+  \item \textbf{特点}：收敛快、支持VLSM、支持认证
+  \item \textbf{区域}：骨干区域（Area 0）和普通区域
+  \item \textbf{LSA类型}：路由器LSA、网络LSA、汇总LSA等
+\end{itemize}
+
+\textbf{BGP协议（路径向量）：}
+\begin{itemize}
+  \item \textbf{用途}：AS间路由、Internet骨干路由
+  \item \textbf{特点}：基于策略、支持CIDR
+  \item \textbf{路径信息}：AS路径，防止环路
+  \item \textbf{连接类型}：eBGP（外部）、iBGP（内部）
+  \item \textbf{属性}：下一跳、AS路径、本地优先等
+\end{itemize}
+
+\textbf{路由协议对比：}
+\begin{longtable}{@{}p{2cm}p{3cm}p{3cm}p{4cm}@{}}
+\toprule
+\textbf{协议} & \textbf{算法} & \textbf{度量} & \textbf{适用范围} \\\\ \midrule
+\endhead
+
+RIP & 距离向量 & 跳数 & 小型网络 \\\\
+OSPF & 链路状态 & 带宽 & 企业网络 \\\\
+BGP & 路径向量 & 策略 & Internet骨干 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{IP组播}
+
+\textbf{组播基本概念：}
+\begin{itemize}
+  \item \textbf{单播}：一对一通信
+  \item \textbf{广播}：一对所有通信
+  \item \textbf{组播}：一对多通信（一对一组）
+  \item \textbf{任播}：一对最近一个通信
+\end{itemize}
+
+\textbf{组播优点：}
+\begin{itemize}
+  \item 节约网络带宽
+  \item 减轻服务器负担
+  \item 支持多媒体应用
+\end{itemize}
+
+\textbf{组播地址：}
+\begin{itemize}
+  \item \textbf{D类地址}：224.0.0.0-239.255.255.255
+  \item \textbf{本地链路组播}：224.0.0.x（不转发）
+  \item \textbf{预留组播地址}：
+    \begin{itemize}
+      \item 224.0.0.1：所有主机
+      \item 224.0.0.2：所有路由器
+      \item 224.0.0.5：OSPF路由器
+    \end{itemize}
+\end{itemize}
+
+\textbf{IGMP协议：}
+\begin{itemize}
+  \item \textbf{功能}：主机向路由器报告组成员关系
+  \item \textbf{版本}：IGMPv1、IGMPv2、IGMPv3
+  \item \textbf{报文类型}：查询、报告、离开
+  \item \textbf{工作原理}：
+    \begin{enumerate}
+      \item 路由器周期性发送查询
+      \item 主机响应报告组成员身份
+      \item 离开时发送离开报文
+    \end{enumerate}
+\end{itemize}
+
+\textbf{组播路由协议：}
+\begin{itemize}
+  \item \textbf{PIM-DM}：密集模式，洪泛剪枝
+  \item \textbf{PIM-SM}：稀疏模式，显式加入
+  \item \textbf{DVMRP}：距离向量组播路由
+\end{itemize}
+
+\section{移动IP}
+
+\textbf{移动IP基本概念：}
+\begin{itemize}
+  \item 支持移动节点在不同网络间移动
+  \item 保持原有IP地址不变
+  \item 维持现有的网络连接
+\end{itemize}
+
+\textbf{基本术语：}
+\begin{itemize}
+  \item \textbf{归属网络}：移动节点的原始网络
+  \item \textbf{外地网络}：移动节点当前所在网络
+  \item \textbf{归属代理}：归属网络中的路由器
+  \item \textbf{外地代理}：外地网络中的路由器
+  \item \textbf{转交地址}：外地网络分配的临时地址
+\end{itemize}
+
+\textbf{移动IP工作过程：}
+\begin{enumerate}
+  \item \textbf{代理发现}：移动节点发现可用代理
+  \item \textbf{注册}：向归属代理注册转交地址
+  \item \textbf{隧道传输}：数据包通过隧道转发
+  \item \textbf{注销}：返回归属网络时注销
+\end{enumerate}
+
+\section{网络层设备}
+
+\textbf{路由器工作原理：}
+
+\textbf{路由器功能：}
+\begin{itemize}
+  \item \textbf{路径选择}：运行路由算法，维护路由表
+  \item \textbf{分组转发}：根据目的IP地址转发分组
+  \item \textbf{协议转换}：连接不同类型的网络
+  \item \textbf{流量控制}：防止网络拥塞
+\end{itemize}
+
+\textbf{路由器结构：}
+\begin{itemize}
+  \item \textbf{输入端口}：物理层和数据链路层处理
+  \item \textbf{交换结构}：高速转发分组
+  \item \textbf{输出端口}：输出链路调度和队列管理
+  \item \textbf{路由处理器}：运行路由协议，维护路由表
+\end{itemize}
+
+\textbf{转发表查找：}
+\begin{itemize}
+  \item \textbf{最长前缀匹配}：选择匹配位数最多的表项
+  \item \textbf{默认路由}：0.0.0.0/0，匹配所有目的地
+  \item \textbf{查找算法}：线性查找、二分查找、树查找
+\end{itemize}
+
+\textbf{路由器vs交换机：}
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{特性} & \textbf{交换机} & \textbf{路由器} \\\\ \midrule
+\endhead
+
+工作层次 & 数据链路层 & 网络层 \\\\
+转发依据 & MAC地址 & IP地址 \\\\
+广播域 & 不分割 & 分割 \\\\
+冲突域 & 分割 & 分割 \\\\
+主要功能 & 帧交换 & 路由选择 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{记忆要点：}
+\begin{itemize}
+  \item 网络层实现端到端的数据传输
+  \item IP地址分为网络号和主机号两部分
+  \item 路由算法分为距离向量和链路状态两大类
+  \item ICMP用于差错报告，不纠正差错
+  \item IPv6地址128位，IPv4地址32位
+  \item 路由器工作在网络层，交换机工作在数据链路层
+\end{itemize}
+
+% ========== 第5章 传输层 ==========
+\chapter{传输层}
+
+\section{传输层概述}
+
+\textbf{传输层功能：}为应用进程提供逻辑通信，实现端到端的数据传输
+
+\textbf{端口号分类：}
+\begin{itemize}
+  \item \textbf{熟知端口}：0-1023（系统保留）
+  \item \textbf{注册端口}：1024-49151（应用程序）
+  \item \textbf{动态端口}：49152-65535（临时分配）
+\end{itemize}
+
+\textbf{复用与分解：}
+\begin{itemize}
+  \item \textbf{复用}：发送方多个进程数据通过一个传输层协议发送
+  \item \textbf{分解}：接收方根据端口号将数据分发给对应进程
+\end{itemize}
+
+\section{UDP协议}
+
+\textbf{UDP特点：}
+\begin{itemize}
+  \item 无连接、不可靠、面向报文
+  \item 开销小、传输效率高
+  \item 支持一对一、一对多、多对多通信
+\end{itemize}
+
+\textbf{UDP首部格式（8字节）：}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+源端口号(16bit) & 目的端口号(16bit) \\
+\hline
+UDP长度(16bit) & UDP校验和(16bit) \\
+\hline
+\multicolumn{2}{|c|}{数据} \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{适用场景：}DNS查询、TFTP、SNMP、音视频流
+
+\section{TCP协议}
+
+\subsection{TCP首部}
+\begin{center}
+\small
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{0 \quad\quad\quad\quad\quad\quad\quad\quad 16 \quad\quad\quad\quad\quad\quad\quad\quad 31} \\
+\hline
+\multicolumn{2}{|c|}{源端口 (16)} & \multicolumn{2}{c|}{目的端口 (16)} \\
+\hline
+\multicolumn{4}{|c|}{序号 (32)} \\
+\hline
+\multicolumn{4}{|c|}{确认号 (32)} \\
+\hline
+数据偏移(4) & 保留(6) & 控制位(6) & 窗口大小(16) \\
+\hline
+\multicolumn{2}{|c|}{校验和 (16)} & \multicolumn{2}{c|}{紧急指针 (16)} \\
+\hline
+\multicolumn{4}{|c|}{选项(可变) + 填充} \\
+\hline
+\multicolumn{4}{|c|}{数据部分} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{TCP特点}
+\begin{itemize}
+  \item \textbf{面向连接}：通信前需建立连接
+  \item \textbf{可靠传输}：无差错、不丢失、不重复、按序到达
+  \item \textbf{面向字节流}：把应用层数据看成字节流
+  \item \textbf{全双工通信}：双向同时传输
+  \item \textbf{点对点}：只能一对一通信
+\end{itemize}
+
+\subsection{TCP报文段}
+
+\textbf{重要字段：}
+\begin{itemize}
+  \item \textbf{序号}：本报文段第一个字节的序号
+  \item \textbf{确认号}：期望收到下个报文段的第一个字节序号
+  \item \textbf{窗口大小}：接收窗口大小，用于流量控制
+  \item \textbf{标志位}：URG、ACK、PSH、RST、SYN、FIN
+\end{itemize}
+
+\subsection{TCP连接管理}
+
+\textbf{三次握手建立连接：}
+\begin{enumerate}
+  \item 客户端：SYN=1, seq=x
+  \item 服务器：SYN=1, ACK=1, seq=y, ack=x+1  
+  \item 客户端：ACK=1, seq=x+1, ack=y+1
+\end{enumerate}
+
+\textbf{四次挥手释放连接：}
+\begin{enumerate}
+  \item 客户端：FIN=1, seq=u
+  \item 服务器：ACK=1, seq=v, ack=u+1
+  \item 服务器：FIN=1, ACK=1, seq=w, ack=u+1
+  \item 客户端：ACK=1, seq=u+1, ack=w+1
+\end{enumerate}
+
+\textbf{记忆要点：}
+\begin{itemize}
+  \item 三次握手：防止失效连接请求到达服务器
+  \item 四次挥手：需要等待服务器数据发送完成
+  \item TIME\_WAIT状态：等待2MSL，确保最后ACK到达
+\end{itemize}
+
+\subsection{TCP可靠传输}
+
+\textbf{可靠传输机制：}
+\begin{enumerate}
+  \item \textbf{序号与确认号}：保证按序、无重复
+  \item \textbf{校验和}：检测差错
+  \item \textbf{定时器}：超时重传
+  \item \textbf{滑动窗口}：流量控制和效率
+\end{enumerate}
+
+\textbf{超时重传机制：}
+\begin{itemize}
+  \item \textbf{RTT测量}：$RTT_s = (1-\alpha) \times RTT_s + \alpha \times RTT_m$
+  \item \textbf{RTO计算}：$RTO = RTT_s + 4 \times RTT_D$
+  \item \textbf{超时翻倍}：重传时RTO翻倍，最大64秒
+\end{itemize}
+
+\textbf{快速重传：}
+\begin{itemize}
+  \item 收到3个重复ACK立即重传
+  \item 不等超时，提高效率
+\end{itemize}
+
+\subsection{TCP流量控制}
+
+\textbf{目的：}防止发送方发送过快，导致接收方缓存溢出
+
+\textbf{滑动窗口机制：}
+\begin{itemize}
+  \item \textbf{接收窗口rwnd}：接收方通告的可用缓存空间
+  \item \textbf{发送窗口}：min(rwnd, cwnd)
+  \item \textbf{零窗口}：rwnd=0时停止发送，定期探测
+\end{itemize}
+
+\subsection{TCP拥塞控制}
+
+\textbf{拥塞控制vs流量控制：}
+\begin{itemize}
+  \item 流量控制：考虑接收方处理能力
+  \item 拥塞控制：考虑网络传输能力
+\end{itemize}
+
+\textbf{四种算法：}
+
+\begin{enumerate}
+  \item \textbf{慢开始}：cwnd指数增长至ssthresh
+    \[cwnd_{new} = cwnd_{old} \times 2\]
+  
+  \item \textbf{拥塞避免}：cwnd线性增长
+    \[cwnd_{new} = cwnd_{old} + 1\]
+  
+  \item \textbf{快重传}：收到3个重复ACK立即重传
+  
+  \item \textbf{快恢复}：快重传后cwnd减半，进入拥塞避免
+\end{enumerate}
+
+\textbf{拥塞控制状态转换：}
+\begin{itemize}
+  \item \textbf{超时}：ssthresh = cwnd/2, cwnd = 1，慢开始
+  \item \textbf{快重传}：ssthresh = cwnd/2, cwnd = ssthresh，拥塞避免
+\end{itemize}
+
+\textbf{记忆口诀：}
+\begin{itemize}
+  \item 慢开始：小心试探，指数增长
+  \item 拥塞避免：稳步前进，线性增长  
+  \item 快重传：及时发现，立即重传
+  \item 快恢复：适度惩罚，减半继续
+\end{itemize}
+
+% ========== 第6章 应用层 ==========
+\chapter{应用层}
+
+\section{应用层概述}
+
+\textbf{网络应用模型：}
+\begin{enumerate}
+  \item \textbf{客户/服务器模式(C/S)}
+    \begin{itemize}
+      \item 服务器：永远运行，固定IP地址，提供服务
+      \item 客户端：主动发起通信，可间歇运行
+    \end{itemize}
+  
+  \item \textbf{对等模式(P2P)}
+    \begin{itemize}
+      \item 对等方：既是客户端又是服务器
+      \item 直接通信，无专用服务器
+      \item 可扩展性好，但管理复杂
+    \end{itemize}
+\end{enumerate}
+
+\section{域名系统DNS}
+
+\textbf{DNS功能：}域名与IP地址的映射
+
+\textbf{域名层次结构：}
+\begin{center}
+\texttt{www.example.com.}
+\end{center}
+\begin{itemize}
+  \item 根域：. (dot)
+  \item 顶级域：com, org, cn, edu
+  \item 二级域：example
+  \item 主机名：www
+\end{itemize}
+
+\textbf{DNS查询过程：}
+\begin{enumerate}
+  \item 递归查询：客户端 → 本地DNS服务器
+  \item 迭代查询：本地DNS → 根DNS → 顶级域DNS → 权威DNS
+\end{enumerate}
+
+\section{万维网WWW}
+
+\subsection{HTTP协议}
+
+\textbf{HTTP特点：}
+\begin{itemize}
+  \item 基于TCP，端口80
+  \item 无状态协议
+  \item 支持持久连接和非持久连接
+\end{itemize}
+
+\textbf{HTTP方法：}
+\begin{itemize}
+  \item \textbf{GET}：请求资源
+  \item \textbf{POST}：提交数据
+  \item \textbf{PUT}：上传文件
+  \item \textbf{DELETE}：删除资源
+  \item \textbf{HEAD}：只要响应头
+\end{itemize}
+
+\textbf{常见状态码：}
+\begin{longtable}{@{}clp{6cm}@{}}
+\toprule
+\textbf{代码} & \textbf{含义} & \textbf{说明} \\\\ \midrule
+\endhead
+
+200 & OK & 请求成功 \\\\
+301 & Moved Permanently & 永久重定向 \\\\
+302 & Found & 临时重定向 \\\\
+304 & Not Modified & 未修改，使用缓存 \\\\
+400 & Bad Request & 请求语法错误 \\\\
+401 & Unauthorized & 需要身份验证 \\\\
+403 & Forbidden & 服务器拒绝请求 \\\\
+404 & Not Found & 资源不存在 \\\\
+500 & Internal Server Error & 服务器内部错误 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{文件传输协议FTP}
+
+\textbf{FTP基本概念：}
+\begin{itemize}
+  \item 基于TCP的可靠文件传输协议
+  \item 使用两个并行连接：控制连接和数据连接
+  \item 支持ASCII和二进制两种传输模式
+\end{itemize}
+
+\textbf{FTP连接模式：}
+
+\textbf{控制连接：}
+\begin{itemize}
+  \item 端口21，持续整个FTP会话
+  \item 传输FTP命令和响应
+  \item 面向字符，使用7位ASCII编码
+\end{itemize}
+
+\textbf{数据连接：}
+\begin{itemize}
+  \item 端口20（主动模式）或动态端口（被动模式）
+  \item 只在传输文件时建立
+  \item 每传输一个文件就建立和关闭一次
+\end{itemize}
+
+\textbf{主动模式vs被动模式：}
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{模式} & \textbf{主动模式(PORT)} & \textbf{被动模式(PASV)} \\\\ \midrule
+\endhead
+
+数据连接发起方 & 服务器 & 客户端 \\\\
+服务器数据端口 & 20 & 动态分配 \\\\
+防火墙友好性 & 较差 & 较好 \\\\
+NAT兼容性 & 较差 & 较好 \\\\
+适用场景 & 早期应用 & 现代应用 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{常用FTP命令：}
+\begin{itemize}
+  \item \textbf{USER username}：指定用户名
+  \item \textbf{PASS password}：指定密码
+  \item \textbf{LIST}：列出目录内容
+  \item \textbf{RETR filename}：下载文件
+  \item \textbf{STOR filename}：上传文件
+  \item \textbf{PWD}：显示当前目录
+  \item \textbf{CWD path}：改变目录
+  \item \textbf{QUIT}：退出FTP会话
+\end{itemize}
+
+\textbf{FTP响应码：}
+\begin{itemize}
+  \item \textbf{1xx}：肯定的初步回答
+  \item \textbf{2xx}：肯定的完成回答（如220 Ready）
+  \item \textbf{3xx}：肯定的中间回答（如331 Password required）
+  \item \textbf{4xx}：瞬时否定的完成回答（如425 Can't open connection）
+  \item \textbf{5xx}：永久性否定的完成回答（如500 Command not recognized）
+\end{itemize}
+
+\section{电子邮件系统}
+
+\textbf{电子邮件系统组成：}
+\begin{itemize}
+  \item \textbf{用户代理(UA)}：用户与邮件系统的接口
+  \item \textbf{邮件服务器}：存储和转发邮件
+  \item \textbf{邮件传输协议}：SMTP、POP3、IMAP
+\end{itemize}
+
+\textbf{邮件地址格式：}
+\begin{center}
+\texttt{username@domain.com}
+\end{center}
+
+\textbf{电子邮件格式与MIME：}
+
+\textbf{RFC 822邮件格式：}
+\begin{itemize}
+  \item \textbf{信封}：传输时使用的地址信息
+  \item \textbf{首部}：邮件头字段
+    \begin{itemize}
+      \item From：发件人
+      \item To：收件人
+      \item Subject：主题
+      \item Date：发送日期
+      \item Cc：抄送
+      \item Bcc：密件抄送
+    \end{itemize}
+  \item \textbf{主体}：邮件正文内容
+\end{itemize}
+
+\textbf{MIME扩展：}
+\begin{itemize}
+  \item \textbf{多用途互联网邮件扩展}：支持多媒体邮件
+  \item \textbf{解决问题}：RFC 822只支持7位ASCII字符
+  \item \textbf{MIME首部字段}：
+    \begin{itemize}
+      \item MIME-Version：版本信息
+      \item Content-Type：内容类型
+      \item Content-Transfer-Encoding：传输编码
+      \item Content-Disposition：内容处置
+    \end{itemize}
+\end{itemize}
+
+\textbf{主要MIME类型：}
+\begin{longtable}{@{}p{3cm}p{9cm}@{}}
+\toprule
+\textbf{内容类型} & \textbf{说明} \\\\ \midrule
+\endhead
+
+text/plain & 纯文本 \\\\
+text/html & HTML文档 \\\\
+image/jpeg & JPEG图像 \\\\
+image/gif & GIF图像 \\\\
+audio/mpeg & MP3音频 \\\\
+video/mp4 & MP4视频 \\\\
+application/pdf & PDF文档 \\\\
+multipart/mixed & 多部分混合内容 \\\\
+multipart/alternative & 多部分可选内容 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{MIME编码方式：}
+\begin{itemize}
+  \item \textbf{Base64}：将二进制数据转换为64个可打印字符
+  \item \textbf{Quoted-Printable}：可打印字符引用编码
+  \item \textbf{7bit}：7位ASCII字符
+  \item \textbf{8bit}：8位字符
+\end{itemize}
+
+\subsection{SMTP协议}
+
+\textbf{SMTP特点：}
+\begin{itemize}
+  \item 简单邮件传输协议，端口25
+  \item 基于TCP的可靠传输
+  \item 只能传输7位ASCII字符
+  \item 推送协议（push）
+\end{itemize}
+
+\textbf{SMTP工作过程：}
+\begin{enumerate}
+  \item 建立TCP连接（端口25）
+  \item 握手：服务器发送220 Ready
+  \item 邮件传输：
+    \begin{itemize}
+      \item HELO/EHLO：客户端标识
+      \item MAIL FROM：发件人地址
+      \item RCPT TO：收件人地址
+      \item DATA：邮件内容
+    \end{itemize}
+  \item 结束：QUIT命令关闭连接
+\end{enumerate}
+
+\textbf{SMTP命令示例：}
+\begin{lstlisting}[language=bash,caption={SMTP会话示例}]
+S: 220 mail.example.com Ready
+C: HELO client.example.com
+S: 250 Hello client.example.com
+C: MAIL FROM:<sender@example.com>
+S: 250 OK
+C: RCPT TO:<recipient@example.com>
+S: 250 OK
+C: DATA
+S: 354 Start mail input
+C: Subject: Test Email
+C: 
+C: This is a test message.
+C: .
+S: 250 Message accepted
+C: QUIT
+S: 221 Goodbye
+\end{lstlisting}
+
+\textbf{扩展SMTP (ESMTP)：}
+\begin{itemize}
+  \item 支持认证：AUTH命令
+  \item 支持加密：STARTTLS
+  \item 支持二进制传输：8BITMIME
+  \item 支持较大邮件：CHUNKING
+\end{itemize}
+
+\subsection{POP3协议}
+
+\textbf{POP3特点：}
+\begin{itemize}
+  \item 邮局协议版本3，端口110
+  \item 拉取协议（pull）
+  \item 下载并删除模式
+  \item 无状态协议
+\end{itemize}
+
+\textbf{POP3工作阶段：}
+\begin{enumerate}
+  \item \textbf{认证阶段}：
+    \begin{itemize}
+      \item USER username：指定用户名
+      \item PASS password：指定密码
+    \end{itemize}
+  
+  \item \textbf{事务阶段}：
+    \begin{itemize}
+      \item LIST：列出邮件
+      \item RETR n：检索第n封邮件
+      \item DELE n：删除第n封邮件
+      \item STAT：获取邮箱统计信息
+    \end{itemize}
+  
+  \item \textbf{更新阶段}：
+    \begin{itemize}
+      \item QUIT：退出，删除标记的邮件
+    \end{itemize}
+\end{enumerate}
+
+\subsection{IMAP协议}
+
+\textbf{IMAP特点：}
+\begin{itemize}
+  \item 互联网消息访问协议，端口143
+  \item 邮件保留在服务器上
+  \item 支持多设备同步
+  \item 有状态协议
+\end{itemize}
+
+\textbf{IMAP优势：}
+\begin{itemize}
+  \item 支持在线和离线工作
+  \item 支持文件夹管理
+  \item 支持部分邮件下载
+  \item 支持搜索功能
+  \item 支持多用户访问同一邮箱
+\end{itemize}
+
+\textbf{邮件协议对比：}
+\begin{longtable}{@{}p{2.5cm}p{4cm}p{3cm}p{3cm}@{}}
+\toprule
+\textbf{特性} & \textbf{SMTP} & \textbf{POP3} & \textbf{IMAP} \\\\ \midrule
+\endhead
+
+用途 & 发送邮件 & 接收邮件 & 接收邮件 \\\\
+端口 & 25 & 110 & 143 \\\\
+邮件存储 & 转发 & 下载删除 & 服务器保存 \\\\
+多设备支持 & N/A & 不支持 & 支持 \\\\
+离线工作 & N/A & 支持 & 支持 \\\\
+文件夹管理 & N/A & 不支持 & 支持 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{邮件安全：}
+\begin{itemize}
+  \item \textbf{SMTPS}：SMTP over SSL/TLS，端口465/587
+  \item \textbf{POP3S}：POP3 over SSL/TLS，端口995
+  \item \textbf{IMAPS}：IMAP over SSL/TLS，端口993
+  \item \textbf{SPF}：发送方策略框架，防止邮件伪造
+  \item \textbf{DKIM}：域名密钥识别邮件，数字签名
+  \item \textbf{DMARC}：域名消息认证报告一致性
+\end{itemize}
+
+
+
+% ========== 附录：术语速查 ==========
+\appendix
+
+\chapter{重要术语速查表}
+
+\section{中英文术语对照}
+\begin{longtable}{@{}p{4cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{中文术语} & \textbf{英文术语} & \textbf{简要说明} \\\\ \midrule
+\endhead
+
+计算机网络 & Computer Network & 互连的自主计算机集合 \\\\
+带宽 & Bandwidth & 信道能通过的最高数据率 \\\\
+时延 & Delay/Latency & 数据从源到目的地所需时间 \\\\
+吞吐量 & Throughput & 单位时间内实际传输的数据量 \\\\
+协议 & Protocol & 网络中数据交换的规则集合 \\\\
+分组交换 & Packet Switching & 将数据分割成分组传输 \\\\
+电路交换 & Circuit Switching & 建立专用物理链路 \\\\
+以太网 & Ethernet & 最常用的局域网技术 \\\\
+CSMA/CD & Carrier Sense Multiple Access with Collision Detection & 载波监听多路访问/冲突检测 \\\\
+交换机 & Switch & 数据链路层设备，学习MAC地址 \\\\
+路由器 & Router & 网络层设备，转发IP分组 \\\\
+网关 & Gateway & 连接不同网络的设备 \\\\
+子网掩码 & Subnet Mask & 用于划分网络和主机部分 \\\\
+VLSM & Variable Length Subnet Mask & 可变长子网掩码 \\\\
+CIDR & Classless Inter-Domain Routing & 无类域间路由 \\\\
+NAT & Network Address Translation & 网络地址转换 \\\\
+DHCP & Dynamic Host Configuration Protocol & 动态主机配置协议 \\\\
+ARP & Address Resolution Protocol & 地址解析协议 \\\\
+ICMP & Internet Control Message Protocol & 网际控制报文协议 \\\\
+RIP & Routing Information Protocol & 路由信息协议 \\\\
+OSPF & Open Shortest Path First & 开放最短路径优先 \\\\
+BGP & Border Gateway Protocol & 边界网关协议 \\\\
+TCP & Transmission Control Protocol & 传输控制协议 \\\\
+UDP & User Datagram Protocol & 用户数据报协议 \\\\
+HTTP & HyperText Transfer Protocol & 超文本传输协议 \\\\
+HTTPS & HTTP Secure & 安全的HTTP \\\\
+FTP & File Transfer Protocol & 文件传输协议 \\\\
+SMTP & Simple Mail Transfer Protocol & 简单邮件传输协议 \\\\
+POP3 & Post Office Protocol 3 & 邮局协议版本3 \\\\
+IMAP & Internet Message Access Protocol & 互联网消息访问协议 \\\\
+DNS & Domain Name System & 域名系统 \\\\
+SNMP & Simple Network Management Protocol & 简单网络管理协议 \\\\
+SSL/TLS & Secure Socket Layer/Transport Layer Security & 安全套接字层/传输层安全 \\\\
+VPN & Virtual Private Network & 虚拟专用网络 \\\\
+IPSec & IP Security & IP安全协议 \\\\
+DES & Data Encryption Standard & 数据加密标准 \\\\
+AES & Advanced Encryption Standard & 高级加密标准 \\\\
+RSA & Rivest-Shamir-Adleman & RSA公钥算法 \\\\
+MD5 & Message Digest 5 & 消息摘要算法5 \\\\
+SHA & Secure Hash Algorithm & 安全散列算法 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{重要公式汇总}
+\subsection{性能计算公式}
+\begin{align}
+\text{发送时延} &= \frac{L}{R} \quad (L:\text{分组长度},R:\text{发送速率}) \\\\
+\text{传播时延} &= \frac{d}{s} \quad (d:\text{距离},s:\text{传播速率}) \\\\
+\text{总时延} &= \text{发送时延} + \text{传播时延} + \text{处理时延} + \text{排队时延} \\\\
+\text{时延带宽积} &= \text{传播时延} \times \text{带宽} \\\\
+\text{信道利用率} &= \frac{T_0}{T_0 + RTT} \quad (\text{停止等待协议}) \\\\
+\text{香农公式} &= W \log_2(1 + S/N) \quad (\text{信道容量}) \\\\
+\text{奈奎斯特公式} &= 2W \log_2 V \quad (\text{理想信道})
+\end{align}
+
+\subsection{子网划分公式}
+\begin{align}
+\text{子网数} &= 2^n \quad (n:\text{借用的主机位数}) \\\\
+\text{每个子网主机数} &= 2^m - 2 \quad (m:\text{剩余主机位数}) \\\\
+\text{子网地址} &= \text{网络地址} \text{ AND } \text{子网掩码}
+\end{align}
+
+\subsection{TCP窗口计算}
+\begin{align}
+\text{发送窗口} &= \min(\text{拥塞窗口}, \text{接收窗口}) \\\\
+\text{慢开始阈值} &= \max(\text{飞行中字节数}/2, 2 \times MSS) \\\\
+\text{超时间隔} &= \text{估计RTT} + 4 \times \text{RTT偏差}
+\end{align}
+
+\section{常用端口号}
+\begin{longtable}{@{}llp{8cm}@{}}
+\toprule
+\textbf{端口号} & \textbf{协议} & \textbf{说明} \\\\ \midrule
+\endhead
+
+20/21 & FTP & 文件传输协议（20数据，21控制） \\\\
+22 & SSH & 安全外壳协议 \\\\
+23 & Telnet & 远程登录协议 \\\\
+25 & SMTP & 简单邮件传输协议 \\\\
+53 & DNS & 域名系统 \\\\
+80 & HTTP & 超文本传输协议 \\\\
+110 & POP3 & 邮局协议版本3 \\\\
+143 & IMAP & 互联网消息访问协议 \\\\
+443 & HTTPS & 安全的HTTP \\\\
+993 & IMAPS & 安全的IMAP \\\\
+995 & POP3S & 安全的POP3 \\\\
+
+\bottomrule
+\end{longtable}
+
+% ================== 转录说明 ==================
+% 上述章节骨架已建立完成，接下来请：
+% 1. 逐章对照PDF原文，将具体内容填入对应章节
+% 2. 补充图表：在适当位置插入 \includegraphics 和 table 环境
+% 3. 完善公式：使用 align、equation 等环境
+% 4. 添加交叉引用：用 \label 和 \ref 建立章节、图表间联系
+% 5. 调整术语表：根据实际PDF内容补充重要术语
+% ================== 转录区域结束 ==================
+
+\end{document}

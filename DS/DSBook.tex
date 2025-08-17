@@ -1,4 +1,10 @@
 \documentclass[lang=cn,newtx,10pt,scheme=chinese]{../elegantbook}
+\usepackage{tikz}
+\tikzset{
+  every node/.style={circle, draw, very thick, minimum size=6.5mm, inner sep=0pt, font=\scriptsize},
+  redn/.style={circle, draw=red, very thick, text=red},
+  blackn/.style={circle, draw=black, very thick, fill=black!10}
+}
 
 \title{深入浅出数据结构}
 \subtitle{北街学长倾力之作}
@@ -29,6 +35,10 @@
 \usepackage{listings}         % 导入listings宏包
 \usepackage{xcolor}           % 支持颜色
 \usepackage{graphicx}        % 支持图形
+% --------- 红黑树等章节需要示意图，加载 TikZ ---------
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,trees,calc}
+\usepackage{float} % 支持 [H] 浮动参数
 % 配置C++代码样式
 \lstset{
     language=C++,             % 语言设置为C++
@@ -507,8 +517,8 @@ $L = \{1001, 1002, 1003, 1004\}$。
     int data;
     for (int i = 0; i < length; i++)
     {
-      printf(``请输入第%d个元素``, i);
-      scanf(``%d``, &L->data[i]);
+      printf("请输入第%d个元素", i);
+      scanf("%d", &L->data[i]);
     }
     L->length = length;
     return L;
@@ -526,7 +536,7 @@ $L = \{1001, 1005, 1002, 1003, 1004\}$。代码如代码\ref{lst:insert_list}所
 \begin{lstlisting}[language=C++, caption={顺序表的插入示例代码}, label={lst:insert_list}]
   void insertList(SqList* L, int i, int data) {//传入要插入的顺序表，要插入的位置，要插入的数据
     if (i < 0 || i > L->length) {
-      printf(``插入位置不合法``);
+      printf("插入位置不合法");
       return;
     }
     for (int j = L->length; j > i; j--)
@@ -549,7 +559,7 @@ $L = \{1001, 1002, 1004\}$。代码如代码\ref{lst:delete_list}所示：
 \begin{lstlisting}[language=C++, caption={顺序表的删除示例代码}, label={lst:delete_list}]
   void deleteList(SqList* L, int i) {//传入要删除的顺序表，要删除的位置
     if (i < 0 || i >= L->length) {
-      printf(``删除位置不合法``);
+      printf("删除位置不合法");
       return;
     }
     for (int j = i; j < L->length - 1; j++)
@@ -588,7 +598,7 @@ $L = \{1001, 2002, 1003, 1004\}$。
 \begin{lstlisting}[language=C++, caption={顺序表的更新示例代码}, label={lst:update_list}]
   void updateList(SqList* L, int i, int data) {//传入要更新的顺序表，要更新的位置，要更新的数据
     if (i < 0 || i >= L->length) {
-      printf(``更新位置不合法``);
+      printf("更新位置不合法");
       return;
     }
     L->data[i] = data;
@@ -674,14 +684,14 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
   \begin{lstlisting}[language=C++, caption={头插法建立单链表示例代码}, label={lst:headInsert}]
     singleLink* createSingleLink() {
       int n, data;
-      printf(``请输入创建链表的节点个数：``);
-      scanf(``%d``, &n);
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
       SingleLink* L = (SingleLink*)malloc(sizeof(SingleLink));
       L->next = NULL;
       for (int i = 0; i < n; i++) {
         SingleLink* s = (singleLink*)malloc(sizeof(SingleLink));
-        printf(``请输入第%d个节点的值(int)：``, i + 1);
-        scanf(``%d``, &data);
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
         s->data = data;
         s->next = NULL;
         s->next = L->next;
@@ -709,14 +719,14 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
   \begin{lstlisting}[language=C++, caption={尾插法建立单链表示例代码}, label={lst:tailInsert}]
     singleLink* createSingleLink() {
       int n, data;
-      printf(``请输入创建链表的节点个数：``);
-      scanf(``%d``, &n);
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
       SingleLink* L = (SingleLink*)malloc(sizeof(SingleLink));
       SingleLink* r = L;
       for (int i = 0; i < n; i++) {
         SingleLink* s = (singleLink*)malloc(sizeof(SingleLink));
-        printf(``请输入第%d个节点的值(int)：``, i + 1);
-        scanf(``%d``, &data);
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
         s->data = data;
         s->next = NULL;
         r->next = s;
@@ -754,10 +764,10 @@ $L = \{1001 \rightarrow 1002 \rightarrow 1003\}$。
 void printSingleLink(SingleLink* L) {
   SingleLink* p = L->next;
   while (p != NULL) {
-    printf(``%d ``, p->data);
+    printf("%d ", p->data);
     p = p->next;
   }
-  printf(``\n``);
+  printf("\n");
 }
 \end{lstlisting}
 该算法的总时间复杂度为 $O(n)$，空间复杂度为 $O(1)$。
@@ -815,7 +825,7 @@ int lengthSingleLink(SingleLink* L) {
       j++;
     }
     if (p == NULL || j > i) {
-      printf(``第%d个元素不存在``, i);
+      printf("第%d个元素不存在", i);
       return -1;
     }
     return p->data;
@@ -932,15 +942,15 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   \begin{lstlisting}[language=C++, caption={头插法建立双链表示例代码}, label={lst:headInsertDouble}]
     DLink* createDoubleLink() {
       int n, data;
-      printf(``请输入创建链表的节点个数：``);
-      scanf(``%d``, &n);
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
       DLink* L = (DLink*)malloc(sizeof(DLink));
       L->pre = NULL;
       L->next = NULL;
       for (int i = 0; i < n; i++) {
         DLink* s = (DLink*)malloc(sizeof(DLink));
-        printf(``请输入第%d个节点的值(int)：``, i + 1);
-        scanf(``%d``, &data);
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
         s->data = data;
         s->pre = L;
         s->next = L->next;
@@ -970,14 +980,14 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   \begin{lstlisting}[language=C++, caption={尾插法建立双链表示例代码}, label={lst:tailInsertDouble}]
     DLink* createDoubleLink() {
       int n, data;
-      printf(``请输入创建链表的节点个数：``);
-      scanf(``%d``, &n);
+      printf("请输入创建链表的节点个数：");
+      scanf("%d", &n);
       DLink* L = (DLink*)malloc(sizeof(DLink));
       DLink* r = L;
       for (int i = 0; i < n; i++) {
         DLink* s = (DLink*)malloc(sizeof(DLink));
-        printf(``请输入第%d个节点的值(int)：``, i + 1);
-        scanf(``%d``, &data);
+        printf("请输入第%d个节点的值(int)：", i + 1);
+        scanf("%d", &data);
         s->data = data;
         s->pre = r;
         s->next = NULL;
@@ -1001,10 +1011,10 @@ void insertSingleLink(SingleLink* L, int i, int data) {
     void printDoubleLink(DLink* L) {
       DLink* p = L->next;
       while (p != NULL) {
-        printf(``%d ``, p->data);
+        printf("%d ", p->data);
         p = p->next;
       }
-      printf(``\n``);
+      printf("\n");
     }
   \end{lstlisting}
 
@@ -1065,7 +1075,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
         j++;
       }
       if (p == NULL || j > i) {
-        printf(``第%d个元素不存在``, i);
+        printf("第%d个元素不存在", i);
         return -1;
       }
       return p->data;
@@ -1391,7 +1401,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={压入顺序栈示例代码}, label={lst:pushSeqStack}]
   void pushSeqStack(SeqStack* S, int data) {
     if (isFullSeqStack(S)) {
-      printf(``栈已满，无法压入元素\n``);
+      printf("栈已满，无法压入元素\n");
       return;
     }
     S->data[++S->top] = data;
@@ -1412,7 +1422,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={弹出顺序栈示例代码}, label={lst:popSeqStack}]
   void popSeqStack(SeqStack* S) {
     if (isEmptySeqStack(S)) {
-      printf(``栈为空，无法弹出元素\n``);
+      printf("栈为空，无法弹出元素\n");
       return;
     }
     S->top--;
@@ -1433,7 +1443,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取顺序栈的栈顶元素示例代码}, label={lst:getTopSeqStack}]
   int getTopSeqStack(SeqStack* S) {
     if (isEmptySeqStack(S)) {
-      printf(``栈为空，无法获取栈顶元素\n``);
+      printf("栈为空，无法获取栈顶元素\n");
       return -1;
     }
     return S->data[S->top];
@@ -1505,9 +1515,9 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={遍历顺序栈示例代码}, label={lst:traverseSeqStack}]
   void traverseSeqStack(SeqStack* S) {
     for (int i = 0; i <= S->top; i++) {
-      printf(``%d ``, S->data[i]);
+      printf("%d ", S->data[i]);
     }
-    printf(``\n``);
+    printf("\n");
   }
 
 \end{lstlisting}
@@ -1536,7 +1546,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/linkStack.pdf}
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/linkStack.pdf}
   \caption{链栈}
   \label{fig:linkStack}
 \end{figure}
@@ -1632,7 +1642,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={弹出链栈示例代码}, label={lst:popLinkStack}]
   void popLinkStack(LinkStack* S) {
     if (isEmptyLinkStack(S)) {
-      printf(``栈为空，无法弹出元素\n``);
+      printf("栈为空，无法弹出元素\n");
       return;
     }
     LinkStack* p = S->next;
@@ -1655,7 +1665,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取链栈的栈顶元素示例代码}, label={lst:getTopLinkStack}]
   int getTopLinkStack(LinkStack* S) {
     if (isEmptyLinkStack(S)) {
-      printf(``栈为空，无法获取栈顶元素\n``);
+      printf("栈为空，无法获取栈顶元素\n");
       return -1;
     }
     return S->next->data;
@@ -1677,10 +1687,10 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   void traverseLinkStack(LinkStack* S) {
     LinkStack* p = S->next;
     while (p != NULL) {
-      printf(``%d ``, p->data);
+      printf("%d ", p->data);
       p = p->next;
     }
-    printf(``\n``);
+    printf("\n");
   }
 
 \end{lstlisting}
@@ -1807,7 +1817,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={压入共享栈示例代码}, label={lst:pushSharedStack}]
   void pushSharedStack(SharedStack* S, int data, int stackNumber) {
     if (isFullSharedStack(S)) {
-      printf(``栈已满，无法压入元素\n``);
+      printf("栈已满，无法压入元素\n");
       return;
     }
     if (stackNumber == 1) {
@@ -1832,7 +1842,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={弹出共享栈示例代码}, label={lst:popSharedStack}]
   void popSharedStack(SharedStack* S, int stackNumber) {
     if (isEmptySharedStack(S, stackNumber)) {
-      printf(``栈为空，无法弹出元素\n``);
+      printf("栈为空，无法弹出元素\n");
       return;
     }
     if (stackNumber == 1) {
@@ -1857,7 +1867,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取共享栈的栈顶元素示例代码}, label={lst:getTopSharedStack}]
   int getTopSharedStack(SharedStack* S, int stackNumber) {
     if (isEmptySharedStack(S, stackNumber)) {
-      printf(``栈为空，无法获取栈顶元素\n``);
+      printf("栈为空，无法获取栈顶元素\n");
       return -1;
     }
     if (stackNumber == 1) {
@@ -1936,12 +1946,12 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={遍历共享栈示例代码}, label={lst:traverseSharedStack}]
   void traverseSharedStack(SharedStack* S) {
     for (int i = 0; i <= S->top1; i++) {
-      printf(``%d ``, S->data[i]);
+      printf("%d ", S->data[i]);
     }
     for (int i = S->capacity - 1; i >= S->top2; i--) {
-      printf(``%d ``, S->data[i]);
+      printf("%d ", S->data[i]);
     }
-    printf(``\n``);
+    printf("\n");
   }
 
 \end{lstlisting}
@@ -2097,7 +2107,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={入队示例代码}, label={lst:enQueueSeqQueue}]
   void enQueueSeqQueue(SeqQueue* Q, int data) {
     if (isFullSeqQueue(Q)) {
-      printf(``队列已满，无法入队\n``);
+      printf("队列已满，无法入队\n");
       return;
     }
     Q->data[Q->rear] = data;
@@ -2119,7 +2129,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={出队示例代码}, label={lst:deQueueSeqQueue}]
   void deQueueSeqQueue(SeqQueue* Q) {
     if (isEmptySeqQueue(Q)) {
-      printf(``队列为空，无法出队\n``);
+      printf("队列为空，无法出队\n");
       return;
     }
     Q->front = (Q->front + 1) % Q->capacity;
@@ -2140,7 +2150,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取队头元素示例代码}, label={lst:getFrontSeqQueue}]
   int getFrontSeqQueue(SeqQueue* Q) {
     if (isEmptySeqQueue(Q)) {
-      printf(``队列为空，无法获取队头元素\n``);
+      printf("队列为空，无法获取队头元素\n");
       return -1;
     }
     return Q->data[Q->front];
@@ -2213,9 +2223,9 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={遍历队列示例代码}, label={lst:traverseSeqQueue}]
   void traverseSeqQueue(SeqQueue* Q) {
     for (int i = Q->front; i != Q->rear; i = (i + 1) % Q->capacity) {
-      printf(``%d ``, Q->data[i]);
+      printf("%d ", Q->data[i]);
     }
-    printf(``\n``);
+    printf("\n");
   }
 
 \end{lstlisting}
@@ -2312,7 +2322,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=1\textwidth]{./figure/pdf/cropped/linkQueue.pdf}
+  \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/linkQueue.pdf}
   \caption{链式队列}
   \label{fig:linkQueue}
 \end{figure}
@@ -2426,7 +2436,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={出队示例代码}, label={lst:deQueueLinkQueue}]
   void deQueueLinkQueue(LinkQueue* Q) {
     if (isEmptyLinkQueue(Q)) {
-      printf(``队列为空，无法出队\n``);
+      printf("队列为空，无法出队\n");
       return;
     }
     singleLink* p = Q->front->next;
@@ -2452,7 +2462,7 @@ void insertSingleLink(SingleLink* L, int i, int data) {
 \begin{lstlisting}[language=C++, caption={获取队头元素示例代码}, label={lst:getFrontLinkQueue}]
   NODETYPE getFrontLinkQueue(LinkQueue* Q) {
     if (isEmptyLinkQueue(Q)) {
-      printf(``队列为空，无法获取队头元素\n``);
+      printf("队列为空，无法获取队头元素\n");
       return -1;
     }
     return Q->front->next->data;
@@ -2520,10 +2530,10 @@ void insertSingleLink(SingleLink* L, int i, int data) {
   void traverseLinkQueue(LinkQueue* Q) {
     singleLink* p = Q->front->next;
     while (p != NULL) {
-      printf(``%d ``, p->data);
+      printf("%d ", p->data);
       p = p->next;
     }
-    printf(``\n``);
+    printf("\n");
   }
 
 \end{lstlisting}
@@ -2640,7 +2650,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
   string infixToPostfix(string infix) {
     stack<char> s;
-    string postfix = ````;
+    string postfix = "";
     for (int i = 0; i < infix.size(); i++) {
       if (isdigit(infix[i])) {
         postfix += infix[i];
@@ -2831,7 +2841,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
         q.push(q.front());
         q.pop();
       }
-      cout << q.front() << `` ``;
+      cout << q.front() << " ";
       q.pop();
     }
   }
@@ -2847,7 +2857,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \chapter{串}
 
 串(string)是由零个或多个字符组成的有限序列。含零个字符的串称为空串,用多表
-示。串中所含字符的个数称为该串的长度(或串长)。通常将一个串表示成``aa …a， 的形
+示。串中所含字符的个数称为该串的长度(或串长)。通常将一个串表示成"aa …a， 的形
 式,其中最外边的双引号(或单引号)不是串的内容,它们是串的标志,用于将串与标识符(如
 变量名等)加以区别。每个字符（即使是空格）都占用一个存储单元，不同的机器和编程语言对合法字符
 （即允许使用的字符）有不同的规定。但在一般情况下，英文字母、数字（0,1,…,9）和常用的
@@ -2855,8 +2865,8 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 
 两个串相等当且仅当这两个串的长度相等并且各对应位置上的字符都
 相同。一个串中任意个连续字符组成的序列称为该串的子串(substring)，
-例如串``abcde``的子串有``a``、``ab``、``abc``和``abcd``等。为了表述清楚，
-在串中空格字符用“␣”符号表示，例如``a␣b``是一个长度为3的串，其中含有一个空格字符。空串是不包含任何字符的串，其长度为0，空串是任何串的子串。
+例如串"abcde"的子串有"a"、"ab"、"abc"和"abcd"等。为了表述清楚，
+在串中空格字符用“␣”符号表示，例如"a␣b"是一个长度为3的串，其中含有一个空格字符。空串是不包含任何字符的串，其长度为0，空串是任何串的子串。
 
 
 \section{串的存储结构}
@@ -2981,7 +2991,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={获取串中指定位置的字符示例代码}, label={lst:getSeqString}]
   char getSeqString(SeqString* s, int i) {
     if (i < 0 || i >= s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return -1;
     }
     return s->data[i];
@@ -3047,7 +3057,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={在指定位置插入子串示例代码}, label={lst:insertSeqString}]
   void insertSeqString(SeqString* s, int i, SeqString* t) {
     if (i < 0 || i > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return;
     }
     for (int j = s->length - 1; j >= i; j--) {//将i位置及其后面的字符后移
@@ -3073,7 +3083,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={删除指定位置的子串示例代码}, label={lst:deleteSeqString}]
   void deleteSeqString(SeqString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return;
     }
     for (int j = i + len; j < s->length; j++) {//将i+len位置及其后面的字符前移
@@ -3096,7 +3106,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={替换指定位置的子串示例代码}, label={lst:replaceSeqString}]
   void replaceSeqString(SeqString* s, int i, int len, SeqString* t) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return;
     }
     for (int j = i + len; j < s->length; j++) {//将i+len位置及其后面的字符前移
@@ -3167,7 +3177,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={求串的子串示例代码}, label={lst:subSeqString}]
   SeqString* subSeqString(SeqString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return NULL;
     }
     SeqString* t = createSeqString();
@@ -3192,9 +3202,9 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={输出串示例代码}, label={lst:printSeqString}]
   void printSeqString(SeqString* s) {
     for (int i = 0; i < s->length; i++) {
-      printf(``%c``, s->data[i]);
+      printf("%c", s->data[i]);
     }
-    printf(``\n``);
+    printf("\n");
   }
 
 \end{lstlisting}
@@ -3208,7 +3218,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 串采用链式存储结构存储时称为链串,这里采用带头结点的单链表作为链串。链串的
 组织形式与一般的单链表类似,主要区别在于链串中的一个结点可以存储多个字符。通常
 将链串中每个结点所存储的字符个数称为结点大小。图\ref{fig:linkStr_fourNodes}和图 \ref{fig:linkStr_oneNode}分别表示同一个串
-``ABCDEFGHIJKLMN ``的结点大小为 4(存储密度大)和 1(存储密度小)时的链串结构 。
+"ABCDEFGHIJKLMN "的结点大小为 4(存储密度大)和 1(存储密度小)时的链串结构 。
 
 
 \begin{figure}[!htbp]
@@ -3343,7 +3353,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={获取串中指定位置的字符示例代码}, label={lst:getLinkString}]
   char getLinkString(LinkString* s, int i) {
     if (i < 0 || i >= s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return -1;
     }
     LinkNode* p = s->head;
@@ -3441,7 +3451,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={在指定位置插入子串示例代码}, label={lst:insertLinkString}]
   void insertLinkString(LinkString* s, int i, LinkString* t) {
     if (i < 0 || i > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return;
     }
     LinkNode* p = s->head;
@@ -3471,7 +3481,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={删除指定位置的子串示例代码}, label={lst:deleteLinkString}]
   void deleteLinkString(LinkString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return;
     }
     LinkNode* p = s->head;
@@ -3499,7 +3509,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={替换指定位置的子串示例代码}, label={lst:replaceLinkString}]
   void replaceLinkString(LinkString* s, int i, int len, LinkString* t) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return;
     }
     LinkNode* p = s->head;
@@ -3588,7 +3598,7 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
 \begin{lstlisting}[language=C++, caption={求串的子串示例代码}, label={lst:subLinkString}]
   LinkString* subLinkString(LinkString* s, int i, int len) {
     if (i < 0 || i >= s->length || len < 0 || i + len > s->length) {
-      printf(``位置不合法\n``);
+      printf("位置不合法\n");
       return NULL;
     }
     LinkString* t = createLinkString();
@@ -3626,10 +3636,10 @@ expression) ,如 1 + 2 * 3 的前缀表达式为+ 1 * 2 3。
   void printLinkString(LinkString* s) {
     LinkNode* p = s->head;
     while (p != NULL) {
-      printf(``%c``, p->data);
+      printf("%c", p->data);
       p = p->next;
     }
-    printf(``\n``);
+    printf("\n");
   }
 
 \end{lstlisting}
@@ -3652,17 +3662,17 @@ BF算法的基本思想是从目标串的第一个字符开始，依次与模式
 则继续比较下一个字符，如果不相等，则从目标串的下一个字符开始，重新与模式串的第一个字符比较，
 直到找到与模式串相等的子串或目标串的所有字符都比较完为止。
 
-例如 ，设目标串为``ababcabcacbab``，模式串为``abcac``，BF算法的匹配过程如下：
+例如 ，设目标串为"ababcabcacbab"，模式串为"abcac"，BF算法的匹配过程如下：
 
 \begin{itemize}
-  \item 从目标串的第一个字符``a``开始，与模式串的第一个字符``a``比较，相等，继续比较下一个字符；
-  \item 与模式串的第二个字符``b``比较，不相等，从目标串的第二个字符``b``开始，重新与模式串的第一个字符比较；
-  \item 与模式串的第一个字符``a``比较，不相等，从目标串的第三个字符``a``开始，重新与模式串的第一个字符比较；
-  \item 与模式串的第一个字符``a``比较，相等，继续比较下一个字符；
-  \item 与模式串的第二个字符``b``比较，相等，继续比较下一个字符；
-  \item 与模式串的第三个字符``c``比较，相等，继续比较下一个字符；
-  \item 与模式串的第四个字符``a``比较，相等，继续比较下一个字符；
-  \item 与模式串的第五个字符``c``比较，相等，匹配成功。
+  \item 从目标串的第一个字符"a"开始，与模式串的第一个字符"a"比较，相等，继续比较下一个字符；
+  \item 与模式串的第二个字符"b"比较，不相等，从目标串的第二个字符"b"开始，重新与模式串的第一个字符比较；
+  \item 与模式串的第一个字符"a"比较，不相等，从目标串的第三个字符"a"开始，重新与模式串的第一个字符比较；
+  \item 与模式串的第一个字符"a"比较，相等，继续比较下一个字符；
+  \item 与模式串的第二个字符"b"比较，相等，继续比较下一个字符；
+  \item 与模式串的第三个字符"c"比较，相等，继续比较下一个字符；
+  \item 与模式串的第四个字符"a"比较，相等，继续比较下一个字符；
+  \item 与模式串的第五个字符"c"比较，相等，匹配成功。
 \end{itemize}
 
 BF算法的代码如代码\ref{lst:BF}所示。
@@ -3754,7 +3764,7 @@ KMP算法的核心，是一个被称为部分匹配表(Partial Match Table)的�
 
 \end{figure}
 
-在主字符串 ``ababababca`` 中查找模式字符串 ``abababca`` 时，如果在位置 j 处字符不匹配，根据模式字符串的 PMT（部分匹配表）性质，可以跳过一些字符的比较。
+在主字符串 "ababababca" 中查找模式字符串 "abababca" 时，如果在位置 j 处字符不匹配，根据模式字符串的 PMT（部分匹配表）性质，可以跳过一些字符的比较。
 
 假设主字符串的 i 指针在位置 i 处失配，这意味着主字符串从位置 i−j 到 i 的这一段，与模式字符串从位置 0 到 j 的这一段是完全相同的。而 PMT[j−1] 表示模式字符串从位置 0 到 j−1 的最长前缀和后缀的匹配长度。
 
@@ -4291,7 +4301,7 @@ k =
 \begin{lstlisting}[language=C, caption={输出稀疏矩阵的三元组}]
   void PrintSMatrix(TSMatrix A) {
     for (int i = 1; i <= A.nums; i++) {
-      printf(``(%d, %d, %d)\n``, A.data[i].r, A.data[i].c, A.data[i].d);
+      printf("(%d, %d, %d)\n", A.data[i].r, A.data[i].c, A.data[i].d);
     }
   }
 
@@ -4561,18 +4571,18 @@ F(G) =
     }
     GLNode *gl;
     if (L->tag == 0) {// 原子结点
-      printf(``%c``, L->val.data);// 输出原子结点的值
+      printf("%c", L->val.data);// 输出原子结点的值
     } else {// 子表结点
-      printf(``(``);
+      printf("(");
       gl = L->val.sublist;
       while (gl) {
         PrintGList(gl);// 递归输出子表
         gl = gl->link;
         if (gl) {
-          printf(``,``);
+          printf(",");
         }
       }
-      printf(``)``);
+      printf(")");
     }
   }
 \end{lstlisting}
@@ -4866,7 +4876,7 @@ F(G) =
     if (T == NULL) {
       return;
     }
-    printf(``%c``, T->data);
+    printf("%c", T->data);
     PreOrderTraverse(T->lchild);
     PreOrderTraverse(T->rchild);
   }
@@ -4895,7 +4905,7 @@ F(G) =
       return;
     }
     InOrderTraverse(T->lchild);
-    printf(``%c``, T->data);
+    printf("%c", T->data);
     InOrderTraverse(T->rchild);
   }
 
@@ -4916,7 +4926,7 @@ F(G) =
     }
     PostOrderTraverse(T->lchild);
     PostOrderTraverse(T->rchild);
-    printf(``%c``, T->data);
+    printf("%c", T->data);
   }
 
 \end{lstlisting}
@@ -4940,7 +4950,7 @@ F(G) =
     BiTree p = T;
     while (p != NULL || !StackEmpty(S)) {//栈不空或者p不空
       if (p != NULL) {//一直向左并将沿途结点压入栈
-        printf(``%c``, p->data);//访问结点
+        printf("%c", p->data);//访问结点
         Push(S, p);
         p = p->lchild;
       } else {//结点弹出栈
@@ -4997,7 +5007,7 @@ F(G) =
         p = p->lchild;
       } else {
         Pop(S, p);
-        printf(``%c``, p->data);
+        printf("%c", p->data);
         p = p->rchild;
       }
     }
@@ -5082,7 +5092,7 @@ F(G) =
           p = p->rchild;
         } else {
           Pop(S, p);
-          printf(``%c``, p->data);
+          printf("%c", p->data);
           r = p;
           p = NULL;
         }
@@ -5141,7 +5151,7 @@ F(G) =
     EnQueue(Q, T);
     while (!QueueEmpty(Q)) {
       DeQueue(Q, p);
-      printf(``%c``, p->data);
+      printf("%c", p->data);
       if (p->lchild != NULL) {
         EnQueue(Q, p->lchild);
       }
@@ -5169,7 +5179,7 @@ F(G) =
     if (T == NULL) {
       return;
     }
-    printf(``%c``, T->data);
+    printf("%c", T->data);
     PreOrderTraverse(T->lchild);
     PreOrderTraverse(T->rchild);
   }
@@ -5181,7 +5191,7 @@ F(G) =
 \begin{lstlisting}[language=C++, caption={创建二叉树}, label={code:create}]
   void CreateBiTree(BiTree &T) {
     TElemType ch;
-    scanf(``%c``, &ch);
+    scanf("%c", &ch);
     if (ch == '#') {
       T = NULL;
     } else {
@@ -5550,10 +5560,10 @@ F(G) =
       while (p->ltag == 0) {
         p = p->lchild;
       }
-      printf(``%c``, p->data);
+      printf("%c", p->data);
       while (p->rtag == 1 && p->rchild != T) {
         p = p->rchild;
-        printf(``%c``, p->data);
+        printf("%c", p->data);
       }
       p = p->rchild;
     }
@@ -5756,7 +5766,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
       HT[i].rchild = 0;
     }
     for (int i = 1; i <= n; i++) {
-      scanf(``%d``, &HT[i].weight);
+      scanf("%d", &HT[i].weight);
     }
     for (int i = n + 1; i <= m; i++) {
       int s1, s2;
@@ -5812,7 +5822,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindExample(a).pdf}
+  \includegraphics[width=0.4\textwidth]{./figure/pdf/cropped/unionFindExample(a).pdf}
   \caption{并查集初始状态}
   \label{fig:unionFind1}
 \end{figure}
@@ -5912,7 +5922,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
   \begin{figure}
     \centering
-    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/unionFindLow.pdf}
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/unionFindLow.pdf}
     \caption{并查集低效率}
     \label{fig:unionFind6}
   \end{figure}
@@ -5923,7 +5933,7 @@ n = n_0 + n_1 + n_2 = n_0 + n_2 = n_0 + (n_0 - 1) = 2n_0 - 1
 
   \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{./figure/pdf/cropped/pathCompress.pdf}
+    \includegraphics[width=0.8\textwidth]{./figure/pdf/cropped/pathCompress.pdf}
     \caption{并查集高效率}
     \label{fig:unionFind7}
   \end{figure}
@@ -6261,11 +6271,11 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 \begin{lstlisting}[language=C++, caption={邻接矩阵的创建}]
   void CreateMGraph(MGraph *G) {
     int i, j, k, w;
-    printf(``输入顶点数和边数：\n``);
-    scanf(``%d %d``, &G->vexnum, &G->arcnum);
-    printf(``输入顶点信息：\n``);
+    printf("输入顶点数和边数：\n");
+    scanf("%d %d", &G->vexnum, &G->arcnum);
+    printf("输入顶点信息：\n");
     for (i = 0; i < G->vexnum; i++) {
-      scanf(``%c``, &G->vexs[i]);
+      scanf("%c", &G->vexs[i]);
     }
     for (i = 0; i < G->vexnum; i++) {
       for (j = 0; j < G->vexnum; j++) {
@@ -6273,8 +6283,8 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
       }
     }
     for (k = 0; k < G->arcnum; k++) {
-      printf(``输入边(vi, vj)的下标i, 下标j和权值w：\n``);
-      scanf(``%d %d %d``, &i, &j, &w);
+      printf("输入边(vi, vj)的下标i, 下标j和权值w：\n");
+      scanf("%d %d %d", &i, &j, &w);
       G->arc[i][j] = w;
       G->arc[j][i] = w;
     }
@@ -6288,16 +6298,16 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   void CreateALGraph(ALGraph *G) {
     int i, j, k;
     EdgeNode *e;
-    printf(``输入顶点数和边数：\n``);
-    scanf(``%d %d``, &G->numVertexes, &G->numEdges);
-    printf(``输入顶点信息：\n``);
+    printf("输入顶点数和边数：\n");
+    scanf("%d %d", &G->numVertexes, &G->numEdges);
+    printf("输入顶点信息：\n");
     for (i = 0; i < G->numVertexes; i++) {
-      scanf(``%c``, &G->adjList[i].data);
+      scanf("%c", &G->adjList[i].data);
       G->adjList[i].firstEdge = NULL;
     }
     for (k = 0; k < G->numEdges; k++) {
-      printf(``输入边(vi, vj)的下标i, 下标j：\n``);
-      scanf(``%d %d``, &i, &j);
+      printf("输入边(vi, vj)的下标i, 下标j：\n");
+      scanf("%d %d", &i, &j);
       e = (EdgeNode *)malloc(sizeof(EdgeNode));
       e->adjvex = j;
       e->next = G->adjList[i].firstEdge;
@@ -6321,9 +6331,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     int i, j;
     for (i = 0; i < G.vexnum; i++) {
       for (j = 0; j < G.vexnum; j++) {
-        printf(``%d ``, G.arc[i][j]);
+        printf("%d ", G.arc[i][j]);
       }
-      printf(``\n``);
+      printf("\n");
     }
   }
 \end{lstlisting}
@@ -6336,13 +6346,13 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     int i;
     EdgeNode *e;
     for (i = 0; i < G.numVertexes; i++) {
-      printf(``%c``, G.adjList[i].data);
+      printf("%c", G.adjList[i].data);
       e = G.adjList[i].firstEdge;
       while (e != NULL) {
-        printf(``%d``, e->adjvex);
+        printf("%d", e->adjvex);
         e = e->next;
       }
-      printf(``\n``);
+      printf("\n");
     }
   }
 \end{lstlisting}
@@ -6412,7 +6422,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   void DFS(ALGraph G, int i) {
     EdgeNode *p;
     visited[i] = 1;
-    printf(``%c``, G.adjList[i].data);
+    printf("%c", G.adjList[i].data);
     p = G.adjList[i].firstEdge;
     while (p != NULL) {
       if (!visited[p->adjvex]) {
@@ -6433,7 +6443,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
   void DFS(MGraph G, int i) {
     int j;
     visited[i] = 1;
-    printf(``%c``, G.vexs[i]);
+    printf("%c", G.vexs[i]);
     for (j = 0; j < G.vexnum; j++) {
       if (G.arc[i][j] == 1 && !visited[j]) {
         DFS(G, j);
@@ -6479,7 +6489,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     EdgeNode *p;
     int queue[MAX_VERTEX_NUM];
     int front = 0, rear = 0;
-    printf(``%c``, G.adjList[i].data);
+    printf("%c", G.adjList[i].data);
     visited[i] = 1;
     rear = (rear + 1) % MAX_VERTEX_NUM;
     queue[rear] = i;
@@ -6489,7 +6499,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
       p = G.adjList[j].firstEdge;
       while (p != NULL) {
         if (!visited[p->adjvex]) {
-          printf(``%c``, G.adjList[p->adjvex].data);
+          printf("%c", G.adjList[p->adjvex].data);
           visited[p->adjvex] = 1;
           rear = (rear + 1) % MAX_VERTEX_NUM;
           queue[rear] = p->adjvex;
@@ -6508,7 +6518,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
     int j;
     int queue[MAX_VERTEX_NUM];
     int front = 0, rear = 0;
-    printf(``%c``, G.vexs[i]);
+    printf("%c", G.vexs[i]);
     visited[i] = 1;
     rear = (rear + 1) % MAX_VERTEX_NUM;
     queue[rear] = i;
@@ -6517,7 +6527,7 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
       j = queue[front];
       for (int k = 0; k < G.vexnum; k++) {
         if (G.arc[j][k] == 1 && !visited[k]) {
-          printf(``%c``, G.vexs[k]);
+          printf("%c", G.vexs[k]);
           visited[k] = 1;
           rear = (rear + 1) % MAX_VERTEX_NUM;
           queue[rear] = k;
@@ -6641,9 +6651,9 @@ e = \frac{\sum_{i=0}^{n-1} d_i}{2}
 			}
 		}
 	}
-	printf(``%d ``, getSum(G, prims));
+	printf("%d ", getSum(G, prims));
 	for (int i = 0; i < G->numV; i++) {
-		printf(``%c ``, G->Vertex[prims[i]]);
+		printf("%c ", G->Vertex[prims[i]]);
 	}
 }
 
@@ -6658,7 +6668,7 @@ void prim(ALGraph* G, int start) {
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
 int getSum(ALGraph* G, int* lowCost) {//获得最小生成树的权值
 	int sum = 0;
 	for (int i = 0; i < G->numV; i++) {
@@ -6706,10 +6716,10 @@ void primInAL(ALGraph *G, int start) {
 		}
 		
 	}
-	printf(``最小生成树权值为：%d ``, getSum(G, lowCost));
-	printf(``\n``);
+	printf("最小生成树权值为：%d ", getSum(G, lowCost));
+	printf("\n");
 	for (int i = 0; i < G->numV; i++) {
-		printf(``%c ``, G->adjlist[prims[i]].info);
+		printf("%c ", G->adjlist[prims[i]].info);
 	}
 
 }
@@ -6763,13 +6773,13 @@ Kruskal 算法是基于贪心思想得到的。首先，我们将所有的边按
 */
 #include<stdio.h>
 #include <stdlib.h>
-#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
 
 void outPut(ALGraph *G, int **weights) {//输出最小生成树
 	for (int i = 0; i < G->numV; i++) {
 		for (int j = i; j < G->numV; j++) {
 			if (weights[i][j] != 0) {
-				printf(``%c->%c(%d)\n``, G->adjlist[i].info, G->adjlist[j].info, weights[i][j]);
+				printf("%c->%c(%d)\n", G->adjlist[i].info, G->adjlist[j].info, weights[i][j]);
 			}
 		}
 	}
@@ -7114,7 +7124,7 @@ S = \{0,1,2,3,5,4,6\}, \quad U = \emptyset
 */
 #include<stdio.h>
 #include <stdlib.h>
-#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
 void dijkstra(ALGraph *G, int v) {
   int *dist = (int *)malloc(sizeof(int)*G->numV);//源点到各点的最短路径长度
   int *path = (int *)malloc(sizeof(int)*G->numV);//源点到各点的最短路径
@@ -7151,16 +7161,16 @@ void dijkstra(ALGraph *G, int v) {
     }
   }
   for (int i = 0; i < G->numV; i++) {
-    printf(``源点到%d的最短路径长度为：%d\n``, i, dist[i]);
+    printf("源点到%d的最短路径长度为：%d\n", i, dist[i]);
   }
   for (int i = 0; i < G->numV; i++) {
-    printf(``源点到%d的最短路径为：``, i);
+    printf("源点到%d的最短路径为：", i);
     int j = i;
     while (j != v) {
-      printf(``%d<-``, j);
+      printf("%d<-", j);
       j = path[j];
     }
-    printf(``%d\n``, v);
+    printf("%d\n", v);
   }
 }
 int main() {
@@ -7417,7 +7427,7 @@ P =
 */
 #include<stdio.h>
 #include <stdlib.h>
-#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
 void floyd(ALGraph *G) {
   int **dist = (int **)malloc(sizeof(int *)*G->numV);//源点到各点的最短路径长度
   int **path = (int **)malloc(sizeof(int *)*G->numV);//源点到各点的最短路径
@@ -7446,18 +7456,18 @@ void floyd(ALGraph *G) {
   }
   for (int i = 0; i < G->numV; i++) {
     for (int j = 0; j < G->numV; j++) {
-      printf(``源点%d到%d的最短路径长度为：%d\n``, i, j, dist[i][j]);
+      printf("源点%d到%d的最短路径长度为：%d\n", i, j, dist[i][j]);
     }
   }
   for (int i = 0; i < G->numV; i++) {
     for (int j = 0; j < G->numV; j++) {
-      printf(``源点%d到%d的最短路径为：``, i, j);
+      printf("源点%d到%d的最短路径为：", i, j);
       int k = j;
       while (k != i) {
-        printf(``%d<-``, k);
+        printf("%d<-", k);
         k = path[i][k];
       }
-      printf(``%d\n``, i);
+      printf("%d\n", i);
     }
   }
 }
@@ -7482,7 +7492,7 @@ int main() {
       for (i = 0; i < g.n; i++) {
           for (j = 0; j < g.n; j++) {
               if (A[i][j] != INF && i != j) { // 若顶点 i 和 j 之间存在路径
-                  printf(``从顶点 %d 到顶点 %d 的路径为: ``, i, j);
+                  printf("从顶点 %d 到顶点 %d 的路径为: ", i, j);
                   k = path[i][j];
                   d = 0;
                   apath[d] = j; // 路径上添加终点
@@ -7493,11 +7503,11 @@ int main() {
                   }
                   d++;
                   apath[d] = i; // 路径上添加起点
-                  printf(``%d``, apath[d]); // 输出起点
+                  printf("%d", apath[d]); // 输出起点
                   for (s = d - 1; s >= 0; s--) { // 输出路径上的中间顶点
-                      printf(``, %d``, apath[s]);
+                      printf(", %d", apath[s]);
                   }
-                  printf(``\t路径长度为: %d\n``, A[i][j]);
+                  printf("\t路径长度为: %d\n", A[i][j]);
               }
           }
       }
@@ -7568,8 +7578,8 @@ int main() {
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
-#include ``stackStruct.h``//通过头文件加载栈结构体
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include "stackStruct.h"//通过头文件加载栈结构体
 void inDegree(ALGraph* G, int* indegree) {//统计每个顶点的入度，用数组保存
 	for (int j = 0; j < G->numV; j++) {
 		for (EdgeNode* p = G->adjlist[j].firstEdge; p; p = p->next) {
@@ -7599,7 +7609,7 @@ void topoSort(ALGraph* G) {
 	}
 	while (!empty(s)) {//栈不空，输出栈顶
 		index = top(s);//查看栈顶元素
-		printf(``%c ``, G->adjlist[index].info);//打印
+		printf("%c ", G->adjlist[index].info);//打印
 		pop(s);//出栈
 		for (EdgeNode* p = G->adjlist[index].firstEdge; p; p = p->next) {//将当前出栈的顶点所指向的顶点的入度均-1
 			indegree[p->index]--;
@@ -7639,8 +7649,8 @@ int main() {
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-#include ``ALGraphStruct.h``//通过头文件加载邻接表结构体
-#include ``stackStruct.h``//通过头文件加载栈结构体
+#include "ALGraphStruct.h"//通过头文件加载邻接表结构体
+#include "stackStruct.h"//通过头文件加载栈结构体
 void outDegree(ALGraph* G, int* outdegree) {//统计每个顶点的出度，用数组保存
     for (int j = 0; j < G->numV; j++) {
         for (EdgeNode* p = G->adjlist[j].firstEdge; p; p = p->next) {
@@ -7670,7 +7680,7 @@ void reverseTopoSort(ALGraph* G) {
     }
     while (!empty(s)) {//栈不空，输出栈顶
         index = top(s);//查看栈顶元素
-        printf(``%c ``, G->adjlist[index].info);//打印
+        printf("%c ", G->adjlist[index].info);//打印
         pop(s);//出栈
         for (EdgeNode* p = G->adjlist[index].firstEdge; p; p = p->next) {//将当前出栈的顶点所指向的顶点的出度均-1
             outdegree[p->index]--;
@@ -8690,7 +8700,7 @@ void insertNode(BSTree *&T, int key) {
     } else if (key > T->key) {
         insertNode(T->rchild, key);
     } else {
-        printf(``The key %d already exists.\n``, key);
+        printf("The key %d already exists.\n", key);
     }
 }
 \end{lstlisting}
@@ -8712,9 +8722,9 @@ void insertNode(BSTree *&T, int key) {
 void createBSTree(BSTree *&T) {
     T = NULL;
     int key;
-    printf(``Please input the key (end with -1):\n``);
+    printf("Please input the key (end with -1):\n");
     while (1) {
-        scanf(``%d``, &key);
+        scanf("%d", &key);
         if (key == -1) {
             break;
         }
@@ -8892,7 +8902,7 @@ void deleteNode(BSTree *&T, int key) {
         }
     }
     if (p == NULL) {
-        printf(``The key %d does not exist.\n``, key);
+        printf("The key %d does not exist.\n", key);
         return;
     }
     if (p->lchild == NULL) {//删除结点 p 的左子树为空
@@ -9626,6 +9636,271 @@ O(\log_m n)
    
       其调整过程与 B-树的删除操作相似。
 \section{红黑树}
+
+红黑树（Red-Black Tree, RBT）是一类“带颜色、爱打扮”的二叉查找树。它在保证查找、插入、删除操作 \(O(\log n)\) 最坏界的同时，又不像 AVL 那么“神经质”——允许适度“发福”（高度略大一点），换来更少的旋转次数，被广泛用于各类语言标准库（C++ \texttt{std::map/set}、Java \texttt{TreeMap/TreeSet} 等）。本节我们像剥洋葱一样层层推进：定义—性质—高度界—操作（旋转、插入、删除）—复杂度—对比—常见易错点—练习。准备好，开整！
+
+\subsection{1. 基本定义与节点结构}
+一棵红黑树是满足以下约束的二叉查找树（BST）：
+\begin{itemize}
+  \item 每个节点或为红色（Red）或为黑色（Black）。
+  \item 根节点为黑色（有些实现允许临时例外，最终要修成黑）。
+  \item 叶子 NIL （空指针视作外部叶）均为黑色。（实现时通常不显式建空节点，只需在证明中默认它们是黑的。）
+  \item 不存在两个相邻的红色节点（红色节点的孩子必须全黑）——“红红不相连”。
+  \item 对任一节点，从该节点到其所有后代 NIL 叶子的所有简单路径，黑节点数（称“黑高” black-height）均相同。
+\end{itemize}
+这些性质联手限制了树的“瘦高”程度，确保高度 \(h \le 2\log_2(n+1)\)。
+
+典型节点（C 语言）结构（此处示例以整型键值为主，若需泛型可结合 void* 与比较函数）：
+\begin{lstlisting}[language=C]
+#include <stdlib.h>
+#include <stdio.h>
+
+typedef enum { RED, BLACK } Color;
+
+typedef struct RBNode {
+  int key;
+  int value;              // 可根据需要替换为指针等
+  Color color;            // 新插入节点默认为 RED
+  struct RBNode *left, *right, *parent;
+} RBNode;
+
+static RBNode* rb_create_node(int key, int value){
+  RBNode *n = (RBNode*)malloc(sizeof(RBNode));
+  if(!n){ perror("malloc"); exit(EXIT_FAILURE); }
+  n->key = key; n->value = value; n->color = RED;
+  n->left = n->right = n->parent = NULL;
+  return n;
+}
+\end{lstlisting}
+
+\subsection{2. 一个最小示意}下图展示一棵满足红黑性质的小树，其中黑节点画成实心、红节点空心（或着色）。
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{tikzpicture}[level distance=1.1cm,
+    every node/.style={circle, draw, minimum size=7mm, inner sep=0pt, font=\small},
+    redn/.style={circle, draw=red, very thick, text=red},
+    blackn/.style={circle, draw=black, very thick, fill=black!10}]
+    \node[blackn]{10}
+      child{ node[redn]{5}
+        child{ node[blackn]{2} }
+        child{ node[blackn]{7} }
+      }
+      child{ node[redn]{15}
+        child{ node[blackn]{12} }
+        child{ node[blackn]{18} }
+      };
+  \end{tikzpicture}
+  \caption{红黑树示意（颜色与层次）}
+\end{figure}
+
+\subsection{3. 黑高与高度上界（为啥它快）}
+记某节点的黑高为从该节点（不含自身若为红，可含自身若为黑——不同教材定义略异，本书采用“到叶 NIL 的黑节点数”）到任一外部 NIL 叶路径上的黑节点数量。由“红红不相连”与“各路径黑节点数量一致”可“夹逼”出高度：
+若根的黑高为 \(bh\)，最短路径（全黑）长度为 \(bh\)，最长路径（红黑交替）长度最多 \(2bh\)。另一方面含 \(bh\) 黑节点的最少内部节点数满足：\(n \ge 2^{bh}-1\)，故 \(bh \le \log_2(n+1)\)，从而 \(h \le 2\log_2(n+1)\)。这保证 \(O(\log n)\) 操作最坏界。
+
+\subsection{4. 核心武器：旋转（Rotation）}
+红黑树修复平衡只靠两招：\textbf{颜色翻转} 与 \textbf{局部旋转}。旋转保持 BST 中序序列不变，相当于“重接指针”。C 语言实现使用“根指针的指针”便于修改根：
+\begin{lstlisting}[language=C]
+static void left_rotate(RBNode **root, RBNode *x){
+  RBNode *y = x->right;                 // 取出右孩子
+  x->right = y->left;                   // 右孩子的左子树接到 x 右侧
+  if (y->left) y->left->parent = x;
+  y->parent = x->parent;                // y 替换 x 的位置
+  if(!x->parent) *root = y;
+  else if(x == x->parent->left) x->parent->left = y; else x->parent->right = y;
+  y->left = x; x->parent = y;           // x 下沉为 y 左孩子
+}
+
+static void right_rotate(RBNode **root, RBNode *y){
+  RBNode *x = y->left;                  // 取出左孩子
+  y->left = x->right;
+  if (x->right) x->right->parent = y;
+  x->parent = y->parent;                // x 替换 y 的位置
+  if(!y->parent) *root = x;
+  else if(y == y->parent->left) y->parent->left = x; else y->parent->right = x;
+  x->right = y; y->parent = x;          // y 下沉为 x 右孩子
+}
+\end{lstlisting}
+
+小口诀：左旋“提右孩子、右子左挂、父换顶、原点做左”；右旋反之。
+
+\subsection{5. 插入操作：三个场景 + 终止条件}
+插入新键时：先按 BST 规则插入“红”节点（选红是为了更容易恢复黑高不变）。若破坏性质，向上“调和”（FixUp）。设当前修复节点为 \(z\)，父为 \(p\)，祖父为 \(g\)，叔叔为 \(u\)。分三类（父为红才需要修）：
+\begin{enumerate}
+  \item \textbf{Case 1：叔叔也是红}\ (p、u 红)。操作：p 与 u 染黑，g 染红，令 g 成为新的 \(z\) 继续往上。——“红红上浮”。
+  \item \textbf{Case 2：叔叔黑，且 z 与 p 形成“内弯”}（例如 p 是 g 左孩子而 z 是 p 右孩子）。先对 p 做一次朝 z 方向的旋转，把其化为 Case 3。
+  \item \textbf{Case 3：叔叔黑，且 z 与 p 形成“外直”}。对 g 做一次朝 p 方向的旋转，然后：p 染黑、g 染红，结束。
+\end{enumerate}
+最后确保根为黑。
+
+插入修复核心 C 实现（精简）：
+\begin{lstlisting}[language=C]
+static void rb_insert_fix(RBNode **root, RBNode *z){
+  while (z->parent && z->parent->color == RED) {
+    RBNode *p = z->parent;
+    RBNode *g = p->parent;                   // 祖父不可能为 NULL (父红 => 祖父存在)
+    int pIsLeft = (p == g->left);
+    RBNode *u = pIsLeft ? g->right : g->left; // 叔叔
+    if (u && u->color == RED) {              // Case 1: 叔叔红 => 颜色翻转, 向上继续
+      p->color = BLACK; u->color = BLACK; g->color = RED; z = g; continue;
+    }
+    // Case 2: 内弯, 先转成外直
+    if (pIsLeft && z == p->right){           // LR
+      left_rotate(root, p); z = p; p = z->parent; pIsLeft = (p == g->left);
+    } else if(!pIsLeft && z == p->left){     // RL
+      right_rotate(root, p); z = p; p = z->parent; pIsLeft = (p == g->left);
+    }
+    // Case 3: 外直, 旋转 + 着色
+    p->color = BLACK; g->color = RED;
+    if (pIsLeft) right_rotate(root, g); else left_rotate(root, g);
+    break; // 平衡完成
+  }
+  (*root)->color = BLACK; // 根强制为黑
+}
+\end{lstlisting}
+
+\paragraph{图解：经典序列 41, 38, 31, 12, 19, 8 的插入过程}
+下列图组展示每次插入后经修复得到的红黑树形态（采用 CLRS 经典例子）。黑节点用加粗黑框（浅填充），红节点用红色描边。请特别留意发生“颜色翻转”与“旋转”的步骤。
+
+\begin{figure}[H]
+  \centering
+  % (a) 插入 41
+  \begin{minipage}{0.30\textwidth}\centering
+  \begin{tikzpicture}[level distance=0.9cm,
+    every node/.style={circle, draw, very thick, minimum size=6.5mm, inner sep=0pt, font=\scriptsize},
+    redn/.style={circle, draw=red, very thick, text=red},
+    blackn/.style={circle, draw=black, very thick, fill=black!10}]
+    \node[blackn]{41};
+  \end{tikzpicture}\\[-2pt]
+  \small (a) 插入 41（根强制黑）
+  \end{minipage}\hfill
+  % (b) 插入 38
+  \begin{minipage}{0.30\textwidth}\centering
+  \begin{tikzpicture}[level distance=0.9cm,
+    every node/.style={circle, draw, very thick, minimum size=6.5mm, inner sep=0pt, font=\scriptsize},
+    redn/.style={circle, draw=red, very thick, text=red},
+    blackn/.style={circle, draw=black, very thick, fill=black!10}]
+    \node[blackn]{41}
+      child{ node[redn]{38} }
+      child[missing];
+  \end{tikzpicture}\\[-2pt]
+  \small (b) 插入 38（父黑, 无冲突）
+  \end{minipage}\hfill
+  % (c) 插入 31 触发旋转
+  \begin{minipage}{0.30\textwidth}\centering
+  \begin{tikzpicture}[level distance=0.9cm,
+    every node/.style={circle, draw, very thick, minimum size=6.5mm, inner sep=0pt, font=\scriptsize},
+    redn/.style={circle, draw=red, very thick, text=red},
+    blackn/.style={circle, draw=black, very thick, fill=black!10}]
+    \node[blackn]{38}
+      child{ node[redn]{31} }
+      child{ node[redn]{41} };
+  \end{tikzpicture}\\[-2pt]
+  \small (c) 插入 31 后: 原 41 为根, 发生右旋+重新着色
+  \end{minipage}
+
+  \vspace{6pt}
+
+  % (d) 插入 12 颜色翻转
+  \begin{minipage}{0.30\textwidth}\centering
+  \begin{tikzpicture}[level distance=0.9cm,
+    every node/.style={circle, draw, very thick, minimum size=6.5mm, inner sep=0pt, font=\scriptsize},
+    redn/.style={circle, draw=red, very thick, text=red},
+    blackn/.style={circle, draw=black, very thick, fill=black!10}]
+    \node[blackn]{38}
+      child{ node[blackn]{31}
+        child{ node[redn]{12} }
+        child[missing]
+      }
+      child{ node[blackn]{41} };
+  \end{tikzpicture}\\[-2pt]
+  \small (d) 插入 12：Case1 (叔叔41红) 颜色翻转
+  \end{minipage}\hfill
+  % (e) 插入 19 触发 LR -> LL -> 旋转
+  \begin{minipage}{0.30\textwidth}\centering
+  \begin{tikzpicture}[level distance=0.9cm,
+    every node/.style={circle, draw, very thick, minimum size=6.5mm, inner sep=0pt, font=\scriptsize},
+    redn/.style={circle, draw=red, very thick, text=red},
+    blackn/.style={circle, draw=black, very thick, fill=black!10}]
+    \node[blackn]{38}
+      child{ node[blackn]{19}
+        child{ node[redn]{12} }
+        child{ node[redn]{31} }
+      }
+      child{ node[blackn]{41} };
+  \end{tikzpicture}\\[-2pt]
+  \small (e) 插入 19：LR 情形 => 左旋 12 再右旋 31 (合并后结果)
+  \end{minipage}\hfill
+  % (f) 插入 8 最终
+  \begin{minipage}{0.30\textwidth}\centering
+  \begin{tikzpicture}[level distance=0.95cm,
+    every node/.style={circle, draw, very thick, minimum size=6.5mm, inner sep=0pt, font=\scriptsize},
+    redn/.style={circle, draw=red, very thick, text=red},
+    blackn/.style={circle, draw=black, very thick, fill=black!10}]
+    \node[blackn]{38}
+      child{ node[redn]{19}
+        child{ node[blackn]{12}
+          child{ node[redn]{8} }
+          child[missing] }
+        child{ node[blackn]{31} }
+      }
+      child{ node[blackn]{41} };
+  \end{tikzpicture}\\[-2pt]
+  \small (f) 插入 8：Case1 颜色翻转后 19 变红
+  \end{minipage}
+
+  \caption{红黑树插入示例：序列 41,38,31,12,19,8 的逐步演化}
+\end{figure}
+\subsection{6. 删除操作：更烧脑但有套路}
+删除分两步：\textbf{定位目标}（BST 方式；若有两个孩子，用后继替换） + \textbf{修复双黑}。与插入不同，删除的难点在“黑色被删”导致某条路径黑高减少。常用处理：用“额外黑色”标记当前节点（双黑），然后通过兄弟（sibling）配置进行变换，直到：
+\begin{itemize}
+  \item 移动到根（去掉多余黑）；或
+  \item 落到红节点（染黑完成）；或
+  \item 通过旋转 + 重新着色抵消额外黑。
+\end{itemize}
+核心情形（设当前双黑节点为 x，它的兄弟为 s，x 为左孩子情况；右对称）：
+\begin{enumerate}
+  \item \textbf{s 为红}：父黑红换色，对父左旋，转换成兄弟黑情形。
+  \item \textbf{s 黑且 s 的两个侄子都黑}：s 染红，x 上移为父（相当于“借不到”黑，向上继续）。
+  \item \textbf{s 黑且 s 的远侄子黑、近侄子红}：对 s 做一次右旋（兄弟与近侄子换位）并重新着色，化成 Case 4。
+  \item \textbf{s 黑且 s 的远侄子红}：远侄子染黑，s 取父色，父染黑，对父左旋，结束。
+\end{enumerate}
+
+
+由于篇幅，完整代码略，读者可对照插入修复的思想：尽量把“难局”转成“更易终结”的形态。
+
+\subsection{7. 时间与空间复杂度}
+所有基本操作（查找、插入、删除）最坏 \(O(\log n)\)。空间开销为节点指针（左右+父）与 1 bit 颜色（通常用枚举或最低位复用，实际多占 1 字节~4 字节，看实现）。
+
+\subsection{8. 与 AVL、Treap、跳表的对比}
+\begin{itemize}
+  \item AVL 更“矮”（更严格平衡），查找稍占优；但插入/删除需要更多旋转，适合查找远多于更新的场景。
+  \item 红黑树更新代价更稳定，工业界偏爱（Java、C++ 标准库）。
+  \item Treap 随机化，代码更短，但性能有概率波动；跳表（Skip List）在并发友好性方面更易锁分层。
+\end{itemize}
+
+\subsection{9. 常见易错点 / 面试“绊脚石”}
+\begin{enumerate}
+  \item 忘记“所有外部 NIL 都视为黑”，从而黑高证明写不下去。
+  \item 插入 Case 2 之后忘记更新 \(z\) 指针（应提升到旋转前父）。
+  \item 删除修复中未对称处理（只写“左”不写“右”）。
+  \item 根可能被染成红后忘记最后强制染黑。
+  \item 旋转函数未更新新根的 parent 或孩子指针，导致“断链”。
+\end{enumerate}
+
+\subsection{10. 小练习}
+\begin{enumerate}
+  \item 画出依次插入序列：\(41, 38, 31, 12, 19, 8\) 的红黑树演变（经典教科书例）。
+  \item 证明：具有 \(n\) 个内部节点的红黑树高度不超过 \(2\log_2(n+1)\)。
+  \item 请给出删除节点 6 后对下述树的调整步骤（自行构造一个案例）。
+  \item 将红黑树节点颜色字段压缩到指针最低位的思路是什么？注意对齐与平台差异。
+\end{enumerate}
+
+\subsection{11. 总结（复盘三句话）}
+“红黑五性质”维持黑高一致；插入靠“红红上浮 + 旋转矫形”；删除用“兄弟分类 + 借黑 / 旋转”消除双黑。理解其 \textit{局部修补} 思想比死记硬背更关键。
+
+稍微调侃一句：红黑树就像健身教练，不求你身材完美（绝对平衡），但保证你“别太走形”——这样你随时都能在 \(O(\log n)\) 的时间内找到“腰线”。
+
 
 
 \chapter{排序}

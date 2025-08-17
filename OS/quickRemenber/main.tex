@@ -1,0 +1,2143 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{../../elegantbook}
+
+\title{408计算机操作系统冲刺背诵手册}
+\subtitle{北街学长倾力之作}
+
+\author{北街}
+\date{2025/08/17}
+\version{1.0}
+
+
+\setcounter{tocdepth}{3}
+
+\logo{../../../figure/logo-blue.png}
+\cover{../../../figure/cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\usepackage{listings}         % 导入listings宏包
+\usepackage{xcolor}           % 支持颜色
+\usepackage{graphicx}        % 支持图形
+% 配置C++代码样式
+\lstset{
+    language=C++,             % 语言设置为C++
+    basicstyle=\ttfamily,      % 基本样式
+    keywordstyle=\color{blue}, % 关键词颜色
+    commentstyle=\color[rgb]{0,0.5,0},% 注释颜色  stringstyle=\color{red},   % 字符串颜色
+    numbers=left,              % 显示行号
+    numberstyle=\tiny,         % 行号样式
+    stepnumber=1,              % 每行显示行号
+    breaklines=true,           % 自动换行
+    frame=lines                % 代码块边框样式
+}
+
+\usepackage{tikz}
+\usetikzlibrary{chains, positioning, arrows.meta, automata}
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+
+% ================== 408计算机操作系统冲刺背诵手册 ==================
+% 根据408考纲结构生成完整内容，适合考前冲刺背诵
+
+% ========== 第1章 操作系统概述 ==========
+\chapter{操作系统概述}
+
+\section{操作系统的基本概念}
+
+\textbf{操作系统定义：}
+操作系统是管理计算机硬件与软件资源的计算机程序，是计算机系统的内核与基石。
+
+\textbf{操作系统的目标：}
+\begin{enumerate}
+  \item \textbf{方便性}：为用户提供便利的使用环境
+  \item \textbf{有效性}：提高系统资源利用率
+  \item \textbf{可扩充性}：方便系统功能的扩展和修改
+  \item \textbf{开放性}：遵循标准，易于移植
+\end{enumerate}
+
+\textbf{操作系统的功能：}
+\begin{itemize}
+  \item \textbf{进程管理}：进程控制、调度、同步与通信
+  \item \textbf{内存管理}：内存分配、地址映射、虚拟存储
+  \item \textbf{文件管理}：文件存储、目录管理、存取控制
+  \item \textbf{设备管理}：设备分配、驱动程序、中断处理
+  \item \textbf{用户接口}：命令接口、程序接口、图形界面
+\end{itemize}
+
+\section{操作系统的发展历程}
+
+\begin{longtable}{@{}p{3cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{发展阶段} & \textbf{主要特点} & \textbf{代表技术} \\\\ \midrule
+\endhead
+
+手工操作阶段 & 程序员直接操作硬件 & 纸带、卡片输入 \\\\
+单道批处理 & 自动连续处理作业 & 监控程序、脱机I/O \\\\
+多道批处理 & 内存中多个程序并发 & 多道程序设计、中断 \\\\
+分时系统 & 多用户交互式使用 & 时间片轮转、虚拟存储 \\\\
+实时系统 & 对时间要求严格 & 优先级调度、快速响应 \\\\
+网络操作系统 & 支持网络功能 & 分布式处理、远程访问 \\\\
+分布式系统 & 多机协作处理 & 集群、负载均衡 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{程序运行环境}
+
+\subsection{CPU运行模式}
+
+\textbf{内核模式（管态、核心态）：}
+\begin{itemize}
+  \item 可以执行所有机器指令
+  \item 可以访问所有内存区域
+  \item 可以直接访问硬件设备
+  \item 操作系统内核运行在此模式
+\end{itemize}
+
+\textbf{用户模式（目态、用户态）：}
+\begin{itemize}
+  \item 只能执行非特权指令
+  \item 只能访问用户内存空间
+  \item 不能直接访问硬件
+  \item 用户程序运行在此模式
+\end{itemize}
+
+\textbf{模式切换：}
+\begin{itemize}
+  \item \textbf{用户态→内核态}：中断、异常、系统调用
+  \item \textbf{内核态→用户态}：执行特权指令修改PSW
+\end{itemize}
+
+\subsection{中断和异常的处理}
+
+\textbf{中断分类：}
+\begin{longtable}{@{}p{3cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{类型} & \textbf{来源} & \textbf{特点} \\\\ \midrule
+\endhead
+
+外部中断 & I/O设备、时钟等 & 异步、可屏蔽 \\\\
+内部中断 & CPU内部 & 同步、不可屏蔽 \\\\
+软中断 & 软件指令 & 系统调用、陷阱 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{中断处理过程：}
+\begin{enumerate}
+  \item 保存现场（PSW、PC等寄存器）
+  \item 识别中断源
+  \item 转向相应的中断服务程序
+  \item 执行中断服务
+  \item 恢复现场
+  \item 返回被中断程序
+\end{enumerate}
+
+\subsection{系统调用}
+
+\textbf{系统调用定义：}
+用户程序请求操作系统服务的接口
+
+\textbf{系统调用类型：}
+\begin{itemize}
+  \item \textbf{进程控制}：fork、exec、exit、wait
+  \item \textbf{文件操作}：open、read、write、close
+  \item \textbf{设备管理}：ioctl、read、write
+  \item \textbf{信息维护}：getpid、alarm、sleep
+  \item \textbf{通信}：pipe、shmget、msgget
+\end{itemize}
+
+\textbf{系统调用过程：}
+\begin{enumerate}
+  \item 用户程序调用库函数
+  \item 库函数将参数放入指定寄存器
+  \item 执行trap指令（软中断）
+  \item 切换到内核态
+  \item 执行系统调用服务程序
+  \item 返回用户态
+\end{enumerate}
+
+\subsection{程序的链接与装入}
+
+\textbf{编译过程：}
+\begin{center}
+源程序 → 编译 → 目标模块 → 链接 → 装入模块 → 装入 → 内存映像
+\end{center}
+
+\textbf{链接方式：}
+\begin{itemize}
+  \item \textbf{静态链接}：装入前链接，生成完整可执行文件
+  \item \textbf{装入时动态链接}：装入时进行链接
+  \item \textbf{运行时动态链接}：运行时需要时才链接
+\end{itemize}
+
+\textbf{装入方式：}
+\begin{itemize}
+  \item \textbf{绝对装入}：编译时确定绝对地址
+  \item \textbf{可重定位装入}：装入时修改地址
+  \item \textbf{动态运行时装入}：运行时地址转换
+\end{itemize}
+
+\subsection{程序运行时内存映像与地址空间}
+
+\textbf{逻辑地址空间：}
+\begin{itemize}
+  \item \textbf{代码段}：程序指令
+  \item \textbf{数据段}：全局变量、静态变量
+  \item \textbf{堆段}：动态分配内存
+  \item \textbf{栈段}：局部变量、函数调用
+\end{itemize}
+
+\textbf{地址转换：}
+\begin{itemize}
+  \item \textbf{逻辑地址}：程序中的地址
+  \item \textbf{物理地址}：内存中的实际地址
+  \item \textbf{地址映射}：MMU完成逻辑到物理地址转换
+\end{itemize}
+
+\section{操作系统结构}
+
+\textbf{分层结构：}
+\begin{itemize}
+  \item 系统分为若干层，每层只能调用更低层
+  \item 优点：结构清晰，易于调试
+  \item 缺点：效率低，层次间通信开销大
+\end{itemize}
+
+\textbf{模块化结构：}
+\begin{itemize}
+  \item 将系统分解为若干模块
+  \item 优点：可维护性好，可重用性强
+  \item 缺点：模块间接口复杂
+\end{itemize}
+
+\textbf{宏内核：}
+\begin{itemize}
+  \item 整个操作系统在内核态运行
+  \item 优点：性能高，调用开销小
+  \item 缺点：可靠性差，难以维护
+\end{itemize}
+
+\textbf{微内核：}
+\begin{itemize}
+  \item 只有基本功能在内核态
+  \item 其他功能在用户态作为服务器
+  \item 优点：可靠性高，易于扩展
+  \item 缺点：性能低，通信开销大
+\end{itemize}
+
+\textbf{外核：}
+\begin{itemize}
+  \item 只提供硬件资源的安全复用
+  \item 应用程序直接管理资源
+  \item 优点：性能极高，灵活性好
+  \item 缺点：应用编程复杂
+\end{itemize}
+
+\section{操作系统引导}
+
+\textbf{引导过程：}
+\begin{enumerate}
+  \item \textbf{开机自检}：POST检测硬件
+  \item \textbf{主引导记录}：MBR加载引导程序
+  \item \textbf{活动分区}：查找可引导分区
+  \item \textbf{引导程序}：加载操作系统内核
+  \item \textbf{内核初始化}：初始化系统数据结构
+  \item \textbf{启动进程}：创建第一个用户进程
+\end{enumerate}
+
+\section{虚拟机}
+
+\textbf{虚拟机概念：}
+通过软件模拟完整计算机系统的技术
+
+\textbf{虚拟机类型：}
+\begin{itemize}
+  \item \textbf{系统虚拟机}：虚拟完整的硬件平台
+  \item \textbf{进程虚拟机}：虚拟单个程序的运行环境
+\end{itemize}
+
+\textbf{虚拟化技术：}
+\begin{itemize}
+  \item \textbf{全虚拟化}：客户OS无需修改
+  \item \textbf{半虚拟化}：客户OS需要修改
+  \item \textbf{硬件辅助虚拟化}：CPU提供虚拟化支持
+\end{itemize}
+
+% ========== 第2章 进程管理 ==========
+\chapter{进程管理}
+
+\section{进程与线程}
+
+\subsection{进程与线程的基本概念}
+
+\textbf{进程定义：}
+进程是程序在某个数据集合上的一次运行活动，是系统进行资源分配和调度的基本单位。
+
+\textbf{进程特征：}
+\begin{itemize}
+  \item \textbf{动态性}：进程是程序的一次执行过程
+  \item \textbf{并发性}：多个进程可同时存在
+  \item \textbf{独立性}：进程是独立运行的基本单位
+  \item \textbf{异步性}：进程按异步方式运行
+  \item \textbf{结构性}：进程由程序、数据、PCB组成
+\end{itemize}
+
+\textbf{线程定义：}
+线程是进程中的一个执行单元，是CPU调度和分派的基本单位。
+
+\textbf{进程vs线程：}
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{对比项} & \textbf{进程} & \textbf{线程} \\\\ \midrule
+\endhead
+
+调度单位 & 传统的调度单位 & 现代OS的调度单位 \\\\
+拥有资源 & 拥有资源的基本单位 & 不拥有资源 \\\\
+并发性 & 进程间可并发 & 同进程内线程可并发 \\\\
+系统开销 & 创建撤销开销大 & 创建撤销开销小 \\\\
+地址空间 & 独立的地址空间 & 共享进程地址空间 \\\\
+通信方式 & IPC机制 & 直接读写进程数据 \\\\
+
+\bottomrule
+\end{longtable}
+
+\subsection{进程/线程的状态与转换}
+
+\textbf{进程的三态模型：}
+\begin{itemize}
+  \item \textbf{就绪态(Ready)}：已获得除CPU外的所有资源
+  \item \textbf{运行态(Running)}：正在CPU上执行
+  \item \textbf{阻塞态(Blocked)}：等待某个事件发生
+\end{itemize}
+
+\textbf{进程的五态模型：}
+\begin{itemize}
+  \item \textbf{新建态(New)}：进程正在被创建
+  \item \textbf{就绪态(Ready)}：等待分配CPU
+  \item \textbf{运行态(Running)}：正在运行
+  \item \textbf{阻塞态(Waiting)}：等待事件
+  \item \textbf{终止态(Exit)}：进程结束
+\end{itemize}
+
+\textbf{状态转换：}
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+\node[state] (new) {新建};
+\node[state, right of=new] (ready) {就绪};
+\node[state, right of=ready] (running) {运行};
+\node[state, below of=running] (waiting) {阻塞};
+\node[state, right of=running] (exit) {终止};
+
+\path[->] (new) edge node {创建} (ready)
+          (ready) edge node {调度} (running)
+          (running) edge node {阻塞} (waiting)
+          (running) edge node {结束} (exit)
+          (running) edge[bend left] node {时间片到} (ready);
+\end{tikzpicture}
+\end{center}
+
+\subsection{进程控制块PCB}
+
+\textbf{PCB作用：}
+\begin{itemize}
+  \item 作为进程存在的唯一标志
+  \item 记录进程的各种信息
+  \item 供OS掌握进程情况
+\end{itemize}
+
+\textbf{PCB内容：}
+\begin{itemize}
+  \item \textbf{进程标识信息}：PID、用户ID、组ID
+  \item \textbf{处理机状态信息}：通用寄存器、PC、PSW、栈指针
+  \item \textbf{进程调度信息}：优先级、状态、队列指针
+  \item \textbf{进程控制信息}：程序入口、代码数据地址、资源清单
+\end{itemize}
+
+\textbf{PCB组织方式：}
+\begin{itemize}
+  \item \textbf{链接方式}：同状态进程的PCB链成队列
+  \item \textbf{索引方式}：建立各种状态的索引表
+\end{itemize}
+
+\subsection{线程的实现方式}
+
+\textbf{用户级线程：}
+\begin{itemize}
+  \item 由用户线程库管理
+  \item 内核不知道线程存在
+  \item 优点：切换快、可移植
+  \item 缺点：一个线程阻塞全进程阻塞
+\end{itemize}
+
+\textbf{内核级线程：}
+\begin{itemize}
+  \item 由内核管理
+  \item 内核为每个线程建立TCB
+  \item 优点：一个线程阻塞不影响其他线程
+  \item 缺点：切换开销大
+\end{itemize}
+
+\textbf{混合模式：}
+\begin{itemize}
+  \item 用户级线程映射到内核级线程
+  \item n:m映射关系
+  \item 结合两种方式的优点
+\end{itemize}
+
+\section{处理机调度}
+
+\subsection{调度的基本概念}
+
+\textbf{调度层次：}
+\begin{itemize}
+  \item \textbf{高级调度(作业调度)}：决定哪个作业进入内存
+  \item \textbf{中级调度(内存调度)}：决定哪个进程换入换出
+  \item \textbf{低级调度(进程调度)}：决定哪个就绪进程获得CPU
+\end{itemize}
+
+\textbf{调度时机：}
+\begin{itemize}
+  \item 当前运行进程主动放弃CPU
+  \item 当前运行进程因异常终止
+  \item 当前运行进程被阻塞
+  \item 当前运行进程时间片用完
+  \item 有更高优先级进程就绪
+\end{itemize}
+
+\textbf{调度方式：}
+\begin{itemize}
+  \item \textbf{非抢占式}：进程主动放弃CPU
+  \item \textbf{抢占式}：可强制进程放弃CPU
+\end{itemize}
+
+\subsection{调度算法}
+
+\textbf{先来先服务(FCFS)：}
+\begin{itemize}
+  \item 按到达时间排队
+  \item 非抢占式
+  \item 对长作业有利，对短作业不利
+  \item 不考虑作业运行时间
+\end{itemize}
+
+\textbf{短作业优先(SJF)：}
+\begin{itemize}
+  \item 优先选择运行时间短的作业
+  \item 平均等待时间最短
+  \item 对长作业不利，可能饥饿
+  \item 难以预知作业运行时间
+\end{itemize}
+
+\textbf{高响应比优先(HRRN)：}
+\begin{itemize}
+  \item 响应比 = (等待时间 + 服务时间) / 服务时间
+  \item 综合考虑等待时间和服务时间
+  \item 既考虑短作业又防止长作业饥饿
+  \item 非抢占式算法
+\end{itemize}
+
+\textbf{时间片轮转(RR)：}
+\begin{itemize}
+  \item 每个进程分配一个时间片
+  \item 时间片用完则轮转到下一个进程
+  \item 抢占式算法
+  \item 时间片大小影响系统性能
+\end{itemize}
+
+\textbf{优先级调度：}
+\begin{itemize}
+  \item 根据优先级分配CPU
+  \item 可以是抢占式或非抢占式
+  \item 静态优先级：优先级不变
+  \item 动态优先级：优先级可调整
+\end{itemize}
+
+\textbf{多级反馈队列：}
+\begin{itemize}
+  \item 设置多个就绪队列，优先级递减
+  \item 新进程进入第1级队列
+  \item 时间片用完降到下一级队列
+  \item 兼顾短作业和长作业
+\end{itemize}
+
+\textbf{调度算法比较：}
+\begin{longtable}{@{}p{3cm}p{2cm}p{2cm}p{3cm}p{3cm}@{}}
+\toprule
+\textbf{算法} & \textbf{抢占} & \textbf{饥饿} & \textbf{适用环境} & \textbf{特点} \\\\ \midrule
+\endhead
+
+FCFS & 非抢占 & 无 & 批处理 & 简单，利于长作业 \\\\
+SJF & 非抢占 & 可能 & 批处理 & 平均等待时间短 \\\\
+HRRN & 非抢占 & 无 & 批处理 & 综合考虑多因素 \\\\
+RR & 抢占 & 无 & 分时 & 响应时间好 \\\\
+优先级 & 两种 & 可能 & 实时 & 满足实时要求 \\\\
+多级反馈 & 抢占 & 无 & 分时 & 综合性能好 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{进程同步}
+
+\subsection{同步与互斥的基本概念}
+
+\textbf{临界资源：}
+一次只允许一个进程使用的资源
+
+\textbf{临界区：}
+访问临界资源的代码段
+
+\textbf{同步：}
+协调多个进程的执行顺序
+
+\textbf{互斥：}
+多个进程不能同时使用临界资源
+
+\textbf{临界区使用原则：}
+\begin{itemize}
+  \item \textbf{空闲让进}：临界区空闲时应允许进程进入
+  \item \textbf{忙则等待}：已有进程在临界区时其他进程等待
+  \item \textbf{有限等待}：等待进程应在有限时间内进入
+  \item \textbf{让权等待}：等待时应释放CPU
+\end{itemize}
+
+\subsection{实现临界区互斥的基本方法}
+
+\textbf{软件实现方法：}
+
+\textbf{单标志法：}
+\begin{lstlisting}[language=C]
+int turn = 0; // 0表示P0可进入，1表示P1可进入
+// P0进程
+while(turn != 0); // 等待
+critical_section(); // 临界区
+turn = 1; // 让对方进入
+remainder_section();
+
+// P1进程  
+while(turn != 1); // 等待
+critical_section(); // 临界区
+turn = 0; // 让对方进入
+remainder_section();
+\end{lstlisting}
+问题：必须交替进入，违反空闲让进
+
+\textbf{双标志先检查：}
+\begin{lstlisting}[language=C]
+bool flag[2] = {false, false};
+// Pi进程
+while(flag[j]); // 等待对方退出
+flag[i] = true; // 表示自己要进入
+critical_section();
+flag[i] = false; // 表示自己退出
+\end{lstlisting}
+问题：可能两个进程都进入临界区
+
+\textbf{双标志后检查：}
+\begin{lstlisting}[language=C]
+bool flag[2] = {false, false};
+// Pi进程
+flag[i] = true; // 表示自己要进入
+while(flag[j]); // 等待对方退出
+critical_section();
+flag[i] = false; // 表示自己退出
+\end{lstlisting}
+问题：可能都无法进入临界区
+
+\textbf{Peterson算法：}
+\begin{lstlisting}[language=C]
+bool flag[2] = {false, false};
+int turn = 0;
+// Pi进程
+flag[i] = true; // 表示自己要进入
+turn = j; // 谦让对方
+while(flag[j] && turn == j); // 等待
+critical_section();
+flag[i] = false;
+\end{lstlisting}
+满足所有要求，但忙等浪费CPU
+
+\textbf{硬件实现方法：}
+
+\textbf{中断屏蔽：}
+\begin{lstlisting}[language=C]
+关中断;
+critical_section();
+开中断;
+\end{lstlisting}
+简单有效，但不适用于多处理机
+
+\textbf{TestAndSet指令：}
+\begin{lstlisting}[language=C]
+bool TestAndSet(bool *lock) {
+    bool old = *lock;
+    *lock = true;
+    return old;
+}
+// 使用
+bool lock = false;
+while(TestAndSet(&lock));
+critical_section();
+lock = false;
+\end{lstlisting}
+
+\textbf{Swap指令：}
+\begin{lstlisting}[language=C]
+void Swap(bool *a, bool *b) {
+    bool temp = *a;
+    *a = *b;
+    *b = temp;
+}
+// 使用
+bool lock = false;
+bool key = true;
+while(key) Swap(&lock, &key);
+critical_section();
+lock = false;
+\end{lstlisting}
+
+\subsection{信号量}
+
+\textbf{信号量定义：}
+信号量是一个整型变量，除初始化外只能通过P、V操作访问。
+
+\textbf{P操作(wait)：}
+\begin{lstlisting}[language=C]
+P(S) {
+    S--;
+    if(S < 0) {
+        将进程加入等待队列;
+        阻塞进程;
+    }
+}
+\end{lstlisting}
+
+\textbf{V操作(signal)：}
+\begin{lstlisting}[language=C]
+V(S) {
+    S++;
+    if(S <= 0) {
+        从等待队列取出一个进程;
+        唤醒该进程;
+    }
+}
+\end{lstlisting}
+
+\textbf{信号量类型：}
+\begin{itemize}
+  \item \textbf{整型信号量}：可为任意整数
+  \item \textbf{记录型信号量}：包含value和队列指针
+  \item \textbf{二元信号量}：只能取0或1，类似互斥锁
+\end{itemize}
+
+\textbf{信号量应用：}
+
+\textbf{实现互斥：}
+\begin{lstlisting}[language=C]
+semaphore mutex = 1; // 互斥信号量
+P(mutex);
+critical_section();
+V(mutex);
+\end{lstlisting}
+
+\textbf{实现同步：}
+\begin{lstlisting}[language=C]
+semaphore S = 0; // 同步信号量
+// P1进程
+statement1;
+V(S);
+
+// P2进程  
+P(S);
+statement2; // 必须在statement1之后执行
+\end{lstlisting}
+
+\subsection{管程}
+
+\textbf{管程定义：}
+管程是一种高级同步机制，由一组数据和定义在数据上的操作组成。
+
+\textbf{管程特性：}
+\begin{itemize}
+  \item 局部数据只能被管程内部过程访问
+  \item 进程通过调用管程过程进入管程
+  \item 同一时刻只有一个进程在管程内执行
+\end{itemize}
+
+\textbf{条件变量：}
+\begin{itemize}
+  \item wait操作：阻塞调用进程
+  \item signal操作：唤醒等待进程
+  \item 只能在管程内使用
+\end{itemize}
+
+\section{经典同步问题}
+
+\subsection{生产者-消费者问题}
+
+\textbf{问题描述：}
+一组生产者进程和一组消费者进程共享一个有界缓冲区。
+
+\textbf{同步关系：}
+\begin{itemize}
+  \item 缓冲区满时生产者等待
+  \item 缓冲区空时消费者等待
+  \item 互斥访问缓冲区
+\end{itemize}
+
+\textbf{信号量解法：}
+\begin{lstlisting}[language=C]
+semaphore empty = n;    // 空缓冲区数量
+semaphore full = 0;     // 满缓冲区数量  
+semaphore mutex = 1;    // 互斥访问
+
+// 生产者
+while(true) {
+    produce_item();
+    P(empty);
+    P(mutex);
+    put_item();
+    V(mutex);
+    V(full);
+}
+
+// 消费者
+while(true) {
+    P(full);
+    P(mutex);
+    get_item();
+    V(mutex);
+    V(empty);
+    consume_item();
+}
+\end{lstlisting}
+
+\subsection{读者-写者问题}
+
+\textbf{问题描述：}
+多个读者和写者共享一个文件，读者只读文件，写者只写文件。
+
+\textbf{约束条件：}
+\begin{itemize}
+  \item 允许多个读者同时读
+  \item 不允许读者和写者同时访问
+  \item 不允许多个写者同时写
+\end{itemize}
+
+\textbf{读者优先解法：}
+\begin{lstlisting}[language=C]
+semaphore rw = 1;       // 读写互斥
+semaphore count_mutex = 1; // 读者计数互斥
+int read_count = 0;     // 读者数量
+
+// 读者
+P(count_mutex);
+read_count++;
+if(read_count == 1) P(rw); // 第一个读者申请
+V(count_mutex);
+
+reading();
+
+P(count_mutex);
+read_count--;
+if(read_count == 0) V(rw); // 最后一个读者释放
+V(count_mutex);
+
+// 写者
+P(rw);
+writing();
+V(rw);
+\end{lstlisting}
+
+\subsection{哲学家进餐问题}
+
+\textbf{问题描述：}
+5个哲学家围坐圆桌，每人需要两把叉子才能进餐。
+
+\textbf{死锁解决方案：}
+
+\textbf{方案1：奇偶哲学家不同的取叉顺序}
+\begin{lstlisting}[language=C]
+semaphore fork[5] = {1,1,1,1,1};
+
+// 奇数号哲学家
+P(fork[i]);
+P(fork[(i+1)%5]);
+eating();
+V(fork[i]);
+V(fork[(i+1)%5]);
+
+// 偶数号哲学家
+P(fork[(i+1)%5]);
+P(fork[i]);
+eating();
+V(fork[(i+1)%5]);
+V(fork[i]);
+\end{lstlisting}
+\textbf{方案2：最多允许4个哲学家同时拿叉子}
+\begin{lstlisting}[language=C]
+semaphore fork[5] = {1,1,1,1,1};
+semaphore count = 4; // 最多4个人
+
+P(count);
+P(fork[i]);
+P(fork[(i+1)%5]);
+eating();
+V(fork[(i+1)%5]);
+V(fork[i]);
+V(count);
+\end{lstlisting}
+
+\section{进程通信}
+\section{进程通信}
+
+\subsection{进程通信的基本概念}
+
+\textbf{进程通信(IPC)：}
+进程间传送信息的活动
+
+\textbf{通信分类：}
+\begin{itemize}
+  \item 按通信方式：直接通信、间接通信
+  \item 按通信介质：共享存储、消息传递、管道通信
+\end{itemize}
+
+\subsection{共享存储}
+
+\textbf{基于共享数据结构：}
+\begin{itemize}
+  \item 进程共享某些数据结构
+  \item 只适用于传递格式化数据
+  \item 速度慢，限制多
+\end{itemize}
+
+\textbf{基于共享存储区：}
+\begin{itemize}
+  \item 在内存中划出共享存储区
+  \item 进程可直接访问
+  \item 速度快，但需要同步机制
+\end{itemize}
+
+\subsection{消息传递}
+
+\textbf{消息传递特点：}
+\begin{itemize}
+  \item 无需共享变量
+  \item 适用于分布式系统
+  \item 通过send/receive原语通信
+\end{itemize}
+
+\textbf{直接通信：}
+\begin{itemize}
+  \item 发送方明确指定接收方进程名
+  \item 接收方明确指定发送方进程名
+  \item 建立一对一通信链路
+\end{itemize}
+
+\textbf{间接通信：}
+\begin{itemize}
+  \item 通过邮箱或端口通信
+  \item 多个进程可共享一个邮箱
+  \item 建立一对多或多对多链路
+\end{itemize}
+
+\textbf{消息传递方式：}
+\begin{itemize}
+  \item \textbf{阻塞发送}：发送方等待接收方接收
+  \item \textbf{非阻塞发送}：发送方不等待立即返回
+  \item \textbf{阻塞接收}：接收方等待消息到达
+  \item \textbf{非阻塞接收}：接收方立即返回
+\end{itemize}
+
+\subsection{管道通信}
+
+\textbf{匿名管道：}
+\begin{itemize}
+  \item 半双工通信
+  \item 只能在父子进程间使用
+  \item 存在于内存中
+  \item 读一个写一个，边读边清空
+\end{itemize}
+
+\textbf{命名管道(FIFO)：}
+\begin{itemize}
+  \item 可在无关进程间通信
+  \item 存在于文件系统中
+  \item 有文件名，可以打开
+  \item 先进先出
+\end{itemize}
+
+\section{线程}
+
+\subsection{线程的概念和多线程模型}
+
+\textbf{多线程的优点：}
+\begin{itemize}
+  \item \textbf{响应性好}：一个线程阻塞其他线程可继续
+  \item \textbf{资源共享}：线程共享进程资源
+  \item \textbf{经济性}：创建切换开销小
+  \item \textbf{可扩展性}：可利用多处理器
+\end{itemize}
+
+\textbf{多线程模型：}
+
+\textbf{多对一模型：}
+\begin{itemize}
+  \item 多个用户线程映射到一个内核线程
+  \item 线程管理在用户空间进行
+  \item 一个线程阻塞导致所有线程阻塞
+\end{itemize}
+
+\textbf{一对一模型：}
+\begin{itemize}
+  \item 每个用户线程映射到一个内核线程
+  \item 提供更好的并发性
+  \item 创建用户线程需要创建内核线程
+\end{itemize}
+
+\textbf{多对多模型：}
+\begin{itemize}
+  \item 多个用户线程映射到多个内核线程
+  \item 结合前两种模型优点
+  \item 实现复杂
+\end{itemize}
+
+% ========== 第3章 内存管理 ==========
+\chapter{内存管理}
+
+\section{内存管理基础}
+
+\subsection{内存管理基本概念}
+
+\textbf{内存管理功能：}
+\begin{itemize}
+  \item \textbf{内存分配与回收}：为进程分配和回收内存
+  \item \textbf{地址转换}：逻辑地址到物理地址的转换
+  \item \textbf{内存保护}：防止进程越界访问
+  \item \textbf{内存扩充}：虚拟存储技术扩充内存
+\end{itemize}
+
+\subsection{程序装入与链接}
+
+\textbf{编译链接过程：}
+\begin{center}
+源程序 → 编译 → 目标模块 → 链接 → 装入模块 → 装入 → 运行
+\end{center}
+
+\textbf{程序的链接：}
+\begin{itemize}
+  \item \textbf{静态链接}：运行前链接成完整程序
+  \item \textbf{装入时动态链接}：装入内存时进行链接
+  \item \textbf{运行时动态链接}：执行时需要才链接
+\end{itemize}
+
+\textbf{程序的装入：}
+\begin{itemize}
+  \item \textbf{绝对装入}：编译时产生绝对地址
+  \item \textbf{可重定位装入}：装入时调整地址
+  \item \textbf{动态运行时装入}：运行时进行地址转换
+\end{itemize}
+
+\subsection{逻辑地址与物理地址}
+
+\textbf{地址类型：}
+\begin{itemize}
+  \item \textbf{逻辑地址}：程序中的地址，相对地址
+  \item \textbf{物理地址}：内存中的实际地址，绝对地址
+  \item \textbf{虚拟地址}：虚拟存储器中的地址
+\end{itemize}
+
+\textbf{地址转换：}
+\begin{center}
+逻辑地址 → MMU → 物理地址
+\end{center}
+
+\section{连续分配管理方式}
+
+\subsection{单一连续分配}
+
+\textbf{特点：}
+\begin{itemize}
+  \item 内存分为系统区和用户区
+  \item 用户区只有一个进程
+  \item 无需内存保护
+  \item 内存利用率低
+\end{itemize}
+
+\subsection{固定分区分配}
+
+\textbf{分区大小固定：}
+\begin{itemize}
+  \item 将用户区分为若干固定分区
+  \item 每个分区装入一个进程
+  \item 产生内部碎片
+  \item 分区数量限制并发度
+\end{itemize}
+
+\textbf{分区分配表：}
+\begin{longtable}{@{}p{3cm}p{3cm}p{3cm}p{3cm}@{}}
+\toprule
+\textbf{分区号} & \textbf{大小} & \textbf{起始地址} & \textbf{状态} \\\\ \midrule
+\endhead
+
+1 & 8K & 64K & 空闲 \\\\
+2 & 16K & 72K & 已分配 \\\\
+3 & 32K & 88K & 空闲 \\\\
+
+\bottomrule
+\end{longtable}
+
+\subsection{动态分区分配}
+
+\textbf{基本思想：}
+\begin{itemize}
+  \item 分区大小不固定
+  \item 根据进程需要动态分割
+  \item 产生外部碎片
+  \item 需要内存紧凑技术
+\end{itemize}
+
+\textbf{分配算法：}
+
+\textbf{首次适应(First Fit)：}
+\begin{itemize}
+  \item 从头开始找第一个满足的空闲区
+  \item 优点：简单，开销小
+  \item 缺点：产生小碎片
+\end{itemize}
+
+\textbf{最佳适应(Best Fit)：}
+\begin{itemize}
+  \item 选择大小最接近的空闲区
+  \item 优点：内存利用率高
+  \item 缺点：产生很多小碎片，速度慢
+\end{itemize}
+
+\textbf{最坏适应(Worst Fit)：}
+\begin{itemize}
+  \item 选择最大的空闲区
+  \item 优点：剩余空闲区较大
+  \item 缺点：大空闲区很快用完
+\end{itemize}
+
+\textbf{邻近适应(Next Fit)：}
+\begin{itemize}
+  \item 从上次分配位置开始查找
+  \item 优点：分配均匀
+  \item 缺点：缺乏大的空闲区
+\end{itemize}
+
+\section{分页管理方式}
+
+\subsection{基本分页存储管理}
+
+\textbf{基本概念：}
+\begin{itemize}
+  \item \textbf{页面}：逻辑地址空间分成固定大小的块
+  \item \textbf{页框}：物理地址空间分成固定大小的块
+  \item \textbf{页号}：页面的编号
+  \item \textbf{页内偏移}：页面内的位移量
+\end{itemize}
+
+\textbf{地址结构：}
+\begin{center}
+逻辑地址 = 页号 + 页内偏移
+\end{center}
+
+页号占m位，页内偏移占n位，则：
+\begin{itemize}
+  \item 页面大小 = $2^n$ 字节
+  \item 页面数量 ≤ $2^m$ 个
+\end{itemize}
+
+\textbf{页表：}
+\begin{itemize}
+  \item 记录页号到页框号的映射
+  \item 存放在内存中
+  \item 由页表寄存器指示页表位置
+\end{itemize}
+
+\textbf{地址转换过程：}
+\begin{enumerate}
+  \item 从逻辑地址中提取页号和页内偏移
+  \item 查页表得到页框号
+  \item 物理地址 = 页框号 + 页内偏移
+\end{enumerate}
+
+\subsection{基本地址变换机构}
+
+\textbf{页表寄存器(PTR)：}
+\begin{itemize}
+  \item 存放页表在内存中的起始地址
+  \item 存放页表长度
+\end{itemize}
+
+\textbf{地址变换步骤：}
+\begin{enumerate}
+  \item 检查页号是否越界
+  \item 查页表：页表始址 + 页号 × 页表项长度
+  \item 检查页框号是否合法
+  \item 计算物理地址：页框号 × 页面大小 + 页内偏移
+\end{enumerate}
+
+\subsection{具有快表的地址变换机构}
+
+\textbf{快表(TLB)：}
+\begin{itemize}
+  \item 高速缓冲存储器
+  \item 存放常用的页表项
+  \item 由相联存储器组成
+  \item 按内容并行查找
+\end{itemize}
+
+\textbf{地址变换过程：}
+\begin{enumerate}
+  \item 首先查快表
+  \item 若命中，直接得到页框号
+  \item 若未命中，查内存中的页表
+  \item 将页表项写入快表
+\end{enumerate}
+
+\textbf{有效访问时间：}
+设快表命中率为α，快表访问时间为t，内存访问时间为m，则：
+$$\text{有效访问时间} = α(t + m) + (1-α)(t + 2m) = t + 2m - αm$$
+
+\subsection{两级页表}
+
+\textbf{两级页表结构：}
+\begin{itemize}
+  \item 页目录表：一级页表
+  \item 页表：二级页表
+  \item 减少页表占用的内存空间
+\end{itemize}
+
+\textbf{地址结构：}
+\begin{center}
+逻辑地址 = 页目录号 + 页表号 + 页内偏移
+\end{center}
+
+\textbf{地址转换：}
+\begin{enumerate}
+  \item 根据页目录号查页目录表
+  \item 得到页表的物理地址
+  \item 根据页表号查页表
+  \item 得到页框号
+  \item 计算物理地址
+\end{enumerate}
+
+\section{分段管理方式}
+
+\subsection{基本分段存储管理}
+
+\textbf{段的概念：}
+\begin{itemize}
+  \item 按程序逻辑结构划分
+  \item 段长度可变
+  \item 段内地址连续，段间可不连续
+  \item 便于编程、修改、保护、共享
+\end{itemize}
+
+\textbf{逻辑地址结构：}
+\begin{center}
+逻辑地址 = 段号 + 段内偏移
+\end{center}
+
+\textbf{段表：}
+\begin{longtable}{@{}p{3cm}p{3cm}p{3cm}@{}}
+\toprule
+\textbf{段号} & \textbf{段长} & \textbf{基址} \\\\ \midrule
+\endhead
+
+0 & 1000 & 8000 \\\\
+1 & 2000 & 10000 \\\\
+2 & 1500 & 15000 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{地址转换：}
+\begin{enumerate}
+  \item 检查段号是否越界
+  \item 查段表得到段长和基址
+  \item 检查段内偏移是否越界
+  \item 物理地址 = 基址 + 段内偏移
+\end{enumerate}
+
+\subsection{段页式管理方式}
+
+\textbf{基本思想：}
+\begin{itemize}
+  \item 结合分段和分页的优点
+  \item 段内分页
+  \item 地址转换需要段表和页表
+\end{itemize}
+
+\textbf{地址结构：}
+\begin{center}
+逻辑地址 = 段号 + 页号 + 页内偏移
+\end{center}
+
+\textbf{段表项：}
+\begin{itemize}
+  \item 页表长度
+  \item 页表起始地址
+\end{itemize}
+
+\textbf{地址转换：}
+\begin{enumerate}
+  \item 根据段号查段表
+  \item 得到页表起始地址和长度
+  \item 检查页号是否越界
+  \item 根据页号查页表
+  \item 得到页框号
+  \item 计算物理地址
+\end{enumerate}
+
+\section{虚拟内存管理}
+
+\subsection{虚拟内存的基本概念}
+
+\textbf{虚拟内存特征：}
+\begin{itemize}
+  \item \textbf{多次性}：作业分多次调入内存
+  \item \textbf{对换性}：允许作业换入换出
+  \item \textbf{虚拟性}：逻辑上扩充内存容量
+\end{itemize}
+
+\textbf{实现技术：}
+\begin{itemize}
+  \item 请求分页系统
+  \item 请求分段系统
+  \item 请求段页式系统
+\end{itemize}
+
+\subsection{请求分页管理方式}
+
+\textbf{页表项结构：}
+\begin{longtable}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
+\toprule
+\textbf{页框号} & \textbf{状态位} & \textbf{访问字段} & \textbf{修改位} & \textbf{外存地址} \\\\ \midrule
+\endhead
+
+frame & P & A & M & addr \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{缺页中断处理：}
+\begin{enumerate}
+  \item 查页表发现缺页
+  \item 产生缺页中断
+  \item 选择调入页面的物理块
+  \item 从外存调入页面
+  \item 修改页表
+\end{enumerate}
+\subsection{页面置换算法}
+
+\textbf{页面置换时机：}
+\begin{itemize}
+  \item 发生缺页中断
+  \item 内存已满需要调入新页面
+  \item 选择被置换的页面
+\end{itemize}
+
+\textbf{最佳置换算法(OPT)：}
+\begin{itemize}
+  \item 置换将来最长时间不访问的页面
+  \item 缺页中断次数最少
+  \item 无法实现，仅作为性能评价标准
+\end{itemize}
+
+\textbf{先进先出置换算法(FIFO)：}
+\begin{itemize}
+  \item 置换最先进入内存的页面
+  \item 实现简单，用队列管理
+  \item 性能差，可能产生Belady异常
+  \item Belady异常：分配页框数增加，缺页率反而增加
+\end{itemize}
+
+\textbf{最近最久未使用算法(LRU)：}
+\begin{itemize}
+  \item 置换最近最长时间未访问的页面
+  \item 性能接近OPT
+  \item 实现复杂，开销大
+\end{itemize}
+
+\textbf{LRU实现方式：}
+
+\textbf{寄存器实现：}
+\begin{itemize}
+  \item 为每个页面配置移位寄存器
+  \item 访问时最高位置1，定期右移
+  \item 寄存器值最小的页面是LRU页面
+\end{itemize}
+
+\textbf{栈实现：}
+\begin{itemize}
+  \item 维护一个页面栈
+  \item 访问页面时将其移到栈顶
+  \item 栈底页面是LRU页面
+\end{itemize}
+
+\textbf{时钟置换算法(Clock)：}
+\begin{itemize}
+  \item 近似LRU算法
+  \item 为每页设置使用位
+  \item 访问时使用位置1
+  \item 置换时扫描，使用位为0则选中，为1则清0
+\end{itemize}
+
+\textbf{改进的时钟算法：}
+\begin{itemize}
+  \item 考虑使用位和修改位
+  \item (0,0)：最近未使用且未修改，首选
+  \item (0,1)：最近未使用但已修改，次选
+  \item (1,0)：最近使用但未修改
+  \item (1,1)：最近使用且已修改，最后选择
+\end{itemize}
+
+\textbf{页面置换算法比较：}
+\begin{longtable}{@{}p{3cm}p{3cm}p{3cm}p{3cm}@{}}
+\toprule
+\textbf{算法} & \textbf{实现难度} & \textbf{性能} & \textbf{特点} \\\\ \midrule
+\endhead
+
+OPT & 无法实现 & 最优 & 理论标准 \\\\
+FIFO & 简单 & 差 & 可能Belady异常 \\\\
+LRU & 复杂 & 好 & 开销大 \\\\
+Clock & 简单 & 较好 & 近似LRU \\\\
+
+\bottomrule
+\end{longtable}
+
+\subsection{页面分配策略}
+
+\textbf{驻留集：}
+\begin{itemize}
+  \item 进程在内存中的页面集合
+  \item 驻留集太小：缺页频繁
+  \item 驻留集太大：内存利用率低
+\end{itemize}
+
+\textbf{分配策略：}
+\begin{itemize}
+  \item \textbf{固定分配}：进程创建时确定页框数
+  \item \textbf{可变分配}：运行时可调整页框数
+\end{itemize}
+
+\textbf{置换范围：}
+\begin{itemize}
+  \item \textbf{局部置换}：在本进程的页框中选择
+  \item \textbf{全局置换}：在所有页框中选择
+\end{itemize}
+
+\textbf{工作集：}
+\begin{itemize}
+  \item 进程在某时间窗口内访问的页面集合
+  \item 工作集模型：$W(t,Δ)$
+  \item t：当前时刻，Δ：工作集窗口大小
+  \item 基于程序局部性原理
+\end{itemize}
+
+\textbf{缺页率置换：}
+\begin{itemize}
+  \item 缺页率 = 缺页次数 / 内存访问次数
+  \item 缺页率过高：增加页框
+  \item 缺页率过低：减少页框
+\end{itemize}
+
+\textbf{抖动：}
+\begin{itemize}
+  \item 系统频繁进行页面置换
+  \item CPU利用率急剧下降
+  \item 原因：并发进程太多或驻留集太小
+  \item 解决：暂停部分进程或增加内存
+\end{itemize}
+
+% ========== 第4章 文件管理 ==========
+\chapter{文件管理}
+
+\section{文件系统基础}
+
+\subsection{文件的基本概念}
+
+\textbf{文件定义：}
+文件是具有文件名的相关信息的集合，是用户进行信息存储的基本单位。
+
+\textbf{文件属性：}
+\begin{itemize}
+  \item \textbf{文件名}：用户可见的文件标识
+  \item \textbf{标识符}：系统内部文件标识
+  \item \textbf{类型}：不同类型文件的分类
+  \item \textbf{位置}：文件在存储设备上的位置
+  \item \textbf{大小}：当前文件大小
+  \item \textbf{保护}：访问权限控制
+  \item \textbf{时间}：创建、修改、访问时间
+\end{itemize}
+
+\textbf{文件类型：}
+\begin{itemize}
+  \item \textbf{按用途分类}：系统文件、用户文件、库文件
+  \item \textbf{按保护级别}：只读文件、读写文件、可执行文件
+  \item \textbf{按组织形式}：普通文件、目录文件、特殊文件
+\end{itemize}
+
+\textbf{文件操作：}
+\begin{itemize}
+  \item \textbf{创建}：分配存储空间，建立目录项
+  \item \textbf{删除}：回收存储空间，删除目录项
+  \item \textbf{打开}：将文件控制块调入内存
+  \item \textbf{关闭}：将文件控制块写回外存
+  \item \textbf{读写}：按当前指针位置读写数据
+  \item \textbf{重定位}：修改当前文件指针位置
+\end{itemize}
+
+\subsection{文件的逻辑结构}
+
+\textbf{无结构文件（流式文件）：}
+\begin{itemize}
+  \item 文件内容是字符流
+  \item 没有任何结构
+  \item 如文本文件、二进制文件
+\end{itemize}
+
+\textbf{有结构文件（记录式文件）：}
+
+\textbf{顺序文件：}
+\begin{itemize}
+  \item 记录按某种顺序排列
+  \item 支持顺序存取和随机存取
+  \item 查找效率：O(n)
+\end{itemize}
+
+\textbf{索引文件：}
+\begin{itemize}
+  \item 为文件建立索引表
+  \item 索引表包含关键字和记录地址
+  \item 查找效率：O(log n)
+\end{itemize}
+
+\textbf{索引顺序文件：}
+\begin{itemize}
+  \item 结合顺序和索引的优点
+  \item 记录分组，每组建索引
+  \item 组内顺序排列，组间索引查找
+\end{itemize}
+
+\textbf{直接文件（散列文件）：}
+\begin{itemize}
+  \item 通过散列函数计算记录地址
+  \item 查找效率：O(1)
+  \item 可能产生冲突
+\end{itemize}
+
+\subsection{目录结构}
+
+\textbf{文件控制块(FCB)：}
+\begin{itemize}
+  \item 存储文件管理信息的数据结构
+  \item 包含文件属性、存储位置等信息
+  \item UNIX中称为inode
+\end{itemize}
+
+\textbf{目录结构类型：}
+
+\textbf{单级目录：}
+\begin{itemize}
+  \item 所有文件在同一目录下
+  \item 简单，但文件名易冲突
+  \item 不适合多用户系统
+\end{itemize}
+
+\textbf{两级目录：}
+\begin{itemize}
+  \item 主文件目录(MFD) + 用户文件目录(UFD)
+  \item 解决文件名冲突
+  \item 不同用户可有同名文件
+\end{itemize}
+
+\textbf{多级目录（树形目录）：}
+\begin{itemize}
+  \item 目录形成树形结构
+  \item 支持子目录嵌套
+  \item 绝对路径：从根目录开始
+  \item 相对路径：从当前目录开始
+\end{itemize}
+
+\textbf{无环图目录：}
+\begin{itemize}
+  \item 允许文件有多个父目录
+  \item 支持文件共享
+  \item 通过链接实现
+  \item 删除时需检查链接数
+\end{itemize}
+
+\section{文件存储空间的管理}
+
+\subsection{存储空间的划分与初始化}
+
+\textbf{存储空间划分：}
+\begin{itemize}
+  \item \textbf{文件区}：存放文件数据
+  \item \textbf{目录区}：存放文件目录
+\end{itemize}
+
+\textbf{文件卷：}
+\begin{itemize}
+  \item 逻辑存储单位
+  \item 可以是整个磁盘或磁盘分区
+  \item 有独立的文件系统
+\end{itemize}
+
+\subsection{存储空间管理}
+
+\textbf{空闲表法：}
+\begin{itemize}
+  \item 为每个空闲区建立表项
+  \item 记录起始地址和长度
+  \item 适用于连续分配
+\end{itemize}
+
+\textbf{空闲链表法：}
+\begin{itemize}
+  \item \textbf{空闲盘块链}：链接所有空闲盘块
+  \item \textbf{空闲盘区链}：链接空闲盘区
+  \item 分配时从链头摘下盘块
+\end{itemize}
+
+\textbf{位示图法：}
+\begin{itemize}
+  \item 用位图表示盘块使用情况
+  \item 0：空闲，1：已分配
+  \item 查找效率高
+  \item 适用于小型文件系统
+\end{itemize}
+
+\textbf{成组链接法：}
+\begin{itemize}
+  \item 空闲盘块分组管理
+  \item 第一个盘块存放下一组信息
+  \item UNIX系统采用此方法
+\end{itemize}
+
+\section{文件存储结构}
+
+\subsection{文件分配方式}
+
+\textbf{连续分配：}
+\begin{itemize}
+  \item 文件占用连续的盘块
+  \item 目录项记录起始地址和长度
+  \item 优点：支持顺序和随机访问，读取效率高
+  \item 缺点：产生外部碎片，文件长度难以确定
+\end{itemize}
+
+\textbf{链接分配：}
+
+\textbf{隐式链接：}
+\begin{itemize}
+  \item 每个盘块有指针指向下一盘块
+  \item 目录项记录首末盘块地址
+  \item 优点：无外部碎片
+  \item 缺点：只支持顺序访问，可靠性差
+\end{itemize}
+
+\textbf{显式链接（文件分配表FAT）：}
+\begin{itemize}
+  \item 将指针集中存放在FAT中
+  \item FAT表项记录下一盘块号
+  \item 优点：支持随机访问，可靠性好
+  \item 缺点：FAT占用内存空间
+\end{itemize}
+
+\textbf{索引分配：}
+\begin{itemize}
+  \item 为每个文件建立索引表
+  \item 索引表记录文件各盘块地址
+  \item 目录项指向索引表
+  \item 优点：支持随机访问，无外部碎片
+  \item 缺点：索引表占用存储空间
+\end{itemize}
+
+\textbf{多级索引：}
+\begin{itemize}
+  \item 建立多级索引结构
+  \item 适用于大文件
+  \item UNIX的inode结构
+\end{itemize}
+
+\textbf{混合索引：}
+\begin{itemize}
+  \item 直接地址：直接指向数据盘块
+  \item 一级间接地址：指向一级索引表
+  \item 二级间接地址：指向二级索引表
+  \item 三级间接地址：指向三级索引表
+\end{itemize}
+
+\subsection{文件存储结构比较}
+
+\begin{longtable}{@{}p{3cm}p{3cm}p{3cm}p{4cm}@{}}
+\toprule
+\textbf{分配方式} & \textbf{访问方式} & \textbf{外部碎片} & \textbf{适用场景} \\\\ \midrule
+\endhead
+
+连续分配 & 顺序+随机 & 有 & 文件大小已知且很少修改 \\\\
+链接分配 & 顺序 & 无 & 文件大小变化频繁 \\\\
+FAT & 顺序+随机 & 无 & 小型文件系统 \\\\
+索引分配 & 随机 & 无 & 文件大小变化且需随机访问 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{磁盘组织与管理}
+
+\subsection{磁盘的结构}
+
+\textbf{磁盘物理结构：}
+\begin{itemize}
+  \item \textbf{盘片}：磁盘的存储介质
+  \item \textbf{磁道}：盘片上的同心圆
+  \item \textbf{扇区}：磁道的最小存储单位
+  \item \textbf{柱面}：所有盘片同一位置磁道的集合
+  \item \textbf{磁头}：读写磁性信息的部件
+\end{itemize}
+
+\textbf{磁盘地址：}
+(柱面号, 磁头号, 扇区号)
+
+\textbf{磁盘性能参数：}
+\begin{itemize}
+  \item \textbf{寻道时间}：磁头移动到指定磁道的时间
+  \item \textbf{旋转延迟}：等待扇区转到磁头下的时间
+  \item \textbf{传输时间}：数据传输的时间
+\end{itemize}
+
+磁盘访问时间 = 寻道时间 + 旋转延迟 + 传输时间
+
+\subsection{磁盘调度算法}
+
+\textbf{先来先服务(FCFS)：}
+\begin{itemize}
+  \item 按访问请求的先后顺序服务
+  \item 公平，但平均寻道距离大
+\end{itemize}
+
+\textbf{最短寻道时间优先(SSTF)：}
+\begin{itemize}
+  \item 选择距当前磁头最近的请求
+  \item 平均寻道时间短
+  \item 可能导致饥饿现象
+\end{itemize}
+
+\textbf{扫描算法(SCAN)：}
+\begin{itemize}
+  \item 磁头在磁盘上来回扫描
+  \item 边扫描边处理路径上的请求
+  \item 又称电梯调度算法
+\end{itemize}
+
+\textbf{循环扫描(C-SCAN)：}
+\begin{itemize}
+  \item 磁头只向一个方向扫描
+  \item 到达末端后直接回到起始端
+  \item 提供更均匀的等待时间
+\end{itemize}
+
+\textbf{LOOK和C-LOOK：}
+\begin{itemize}
+  \item 改进的SCAN和C-SCAN
+  \item 磁头到达最后一个请求就返回
+  \item 不必到达磁盘端点
+\end{itemize}
+
+\textbf{磁盘调度算法比较：}
+\begin{longtable}{@{}p{3cm}p{3cm}p{3cm}p{4cm}@{}}
+\toprule
+\textbf{算法} & \textbf{性能} & \textbf{公平性} & \textbf{特点} \\ \midrule
+\endhead
+FCFS & 差 & 好 & 简单，无饥饿 \\
+SSTF & 好 & 差 & 可能饥饿 \\
+SCAN & 较好 & 较好 & 电梯算法 \\
+LOOK & 较好 & 较好 & 仅在请求范围内来回扫描 \\
+C-SCAN & 好 & 好 & 单向循环扫描等待更均匀 \\
+C-LOOK & 好 & 好 & 单向扫描仅覆盖请求范围 \\
+\bottomrule
+\end{longtable}
+
+% ========== 第5章 I/O(输入/输出)管理 ==========
+\chapter{I/O(输入/输出)管理}
+
+
+\section{I/O管理概述}
+
+\subsection{I/O设备}
+
+\textbf{I/O设备分类：}
+
+\textbf{按使用特性分类：}
+\begin{itemize}
+  \item \textbf{人机交互设备}：键盘、鼠标、显示器
+  \item \textbf{存储设备}：磁盘、光盘、磁带
+  \item \textbf{网络通信设备}：网卡、调制解调器
+\end{itemize}
+
+\textbf{按传输速率分类：}
+\begin{itemize}
+  \item \textbf{低速设备}：键盘、鼠标（几字节/秒到几百字节/秒）
+  \item \textbf{中速设备}：打印机、激光打印机（几千字节/秒）
+  \item \textbf{高速设备}：磁盘、网卡（几兆字节/秒到几百兆字节/秒）
+\end{itemize}
+
+\textbf{按信息交换单位分类：}
+\begin{itemize}
+  \item \textbf{块设备}：以数据块为单位，可随机访问（磁盘）
+  \item \textbf{字符设备}：以字符为单位，只能顺序访问（键盘、打印机）
+\end{itemize}
+
+\subsection{I/O控制器}
+
+\textbf{I/O控制器功能：}
+\begin{itemize}
+  \item \textbf{接收和识别命令}：接收CPU发送的命令
+  \item \textbf{报告设备状态}：向CPU报告设备状态
+  \item \textbf{数据交换}：控制设备与内存间的数据传送
+  \item \textbf{地址识别}：识别设备地址
+  \item \textbf{数据缓冲}：缓解速度不匹配
+  \item \textbf{差错控制}：检测和纠正传输错误
+\end{itemize}
+
+\textbf{I/O控制器组成：}
+\begin{itemize}
+  \item \textbf{设备控制逻辑}：控制设备工作
+  \item \textbf{主机接口}：与主机通信
+  \item \textbf{设备接口}：与设备通信
+  \item \textbf{I/O逻辑}：实现I/O操作
+\end{itemize}
+
+\textbf{I/O端口：}
+\begin{itemize}
+  \item \textbf{数据寄存器}：存放输入输出数据
+  \item \textbf{状态寄存器}：反映设备当前状态
+  \item \textbf{控制寄存器}：接收控制信号
+\end{itemize}
+
+\subsection{I/O控制方式}
+
+\textbf{程序直接控制方式：}
+\begin{itemize}
+  \item CPU直接控制I/O操作
+  \item 采用程序查询方式
+  \item 优点：硬件简单
+  \item 缺点：CPU利用率低，等待时间长
+\end{itemize}
+
+\textbf{中断驱动方式：}
+\begin{itemize}
+  \item I/O操作完成后发出中断信号
+  \item CPU响应中断处理I/O
+  \item 优点：CPU利用率提高
+  \item 缺点：每传送一个字符就中断一次
+\end{itemize}
+
+\textbf{DMA方式：}
+\begin{itemize}
+  \item 数据在内存和设备间直接传送
+  \item 不需CPU干预每个数据传送
+  \item 传送完成后产生中断
+  \item 优点：CPU利用率高，传输速度快
+  \item 缺点：硬件复杂
+\end{itemize}
+
+\textbf{通道控制方式：}
+\begin{itemize}
+  \item 通道是专用处理机
+  \item 有自己的指令集
+  \item 可控制多台设备
+  \item CPU只需启动通道
+\end{itemize}
+
+\textbf{I/O控制方式比较：}
+\begin{longtable}{@{}p{3cm}p{3cm}p{3cm}p{4cm}@{}}
+\toprule
+\textbf{控制方式} & \textbf{CPU参与度} & \textbf{数据传输} & \textbf{适用设备} \\\\ \midrule
+\endhead
+
+程序直接控制 & 完全参与 & 逐字符 & 简单低速设备 \\\\
+中断驱动 & 部分参与 & 逐字符 & 中等速度设备 \\\\
+DMA & 少量参与 & 成块 & 高速设备 \\\\
+通道控制 & 微量参与 & 成块 & 多设备系统 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{I/O软件层次结构}
+
+\subsection{I/O软件层次}
+
+\textbf{用户层I/O软件：}
+\begin{itemize}
+  \item 实现与用户交互的I/O软件
+  \item 提供用户接口
+  \item 如文本编辑器、图形界面
+\end{itemize}
+
+\textbf{设备独立性软件：}
+\begin{itemize}
+  \item 实现设备独立的I/O功能
+  \item 提供统一的I/O接口
+  \item 功能：设备命名、设备保护、缓冲管理、错误处理
+\end{itemize}
+
+\textbf{设备驱动程序：}
+\begin{itemize}
+  \item 与硬件相关的软件
+  \item 直接控制I/O设备
+  \item 将设备独立软件的命令转换为设备相关命令
+\end{itemize}
+
+\textbf{中断处理程序：}
+\begin{itemize}
+  \item 处理I/O中断
+  \item 唤醒被阻塞的进程
+  \item 保存和恢复现场
+\end{itemize}
+
+\textbf{硬件：}
+\begin{itemize}
+  \item I/O设备和控制器
+  \item 提供基本的I/O功能
+\end{itemize}
+
+\subsection{设备独立性软件}
+
+\textbf{设备独立性：}
+\begin{itemize}
+  \item 应用程序独立于具体的物理设备
+  \item 通过逻辑设备名访问设备
+  \item 由OS建立逻辑设备名与物理设备的映射
+\end{itemize}
+
+\textbf{设备分配：}
+\begin{itemize}
+  \item \textbf{设备控制表(DCT)}：描述设备特性
+  \item \textbf{控制器控制表(COCT)}：描述控制器状态
+  \item \textbf{通道控制表(CHCT)}：描述通道状态
+  \item \textbf{系统设备表(SDT)}：记录全部设备信息
+\end{itemize}
+
+\textbf{设备分配策略：}
+\begin{itemize}
+  \item \textbf{静态分配}：进程运行前分配全部设备
+  \item \textbf{动态分配}：需要时才分配设备
+\end{itemize}
+
+\textbf{设备分配算法：}
+\begin{itemize}
+  \item 先请求先分配
+  \item 优先级高者先分配
+  \item 短任务优先分配
+\end{itemize}
+
+\section{缓冲管理}
+
+\subsection{缓冲的引入}
+
+\textbf{缓冲作用：}
+\begin{itemize}
+  \item \textbf{缓解速度不匹配}：缓解CPU与I/O设备速度差异
+  \item \textbf{减少中断频率}：积累数据批量处理
+  \item \textbf{提高并行性}：CPU和I/O并行工作
+  \item \textbf{复制语义}：保证数据正确性
+\end{itemize}
+
+\subsection{缓冲实现}
+
+\textbf{单缓冲：}
+\begin{itemize}
+  \item 在内存中设置一个缓冲区
+  \item 设备→缓冲区→用户区
+  \item 处理时间：max(C, T) + M
+  \item C：计算时间，T：I/O时间，M：传送时间
+\end{itemize}
+
+\textbf{双缓冲：}
+\begin{itemize}
+  \item 设置两个缓冲区交替使用
+  \item 一个接收数据，一个传送数据
+  \item 处理时间：max(C+M, T)
+  \item 提高系统效率
+\end{itemize}
+
+\textbf{循环缓冲：}
+\begin{itemize}
+  \item 多个缓冲区组成环形队列
+  \item 输入指针和输出指针
+  \item 进一步提高并行度
+\end{itemize}
+
+\textbf{缓冲池：}
+\begin{itemize}
+  \item 系统中设置公共缓冲池
+  \item 包含空缓冲队列、输入队列、输出队列
+  \item 动态分配缓冲区
+  \item 提高缓冲区利用率
+\end{itemize}
+
+\section{磁盘存储器的管理}
+
+\subsection{磁盘初始化}
+
+\textbf{低级格式化：}
+\begin{itemize}
+  \item 将磁盘分成扇区
+  \item 每个扇区有头部、数据区、尾部
+  \item 在工厂完成
+\end{itemize}
+
+\textbf{分区：}
+\begin{itemize}
+  \item 将磁盘分成一个或多个分区
+  \item 每个分区可以有独立的文件系统
+  \item 分区表记录分区信息
+\end{itemize}
+
+\textbf{高级格式化：}
+\begin{itemize}
+  \item 创建文件系统
+  \item 建立文件分配表、目录结构等
+  \item 用户执行的格式化
+\end{itemize}
+
+\subsection{引导块}
+
+\textbf{引导过程：}
+\begin{enumerate}
+  \item 开机时运行ROM中的引导程序
+  \item 读取磁盘第一个扇区（引导扇区）
+  \item 执行引导扇区中的引导程序
+  \item 加载操作系统内核
+\end{enumerate}
+
+\textbf{主引导记录(MBR)：}
+\begin{itemize}
+  \item 位于磁盘第一个扇区
+  \item 包含分区表和引导代码
+  \item 大小为512字节
+\end{itemize}
+
+\subsection{坏块处理}
+
+\textbf{扇区备用：}
+\begin{itemize}
+  \item 为每个扇区设置备用扇区
+  \item 发现坏块时自动替换
+  \item 对软件透明
+\end{itemize}
+
+\textbf{扇区滑动：}
+\begin{itemize}
+  \item 将坏扇区后面的扇区前移
+  \item 将备用扇区加在磁道末尾
+  \item 保持扇区编号连续
+\end{itemize}
+
+\textbf{交替扇区：}
+\begin{itemize}
+  \item 在每个磁道后设置几个备用扇区
+  \item 坏扇区用备用扇区替代
+  \item 简单但性能略有下降
+\end{itemize}
+
+\section{固态硬盘}
+
+\subsection{SSD基本原理}
+
+\textbf{NAND闪存：}
+\begin{itemize}
+  \item 基于浮栅晶体管
+  \item 通过电荷存储信息
+  \item 非易失性存储
+\end{itemize}
+
+\textbf{存储单元类型：}
+\begin{itemize}
+  \item \textbf{SLC}：单层单元，存储1位
+  \item \textbf{MLC}：多层单元，存储2位
+  \item \textbf{TLC}：三层单元，存储3位
+  \item \textbf{QLC}：四层单元，存储4位
+\end{itemize}
+
+\subsection{SSD特点}
+
+\textbf{优点：}
+\begin{itemize}
+  \item 随机访问性能好
+  \item 无机械运动，低功耗
+  \item 抗震动，体积小
+  \item 启动时间短
+\end{itemize}
+
+\textbf{缺点：}
+\begin{itemize}
+  \item 成本高于机械硬盘
+  \item 写入次数有限
+  \item 写入性能不如读取
+\end{itemize}
+
+\textbf{SSD vs HDD：}
+\begin{longtable}{@{}p{3cm}p{4cm}p{4cm}@{}}
+\toprule
+\textbf{特性} & \textbf{SSD} & \textbf{HDD} \\\\ \midrule
+\endhead
+
+随机访问 & 快（0.1ms） & 慢（5-10ms） \\\\
+顺序访问 & 快 & 较快 \\\\
+功耗 & 低 & 高 \\\\
+噪音 & 无 & 有 \\\\
+容量 & 较小 & 大 \\\\
+成本 & 高 & 低 \\\\
+寿命 & 写入次数限制 & 机械磨损 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{磨损均衡：}
+\begin{itemize}
+  \item 均匀分布写操作
+  \item 避免某些块过度磨损
+  \item 延长SSD使用寿命
+\end{itemize}
+
+% ========== 408操作系统重点公式汇总 ==========
+\chapter{重点公式汇总}
+
+\section{进程调度公式}
+
+\textbf{平均周转时间：}
+$$T_{平均} = \frac{1}{n}\sum_{i=1}^{n}T_i$$
+其中$T_i$为第i个作业的周转时间
+
+\textbf{周转时间：}
+$$T_i = \text{完成时间} - \text{到达时间}$$
+
+\textbf{带权周转时间：}
+$$W_i = \frac{T_i}{\text{服务时间}}$$
+
+\textbf{响应比：}
+$$\text{响应比} = \frac{\text{等待时间} + \text{服务时间}}{\text{服务时间}}$$
+
+\section{存储管理公式}
+
+\textbf{页面大小计算：}
+逻辑地址为32位，页号20位，页内偏移12位
+$$\text{页面大小} = 2^{12} = 4KB$$
+
+\textbf{页表项数：}
+$$\text{页表项数} = 2^{\text{页号位数}}$$
+
+\textbf{有效访问时间：}
+$$EAT = \alpha \times (t + m) + (1-\alpha) \times (t + 2m)$$
+其中$\alpha$为快表命中率，$t$为快表访问时间，$m$为内存访问时间
+
+\section{磁盘调度公式}
+
+\textbf{磁盘访问时间：}
+$$T_{\text{访问}} = T_{\text{寻道}} + T_{\text{旋转}} + T_{\text{传输}}$$
+
+\textbf{平均旋转延迟：}
+$$T_{\text{旋转}} = \frac{1}{2} \times \frac{60}{RPM}$$
+
+\textbf{传输时间：}
+$$T_{\text{传输}} = \frac{\text{传输字节数}}{\text{传输速率}}$$
+
+% ========== 408操作系统核心概念对比 ==========
+\chapter{核心概念对比}
+
+\section{进程 vs 线程}
+
+\begin{longtable}{@{}p{3cm}p{5cm}p{5cm}@{}}
+\toprule
+\textbf{对比项} & \textbf{进程} & \textbf{线程} \\\\ \midrule
+\endhead
+
+定义 & 程序的一次执行实例 & 进程内的执行单元 \\\\
+资源拥有 & 拥有独立资源 & 共享进程资源 \\\\
+调度单位 & 传统调度单位 & 现代调度单位 \\\\
+并发性 & 进程间并发 & 同进程内线程并发 \\\\
+地址空间 & 独立地址空间 & 共享进程地址空间 \\\\
+通信开销 & 大（需IPC） & 小（直接访问） \\\\
+创建开销 & 大 & 小 \\\\
+切换开销 & 大 & 小 \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{分页 vs 分段 vs 段页式}
+
+\begin{longtable}{@{}p{2.5cm}p{4cm}p{4cm}p{3cm}@{}}
+\toprule
+\textbf{对比项} & \textbf{分页} & \textbf{分段} & \textbf{段页式} \\\\ \midrule
+\endhead
+
+地址结构 & 页号+页内偏移 & 段号+段内偏移 & 段号+页号+页内偏移 \\\\
+大小特点 & 页面大小固定 & 段长度可变 & 段长可变,页面定长 \\\\
+逻辑单位 & 物理划分 & 逻辑划分 & 结合两者优点 \\\\
+内存利用 & 无外部碎片 & 有外部碎片 & 无外部碎片 \\\\
+共享保护 & 较难实现 & 容易实现 & 容易实现 \\\\
+访问速度 & 快 & 快 & 较慢（两次查表） \\\\
+
+\bottomrule
+\end{longtable}
+
+\section{常见错误总结}
+
+\textbf{进程状态转换错误：}
+\begin{itemize}
+  \item 就绪态不能直接转到阻塞态
+  \item 阻塞态不能直接转到运行态
+  \item 运行态转就绪态由时间片用完或高优先级进程抢占
+\end{itemize}
+
+\textbf{PV操作错误：}
+\begin{itemize}
+  \item P操作在临界区前，V操作在临界区后
+  \item 实现同步时，V操作在前，P操作在后
+  \item 多个信号量时注意操作顺序，避免死锁
+\end{itemize}
+
+\textbf{页面置换算法理解错误：}
+\begin{itemize}
+  \item OPT是理想算法，无法实现
+  \item FIFO可能产生Belady异常
+  \item LRU性能好但实现复杂
+  \item Clock算法是LRU的近似
+\end{itemize}
+
+\textbf{死锁条件记忆：}
+\begin{itemize}
+  \item 互斥条件：资源不能共享
+  \item 持有并等待：已持有资源的进程等待新资源
+  \item 不可剥夺：资源不能被强制回收
+  \item 循环等待：存在进程循环等待链
+\end{itemize}
+
+% ========== 结束 ==========
+
+\end{document}
+\end{document}
