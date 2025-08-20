@@ -804,7 +804,205 @@ V(fork[i]);
 V(count);
 \end{lstlisting}
 
-\section{进程通信}
+\section{死锁}
+
+\subsection{死锁的基本概念}
+
+\textbf{死锁定义：}
+在多道程序系统中，一组进程中的每个进程都在等待仅由该组中的其他进程才能引发的事件，则称该组进程发生了死锁。
+
+\textbf{死锁的必要条件：}
+\begin{enumerate}
+  \item \textbf{互斥条件}：资源不能被多个进程同时使用
+  \item \textbf{持有并等待条件}：进程已获得至少一个资源，又在申请其他资源
+  \item \textbf{不可剥夺条件}：已分配的资源不能被强制性地释放
+  \item \textbf{循环等待条件}：存在进程循环等待链
+\end{enumerate}
+
+\textbf{死锁相关概念：}
+\begin{itemize}
+  \item \textbf{饥饿}：进程长期得不到所需资源
+  \item \textbf{死循环}：程序陷入无限循环
+  \item \textbf{活锁}：进程没有阻塞但无法继续执行
+\end{itemize}
+
+\subsection{死锁的处理策略}
+
+\textbf{死锁预防：}
+破坏死锁产生的四个必要条件之一
+
+\textbf{破坏互斥条件：}
+\begin{itemize}
+  \item 允许资源同时被多个进程使用
+  \item 不适用于大多数资源（如打印机）
+  \item 仅适用于可读共享资源
+\end{itemize}
+
+\textbf{破坏持有并等待条件：}
+\begin{itemize}
+  \item \textbf{方案1}：进程运行前一次性申请所有资源
+  \item \textbf{方案2}：进程申请新资源前必须释放已有资源
+  \item 优点：简单，无死锁
+  \item 缺点：资源利用率低，可能饥饿
+\end{itemize}
+
+\textbf{破坏不可剥夺条件：}
+\begin{itemize}
+  \item 申请新资源失败时释放已有资源
+  \item 适用于状态易保存的资源（CPU、内存）
+  \item 不适用于打印机等资源
+\end{itemize}
+
+\textbf{破坏循环等待条件：}
+\begin{itemize}
+  \item 对资源类型进行线性排序
+  \item 进程必须按递增顺序申请资源
+  \item 实现相对简单
+  \item 限制用户编程，资源利用率低
+\end{itemize}
+
+\textbf{死锁避免：}
+
+\textbf{系统安全状态：}
+\begin{itemize}
+  \item 存在至少一个进程序列能顺利完成
+  \item 安全状态一定无死锁
+  \item 不安全状态可能发生死锁
+\end{itemize}
+
+\textbf{银行家算法：}
+用于多种资源的死锁避免
+
+\textbf{数据结构：}
+\begin{itemize}
+  \item \textbf{Available[m]}：可用资源向量
+  \item \textbf{Max[n][m]}：最大需求矩阵
+  \item \textbf{Allocation[n][m]}：分配矩阵
+  \item \textbf{Need[n][m]}：需求矩阵，Need = Max - Allocation
+\end{itemize}
+
+\textbf{安全性算法：}
+\begin{lstlisting}[language=C]
+// 1. 初始化工作向量
+Work = Available;
+Finish[i] = false; // 对所有进程
+
+// 2. 查找满足条件的进程
+for(i = 0; i < n; i++) {
+    if(Finish[i] == false && Need[i] <= Work) {
+        // 3. 模拟分配资源
+        Work = Work + Allocation[i];
+        Finish[i] = true;
+        goto step2; // 重新查找
+    }
+}
+
+// 4. 检查结果
+if(all Finish[i] == true)
+    系统处于安全状态;
+else
+    系统处于不安全状态;
+\end{lstlisting}
+
+\textbf{资源请求算法：}
+\begin{lstlisting}[language=C]
+// 进程Pi请求资源Request[i]
+// 1. 检查请求是否超过需求
+if(Request[i] > Need[i])
+    出错返回;
+
+// 2. 检查请求是否超过可用资源
+if(Request[i] > Available)
+    等待;
+
+// 3. 试分配资源
+Available = Available - Request[i];
+Allocation[i] = Allocation[i] + Request[i];
+Need[i] = Need[i] - Request[i];
+
+// 4. 执行安全性算法
+if(安全状态)
+    正式分配;
+else {
+    恢复原状态;
+    等待;
+}
+\end{lstlisting}
+
+\textbf{银行家算法示例：}
+\begin{longtable}{@{}p{1.5cm}p{2cm}p{2cm}p{2cm}p{2cm}@{}}
+\toprule
+\textbf{进程} & \textbf{Max} & \textbf{Allocation} & \textbf{Need} & \textbf{Available} \\\\ \midrule
+\endhead
+
+P0 & (7,5,3) & (0,1,0) & (7,4,3) & \multirow{5}{*}{(3,3,2)} \\\\
+P1 & (3,2,2) & (2,0,0) & (1,2,2) & \\\\
+P2 & (9,0,2) & (3,0,2) & (6,0,0) & \\\\
+P3 & (2,2,2) & (2,1,1) & (0,1,1) & \\\\
+P4 & (4,3,3) & (0,0,2) & (4,3,1) & \\\\
+
+\bottomrule
+\end{longtable}
+
+安全序列：P1 → P3 → P4 → P2 → P0
+
+\textbf{死锁检测：}
+
+\textbf{资源分配图：}
+\begin{itemize}
+  \item 用有向图表示资源分配关系
+  \item 进程→资源：请求边
+  \item 资源→进程：分配边
+  \item 图中有环则可能死锁
+\end{itemize}
+
+\textbf{死锁检测算法：}
+\begin{lstlisting}[language=C]
+// 类似银行家算法的安全性检测
+Work = Available;
+Finish[i] = false; // 初始化
+
+for(i = 0; i < n; i++) {
+    if(Finish[i] == false && Request[i] <= Work) {
+        Work = Work + Allocation[i];
+        Finish[i] = true;
+    }
+}
+
+// 检查是否有死锁
+if(存在 Finish[i] == false)
+    系统发生死锁;
+\end{lstlisting}
+
+\textbf{死锁解除：}
+
+\textbf{进程终止：}
+\begin{itemize}
+  \item \textbf{终止所有死锁进程}：代价大但简单
+  \item \textbf{逐个终止死锁进程}：每次终止一个直到死锁解除
+\end{itemize}
+
+\textbf{资源抢占：}
+\begin{itemize}
+  \item 选择牺牲者：选择代价最小的进程
+  \item 回滚：回滚到安全状态
+  \item 饥饿：避免总是选择同一进程
+\end{itemize}
+
+\textbf{死锁处理策略比较：}
+\begin{longtable}{@{}p{3cm}p{3cm}p{3cm}p{4cm}@{}}
+\toprule
+\textbf{策略} & \textbf{实现难度} & \textbf{资源利用率} & \textbf{适用场景} \\\\ \midrule
+\endhead
+
+鸵鸟策略 & 最简单 & 高 & 死锁很少发生的系统 \\\\
+死锁预防 & 简单 & 低 & 小型系统 \\\\
+死锁避免 & 复杂 & 中等 & 资源数量固定的系统 \\\\
+死锁检测 & 较复杂 & 高 & 大型系统 \\\\
+
+\bottomrule
+\end{longtable}
+
 \section{进程通信}
 
 \subsection{进程通信的基本概念}
@@ -2121,6 +2319,14 @@ $$T_{\text{传输}} = \frac{\text{传输字节数}}{\text{传输速率}}$$
   \item 多个信号量时注意操作顺序，避免死锁
 \end{itemize}
 
+\textbf{死锁理解错误：}
+\begin{itemize}
+  \item 死锁四个条件必须同时满足
+  \item 银行家算法是死锁避免，不是预防
+  \item 安全状态不等于无死锁，不安全状态不等于有死锁
+  \item 资源分配图有环不一定死锁（单资源类型才成立）
+\end{itemize}
+
 \textbf{页面置换算法理解错误：}
 \begin{itemize}
   \item OPT是理想算法，无法实现
@@ -2129,15 +2335,6 @@ $$T_{\text{传输}} = \frac{\text{传输字节数}}{\text{传输速率}}$$
   \item Clock算法是LRU的近似
 \end{itemize}
 
-\textbf{死锁条件记忆：}
-\begin{itemize}
-  \item 互斥条件：资源不能共享
-  \item 持有并等待：已持有资源的进程等待新资源
-  \item 不可剥夺：资源不能被强制回收
-  \item 循环等待：存在进程循环等待链
-\end{itemize}
-
 % ========== 结束 ==========
 
-\end{document}
 \end{document}
