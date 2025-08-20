@@ -1742,6 +1742,143 @@ UDP长度(16bit) & UDP校验和(16bit) \\
     \end{itemize}
 \end{enumerate}
 
+\section{动态主机配置协议DHCP}
+
+\textbf{DHCP功能：}
+动态分配IP地址和网络配置参数，实现网络的即插即用。
+
+\textbf{DHCP优点：}
+\begin{itemize}
+  \item \textbf{自动配置}：减少手工配置错误
+  \item \textbf{集中管理}：统一管理IP地址分配
+  \item \textbf{动态分配}：提高IP地址利用率
+  \item \textbf{移动支持}：便于移动设备接入网络
+\end{itemize}
+
+\textbf{DHCP工作原理：}
+
+\textbf{DHCP报文类型：}
+\begin{longtable}{@{}p{3cm}p{4cm}p{6cm}@{}}
+\toprule
+\textbf{报文类型} & \textbf{发送方向} & \textbf{功能} \\\\ \midrule
+\endhead
+
+DHCP DISCOVER & 客户端→服务器 & 广播寻找DHCP服务器 \\\\
+DHCP OFFER & 服务器→客户端 & 提供IP地址配置 \\\\
+DHCP REQUEST & 客户端→服务器 & 请求使用特定IP地址 \\\\
+DHCP ACK & 服务器→客户端 & 确认分配IP地址 \\\\
+DHCP NAK & 服务器→客户端 & 拒绝IP地址请求 \\\\
+DHCP RELEASE & 客户端→服务器 & 释放IP地址 \\\\
+DHCP RENEW & 客户端→服务器 & 续租IP地址 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{DHCP四步握手过程：}
+\begin{enumerate}
+  \item \textbf{发现(DISCOVER)}：
+    \begin{itemize}
+      \item 客户端开机后广播DHCP DISCOVER报文
+      \item 源IP：0.0.0.0，目的IP：255.255.255.255
+      \item 包含客户端MAC地址
+    \end{itemize}
+    
+  \item \textbf{提供(OFFER)}：
+    \begin{itemize}
+      \item DHCP服务器收到DISCOVER后回应OFFER报文
+      \item 包含建议的IP地址、子网掩码、默认网关、DNS服务器
+      \item 包含租约时间
+    \end{itemize}
+    
+  \item \textbf{请求(REQUEST)}：
+    \begin{itemize}
+      \item 客户端选择一个OFFER，发送REQUEST报文
+      \item 广播形式，让其他DHCP服务器知道选择结果
+      \item 包含所选择的服务器标识符
+    \end{itemize}
+    
+  \item \textbf{确认(ACK)}：
+    \begin{itemize}
+      \item 被选中的DHCP服务器发送ACK确认
+      \item 包含最终的IP配置参数
+      \item 客户端开始使用分配的IP地址
+    \end{itemize}
+\end{enumerate}
+
+\textbf{DHCP租约管理：}
+
+\textbf{租约时间：}
+\begin{itemize}
+  \item 默认租约时间：通常为8天
+  \item T1时间：租约时间的50\%，开始续租
+  \item T2时间：租约时间的87.5\%，向任何DHCP服务器续租
+  \item 租约到期：释放IP地址，重新申请
+\end{itemize}
+
+\textbf{续租过程：}
+\begin{itemize}
+  \item 客户端在T1时间向原服务器发送REQUEST
+  \item 服务器回应ACK延长租约
+  \item 如果原服务器不可达，在T2时间广播REQUEST
+  \item 任何DHCP服务器都可以响应续租
+\end{itemize}
+
+\textbf{DHCP中继代理：}
+\begin{itemize}
+  \item 解决DHCP服务器跨网段问题
+  \item 中继代理接收客户端广播
+  \item 单播转发给DHCP服务器
+  \item 转发服务器响应给客户端
+\end{itemize}
+
+\textbf{DHCP报文格式：}
+\begin{longtable}{@{}p{3cm}p{2cm}p{8cm}@{}}
+\toprule
+\textbf{字段} & \textbf{长度} & \textbf{说明} \\\\ \midrule
+\endhead
+
+OP & 1字节 & 操作类型：1=请求，2=回应 \\\\
+HTYPE & 1字节 & 硬件地址类型：1=以太网 \\\\
+HLEN & 1字节 & 硬件地址长度：6=MAC地址 \\\\
+HOPS & 1字节 & 中继跳数 \\\\
+XID & 4字节 & 事务ID，匹配请求和响应 \\\\
+SECS & 2字节 & 客户端启动后经过的秒数 \\\\
+FLAGS & 2字节 & 标志位，最高位为广播标志 \\\\
+CIADDR & 4字节 & 客户端IP地址 \\\\
+YIADDR & 4字节 & 你的IP地址（服务器分配） \\\\
+SIADDR & 4字节 & 服务器IP地址 \\\\
+GIADDR & 4字节 & 网关IP地址（中继代理） \\\\
+CHADDR & 16字节 & 客户端硬件地址 \\\\
+OPTIONS & 可变 & 选项字段，包含各种配置参数 \\\\
+
+\bottomrule
+\end{longtable}
+
+\textbf{DHCP选项：}
+\begin{itemize}
+  \item \textbf{选项1}：子网掩码
+  \item \textbf{选项3}：默认网关
+  \item \textbf{选项6}：DNS服务器
+  \item \textbf{选项51}：IP地址租约时间
+  \item \textbf{选项53}：DHCP消息类型
+  \item \textbf{选项54}：DHCP服务器标识符
+\end{itemize}
+
+\textbf{DHCP安全考虑：}
+\begin{itemize}
+  \item \textbf{DHCP欺骗}：恶意DHCP服务器分配错误配置
+  \item \textbf{DHCP饥饿攻击}：耗尽IP地址池
+  \item \textbf{防护措施}：DHCP侦听、端口安全、MAC地址绑定
+\end{itemize}
+
+\textbf{DHCP故障排除：}
+\begin{itemize}
+  \item 检查DHCP服务器状态
+  \item 检查IP地址池是否耗尽
+  \item 检查网络连通性
+  \item 检查DHCP中继代理配置
+\end{itemize}
+
 \section{域名系统DNS}
 
 \textbf{DNS功能：}域名与IP地址的映射
