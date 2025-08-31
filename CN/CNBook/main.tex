@@ -49,7 +49,7 @@
 }
 
 \usepackage{tikz}
-\usetikzlibrary{chains, positioning, arrows.meta, shapes.geometric}
+\usetikzlibrary{chains, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
 
 \begin{document}
 
@@ -1987,6 +1987,208 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 \end{minipage}}}%
 \end{center}
 
+\section{传输方式}
+\subsection{串行传输和并行传输}
+串行与并行是按位并发度对数据在物理链路上的组织方式划分：
+\begin{itemize}
+    \item \textbf{串行传输}：在\textbf{一对导线/一条链路}上\textbf{逐位}依次发送，比特沿时间轴排队。典型实现配合\textbf{编码+时钟恢复}（如8b/10b、64b/66b等）与\textbf{差分传输}，以获得\textbf{高抗干扰、远距离、超高速}能力（Gbps+）。
+    \item \textbf{并行传输}：通过\textbf{多条数据线}同时并发发送\textbf{多个比特}（如8位/16位/32位总线），常配合一根或多根\textbf{时钟线}。受\textbf{时钟偏斜（clock skew）}和\textbf{串扰}影响，\textbf{距离短、频率受限}，适合板级/背板/机内短距高并发。
+\end{itemize}
+
+\paragraph{直观对照图}
+\begin{center}
+\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[node distance=1.8cm]
+    % styles
+    	\tikzset{dev/.style={rectangle,draw=blue!60,fill=blue!10,rounded corners,minimum width=2.6cm,minimum height=0.9cm,align=center},
+             blk/.style={rectangle,draw=gray!70,fill=gray!10,rounded corners,minimum width=2.3cm,minimum height=0.9cm,align=center},
+             arr/.style={->,>=Stealth,thick}, lab/.style={font=\small}, bus/.style={-Latex,thick,blue!70} }
+
+    % Parallel block (left)
+    \node[dev] (cpu) {主机/控制器};
+    \node[dev, right=5.5cm of cpu] (dev) {设备/存储器};
+    % draw 8-bit bus lines
+    \foreach \i [count=\k from 0] in {0,...,7} {
+        \draw[bus] ([yshift=\i*0.18cm]cpu.east) -- ([yshift=\i*0.18cm]dev.west);
+    }
+    % clock line
+    \draw[bus,red!70,dashed] ([yshift=-0.5cm]cpu.east) -- node[lab,fill=white,inner sep=1pt] {CLK} ([yshift=-0.5cm]dev.west);
+    % labels
+    \node[lab,above=0.75cm of cpu] {\textbf{并行总线：}多根数据线+D/C线};
+    \node[lab,below=0.55cm of cpu,align=left] {优点：每拍多位\;\;\;缺点：时钟偏斜/串扰\\\textbf{距离短、速率受限}};
+
+    % divider
+    \node[lab] (sep) at ($(cpu)!0.5!(dev) + (0,-2.2)$) {\Large vs};
+
+    % Serial block (below)
+    \node[blk, below=3.0cm of cpu] (ser) {串行器 SER};
+    \node[blk, below=3.0cm of dev] (des) {解串器 DES};
+    \draw[arr,blue!70,thick] (ser) -- node[lab,fill=white,inner sep=1pt] {\small 差分对/链路} (des);
+    \node[dev, left=2.2cm of ser] (host) {主机/控制器};
+    \node[dev, right=2.2cm of des] (peer) {设备/外设};
+    \draw[arr] (host) -- (ser);
+    \draw[arr] (des) -- (peer);
+    \node[lab,below=0.35cm of ser,align=left] {\textbf{串行链路：}编码+时钟恢复（CDR）\\\textbf{线缆少、抗干扰强、可远距离/超高速}};
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{优缺点与应用对比}
+{\small\begin{longtable}{|p{0.20\linewidth}|p{0.36\linewidth}|p{0.36\linewidth}|}
+\hline
+    	\textbf{维度} & \textbf{串行} & \textbf{并行} \\
+\hline
+线路与连接件 & 1对/少数对（常用\textbf{差分对}），接头小、布线简 & 多根数据线+时钟/控制线，接头宽、布线复杂 \\
+\hline
+时钟与同步 & 依赖\textbf{编码自同步}+\textbf{时钟恢复}（CDR），抖动容限设计重要 & 需\textbf{共享时钟}，受\textbf{时钟偏斜}影响，需等长/校准 \\
+\hline
+速率与距离 & 易达\textbf{高频/长距}（Gbps、米-百米/公里，视介质） & 适合\textbf{短距/机内/板级}，频率受限，长度随位宽增加更受限 \\
+\hline
+抗干扰/EMI & 差分+编码，\textbf{抗干扰强、EMI低} & 多线并行，\textbf{串扰}与EMI较明显 \\
+\hline
+成本与扩展 & 线缆/针脚少，\textbf{成本低、可多lane聚合}（x4/x8/x16） & 引脚/线缆多，扩展代价高 \\
+\hline
+典型接口 & \makecell[l]{USB 2/3/4, PCIe, SATA, \newline HDMI/DP, Ethernet,\newline \\串口（UART/RS-232/485）} 
+& \makecell[l]{内存总线（DDR并非传统并口但属多线并发）
+\newline \\早期IDE/并口打印机、\newline FPGA/背板并行总线} \\
+\hline
+\end{longtable}}
+
+\paragraph{考试提示}
+\begin{itemize}
+    \item \textbf{记忆法}：\textbf{并行靠“多线同拍”}，受\textbf{偏斜/串扰}困扰；\textbf{串行靠“编码+CDR”}，\textbf{远距/高速}更强。
+    \item \textbf{易混点}：并行\textbf{不是}一定更快——当频率提升受限时，\textbf{高速串行+多Lane}往往胜出（如PCI→PCIe）。
+    \item \textbf{场景选择}：\textbf{机内短距高并发}（如CPU-内存）偏并行；\textbf{板间/机间/外设长距}首选串行。
+\end{itemize}
+
+\subsection{同步传输和异步传输}
+同步与异步描述的是\textbf{时钟配合与定界方式}：
+\begin{itemize}
+    \item \textbf{异步传输}（Asynchronous）：发送端与接收端\textbf{各自独立时钟}，以\textbf{起始位（Start）/停止位（Stop）}为\textbf{字符级}定界，必要时附\textbf{奇偶校验位}。\textbf{简单、成本低}，适合\textbf{低速、间歇}通信，如 UART/RS-232/485。
+    \item \textbf{同步传输}（Synchronous）：双方\textbf{共享时钟}或通过\textbf{自同步编码+时钟恢复（CDR）}保持同步，\textbf{帧/块级}定界，常用\textbf{前导码/标志/位填充}和\textbf{FCS/CRC}。\textbf{效率高、吞吐大}，用于\textbf{高速、连续}链路，如以太网、HDLC/PPP、SATA、PCIe。
+\end{itemize}
+
+\paragraph{示意图（字段级对比）}
+\begin{center}
+\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0pt]
+    	\tikzset{seg/.style={rectangle,draw=blue!60,fill=blue!10,minimum width=1.35cm,minimum height=0.7cm,align=center,font=\small},
+             seg2/.style={rectangle,draw=gray!70,fill=gray!15,minimum width=2.0cm,minimum height=0.7cm,align=center,font=\small},
+             note/.style={font=\small}}
+    % Asynchronous line (character oriented)
+    \node[note,anchor=west] at (0,0.95) {\textbf{异步（字节定界，起始/停止）}};
+    \node[seg] (a0) at (0,0) {Start};
+    \node[seg, right=0pt of a0] (a1) {D0};
+    \node[seg, right=0pt of a1] (a2) {D1};
+    \node[seg, right=0pt of a2] (a3) {D2};
+    \node[seg, right=0pt of a3] (a4) {D3};
+    \node[seg, right=0pt of a4] (a5) {D4};
+    \node[seg, right=0pt of a5] (a6) {D5};
+    \node[seg, right=0pt of a6] (a7) {D6};
+    \node[seg, right=0pt of a7] (a8) {D7};
+    \node[seg, right=0pt of a8,fill=orange!20] (ap) {Parity?};
+    \node[seg, right=0pt of ap,fill=green!20] (as) {Stop};
+    \node[note,below=0.05cm of a0,align=left] {8N1效率示例：$\;\,\frac{8}{8+1+1}=80\%$};
+
+    % Synchronous line (frame oriented)
+    \begin{scope}[yshift=-2.3cm]
+        \node[note,anchor=west] at (0,0.95) {\textbf{同步（帧定界，前导/标志+FCS）}};
+        \node[seg2,fill=yellow!25] (s0) at (0,0) {Sync/Preamble};
+        \node[seg2, right=0pt of s0, minimum width=5.2cm, fill=blue!10] (s1) {Payload/Frame Data};
+        \node[seg2, right=0pt of s1, fill=red!15] (s2) {FCS/CRC};
+        \node[note,below=0.05cm of s0,align=left] {以太网：7B 0x55 前导 + 1B 0xD5 SFD；HDLC：0x7E 标志+位填充};
+    \end{scope}
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{对比表}
+{\small\begin{longtable}{|p{0.20\linewidth}|p{0.36\linewidth}|p{0.36\linewidth}|}
+\hline
+    	\textbf{维度} & \textbf{异步传输} & \textbf{同步传输} \\
+\hline
+定界与粒度 & \textbf{字符/字节}为单位，起始/停止位定界，\textbf{可选奇偶校验} & \textbf{帧/块}为单位，前导/标志+\textbf{位填充}，帧尾常有\textbf{FCS/CRC} \\
+\hline
+时钟与同步 & 无共享时钟，靠\textbf{起始位边沿}临时校准采样点 & \textbf{共享时钟}或\textbf{自同步编码+CDR}保持全程同步 \\
+\hline
+开销与效率 & 每字节\textbf{2-3 位}冗余（起停/校验），速率越低影响越明显 & 帧级开销，相对\textbf{更高效率}，适合\textbf{高速/长帧} \\
+\hline
+性能与场景 & 低速、间歇、点对点、实现简单，如\textbf{UART/RS-232/485} & 高速、连续、链路层协议丰富，如\textbf{以太网、HDLC/PPP、SAS/SATA、PCIe} \\
+\hline
+鲁棒与实现 & 容忍时钟漂移较大但吞吐受限；实现简单 & 对抖动/抖动容限要求高，需\textbf{编码、时钟恢复、缓冲}支持 \\
+\hline
+\end{longtable}}
+
+\paragraph{408考试提示}
+\begin{itemize}
+    \item \textbf{口令}：\textbf{异步“起停定字节”}，\textbf{同步“前导定帧+FCS”}；二者对应的\textbf{时钟获取}方式不同。
+    \item \textbf{速算}：8N1 有效负载效率约 \textasciitilde80\%；若含奇偶校验（8E1）则为 $\tfrac{8}{11}\approx72.7\%$。
+    \item \textbf{知名实例}：以太网 7B 0x55 + 1B 0xD5；HDLC/PPP 使用 0x7E 标志与\textbf{位填充}。
+\end{itemize}
+
+\subsection{单向通信 双向交替通信和双向同时通信}
+根据发送与接收是否可以同时进行，物理层链路可分为：
+\begin{itemize}
+    \item \textbf{单向通信（Simplex）}：仅\textbf{单方向}传输，反向无信道能力。例：\textbf{广播/电视下行}、\textbf{键盘→主机}早期模型。
+    \item \textbf{双向交替（半双工，Half-duplex）}：\textbf{双向可达但不可同时}，需\textbf{轮流}占用信道。例：对讲机、早期\textbf{共享式以太网}（需CSMA/CD）。
+    \item \textbf{双向同时（全双工，Full-duplex）}：\textbf{两端可同时}发送与接收。例：\textbf{交换式以太网全双工}、\textbf{光纤双纤上下行}、\textbf{xDSL回声抵消}。
+\end{itemize}
+
+\paragraph{示意图}
+\begin{center}
+\resizebox{0.9\linewidth}{!}{%
+\begin{tikzpicture}[node distance=3.6cm]
+    		\tikzset{end/.style={rectangle,draw=blue!60,fill=blue!10,rounded corners,minimum width=2.6cm,minimum height=0.9cm,align=center},
+             arr/.style={->,>=Stealth,thick}, both/.style={<->,>=Stealth,thick},
+             lab/.style={font=\small}}
+    % Simplex
+    \node[end] (sA) {节点A};
+    \node[end, right=3.6cm of sA] (sB) {节点B};
+    \draw[arr,blue!70] (sA) -- (sB);
+    \node[lab,above=0.2cm of sA] {\textbf{单向通信（Simplex）}};
+
+    % Half-duplex
+    \begin{scope}[yshift=-2.1cm]
+        \node[end] (hA) {节点A};
+        \node[end, right=3.6cm of hA] (hB) {节点B};
+        \draw[arr,gray!70,dashed] (hA) -- (hB);
+        \draw[arr,gray!70,dashed] (hB) -- (hA);
+        \node[lab,above=0.2cm of hA] {\textbf{半双工（交替）}};
+        \node[lab] at ($(hA)!0.5!(hB)+(0,-0.6)$) {不能同时，需仲裁/轮转（如CSMA/CD）};
+    \end{scope}
+
+    % Full-duplex
+    \begin{scope}[yshift=-4.2cm]
+        \node[end] (fA) {节点A};
+        \node[end, right=3.6cm of fA] (fB) {节点B};
+        \draw[both,blue!70] (fA) -- (fB);
+        \node[lab,above=0.2cm of fA] {\textbf{全双工（同时）}};
+        \node[lab] at ($(fA)!0.5!(fB)+(0,-0.6)$) {同时双向，\textbf{无冲突域}（交换式以太网）};
+    \end{scope}
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{对比表}
+{\small\begin{longtable}{|p{0.20\linewidth}|p{0.26\linewidth}|p{0.26\linewidth}|p{0.22\linewidth}|}
+\hline
+    	\textbf{维度} & \textbf{单向通信} & \textbf{半双工} & \textbf{全双工} \\
+\hline
+方向/是否同时 & 单向/不可同时 & 双向/不可同时（交替） & 双向/\textbf{可同时} \\
+\hline
+冲突域与仲裁 & 无冲突 & 可能冲突，需\textbf{仲裁/退避}（如CSMA/CD） & \textbf{无冲突域}（点到点交换式） \\
+\hline
+带宽利用 & 仅一向 & 两向共享，时分占用 & 两向各得一份（或\textbf{回声抵消}/双纤） \\
+\hline
+典型实现 & 广播/电视下行、传感上报单向 & 共享介质、早期集线器以太网、对讲机 & 交换式以太网、光纤双纤、xDSL、PCIe 物理链路 \\
+\hline
+备注 & 简单，交互差 & 机制简单、效率受制于轮转/冲突 & 需要\textbf{交换/回声抵消/隔离上下行} \\
+\hline
+\end{longtable}}
+
+\paragraph{408考试提示}
+\begin{itemize}
+    \item \textbf{以太网考点}：\textbf{共享介质+半双工}才需要\textbf{CSMA/CD}；\textbf{交换式全双工\,不再使用 CSMA/CD}。
+    \item \textbf{实现方式}：全双工可通过\textbf{物理分离上下行}（双绞线不同线对、光纤双纤）或\textbf{回声抵消}实现；无线蜂窝可\textbf{FDD/TDD}区分上下行，Wi‑Fi通常半双工。
+    \item \textbf{易错点}：把“全双工=两倍带宽”一概而论不严谨，取决于\textbf{物理层/设备能力与瓶颈}。
+\end{itemize}
 \section{物理层设备}
 \subsection{中继器}
 中继器(Repeater)工作在\textbf{物理层(L1)}，对\textbf{比特流}进行\textbf{再生整形、放大}，以\textbf{延长传输距离}、弥补衰减与失真；其不识别帧或地址，不改变上层协议内容。
@@ -2000,8 +2202,8 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 
 \begin{center}
 \resizebox{0.9\linewidth}{!}{%
-\begin{tikzpicture}[node distance=1.6cm]
-    	\tikzset{end/.style={rectangle,draw=blue!60,fill=blue!10,rounded corners,minimum width=2.2cm,minimum height=0.8cm,align=center},
+\begin{tikzpicture}[node distance=3.6cm]
+        \tikzset{end/.style={rectangle,draw=blue!60,fill=blue!10,rounded corners,minimum width=2.6cm,minimum height=0.9cm,align=center},
                      rep/.style={rectangle,draw=gray!70,fill=gray!10,rounded corners,minimum width=2.4cm,minimum height=0.9cm,align=center},
                      arr/.style={->,>=Stealth,thick}, lab/.style={font=\small}}
     \node[end] (a) {段1 电缆};
@@ -2101,162 +2303,698 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 \end{center}
 
 \section{编码与调制}
+\subsection{编码与调制的基本概念}
+本小节聚焦物理层中的“\textbf{编码}”与“\textbf{调制}”两件事：前者多指\textbf{基带数字线码}的表示方式，后者是将信息\textbf{映射到模拟载波}（幅度/频率/相位/矢量）上以适应\textbf{带通信道}。
+
+\paragraph{核心概念速览}
+{\small\begin{longtable}{|p{0.22\linewidth}|p{0.72\linewidth}|}
+\hline
+    	\textbf{基带编码（线码）} & 将比特流直接映射为\textbf{基带波形}（电平/极性/过零等），典型：NRZ-L/NRZ-I、RZ、AMI、曼彻斯特、差分曼彻斯特等。\\
+\hline
+    	\textbf{带通调制} & 将信息映射到\textbf{载波}的幅度/频率/相位，或其联合（ASK/FSK/PSK/QAM），便于在\textbf{带通信道}上传输（无线、长距、电缆/光纤）。\\
+\hline
+    	\textbf{码元/符号} & 一次调制/编码输出的最小单位，可能承载\textbf{k 个比特}。M进制调制：$k=\log_2 M$；\textbf{符号率}=$R_s$（波特）。\\
+\hline
+    	\textbf{比特率与波特率} & 比特率 $R_b$（bps），符号率 $R_s$（Baud）。二进制时 $R_b=R_s$；M进制时 $R_b=k\,R_s$，其中 $k=\log_2 M$。\\
+\hline
+    	\textbf{频谱与带宽} & 线码频谱与直流/高频成分相关；带通调制占用载波附近频带。带宽（Hz）受\textbf{脉冲成形}与滚降系数影响（如升余弦 $(1+\alpha)R_s$ 近似）。\\
+\hline
+    	\textbf{自同步与直流分量} & 自同步编码（如曼彻斯特/差分曼彻斯特）便于时钟恢复；有/无直流分量影响低通信道可否直接传（以太网常需抑制直流）。\\
+\hline
+\end{longtable}}
+
+\paragraph{星座图一瞥（PSK/QAM，含判决边界与Gray标注）}
+\begin{center}
+\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[>=Stealth]
+    % styles and helpers
+    \tikzset{
+        axis/.style={-},
+        pt/.style={circle,fill=blue!70,inner sep=1.2pt},
+        ptR/.style={circle,fill=red!70,inner sep=1.2pt},
+        dashline/.style={gray!70,dashed},
+        lab/.style={font=\small},
+        bit/.style={font=\scriptsize, inner sep=1pt, fill=white, text=black}
+    }
+    % ====================== Panel A: PSK ======================
+    \begin{scope}[xshift=0cm]
+        % Axes for PSK
+        \draw[axis,->] (-2.2,0) -- (2.3,0) node[below right]{I（同相）};
+        \draw[axis,->] (0,-2.2) -- (0,2.3) node[above left]{Q（正交）};
+        \node[lab] at (0,2.1) {PSK 星座与判决边界};
+
+        % Parameters
+        \def\R{1.6}
+
+        % BPSK on real axis
+        \node[lab] at (-1.3,1.8) {BPSK};
+        \draw[ptR] (-\R,0) circle (0pt);
+        \draw[ptR] (\R,0) circle (0pt);
+        \node[bit] at (-\R,0.3) {1};
+        \node[bit] at (\R,0.3) {0};
+        % Decision boundary for BPSK
+        \draw[dashline] (0,-0.4) -- (0,0.4);
+
+        % QPSK (Gray) at 45°,135°,-135°,-45°
+        \node[lab] at (0.9,1.8) {QPSK（Gray）};
+        \foreach \a/\b in {45/00,135/01,-135/11,-45/10}{
+            \draw[pt] ({0.95*\R*cos(\a)},{0.95*\R*sin(\a)}) circle (0pt);
+            \node[bit] at ({0.95*\R*cos(\a)+0.22},{0.95*\R*sin(\a)+0.20}) {\b};
+        }
+        % Decision boundaries for QPSK (I=0 and Q=0)
+        \draw[dashline] (-2.2,0) -- (2.2,0);
+        \draw[dashline] (0,-2.2) -- (0,2.2);
+
+        % 8-PSK ring + a few Gray labels
+        \node[lab] at (-1.45,-1.8) {8-PSK};
+        \draw[gray!60] (0,0) circle (1.15*\R);
+        \foreach \a/\b in {0/000,45/001,90/011,135/010,180/110,225/111,270/101,315/100}{
+            \draw[pt] ({1.15*\R*cos(\a)},{1.15*\R*sin(\a)}) circle (0pt);
+        }
+        % Show several decision rays (every 45° bisector)
+        \foreach \t in {22.5,67.5,112.5,157.5,202.5,247.5,292.5,337.5}{
+            \draw[dashline] (0,0) -- ({2.1*cos(\t)},{2.1*sin(\t)});
+        }
+        % Label a few example Gray codes (sparse to avoid clutter)
+        \node[bit] at ({1.15*\R*cos(0)+0.18},{1.15*\R*sin(0)+0.18}) {000};
+        \node[bit] at ({1.15*\R*cos(90)+0.18},{1.15*\R*sin(90)+0.18}) {011};
+        \node[bit] at ({1.15*\R*cos(180)+0.18},{1.15*\R*sin(180)+0.18}) {110};
+        \node[bit] at ({1.15*\R*cos(270)+0.18},{1.15*\R*sin(270)+0.18}) {101};
+    \end{scope}
+
+    % ====================== Panel B: 16-QAM ======================
+    \begin{scope}[xshift=7.0cm]
+        % Axes
+        \draw[axis,->] (-2.6,0) -- (2.7,0) node[below right]{I};
+        \draw[axis,->] (0,-2.6) -- (0,2.7) node[above left]{Q};
+        \node[lab] at (0,2.45) {16-QAM（方阵，判决边界与最小距离）};
+
+        % Grid parameters: levels {-3,-1,1,3} * d
+        \def\d{0.55}
+        \foreach \ix in {-3,-1,1,3}{
+            \foreach \qy in {-3,-1,1,3}{
+                \draw[pt] (\ix*\d,\qy*\d) circle (0pt);
+            }
+        }
+
+        % Decision boundaries (vertical / horizontal midlines at ±2d, 0)
+        \foreach \x in {-2*\d,0,2*\d}{
+            \draw[dashline] (\x,-2.6) -- (\x,2.6);
+        }
+        \foreach \y in {-2*\d,0,2*\d}{
+            \draw[dashline] (-2.6,\y) -- (2.6,\y);
+        }
+
+        % Minimum distance annotation (2d) between nearest neighbors
+        \draw[<->,red!70,thick] (-3*\d,3*\d+0.45) -- (-1*\d,3*\d+0.45);
+        \node[bit, text=red!80] at (-2*\d,3*\d+0.65) {$2d$（最小距离）};
+
+        % Example Gray labels for I and Q axes (show on top/right edges)
+        % I bits (from left to right): 00,01,11,10
+        \node[bit] at (-3*\d,-2.35) {I:00};
+        \node[bit] at (-1*\d,-2.35) {01};
+        \node[bit] at ( 1*\d,-2.35) {11};
+        \node[bit] at ( 3*\d,-2.35) {10};
+        % Q bits (from bottom to top): 00,01,11,10
+        \node[bit] at (2.35,-3*\d) {Q:00};
+        \node[bit] at (2.35,-1*\d) {01};
+        \node[bit] at (2.35, 1*\d) {11};
+        \node[bit] at (2.35, 3*\d) {10};
+
+        % Show full symbol bits on one example point (top-right)
+        \node[bit] at (3*\d+0.35,3*\d+0.35) {I:10,Q:10};
+    \end{scope}
+
+    % ====================== Panel C: 64-QAM ======================
+    \begin{scope}[xshift=13.6cm]
+        % Axes
+        \draw[axis,->] (-2.6,0) -- (2.7,0) node[below right]{I};
+        \draw[axis,->] (0,-2.6) -- (0,2.7) node[above left]{Q};
+        \node[lab] at (0,2.45) {64-QAM（8×8，稠密方阵）};
+
+        % Grid parameters: levels {-7,-5,-3,-1,1,3,5,7} * s
+        \def\s{0.32}
+        \foreach \ix in {-7,-5,-3,-1,1,3,5,7}{
+            \foreach \qy in {-7,-5,-3,-1,1,3,5,7}{
+                \draw[pt] (\ix*\s,\qy*\s) circle (0pt);
+            }
+        }
+
+        % Draw a light bounding box to emphasize span
+        \draw[gray!60,rounded corners] (-7*\s-0.15,-7*\s-0.15) rectangle (7*\s+0.15,7*\s+0.15);
+
+        % Sparse decision boundaries (only the main ones to avoid clutter)
+        \foreach \x in {-6*\s,-4*\s,-2*\s,0,2*\s,4*\s,6*\s}{
+            \draw[dashline] (\x,-2.55) -- (\x,2.55);
+        }
+        \foreach \y in {-6*\s,-4*\s,-2*\s,0,2*\s,4*\s,6*\s}{
+            \draw[dashline] (-2.55,\y) -- (2.55,\y);
+        }
+
+        % Note about谱效率 / 抗噪取舍
+        \node[bit, text=black] at (0,-2.2) {阶数↑→谱效率↑，但对SNR更敏感};
+    \end{scope}
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{关键关系式}
+\begin{itemize}
+    \item \textbf{M进制调制}：每符号携带 $k=\log_2 M$ bit，$R_b = k\,R_s$；在固定带宽与SNR下，增大 $M$ 提升谱效率但\textbf{误码率对噪声更敏感}。
+    \item \textbf{基带线码与带宽}：自同步编码常提升时钟恢复鲁棒性，但\textbf{频谱更宽}；抑制直流的码型利于\textbf{变压器/低通}链路传输。
+    \item \textbf{基带 vs 带通}：\textbf{低通信道}可直接基带；\textbf{带通信道}需经调制到载波后传输。
+\end{itemize}
+
+\paragraph{两者区别与场景对比}
+{\small\begin{longtable}{|p{0.20\linewidth}|p{0.36\linewidth}|p{0.36\linewidth}|}
+\hline
+    	\textbf{维度} & \textbf{基带编码（线码）} & \textbf{带通调制} \\
+\hline
+对象与输出 & 数字基带波形（电平/极性/过零） & 模拟载波的幅/频/相位或矢量（I/Q） \\
+\hline
+代表方式 & NRZ、RZ、AMI、曼彻斯特、差分曼彻斯特 & ASK、FSK、BPSK/QPSK、$M$-QAM \\
+\hline
+时钟同步 & 依赖码型自同步与接收端时钟恢复 & 载波同步+符号定时恢复（CDR/PLL） \\
+\hline
+频谱占用 & 与码型相关（有无直流、高频成分） & 以 $f_c$ 为中心的通带；受成形滤波影响 \\
+\hline
+常见场景 & 双绞线短距以太网、电气底层互连 & 无线/有线长距、光纤、同轴宽带接入 \\
+\hline
+\end{longtable}}
+
+\paragraph{408考试提示}
+\begin{itemize}
+    \item 辨析：\textbf{比特率(bps)}、\textbf{波特率(Baud)}、\textbf{码元/符号}、\textbf{M进制与谱效率}之间的关系。
+    \item 记忆：\textbf{基带=线码}（NRZ/曼彻斯特…）；\textbf{带通=调制}（ASK/FSK/PSK/QAM）。\textbf{低通}$\Rightarrow$可基带；\textbf{带通}$\Rightarrow$需调制。
+    \item 场景：\textbf{以太网双绞线}多用基带线码；\textbf{Wi‑Fi/蜂窝/长距链路}使用带通调制与更高阶$M$‑QAM。
+\end{itemize}
 \subsection{数字信号的编码}
-面向物理层的“线路编码”（line coding）决定了比特如何在介质上以电平/极性/过零等形式表现。评判维度常见：
-（1）同步性（是否自带时钟过渡，易于位同步）；（2）直流分量与基线漂移；（3）频谱/带宽占用；（4）抗误码与实现复杂度；（5）典型应用。
+数字线码是把\textbf{比特流}映射为\textbf{基带电信号}的规则。关注三点：\textbf{自同步能力}（便于时钟恢复）、\textbf{直流分量}（影响低通信道）、\textbf{频谱/带宽占用}（影响速率与距离）。
 
-为便于直观比较，下图用同一比特序列“10110010”示例五种常见编码波形（方向仅示意）：
+\paragraph{常见线码小示意}
+\begin{center}
+\resizebox{0.9\linewidth}{!}{%
+\begin{tikzpicture}[x=0.9cm,y=0.6cm]
 
-\begin{figure}[!htbp]
-    \centering
-    \resizebox{\linewidth}{!}{%
-    \begin{tikzpicture}[x=1.0cm,y=0.6cm]
-        	\tikzset{bitgrid/.style={gray!50,thin}}
-        % 全局参数
-        \def\bits{8}
-    \def\labels{{1,0,1,1,0,0,1,0}}
-        % 画位栅格与位标注
-        \foreach \i in {0,...,8} {
-            \draw[bitgrid] (\i,4.6) -- (\i,-0.6);
-        }
-        \foreach \y/\name in {4.0/NRZ-L,3.0/NRZ-I,2.0/曼彻斯特,1.0/差分曼彻斯特,0.0/AMI} {
-            \draw[bitgrid] (0,\y) -- (8,\y);
-            \node[left] at (0,\y) {\scriptsize \name};
-        }
-        \foreach \i [count=\c from 1] in \labels {
-            \node[below] at (\c-0.5,-0.4) {\scriptsize \i};
-        }
+    % 基本参数
+    \def\N{8} % 比特数量
+    % 统一的比特边界（虚线）
+    \foreach \x in {0,...,8} {\draw[draw=gray!60,dashed] (\x,7) -- (\x,-7.5);}    
 
-        % ========== NRZ-L: 1=高, 0=低 ==========
-        \begin{scope}
-            \def\y{4.0}
-            % 手工根据 10110010 描绘
-            \draw[thick]
-                (0,\y+0.6) -- (1,\y+0.6) -- (1,\y-0.6) -- (2,\y-0.6) --
-                (2,\y+0.6) -- (3,\y+0.6) -- (4,\y+0.6) -- (4,\y-0.6) --
-                (6,\y-0.6) -- (6,\y+0.6) -- (7,\y+0.6) -- (7,\y-0.6) -- (8,\y-0.6);
-        \end{scope}
+    % 顶部“比特流”与位标注
+    \node[font=\small,left=0.2cm] at (0,6.8) {\textbf{比特流}};
+    \draw[draw=gray!60] (0,6) -- (8,6);
+    % 例子比特序列：1 0 1 1 0 0 1 0
+    \foreach [count=\i] \b in {1,0,1,1,0,0,1,0} {
+    \node[font=\small] at (\i-0.5,6.35) {\b};
+    }
 
-        % ========== NRZ-I: 1=边界翻转, 0=不变 (初始低) ==========
-        \begin{scope}
-            \def\y{3.0}
-            % 边界：1->翻转，0->保持；按 10110010 手工推导路径
-            % 初始低(-0.6)
-            \draw[thick]
-                (0,\y-0.6) -- (0,\y+0.6) -- (1,\y+0.6)  % 第1位=1: 翻到高
-                -- (2,\y+0.6)                             % 第2位=0: 保持高
-                -- (2,\y-0.6) -- (3,\y-0.6)               % 第3位=1: 翻到低
-                -- (3,\y+0.6) -- (4,\y+0.6)               % 第4位=1: 翻到高
-                -- (5,\y+0.6)                              % 第5位=0: 保持高
-                -- (5,\y-0.6) -- (6,\y-0.6)               % 第6位=0: 保持低（此处为示意，加入回落边以区分眼图）
-                -- (6,\y+0.6) -- (7,\y+0.6)               % 第7位=1: 翻到高
-                -- (7,\y-0.6) -- (8,\y-0.6);              % 第8位=0: 保持低
-        \end{scope}
+    % 行标题与基线
+    \draw[draw=gray!60] (0,3) -- (8,3);    \node[font=\small,left=0.2cm] at (0,3.8) {\textbf{双极性NRZ（AMI）}};
+    \draw[draw=gray!60] (0,0) -- (8,0);    \node[font=\small,left=0.2cm] at (0,0.8) {\textbf{双极性RZ}};
+    \draw[draw=gray!60] (0,-3) -- (8,-3);  \node[font=\small,left=0.2cm] at (0,-2.2) {\textbf{曼彻斯特}};
+    \draw[draw=gray!60] (0,-6) -- (8,-6);  \node[font=\small,left=0.2cm] at (0,-5.2) {\textbf{差分曼彻斯特}};
 
-            % ========== Manchester: 半位翻转(1: 高->低, 0: 低->高) ==========
-            \begin{scope}
-                \def\y{2.0}
-                % 位1: 1 => 高-低
-                \draw[thick] (0,\y+0.6) -- (0.5,\y+0.6) -- (0.5,\y-0.6) -- (1,\y-0.6);
-                % 位2: 0 => 低-高
-                \draw[thick] (1,\y-0.6) -- (1.5,\y-0.6) -- (1.5,\y+0.6) -- (2,\y+0.6);
-                % 位3: 1 => 高-低
-                \draw[thick] (2,\y+0.6) -- (2.5,\y+0.6) -- (2.5,\y-0.6) -- (3,\y-0.6);
-                % 位4: 1 => 高-低（起始需抬到高）
-                \draw[thick] (3,\y-0.6) -- (3,\y+0.6) -- (3.5,\y+0.6) -- (3.5,\y-0.6) -- (4,\y-0.6);
-                % 位5: 0 => 低-高
-                \draw[thick] (4,\y-0.6) -- (4.5,\y-0.6) -- (4.5,\y+0.6) -- (5,\y+0.6);
-                % 位6: 0 => 低-高（起始需降到低）
-                \draw[thick] (5,\y+0.6) -- (5,\y-0.6) -- (5.5,\y-0.6) -- (5.5,\y+0.6) -- (6,\y+0.6);
-                % 位7: 1 => 高-低
-                \draw[thick] (6,\y+0.6) -- (6.5,\y+0.6) -- (6.5,\y-0.6) -- (7,\y-0.6);
-                % 位8: 0 => 低-高
-                \draw[thick] (7,\y-0.6) -- (7.5,\y-0.6) -- (7.5,\y+0.6) -- (8,\y+0.6);
-            \end{scope}
+    % ===== 双极性NRZ（AMI）：1 交替正/负，0 为 0 电平 =====
+    % 电平：+1 -> y=4, 0 -> y=3, -1 -> y=2
+    \draw[thick,blue!70]
+        (0,4) -- (1,4) -- (1,3) -- (2,3) % 1 -> 0
+        -- (2,2) -- (3,2)                 % 1(-)
+        -- (3,4) -- (4,4)                 % 1(+)
+        -- (4,3) -- (5,3) -- (6,3)        % 0,0
+        -- (6,2) -- (7,2)                 % 1(-)
+        -- (7,3) -- (8,3);                % 0
 
-            % ========== Differential Manchester: 中点必翻；0=起始翻，1=起始不翻 ==========
-            \begin{scope}
-                \def\y{1.0}
-                % 位1: 1 => 起始不翻；前半低，半位翻到高
-                \draw[thick] (0,\y-0.6) -- (0.5,\y-0.6) -- (0.5,\y+0.6) -- (1,\y+0.6);
-                % 位2: 0 => 起始翻(高->低)，半位翻(低->高)
-                \draw[thick] (1,\y+0.6) -- (1,\y-0.6) -- (1.5,\y-0.6) -- (1.5,\y+0.6) -- (2,\y+0.6);
-                % 位3: 1 => 起始不翻；前半高，半位翻到低
-                \draw[thick] (2,\y+0.6) -- (2.5,\y+0.6) -- (2.5,\y-0.6) -- (3,\y-0.6);
-                % 位4: 1 => 起始不翻；前半低，半位翻到高
-                \draw[thick] (3,\y-0.6) -- (3.5,\y-0.6) -- (3.5,\y+0.6) -- (4,\y+0.6);
-                % 位5: 0 => 起始翻(高->低)，半位翻到高
-                \draw[thick] (4,\y+0.6) -- (4,\y-0.6) -- (4.5,\y-0.6) -- (4.5,\y+0.6) -- (5,\y+0.6);
-                % 位6: 0 => 起始翻(高->低)，半位翻到高
-                \draw[thick] (5,\y+0.6) -- (5,\y-0.6) -- (5.5,\y-0.6) -- (5.5,\y+0.6) -- (6,\y+0.6);
-                % 位7: 1 => 起始不翻；前半高，半位翻到低
-                \draw[thick] (6,\y+0.6) -- (6.5,\y+0.6) -- (6.5,\y-0.6) -- (7,\y-0.6);
-                % 位8: 0 => 起始翻(低->高)，半位翻到低
-                \draw[thick] (7,\y-0.6) -- (7,\y+0.6) -- (7.5,\y+0.6) -- (7.5,\y-0.6) -- (8,\y-0.6);
-            \end{scope}
+    % ===== 双极性RZ：1 半比特取正/负交替，后半回零；0 维持零 =====
+    % 电平：+1 -> y=1, 0 -> y=0, -1 -> y=-1
+    \draw[thick,blue!70]
+        (0,0) -- (0,1) -- (0.5,1) -- (0.5,0) -- (1,0)      % 1(+)
+        -- (2,0)                                            % 0
+        -- (2,-1) -- (2.5,-1) -- (2.5,0) -- (3,0)           % 1(-)
+        -- (3,1) -- (3.5,1) -- (3.5,0) -- (4,0)             % 1(+)
+        -- (5,0) -- (6,0)                                   % 0,0
+        -- (6,-1) -- (6.5,-1) -- (6.5,0) -- (7,0)           % 1(-)
+        -- (8,0);                                           % 0
 
-            % ========== AMI: 1交替为+A/-A, 0为0电平 ==========
-            \begin{scope}
-                \def\y{0.0}
-                % 位1=1: +A
-                \draw[thick] (0,\y) -- (0,\y+0.6) -- (1,\y+0.6) -- (1,\y);
-                % 位2=0: 0电平
-                \draw[thick] (1,\y) -- (2,\y);
-                % 位3=1: -A
-                \draw[thick] (2,\y) -- (2,\y-0.6) -- (3,\y-0.6) -- (3,\y);
-                % 位4=1: +A
-                \draw[thick] (3,\y) -- (3,\y+0.6) -- (4,\y+0.6) -- (4,\y);
-                % 位5=0, 位6=0
-                \draw[thick] (4,\y) -- (6,\y);
-                % 位7=1: -A
-                \draw[thick] (6,\y) -- (6,\y-0.6) -- (7,\y-0.6) -- (7,\y);
-                % 位8=0
-                \draw[thick] (7,\y) -- (8,\y);
-            \end{scope}
+    % ===== 曼彻斯特：1=高->低，0=低->高；每比特中点必跳变 =====
+    % 高 -> y=-2, 低 -> y=-4
+    \draw[thick,blue!70]
+        % bit1=1
+        (0,-2) -- (0.5,-2) -- (0.5,-4) -- (1,-4)
+        % bit2=0
+        -- (1,-4) -- (1.5,-4) -- (1.5,-2) -- (2,-2)
+        % bit3=1
+        -- (2,-2) -- (2.5,-2) -- (2.5,-4) -- (3,-4)
+        % bit4=1（与前一位相同，边界处上跳）
+        -- (3,-2) -- (3.5,-2) -- (3.5,-4) -- (4,-4)
+        % bit5=0
+        -- (4,-4) -- (4.5,-4) -- (4.5,-2) -- (5,-2)
+        % bit6=0（与前一位相同，边界处下跳）
+        -- (5,-4) -- (5.5,-4) -- (5.5,-2) -- (6,-2)
+        % bit7=1
+        -- (6,-2) -- (6.5,-2) -- (6.5,-4) -- (7,-4)
+        % bit8=0
+        -- (7,-4) -- (7.5,-4) -- (7.5,-2) -- (8,-2);
 
-    \end{tikzpicture}}
-    \vspace{-3mm}
-    \caption{典型线路编码波形示意（位序列：10110010；方向示意不作为考点）}
-\end{figure}
+    % ===== 差分曼彻斯特：中点必跳变；1=起始跳变，0=起始不跳变 =====
+    % 高 -> y=-5, 低 -> y=-7；初始取高
+    \draw[thick,blue!70]
+        % bit1=1：起始跳变到低 -> 中点跳变到高
+        (0,-5) -- (0,-7) -- (0.5,-7) -- (0.5,-5) -- (1,-5)
+        % bit2=0：起始不跳变，高->中点->低
+        -- (1,-5) -- (1.5,-5) -- (1.5,-7) -- (2,-7)
+        % bit3=1：起始跳变到高 -> 中点跳变到低
+        -- (2,-5) -- (2.5,-5) -- (2.5,-7) -- (3,-7)
+        % bit4=1：起始跳变到高 -> 中点跳变到低
+        -- (3,-5) -- (3.5,-5) -- (3.5,-7) -- (4,-7)
+        % bit5=0：起始不跳变，低->中点->高
+        -- (4,-7) -- (4.5,-7) -- (4.5,-5) -- (5,-5)
+        % bit6=0：起始不跳变，高->中点->低
+        -- (5,-5) -- (5.5,-5) -- (5.5,-7) -- (6,-7)
+        % bit7=1：起始跳变到高 -> 中点跳变到低
+        -- (6,-5) -- (6.5,-5) -- (6.5,-7) -- (7,-7)
+        % bit8=0：起始不跳变，低->中点->高
+        -- (7,-7) -- (7.5,-7) -- (7.5,-5) -- (8,-5);
+\end{tikzpicture}}%
+\end{center}
 
-% \noindent 常见编码要点与对比：
+\paragraph{常见线码对比}
+{\small\begin{longtable}{|p{0.18\linewidth}|p{0.18\linewidth}|p{0.18\linewidth}|p{0.22\linewidth}|p{0.18\linewidth}|}
+\hline
+    	\textbf{线码} & \textbf{自同步} & \textbf{直流分量} & \textbf{带宽/频谱特性} & \textbf{常见应用} \\
+\hline
+NRZ-L/NRZ-I & 弱（长0/1易失同步） & 有（取决于数据偏置） & 带宽较窄，频谱含直流 & 早期链路、与4B/5B/8B/10B配合 \\
+\hline
+RZ & 中 & 较少直流 & 频谱比NRZ更宽（回到零） & 早期系统 \\
+\hline
+曼彻斯特 & 强（每比特中点必跳变） & 无直流（均衡） & 带宽约为NRZ的~2倍 & 10BASE-T、RFID等 \\
+\hline
+差分曼彻斯特 & 强（中点必跳变） & 无直流 & 带宽与曼彻斯特相近 & 令牌环等 \\
+\hline
+AMI（双极性） & 中（需避免长零） & 直流抑制较好 & 频谱集中，需违规/填充避免长零 & E1/T1 体系（HDB3/B8ZS变体） \\
+\hline
+\end{longtable}}
 
-% {\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
-% \begin{longtable}{p{0.12\textwidth} p{0.28\textwidth} p{0.12\textwidth} p{0.12\textwidth} p{0.14\textwidth} p{0.22\textwidth}}
-% \caption{常见数字线码对比}\label{tab:line-codes}\\
-% \toprule
-% \textbf{编码} & \textbf{基本思想} & \textbf{自同步} & \textbf{直流分量} & \textbf{带宽占用(相对)} & \textbf{典型问题/应用}\\
-% \midrule
-% \endfirsthead
-% \toprule
-% \textbf{编码} & \textbf{基本思想} & \textbf{自同步} & \textbf{直流分量} & \textbf{带宽占用(相对)} & \textbf{典型问题/应用}\\
-% \midrule
-% \endhead
-% NRZ-L & 1高0低，位内不翻转 & 差 & 大（有DC） & 低 & 容易\textbf{基线漂移}且难恢复时钟；早期串口/磁记录 \\
-% NRZ-I & 1引起边界翻转，0保持 & 一般 & 中等 & 低 & 连续0串时过渡少；FDDI等配合4B5B使用 \\
-% RZ & 位中回到0电平（占空比50\%） & 较好 & 中等 & 中等 & 过渡多，频带较宽；部分光存储历史 \\
-% 曼彻斯特 & 每位中点必翻，1/0用相反方向 & 好 & 小（近零） & 高（约为比特率的2倍主瓣） & \textbf{强自同步}；10BASE-T以太网 \\
-% 差分曼彻斯特 & 中点必翻，0起始翻/1不翻 & 好 & 小（近零） & 高 & 对极性不敏感；令牌环等 \\
-% AMI & 1在+A/-A间交替，0为0电平 & 一般 & 小（无DC） & 中等 & 长0串缺同步；配HDB3/B8ZS零替代提升同步 \\
-% 4B5B(+NRZ-I/MLT-3) & 4位映射5位，限制最长0串(≤3) & 好 & 取决于后续线码 & 中等 & \textbf{25%编码开销}；FDDI/100BASE-TX（4B5B+MLT-3） \\
-% 8B/10B & 8位映射10位，正负码保持DC平衡 & 好 & 极小（DC平衡） & 中等偏高 & \textbf{25%开销}；最长连同符号≤5；PCIe Gen1/2、FC、1000BASE-X \\
-% \bottomrule
-% \end{longtable}}
+\paragraph{408考试提示}
+\begin{itemize}
+    \item \textbf{自同步排序}：曼彻斯特/差分曼彻斯特 \textgreater{} AMI \textgreater{} NRZ。
+    \item \textbf{直流分量}：曼彻斯特/差分曼彻斯特/双极性（AMI）\textbf{无直流或被抑制}，利于变压器耦合与低通链路。
+    \item \textbf{带宽}：曼彻斯特\textbf{带宽约翻倍}；NRZ较窄但需码组映射（如4B/5B、8B/10B）来保证过零密度。
+\end{itemize}
+\subsubsection{曼彻斯特编码}
+每比特间隔\textbf{中点必有一次跳变}用于\textbf{时钟恢复}：
+\begin{itemize}
+    \item 约定1种常见映射：\textbf{1=高到低，0=低到高}（IEEE 802.3 10BASE-T）。
+    \item 优点：\textbf{自同步强、无直流分量、实现简单}；缺点：\textbf{带宽约为NRZ的2倍}。
+\end{itemize}
+\subsubsection{差分曼彻斯特编码}
+规则：\textbf{每个比特中点必跳变}；数据位由\textbf{起始边界是否跳变}来表示（\textbf{1=起始跳变，0=起始不跳变}的一种常见约定）。
+\begin{itemize}
+    \item 优点：\textbf{抗极性反接}（差分定义）、\textbf{自同步强}、\textbf{无直流}；带宽略高于NRZ。
+\end{itemize}
 
-% \begin{center}
-% {\setlength{\fboxsep}{6pt}%
-% \fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
-%     	\textbf{408考试提示}
-%     \begin{itemize}
-%         \item 识别关键词：\textbf{“中点必有翻转”→(差分)曼彻斯特；“1交替正负、0为零电平”→AMI；“1触发边界翻转”→NRZ-I}。
-%         \item 以太网：10BASE-T用\textbf{曼彻斯特}；100BASE-TX常配\textbf{4B5B+MLT-3}；1000BASE-X/多高速串行常用\textbf{8B/10B}（新标准也见64B/66B）。
-%         \item 选项陷阱：\textbf{自同步好}往往对应“中点必翻”的家族；\textbf{直流分量小/无}多见AMI、8B/10B；带宽利用率与同步性通常\textbf{难两全}。
-%     \end{itemize}
-% \end{minipage}}}%
-% \end{center}
+\subsubsection{双极性不归零（AMI，Bipolar NRZ）}
+\textbf{编码规则}：比特1用\textbf{交替极性}的全比特宽脉冲（+V、-V 轮流出现），比特0为\textbf{零电平}（0V）。相邻“1”极性交替，称为\textbf{交替标记反转}(AMI)。
+\begin{itemize}
+    \item \textbf{直流分量}：正负对称，\textbf{DC抑制好}；频谱较NRZ更集中，低频分量较少。
+    \item \textbf{自同步性}：较\textbf{一般}，\textbf{长零序列}会导致过零密度不足，需配合\textbf{零替代/违规编码}（如\textbf{HDB3（E1）}、\textbf{B8ZS（T1）}）。
+    \item \textbf{带宽占用}：与NRZ相近，\textbf{明显小于曼彻斯特}。
+    \item \textbf{工程特性}：出现\textbf{同极性连续“1”}可作为\textbf{双极性违规}进行错误/控制标记识别（也用于零替代方案）。
+    \item \textbf{典型应用}：\textbf{E1/T1 干线}基础线码（结合HDB3/B8ZS）；专线/承载场景常见。
+\end{itemize}
+
+\subsubsection{双极性归零（Bipolar RZ）}
+\textbf{编码规则}：比特1在\textbf{半个比特时间}输出+V或−V（\textbf{极性交替}），\textbf{后半比特回零}；比特0为\textbf{全比特零电平}。
+\begin{itemize}
+    \item \textbf{自同步性}：\textbf{较强}，因“1”位\textbf{中点必回零}，过零密度高，\textbf{时钟恢复更稳}；长零序列仍可能影响同步。
+    \item \textbf{直流分量}：正负对称且回零，\textbf{DC分量很小}，适合\textbf{变压器耦合/低通链路}。
+    \item \textbf{带宽占用}：脉冲变窄、回零使\textbf{高频分量增加}，\textbf{带宽大于AMI（NRZ）}（约为其1.5–2倍，视成形而定）。
+    \item \textbf{典型应用}：早期载波系统、部分\textbf{磁记录/专用链路}；现代以太网中少用，更多用于\textbf{教学与特定工程}。
+    \item \textbf{工程注意}：为避免\textbf{长零}导致的定时退化，常配合\textbf{扰码/零替代}或上层帧结构保障过零密度。
+\end{itemize}
 
 \subsection{模拟信号的调制}
-\subsection{码分多址CDMA}
+带通调制是把离散信息映射到模拟载波上（幅度/频率/相位或I/Q矢量），以适应只能通过特定频带传输的信道（无线、同轴、光纤等）。
+
+\paragraph{带通信号的一般形式与I/Q正交分解}
+带通信号可写为
+\[
+    s(t)=A(t)\cos\bigl(2\pi f_c t+\varphi(t)\bigr),\quad \text{或}\quad s(t)=I(t)\cos(2\pi f_c t)-Q(t)\sin(2\pi f_c t),
+\]
+其中 $f_c$ 为载波频率；$A(t)$、$\varphi(t)$ 或 $I/Q$ 随符号变化。调制的本质是选择\textbf{哪一维}承载信息：幅度（ASK）、频率（FSK）、相位（PSK），或同时在I/Q二维承载（QAM）。
+
+\paragraph{ASK/FSK/PSK/QAM 的定义与特点}
+\begin{itemize}
+    \item \textbf{二进制ASK（开关键控，OOK）}：比特1用较大幅度，0用小幅度/零幅度；实现简单，但\textbf{抗噪声（功率效率）差}。
+    \item \textbf{二进制FSK}：用不同载波\textbf{频率}表示0/1（$f_0\neq f_1$）。\textbf{非相干}解调易做、抗衰落较稳，但\textbf{带宽占用较大}。
+    \item \textbf{PSK}：用\textbf{相位}表示信息。BPSK 每符号1比特，QPSK 每符号2比特。相干解调下，\textbf{功率效率高于ASK/FSK}（同带宽下误码率更低）。
+    \item \textbf{$M$‑QAM}：在I/Q平面上取$M$个离散点（方阵最常见），每符号 $k=\log_2 M$ 比特，\textbf{谱效率高}，但对SNR更敏感，阶数越高越易误码。
+\end{itemize}
+
+\paragraph{时间域小示意（与图示一比一复刻：ASK/FSK/PSK）}
+\begin{center}
+\leavevmode
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[x=1.15cm,y=0.85cm]
+    % 全局参数
+    \def\N{8}
+    \def\bits{0,1,0,0,1,1,1,0}
+    % 行的基线y坐标
+    \def\ybb{6.8}  % 基带
+    \def\yask{4.4} % ASK
+    \def\yfsk{2.2} % FSK
+    \def\ypsk{0.0} % PSK
+
+    % 为了确保比特边界处严格对齐，载波在每个比特宽度内走“整周期”
+    \def\cyclesASK{2} % ASK 每比特整周期数
+    \def\cyclesPSK{2} % PSK 每比特整周期数
+    \def\cyclesFHigh{2}  % FSK 中“高频”每比特整周期数（1）
+    \def\cyclesFLow{1}  % FSK 中“低频”每比特整周期数（0）
+
+    % 竖向比特边界
+    \foreach \x in {0,...,8}{
+        \draw[gray!60,dashed] (\x,\ybb+1.1) -- (\x,\ypsk-1.0);
+    }
+
+    % 左侧标题
+    \node[anchor=east,font=\small] at (-0.35,\ybb+0.5) {数字基带信号};
+    \node[anchor=east,font=\small] at (-0.35,\yask+0.4) {(a) 调幅};
+    \node[anchor=east,font=\small] at (-0.35,\yfsk+0.4) {(b) 调频};
+    \node[anchor=east,font=\small] at (-0.35,\ypsk+0.4) {(c) 调相};
+
+    % 顶部：数字基带（0/1高低电平阶梯）
+    \draw[gray!70] (0,\ybb) -- (\N,\ybb);
+    \foreach [count=\i] \b in \bits {
+        % 位值标注
+        \node[font=\small] at (\i-0.5,\ybb+0.85) {\b};
+        % 1比特矩形（高电平=1，低电平=0）
+        \ifnum\b=1
+            \draw[thick] (\i-1,\ybb) -- (\i-1,\ybb+0.9) -- (\i,\ybb+0.9) -- (\i,\ybb) -- cycle;
+        \else
+            % 画低电平基线
+            \draw[thick] (\i-1,\ybb) -- (\i,\ybb);
+        \fi
+    }
+
+    % ===== (a) ASK（OOK：有/无载波，与示意图一致并标注文本） =====
+    \draw[gray!70] (0,\yask) -- (\N,\yask);
+    \foreach [count=\i] \b in \bits {
+        % 顶部文字：有载波/无载波
+        \ifnum\b=1
+            \node[font=\scriptsize] at (\i-0.5,\yask+1.05) {有载波};
+        \else
+            \node[font=\scriptsize] at (\i-0.5,\yask+1.05) {无载波};
+        \fi
+        % 每位的载波/无载波波形（边界已由全局虚线标出）
+        \begin{scope}[xshift={(\i-1)}]
+            \ifnum\b=1
+                % 位=1：绘制连续正弦载波（有载波）
+                \pgfmathsetmacro{\phaseStep}{10} % 每位相位滞后角(度)
+                \pgfmathsetmacro{\ph}{(\i-1)*\phaseStep}
+                \draw[blue!70,thick,domain=0:1,samples=160,smooth,variable=\t]
+                    plot (\t, {\yask + 0.75*sin(360*\cyclesASK*\t - \ph)});
+            \else
+                % 位=0：无载波，画基线
+                \draw[blue!70,thick] (0,\yask) -- (1,\yask);
+            \fi
+        \end{scope}
+    }
+
+    % ===== (b) FSK（0/1用不同频率；边界对齐：整周期） =====
+    % 约定：0 -> 低频(1周期/比特)，1 -> 高频(2周期/比特)
+    \draw[gray!70] (0,\yfsk) -- (\N,\yfsk);
+    \foreach [count=\i] \b in \bits {
+        \begin{scope}[xshift={(\i-1)}]
+            \ifnum\b=1
+                \def\cf{\cyclesFHigh} % 高频
+            \else
+                \def\cf{\cyclesFLow} % 低频
+            \fi
+            \draw[green!60!black,thick,domain=0:1,samples=160,smooth,variable=\t]
+                plot (\t, {\yfsk + 0.7*sin(360*\cf*\t)});
+        \end{scope}
+    }
+
+    % ===== (c) PSK（相位键控：0/1相位0/180°；边界对齐：整周期） =====
+    \draw[gray!70] (0,\ypsk) -- (\N,\ypsk);
+    \foreach [count=\i] \b in \bits {
+        \begin{scope}[xshift={(\i-1)}]
+            \ifnum\b=1
+                \def\phi{180} % 1 -> 反相
+            \else
+                \def\phi{0}   % 0 -> 同相
+            \fi
+            \draw[red!70,thick,domain=0:1,samples=160,smooth,variable=\t]
+                plot (\t, {\ypsk + 0.7*sin(360*\cyclesPSK*\t + \phi)});
+        \end{scope}
+    }
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{关系总览（I/Q 与频域）}
+\begin{center}
+\leavevmode
+\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth]
+    % ========== (d) I/Q 平面：PSK在等幅圆上，QAM为二维网格 ==========
+    \begin{scope}[shift={(0,0)}]
+        % 轴
+        \draw[->] (-2.2,0) -- (2.3,0) node[right]{\small I};
+        \draw[->] (0,-2.2) -- (0,2.3) node[above]{\small Q};
+        % PSK 等幅圆
+        \def\r{1.3}
+        \draw[gray!60] (0,0) circle (\r);
+        % BPSK 两点（在 I 轴）
+        \foreach \x in {-\r,\r} {\fill[red!70] (\x,0) circle (1.8pt);} 
+        \node[red!70!black,anchor=west,font=\scriptsize] at (0.2,-1.7) {BPSK：相位二选，等幅圆上两点};
+        % QPSK 四点（在等幅圆四象限）
+        \pgfmathsetmacro{\rq}{\r/sqrt(2)}
+        \foreach \sx in {-1,1} \foreach \sy in {-1,1} {\fill[blue!70] (\sx*\rq,\sy*\rq) circle (1.6pt);} 
+        \node[blue!70!black,anchor=west,font=\scriptsize] at (0.2,-1.95) {QPSK：相位四选，等幅圆四点};
+        % 16-QAM 网格点（四乘四）
+        \foreach \ix in {-1.5,-0.5,0.5,1.5} {
+            \foreach \iy in {-1.5,-0.5,0.5,1.5} {
+                \fill[green!60!black] (\ix,\iy) circle (1.3pt);
+            }
+        }
+        \node[green!50!black,anchor=west,font=\scriptsize] at (0.2,-2.2) {16-QAM：幅度+相位双维取值，二维星座};
+        \node[anchor=west,font=\small] at (-2.1,2.05) {(d) I/Q 平面（PSK 与 QAM）};
+    \end{scope}
+
+    % ========== (e) ASK：I 轴不同幅度（OOK 可以包含原点） ==========
+    \begin{scope}[shift={(6,0)}]
+        \draw[->] (-0.4,0) -- (3.2,0) node[right]{\small I};
+        \node[anchor=west,font=\small] at (-0.3,2.05) {(e) ASK（幅度变化）};
+        % OOK: 0 -> 0, 1 -> A
+        \fill[red!60] (0,0) circle (1.8pt); \node[font=\scriptsize,below] at (0,0) {0};
+        \fill[red!60] (2.2,0) circle (1.8pt); \node[font=\scriptsize,below] at (2.2,0) {1};
+        \draw[<->,gray!60] (0,0.7) -- node[fill=white,inner sep=1pt,font=\scriptsize]{幅度变化 $\Delta A$} (2.2,0.7);
+    \end{scope}
+
+    % ========== (f) FSK 频域：载波两侧频线（正交BFSK 示意） ==========
+    \begin{scope}[shift={(11,0)}]
+        \draw[->] (-0.5,0) -- (4.6,0) node[right]{\small 频率 $f$};
+        \node[anchor=west,font=\small] at (-0.4,2.05) {(f) FSK（频域示意）};
+        % fc 与两侧频率
+        \def\fc{2.05}
+        \def\df{0.9}
+        \draw[gray!60] (\fc,-0.08) -- (\fc,0.08); \node[font=\scriptsize,below] at (\fc,-0.08) {$f_c$};
+        % 频谱线（抽象脉冲）
+        \draw[green!60!black,thick] (\fc-\df,0) -- (\fc-\df,1.25);
+        \draw[green!60!black,thick] (\fc+\df,0) -- (\fc+\df,1.25);
+        % Δf 标注
+        \draw[<->,gray!60] (\fc-\df,1.5) -- node[fill=white,inner sep=1pt,font=\scriptsize]{$2\Delta f$} (\fc+\df,1.5);
+        \node[font=\scriptsize,below] at (\fc-\df,0) {$f_0$};
+        \node[font=\scriptsize,below] at (\fc+\df,0) {$f_1$};
+    \end{scope}
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{一眼看懂关系}
+\begin{itemize}
+    \item \textbf{只改幅度}：$A \\Rightarrow \\text{ASK}$；\textbf{只改相位}：$\varphi \\Rightarrow \\text{PSK}$；\textbf{只改频率}：$f \\Rightarrow \\text{FSK}$；\textbf{同时改I/Q（幅+相位）}：$(I,Q) \\Rightarrow \\text{QAM}$。
+    \item \textbf{I/Q 视角}：PSK 星座点在\textbf{等幅圆}上（相位离散）；QAM 星座点是\textbf{二维网格}（幅+相位离散）。
+    \item \textbf{频域视角}：FSK 体现为\textbf{频线位置}变化（间隔 $\Delta f$）；ASK/PSK/QAM 的\textbf{主带宽}主要由符号率与成形滚降系数 $\alpha$ 决定。
+\end{itemize}
+
+
+
+\paragraph{关键关系式（速率、带宽、谱效率）}
+\begin{itemize}
+    \item \textbf{每符号比特数}：$k=\log_2 M$，$R_b=k\,R_s$（$R_b$比特率，$R_s$符号率）。
+    \item \textbf{成形滤波带宽近似}：升余弦成形时 $B\approx (1+\alpha)R_s$（$0\le\alpha\le1$）。故\textbf{谱效率} $\eta=\dfrac{R_b}{B}\approx\dfrac{k}{1+\alpha}$。
+    \item \textbf{FSK带宽}（概略）：$B\approx 2\Delta f + (1+\alpha)R_s$（$\Delta f$为两个频率的间隔；正交BFSK常取 $\Delta f\approx R_s/2$）。
+    \item \textbf{功率效率（定性）}：相干BPSK/QPSK $>$ FSK（相干） $>$ ASK；$M$ 增大（如16/64‑QAM）谱效率升高，但对SNR更敏感，给定误码率所需 $E_b/N_0$ 更高。
+\end{itemize}
+
+\paragraph{常见带通调制对比}
+{\small\begin{longtable}{|p{0.16\linewidth}|p{0.16\linewidth}|p{0.24\linewidth}|p{0.20\linewidth}|p{0.20\linewidth}|}
+\hline
+	\textbf{调制} & \textbf{每符号比特} & \textbf{带宽/谱效率（近似）} & \textbf{接收复杂度} & \textbf{特点/应用} \\
+\hline
+ASK（OOK） & 1 & $B\approx (1+\alpha)R_s$，$\eta\approx 1/(1+\alpha)$ & 非相干/包络检波可行 & 硬件简单，功率效率差；短距、低功耗链路、RFID等 \\
+\hline
+2‑FSK & 1 & $B\approx 2\Delta f+(1+\alpha)R_s$；正交取 $\Delta f\!\approx\!R_s/2$ & 非相干或相干 & 抗衰落好、频谱占用较大；低速无线、旧制式调制 \\
+\hline
+BPSK/QPSK & 1/2 & $B\approx (1+\alpha)R_s$；$\eta\approx k/(1+\alpha)$ & 载波/定时同步+相干判决 & 功率效率高；QPSK常用于\textbf{Wi‑Fi/蜂窝/卫星} \\
+\hline
+$M$‑QAM（16/64…） & $\log_2 M$ & $B\approx (1+\alpha)R_s$；$\eta\approx k/(1+\alpha)$ & 相干，且需I/Q增益/相位校准 & 谱效率高；对SNR/线性度更敏感，常配合\textbf{Gray编码}与均衡/纠错 \\
+\hline
+\end{longtable}}
+
+\paragraph{408考试提示}
+\begin{itemize}
+    \item \textbf{概念辨析}：\textbf{基带（线码）} vs \textbf{带通（调制）}；$R_b$、$R_s$、$k$ 与谱效率的关系：$R_b=kR_s$、$\eta\approx k/(1+\alpha)$。
+    \item \textbf{优劣排序（定性）}：功率效率 BPSK/QPSK $>$ FSK $>$ ASK；谱效率 QAM $>$ QPSK $>$ BFSK（正交）。
+    \item \textbf{易错点}：提高 $M$ 并非“白捡容量”，\textbf{同样误码率}所需 $E_b/N_0$ 会显著升高；FSK\textbf{非相干}比相干通常多消耗约\textasciitilde{}3\,dB。
+    \item \textbf{工程常识}：QAM/PSK 实际系统用\textbf{成形滤波}与\textbf{Gray编码}降低ISI/误比特；无线链路需\textbf{同步（载波+定时）}与\textbf{均衡/纠错}协同。
+\end{itemize}
+
+
+\subsection{信道复用技术}
+
+复用（Multiplexing）是在\textbf{一个物理信道}上同时承载多个逻辑通信的技术；按资源维度划分常见有：\textbf{频分（FDM）}、\textbf{时分（TDM）}、\textbf{波分（WDM）}与\textbf{码分（CDM）}。\textbf{多址}（Multiple Access）是复用思想在\textbf{共享介质多用户接入}上的体现，如 FDMA/TDMA/CDMA。二者核心一致但面向的层次/场景不同。
+
+为便于一眼理解，下图以\textbf{频域/时间轴/波长/码域}四个视角并排示意：
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.95\linewidth}{!}{%
+    \begin{tikzpicture}[x=1cm,y=1cm]
+        % Panel (a) FDM 频谱
+        \begin{scope}
+            \node[anchor=west] at (-0.2,1.6) {\small (a) FDM 频谱：互不重叠，设护频带};
+            % axis
+            \draw[->] (0,0) -- (8,0) node[below] {\small 频率 $f$};
+            % channels as rectangles
+            \fill[blue!20] (0.5,0) rectangle (2.0,1.0);
+            \fill[blue!20] (2.6,0) rectangle (4.1,1.2);
+            \fill[blue!20] (4.7,0) rectangle (6.2,0.8);
+            % guard bands
+            \draw[gray!60,decorate,decoration={brace,amplitude=3pt}] (2.0,0.2) -- (2.6,0.2) node[midway,below=4pt,gray!70]{\scriptsize 护频带};
+            \draw[gray!60,decorate,decoration={brace,amplitude=3pt}] (4.1,0.2) -- (4.7,0.2) node[midway,below=4pt,gray!70]{\scriptsize 护频带};
+        \end{scope}
+
+        % Panel (b) TDM 时间轴
+        \begin{scope}[shift={(0,-2.0)}]
+            \node[anchor=west] at (-0.2,1.6) {\small (b) TDM 时间：时隙轮转，帧同步};
+            % timeline
+            \draw[->] (0,0.4) -- (8,0.4) node[below] {\small 时间 $t$};
+            % slots
+            \foreach \i/\lab/\col in {0/A/red!25,1/B/green!25,2/C/blue!25,3/A/red!25,4/B/green!25,5/C/blue!25} {
+                \fill[\col] (0.5+\i*1.0,0) rectangle (1.4+\i*1.0,0.8);
+                \node at (0.95+\i*1.0,0.4) {\small $\lab$};
+            }
+            % frame mark
+            \draw[gray!60,dashed] (0.5,-0.05) -- (0.5,1.0);
+            \draw[gray!60,dashed] (3.5,-0.05) -- (3.5,1.0);
+            \node[gray!70] at (2.0,1.1) {\scriptsize 一帧};
+        \end{scope}
+
+        % Panel (c) WDM 波长
+        \begin{scope}[shift={(0,-4.1)}]
+            \node[anchor=west] at (-0.2,1.6) {\small (c) WDM 波长：不同 $\lambda$ 复用于光纤};
+            \draw[->] (0,0) -- (8,0) node[below] {\small 波长 $\lambda$（nm）};
+            % channels as triangles/rectangles
+            \fill[purple!20] (1.0,0) rectangle (2.0,1.0);
+            \fill[purple!20] (3.0,0) rectangle (4.0,1.2);
+            \fill[purple!20] (5.0,0) rectangle (6.0,0.9);
+            \node[gray!70] at (1.5,1.35) {\scriptsize 1310};
+            \node[gray!70] at (3.5,1.55) {\scriptsize 1550};
+            \node[gray!70] at (5.5,1.25) {\scriptsize 1625};
+        \end{scope}
+
+        % Panel (d) CDM 码域
+        \begin{scope}[shift={(0,-6.2)}]
+            \node[anchor=west] at (-0.2,1.6) {\small (d) CDM 码域：正交/低相关码同时占用全时频};
+            % chips timeline
+            \draw[->] (0,0.4) -- (8,0.4) node[below] {\small 芯片序列（chips）};
+            \foreach \i in {0,...,7} {\draw[gray!50] (0.5+\i*0.8,0) -- (0.5+\i*0.8,0.9);}
+            % two codes rows
+            \node[anchor=east] at (0.3,1.0) {\scriptsize 码1：};
+            \node[anchor=east] at (0.3,-0.1) {\scriptsize 码2：};
+            \foreach \i/\b in {0/1,1/-1,2/1,3/1,4/-1,5/1,6/-1,7/1} {
+                \fill[cyan!25] (0.5+\i*0.8,0.5) rectangle (0.5+\i*0.8+0.8,0.9);
+                \node at (0.9+\i*0.8,0.7) {\scriptsize $\b$};
+            }
+            \foreach \i/\b in {0/1,1/1,2/-1,3/1,4/1,5/-1,6/1,7/-1} {
+                \fill[orange!25] (0.5+\i*0.8,0.0) rectangle (0.5+\i*0.8,0.0); % placeholder to keep style
+                \node at (0.9+\i*0.8,0.2) {\scriptsize $\b$};
+            }
+            % correlation comment
+            \node[gray!70] at (6.7,1.2) {\scriptsize $\langle\text{码1},\text{码2}\rangle\approx 0$};
+        \end{scope}
+    \end{tikzpicture}%
+    }
+    \caption{信道复用四视角示意：FDM（频域）、TDM（时间）、WDM（波长）、CDM（码域）}
+    \label{fig:mux-overview}
+\end{figure}
+
+\paragraph{术语对齐}
+\begin{itemize}
+    \item 复用（物理/链路层常见）：FDM/TDM/WDM/CDM 对应\textbf{合/分波器、合/分时器、合/分码器}。
+    \item 多址（MAC 常见）：FDMA/TDMA/CDMA —— 面向\textbf{多用户共享接入}的资源划分。
+\end{itemize}
+
+\subsubsection{频分复用FDM}
+思想：把可用带宽分成若干\textbf{互不重叠}的子带，各路用户各占一段频谱，中间留\textbf{护频带}以减小串扰。典型设备为\textbf{合路器/分路器}；在无线/有线电视/宽带接入中广泛使用。与之在光域的对应是\textbf{WDM}。
+
+要点：
+\begin{itemize}
+    \item 近似带宽预算：$B_\text{总}\approx\sum_i B_i +$ 护频带总和；调制成形越好，护频带可越小。
+    \item FDM 不需严格时钟同步，\textbf{频率规划}与\textbf{滤波器选择性}是关键。
+    \item OFDM 是“\textbf{正交子载波}的 FDM”，子载波间隔 $\Delta f=1/T_u$，可\textbf{重叠而不互扰}，并常配\textbf{循环前缀}对抗多径。
+\end{itemize}
+
+\subsubsection{时分复用TDM}
+思想：各路在\textbf{时间上轮流}占用链路。\textbf{同步TDM}按固定时隙分配（即便空载也保留）；\textbf{统计复用}按需求动态分配时隙，提高链路利用率。
+
+要点：
+\begin{itemize}
+    \item 线路速率 $R_\text{线}$ 需覆盖各源汇总与开销：$R_\text{线}\gtrsim \sum_i R_i + R_\text{开销}$。
+    \item 帧结构含\textbf{帧同步/时钟恢复}字段；跨域时可能需\textbf{缓冲与整形}。
+    \item 典型：E1/T1 复用层级，SDH/SONET 帧复用，交换机端口轮询（内核层面）。
+\end{itemize}
+
+\subsubsection{波分复用}
+思想：在同一根光纤上以不同\textbf{波长}承载多路光信号，等价于“光域的 FDM”。分为\textbf{粗波分（CWDM）}与\textbf{密集波分（DWDM）}；前者通道间隔大、成本低，后者通道密、容量高。
+
+要点：
+\begin{itemize}
+    \item 典型窗口：\textbf{1310/1550/1625\,nm}；DWDM 在 C/L 波段可达\textbf{几十/上百}波长。
+    \item 关键器件：\textbf{AWG}、\textbf{光合分波器}、\textbf{OADM/ROADM}；工程上关注\textbf{光功率预算、色散、非线性}。
+\end{itemize}
+
+\subsubsection{码分复用CDM}
+思想：各路同时占用\textbf{全时频}，靠\textbf{编码正交（或低相关）}在接收端通过相关解扩区分。常见实现是\textbf{扩频（DSSS）}与\textbf{跳频（FHSS）}；通信制式中的\textbf{CDMA}即由此而来。
+
+要点：
+\begin{itemize}
+    \item \textbf{处理增益} $G_p=\dfrac{W}{R_b}$（扩频带宽 $W$ 对比用户比特率 $R_b$），$G_p$ 越大越抗干扰/多径。
+    \item 需要\textbf{功率控制}以缓解\textbf{远近效应}；码字选取常用\textbf{Walsh}、\textbf{m序列/Gold}（低互相关）。
+    \item 解扩依赖\textbf{精确同步}（码相位/载波/定时）。
+\end{itemize}
+
+\paragraph{对比一览}
+{\small\begin{longtable}{|p{0.17\linewidth}|p{0.20\linewidth}|p{0.25\linewidth}|p{0.18\linewidth}|p{0.20\linewidth}|}
+\hline
+	\textbf{方案} & \textbf{资源维度} & \textbf{同步/隔离机制} & \textbf{典型系统} & \textbf{优缺点（概述）} \\
+\hline
+FDM & 频率子带 + 护频带 & 频率规划 + 滤波选择性 & 有线电视、微波、xDSL 上下行分频 & 实现成熟；频谱利用受护频带限制 \\
+\hline
+TDM（同步/统计） & 时间时隙/帧 & 帧同步、时钟恢复 & E1/T1、SDH/SONET、交换机内部调度 & 统计复用效率高；需严格定时 \\
+\hline
+WDM（CWDM/DWDM） & 光波长 & 光合分波/AWG/ROADM & 城域/骨干光传输、数据中心互联 & 容量极高；器件成本/色散/非线性挑战 \\
+\hline
+CDM（DSSS/FHSS） & 码域（正交/低相关） & 相关解扩 + 功率控制 & 蜂窝 CDMA、抗干扰专用链路 & 抗干扰/抗窄带衰落；设计复杂、同步严格 \\
+\hline
+\end{longtable}}
+
+\paragraph{408 考试提示}
+\begin{itemize}
+    \item \textbf{辨析：}复用 vs 多址；TDM 的\textbf{同步}与\textbf{统计}两类；WDM 属于\textbf{物理层光域复用}。
+    \item \textbf{名词：}护频带/护时带、帧同步、处理增益 $G_p$、远近效应、循环前缀（OFDM）。
+    \item \textbf{易错：}把 OFDM 误认为“额外占带宽”——\textbf{子载波正交}可重叠；把 CDM 与\textbf{频/时}划分混淆。
+\end{itemize}
 
 % ========== 第3章 数据链路层 ==========
 
@@ -2269,6 +3007,8 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 \subsection{帧同步}
 \subsection{流量控制}
 \subsection{差错控制}
+
+
 
 \section{组帧}
 \subsection{字符计数法}
@@ -2303,6 +3043,7 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 \subsubsection{CSMA/CD协议}
 \subsubsection{CSMA/CA协议}
 
+
 \section{局域网}
 \subsection{局域网的基本概念和体系结构}
 \subsection{以太网}
@@ -2312,11 +3053,16 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 \subsection{无线局域网}
 \subsubsection{IEEE 802.11}
 \subsubsection{无线局域网的组成}
+\subsubsection{虚拟局域网VLAN}
 
 \section{广域网}
 \subsection{广域网的基本概念}
 \subsection{PPP协议}
+\subsection{PPP协议}
+\subsection{PPP的帧格式}
+\subsection{PPP协议的工作状态}
 \subsection{HDLC协议}
+
 
 \section{数据链路层设备}
 \subsection{网桥}
@@ -2359,6 +3105,14 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 \subsection{域间路由协议}
 \subsubsection{BGP协议}
 
+\section{网际控制协议ICMP}
+\subsection{ICMP的基本概念}
+\subsection{ICMP报文格式}
+\subsection{ICMP的常见类型}
+\subsection{ICMP的应用}
+
+\section{虚拟专用网和网络地址转换NAT}
+
 \section{IP多播}
 \subsection{IP多播的基本概念}
 \subsection{IP多播地址}
@@ -2368,6 +3122,8 @@ Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
 \section{移动IP}
 \subsection{移动IP的基本概念}
 \subsection{移动IP的工作原理}
+
+\section{软件定义网络SDN}
 
 \section{网络层设备}
 \subsection{路由器}
