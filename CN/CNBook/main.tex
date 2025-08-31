@@ -1,0 +1,2492 @@
+\documentclass[lang=cn,newtx,10pt,scheme=chinese]{../../elegantbook}
+
+\title{408计算机网络冲刺背诵手册}
+\subtitle{北街学长倾力之作}
+
+\author{北街}
+\date{2025/08/17}
+\version{1.0}
+
+
+\setcounter{tocdepth}{3}
+
+\logo{../../figure/logo-blue.png}
+\cover{../../figure/cover.jpg}
+
+% 本文档命令
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+% 收紧 longtable 上下间距，减少分页处垂直胶水
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+% 提高断行容错，缓解英文字母/数字混排导致的 Over/Underfull \hbox
+\emergencystretch=1em
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % 参考文献，不要删除
+\usepackage{listings}         % 导入listings宏包
+\usepackage{xcolor}           % 支持颜色
+\usepackage{graphicx}        % 支持图形
+% 配置C++代码样式
+\lstset{
+    language=C++,             % 语言设置为C++
+    basicstyle=\ttfamily,      % 基本样式
+    keywordstyle=\color{blue}, % 关键词颜色
+    commentstyle=\color[rgb]{0,0.5,0},% 注释颜色  stringstyle=\color{red},   % 字符串颜色
+    numbers=left,              % 显示行号
+    numberstyle=\tiny,         % 行号样式
+    stepnumber=1,              % 每行显示行号
+    breaklines=true,           % 自动换行
+    frame=lines                % 代码块边框样式
+}
+
+\usepackage{tikz}
+\usetikzlibrary{chains, positioning, arrows.meta, shapes.geometric}
+
+\begin{document}
+
+% 全局定义 TikZ 样式，供所有图使用
+\tikzset{
+    computer/.style={rectangle, draw=blue!50, fill=blue!20, thick, minimum width=1.5cm, minimum height=1cm, rounded corners},
+    device/.style={rectangle, draw=blue!50, fill=blue!20, thick, minimum width=1cm, minimum height=0.8cm},
+    arrow/.style={->, >=Stealth, thick, blue!70},
+    nodeText/.style={align=center, font=\small}
+}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+% 减少版心撑满的强制要求，缓解 Underfull \vbox 提示
+\raggedbottom
+
+% ================== 408计算机网络全册讲义 ==================
+% 根据2025年408大纲结构生成章节骨架，逐步填充讲义内容
+
+% ========== 第1章 计算机网络概述 ==========
+\chapter{计算机网络概述}
+
+\section{计算机网络的定义、组成与功能}
+\subsection{计算机网络的定义}
+
+计算机网络就像是一个巨大的"朋友圈"，只不过这个朋友圈里的"朋友"都是计算机设备。想象一下，如果你家里的电脑、手机、平板、智能电视都能互相聊天、分享文件，甚至一起玩游戏，那就是计算机网络的魅力所在！
+
+\subsubsection{官方定义}
+**计算机网络是指将地理位置不同的具有独立功能的多台计算机及其外部设备，通过通信线路连接起来，在网络操作系统、网络管理软件及网络通信协议的管理和协调下，实现资源共享和信息传递的计算机系统。**
+
+这个定义听起来很官方对不对？让我们把它"翻译"成人话：
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm, auto]
+    
+    % 绘制计算机节点
+    \node[computer] (pc1) {电脑A};
+    \node[computer, right=3cm of pc1] (pc2) {电脑B};
+    \node[computer, below=2cm of pc1] (pc3) {电脑C};
+    \node[computer, below=2cm of pc2] (pc4) {电脑D};
+    
+    % 绘制连接线
+    \draw[arrow] (pc1) -- (pc2) node[midway, above] {通信线路};
+    \draw[arrow] (pc1) -- (pc3);
+    \draw[arrow] (pc2) -- (pc4);
+    \draw[arrow] (pc3) -- (pc4);
+    \draw[arrow] (pc1) -- (pc4);
+    \draw[arrow] (pc2) -- (pc3);
+    
+    % 添加标注
+    \node[nodeText, above=0.5cm of pc1] {\textbf{不同地理位置}};
+    \node[nodeText, below=1cm of pc3] {\textbf{资源共享}};
+    \node[nodeText, below=1cm of pc4] {\textbf{信息传递}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{通俗理解}
+把计算机网络想象成一个"智能社区"：
+
+\begin{itemize}
+    \item \textbf{居民}：各种计算机设备（就像社区里的住户）
+    \item \textbf{道路}：通信线路（连接各家各户的道路网络）
+    \item \textbf{交通规则}：网络协议（大家都要遵守的"行车规则"）
+    \item \textbf{社区管理}：网络操作系统（负责维护秩序的物业管理）
+    \item \textbf{目标}：资源共享和信息交流（邻里互助，分享资源）
+\end{itemize}
+
+\subsubsection{定义中的关键要素分析}
+
+\begin{longtable}{|p{3cm}|p{10cm}|}
+\hline
+\textbf{关键要素} & \textbf{详细解释} \\
+\hline
+\textbf{独立功能} & 
+每台计算机都有自己的"人格"——独立的处理能力、存储能力和运行程序的能力。它们不是"傀儡"，而是有"思想"的个体。 \\
+\hline
+\textbf{通信线路} & 
+就像人与人之间需要语言交流一样，计算机之间需要"说话的渠道"。可以是网线、WiFi、光纤，甚至是卫星信号。 \\
+\hline
+\textbf{网络协议} & 
+这是计算机界的"世界语"。就像我们说中文、英文一样，计算机也需要统一的"语言"来交流，比如TCP/IP协议。 \\
+\hline
+\textbf{资源共享} & 
+这是网络的精髓！就像室友可以共享WiFi、打印机一样，网络让计算机可以共享文件、程序、甚至计算能力。 \\
+\hline
+\textbf{信息传递} & 
+计算机之间可以发送消息、传输文件、视频通话等。就像微信群聊，但参与者是计算机。 \\
+\hline
+\end{longtable}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % 绘制高速公路
+    \draw[thick, gray!70] (0,0) -- (10,0);
+    \draw[thick, gray!70] (0,0.5) -- (10,0.5);
+    \draw[dashed, white, thick] (0,0.25) -- (10,0.25);
+    
+    % 绘制计算机/城市
+    \node[computer] at (1,1) {北京};
+    \node[computer] at (5,1) {上海};
+    \node[computer] at (9,1) {深圳};
+    
+    % 绘制连接线
+    \draw[arrow] (1,0.8) -- (1,0.5);
+    \draw[arrow] (5,0.8) -- (5,0.5);
+    \draw[arrow] (9,0.8) -- (9,0.5);
+    
+    % 绘制数据包（汽车）
+    \node[draw, fill=red!30, circle, scale=0.7] at (3,0.25) {数据};
+    \node[draw, fill=blue!30, circle, scale=0.7] at (7,0.25) {文件};
+    
+    % 添加标签
+    \node[below] at (5,-0.5) {\textbf{数字高速公路（互联网）}};
+    \node[above] at (3,1.5) {\textbf{各个"数字城市"（计算机节点）}};
+\end{tikzpicture}
+\end{center}
+
+在这个比喻中：
+\begin{itemize}
+    \item \textbf{高速公路} = 网络基础设施（光纤、路由器等）
+    \item \textbf{城市} = 网络中的计算机节点
+    \item \textbf{汽车} = 传输的数据包
+    \item \textbf{交通规则} = 网络协议
+    \item \textbf{目的地} = 实现资源共享和信息传递
+\end{itemize}
+
+\subsubsection{408考试重点提醒}
+
+\begin{center}
+\fcolorbox{red}{yellow!20}{
+\begin{minipage}{0.9\textwidth}
+\textbf{考试高频考点：}
+\begin{enumerate}
+    \item 计算机网络定义中的\textbf{关键要素}（地理分布、独立功能、互连、协议、共享）
+    \item 网络与分布式系统的\textbf{区别}（网络强调通信，分布式强调协作）
+    \item 计算机网络的\textbf{本质目标}：资源共享和信息传递
+\end{enumerate}
+\end{minipage}
+}
+\end{center}
+
+\textbf{小贴士}：记住计算机网络就是让"散落各地的计算机朋友们手牵手，一起分享，共同成长"！
+
+\subsection{计算机网络的组成}
+
+计算机网络就像搭积木一样，由各种不同的"积木块"组合而成。每个积木块都有自己独特的作用，缺一不可！让我们来看看这个"网络积木盒"里都有什么宝贝。
+
+\subsubsection{硬件组成——网络的"筋骨"}
+
+\textbf{1. 计算机主机（Host）}
+
+主机就是网络中的"居民"，分为两大类：
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm, auto]
+    % 定义节点样式
+    \tikzset{
+        server/.style={rectangle, draw=green!50, fill=green!20, thick, minimum width=2cm, minimum height=1.5cm, rounded corners, align=center},
+        client/.style={rectangle, draw=blue!50, fill=blue!20, thick, minimum width=2cm, minimum height=1.5cm, rounded corners, align=center},
+        arrow/.style={->, >=stealth, thick},
+        nlabel/.style={font=\small\bfseries}
+    }
+    
+    % 服务器端
+    \node[server] (server) {服务器\\(Server)};
+    \node[nlabel, above=0.3cm of server] {提供服务};
+    
+    % 客户端
+    \node[client, right=4cm of server] (client) {客户机\\(Client)};
+    \node[nlabel, above=0.3cm of client] {使用服务};
+    
+    % 连接箭头
+    \draw[arrow, green!70] (server) -- (client) node[midway, above] {提供资源};
+    \draw[arrow, blue!70] (client) -- (server) node[midway, below] {请求服务};
+    
+    % 举例
+    \node[below=1cm of server, text width=3cm, align=center] {\small 例如：\\网站服务器\\文件服务器\\邮件服务器};
+    \node[below=1cm of client, text width=3cm, align=center] {\small 例如：\\个人电脑\\手机\\平板};
+\end{tikzpicture}
+\end{center}
+
+\textbf{2. 通信链路（Communication Link）}
+
+通信链路就是网络的"血管系统"，负责在设备之间传输数据：
+
+\begin{longtable}{|p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{类型} & \textbf{特点} & \textbf{生活例子} \\
+\hline
+\textbf{有线链路} & 
+稳定可靠，速度快，但布线麻烦 & 
+就像家里的网线，稳定但不能随便移动 \\
+\hline
+\textbf{无线链路} & 
+灵活方便，但容易受干扰 & 
+就像WiFi，方便但信号会被墙壁影响 \\
+\hline
+\textbf{光纤链路} & 
+速度超快，距离超远 & 
+就像高铁，又快又远，但造价昂贵 \\
+\hline
+\end{longtable}
+
+\textbf{3. 交换设备（Switching Equipment）}
+
+交换设备是网络中的"交通枢纽"，负责数据的转发和路由：
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % 定义样式
+    \tikzset{
+        switch/.style={rectangle, draw=orange!70, fill=orange!30, thick, minimum width=1.5cm, minimum height=1cm},
+        router/.style={rectangle, draw=red!70, fill=red!30, thick, minimum width=1.5cm, minimum height=1cm},
+        hub/.style={circle, draw=gray!70, fill=gray!30, thick, minimum size=1.2cm},
+        device/.style={rectangle, draw=blue!50, fill=blue!20, thick, minimum width=1cm, minimum height=0.8cm}
+    }
+    
+    % 集线器层
+    \node[hub] (hub) at (2,4) {集线器};
+    \node[device] (pc1) at (0,5) {PC1};
+    \node[device] (pc2) at (1,3) {PC2};
+    \node[device] (pc3) at (3,3) {PC3};
+    \node[device] (pc4) at (4,5) {PC4};
+    
+    % 连接集线器
+    \draw[thick] (hub) -- (pc1);
+    \draw[thick] (hub) -- (pc2);
+    \draw[thick] (hub) -- (pc3);
+    \draw[thick] (hub) -- (pc4);
+    
+    % 交换机层
+    \node[switch] (switch) at (8,4) {交换机};
+    \node[device] (pc5) at (6,5) {PC5};
+    \node[device] (pc6) at (7,3) {PC6};
+    \node[device] (pc7) at (9,3) {PC7};
+    \node[device] (pc8) at (10,5) {PC8};
+    
+    % 连接交换机
+    \draw[thick] (switch) -- (pc5);
+    \draw[thick] (switch) -- (pc6);
+    \draw[thick] (switch) -- (pc7);
+    \draw[thick] (switch) -- (pc8);
+    
+    % 路由器
+    \node[router] (router) at (5,1.5) {路由器};
+    \draw[thick] (hub) -- (router);
+    \draw[thick] (switch) -- (router);
+    
+    % 标签
+    \node[above=0.3cm of hub] {\small\textbf{物理层设备}};
+    \node[above=0.3cm of switch] {\small\textbf{数据链路层设备}};
+    \node[below=0.3cm of router] {\small\textbf{网络层设备}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{软件组成——网络的"大脑"}
+
+网络硬件只是"身体"，软件才是"灵魂"！
+
+\textbf{1. 网络操作系统}
+
+就像手机需要iOS或Android系统一样，网络也需要专门的操作系统：
+
+\begin{itemize}
+    \item \textbf{功能}：管理网络资源，提供网络服务
+    \item \textbf{举例}：Windows Server、Linux、Unix
+    \item \textbf{比喻}：就像一个超级管家，负责分配房间、管理钥匙、安排访客
+\end{itemize}
+
+\textbf{2. 网络协议}
+
+协议是网络世界的"法律条文"，规定了数据传输的规则：
+
+\begin{center}
+\begin{tikzpicture}[node distance=1.5cm]
+    % 协议栈
+    \node[draw, fill=red!20, minimum width=6cm, minimum height=0.8cm] (app) {应用层协议 (HTTP, FTP, SMTP)};
+    \node[draw, fill=orange!20, minimum width=6cm, minimum height=0.8cm, below=0.1cm of app] (trans) {传输层协议 (TCP, UDP)};
+    \node[draw, fill=yellow!20, minimum width=6cm, minimum height=0.8cm, below=0.1cm of trans] (net) {网络层协议 (IP, ICMP)};
+    \node[draw, fill=green!20, minimum width=6cm, minimum height=0.8cm, below=0.1cm of net] (link) {数据链路层协议 (Ethernet, WiFi)};
+    \node[draw, fill=blue!20, minimum width=6cm, minimum height=0.8cm, below=0.1cm of link] (phy) {物理层协议 (电信号, 光信号)};
+    
+    % 标签
+    \node[left=1cm of app] {\textbf{协议栈}};
+    \node[right=1cm of app] {\small 应用程序间通信};
+    \node[right=1cm of trans] {\small 端到端可靠传输};
+    \node[right=1cm of net] {\small 路径选择和寻址};
+    \node[right=1cm of link] {\small 相邻节点通信};
+    \node[right=1cm of phy] {\small 比特流传输};
+\end{tikzpicture}
+\end{center}
+
+\textbf{3. 应用软件}
+
+这些是用户直接接触的软件，就像手机上的各种APP：
+
+\begin{itemize}
+    \item \textbf{浏览器}：Chrome、Firefox（用来上网冲浪的）
+    \item \textbf{即时通讯}：微信、QQ（用来聊天吹水的）
+    \item \textbf{文件传输}：FTP客户端（用来传输文件的）
+    \item \textbf{邮件客户端}：Outlook、Thunderbird（用来收发邮件的）
+\end{itemize}
+
+\subsubsection{按功能划分的组成结构}
+
+计算机网络从功能角度可以分为两个子网：
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+    % 定义样式
+    \tikzset{
+        subnet/.style={rectangle, draw=blue!70, fill=blue!20, thick, minimum width=4cm, minimum height=3cm, rounded corners},
+        component/.style={rectangle, draw=green!50, fill=green!20, thick, minimum width=2.5cm, minimum height=0.8cm, rounded corners}
+    }
+    
+    % 通信子网
+    \node[subnet] (comm) at (0,0) {};
+    \node[above=0.1cm of comm.north] {\textbf{通信子网}};
+    \node[component] (router1) at (0,0.5) {路由器};
+    \node[component] (switch1) at (0,-0.3) {交换机};
+    \node[component] (link1) at (0,-1.1) {通信链路};
+    
+    % 资源子网
+    \node[subnet] (resource) at (6,0) {};
+    \node[above=0.1cm of resource.north] {\textbf{资源子网}};
+    \node[component] (host1) at (6,0.5) {主机};
+    \node[component] (terminal1) at (6,-0.3) {终端};
+    \node[component] (software1) at (6,-1.1) {应用软件};
+    
+    % 连接线
+    \draw[<->, thick, red] (comm.east) -- (resource.west) node[midway, above] {数据传输};
+    
+    % 功能说明
+    \node[below=1cm of comm, text width=4cm, align=center] {\small\textbf{负责数据传输}\\提供通信服务\\就像快递公司};
+    \node[below=1cm of resource, text width=4cm, align=center] {\small\textbf{负责数据处理}\\提供计算资源\\就像办公大楼};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{生动比喻——网络就是"数字城市"}
+
+把计算机网络想象成一个完整的现代化城市：
+
+\begin{longtable}{|p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{网络组件} & \textbf{城市对应物} & \textbf{功能说明} \\
+\hline
+\textbf{主机} & 居民楼、办公楼 & 提供居住和工作场所 \\
+\hline
+\textbf{路由器} & 交通信号灯 & 指挥交通流向 \\
+\hline
+\textbf{交换机} & 立交桥 & 连接不同道路 \\
+\hline
+\textbf{通信链路} & 道路系统 & 承载交通流量 \\
+\hline
+\textbf{协议} & 交通法规 & 规范行车秩序 \\
+\hline
+\textbf{数据包} & 汽车 & 承载乘客和货物 \\
+\hline
+\textbf{网络操作系统} & 城市管理部门 & 统一规划和管理 \\
+\hline
+\end{longtable}
+
+\subsubsection{408考试重点提醒}
+
+\begin{center}
+\fcolorbox{red}{yellow!20}{
+\begin{minipage}{0.9\textwidth}
+\textbf{必考知识点：}
+\begin{enumerate}
+    \item 网络的\textbf{硬件组成}：主机、通信链路、交换设备
+    \item 网络的\textbf{软件组成}：网络操作系统、协议、应用软件
+    \item \textbf{通信子网 vs 资源子网}的区别和联系
+    \item 各种网络设备的\textbf{工作层次}（物理层、数据链路层、网络层）
+\end{enumerate}
+\end{minipage}
+}
+\end{center}
+
+\textbf{记忆口诀}：硬件软件两大类，主机链路加交换，系统协议和应用，通信资源分两边！
+
+\subsection{计算机网络的功能}
+
+如果说网络的组成告诉我们"网络是什么"，那么网络的功能就告诉我们"网络能干什么"。计算机网络就像一个超级多功能工具箱，每个功能都能让我们的数字生活更加精彩！
+
+\subsubsection{功能概览——网络的"十八般武艺"}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2cm]
+    % 定义样式
+    \tikzset{
+        function/.style={shape=ellipse, draw=blue!70, fill=blue!20, thick, minimum width=2.5cm, minimum height=1.2cm, align=center},
+        core/.style={circle, draw=red!70, fill=red!30, thick, minimum size=2cm, align=center, font=\bfseries}
+    }
+    
+    % 中心核心
+    \node[core] (center) at (0,0) {计算机\\网络\\功能};
+    
+    % 六大功能环绕
+    \node[function] (share) at (0,3) {资源\\共享};
+    \node[function] (comm) at (2.6,1.5) {数据\\通信};
+    \node[function] (dist) at (2.6,-1.5) {分布式\\处理};
+    \node[function] (balance) at (0,-3) {负载\\均衡};
+    \node[function] (reliability) at (-2.6,-1.5) {提高\\可靠性};
+    \node[function] (cost) at (-2.6,1.5) {降低\\成本};
+    
+    % 连接线
+    \draw[thick, blue!70] (center) -- (share);
+    \draw[thick, blue!70] (center) -- (comm);
+    \draw[thick, blue!70] (center) -- (dist);
+    \draw[thick, blue!70] (center) -- (balance);
+    \draw[thick, blue!70] (center) -- (reliability);
+    \draw[thick, blue!70] (center) -- (cost);
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{1. 资源共享——网络的"共产主义理想"}
+
+资源共享是计算机网络最重要的功能，就像室友之间共享WiFi密码一样自然！
+
+\textbf{硬件资源共享}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % 定义样式
+    \tikzset{
+        computer/.style={rectangle, draw=blue!50, fill=blue!20, thick, minimum width=1.5cm, minimum height=1cm},
+        device/.style={rectangle, draw=green!50, fill=green!20, thick, minimum width=1.5cm, minimum height=1cm},
+        arrow/.style={->, >=stealth, thick}
+    }
+    
+    % 计算机
+    \node[computer] (pc1) at (0,2) {电脑A};
+    \node[computer] (pc2) at (0,0) {电脑B};
+    \node[computer] (pc3) at (0,-2) {电脑C};
+    
+    % 共享设备
+    \node[device] (printer) at (4,1) {打印机};
+    \node[device] (scanner) at (4,-1) {扫描仪};
+    \node[device] (storage) at (6,0) {存储服务器};
+    
+    % 连接线
+    \draw[arrow, red] (pc1) -- (printer);
+    \draw[arrow, red] (pc2) -- (printer);
+    \draw[arrow, red] (pc3) -- (printer);
+    
+    \draw[arrow, blue] (pc1) -- (scanner);
+    \draw[arrow, blue] (pc2) -- (scanner);
+    \draw[arrow, blue] (pc3) -- (scanner);
+    
+    \draw[arrow, green] (pc1) -- (storage);
+    \draw[arrow, green] (pc2) -- (storage);
+    \draw[arrow, green] (pc3) -- (storage);
+    
+    % 标签
+    \node[above=0.3cm of printer] {\small\textbf{共享打印机}};
+    \node[below=0.3cm of scanner] {\small\textbf{共享扫描仪}};
+    \node[right=0.3cm of storage] {\small\textbf{共享存储}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{软件资源共享}
+
+想象一下，如果每个人都要买正版Adobe全家桶，那得花多少钱？网络让我们可以共享软件许可：
+
+\begin{itemize}
+    \item \textbf{应用程序共享}：多用户共享同一个软件许可
+    \item \textbf{数据库共享}：大家都能访问同一个数据库
+    \item \textbf{计算资源共享}：借用别人的CPU和内存来加速计算
+\end{itemize}
+
+\textbf{信息资源共享}
+
+这是最常见的共享方式，就像微信群里分享链接一样：
+
+\begin{longtable}{|p{3cm}|p{5cm}|p{5cm}|}
+\hline
+\textbf{共享类型} & \textbf{实际例子} & \textbf{生活比喻} \\
+\hline
+\textbf{文件共享} & 
+百度网盘、OneDrive & 
+就像公共图书馆，大家都能借书 \\
+\hline
+\textbf{网页内容} & 
+各种网站、博客 & 
+就像公告板，大家都能看信息 \\
+\hline
+\textbf{数据库} & 
+在线百科、论文库 & 
+就像超大型档案室 \\
+\hline
+\textbf{多媒体} & 
+YouTube、B站 & 
+就像电影院，但是免费的 \\
+\hline
+\end{longtable}
+
+\subsubsection{2. 数据通信——网络的"千里传音"}
+
+数据通信让相距千里的计算机能够"聊天"，就像古代的飞鸽传书，但速度是光速！
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm]
+    % 发送方
+    \node[computer] (sender) {发送方};
+    \node[above=0.3cm of sender] {\textbf{小明的电脑}};
+    
+    % 接收方
+    \node[computer, right=6cm of sender] (receiver) {接收方};
+    \node[above=0.3cm of receiver] {\textbf{小红的电脑}};
+    
+    % 网络云
+    \node[draw, ellipse, fill=gray!20, minimum width=3cm, minimum height=1.5cm] (network) at (3,0) {互联网};
+    
+    % 数据流
+    \draw[arrow, red, thick] (sender) -- (network) node[midway, above] {\small 发送数据};
+    \draw[arrow, blue, thick] (network) -- (receiver) node[midway, above] {\small 接收数据};
+    
+    % 数据包
+    \node[draw, fill=yellow!30, rounded corners] at (1.5,-1) {\small 电子邮件};
+    \node[draw, fill=yellow!30, rounded corners] at (3,-1.5) {\small 视频通话};
+    \node[draw, fill=yellow!30, rounded corners] at (4.5,-1) {\small 文件传输};
+\end{tikzpicture}
+\end{center}
+
+\textbf{数据通信的特点}：
+\begin{itemize}
+    \item \textbf{高速}：光纤网络速度可达Gbps级别（比火箭还快！）
+    \item \textbf{可靠}：有错误检测和纠正机制（不会搞丢你的作业）
+    \item \textbf{实时}：支持实时通信（视频聊天不会有时差）
+    \item \textbf{多样}：支持文字、图片、音频、视频（什么都能传）
+\end{itemize}
+
+\subsubsection{3. 分布式处理——网络的"众人拾柴火焰高"}
+
+分布式处理就像大家一起做大作业，每个人负责一部分，最后合成完整的作品。
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % 定义样式
+    \tikzset{
+        task/.style={rectangle, draw=orange!70, fill=orange!20, thick, minimum width=2cm, minimum height=1cm, align=center},
+        computer/.style={rectangle, draw=blue!50, fill=blue!20, thick, minimum width=1.5cm, minimum height=0.8cm, align=center}
+    }
+    
+    % 主任务
+    \node[task] (main) at (0,3) {大任务\\(渲染电影)};
+    
+    % 子任务
+    \node[task] (sub1) at (-3,1) {子任务1\\(第1-100帧)};
+    \node[task] (sub2) at (0,1) {子任务2\\(第101-200帧)};
+    \node[task] (sub3) at (3,1) {子任务3\\(第201-300帧)};
+    
+    % 计算机
+    \node[computer] (pc1) at (-3,-1) {电脑A};
+    \node[computer] (pc2) at (0,-1) {电脑B};
+    \node[computer] (pc3) at (3,-1) {电脑C};
+    
+    % 结果
+    \node[task] (result) at (0,-3) {最终结果\\(完整电影)};
+    
+    % 连接线
+    \draw[arrow] (main) -- (sub1);
+    \draw[arrow] (main) -- (sub2);
+    \draw[arrow] (main) -- (sub3);
+    
+    \draw[arrow] (sub1) -- (pc1);
+    \draw[arrow] (sub2) -- (pc2);
+    \draw[arrow] (sub3) -- (pc3);
+    
+    \draw[arrow] (pc1) -- (result);
+    \draw[arrow] (pc2) -- (result);
+    \draw[arrow] (pc3) -- (result);
+    
+    % 标签
+    \node[left=0.5cm of main] {\textbf{任务分解}};
+    \node[left=0.5cm of pc1] {\textbf{并行计算}};
+    \node[left=0.5cm of result] {\textbf{结果合并}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{分布式处理的优势}：
+\begin{itemize}
+    \item \textbf{提高效率}：多台计算机同时工作，就像多人搬家比一人搬家快
+    \item \textbf{容错能力}：一台机器坏了，其他机器继续工作
+    \item \textbf{资源利用}：充分利用网络中闲置的计算资源
+\end{itemize}
+
+\subsubsection{4. 负载均衡——网络的"交通疏导"}
+
+负载均衡就像交警指挥交通，让每条路都不会太拥堵。
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % 用户请求
+    \node[computer] (users) at (0,2) {大量用户};
+    
+    % 负载均衡器
+    \node[draw, circle, fill=red!30, minimum size=1.5cm, align=center] (balancer) at (3,2) {负载\\均衡器};
+    
+    % 服务器
+    \node[computer, align=center] (server1) at (6,3) {服务器1\\(30\%负载)};
+    \node[computer, align=center] (server2) at (6,2) {服务器2\\(35\%负载)};
+    \node[computer, align=center] (server3) at (6,1) {服务器3\\(35\%负载)};
+    
+    % 连接线
+    \draw[arrow, thick] (users) -- (balancer);
+    \draw[arrow] (balancer) -- (server1) node[midway, above] {\tiny 30\%};
+    \draw[arrow] (balancer) -- (server2) node[midway, above] {\tiny 35\%};
+    \draw[arrow] (balancer) -- (server3) node[midway, above] {\tiny 35\%};
+    
+    % 标签
+    \node[below=0.3cm of balancer] {\small\textbf{智能分配}};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{5. 提高可靠性——网络的"备胎机制"}
+
+网络通过冗余设计提高可靠性，就像重要文件要备份一样。
+
+\textbf{可靠性措施}：
+\begin{itemize}
+    \item \textbf{数据备份}：重要数据存多份（鸡蛋不放一个篮子里）
+    \item \textbf{路径冗余}：多条路径传输数据（一条路堵了走另一条）
+    \item \textbf{设备冗余}：关键设备有备用（主力坏了上替补）
+    \item \textbf{容错机制}：自动检测和修复错误（自动纠错）
+\end{itemize}
+
+\subsubsection{6. 降低成本——网络的"省钱妙招"}
+
+网络让我们能够以更低的成本获得更好的服务：
+
+\begin{longtable}{|p{4cm}|p{4cm}|p{5cm}|}
+\hline
+\textbf{成本类型} & \textbf{传统方式} & \textbf{网络方式} \\
+\hline
+\textbf{硬件成本} & 每人买一台打印机 & 大家共享一台高级打印机 \\
+\hline
+\textbf{软件成本} & 每人买一份软件 & 网络版软件多人共享 \\
+\hline
+\textbf{维护成本} & 每台机器单独维护 & 集中管理，统一维护 \\
+\hline
+\textbf{通信成本} & 长途电话、传真 & 网络通信几乎免费 \\
+\hline
+\end{longtable}
+
+\subsubsection{408考试重点提醒}
+
+\begin{center}
+\fcolorbox{red}{yellow!20}{
+\begin{minipage}{0.9\textwidth}
+\textbf{必考功能（按重要性排序）：}
+\begin{enumerate}
+    \item \textbf{资源共享}：最基本、最重要的功能
+    \item \textbf{数据通信}：网络存在的基础
+    \item \textbf{分布式处理}：现代网络的重要应用
+    \item \textbf{负载均衡}：提高系统性能
+    \item \textbf{可靠性}：系统稳定运行的保证
+    \item \textbf{成本效益}：网络应用的经济优势
+\end{enumerate}
+\end{minipage}
+}
+\end{center}
+
+\textbf{记忆口诀}：共享通信分布式，均衡可靠降成本，六大功能要记牢，考试必定能过关！
+
+\textbf{温馨提示}：网络功能虽然很多，但\textbf{资源共享}永远是最核心的！就像朋友的意义不在于数量，而在于愿意分享。
+
+\section{计算机网络的分类}
+
+计算机网络就像动物王国一样丰富多彩，有各种各样的"物种"。不同的分类方法就像不同的观察角度，让我们能够更好地理解网络这个大家族！
+
+\subsection{按覆盖范围分类}
+
+这是最常见的分类方法，就像按照活动范围给动物分类：家养的、野生的、海洋的...
+
+\subsubsection{个人区域网络（PAN - Personal Area Network）}
+
+\textbf{覆盖范围}：10米以内，就是你伸手够得着的范围
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % 定义样式
+    \tikzset{
+        device/.style={rectangle, draw=blue!50, fill=blue!20, thick, minimum width=1.2cm, minimum height=0.8cm, rounded corners},
+        person/.style={circle, draw=green!50, fill=green!20, thick, minimum size=1.5cm}
+    }
+    
+    % 人物
+    \node[person] (person) at (0,0) {小明};
+    
+    % PAN设备
+    \node[device] (phone) at (1.5,1) {手机};
+    \node[device] (watch) at (-1.5,1) {智能手表};
+    \node[device] (earphone) at (1.5,-1) {蓝牙耳机};
+    \node[device] (laptop) at (-1.5,-1) {笔记本};
+    
+    % 连接线
+    \draw[dashed, blue] (person) circle (2.5cm);
+    \draw[dotted] (person) -- (phone);
+    \draw[dotted] (person) -- (watch);
+    \draw[dotted] (person) -- (earphone);
+    \draw[dotted] (person) -- (laptop);
+    
+    % 标签
+    \node[below=3cm of person] {\textbf{PAN范围：10米内}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{典型技术}：蓝牙、红外线
+\textbf{生活例子}：手机连蓝牙耳机、智能手表同步手机数据
+
+\subsubsection{局域网（LAN - Local Area Network）}
+
+\textbf{覆盖范围}：几百米到几公里，比如一栋楼、一个校园
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % 建筑物
+    \draw[thick] (0,0) rectangle (6,3);
+    \node[above] at (3,3) {\textbf{学校/公司大楼}};
+    
+    % 楼层和设备
+    \node[device] (pc1) at (1,2.5) {PC1};
+    \node[device] (pc2) at (2,2.5) {PC2};
+    \node[device] (pc3) at (4,2.5) {PC3};
+    \node[device] (server) at (5,2.5) {服务器};
+    
+    \node[device] (pc4) at (1,1.5) {PC4};
+    \node[device] (pc5) at (2,1.5) {PC5};
+    \node[device] (printer) at (4,1.5) {打印机};
+    \node[device] (pc6) at (5,1.5) {PC6};
+    
+    % 交换机
+    \node[draw, circle, fill=red!30] (switch) at (3,0.5) {交换机};
+    
+    % 连接线
+    \draw (pc1) -- (switch);
+    \draw (pc2) -- (switch);
+    \draw (pc3) -- (switch);
+    \draw (server) -- (switch);
+    \draw (pc4) -- (switch);
+    \draw (pc5) -- (switch);
+    \draw (printer) -- (switch);
+    \draw (pc6) -- (switch);
+    
+    % 范围标示
+    \node[below=0.5cm of switch] {\textbf{LAN范围：几百米到几公里}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{特点}：
+\begin{itemize}
+    \item \textbf{高速}：通常100Mbps-10Gbps
+    \item \textbf{低延迟}：响应快，适合实时应用
+    \item \textbf{私有}：通常由单一组织管理
+    \item \textbf{可靠}：错误率低，性能稳定
+\end{itemize}
+
+\textbf{典型技术}：以太网、WiFi
+
+\subsubsection{城域网（MAN - Metropolitan Area Network）}
+
+\textbf{覆盖范围}：几十公里，比如一个城市
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+    % 城市轮廓
+    \draw[thick] (0,0) circle (4cm);
+    \node at (0,4.2) {\textbf{城市范围}};
+    
+    % 不同区域
+    \node[draw, fill=blue!20, minimum width=1.5cm, minimum height=1cm] (area1) at (-2,2) {商业区};
+    \node[draw, fill=green!20, minimum width=1.5cm, minimum height=1cm] (area2) at (2,2) {住宅区};
+    \node[draw, fill=yellow!20, minimum width=1.5cm, minimum height=1cm] (area3) at (-2,-2) {工业区};
+    \node[draw, fill=red!20, minimum width=1.5cm, minimum height=1cm] (area4) at (2,-2) {政府区};
+    
+    % 中心节点
+    \node[draw, circle, fill=orange!30, minimum size=1cm] (center) at (0,0) {中心节点};
+    
+    % 连接线
+    \draw[thick] (area1) -- (center);
+    \draw[thick] (area2) -- (center);
+    \draw[thick] (area4) -- (center);
+    
+    \node at (0,-4.5) {\textbf{MAN范围：几十公里（一个城市）}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{典型应用}：城市光纤网络、有线电视网络
+\textbf{生活例子}：城市的宽带网络、数字电视网络
+
+\subsubsection{广域网（WAN - Wide Area Network）}
+
+\textbf{覆盖范围}：几百公里到全球，跨越国家和大洲
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % 地球
+    \draw[thick] (0,0) circle (3cm);
+    \node at (0,3.3) {\textbf{全球范围}};
+    
+    % 大洲
+    \node[draw, fill=blue!20, ellipse] (asia) at (-1,1) {亚洲};
+    \node[draw, fill=green!20, ellipse] (europe) at (1,1.5) {欧洲};
+    \node[draw, fill=yellow!20, ellipse] (america) at (-1.5,-1) {美洲};
+    \node[draw, fill=red!20, ellipse] (africa) at (1,-1.5) {非洲};
+    
+    % 连接线（海底光缆）
+    \draw[thick, blue, dashed] (asia) to[bend left=20] (europe);
+    \draw[thick, blue, dashed] (asia) to[bend right=30] (america);
+    \draw[thick, blue, dashed] (europe) to[bend left=20] (america);
+    \draw[thick, blue, dashed] (europe) to[bend right=20] (africa);
+    
+    % 卫星
+    \node[draw, star, fill=orange!30] (satellite) at (0,4) {卫星};
+    \draw[dotted] (satellite) -- (europe);
+    
+    \node at (0,-3.5) {\textbf{WAN范围：全球（互联网就是最大的WAN）}};
+\end{tikzpicture}
+\end{center}
+\textbf{特点}：
+\begin{itemize}
+    \item \textbf{覆盖面广}：跨越地理边界
+    \item \textbf{传输延迟大}：距离远导致延迟增加
+    \item \textbf{带宽有限}：相对于LAN带宽较小
+    \item \textbf{复杂性高}：涉及多个运营商和技术
+\end{itemize}
+
+\textbf{典型技术}：光纤、卫星、微波
+
+\subsubsection{网络范围对比表}
+
+\begin{longtable}{|p{2cm}|p{2cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\textbf{网络类型} & \textbf{覆盖范围} & \textbf{典型技术} & \textbf{传输速度} & \textbf{生活例子} \\
+\hline
+\textbf{PAN} & 10米内 & 蓝牙、红外 & 几Mbps & 手机连耳机 \\
+\hline
+\textbf{LAN} & 几公里 & 以太网、WiFi & 100Mbps-10Gbps & 校园网、家庭网 \\
+\hline
+\textbf{MAN} & 几十公里 & 光纤、有线电视 & 几十Mbps-几Gbps & 城市宽带网 \\
+\hline
+\textbf{WAN} & 全球 & 光纤、卫星 & 几Mbps-几Gbps & 互联网 \\
+\hline
+\end{longtable}
+
+\subsection{按拓扑结构分类}
+
+网络拓扑就像房子的建筑结构，决定了网络的"长相"和性能特点。
+
+\subsubsection{总线型拓扑}
+
+就像公交车站，大家都在同一条线上排队：
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+    % 总线
+    \draw[thick, blue] (0,0) -- (8,0);
+    \node[below=0.3cm] at (4,0) {\textbf{总线（公共传输介质）}};
+    
+    % 节点
+    \node[computer] (pc1) at (1,1) {PC1};
+    \node[computer] (pc2) at (3,1) {PC2};
+    \node[computer] (pc3) at (5,1) {PC3};
+    \node[computer] (pc4) at (7,1) {PC4};
+    
+    % 连接线
+    \draw (pc1) -- (1,0);
+    \draw (pc2) -- (3,0);
+    \draw (pc3) -- (5,0);
+    \draw (pc4) -- (7,0);
+    
+    % 终端电阻
+    \node[draw, circle, fill=red!30, scale=0.7] at (0,0) {T};
+    \node[draw, circle, fill=red!30, scale=0.7] at (8,0) {T};
+    \node[below=0.5cm] at (0,0) {\tiny 终端器};
+    \node[below=0.5cm] at (8,0) {\tiny 终端器};
+\end{tikzpicture}
+\end{center}
+
+\textbf{优点}：
+\begin{itemize}
+    \item \textbf{简单经济}：布线简单，成本低（就像坐公交便宜）
+    \item \textbf{易于扩展}：添加节点容易
+\end{itemize}
+
+\textbf{缺点}：
+\begin{itemize}
+    \item \textbf{可靠性差}：总线断了全网瘫痪（公交车坏了大家都走不了）
+    \item \textbf{性能下降}：节点多了会冲突增加
+    \item \textbf{故障定位难}：不知道哪里出了问题
+\end{itemize}
+
+\subsubsection{星型拓扑}
+
+就像太阳系，所有行星围绕太阳转：
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % 中心节点
+    \node[draw, circle, fill=yellow!30, minimum size=1.5cm] (center) at (0,0) {交换机（中心）};
+    
+    % 周围节点
+    \node[computer] (pc1) at (0,2.5) {PC1};
+    \node[computer] (pc2) at (2.2,1.5) {PC2};
+    \node[computer] (pc3) at (2.2,-1.5) {PC3};
+    \node[computer] (pc4) at (0,-2.5) {PC4};
+    \node[computer] (pc5) at (-2.2,-1.5) {PC5};
+    \node[computer] (pc6) at (-2.2,1.5) {PC6};
+    
+    % 连接线
+    \draw[thick] (center) -- (pc1);
+    \draw[thick] (center) -- (pc2);
+    \draw[thick] (center) -- (pc3);
+    \draw[thick] (center) -- (pc4);
+    \draw[thick] (center) -- (pc5);
+    \draw[thick] (center) -- (pc6);
+\end{tikzpicture}
+\end{center}
+
+\textbf{优点}：
+\begin{itemize}
+    \item \textbf{可靠性高}：单个节点故障不影响其他节点
+    \item \textbf{易于管理}：集中控制，故障定位容易
+    \item \textbf{性能好}：每个节点独享带宽
+\end{itemize}
+
+\textbf{缺点}：
+\begin{itemize}
+    \item \textbf{中心依赖}：中心节点坏了全网瘫痪（太阳没了行星就乱套了）
+    \item \textbf{布线成本高}：需要大量线缆
+\end{itemize}
+
+\subsubsection{环型拓扑}
+
+就像接龙游戏，大家手拉手围成圈：
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % 环形连接
+    \node[computer] (pc1) at (0,2) {PC1};
+    \node[computer] (pc2) at (2,1) {PC2};
+    \node[computer] (pc3) at (2,-1) {PC3};
+    \node[computer] (pc4) at (0,-2) {PC4};
+    \node[computer] (pc5) at (-2,-1) {PC5};
+    \node[computer] (pc6) at (-2,1) {PC6};
+    
+    % 连接线（环形）
+    \draw[thick, ->] (pc1) to[bend left=15] (pc2);
+    \draw[thick, ->] (pc2) to[bend left=15] (pc3);
+    \draw[thick, ->] (pc3) to[bend left=15] (pc4);
+    \draw[thick, ->] (pc4) to[bend left=15] (pc5);
+    \draw[thick, ->] (pc5) to[bend left=15] (pc6);
+    \draw[thick, ->] (pc6) to[bend left=15] (pc1);
+    
+    % 数据流向标示
+    \node[draw, fill=green!30, circle, scale=0.7] at (1,1.5) {数据};
+    \node[above=0.3cm] at (1,1.5) {\tiny 令牌};
+\end{tikzpicture}
+\end{center}
+
+\textbf{优点}：
+\begin{itemize}
+    \item \textbf{无冲突}：令牌传递机制避免冲突
+    \item \textbf{公平访问}：每个节点都有平等机会
+\end{itemize}
+
+\textbf{缺点}：
+\begin{itemize}
+    \item \textbf{可靠性差}：一个节点坏了整个环就断了
+    \item \textbf{延迟大}：数据要绕一圈才能到达
+\end{itemize}
+
+\subsubsection{网状拓扑}
+
+就像蜘蛛网，节点之间互相连接：
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+    % 节点
+    \node[computer] (pc1) at (0,2) {PC1};
+    \node[computer] (pc2) at (2,1) {PC2};
+    \node[computer] (pc3) at (2,-1) {PC3};
+    \node[computer] (pc4) at (0,-2) {PC4};
+    \node[computer] (pc5) at (-2,-1) {PC5};
+    \node[computer] (pc6) at (-2,1) {PC6};
+    
+    % 网状连接
+    \draw[thick] (pc1) -- (pc2);
+    \draw[thick] (pc1) -- (pc6);
+    \draw[thick] (pc1) -- (pc4);
+    \draw[thick] (pc2) -- (pc3);
+    \draw[thick] (pc2) -- (pc6);
+    \draw[thick] (pc3) -- (pc4);
+    \draw[thick] (pc3) -- (pc5);
+    \draw[thick] (pc4) -- (pc5);
+    \draw[thick] (pc5) -- (pc6);
+    \draw[thick] (pc1) -- (pc3);
+    \draw[thick] (pc2) -- (pc4);
+    \draw[thick] (pc6) -- (pc3);
+\end{tikzpicture}
+\end{center}
+
+\textbf{优点}：
+\begin{itemize}
+    \item \textbf{可靠性极高}：多条路径，一条断了还有其他路
+    \item \textbf{负载分散}：流量可以分散到多条路径
+\end{itemize}
+
+\textbf{缺点}：
+\begin{itemize}
+    \item \textbf{成本极高}：需要大量连接线路（就像每家都要修路到每家）
+    \item \textbf{管理复杂}：路径选择和管理复杂
+\end{itemize}
+
+\subsection{按传输介质分类}
+
+\subsubsection{有线网络}
+
+就像自来水管，通过物理线缆传输数据：
+
+\begin{itemize}
+    \item \textbf{双绞线网络}：最常见，像电话线的升级版
+    \item \textbf{同轴电缆网络}：像有线电视线
+    \item \textbf{光纤网络}：用光传输，速度最快
+\end{itemize}
+
+\subsubsection{无线网络}
+
+就像广播电台，通过空气传播信号：
+
+\begin{itemize}
+    \item \textbf{WiFi网络}：家庭和办公室常用
+    \item \textbf{移动网络}：手机上网用的3G/4G/5G
+    \item \textbf{卫星网络}：偏远地区的救星
+\end{itemize}
+
+\subsection{按通信方式分类}
+
+\subsubsection{点对点网络（Point-to-Point）}
+
+就像打电话，两个人直接对话：
+
+\begin{center}
+\begin{tikzpicture}
+    \node[computer] (pc1) at (0,0) {电脑A};
+    \node[computer] (pc2) at (4,0) {电脑B};
+    \draw[thick, <->] (pc1) -- (pc2) node[midway, above] {专用连接};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{多点网络（Multi-point）}
+
+就像开会，多个人在一个房间里讨论：
+
+\begin{center}
+\begin{tikzpicture}
+    % 共享介质
+    \draw[thick, blue] (0,0) -- (6,0);
+    
+    % 多个节点
+    \node[computer] (pc1) at (1,1) {PC1};
+    \node[computer] (pc2) at (3,1) {PC2};
+    \node[computer] (pc3) at (5,1) {PC3};
+    
+    \draw (pc1) -- (1,0);
+    \draw (pc2) -- (3,0);
+    \draw (pc3) -- (5,0);
+    
+    \node[below] at (3,0) {共享传输介质};
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{408考试重点提醒}
+\begin{center}
+\fcolorbox{red}{yellow!20}{
+\begin{minipage}{0.9\textwidth}
+\textbf{必考分类重点：}
+\begin{enumerate}
+    \item \textbf{按覆盖范围}：PAN < LAN < MAN < WAN（记住范围大小）
+    \item \textbf{按拓扑结构}：星型最常用，总线型最经济，网状型最可靠
+    \item \textbf{LAN的特点}：高速、低延迟、私有管理
+    \item \textbf{WAN的特点}：覆盖广、延迟大、带宽有限
+\end{enumerate}
+\end{minipage}
+}
+\end{center}
+% \end{minipage}
+\textbf{记忆口诀}：个局城广按范围，总星环网看拓扑，有线无线看介质，点对多点看通信！
+
+\section{计算机网络的标准化工作及相关组织}
+
+网络世界要想“大家说同一种话”，必须靠标准来统一。\textbf{标准化的目标}是：互联互通、兼容性、可扩展、可维护，避免“你说你的，我说我的”。本节聚焦四大组织：ISO、ITU、IEEE、IETF——它们就像四位“网络立法者”，各管一摊，又相互协同。
+
+\subsection{ISO国际标准化组织}
+	\textbf{定位与职责}：非政府国际组织，覆盖工业与技术的广泛标准。\textbf{在网络领域的核心贡献是OSI参考模型与相关服务接口标准}。
+
+	\textbf{代表性标准}
+\begin{longtable}{|p{4cm}|p{8cm}|}
+\hline
+	\textbf{标准/系列} & \textbf{作用说明} \\
+\hline
+ISO 10646（Unicode相关） & 字符集标准，为跨语言信息交换打基础。 \\
+\hline
+\end{longtable}
+
+	\textbf{一眼记忆}：\textbf{OSI模型之父}，强调“\textbf{分层与接口}”。
+
+\subsection{ITU国际电信联盟}
+	\textbf{定位与职责}：联合国专门机构，负责全球电信/无线电频谱/卫星轨道协调与\textbf{公用电信网}相关标准。内部主要分为\textbf{ITU-T}（电信标准化）与\textbf{ITU-R}（无线电通信）。
+
+	\textbf{代表性标准（多以字母系列命名）}
+\begin{longtable}{|p{3.5cm}|p{8.5cm}|}
+\hline
+	\textbf{系列/建议} & \textbf{作用说明} \\
+\hline
+X系列（数据通信/网络） & 如\textbf{X.25}分组交换、X.500目录服务；为早期广域网、目录系统提供规范。 \\
+\hline
+G系列（传输系统） & 光纤传输与编码，如\textbf{G.709 OTN}承载网框架，定义光传送网层次与帧结构。 \\
+\hline
+H系列（多媒体） & \textbf{H.264/AVC、H.265/HEVC}等视频编码标准，影响流媒体与视频会议。 \\
+\hline
+T系列（传真/终端） & 早期传真等终端通信协议。 \\
+\hline
+\end{longtable}
+
+	\textbf{一眼记忆}：\textbf{管“电信与线路承载”}，从频谱到光纤再到编解码。
+
+\subsection{IEEE电气电子工程师协会}
+	\textbf{定位与职责}：学术性专业组织，制定大量\textbf{局域网与链路层}相关标准，最有影响力的是\textbf{IEEE 802系列}。
+
+	\textbf{代表性标准}
+\begin{longtable}{|p{4cm}|p{8cm}|}
+\hline
+	\textbf{标准} & \textbf{作用说明} \\
+\hline
+IEEE 802.3（以太网） & 规定有线以太网的\textbf{物理层与MAC子层}，从10Mb/s到\textbf{100GbE/400GbE}不断演进（\textbf{考试高频}）。 \\
+\hline
+IEEE 802.11（WLAN） & 无线局域网标准（Wi-Fi），含a/b/g/n/ac/ax演进，定义信道、调制、MAC。 \\
+\hline
+IEEE 802.1（桥接与VLAN） & 包括\textbf{802.1Q VLAN}、生成树协议STP/RSTP/MSTP等二层交换关键技术。 \\
+\hline
+IEEE 802.15（WPAN） & 个人区域网，如蓝牙（与SIG协作）、ZigBee等低功耗短距网络。 \\
+\hline
+\end{longtable}
+
+	\textbf{一眼记忆}：\textbf{管“局域网二层技术”}，以太网与Wi-Fi是其“门面担当”。
+
+\subsection{IETF互联网工程任务组}
+	\textbf{定位与职责}：开放性、以工程实践为导向的\textbf{互联网协议标准组织}，标准文档称为\textbf{RFC}。核心流程：Internet-Draft → RFC（分信息性、实验性、最佳现行实践BCP、标准轨道STD等）。
+
+	\textbf{代表性协议（RFC）}
+\begin{longtable}{|p{4cm}|p{8cm}|}
+\hline
+	\textbf{协议/系列} & \textbf{作用说明} \\
+\hline
+	\textbf{TCP/IP（IPv4/IPv6、TCP、UDP）} & 互联网的基础协议族，涵盖寻址、路由、传输（\textbf{考试顶流}）。 \\
+\hline
+DNS（RFC 1034/1035 及后续） & 分布式命名系统，定义名称解析与消息格式。 \\
+\hline
+HTTP/1.1、HTTP/2、HTTP/3 & 万维网应用协议，HTTP/3基于QUIC（UDP之上）改善时延与拥塞表现。 \\
+\hline
+TLS（原SSL演进） & 传输层安全协议，保障Web/邮件等的加密与认证。 \\
+\hline
+\end{longtable}
+
+	\textbf{一眼记忆}：\textbf{管“互联网与上层协议”}，RFC是“活文档”，强调可部署性与互操作。
+
+\subsection{四大组织“谁管什么”——一图速记}
+
+\begin{center}
+\begin{tikzpicture}[node distance=2.2cm]
+        % 样式
+            \tikzset{ org/.style={rectangle, rounded corners, draw=blue!60, fill=blue!15, thick, minimum width=3.5cm, minimum height=1cm, align=center},
+                             area/.style={rectangle, draw=gray!60, dashed, minimum width=4.2cm, minimum height=3.6cm, align=center},
+                             arrow/.style={->, >=stealth, thick} }
+
+        % 四象限区域
+        \node[area, label=above:{\small 物理/承载层面}] (phy) at (-4,0) {};
+
+        \node[area, label=above:{\small 链路/局域网}] (link) at (0,0) {};
+
+        \node[area, label=above:{\small 网络/传输/应用}] (net)  at (4,0) {};
+
+        \node at (-4,1.5) {\small 频谱/光纤/编解码};
+        \node at (0,1.5) {\small 以太网/Wi-Fi/VLAN};
+        \node at (4,1.5) {\small IP/TCP/DNS/HTTP};
+
+        % 组织节点
+        \node[org] (itu) at (-4,0) {ITU-T/ITU-R\\电信与承载};
+
+        \node[org] (ieee) at (0,0) {IEEE 802\\LAN/WLAN/VLAN};
+
+        \node[org] (ietf) at (4,0) {IETF\\互联网RFC};
+        
+        \node[org] (iso) at (0,-3) {ISO\\OSI模型/通用标准};
+
+        % 关系箭头
+        \draw[arrow] (iso) -- (ieee);
+        \draw[arrow] (iso) -- (itu);
+        \draw[arrow] (iso) -- (ietf);
+\end{tikzpicture}
+\end{center}
+
+\subsection{408考试高频对比与易混点}
+
+\begin{longtable}{|p{3cm}|p{4cm}|p{7cm}|}
+\hline
+	\textbf{组织} & \textbf{关键词} & \textbf{易考点/易混淆} \\
+\hline
+ISO & OSI七层、接口 & \textbf{OSI是框架/模型，不是具体协议}；考“层与层的功能界限”。 \\
+\hline
+ITU-T & X/G/H系列、公网承载 & 常把\textbf{X.25}与IP混淆；G.709与以太网的关系是承载与被承载。 \\
+\hline
+IEEE & 802.3/802.11/802.1Q & \textbf{以太网=802.3、Wi-Fi=802.11、VLAN=802.1Q}要对号入座。 \\
+\hline
+IETF & RFC、互联网协议 & RFC编号繁多，记住\textbf{TCP/IP、DNS、HTTP、TLS}是高频。 \\
+\hline
+\end{longtable}
+
+\begin{center}
+\fcolorbox{red}{yellow!20}{
+\begin{minipage}{0.92\textwidth}
+	\textbf{必背三句话：}
+\begin{enumerate}
+    \item \textbf{ISO——提模型（OSI）}；\textbf{IEEE——定二层（802.x）}；\textbf{IETF——管互联网（RFC）}；\textbf{ITU——管电信承载（X/G/H）}。
+    \item \textbf{OSI是理论框架，TCP/IP是事实标准}（考试常考对比题）。
+    \item \textbf{802.3=以太网，802.11=Wi‑Fi，802.1Q=VLAN}（名称与编号要精准匹配）。
+\end{enumerate}
+\end{minipage}}
+\end{center}
+
+	\textbf{记忆口诀}：\textbf{国（际）标找ISO，电信承载看ITU，局域二层问IEEE，互联网协议找IETF！}
+
+\section{计算机网络体系结构与参考模型}
+
+\subsection{网络体系结构的基本概念}
+
+	\textbf{网络体系结构}是对网络功能进行分层、定义层间\textbf{服务}与\textbf{接口}、规定同层\textbf{协议}的一套蓝图。它回答三个问题：\textbf{分几层？每层干啥？层与层怎么合作？}
+
+	\textbf{分层思想的好处}
+\begin{itemize}
+    \item \textbf{模块化}：各层相对独立，便于开发、测试与替换。
+    \item \textbf{标准化}：清晰的接口（SAP/服务访问点），降低系统耦合。
+    \item \textbf{互操作}：不同厂商实现可“对上对下”对接。
+    \item \textbf{演进性}：单层升级不牵一发动全身。
+\end{itemize}
+
+	\textbf{术语小结}（考试常考）：
+
+\begin{itemize}
+    \item \textbf{服务}：下层向上层提供“能做什么”。
+    \item \textbf{接口}：上层调用下层服务的入口（SAP）。
+    \item \textbf{协议}：同层实体间“怎么做”的约定（语法/语义/时序）。
+    \item \textbf{PDU命名}：物理层比特、链路层\textbf{帧}、网络层\textbf{分组/数据报}、传输层\textbf{段/报文段}、应用层\textbf{报文}。
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[node distance=0.1cm]
+        % 左右两端主机分层示意
+			\tikzset{layer/.style={rectangle, draw=blue!50, fill=blue!15, rounded corners, minimum width=2.8cm, minimum height=0.55cm, align=center, font=\scriptsize}}
+    % 左侧
+    \node[layer] (la) {应用层};
+    \node[layer, below=of la] (lt) {传输层};
+    \node[layer, below=of lt] (ln) {网络层};
+    \node[layer, below=of ln] (lld) {数据链路层};
+    \node[layer, below=of lld] (lp) {物理层};
+    % 右侧
+    \node[layer, right=5.2cm of la] (ra) {应用层};
+    \node[layer, below=of ra] (rt) {传输层};
+    \node[layer, below=of rt] (rn) {网络层};
+    \node[layer, below=of rn] (rld) {数据链路层};
+    \node[layer, below=of rld] (rp) {物理层};
+    % 同层“虚通道”
+    \draw[->, >=Stealth] (la.east) -- (ra.west);
+    \draw[->, >=Stealth] (lt.east) -- (rt.west);
+    \draw[->, >=Stealth] (ln.east) -- (rn.west);
+    \draw[->, >=Stealth] (lld.east) -- (rld.west);
+    \draw[->, >=Stealth] (lp.east) -- (rp.west);
+    % 标注
+    \node[below=0.1cm of lp] {发送方};
+    \node[below=0.1cm of rp] {接收方};
+\end{tikzpicture}
+\end{center}
+
+\subsection{OSI七层参考模型}
+
+	\textbf{七层职责速记}：应（应用）表（表示）会（会话）传（传输）网（网络）数（数据链路）物（物理）。
+
+\begin{longtable}{|p{2.6cm}|p{6.2cm}|p{2.3cm}|p{3.2cm}|}
+\hline
+	\textbf{层次} & \textbf{核心功能} & \textbf{PDU} & \textbf{典型要点} \\
+\hline
+应用层 & 应用服务（HTTP/FTP/SMTP/…） & 报文 & Web/邮件/文件传输 \\
+\hline
+表示层 & 数据表示、加密压缩、语法语义转换 & 报文 & SSL/TLS常被视作跨层（历史争议） \\
+\hline
+会话层 & 建立/管理/终止会话、同步、检查点 & 报文 & 检查点/恢复、全双工/半双工 \\
+\hline
+传输层 & 端到端可靠/不可靠传输、复用分用、流量/差错控制 & 段 & TCP、UDP \\
+\hline
+网络层 & 逻辑寻址与路由、分片与转发 & 分组/数据报 & IPv4/IPv6、路由协议作用在此层次之上 \\
+\hline
+数据链路层 & 成帧、差错检测、介质访问控制 & 帧 & 以太网、PPP、802.11、VLAN \\
+\hline
+物理层 & 比特传输、接口与电气特性 & 比特 & 电压/光信号、带宽、编码 \\
+\hline
+\end{longtable}
+
+\subsection{TCP/IP四层模型}
+
+\begin{itemize}
+    \item \textbf{应用层}：囊括OSI的应用/表示/会话（三层合一）。
+    \item \textbf{传输层}：TCP、UDP。
+    \item \textbf{网际层}：IP、ICMP、ARP/ND、路由。
+    \item \textbf{网络接口层}：对应OSI的数据链路+物理。
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}
+        \tikzset{blk/.style={rectangle, draw=green!60, fill=green!15, minimum width=3.2cm, minimum height=0.6cm, align=center, font=\scriptsize}}
+    \node[blk] (a) at (0,2) {应用层\newline(HTTP/DNS/SMTP…)};
+    \node[blk] (t) at (0,1.2) {传输层\newline(TCP/UDP)};
+    \node[blk] (n) at (0,0.4) {网际层\newline(IP/ICMP/ARP/ND)};
+    \node[blk] (l) at (0,-0.4) {网络接口层\newline(以太网/802.11)};
+    \draw[->] (a) -- (t);
+    \draw[->] (t) -- (n);
+    \draw[->] (n) -- (l);
+\end{tikzpicture}
+\end{center}
+
+	\textbf{对比要点}：OSI重\textbf{理论分层与接口}；TCP/IP重\textbf{实用可部署}，\textbf{事实标准}地位明确。
+
+\subsection{五层参考模型}
+
+教学与考试常用的“\textbf{五层模型}”介于两者之间：\textbf{应用/传输/网络/数据链路/物理}。它保留了链路与物理的区分，便于分别讨论成帧与比特传输。
+
+\begin{longtable}{|p{3cm}|p{10.5cm}|}
+\hline
+	\textbf{层次} & \textbf{典型协议/功能} \\
+\hline
+应用层 & HTTP、DNS、SMTP/POP3/IMAP、FTP、DHCP、SSH、NTP \\
+\hline
+传输层 & TCP（可靠、面向连接）、UDP（简单、开销低） \\
+\hline
+网络层 & IPv4/IPv6、ICMP、路由协议运行其上（RIP/OSPF/BGP） \\
+\hline
+数据链路层 & 以太网（802.3）、无线LAN（802.11）、PPP、VLAN（802.1Q） \\
+\hline
+物理层 & 双绞线、同轴、光纤；编码/调制；速率/带宽/误码率 \\
+\hline
+\end{longtable}
+
+\subsection{各层协议与功能}
+
+	\textbf{封装/解封装示意（考试常画）}
+
+\begin{center}
+\begin{tikzpicture}
+        % 封装/解封装示意（从上到下逐层封装）
+        \tikzset{
+            box/.style={rectangle, rounded corners=1pt, minimum height=0.62cm, font=\scriptsize, align=center, inner xsep=4pt, draw},
+            pay/.style={box, draw=gray!60, fill=gray!10},
+            thd/.style={box, draw=blue!60, fill=blue!15},
+            nhd/.style={box, draw=orange!70, fill=orange!20},
+            lhd/.style={box, draw=purple!60, fill=purple!15},
+            captext/.style={font=\scriptsize, text=gray!70}
+        }
+
+        % 应用层：仅有应用数据
+        \node[pay] (app) at (0,0) {应用数据（报文）};
+        \node[captext, right=8pt of app] {应用层数据};
+
+        % 传输层：TCP/UDP首部 + 应用数据
+        \node[thd, below=1.2cm of app] (t_hdr) {TCP/UDP首部};
+        \node[pay, right=0pt of t_hdr] (t_pay) {应用数据};
+        \node[captext, right=8pt of t_pay] {传输层PDU：段};
+
+        % 网络层：IP首部 + TCP/UDP首部 + 应用数据
+        \node[nhd, below=1.2cm of t_hdr] (n_hdr) {IP首部};
+        \node[thd, right=0pt of n_hdr] (n_th) {TCP/UDP首部};
+        \node[pay, right=0pt of n_th] (n_pay) {应用数据};
+        \node[captext, right=8pt of n_pay] {网络层PDU：数据报};
+
+        % 数据链路层：以太网首部 + IP首部 + TCP/UDP首部 + 应用数据 + FCS
+        \node[lhd, below=1.2cm of n_hdr] (l_hdr) {以太网首部};
+        \node[nhd, right=0pt of l_hdr] (l_ip) {IP首部};
+        \node[thd, right=0pt of l_ip] (l_th) {TCP/UDP首部};
+        \node[pay, right=0pt of l_th] (l_pay) {应用数据};
+        \node[lhd, right=0pt of l_pay] (l_fcs) {FCS/帧校验序列};
+        \node[captext, right=8pt of l_fcs] {数据链路层PDU：帧};
+
+        % 封装箭头（自上而下）
+        \draw[->, >=Stealth, thick, gray!70] (app.south) -- node[midway, right, font=\scriptsize] {封装} (t_hdr.north);
+        \draw[->, >=Stealth, thick, gray!70] ([xshift=0.5cm]t_pay.south) -- node[midway, right, font=\scriptsize] {封装} ([xshift=0.5cm]n_hdr.north);
+        \draw[->, >=Stealth, thick, gray!70] ([xshift=0.8cm]n_pay.south) -- node[midway, right, font=\scriptsize] {封装} ([xshift=0.8cm]l_hdr.north);
+
+        % 物理层说明
+        \node[captext, below=1.0cm of l_th] {物理层：比特流传输};
+\end{tikzpicture}
+\end{center}
+
+	\textbf{地址/标识与设备分层（必背）}
+
+\begin{longtable}{|p{3.2cm}|p{5.6cm}|p{4.7cm}|}
+\hline
+	\textbf{层次} & \textbf{主要地址/标识} & \textbf{典型设备} \\
+\hline
+应用层 & URL/域名、应用端口（80/443/53…） & 服务器软件/代理/负载均衡（逻辑） \\
+\hline
+传输层 & 端口号（TCP/UDP） & 四层负载均衡/防火墙策略 \\
+\hline
+网络层 & IP地址（IPv4/IPv6） & \textbf{路由器}、三层交换机 \\
+\hline
+数据链路层 & \textbf{MAC地址}、VLAN ID & \textbf{交换机}、网桥、AP \\
+\hline
+物理层 & 物理接口/光模块/速率 & 中继器、集线器、线缆/光纤 \\
+\hline
+\end{longtable}
+\begin{center}
+\fcolorbox{red}{yellow!20}{\begin{minipage}{0.92\textwidth}
+	\textbf{408必考要点与易错警示：}
+\begin{enumerate}
+    \item \textbf{OSI vs TCP/IP 对应关系}：应/表/会≈应用；链路+物理≈网络接口。
+    \item \textbf{PDU命名与层次设备}：段-包/数据报-帧；\textbf{集线器L1，交换机L2，路由器L3}。
+    \item \textbf{地址三件套}：MAC在二层，IP在三层，端口在四层（\textbf{三层三地址要对齐}）。
+    \item \textbf{封装方向}：发送端自上而下逐层加首部；接收端自下而上剥离首部。
+    \item \textbf{事实标准}：\textbf{TCP/IP}为事实标准；\textbf{OSI}是理论模型（常考辨析）。
+\end{enumerate}
+\end{minipage}}
+\end{center}
+
+	\textbf{记忆口诀}：\textbf{上三为应表会，中层传网做转发；下二链物管介质，三址对应不混搭。}
+
+% ========== 第2章 物理层 ==========
+\chapter{物理层}
+
+\section{通信基础}
+\subsection{数据通信的基本概念}
+数据通信就是把“信息”可靠地从甲地搬到乙地。为此，我们需要把数据变成可在物理介质上传输的“信号”，穿过有噪声、有衰减的“信道”，再在对端还原出来。
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.9cm]
+    	\tikzset{
+        proc/.style={rectangle, draw=blue!60, fill=blue!10, rounded corners, minimum width=2.3cm, minimum height=0.8cm, align=center},
+        chan/.style={rectangle, draw=gray!60, fill=gray!10, minimum width=3.4cm, minimum height=0.8cm, align=center},
+        n/.style={align=center, font=\small},
+        arr/.style={->, >=Stealth, thick}
+    }
+    % blocks
+    \node[proc] (src) {源/数据源\\(Data)};
+    \node[proc, right=1.4cm of src] (enc) {发送端\\编码/调制};
+    \node[chan, right=1.4cm of enc] (chl) {信道/介质\\(噪声/衰减/失真)};
+    \node[proc, right=1.4cm of chl] (dec) {接收端\\解调/译码};
+    \node[proc, right=1.4cm of dec] (dst) {宿/接收方\\(Data)};
+    % arrows
+    \draw[arr] (src) -- (enc);
+    \draw[arr] (enc) -- node[n, above]{信号} (chl);
+    \draw[arr] (chl) -- (dec);
+    \draw[arr] (dec) -- (dst);
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{核心名词一次搞定}
+{\small
+\begin{longtable}{|p{0.25\linewidth}|p{0.70\linewidth}|}
+\hline
+	\textbf{术语} & \textbf{要点解释（配考试高频点）} \\
+\hline
+数据 (Data) & 有意义的符号集合（文本、数值、图片、音频等）本身不等于可传输的电磁波。\\
+\hline
+信号 (Signal) & 用物理量表示数据。\textbf{模拟信号}连续取值，\textbf{数字信号}离散取值。考试常问“模拟/数字”的差别与转换位置。\\
+\hline
+码元 (Symbol) & 在单位时间内传送的\textbf{基本离散信号波形}，每个码元可承载多比特：$M$ 元码元可承载 $\log_2 M$ 比特。\\
+\hline
+比特率 (bps) & 每秒传送的\textbf{比特数}，记作 $R_b$，单位 bit/s。\\
+\hline
+波特率 (Baud) & 每秒传送的\textbf{码元数}，记作 $R_s$，单位 baud。\textbf{关系式}：$R_b = R_s\cdot \log_2 M$。常考与比特率的区别。\\
+\hline
+频带/带宽 (Hz) & 物理意义的“带宽”= 可用频率范围宽度，单位 Hz。注意与网络口语里的“带宽=可用速率(bps)”\textbf{不是一个量}（易混）。\\
+\hline
+基带/带通信 & \textbf{基带}：数字基带信号直接在介质上传输（如以太网双绞线）。\textbf{带通}：把基带调制到载波后在\textbf{通带}上传输（如无线/光纤长距）。\\
+\hline
+信道 & 信号通过的物理路径，受\textbf{噪声/衰减/失真/串扰}影响。相关指标：SNR、BER、带宽、时延。\\
+\hline
+误码率 (BER) & 错误比特数/总比特数。受调制方式、信道噪声、编码增益影响。\\
+\hline
+信噪比 (SNR) & $\mathrm{SNR}=\dfrac{S}{N}$；$\mathrm{SNR_{dB}}=10\log_{10}\!\left(\dfrac{S}{N}\right)$。\textbf{3 dB≈功率×2，10 dB≈×10}（速算常考）。\\
+\hline
+\end{longtable}
+}
+
+\paragraph{三组高频易混淆}
+{\small
+\begin{longtable}{|p{0.30\linewidth}|p{0.36\linewidth}|p{0.30\linewidth}|}
+\hline
+	\textbf{名词} & \textbf{定义} & \textbf{记忆/考点} \\
+\hline
+比特率 $R_b$ vs 波特率 $R_s$ & $R_b$ 是\textbf{比特/秒}；$R_s$ 是\textbf{码元/秒} & $R_b = R_s\cdot \log_2 M$；当 $M=2$ 时二元码元，$R_b=R_s$。\\
+\hline
+带宽(Hz) vs “带宽”(bps) & 物理带宽=频率范围；网络口语带宽=传输速率 & 考题常设陷阱，问“带宽增加一定能否提升速率？”需结合奈奎斯特/香农条件。\\
+\hline
+基带传输 vs 带通传输 & 基带：不调载波；带通：经调制在通带上传输 & 有线短距多用基带（以太网），无线/长距多用带通。\\
+\hline
+\end{longtable}
+}
+
+\paragraph{传输方式与工作方式}
+\begin{itemize}
+    \item \textbf{按方向性}：\textbf{单工}（A→B）、\textbf{半双工}（A↔B但同一时刻单向）、\textbf{全双工}（A↔B同时双向）。
+    \item \textbf{按并发度}：\textbf{串行}（逐位）vs \textbf{并行}（多位同时，短距如主板总线）。
+    \item \textbf{按定时}：\textbf{异步}（字符为单位，起止位，简单/开销大/容错强）vs \textbf{同步}（帧为单位，共享时钟，效率高）。
+\end{itemize}
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[node distance=0.9cm]
+    	\tikzset{end/.style={rectangle, draw=blue!60, fill=blue!10, rounded corners, minimum width=1.8cm, minimum height=0.7cm, align=center}, arr/.style={->, >=Stealth, thick}}
+    % simplex
+    \node[end] (sa) {A};
+    \node[end, right=1.4cm of sa] (sb) {B};
+    \draw[arr] (sa) -- (sb);
+    \node[below=0.1cm of sb] {单工};
+    % half-duplex
+    \node[end, right=2.4cm of sb] (ha) {A};
+    \node[end, right=1.4cm of ha] (hb) {B};
+    \draw[arr] (ha) -- (hb);
+    \draw[arr, bend right=30] (hb.west) to (ha.east);
+    \node[below=0.1cm of hb] {半双工};
+    % full-duplex
+    \node[end, right=2.4cm of hb] (fa) {A};
+    \node[end, right=1.4cm of fa] (fb) {B};
+    \draw[arr] (fa) -- (fb);
+    \draw[arr] (fb) -- (fa);
+    \node[below=0.1cm of fb] {全双工};
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{信道损伤的三大来源}
+\begin{itemize}
+    \item \textbf{衰减 Attenuation}：随距离/频率增大而增大，常用 dB 表示。$A_{\mathrm{dB}}=10\log_{10}(P_\text{入}/P_\text{出})$，\textbf{可叠加}（方便链路预算）。
+    \item \textbf{噪声 Noise}：热噪声、串扰、脉冲噪声等，直接降低 SNR，\textbf{提高 BER}。
+    \item \textbf{失真 Distortion}：多径、频率选择性衰落导致波形展宽、码间串扰（ISI）。
+\end{itemize}
+
+\paragraph{小结与前导}
+\begin{itemize}
+    \item 通信性能受\textbf{频带(Hz)}、\textbf{SNR}、\textbf{码间串扰}共同制约。下一小节将分开讨论信号表示与传输特性；随后用\textbf{奈奎斯特定理}（无噪声限速）与\textbf{香农定理}（有噪声容量）给出\textbf{理论上限}。
+    \item \textbf{牢记三个公式}：$R_b = R_s\log_2 M$；$\mathrm{SNR_{dB}}=10\log_{10}(S/N)$；dB 可\textbf{直接相加}（功率比相乘）。
+\end{itemize}
+
+\begin{center}
+{\setlength{\fboxsep}{6pt}%
+\fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+	\textbf{408考试提示}
+\begin{itemize}
+    \item 概念选择题高频：\textbf{比特率/波特率/码元/带宽(Hz) vs 带宽(bps)/基带与带通/异步与同步}。
+    \item 速算题：$M$ 元码、已知波特率求比特率；dB 级联增益/损耗；给定 SNR 估容量（香农）或无噪声限速（奈奎斯特）。
+    \item 易错点：把“带宽(Hz)”当“速率(bps)”；把“波特=比特/秒”混淆在 $M\neq2$ 的情形。
+\end{itemize}
+\end{minipage}}}%
+\end{center}
+
+\subsection{信号的传输}
+信号在信道中传输会受到带宽限制、噪声、频率选择性衰减与时延失真的共同影响。理解\textbf{时域—频域}两个视角，有助于掌握“为什么方波变圆了、为什么会码间串扰（ISI）”。
+
+\paragraph{时域/频域双视角}
+\begin{itemize}
+    \item \textbf{时域}：观测 $s(t)$ 的波形。带宽受限会“抹平”陡峭边沿，脉冲展宽导致相邻码元互相影响（ISI）。
+    \item \textbf{频域}：用\textbf{傅里叶展开}把信号分解为不同频率的正弦叠加；信道像一个\textbf{滤波器}（低通LPF/带通BPF），削减通带外的频率分量。
+\end{itemize}
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[node distance=1.2cm]
+    	\tikzset{
+        blk/.style={rectangle, draw=blue!60, fill=blue!10, rounded corners, minimum width=2.2cm, minimum height=0.8cm, align=center},
+        arr/.style={->, >=Stealth, thick}, lab/.style={font=\small, align=center}
+    }
+    % blocks
+    \node[blk] (bits) {比特序列};
+    \node[blk, right=1.6cm of bits] (wave) {基带波形 $s(t)$};
+    \node[blk, right=1.8cm of wave] (chn) {信道\\(LPF/BPF, 噪声)};
+    \node[blk, right=1.8cm of chn] (recv) {接收波形 $r(t)$};
+    % arrows
+    \draw[arr] (bits) -- (wave);
+    \draw[arr] (wave) -- node[lab, above]{带宽受限} (chn);
+    \draw[arr] (chn) -- node[lab, above]{失真+噪声} (recv);
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{三类主要传输损伤}
+{\small\begin{longtable}{|p{0.22\linewidth}|p{0.36\linewidth}|p{0.36\linewidth}|}
+\hline
+    \textbf{类型} & \textbf{现象/原因} & \textbf{影响与缓解} \\
+\hline
+衰减 (Attenuation) & 功率随距离/频率下降；介质损耗 & 降低幅度与SNR；用中继/放大、选更优介质；用 dB 做链路预算。\\
+\hline
+噪声 (Noise) & 热噪声、串扰、脉冲噪声 & 提高误码率BER；采用\textbf{编码增益}、滤波、屏蔽与合理布线。\\
+\hline
+失真 (Distortion) & 频率选择性衰减、群时延不平坦 & 波形展宽、\textbf{码间串扰ISI}；均衡、成形滤波、提高采样判决裕度（眼图张开）。\\
+\hline
+\end{longtable}}
+
+\paragraph{衰减与分贝(dB)快记}
+\begin{itemize}
+    \item 功率比与分贝：$G_{\mathrm{dB}}=10\log_{10}\!\left(\dfrac{P_\text{出}}{P_\text{入}}\right)$；损耗为负值。\textbf{可直接相加}表示级联段总增益/损耗。
+    \item 近似换算：3 dB≈功率×2，10 dB≈×10；-3 dB≈×1/2。
+\end{itemize}
+
+\paragraph{低通信道与带通信道}
+\begin{itemize}
+    \item \textbf{低通}：包含直流分量，适合\textbf{基带传输}（如以太网双绞线的短距场景）。
+    \item \textbf{带通}：只允许一段频带通过，需\textbf{调制到载波}后传输（无线、电缆长距、光纤等）。
+\end{itemize}
+
+\begin{center}
+\resizebox{0.9\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+    	\tikzset{axis/.style={->,>=Stealth,thick}, lab/.style={font=\small}}
+    % Low-pass schematic
+    \draw[axis] (0,0) -- (5.2,0) node[right]{f};
+    \draw[axis] (0,0) -- (0,2.0) node[above]{|H(f)|};
+    \draw[blue,thick,fill=blue!10] (0,0) -- (0,1.6) -- (2.2,1.6) -- (2.6,0) -- cycle;
+    \node[lab] at (1.5,1.85){低通(基带)};
+    % Band-pass schematic (shifted)
+    \begin{scope}[xshift=7cm]
+        \draw[axis] (0,0) -- (5.2,0) node[right]{f};
+        \draw[axis] (0,0) -- (0,2.0) node[above]{|H(f)|};
+        \draw[blue,thick,fill=blue!10] (1.4,0) -- (2.0,1.5) -- (3.2,1.5) -- (3.8,0) -- cycle;
+        \node[lab] at (2.6,1.85){带通(调制)};
+    \end{scope}
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{ISI 直观理解}
+理想矩形码元含有高频分量，受限带宽后边沿变缓、脉冲展宽，超出一个码元时间进入相邻时隙，造成\textbf{码间串扰}。解决思路：\textbf{成形滤波}（受控带宽内成形，例如升余弦）、均衡补偿信道、提高采样判决裕度。
+
+\begin{center}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[x=0.9cm,y=0.9cm]
+    	\tikzset{axis/.style={->,>=Stealth,thin}, lab/.style={font=\small}}
+    % Ideal pulses
+    \draw[axis] (0,0) -- (9,0) node[right]{t};
+    \draw[axis] (0,0) -- (0,2.2) node[above]{幅度};
+    \draw[red,thick] (0,0) -- (0,2) -- (2,2) -- (2,0) -- (4,0) -- (4,2) -- (6,2) -- (6,0) -- (8,0);
+    \node[lab,red] at (4,2.3){理想矩形码元};
+    % Received (smeared) pulses
+    \begin{scope}[yshift=-3.2cm]
+        \draw[axis] (0,0) -- (9,0) node[right]{t};
+        \draw[axis] (0,0) -- (0,2.2) node[above]{幅度};
+        \draw[blue,thick,smooth] plot coordinates {(0,0) (0.4,0.8) (0.8,1.5) (1.6,1.9) (2.2,1.4) (2.6,0.7) (3.2,0.2) (3.8,0.1) (4.2,0.8) (4.6,1.5) (5.4,1.9) (6.0,1.5) (6.6,0.7) (7.4,0.2) (8,0.1)};
+        \node[lab,blue] at (4,2.3){受限带宽后(产生ISI)};
+    \end{scope}
+\end{tikzpicture}}%
+\end{center}
+
+\begin{center}
+{\setlength{\fboxsep}{6pt}%
+\fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+    \textbf{408考试提示}
+\begin{itemize}
+    \item 概念辨析：\textbf{低通=可基带；带通=需调制}；\textbf{时域失真}$\leftrightarrow$\textbf{频域带宽受限}。
+    \item 计算速记：dB 可\textbf{相加}；3 dB≈2 倍功率，-3 dB≈1/2；利用 SNR 与下一节容量/限速公式联动。
+    \item 现象判断：边沿被抹平、多径展宽→\textbf{ISI}；对策：成形、均衡、判决时钟优化。
+\end{itemize}
+\end{minipage}}}%
+\end{center}
+\subsection{信道容量}
+    \textbf{信道容量(Channel Capacity)}指在给定\textbf{带宽 $B$} 与\textbf{噪声条件(SNR)}下，理论上\textbf{可无差错传输}的\textbf{最高信息速率}（bit/s）。容量是\textbf{上限}：实际可达速率$\le$容量。
+
+\paragraph{两个核心结论（先记结论，下一小节推导）}
+
+{\small\begin{longtable}{|p{0.28\linewidth}|p{0.66\linewidth}|}
+\hline
+	\textbf{情形} & \textbf{容量/限速表达式与要点} \\
+\hline
+无噪声、理想低通 & 奈奎斯特限速：$R_b\le R_s\log_2 M$ 且 $R_s\le 2B$，故 $\boxed{R_b\le 2B\,\log_2 M}$；二元($M=2$)时 $R_b\le 2B$。\\
+\hline
+有噪声(高斯白噪声) & 香农容量：$\boxed{C=B\,\log_2\!\bigl(1+\mathrm{SNR}\bigr)}$。对数增长：提高 SNR 收益\textbf{递减}，而增大带宽是\textbf{线性}增长。\\
+\hline
+\end{longtable}}
+
+\paragraph{单位与换算}
+\begin{itemize}
+    \item 带宽 $B$ 用 Hz；容量/速率用 bit/s（kbps=$10^3$，Mbps=$10^6$）。
+    \item $\mathrm{SNR}_{\mathrm{linear}}=\dfrac{S}{N}$；$\mathrm{SNR}_{\mathrm{dB}}=10\log_{10}(S/N)$；二者换算：$\mathrm{SNR}_{\mathrm{linear}}=10^{\mathrm{SNR}_{\mathrm{dB}}/10}$。
+    \item 3 dB≈功率×2（SNR 乘 2），10 dB≈×10。香农公式中代入\textbf{线性} SNR。
+\end{itemize}
+
+\begin{center}
+\resizebox{0.9\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+    	\tikzset{axis/.style={->,>=Stealth,thick}, lab/.style={font=\small}}
+    % C vs B (SNR fixed)
+    \draw[axis] (0,0) -- (6.2,0) node[right]{B};
+    \draw[axis] (0,0) -- (0,3.2) node[above]{C};
+    \draw[blue,thick] (0,0) -- (5.8,2.6);
+    \node[lab,blue] at (4.8,2.9){SNR固定: $C\propto B$};
+    % C vs SNR (B fixed)
+    \begin{scope}[xshift=8cm]
+        \draw[axis] (0,0) -- (6.2,0) node[right]{SNR(dB)};
+        \draw[axis] (0,0) -- (0,3.2) node[above]{C};
+        \draw[red,thick,smooth] plot coordinates {(0,0.4) (1,0.9) (2,1.35) (3,1.7) (4,1.95) (5,2.15) (6,2.3)};
+        \node[lab,red] at (3.8,2.9){B固定: C 对数增长};
+    \end{scope}
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{速算例题}
+\begin{enumerate}[label=例\arabic*.]
+    \item 已知 $B=1\,\mathrm{MHz}$，$\mathrm{SNR}=20\,\mathrm{dB}$。求香农容量。
+  
+    $\mathrm{SNR}_{\mathrm{linear}}=10^{20/10}=100$，$C=B\log_2(1+100)\approx 10^6\times 6.658=6.66\,\mathrm{Mbps}$。
+  
+    \item 已知电话信道 $B=3\,\mathrm{kHz}$，二元传输($M=2$)。若无噪声，奈奎斯特限速 $R_b\le 2B=6\,\mathrm{kbps}$。若 $\mathrm{SNR}=30\,\mathrm{dB}$，香农容量 $C=3000\log_2(1+1000)\approx 29.9\,\mathrm{kbps}$。
+  
+    \item 若希望 $C\ge 10\,\mathrm{Mbps}$，在 $B=2\,\mathrm{MHz}$ 下需多大 SNR？
+  
+    $10\times10^6=2\times10^6\log_2(1+\mathrm{SNR})\Rightarrow \log_2(1+\mathrm{SNR})=5$，$\mathrm{SNR}=31\Rightarrow \mathrm{SNR}_{\mathrm{dB}}\approx 10\log_{10}31\approx 14.9\,\mathrm{dB}$。
+\end{enumerate}
+
+\begin{center}
+{\setlength{\fboxsep}{6pt}%
+\fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+	\textbf{408考试提示}
+\begin{itemize}
+    \item \textbf{先分情形}：无噪声看\textbf{奈奎斯特}（$R_s\le 2B$，$R_b=R_s\log_2M$）；有噪声看\textbf{香农容量}（$C=B\log_2(1+\mathrm{SNR})$）。
+    \item \textbf{换算谨慎}：SNR 若给 dB，进香农公式前先转\textbf{线性值}；结果单位留意 bit/s→kbps/Mbps。
+    \item \textbf{增长对比}：增大 B 线性提速；提高 SNR 为\textbf{对数收益}，题目常让你判断“该加带宽还是加功率”。
+    \item 本小节给出结论与速算，详细推导放到“奈奎斯特定理和香农定理”。
+\end{itemize}
+\end{minipage}}}%
+\end{center}
+\subsection{奈奎斯特定理和香农定理}
+本小节给出两个“上限”的来龙去脉：无噪声条件下的\textbf{奈奎斯特限速}与有噪声下的\textbf{香农容量}，并指出常见混淆点。
+
+\paragraph{奈奎斯特（无噪声、零ISI 条件）}
+\begin{itemize}
+    \item 对\textbf{理想低通信道}（带宽 $B$ Hz），若采用满足\textbf{奈奎斯特零ISI准则}的成形（理想 sinc 或升余弦族），可实现\textbf{符号率} $R_s\le 2B$（采样定理同源：带限 $B$ 的信号以 $2B$ 采样可复原）。
+    \item 若每个码元承载 $\log_2 M$ bit，则\textbf{比特率} $\boxed{R_b\le 2B\,\log_2 M}$；$M=2$ 时 $R_b\le 2B$。
+    \item 实际常用\textbf{升余弦成形}，带宽为 $B=\dfrac{1+\beta}{2}\,R_s$（滚降系数 $\beta\in[0,1]$），于是 $R_s\le \dfrac{2B}{1+\beta}$（拓展了解，考试以理想式为主）。
+\end{itemize}
+\begin{center}
+\resizebox{0.86\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+        \tikzset{axis/.style={->,>=Stealth,thick}, lab/.style={font=\small}}
+    % bandwidth vs symbol rate schematic
+    \draw[axis] (0,0) -- (6.2,0) node[right]{B(Hz)};
+    \draw[axis] (0,0) -- (0,3.0) node[above]{$R_s(\mathrm{Symbol/s})$};
+    \draw[blue,thick] (0,0) -- (5.6,2.8);
+    \node[lab,blue] at (4.6,2.6){理想：$R_s=2B$};
+    % beta effect
+    \draw[red,thick] (0,0) -- (5.6,1.9);
+    \node[lab,red] at (4.5,1.7){升余弦：$R_s=\dfrac{2B}{1+\beta}$($\beta>0$)};
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{香农（有噪声、高斯白噪声信道）}
+\begin{itemize}
+    \item \textbf{香农容量}：$\boxed{C=B\,\log_2\!\bigl(1+\mathrm{SNR}\bigr)}$，为\textbf{无差错通信可达的极限}（允许使用任意长的纠错码）。
+    \item \textbf{谱效率} $\eta=\dfrac{C}{B}=\log_2(1+\mathrm{SNR})$（bit/s/Hz）。低 SNR 下 $\eta\approx \dfrac{\mathrm{SNR}}{\ln 2}$；高 SNR 下近似 $\eta\approx \log_2(\mathrm{SNR})$（对数增长）。
+    \item 启示：堆功率（提 SNR）收益递减；\textbf{加带宽}是线性提升，但受物理/法规限制。
+\end{itemize}
+\paragraph{二者关系与易混点}
+{\small\begin{longtable}{|p{0.25\linewidth}|p{0.32\linewidth}|p{0.32\linewidth}|}
+\hline
+    \textbf{维度} & \textbf{奈奎斯特（无噪声）} & \textbf{香农（有噪声）} \\
+\hline
+适用 & 理想低通、零ISI可达 & 高斯白噪声信道容量上限 \\
+适用 & 理想低通、零ISI可达 & 高斯白噪声信道容量上限 \\
+\hline
+表达 & $R_b\le 2B\,\log_2M$ & $C=B\log_2(1+\mathrm{SNR})$ \\
+\hline
+含噪声? & 不考虑噪声/误码概率 & 显式考虑噪声（线性 SNR） \\
+\hline
+设计含义 & 决定\textbf{码元率与成形带宽}的下限关系 & 决定\textbf{可达速率}与\textbf{编码增益}的上限 \\
+\hline
+常见混淆 & 把“奈奎斯特”当采样公式或把 $2B$ 当容量 & 用 dB 值直接代 SNR（漏了线性化） \\
+\hline
+\end{longtable}}
+
+\paragraph{小例题}
+\begin{enumerate}[label=例\arabic*.]
+    \item $B=200\,\mathrm{kHz}$，理想无噪声，$M=8$（每码元 3 bit）。求最大比特率。
+  
+    $R_b\le 2B\,\log_2M=2\times 2\times 10^5\times 3=1.2\,\mathrm{Mbps}$。
+  
+    \item 目标谱效率 $\eta=4\,\mathrm{bit/s/Hz}$，问最低 SNR(dB)?
+  
+    $\eta=\log_2(1+\mathrm{SNR})=4\Rightarrow \mathrm{SNR}=2^4-1=15$，$\mathrm{SNR}_{\mathrm{dB}}\approx 10\log_{10}15\approx 11.76\,\mathrm{dB}$。
+  
+    \item $B=3\,\mathrm{MHz}$、$\mathrm{SNR}=18\,\mathrm{dB}$。香农容量？若理想无噪声且 $M=16$ 时奈奎斯特限速？
+  
+    $\mathrm{SNR}=10^{1.8}\approx 63.1$，$C=3\times10^6\log_2(1+63.1)\approx 3\times10^6\times 6.01=18.0\,\mathrm{Mbps}$；奈奎斯特：$R_b\le 2B\log_2M=2\times 3\times10^6\times 4=24\,\mathrm{Mbps}$（但实际有噪声时达不到）。
+\end{enumerate}
+\begin{center}
+{\setlength{\fboxsep}{6pt}%
+\fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+    \textbf{408考试提示}
+\begin{itemize}
+    \item \textbf{三步走}：先分情形（无/有噪声）→ 统一单位（Hz、bit/s）→ dB 先转线性再代公式。
+    \item \textbf{谱效率快算}：$\eta=\log_2(1+\mathrm{SNR})$；给 $\eta$ 求 SNR 用 $\mathrm{SNR}=2^{\eta}-1$，再转 dB。
+    \item \textbf{常设陷阱}：把 $2B$ 当容量；把 dB 直接代入香农；忘记 $M$ 元导致 $\log_2M$。
+    \item \textbf{工程启示}：若容量受限且 SNR 提升代价大，优先\textbf{拓展带宽/提高频谱利用}或\textbf{采用信道编码}提升靠近香农极限的效率。
+\end{itemize}
+\end{minipage}}}%
+\end{center}
+
+\section{传输介质}
+\subsection{有线传输介质}
+\subsubsection{双绞线}
+双绞线由两根绝缘铜线按一定\textbf{绞距}缠绕构成，利用\textbf{自互相抵消}降低电磁辐射与串扰。分为\textbf{非屏蔽}（UTP）与\textbf{屏蔽}（STP/FTP）。以太网常见 RJ-45 接头，支持 PoE 供电。
+\\
+{\small\begin{longtable}{|p{0.22\linewidth}|p{0.22\linewidth}|p{0.22\linewidth}|p{0.22\linewidth}|}
+\hline
+    \textbf{类别} & \textbf{额定带宽(信号)} & \textbf{典型速率/以太网} & \textbf{典型距离} \\
+\hline
+Cat5e & \~100 MHz & 1GBASE-T(1 Gbps) & 100 m（水平链路） \\
+\hline
+Cat6 & 250 MHz & 10GBASE-T 可达\~55 m；1 Gbps 100 m & 55/100 m \\
+\hline
+Cat6a & 500 MHz & 10GBASE-T(10 Gbps) & 100 m \\
+\hline
+Cat7/7a & $\geq 600/1000$ MHz（屏蔽） & 10G/万兆以上（视标准） & 100 m \\
+\hline
+Cat8 & $\leq 2000$ MHz（屏蔽） & 25G/40GBASE-T（数据中心） & 30 m \\
+\hline
+\end{longtable}}
+
+要点小结：\textbf{成本低、施工方便}，短距接入场景通用；高频衰减与串扰限制了距离与速率；\textbf{屏蔽}可改善抗干扰但施工与接地要求更高。
+\subsubsection{同轴电缆}
+同轴由\textbf{内导体—绝缘层—屏蔽层—外护套}构成，\textbf{50\,Ω}多用于数据/无线电，\textbf{75\,Ω}多用于 CATV。屏蔽效果好，频段高、距离较 UTP 更长。
+\\
+{\small\begin{longtable}{|p{0.28\linewidth}|p{0.28\linewidth}|p{0.36\linewidth}|}
+\hline
+    \textbf{类型/阻抗} & \textbf{典型应用} & \textbf{特点} \\
+\hline
+50\,Ω（RG-58/213 等） & 旧以太网 10BASE2/5、射频馈线 & 驻波小、功率承载较高，历史以太网 185 m/500 m；现多用于射频连接。\\
+\hline
+75\,Ω（RG-6 等） & 有线电视、Cable Modem(DOCSIS) & 衰减低、视频/宽带接入；分支/连接器质量影响回传与上行。\\
+\hline
+\end{longtable}}
+
+要点小结：\textbf{抗干扰强、带宽较高}，但较粗硬、施工成本高；在 LAN 中已被双绞线/光纤替代，接入网/射频仍常见。
+\subsubsection{光纤}
+光纤以光脉冲在玻璃/塑料纤芯中反射/折射传输，\textbf{带宽极高、损耗极低、抗电磁干扰强}。分\textbf{单模(SMF)}与\textbf{多模(MMF)}。
+\\
+{\small\begin{longtable}{|p{0.20\linewidth}|p{0.28\linewidth}|p{0.22\linewidth}|p{0.22\linewidth}|}
+\hline
+    \textbf{类型} & \textbf{参数} & \textbf{典型距离} & \textbf{典型应用} \\
+\hline
+多模 MMF(OM3/OM4) & 芯径 50/62.5\,µm；850/1300\,nm & 百米到数百米（10G 常见 300\textasciitilde 550 m） & 机房/园区短距互联 \\
+\hline
+单模 SMF & 芯径 \~9\,µm；1310/1550\,nm & 十公里到百公里（中继/放大可更远） & 城域/骨干/长距 \\
+\hline
+\end{longtable}}
+
+要点小结：速率从千兆到 100G/400G 乃至更高；\textbf{WDM}（CWDM/DWDM）提升频谱利用；\textbf{缺点}是成本、熔接/端接工艺要求与部署难度较高。
+\subsection{无线传输介质}
+\subsubsection{无线电波}
+无线电波常用于\textbf{Wi-Fi(2.4/5/6\,GHz)}、蜂窝、蓝牙等，\textbf{绕射/反射}能力较强，穿透墙体能力优于更高频的微波/毫米波，但易受同频干扰。
+\subsubsection{微波}
+微波（SHF/毫米波段）频率高、带宽大，适合\textbf{点对点回传/卫星通信}。\textbf{视距(LOS)}要求强，对遮挡/雨衰敏感；定向天线增益高、链路预算严格。
+\subsubsection{红外线}
+红外线波长更短，\textbf{无法穿墙}、多用于室内\textbf{短距直视}通信或遥控，抗电磁干扰强，但受遮挡/阳光影响大。
+
+\begin{center}
+\resizebox{0.95\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm]
+    	\tikzset{axis/.style={->,>=Stealth,thick}, band/.style={draw,rounded corners,fill=blue!10}, lab/.style={font=\small}}
+    % frequency axis (rough, illustrative)
+    \draw[axis] (0,0) -- (14,0) node[right]{频率(对数示意)};
+    \node[lab] at (1,0.5){300 MHz};
+    \node[lab] at (4,0.5){2.4 GHz};
+    \node[lab] at (6,0.5){5 GHz};
+    \node[lab] at (7.2,0.5){6 GHz};
+    \node[lab] at (10,0.5){60 GHz};
+    \node[lab] at (13,0.5){300 GHz};
+    % bands
+    \draw[band] (0.5,0.9) rectangle (5.0,1.6); \node[lab] at (2.8,1.25){无线电波(ISM/蜂窝)};
+    \draw[band,fill=green!10] (5.0,1.9) rectangle (11.5,2.6); \node[lab] at (8.4,2.35){微波/毫米波(定向, LOS)};
+    \draw[band,fill=red!10] (11.5,2.9) rectangle (13.8,3.6); \node[lab] at (12.7,3.35){红外(短距)};
+    % notes
+    \node[lab] at (4.0,-0.6){2.4/5/6 GHz Wi-Fi；蓝牙/物联多在 2.4 GHz};
+    \node[lab] at (9.8,-0.6){60 GHz 高频率—带宽大但穿透弱};
+\end{tikzpicture}}%
+\end{center}
+
+{\small\begin{longtable}{|p{0.22\linewidth}|p{0.30\linewidth}|p{0.38\linewidth}|}
+\hline
+    \textbf{介质} & \textbf{优势} & \textbf{局限/应用} \\
+\hline
+无线电波 & 穿透较好、部署便捷、终端普及 & 易受同频干扰、共享介质碰撞；常见于 Wi-Fi/蜂窝/蓝牙 \\
+\hline
+微波/毫米波 & 频谱宽、容量大、定向强、保密性好 & 视距要求、对遮挡/雨衰敏感；用于微波回传、固定无线接入、卫星 \\
+\hline
+红外 & 抗电磁干扰、短距直视安全性高 & 无法穿墙、易受强光影响；用于遥控/室内短距链路 \\
+\hline
+\end{longtable}}
+
+\paragraph{综合对比（选型速查）}
+{\small\begin{longtable}{|p{0.14\linewidth}|p{0.18\linewidth}|p{0.18\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|}
+\hline
+    \textbf{介质} & \textbf{带宽级别} & \textbf{典型速率} & \textbf{典型距离} & \textbf{抗干扰} & \textbf{成本} \\
+\hline
+双绞线 & 中 & 1G/10G & 100 m & 中 & 低 \\
+\hline
+同轴 & 中-高 & 10M/百兆/接入宽带 & 100 m-公里 & 高 & 中 \\
+\hline
+光纤 & 极高 & 10G/40G/100G+ & 公里-百公里 & 极高 & 中-高 \\
+\hline
+无线电波 & 中 & 十兆-千兆（视制式） & 室内/小区级 & 低-中 & 低 \\
+\hline
+微波/毫米波 & 高 & 百兆-多千兆 & 公里级（视LOS） & 中-高 & 中 \\
+\hline
+红外 & 低-中 & 兆级-十兆 & 室内短距 & 高（EMI） & 低 \\
+\hline
+\end{longtable}}
+
+\begin{center}
+{\setlength{\fboxsep}{6pt}%
+\fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+    \textbf{408考试提示}
+\begin{itemize}
+    \item 识记型：\textbf{UTP vs STP}、\textbf{Cat 类别与速率/距离}、\textbf{SMF vs MMF}（芯径/波长/距离）。
+    \item 判断型：场景选型——\textbf{长距/抗干扰}优先光纤；\textbf{短距/低成本}优先双绞线；\textbf{无布线}用无线。
+    \item 易错点：把“同轴/光纤带宽高就一定低成本”混淆；忽视\textbf{屏蔽接地}对 STP 的要求；SNR 与容量关系需回连香农公式。
+\end{itemize}
+\end{minipage}}}%
+\end{center}
+
+\section{物理层设备}
+\subsection{中继器}
+中继器(Repeater)工作在\textbf{物理层(L1)}，对\textbf{比特流}进行\textbf{再生整形、放大}，以\textbf{延长传输距离}、弥补衰减与失真；其不识别帧或地址，不改变上层协议内容。
+
+\paragraph{工作机理}
+\begin{itemize}
+    \item 将输入端退化的电/光信号\textbf{再生整形}为标准波形，并适当\textbf{放大}后转发到输出端。
+    \item 双端\textbf{同速率、同编码}下工作，不能跨\textbf{不同物理层参数}（如速率、编码规则、介质类型）随意互通。
+    \item 只在\textbf{比特级}处理，\textbf{不缓存、不过滤、不判断地址}，也\textbf{不隔离冲突域}。
+\end{itemize}
+
+\begin{center}
+\resizebox{0.9\linewidth}{!}{%
+\begin{tikzpicture}[node distance=1.6cm]
+    	\tikzset{end/.style={rectangle,draw=blue!60,fill=blue!10,rounded corners,minimum width=2.2cm,minimum height=0.8cm,align=center},
+                     rep/.style={rectangle,draw=gray!70,fill=gray!10,rounded corners,minimum width=2.4cm,minimum height=0.9cm,align=center},
+                     arr/.style={->,>=Stealth,thick}, lab/.style={font=\small}}
+    \node[end] (a) {段1 电缆};
+    \node[rep, right=2.2cm of a] (r) {中继器\\再生/放大/整形};
+    \node[end, right=2.2cm of r] (b) {段2 电缆};
+    \draw[arr] (a) -- (r);
+    \draw[arr] (r) -- (b);
+    \node[lab,above=0.15cm of a]{衰减/失真};
+    \node[lab,above=0.15cm of b]{标准波形};
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{应用边界与规范}
+\begin{itemize}
+    \item 以太网早期\textbf{10BASE5/10BASE2/10BASE-T}等有级联规则（“5-4-3”规则等，考试了解层面）。
+    \item 中继器\textbf{不改变}冲突域规模（仍是同一冲突域），现代以太网更多使用\textbf{交换机}替代。
+    \item 可用于\textbf{光—电—光}的再生中继链路；注意不同物理介质/速率需\textbf{媒体转换器}等专用设备，不是一般中继器的职责。
+\end{itemize}
+
+{\small\begin{longtable}{|p{0.22\linewidth}|p{0.30\linewidth}|p{0.38\linewidth}|}
+\hline
+	\textbf{设备} & \textbf{工作层次/作用} & \textbf{对冲突域/广播域} \\
+\hline
+中继器 Repeater & 物理层：再生/整形/放大 & \textbf{不}划分冲突域；\textbf{不}影响广播域 \\
+\hline
+集线器 Hub & 物理层：多端口中继/共享总线 & 同上；所有端口共享，半双工，冲突概率高 \\
+\hline
+交换机 Switch & 数据链路层：基于 MAC 转发 & \textbf{划分冲突域}（端口为单位）；\textbf{不}划分广播域 \\
+\hline
+\end{longtable}}
+
+\begin{center}
+{\setlength{\fboxsep}{6pt}%
+\fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+	\textbf{408考试提示}
+\begin{itemize}
+    \item 识记：中继器/集线器\textbf{均为 L1}，\textbf{不}隔离冲突域；交换机 L2，可\textbf{划分冲突域}。
+    \item 易混：中继器\textbf{不理解帧/地址}，不可替代交换机；不同速率/编码的互联需要\textbf{媒体转换器}或\textbf{网桥/交换机}层面的适配。
+    \item 正确场景：延长物理段、光电再生；错误场景：指望其\textbf{减少冲突/提高吞吐}（应使用交换机）。
+\end{itemize}
+\end{minipage}}}%
+\end{center}
+\subsection{集线器}
+集线器(Hub)本质是\textbf{多端口中继器}，工作在\textbf{物理层(L1)}。其把一个端口接收到的比特流\textbf{电气再生并广播}到所有其他端口，\textbf{共享同一冲突域}，通常\textbf{半双工}工作。
+
+\paragraph{工作特点}
+\begin{itemize}
+    \item 同一集线器上的所有端口共享同一物理总线语义：\textbf{一个发，其他都能“听到”}。
+    \item \textbf{冲突域不被划分}，需配合 CSMA/CD；端口越多、越繁忙，\textbf{冲突概率越高、有效吞吐越低}。
+    \item 不识别 MAC，不做转发表或过滤；不隔离广播域。
+\end{itemize}
+
+\begin{center}
+\resizebox{0.9\linewidth}{!}{%
+\begin{tikzpicture}[node distance=1.6cm]
+    	\tikzset{host/.style={rectangle,draw=blue!60,fill=blue!10,rounded corners,minimum width=1.8cm,minimum height=0.7cm,align=center},
+                     hub/.style={rectangle,draw=gray!70,fill=gray!10,rounded corners,minimum width=2.4cm,minimum height=0.9cm,align=center},
+                     arr/.style={-,thick}, lab/.style={font=\small}}
+    \node[host] (h1) {Host1};
+    \node[host, below=0.8cm of h1] (h2) {Host2};
+    \node[host, below=0.8cm of h2] (h3) {Host3};
+    \node[hub, right=3.2cm of h2] (hb) {集线器(Hub)};
+    \draw[arr] (h1) -- (hb.west);
+    \draw[arr] (h2) -- (hb.west);
+    \draw[arr] (h3) -- (hb.west);
+    \node[lab, above=0.1cm of hb]{共享冲突域，半双工};
+\end{tikzpicture}}%
+\end{center}
+
+\paragraph{与交换机对比（选择题高频）}
+{\small\begin{longtable}{|p{0.22\linewidth}|p{0.30\linewidth}|p{0.38\linewidth}|}
+\hline
+	\textbf{属性} & \textbf{集线器 Hub(L1)} & \textbf{交换机 Switch(L2)} \\
+\hline
+转发方式 & 比特再生+广播到所有端口 & 按 MAC 学习/转发表选择性转发 \\
+\hline
+冲突域 & \textbf{不}划分（整机一个） & \textbf{端口级划分}（每端口独立） \\
+\hline
+双工/速率 & 多为半双工/低速 & 支持全双工/更高速率 \\
+\hline
+性能/吞吐 & 随端口数/负载上升而下降 & 线速转发、吞吐高、可扩展 \\
+\hline
+应用现状 & 已基本被交换机替代 & LAN 标配接入/汇聚 \\
+\hline
+\end{longtable}}
+
+\begin{center}
+{\setlength{\fboxsep}{6pt}%
+\fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+	\textbf{408考试提示}
+\begin{itemize}
+    \item 选项辨析：看到\textbf{广播到所有端口/半双工/共享冲突域}基本指向“集线器”。
+    \item 场景判断：想\textbf{隔离冲突/提升吞吐}应选“交换机”，不是集线器/中继器。
+    \item 历史回顾：集线器在现代以太网已罕用，题目多在\textbf{概念辨析/对比}上设问。
+\end{itemize}
+\end{minipage}}}%
+\end{center}
+
+\section{编码与调制}
+\subsection{数字信号的编码}
+面向物理层的“线路编码”（line coding）决定了比特如何在介质上以电平/极性/过零等形式表现。评判维度常见：
+（1）同步性（是否自带时钟过渡，易于位同步）；（2）直流分量与基线漂移；（3）频谱/带宽占用；（4）抗误码与实现复杂度；（5）典型应用。
+
+为便于直观比较，下图用同一比特序列“10110010”示例五种常见编码波形（方向仅示意）：
+
+\begin{figure}[!htbp]
+    \centering
+    \resizebox{\linewidth}{!}{%
+    \begin{tikzpicture}[x=1.0cm,y=0.6cm]
+        	\tikzset{bitgrid/.style={gray!50,thin}}
+        % 全局参数
+        \def\bits{8}
+    \def\labels{{1,0,1,1,0,0,1,0}}
+        % 画位栅格与位标注
+        \foreach \i in {0,...,8} {
+            \draw[bitgrid] (\i,4.6) -- (\i,-0.6);
+        }
+        \foreach \y/\name in {4.0/NRZ-L,3.0/NRZ-I,2.0/曼彻斯特,1.0/差分曼彻斯特,0.0/AMI} {
+            \draw[bitgrid] (0,\y) -- (8,\y);
+            \node[left] at (0,\y) {\scriptsize \name};
+        }
+        \foreach \i [count=\c from 1] in \labels {
+            \node[below] at (\c-0.5,-0.4) {\scriptsize \i};
+        }
+
+        % ========== NRZ-L: 1=高, 0=低 ==========
+        \begin{scope}
+            \def\y{4.0}
+            % 手工根据 10110010 描绘
+            \draw[thick]
+                (0,\y+0.6) -- (1,\y+0.6) -- (1,\y-0.6) -- (2,\y-0.6) --
+                (2,\y+0.6) -- (3,\y+0.6) -- (4,\y+0.6) -- (4,\y-0.6) --
+                (6,\y-0.6) -- (6,\y+0.6) -- (7,\y+0.6) -- (7,\y-0.6) -- (8,\y-0.6);
+        \end{scope}
+
+        % ========== NRZ-I: 1=边界翻转, 0=不变 (初始低) ==========
+        \begin{scope}
+            \def\y{3.0}
+            % 边界：1->翻转，0->保持；按 10110010 手工推导路径
+            % 初始低(-0.6)
+            \draw[thick]
+                (0,\y-0.6) -- (0,\y+0.6) -- (1,\y+0.6)  % 第1位=1: 翻到高
+                -- (2,\y+0.6)                             % 第2位=0: 保持高
+                -- (2,\y-0.6) -- (3,\y-0.6)               % 第3位=1: 翻到低
+                -- (3,\y+0.6) -- (4,\y+0.6)               % 第4位=1: 翻到高
+                -- (5,\y+0.6)                              % 第5位=0: 保持高
+                -- (5,\y-0.6) -- (6,\y-0.6)               % 第6位=0: 保持低（此处为示意，加入回落边以区分眼图）
+                -- (6,\y+0.6) -- (7,\y+0.6)               % 第7位=1: 翻到高
+                -- (7,\y-0.6) -- (8,\y-0.6);              % 第8位=0: 保持低
+        \end{scope}
+
+            % ========== Manchester: 半位翻转(1: 高->低, 0: 低->高) ==========
+            \begin{scope}
+                \def\y{2.0}
+                % 位1: 1 => 高-低
+                \draw[thick] (0,\y+0.6) -- (0.5,\y+0.6) -- (0.5,\y-0.6) -- (1,\y-0.6);
+                % 位2: 0 => 低-高
+                \draw[thick] (1,\y-0.6) -- (1.5,\y-0.6) -- (1.5,\y+0.6) -- (2,\y+0.6);
+                % 位3: 1 => 高-低
+                \draw[thick] (2,\y+0.6) -- (2.5,\y+0.6) -- (2.5,\y-0.6) -- (3,\y-0.6);
+                % 位4: 1 => 高-低（起始需抬到高）
+                \draw[thick] (3,\y-0.6) -- (3,\y+0.6) -- (3.5,\y+0.6) -- (3.5,\y-0.6) -- (4,\y-0.6);
+                % 位5: 0 => 低-高
+                \draw[thick] (4,\y-0.6) -- (4.5,\y-0.6) -- (4.5,\y+0.6) -- (5,\y+0.6);
+                % 位6: 0 => 低-高（起始需降到低）
+                \draw[thick] (5,\y+0.6) -- (5,\y-0.6) -- (5.5,\y-0.6) -- (5.5,\y+0.6) -- (6,\y+0.6);
+                % 位7: 1 => 高-低
+                \draw[thick] (6,\y+0.6) -- (6.5,\y+0.6) -- (6.5,\y-0.6) -- (7,\y-0.6);
+                % 位8: 0 => 低-高
+                \draw[thick] (7,\y-0.6) -- (7.5,\y-0.6) -- (7.5,\y+0.6) -- (8,\y+0.6);
+            \end{scope}
+
+            % ========== Differential Manchester: 中点必翻；0=起始翻，1=起始不翻 ==========
+            \begin{scope}
+                \def\y{1.0}
+                % 位1: 1 => 起始不翻；前半低，半位翻到高
+                \draw[thick] (0,\y-0.6) -- (0.5,\y-0.6) -- (0.5,\y+0.6) -- (1,\y+0.6);
+                % 位2: 0 => 起始翻(高->低)，半位翻(低->高)
+                \draw[thick] (1,\y+0.6) -- (1,\y-0.6) -- (1.5,\y-0.6) -- (1.5,\y+0.6) -- (2,\y+0.6);
+                % 位3: 1 => 起始不翻；前半高，半位翻到低
+                \draw[thick] (2,\y+0.6) -- (2.5,\y+0.6) -- (2.5,\y-0.6) -- (3,\y-0.6);
+                % 位4: 1 => 起始不翻；前半低，半位翻到高
+                \draw[thick] (3,\y-0.6) -- (3.5,\y-0.6) -- (3.5,\y+0.6) -- (4,\y+0.6);
+                % 位5: 0 => 起始翻(高->低)，半位翻到高
+                \draw[thick] (4,\y+0.6) -- (4,\y-0.6) -- (4.5,\y-0.6) -- (4.5,\y+0.6) -- (5,\y+0.6);
+                % 位6: 0 => 起始翻(高->低)，半位翻到高
+                \draw[thick] (5,\y+0.6) -- (5,\y-0.6) -- (5.5,\y-0.6) -- (5.5,\y+0.6) -- (6,\y+0.6);
+                % 位7: 1 => 起始不翻；前半高，半位翻到低
+                \draw[thick] (6,\y+0.6) -- (6.5,\y+0.6) -- (6.5,\y-0.6) -- (7,\y-0.6);
+                % 位8: 0 => 起始翻(低->高)，半位翻到低
+                \draw[thick] (7,\y-0.6) -- (7,\y+0.6) -- (7.5,\y+0.6) -- (7.5,\y-0.6) -- (8,\y-0.6);
+            \end{scope}
+
+            % ========== AMI: 1交替为+A/-A, 0为0电平 ==========
+            \begin{scope}
+                \def\y{0.0}
+                % 位1=1: +A
+                \draw[thick] (0,\y) -- (0,\y+0.6) -- (1,\y+0.6) -- (1,\y);
+                % 位2=0: 0电平
+                \draw[thick] (1,\y) -- (2,\y);
+                % 位3=1: -A
+                \draw[thick] (2,\y) -- (2,\y-0.6) -- (3,\y-0.6) -- (3,\y);
+                % 位4=1: +A
+                \draw[thick] (3,\y) -- (3,\y+0.6) -- (4,\y+0.6) -- (4,\y);
+                % 位5=0, 位6=0
+                \draw[thick] (4,\y) -- (6,\y);
+                % 位7=1: -A
+                \draw[thick] (6,\y) -- (6,\y-0.6) -- (7,\y-0.6) -- (7,\y);
+                % 位8=0
+                \draw[thick] (7,\y) -- (8,\y);
+            \end{scope}
+
+    \end{tikzpicture}}
+    \vspace{-3mm}
+    \caption{典型线路编码波形示意（位序列：10110010；方向示意不作为考点）}
+\end{figure}
+
+% \noindent 常见编码要点与对比：
+
+% {\small\setlength{\tabcolsep}{4pt}\renewcommand{\arraystretch}{1.15}
+% \begin{longtable}{p{0.12\textwidth} p{0.28\textwidth} p{0.12\textwidth} p{0.12\textwidth} p{0.14\textwidth} p{0.22\textwidth}}
+% \caption{常见数字线码对比}\label{tab:line-codes}\\
+% \toprule
+% \textbf{编码} & \textbf{基本思想} & \textbf{自同步} & \textbf{直流分量} & \textbf{带宽占用(相对)} & \textbf{典型问题/应用}\\
+% \midrule
+% \endfirsthead
+% \toprule
+% \textbf{编码} & \textbf{基本思想} & \textbf{自同步} & \textbf{直流分量} & \textbf{带宽占用(相对)} & \textbf{典型问题/应用}\\
+% \midrule
+% \endhead
+% NRZ-L & 1高0低，位内不翻转 & 差 & 大（有DC） & 低 & 容易\textbf{基线漂移}且难恢复时钟；早期串口/磁记录 \\
+% NRZ-I & 1引起边界翻转，0保持 & 一般 & 中等 & 低 & 连续0串时过渡少；FDDI等配合4B5B使用 \\
+% RZ & 位中回到0电平（占空比50\%） & 较好 & 中等 & 中等 & 过渡多，频带较宽；部分光存储历史 \\
+% 曼彻斯特 & 每位中点必翻，1/0用相反方向 & 好 & 小（近零） & 高（约为比特率的2倍主瓣） & \textbf{强自同步}；10BASE-T以太网 \\
+% 差分曼彻斯特 & 中点必翻，0起始翻/1不翻 & 好 & 小（近零） & 高 & 对极性不敏感；令牌环等 \\
+% AMI & 1在+A/-A间交替，0为0电平 & 一般 & 小（无DC） & 中等 & 长0串缺同步；配HDB3/B8ZS零替代提升同步 \\
+% 4B5B(+NRZ-I/MLT-3) & 4位映射5位，限制最长0串(≤3) & 好 & 取决于后续线码 & 中等 & \textbf{25%编码开销}；FDDI/100BASE-TX（4B5B+MLT-3） \\
+% 8B/10B & 8位映射10位，正负码保持DC平衡 & 好 & 极小（DC平衡） & 中等偏高 & \textbf{25%开销}；最长连同符号≤5；PCIe Gen1/2、FC、1000BASE-X \\
+% \bottomrule
+% \end{longtable}}
+
+% \begin{center}
+% {\setlength{\fboxsep}{6pt}%
+% \fcolorbox{red}{yellow!15}{\begin{minipage}{0.90\textwidth}
+%     	\textbf{408考试提示}
+%     \begin{itemize}
+%         \item 识别关键词：\textbf{“中点必有翻转”→(差分)曼彻斯特；“1交替正负、0为零电平”→AMI；“1触发边界翻转”→NRZ-I}。
+%         \item 以太网：10BASE-T用\textbf{曼彻斯特}；100BASE-TX常配\textbf{4B5B+MLT-3}；1000BASE-X/多高速串行常用\textbf{8B/10B}（新标准也见64B/66B）。
+%         \item 选项陷阱：\textbf{自同步好}往往对应“中点必翻”的家族；\textbf{直流分量小/无}多见AMI、8B/10B；带宽利用率与同步性通常\textbf{难两全}。
+%     \end{itemize}
+% \end{minipage}}}%
+% \end{center}
+
+\subsection{模拟信号的调制}
+\subsection{码分多址CDMA}
+
+% ========== 第3章 数据链路层 ==========
+
+
+\chapter{数据链路层}
+
+\section{数据链路层的功能}
+\subsection{为网络层提供服务}
+\subsection{数据链路管理}
+\subsection{帧同步}
+\subsection{流量控制}
+\subsection{差错控制}
+
+\section{组帧}
+\subsection{字符计数法}
+\subsection{字符填充法}
+\subsection{零比特填充法}
+\subsection{违法编码法}
+
+\section{差错控制}
+\subsection{差错的产生与分类}
+\subsection{检错编码}
+\subsubsection{奇偶校验码}
+\subsubsection{循环冗余码CRC}
+\subsection{纠错编码}
+\subsubsection{海明码}
+
+\section{流量控制与可靠传输机制}
+\subsection{流量控制}
+\subsection{停止-等待协议}
+\subsection{后退N帧协议}
+\subsection{选择重传协议}
+
+\section{介质访问控制}
+\subsection{介质访问控制的基本概念}
+\subsection{静态划分信道}
+\subsubsection{频分多路复用FDM}
+\subsubsection{时分多路复用TDM}
+\subsubsection{波分多路复用WDM}
+\subsubsection{码分多路复用CDM}
+\subsection{动态分配信道}
+\subsubsection{ALOHA协议}
+\subsubsection{CSMA协议}
+\subsubsection{CSMA/CD协议}
+\subsubsection{CSMA/CA协议}
+
+\section{局域网}
+\subsection{局域网的基本概念和体系结构}
+\subsection{以太网}
+\subsubsection{以太网的发展}
+\subsubsection{以太网的MAC帧格式}
+\subsubsection{高速以太网}
+\subsection{无线局域网}
+\subsubsection{IEEE 802.11}
+\subsubsection{无线局域网的组成}
+
+\section{广域网}
+\subsection{广域网的基本概念}
+\subsection{PPP协议}
+\subsection{HDLC协议}
+
+\section{数据链路层设备}
+\subsection{网桥}
+\subsection{局域网交换机}
+
+% ========== 第4章 网络层 ==========
+\chapter{网络层}
+
+\section{网络层的功能}
+\subsection{异构网络互连}
+\subsection{路由与转发}
+\subsection{拥塞控制}
+
+\section{路由算法}
+\subsection{静态路由与动态路由}
+\subsection{距离向量路由算法}
+\subsection{链路状态路由算法}
+\subsection{层次路由}
+
+\section{IPv4}
+\subsection{IPv4地址}
+\subsubsection{IPv4地址格式}
+\subsubsection{分类编址}
+\subsubsection{无分类编址CIDR}
+\subsubsection{特殊IP地址}
+\subsection{IPv4数据报格式}
+\subsection{IPv4数据报的分片与重组}
+
+\section{IPv6}
+\subsection{IPv6的特点}
+\subsection{IPv6地址}
+\subsection{IPv6数据报格式}
+\subsection{从IPv4到IPv6的过渡}
+
+\section{路由协议}
+\subsection{自治系统}
+\subsection{域内路由协议}
+\subsubsection{RIP协议}
+\subsubsection{OSPF协议}
+\subsection{域间路由协议}
+\subsubsection{BGP协议}
+
+\section{IP多播}
+\subsection{IP多播的基本概念}
+\subsection{IP多播地址}
+\subsection{IGMP协议}
+\subsection{多播路由算法}
+
+\section{移动IP}
+\subsection{移动IP的基本概念}
+\subsection{移动IP的工作原理}
+
+\section{网络层设备}
+\subsection{路由器}
+\subsection{三层交换机}
+
+% ========== 第5章 传输层 ==========
+\chapter{传输层}
+
+\section{传输层提供的服务}
+\subsection{传输层的功能}
+\subsection{传输层的寻址与端口}
+\subsection{无连接服务与面向连接服务}
+
+\section{UDP协议}
+\subsection{UDP的特点}
+\subsection{UDP报文段格式}
+\subsection{UDP校验}
+
+\section{TCP协议}
+\subsection{TCP的特点}
+\subsection{TCP报文段格式}
+\subsection{TCP连接管理}
+\subsubsection{TCP连接建立}
+\subsubsection{TCP连接释放}
+\subsubsection{TCP有限状态机}
+\subsection{TCP可靠传输}
+\subsubsection{序号与确认号}
+\subsubsection{重传机制}
+\subsubsection{滑动窗口}
+\subsection{TCP流量控制}
+\subsection{TCP拥塞控制}
+\subsubsection{慢开始}
+\subsubsection{拥塞避免}
+\subsubsection{快重传}
+\subsubsection{快恢复}
+
+% ========== 第6章 应用层 ==========
+\chapter{应用层}
+
+\section{网络应用模型}
+\subsection{客户/服务器模型}
+\subsection{P2P模型}
+
+\section{DNS系统}
+\subsection{域名系统的层次结构}
+\subsection{域名解析过程}
+\subsection{DNS报文格式}
+
+\section{FTP协议}
+\subsection{FTP的工作原理}
+\subsection{FTP连接}
+\subsection{FTP数据传输模式}
+
+\section{电子邮件}
+\subsection{电子邮件系统组成}
+\subsection{简单邮件传输协议SMTP}
+\subsection{邮局协议POP3}
+\subsection{网际邮件访问协议IMAP}
+\subsection{电子邮件格式与MIME}
+
+\section{万维网WWW}
+\subsection{万维网的概念与组成}
+\subsection{超文本传输协议HTTP}
+\subsubsection{HTTP的特点}
+\subsubsection{HTTP报文格式}
+\subsubsection{HTTP状态码}
+\subsubsection{Cookie与Session}
+\subsection{万维网缓存与代理服务器}
+
+% ========== 附录与总结 ==========
+\chapter{网络安全基础}
+
+\section{网络安全概述}
+\subsection{网络安全的基本概念}
+\subsection{网络攻击与威胁}
+\subsection{网络安全策略}
+
+\section{加密技术}
+\subsection{对称加密}
+\subsection{非对称加密}
+\subsection{数字签名}
+\subsection{报文摘要}
+
+\section{认证技术}
+\subsection{身份认证}
+\subsection{数字证书}
+\subsection{公钥基础设施PKI}
+
+\section{网络安全协议}
+\subsection{IPSec}
+\subsection{SSL/TLS}
+\subsection{HTTPS}
+
+\section{防火墙技术}
+\subsection{防火墙的基本概念}
+\subsection{防火墙的分类}
+\subsection{防火墙的配置策略}
+
+\chapter{408真题考点总结}
+
+\section{历年高频考点}
+\subsection{OSI模型与TCP/IP模型}
+\subsection{以太网与CSMA/CD}
+\subsection{IP地址与子网划分}
+\subsection{路由算法与路由协议}
+\subsection{TCP协议特性}
+\subsection{DNS域名解析}
+\subsection{HTTP协议}
+
+\section{重点计算题型}
+\subsection{子网划分计算}
+\subsection{滑动窗口计算}
+\subsection{RTT与超时重传}
+\subsection{信道利用率计算}
+\subsection{CRC校验计算}
+
+\section{应试技巧与答题策略}
+\subsection{选择题技巧}
+\subsection{综合应用题策略}
+\subsection{时间分配建议}
+% \end{center}
+\end{document}
