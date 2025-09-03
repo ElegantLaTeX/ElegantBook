@@ -10,10 +10,15 @@
 
 \setcounter{tocdepth}{3}
 
-\logo{../../figure/logo-blue.png}
-\cover{../../figure/cover.jpg}
+\logo{\detokenize{../../figure/logo-blue.png}}
+\cover{\detokenize{../../figure/cover.jpg}}
 
 % 本文档命令
+% 可选：快速编译开关（在 main-fast.tex 中开启）。开启后图片以占位框代替、显著加速。
+\ifdefined\FAST
+    \PassOptionsToPackage{draft}{graphicx}
+\fi
+% ———— 以上选项必须出现在 \usepackage{graphicx} 之前 ————
 \usepackage{array}
 \usepackage{makecell}
 \usepackage{longtable}
@@ -35,6 +40,7 @@
 \usepackage{listings}         % 导入listings宏包
 \usepackage{xcolor}           % 支持颜色
 \usepackage{graphicx}        % 支持图形
+\graphicspath{{../../figure/}} % 为封面/徽标等图像提供搜索路径
 % 配置C++代码样式
 \lstset{
     language=C++,             % 语言设置为C++
@@ -49,9 +55,13 @@
 }
 
 \usepackage{tikz}
-\usetikzlibrary{chains, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
-
+\usetikzlibrary{chains, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing, external}
+% Enable externalization only when explicitly requested (requires -shell-escape)
+\ifdefined\EXTTIKZ
+\tikzexternalize[prefix=./tikz-cache/]
+\fi
 \begin{document}
+
 
 % 全局定义 TikZ 样式，供所有图使用
 \tikzset{
@@ -722,9 +732,7 @@ YouTube、B站 &
 \textbf{温馨提示}：网络功能虽然很多，但\textbf{资源共享}永远是最核心的！就像朋友的意义不在于数量，而在于愿意分享。
 
 \section{计算机网络的分类}
-
 计算机网络就像动物王国一样丰富多彩，有各种各样的"物种"。不同的分类方法就像不同的观察角度，让我们能够更好地理解网络这个大家族！
-
 \subsection{按覆盖范围分类}
 
 这是最常见的分类方法，就像按照活动范围给动物分类：家养的、野生的、海洋的...
@@ -2974,6 +2982,24 @@ $M$‑QAM（16/64…） & $\log_2 M$ & $B\approx (1+\alpha)R_s$；$\eta\approx k
     \item 解扩依赖\textbf{精确同步}（码相位/载波/定时）。
 \end{itemize}
 
+\paragraph{考试例题（CDMA 解扩计算）}
+两用户采用长度 $4$ 的正交扩频码：$\mathbf{c}_1=[+1,+1,-1,-1]$，$\mathbf{c}_2=[+1,-1,+1,-1]$，满足 $\mathbf{c}_1\cdot\mathbf{c}_2=0$。已知比特到幅度映射为 $1\mapsto +1$、$0\mapsto -1$。本比特周期内，用户1发送 $1$，用户2发送 $0$，忽略噪声与载波/码相位偏差。
+
+（1）问：复用后接收端芯片序列 $\mathbf{r}$ 为何？（2）问：分别对 $\mathbf{r}$ 与 $\mathbf{c}_1$、$\mathbf{c}_2$ 做相关，判决两用户比特。
+
+解：映射得到 $b_1=+1$、$b_2=-1$。叠加：$\mathbf{r}=b_1\,\mathbf{c}_1+b_2\,\mathbf{c}_2=[1,1,-1,-1]+[-1,1,-1,1]=[0,2,-2,0]$。
+
+相关判决：
+\[
+\langle\mathbf{r},\mathbf{c}_1\rangle=0\cdot1+2\cdot1+(-2)\cdot(-1)+0\cdot(-1)=4\Rightarrow \;\hat b_1=\operatorname{sign}\!\left(\dfrac{1}{4}\langle\mathbf{r},\mathbf{c}_1\rangle\right)=+1
+\]
+\[
+\langle\mathbf{r},\mathbf{c}_2\rangle=0\cdot1+2\cdot(-1)+(-2)\cdot1+0\cdot(-1)=-4\Rightarrow \;\hat b_2=\operatorname{sign}\!\left(\dfrac{1}{4}\langle\mathbf{r},\mathbf{c}_2\rangle\right)=-1
+\]
+故判决比特为用户1: $1$，用户2: $0$。
+
+提示：若存在\textbf{远近效应}（一用户功率显著更大）或码间相关非零/同步误差，多用户间会出现泄漏干扰，需\textbf{功率控制}与\textbf{严格同步}保障判决可靠。
+
 \paragraph{对比一览}
 {\small\begin{longtable}{|p{0.17\linewidth}|p{0.20\linewidth}|p{0.25\linewidth}|p{0.18\linewidth}|p{0.20\linewidth}|}
 \hline
@@ -3003,6 +3029,88 @@ CDM（DSSS/FHSS） & 码域（正交/低相关） & 相关解扩 + 功率控制 
 
 \section{数据链路层的功能}
 \subsection{为网络层提供服务}
+数据链路层通过\textbf{帧}向网络层提供传输服务。根据是否建立连接、是否逐帧确认与重传，可归纳为三类（与教材一致）：
+\begin{itemize}
+    \item \textbf{无确认的无连接服务}（Best Effort）：不建立连接，不逐帧确认，不保证到达与有序，\textbf{开销最小、时延低}。典型：以太网（IEEE 802.3）。
+    \item \textbf{带确认的无连接服务}：不建立连接，但逐帧\textbf{链路层确认/重传}，\textbf{仅保证单跳可靠}。典型：802.11 无线局域网的 MAC ACK。
+    \item \textbf{面向连接的服务}：建立—传输—释放三个阶段，通常配合\textbf{序号、确认、重传、流量控制}，对\textbf{每一跳}提供可靠、有序的帧传输。典型：HDLC/LLC Type 2。
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.9\linewidth}{!}{%
+    \begin{tikzpicture}[x=1cm,y=1cm]
+        % lifelines
+        \begin{scope}
+            \node[anchor=east] (tx1) at (0,3.0) {\small 发送端};
+            \node[anchor=west] (rx1) at (7,3.0) {\small 接收端};
+            \draw[gray!50] (0.2,2.2) -- (0.2,3.8);
+            \draw[gray!50] (6.8,2.2) -- (6.8,3.8);
+            \node[anchor=west] at (-0.2,3.8) {\small (a) 无确认的无连接};
+            % frames only
+            \draw[->,>=Stealth,blue!70,thick] (0.2,3.5) -- (6.8,3.5) node[midway,above] {\scriptsize 帧1};
+            \draw[->,>=Stealth,blue!70,thick] (0.2,3.0) -- (6.8,3.0) node[midway,above] {\scriptsize 帧2};
+            \draw[->,>=Stealth,blue!70,thick] (0.2,2.5) -- (6.8,2.5) node[midway,above] {\scriptsize 帧3};
+        \end{scope}
+
+        \begin{scope}[shift={(0,-2.6)}]
+            \node[anchor=east] at (0,3.0) {\small 发送端};
+            \node[anchor=west] at (7,3.0) {\small 接收端};
+            \draw[gray!50] (0.2,2.2) -- (0.2,3.8);
+            \draw[gray!50] (6.8,2.2) -- (6.8,3.8);
+            \node[anchor=west] at (-0.2,3.8) {\small (b) 带确认的无连接};
+            % frame + ack
+            \draw[->,>=Stealth,blue!70,thick] (0.2,3.5) -- (6.8,3.5) node[midway,above] {\scriptsize 帧1};
+            % ACK1：对“帧1”的确认；数字1表示确认第1个数据帧
+            % 坐标：(0.2,3.2) -> (6.8,3.2)
+            %  - x=0.2 与 x=6.8：分别对应左/右两条生命线的位置
+            %  - y=3.2：该条确认消息在时间轴上的垂直位置
+            \draw[<-,>=Stealth,green!60!black,thick,dashed] (0.2,3.2) -- (6.8,3.2) node[midway,above] {\scriptsize ACK1};
+            \draw[->,>=Stealth,blue!70,thick] (0.2,2.7) -- (6.8,2.7) node[midway,above] {\scriptsize 帧2};
+            \draw[<-,>=Stealth,green!60!black,thick,dashed] (0.2,2.4) -- (6.8,2.4) node[midway,below] {\scriptsize ACK2};
+        \end{scope}
+
+        \begin{scope}[shift={(0,-5.2)}]
+            \node[anchor=east] at (0,3.0) {\small 发送端};
+            \node[anchor=west] at (7,3.0) {\small 接收端};
+            \draw[gray!50] (0.2,2.0) -- (0.2,4.0);
+            \draw[gray!50] (6.8,2.0) -- (6.8,4.0);
+            \node[anchor=west] at (-0.2,4.0) {\small (c) 面向连接};
+            % setup
+            \draw[->,>=Stealth,orange!70!black,thick] (0.2,3.8) -- (6.8,3.8) node[midway,above] {\scriptsize 建立(SETUP)};
+            \draw[<-,>=Stealth,orange!70!black,thick] (0.2,3.55) -- (6.8,3.55) node[midway,below] {\scriptsize 确认(CONN)};
+            % data with seq
+            \draw[->,>=Stealth,blue!70,thick] (0.2,3.05) -- (6.8,3.05) node[midway,above] {\scriptsize 帧(seq=1)};
+            \draw[<-,>=Stealth,green!60!black,thick,dashed] (0.2,2.8) -- (6.8,2.8) node[midway,below] {\scriptsize ACK1};
+            \draw[->,>=Stealth,blue!70,thick] (0.2,2.45) -- (6.8,2.45) node[midway,above] {\scriptsize 帧(seq=2)};
+            % release
+            \draw[->,>=Stealth,gray!70,thick] (0.2,2.15) -- (6.8,2.15) node[midway,above] {\scriptsize 释放(RELEASE)};
+        \end{scope}
+    \end{tikzpicture}%
+    }
+    \caption{链路层对网络层的三类服务：无确认无连接、带确认无连接、面向连接}
+    \label{fig:dl-service-types}
+\end{figure}
+
+\paragraph{对比与适用}
+{\small\begin{longtable}{|p{0.16\linewidth}|p{0.14\linewidth}|p{0.18\linewidth}|p{0.16\linewidth}|p{0.16\linewidth}|p{0.20\linewidth}|}
+\hline
+	extbf{服务类型} & \textbf{是否建连} & \textbf{可靠性/确认} & \textbf{有序性} & \textbf{流量控制} & \textbf{典型场景/优缺点} \\
+\hline
+无确认无连接 & 否 & 不确认、不重传 & 不保证 & 无 & 以太网；\textbf{开销小、时延低}，可靠性交由高层 \\
+\hline
+带确认无连接 & 否 & 单跳ACK+重传 & 一般按帧次序 & 可选/简单 & 802.11；适合\textbf{无线差错高}链路，\textbf{单跳可靠} \\
+\hline
+面向连接 & 是 & 序号+确认+重传 & 有序交付 & 常见 & 点到点可靠链路（如HDLC/LLC2）；\textbf{开销较大} \\
+\hline
+\end{longtable}}
+
+\paragraph{408 考试提示}
+\begin{itemize}
+    \item \textbf{分层责任}：链路层的可靠性是\textbf{逐跳}的；端到端可靠性由\textbf{传输层}保证（如 TCP）。
+    \item \textbf{易混点}：802.11 有 ACK 但仍是\textbf{无连接}；\textbf{建连}不等价于“端到端面向连接”。
+    \item \textbf{选择策略}：低差错/低时延链路倾向无连接；高差错链路可用带确认或面向连接以换取可靠性。
+\end{itemize}
 \subsection{数据链路管理}
 \subsection{帧同步}
 \subsection{流量控制}
