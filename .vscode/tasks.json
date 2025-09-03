@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "LaTeX: 快速编译 (XeLaTeX)",
+      "type": "shell",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-silent",
+        "-bibtex-",
+        "main-fast.tex"
+      ],
+      "group": "build",
+      "options": { "cwd": "${workspaceFolder}/CN/CNBook" }
+    },
+    {
+      "label": "LaTeX: 完整编译 (XeLaTeX+biber)",
+      "type": "shell",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "main.tex"
+      ],
+      "group": "build",
+      "options": { "cwd": "${workspaceFolder}/CN/CNBook" }
+    },
+    {
+      "label": "LaTeX: 持续预览 (XeLaTeX)",
+      "type": "shell",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-shell-escape",
+        "-synctex=1",
+        "-pvc",
+        "-interaction=nonstopmode",
+        "main-fast.tex"
+      ],
+      "isBackground": true,
+      "options": { "cwd": "${workspaceFolder}/CN/CNBook" }
+    },
+    {
+      "label": "LaTeX: 快速编译 (XeLaTeX 2-pass, 无 latexmk)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "Set-Location -LiteralPath '${workspaceFolder}/CN/CNBook'; xelatex -interaction=nonstopmode -synctex=1 -shell-escape main-fast.tex; xelatex -interaction=nonstopmode -synctex=1 -shell-escape main-fast.tex"
+      ],
+      "group": "build"
+    }
+  ]
+}

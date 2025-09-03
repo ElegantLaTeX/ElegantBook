@@ -1,0 +1,21 @@
+# latexmk configuration for XeLaTeX + biber + shell-escape
+# Use xelatex
+$pdflatex = 'xelatex -interaction=nonstopmode -synctex=1 -shell-escape %O %S';
+
+# biblatex via biber
+$biber = 'biber %O %S';
+$bibtex_use = 2;
+
+# Enable continuous preview with -pvc if desired
+$pvc_view_file_via_temporary = 0;
+
+# Silence non-critical warnings a bit
+$max_repeat = 5;
+
+# Always run biber when .bcf changes
+add_cus_dep('bcf', 'bbl', 0, 'do_biber');
+sub do_biber {
+    my ($base_name, $path) = fileparse($_[0]);
+    my $ret = system("biber", "$base_name");
+    return $ret ? 12 : 0;
+}
