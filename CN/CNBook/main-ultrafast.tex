@@ -1,0 +1,16 @@
+% 超快速编译入口：最大程度优化编译速度，适合频繁修改预览
+\def\FAST{1}
+\def\EXTTIKZ{1}  % 启用TikZ外部化缓存
+\def\ULTRAFAST{1}  % 启用超快速模式
+
+% 超快速模式优化
+\ifdefined\ULTRAFAST
+    % 跳过目录生成
+    \let\tableofcontents\relax
+    % 简化页面布局
+    \PassOptionsToPackage{draft}{hyperref}
+    % 最小化字体加载
+    \PassOptionsToPackage{no-math}{fontspec}
+\fi
+
+\input{main}
