@@ -5,11 +5,11 @@
 
 \author{Ethan Deng \& Liam Huang \& syvshc \& sikouhjw \& Osbert Wang}
 \institute{Elegant\LaTeX{} Program}
-\date{2022/12/31}
-\version{4.5}
+\date{2026/2/27}
+\version{4.6}
 \bioinfo{自定义}{信息}
 
-\extrainfo{注意：本模板自 2023 年 1 月 1 日开始，不再更新和维护！}
+\extrainfo{\textcolor{red}{\bfseries 注意：本模板自2023年1月1日起停止维护。然而，鉴于用户群体庞大，自2026年起恢复维护并重新发布。}}
 
 \setcounter{tocdepth}{3}
 
@@ -39,7 +39,7 @@
 \chapter{Elegant\LaTeX{} 系列模板介绍}
 
 \begin{quotation}
-  \textbf{\textcolor{red}{本模板自 2023 年 1 月 1 日开始，不再维护，不建议使用本系列模板！为了保证之前版本的用户仍然能查到说明文档，本说明文档仍然保留过去的信息。}}
+  \textbf{\textcolor{red}{本模板自 2023 年 1 月 1 日起停止维护，并不建议使用，但鉴于用户群体庞大，自 2026 年起重新发布。为保证之前版本的用户仍能查阅说明文档，本说明文档保留了过往信息。}}
 \end{quotation}
 
 Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。大版本改动较大，请关注版本信息，在未开始使用模板前，建议直接选择最新正式版本！
@@ -47,7 +47,6 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
-  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
   \item GitHub 地址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
   \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
@@ -72,9 +71,9 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
 
 本模板测试环境为 
 \begin{enumerate}
-  \item Win10 + \TeX{} Live 2022；
-  \item Ubuntu 20.04 + \TeX{} Live 2022；
-  \item macOS Monterey + Mac\TeX{} 2022。
+  \item Win11 + \TeX{} Live 2025；
+  \item Ubuntu 22.04 + \TeX{} Live 2025；
+  \item macOS + Mac\TeX{} 2025。
 \end{enumerate}
 
 \TeX Live/Mac\TeX{} 的安装请参考啸行的\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases/}{一份简短的关于安装 \LaTeX{} 安装的介绍}。
@@ -943,11 +942,11 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item \question{大佬，我想把正文字体改为亮色，背景色改为黑灰色。}
     页面颜色可以使用 \lstinline{\pagecolor} 命令设置，文本命令可以参考\href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{这里}进行设置。
   \item \question{\lstinline{! LaTeX Error: Unknown option 'scheme=plain' for package 'ctex'.}}
-    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2022。
+    你用的 C\TeX{} 套装吧？这个里面的 \lstinline{ctex} 宏包已经是已经是 10 年前的了，与本模板使用的 \lstinline{ctex} 宏集有很大区别。不建议 C\TeX{} 套装了，请卸载并安装 \TeX{} Live 2025。
   \item \question{我该使用什么版本？}
-    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2021 内获取。
+    请务必使用\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{最新正式发行版}，发行版间不定期可能会有更新（修复 bug 或者改进之类），如果你在使用过程中没有遇到问题，不需要每次更新\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}，但是在发行版更新之后，请尽可能使用最新版（发行版）！最新发行版可以在 GitHub 或者 \TeX{} Live 2025 内获取。
   \item \question{我该使用什么编辑器？}
-    你可以使用 \TeX{} Live 2021 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2021 + \TeX{}studio。我自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
+    你可以使用 \TeX{} Live 2025 自带的编辑器 \TeX{}works 或者使用 \TeX{}studio，\TeX works 的自动补全，你可以参考我们的总结 \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works 自动补全}。推荐使用 \TeX{} Live 2025 + \TeX{}studio。我（注：此为前维护者）自己用 VS Code 和 Sublime Text，相关的配置说明，请参考 \href{https://github.com/EthanDeng/vscode-latex}{\LaTeX{} 编译环境配置：Visual Studio Code 配置简介} 和 \href{https://github.com/EthanDeng/sublime-text-latex}{Sublime Text 搭建 \LaTeX{} 编写环境}。
   \item \question{您好，我们想用您的 ElegantBook 模板写一本书。关于机器学习的教材，希望获得您的授权，谢谢您的宝贵时间。}
     模板的使用修改都是自由的，你们声明模板来源以及模板地址（GitHub 地址）即可，其他未尽事宜按照开源协议 LPPL-1.3c。做好之后，如果方便的话，可以给我们一个链接，我把你们的教材放在 Elegant\LaTeX{} 用户作品集里。
   \item \question{请问交叉引用是什么？}
@@ -961,6 +960,14 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 \chapter{版本更新历史}
 
 根据用户的反馈，我们不断修正和完善模板。由于 3.00 之前版本与现在版本差异非常大，在此不列出 3.00 之前的更新内容。
+
+\datechange{2026/02/27}{发布 v4.6 版本}  \textcolor{blue}{\bfseries 恢复维护}
+
+\begin{change}
+  \item 确认新维护者啸行并恢复维护。
+  \item 鉴于用户群体庞大，模板重新发布。
+  \item 更新以支持 \TeX{} Live 2025 及当前主流操作系统（Windows 11、Ubuntu 24.04 LTS、macOS）。
+\end{change}
 
 \datechange{2022/12/31}{版本 4.5} \textcolor{red}{\bfseries 停止维护！}
 

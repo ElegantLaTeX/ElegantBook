@@ -5,11 +5,11 @@
 
 \author{Ethan Deng, Liam Huang, syvshc, sikouhjw \& Osbert Wang}
 \institute{Elegant\LaTeX{} Program}
-\date{Dec. 31, 2022}
-\version{4.5}
+\date{Feb. 27, 2026}
+\version{4.6}
 \bioinfo{Bio}{Information}
 
-\extrainfo{\textcolor{red}{\bfseries Caution: This template will no longer be maintained since January 1st, 2023.}}
+\extrainfo{\textcolor{red}{\bfseries Caution: This template will no longer be maintained since January 1st, 2023. However, due to its large user base, maintenance has resumed and the template has been re-released as of 2026.}}
 
 \logo{logo-blue.png}
 \cover{cover.jpg}
@@ -59,10 +59,13 @@ tlmgr update --all
 To learn more, please refer to \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
 
 \section{Other Release Versions}
-If you are a \TeX{} Live 2018/2019/2020/2021 user and would like to update, the official solution is to uninstall the previous version. If you want to save the bother of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of \TeX{} Live 2022 (default: \lstinline|C:\texlive\2022\texmf-dist\tex\latex\elegantbook| ), run \lstinline{texhash} in cmd.
+
+If you are using a \TeX{} Live version prior to 2025 and wish to update the template, the official solution is to uninstall the previous version.
+If you want to save the trouble of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of your \TeX{} Live (default for \TeX{} Live 2025: \lstinline|C:\texlive\2025\texmf-dist\tex\latex\elegantbook|; replace "2025" with your actual version), and then run \lstinline{texhash} in the command prompt.
 
 \chapter{ElegantBook Settings}
-This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environments are Win10/Ubuntu 20.04/macOS + \TeX{} Live 2022/ Mac\TeX{} 2022, either \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine for \lstinline{lang=en}.
+
+This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environments are Windows 10/11, Ubuntu 24.04 LTS, and macOS with \TeX{} Live 2025/ Mac\TeX{} 2025. Both \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine for \lstinline{lang=en}.
 
 \section{Languages}
 We defined one option named \lstinline{lang} which has two basic values, \lstinline{lang=en} (default) , \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
@@ -675,9 +678,9 @@ We list some FAQs for users to refer to:
   \item \question{I want to customize font and background color.}
   Please use \lstinline{pagecolor} to change background color, refer to \href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{this} to customize font.
   \item \question{Which version should I choose?}
-  Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX{} Live 2022.
+  Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX{} Live 2025.
   \item \question{Which editor should I choose?}
-  You can use \TeX{} Live 2022 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX{}works autocomplete}. \TeX{} Live 2022 + \TeX{}studio is strongly recommended. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.
+  You can use \TeX{} Live 2025 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX{}works autocomplete}. \TeX{} Live 2025 + \TeX{}studio is strongly recommended. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.
   \item \question{Hello, we want to use ElegantBook to write a book about machine learning and would like your authorization.}
   Feel free to use our templates by pointing out our copyright. For other issues, please refer to LPPL-1.3c. If you want to show us your work, you can share the URL with us afterwards.
   \item \question{What is cross reference?}
@@ -691,6 +694,13 @@ We list some FAQs for users to refer to:
 \chapter{Version History}
 We revised our templates now and then. This section shows the version story of ElegantBook.
 
+\datechange{2026/02/27}{release of v4.6}  \textcolor{blue}{\bfseries Maintenance Resumed}
+
+\begin{change}
+  \item Maintenance resumed under new maintainer Osbert Wang.
+  \item Template re-released due to large user base.
+  \item Updated to support \TeX{} Live 2025 and current operating systems (Windows 11, Ubuntu 24.04 LTS, macOS).
+\end{change}
 
 \datechange{2022/12/31}{release of v4.5.}  \textcolor{red}{\bfseries Stop Maintenance}
 
