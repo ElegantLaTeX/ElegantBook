@@ -60,9 +60,9 @@ function typeset(file, dir, exe)
   dir = dir or typesetdir
   local cmd
   if string.match(file, "%-cn%.tex$") then
-    cmd = "latexmk -pdfxe -synctex=1 -interaction=nonstopmode "
+    cmd = "latexmk -pdfxe -interaction=nonstopmode "
   else
-    cmd = "latexmk -pdf -synctex=1 -interaction=nonstopmode "
+    cmd = "latexmk -pdf -interaction=nonstopmode "
   end
   return run(dir, cmd .. file)
 end
