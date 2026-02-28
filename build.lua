@@ -29,8 +29,8 @@ textfiles        = {"*.md", "LICENSE", "*.lua", "*.cls", "*.bib"}
 typesetexe       = "latexmk -pdf"
 typesetfiles     = {module .. "-cn.tex", module .. "-en.tex"}
 typesetopts      = "-interaction=nonstopmode"
-typesetsuppfiles = {"*.cls", "*.bib"}
 typesetruns      = 1
+typesetsuppfiles = {"*.cls", "*.bib"}
 imagesuppdir     = "image"
 figuresuppdir    = "figure"
 specialtypesetting = specialtypesetting or {}
