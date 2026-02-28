@@ -1,0 +1,8 @@
+*              text=auto
+*.tex          text eol=lf
+.gitignore     text eol=lf
+LICENSE        text eol=lf
+*.md           text eol=lf
+.gitattributes text eol=lf
+*.cls          text eol=lf
+*.bib          text eol=lf
