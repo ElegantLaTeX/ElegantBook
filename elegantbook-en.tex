@@ -1,10 +1,10 @@
 \documentclass[11pt]{elegantbook}
 
-\title{An Elegant \LaTeX{} Template for Books}
-\subtitle{Classic Elegant\LaTeX{} Template}
+\title{An Elegant \LaTeX\ Template for Books}
+\subtitle{Classic Elegant\LaTeX\ Template}
 
 \author{Ethan Deng, Liam Huang, syvshc, sikouhjw \& Osbert Wang}
-\institute{Elegant\LaTeX{} Program}
+\institute{Elegant\LaTeX\ Program}
 \date{Feb. 27, 2026}
 \version{4.6}
 \bioinfo{Bio}{Information}
@@ -30,8 +30,8 @@
 
 \mainmatter
 
-\chapter{Elegant\LaTeX{} Templates}
-Elegant\LaTeX{} Program developers are intended to provide you beautiful, elegant, user-friendly templates. Currently, the Elegant\LaTeX{} is composed of \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}, \href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}, \href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper}, designed for typesetting notes, books, and working papers respectively. Latest releases are strongly recommended! This guide is aimed at briefly introducing the 101 of this template. For any other question, suggestion or comment, feel free to contact us on GitHub \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} or email us at \email{elegantlatex2e@gmail.com}.
+\chapter{Elegant\LaTeX\ Templates}
+Elegant\LaTeX\ Program developers are intended to provide you beautiful, elegant, user-friendly templates. Currently, the Elegant\LaTeX\ is composed of \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}, \href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}, \href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper}, designed for typesetting notes, books, and working papers respectively. Latest releases are strongly recommended! This guide is aimed at briefly introducing the 101 of this template. For any other question, suggestion or comment, feel free to contact us on GitHub \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} or email us at \email{elegantlatex2e@gmail.com}.
 
 Contact Infos:
 \begin{itemize}
@@ -56,16 +56,16 @@ tlmgr update --self
 tlmgr update --all
 \end{lstlisting}
 
-To learn more, please refer to \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
+To learn more, please refer to \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX\ distribution?}
 
 \section{Other Release Versions}
 
-If you are using a \TeX{} Live version prior to 2025 and wish to update the template, the official solution is to uninstall the previous version.
-If you want to save the trouble of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of your \TeX{} Live (default for \TeX{} Live 2025: \lstinline|C:\texlive\2025\texmf-dist\tex\latex\elegantbook|; replace "2025" with your actual version), and then run \lstinline{texhash} in the command prompt.
+If you are using a \TeX~Live version prior to 2025 and wish to update the template, the official solution is to uninstall the previous version.
+If you want to save the trouble of uninstallation and re-installation, please copy \lstinline{elegantbook.cls} to the installation directory of your \TeX~Live (default for \TeX~Live 2025: \lstinline|C:\texlive\2025\texmf-dist\tex\latex\elegantbook|; replace "2025" with your actual version), and then run \lstinline{texhash} in the command prompt.
 
 \chapter{ElegantBook Settings}
 
-This template is based on the Standard \LaTeX{} book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX{} Live is recommended. The test environments are Windows 10/11, Ubuntu 24.04 LTS, and macOS with \TeX{} Live 2025/ Mac\TeX{} 2025. Both \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine for \lstinline{lang=en}.
+This template is based on the Standard \LaTeX\ book class, so the options of book class work as well (Note that the option of papersize has no effect due to \lstinline{device} option). The default encoding is UTF-8 while \TeX~Live is recommended. The test environments are Windows 10/11, Ubuntu 24.04 LTS, and macOS with \TeX~Live 2025/ Mac\TeX\ 2025. Both \hologo{pdfLaTeX} or \hologo{XeLaTeX} works fine for \lstinline{lang=en}.
 
 \section{Languages}
 We defined one option named \lstinline{lang} which has two basic values, \lstinline{lang=en} (default) , \lstinline{lang=cn}. Different values will alter the captions of figure/table, abstract name, refname, etc. You can use this option as
@@ -372,7 +372,7 @@ This template uses \lstinline{tikz} to customize the list environments, with \ls
 \section{Fonts}
 \textcolor{red}{\bfseries Alert} After v3.10, newtx is reset to cm, together with other two options, the \lstinline{math} font option offers:
 \begin{enumerate}
-  \item \lstinline{math=cm}(default), use \LaTeX{} default math font (recommended).
+  \item \lstinline{math=cm}(default), use \LaTeX\ default math font (recommended).
   \item \lstinline{math=newtx}, use \lstinline{newtxmath} math font (may bring about bugs).
   \item \lstinline{math=mtpro2}, use \lstinline{mtpro2} package to set math font.
 \end{enumerate}
@@ -678,13 +678,13 @@ We list some FAQs for users to refer to:
   \item \question{I want to customize font and background color.}
   Please use \lstinline{pagecolor} to change background color, refer to \href{https://tex.stackexchange.com/questions/278544/xcolor-what-is-the-equivalent-of-default-text-color}{this} to customize font.
   \item \question{Which version should I choose?}
-  Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX{} Live 2025.
+  Please use \href{https://github.com/ElegantLaTeX/ElegantBook/releases}{Latest Release} via GitHub or \TeX~Live 2025.
   \item \question{Which editor should I choose?}
-  You can use \TeX{} Live 2025 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX{}works autocomplete}. \TeX{} Live 2025 + \TeX{}studio is strongly recommended. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.
+  You can use \TeX~Live 2025 built-in \TeX works or \TeX Studio. You may refer to \href{https://github.com/EthanDeng/texworks-autocomplete}{\TeX works autocomplete}. \TeX~Live 2025 + \TeX studio is strongly recommended. Related configurations can be found at \href{https://github.com/EthanDeng/vscode-latex}{vscode-latex} and \href{https://github.com/EthanDeng/sublime-text-latex}{sublime-text-latex}.
   \item \question{Hello, we want to use ElegantBook to write a book about machine learning and would like your authorization.}
   Feel free to use our templates by pointing out our copyright. For other issues, please refer to LPPL-1.3c. If you want to show us your work, you can share the URL with us afterwards.
   \item \question{What is cross reference?}
-  This template is aimed at who are not a complete beginner for \LaTeX{}. Please learn more about \LaTeX{} before using this template.
+  This template is aimed at who are not a complete beginner for \LaTeX. Please learn more about \LaTeX\ before using this template.
   \item \question{Is the language for code highlighting optional?}
   Yes, \lstinline{listings} package is used in ElegantBook, hence language is optional(e.g. \lstinline{language=Python}). For global setting, use \lstinline{lstset}. For more information, please refer to package documentations.
   \item \question{When will Beamer template (ElegantSlide or ElegantBeamer) forthcoming?}
@@ -699,7 +699,7 @@ We revised our templates now and then. This section shows the version story of E
 \begin{change}
   \item Maintenance resumed under new maintainer Osbert Wang.
   \item Template re-released due to large user base.
-  \item Updated to support \TeX{} Live 2025 and current operating systems (Windows 11, Ubuntu 24.04 LTS, macOS).
+  \item Updated to support \TeX~Live 2025 and current operating systems (Windows 11, Ubuntu 24.04 LTS, macOS).
 \end{change}
 
 \datechange{2022/12/31}{release of v4.5.}  \textcolor{red}{\bfseries Stop Maintenance}
@@ -761,7 +761,7 @@ We revised our templates now and then. This section shows the version story of E
 
 \begin{change}
   \item \textbf{! Fix}: Fix \lstinline{natbib option clash} problems caused by \lstinline{gbt7714} updates.
-  \item Remove \lstinline{base} decorations and its options since \lstinline{pgfornament} package is not included in \TeX{} Live 2020.
+  \item Remove \lstinline{base} decorations and its options since \lstinline{pgfornament} package is not included in \TeX~Live 2020.
   \item Fix spacing problem in some environments.
   \item Introduce language option for Italian, \lstinline{lang=it}.
 \end{change}
@@ -771,7 +771,7 @@ We revised our templates now and then. This section shows the version story of E
 
 \begin{change}
   \item Introduce \lstinline{math} for math font, optional styles are \lstinline{newtx} and \lstinline{cm}.\\
-  \textbf{Notice}: The math font \lstinline{newtxmath} in previous versions is reset to default \LaTeX{} math font, to keep previous math font, please declare \lstinline{math=newtx}.
+  \textbf{Notice}: The math font \lstinline{newtxmath} in previous versions is reset to default \LaTeX\ math font, to keep previous math font, please declare \lstinline{math=newtx}.
   \item Introduce \lstinline{chinesefont} option, with \lstinline{founder}, \lstinline{ctexfont} and \lstinline{nofont} available.
   \item Turn author information on the cover optional and add customized command \lstinline{\bioinfo}.
   \item Add version history with command \lstinline{\datechange} and environment \lstinline{change}.

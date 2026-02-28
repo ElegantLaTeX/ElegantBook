@@ -1,5 +1,5 @@
 --[==========================================[--
-   L3BUILD FILE FOR ELEGANTBOOK
+          L3BUILD FILE FOR ELEGANTBOOK
      Check PDF File & Directory After Build
 --]==========================================]--
 
@@ -17,11 +17,7 @@ repository       = "https://github.com/" .. maintainid .. "/" .. module
 announcement     = ""
 note             = ""
 summary          = "Elegant LaTeX Template for Books"
-description      = [[
-ElegantBook is designed for writing Books. This template is based on
-the standard LaTeX book class. The goal of this template is
-to make the writing process more elegant.
-]]
+description      = [[ElegantBook is designed for writing Books. This template is based on the standard LaTeX book class. The goal of this template is to make the writing process more elegant.]]
 
 --[==========================================[--
          Build, Pack and Upload To CTAN
@@ -30,10 +26,15 @@ to make the writing process more elegant.
 ctanzip          = module
 excludefiles     = {"*~"}
 textfiles        = {"*.md", "LICENSE", "*.lua", "*.cls", "*.bib"}
+typesetexe       = "latexmk -pdf"
 typesetfiles     = {module .. "-cn.tex", module .. "-en.tex"}
+typesetopts      = "-interaction=nonstopmode"
 typesetsuppfiles = {"*.cls", "*.bib"}
+typesetruns      = 1
 imagesuppdir     = "image"
 figuresuppdir    = "figure"
+specialtypesetting = specialtypesetting or {}
+specialtypesetting[module .. "-cn.tex"] = {cmd = "latexmk -xelatex"}
 
 uploadconfig = {
   pkg          = module,
@@ -55,16 +56,10 @@ uploadconfig = {
   update       = true
 }
 
--- cn uses XeLaTeX, en uses pdfLaTeX
-function typeset(file, dir, exe)
-  dir = dir or typesetdir
-  local cmd
-  if string.match(file, "%-cn%.tex$") then
-    cmd = "latexmk -pdfxe -interaction=nonstopmode "
-  else
-    cmd = "latexmk -pdf -interaction=nonstopmode "
-  end
-  return run(dir, cmd .. file)
+function tex(file, dir, cmd)
+  dir = dir or "."
+  cmd = cmd or typesetexe .. " " .. typesetopts
+  return run(dir, cmd .. " " .. file)
 end
 
 -- Copy required files into the typeset build dir
