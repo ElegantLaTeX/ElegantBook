@@ -6,3 +6,4 @@ LICENSE        text eol=lf
 .gitattributes text eol=lf
 *.cls          text eol=lf
 *.bib          text eol=lf
+build.lua      text eol=lf
