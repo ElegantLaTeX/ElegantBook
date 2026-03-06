@@ -1296,8 +1296,8 @@
       \includegraphics[trim=0 26bp 0 26bp,clip=true, width=\linewidth]{example-image}
     \fi
   }{\relax}
-  \setlength{\fboxsep}{0pt}
-  \colorbox{coverlinecolor}{\makebox[\linewidth][c]{\shortstack[c]{\vspace{0.5in}}}}
+  \vskip-\baselineskip
+  {\color{coverlinecolor}\hrule width \linewidth height .5in}
   \vfill
   \vskip-2ex
   \hspace{2em}
