@@ -1297,7 +1297,7 @@
     \fi
   }{\relax}
   \vskip-\baselineskip
-  {\color{coverlinecolor}\hrule width \linewidth height .5in}
+  {\color{coverlinecolor}\hrule \@width \linewidth \@height .5in}
   \vfill
   \vskip-2ex
   \hspace{2em}
